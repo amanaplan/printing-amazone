@@ -1,0 +1,134 @@
+.dasboard {
+    margin: 20px 0;
+    /*background: #25282e;*/
+}
+.dasboard, .dasboard .right-part, .white-box .info {
+    position: relative;
+}
+.dasboard .left-part {
+    min-height: 100%;
+    left: 0;
+    top: 0;
+    color: #fff;
+	background:#25282e;
+}
+.prf-block {
+    padding: 15px;
+    text-align: center;
+}
+.prf-block .prf-img {
+    background: url(../images/null-img.jpg) center center no-repeat;
+    background-size: 100%;
+    width: 100px;
+    height: 100px;
+    border: 3px solid #fff;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+.dividr1, .prf-block .prf-img img {
+    width: 100%;
+}
+.prf-block span {
+    color: #ff9c00;
+    margin-top: 10px;
+    display: block;
+	font-family:'Raleway', sans-serif;
+}
+.dividr1 {
+    display: block;
+    height: 1px;
+    border-top: 1px solid #ff9c00;
+    background: #4c5055;
+    clear: both;
+}
+.db-menu {
+    margin: 10px 0 0;
+}
+.db-menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+.db-menu ul li {
+    margin: 0 0 2px;
+}
+.db-menu ul li a {
+    display: table;
+    color: #ddd;
+    font: 14px 'Raleway', sans-serif;
+    text-decoration: none;
+    padding: 0 10px;
+    width: 100%;
+}
+.db-menu ul li a:hover, .db-menu ul li.current a {
+    background: #ff9c00;
+	color:#fff;
+}
+.db-menu ul li a div.icon, .db-menu ul li a div.nf {
+    width: 30px;
+}
+.db-menu ul li a div {
+    display: table-cell;
+    vertical-align: middle;
+}
+.db-menu ul li a div.txt {
+    position: relative;
+    line-height: 40px;
+}
+.db-menu ul li a div {
+    display: table-cell;
+    vertical-align: middle;
+}
+.dasboard .right-part {
+    margin: 0;
+    padding: 12px 18px;
+    background: #fff;
+    min-height: 500px;
+}
+.dasboard .right-part h1 {
+    color: #363b3f;
+    font: 600 22px/20px 'Raleway', sans-serif;
+    margin: 0 0 18px;
+}
+.dasboard .right-part .white-box {
+    background: #eee;
+    border: 1px solid #dadada;
+    padding: 12px 20px;
+    margin: 0 0 24px;
+}
+.dasboard .right-part .white-box h2{
+	font-family:'Raleway', sans-serif;
+	font-size:20px;
+	color:#202020;
+	margin:10px 0 30px;
+}
+.form-horizontal .control-label{padding-left: 10px;
+	font-family: 'Raleway', sans-serif;
+	text-align: left;
+	font-size: 14px;
+	padding-right: 0;
+	font-weight: 600;
+}
+button.btn-info{
+    border: 1px none;
+    background-color: #ff9c00;
+	color:#fff;
+	border-radius:4px;
+	transition:all 0.4s;
+	font-family:'Raleway', sans-serif;
+	font-size:16px;
+	padding:10px 30px;
+	font-weight:600;
+}
+button.btn-info:hover{
+	background:#363b3f;
+}
+.dash-footer{margin-top:0}
+a.edit{background:#ff9c00; color:#fff; font-family:'Raleway', sans-serif; font-weight:600; text-decoration:none; font-size:14px; display:inline-block; padding:8px 16px;}
+table td, table th {
+    padding: 10px;
+    font-family: 'Raleway';
+    font-size: 14px;
+	border:1px solid #ddd;
+}
+table#details{margin-bottom:20px;}
