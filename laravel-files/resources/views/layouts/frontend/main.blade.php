@@ -49,21 +49,37 @@
 
 <body>
 
-	<header class="main-header">
+	<header class="main-header {{ empty(Request::segment(1))? '' : 'inner' }}">
 		<div class="container">
 			<div class="row">
 				<div class="top-header">
 					<div class="logo">
 						<a href="#"><img src="{{ asset( 'assets/images/logo.png' ) }}" class="img-responsive" /></a>
 						<div class="top-menu">
+							@if(Auth::check() == false)
+
 							<nav class="main-nav">
 								<ol>
 									<!-- inser more links here -->
 									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-									<li><a class="cd-signin" href="#0"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-									<li><a class="cd-signup" href="#0"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
+									<li><a class="cd-signin" href="javascript:void();"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+									<li><a class="cd-signup" href="javascript:void();"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
 								</ol>
 							</nav>
+
+							@else
+
+							<nav class="main-nav">
+								<ol>
+									<!-- inser more links here -->
+									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+									<li><a class="cd-signin" href="#"><i class="fa fa-user"></i>Hi, {{ Auth::user()->name }}</a></li>
+									<li><a class="cd-signup" href="#0"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+								</ol>
+							</nav>
+
+							@endif
+
 						</div><!-- top-menu -->
 					</div><!-- logo -->
 				</div><!-- top-header -->
@@ -100,7 +116,7 @@
 
 	@yield( 'contents' )
 	
-	<div class="footer">
+	<div class="footer {{ (Auth::check())? 'dash-footer' : '' }}">
 		<div class="container">
 			<div class="row">
 				<div class="footer-menu col-sm-8 col-lg-8">
@@ -126,12 +142,59 @@
 			</div>
 		</div>
 	</div><!-- footer -->
+
+	@if(Auth::check() == false)
+
+	{{-- the js library of google oauth2.0 --}}
+	<script src="https://apis.google.com/js/api:client.js"></script>
+
+	<script>
+		var googleUser = {};
+		var startApp = function() {
+			gapi.load('auth2', function(){
+			  	// Retrieve the singleton for the GoogleAuth library and set up the client.
+				auth2 = gapi.auth2.init({
+					client_id: '1093997638360-20eh43rvact2hetl1bbd5kt1f339g0nq.apps.googleusercontent.com',
+					cookiepolicy: 'single_host_origin',
+					// Request scopes in addition to 'profile' and 'email'
+					scope: 'profile email'
+				});
+
+				attachSignin(document.getElementById('customLogin'));
+				attachSignup(document.getElementById('customSignup'));
+			});
+		};
+
+		function attachSignin(element) {
+		//console.log(element.id);
+		auth2.attachClickHandler(element, {},
+		    function(googleUser) {
+		    	alert(googleUser.getBasicProfile().getName());
+		      /*document.getElementById('name').innerText = "Signed in: " +
+		         googleUser.getBasicProfile().getName() + "given namer: " + googleUser.getBasicProfile().getGivenName() + "image" + googleUser.getBasicProfile().getImageUrl() + "email-id" + googleUser.getBasicProfile().getEmail();*/
+		    }, function(error) {
+		      	alert(JSON.stringify(error, undefined, 2));
+		    });
+		}
+
+		function attachSignup(element) {
+		//console.log(element.id);
+		auth2.attachClickHandler(element, {},
+		    function(googleUser) {
+		    	alert(googleUser.getBasicProfile().getName());
+		      /*document.getElementById('name').innerText = "Signed in: " +
+		          googleUser.getBasicProfile().getName();*/
+		    }, function(error) {
+		      alert(JSON.stringify(error, undefined, 2));
+		    });
+		}
+	</script>
 	
 	  <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
 			<ul class="cd-switcher">
-				<li><a href="#0">Sign in</a></li>
-				<li><a href="#0">New account</a></li>
+				<li><a href="javascript:void();">Sign in</a></li>
+				<li><a href="javascript:void();">New account</a></li>
 			</ul>
 
 			<div id="cd-login"> <!-- log in form -->
@@ -140,7 +203,7 @@
 					  <span>Login via</span>
 
 					  <div class="social-buttons">
-						 <a href="#" class="btn btn-g"><i class="fa fa-google-plus"></i> Google+</a>
+						 <button type="button" class="btn btn-g" id="customLogin"><i class="fa fa-google-plus"></i> Google+</button>
 
 					  </div>
 
@@ -168,7 +231,7 @@
 					</p>
 				</form>
 				
-				<p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+				<p class="cd-form-bottom-message"><a href="javascript:void();">Forgot your password?</a></p>
 				<!-- <a href="#0" class="cd-close-form">Close</a> -->
 			</div> <!-- cd-login -->
 
@@ -178,7 +241,7 @@
 					  <span>Login via</span>
 
 					  <div class="social-buttons">
-						 <a href="#" class="btn btn-g"><i class="fa fa-google-plus"></i> Google+</a>
+						 <button type="button" class="btn btn-g" id="customSignup"><i class="fa fa-google-plus"></i> Google+</button>
 
 					  </div>
 
@@ -235,6 +298,10 @@
 			<a href="#0" class="cd-close-form">Close</a>
 		</div> <!-- cd-user-modal-container -->
 	</div> <!-- cd-user-modal -->
+
+	<script>startApp();</script>
+
+	@endif
 
 
 	<!--======= JavaScript =========-->

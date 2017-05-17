@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Session;
+
 class UserPagesCtrl extends Controller
 {
     /**
@@ -14,16 +16,21 @@ class UserPagesCtrl extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    *user sets initial password for account after signing up
+    */
+    public function InitPassword()
     {
-        return response('logged in as user');
+        if(Session::get('init_signup'))
+        {
+            return view('frontend.user-initial_password_set');
+        }
+        else
+        {
+            abort(404);
+        }
     }
 }
