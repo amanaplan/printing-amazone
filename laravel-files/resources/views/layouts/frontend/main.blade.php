@@ -12,7 +12,8 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>Printing Amazone</title>
+		{{-- on page seo data --}}
+		@yield( 'seo_data' )
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
@@ -41,60 +42,63 @@
 
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
+		{{-- page specific styles --}}
+		@stack( 'styles' )
+
 	</head>
 
 <body>
 
-			<header class="main-header">
-			<div class="container">
-				<div class="row">
-					<div class="top-header">
-						<div class="logo">
-							<a href="#"><img src="{{ asset( 'assets/images/logo.png' ) }}" class="img-responsive" /></a>
-							<div class="top-menu">
-								<nav class="main-nav">
-									<ol>
-										<!-- inser more links here -->
-										<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-										<li><a class="cd-signin" href="#0"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-										<li><a class="cd-signup" href="#0"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
-									</ol>
-								</nav>
-							</div><!-- top-menu -->
-						</div><!-- logo -->
-					</div><!-- top-header -->
-					<div class="menu">
-						<nav role="navigation">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a href="#" class="navbar-brand sr-only">Menu</a>
-                    </div>
-                    <!-- Collection of nav links and other content for toggling -->
-                    <div id="navbarCollapse" class="collapse navbar-collapse">
-                        <ol class="nav navbar-nav">
-                             <li class="active hvr-underline-from-center"><a href="#" class="">Stickers</a></li>
-                             <li class="hvr-underline-from-center"><a href="javascript:void(0)">Business Cards</a></li>
-                             <li class="hvr-underline-from-center"><a href="javascript:void(0)">Brochures/Flyers</a></li>
-                             <li class="hvr-underline-from-center"><a href="javascript:void(0)">Postcards</a></li>
-                             <li class="hvr-underline-from-center"><a href="javascript:void(0)">Labels</a></li>
-                             <li class="hvr-underline-from-center"><a href="javascript:void(0)">Graphic designs</a></li>
-                        </ol>
-                    </div><!-- collapse navbar-collapse -->
-                </nav>
-					</div><!-- menu -->
-				</div>
+	<header class="main-header">
+		<div class="container">
+			<div class="row">
+				<div class="top-header">
+					<div class="logo">
+						<a href="#"><img src="{{ asset( 'assets/images/logo.png' ) }}" class="img-responsive" /></a>
+						<div class="top-menu">
+							<nav class="main-nav">
+								<ol>
+									<!-- inser more links here -->
+									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+									<li><a class="cd-signin" href="#0"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+									<li><a class="cd-signup" href="#0"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
+								</ol>
+							</nav>
+						</div><!-- top-menu -->
+					</div><!-- logo -->
+				</div><!-- top-header -->
+				<div class="menu">
+					<nav role="navigation">
+			            <!-- Brand and toggle get grouped for better mobile display -->
+			            <div class="navbar-header">
+			                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+			                    <span class="sr-only">Toggle navigation</span>
+			                    <span class="icon-bar"></span>
+			                    <span class="icon-bar"></span>
+			                    <span class="icon-bar"></span>
+			                </button>
+			                <a href="#" class="navbar-brand sr-only">Menu</a>
+			            </div>
+			            <!-- Collection of nav links and other content for toggling -->
+			            <div id="navbarCollapse" class="collapse navbar-collapse">
+			                <ol class="nav navbar-nav">
+								<li class="active hvr-underline-from-center"><a href="#" class="">Stickers</a></li>
+								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Business Cards</a></li>
+								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Brochures/Flyers</a></li>
+								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Postcards</a></li>
+								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Labels</a></li>
+								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Graphic designs</a></li>
+			                </ol>
+			            </div><!-- collapse navbar-collapse -->
+			        </nav>
+				</div><!-- menu -->
 			</div>
-		</header><!-- header -->
+		</div>
+	</header><!-- header -->
 		
-			{{-- page contents --}}
+	{{-- page contents --}}
 
-			@yield( 'contents' )
+	@yield( 'contents' )
 	
 	<div class="footer">
 		<div class="container">
@@ -106,7 +110,7 @@
 						<li><a href="#">Uses</a> /</li>
 						<li><a href="#">Templates</a> /</li>
 						<li><a href="#">FAQs</a> /</li>
-						<li><a href="#">Returns & Refund</a> /</li>
+						<li><a href="#">Returns &amp; Refund</a> /</li>
 						<li><a href="#">Contact</a></li>
 					</ul>
 				</div><!-- footer-menu -->
@@ -118,7 +122,7 @@
 					</ul>
 				</div><!-- social -->
 				<div class="clearfix"></div>
-				<p class="copyright">Copyright 2017 - All Rights Reserved © printingamazon.com</p>
+				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; printingamazon.com</p>
 			</div>
 		</div>
 	</div><!-- footer -->
@@ -238,17 +242,18 @@
 	<!--======= jQuery =========-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!--======= Bootstrap =========-->
-	<!--<script src="js/bootstrap.min.js"></script>-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 	<script src="{{ asset( 'assets/frontend/js/main.js' ) }}"></script>
-	<!--<script src="js/index.js"></script>	-->
 
 	<!--======= Touch Swipe =========-->
 	<script src="{{ asset( 'assets/frontend/js/jquery.touchSwipe.min.js' ) }}"></script>
 
 	<!--======= Customize =========-->
 	<script src="{{ asset( 'assets/frontend/js/responsive_bootstrap_carousel.js' ) }}"></script>
+
+	{{-- page specific scripts --}}
+	@stack( 'scripts' )
 
 </body>
 
