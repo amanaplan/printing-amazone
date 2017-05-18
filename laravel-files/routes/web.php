@@ -28,6 +28,9 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
+Route::post('/attempt/google-login', 'Frontend\AjaxCtrl@googleLogin');
+Route::post('/attempt/google-signup', 'Frontend\AjaxCtrl@googleSignup');
+Route::post('/user/logout', 'Frontend\AjaxCtrl@UserLogout');
 
 
 
@@ -36,10 +39,11 @@ Route::get('/', 'Frontend\PagesCtrl@index');
 |front-end registered customers' accessible pages
 |------------------------------------------------------------------------------------------------------
 */
-Route::prefix('user')->middleware('useraccess')->group(function() {
+Route::prefix('user')->group(function() {
 
 	Route::get('/dashboard', 'Frontend\UserPagesCtrl@index')->name('user.dashboard');
 	Route::get('/set-password', 'Frontend\UserPagesCtrl@InitPassword');
+	Route::put('/request/set-password', 'Frontend\UserRqstCtrl@InitPassword');
 
 });
 

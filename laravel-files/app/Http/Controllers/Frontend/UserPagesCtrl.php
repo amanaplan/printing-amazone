@@ -16,7 +16,15 @@ class UserPagesCtrl extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
+    }
+
+    /**
+    *user dashboard
+    */
+    public function index()
+    {
+        return view('frontend.user-dashboard', ['page' => 'dashboard']);
     }
 
     /**
@@ -26,7 +34,7 @@ class UserPagesCtrl extends Controller
     {
         if(Session::get('init_signup'))
         {
-            return view('frontend.user-initial_password_set');
+            return view('frontend.user-initial_password_set', ['page' => 'init_password']);
         }
         else
         {

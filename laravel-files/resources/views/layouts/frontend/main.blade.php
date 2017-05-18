@@ -42,6 +42,9 @@
 
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
+		{{-- the js library of google oauth2.0 --}}
+		<script src="https://apis.google.com/js/api:client.js"></script>
+
 		{{-- page specific styles --}}
 		@stack( 'styles' )
 
@@ -73,8 +76,15 @@
 								<ol>
 									<!-- inser more links here -->
 									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-									<li><a class="cd-signin" href="#"><i class="fa fa-user"></i>Hi, {{ Auth::user()->name }}</a></li>
-									<li><a class="cd-signup" href="#0"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+									<li class="dropdown">
+										<a class="cd-signin dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>Hi, {{ Auth::user()->name }}</a>
+										<ul class="dropdown-menu" style="display: none;">
+											<li><a href="{{ route('user.dashboard') }}">My Dashboard</a></li>
+											<li><a href="#">Profile</a></li>
+											<li><a href="#">Orders</a></li>
+										</ul>
+									</li>
+									<li><a class="cd-signup" href="#" onclick="LogoffUser();"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
 								</ol>
 							</nav>
 
@@ -145,50 +155,6 @@
 
 	@if(Auth::check() == false)
 
-	{{-- the js library of google oauth2.0 --}}
-	<script src="https://apis.google.com/js/api:client.js"></script>
-
-	<script>
-		var googleUser = {};
-		var startApp = function() {
-			gapi.load('auth2', function(){
-			  	// Retrieve the singleton for the GoogleAuth library and set up the client.
-				auth2 = gapi.auth2.init({
-					client_id: '1093997638360-20eh43rvact2hetl1bbd5kt1f339g0nq.apps.googleusercontent.com',
-					cookiepolicy: 'single_host_origin',
-					// Request scopes in addition to 'profile' and 'email'
-					scope: 'profile email'
-				});
-
-				attachSignin(document.getElementById('customLogin'));
-				attachSignup(document.getElementById('customSignup'));
-			});
-		};
-
-		function attachSignin(element) {
-		//console.log(element.id);
-		auth2.attachClickHandler(element, {},
-		    function(googleUser) {
-		    	alert(googleUser.getBasicProfile().getName());
-		      /*document.getElementById('name').innerText = "Signed in: " +
-		         googleUser.getBasicProfile().getName() + "given namer: " + googleUser.getBasicProfile().getGivenName() + "image" + googleUser.getBasicProfile().getImageUrl() + "email-id" + googleUser.getBasicProfile().getEmail();*/
-		    }, function(error) {
-		      	alert(JSON.stringify(error, undefined, 2));
-		    });
-		}
-
-		function attachSignup(element) {
-		//console.log(element.id);
-		auth2.attachClickHandler(element, {},
-		    function(googleUser) {
-		    	alert(googleUser.getBasicProfile().getName());
-		      /*document.getElementById('name').innerText = "Signed in: " +
-		          googleUser.getBasicProfile().getName();*/
-		    }, function(error) {
-		      alert(JSON.stringify(error, undefined, 2));
-		    });
-		}
-	</script>
 	
 	  <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
@@ -199,13 +165,16 @@
 
 			<div id="cd-login"> <!-- log in form -->
 				<form class="cd-form">
+					<div class="alert text-center" id="login-msg" style="display: none;"></div>
 					<p class="fieldset">
-					  <span>Login via</span>
+					  <span id="login-processing-msg">Login via</span>
 
-					  <div class="social-buttons">
-						 <button type="button" class="btn btn-g" id="customLogin"><i class="fa fa-google-plus"></i> Google+</button>
+					  <div class="social-buttons" id="customLogin">
+						<div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign in with Google</span></span></div></div>
 
 					  </div>
+
+					  or
 
 				   </p>
 					<p class="fieldset">
@@ -227,7 +196,7 @@
 					</p>
 
 					<p class="fieldset">
-						<input class="full-width" type="submit" value="Sign In">
+						<input class="full-width" id="signin-button" type="submit" value="Sign In">
 					</p>
 				</form>
 				
@@ -237,20 +206,18 @@
 
 			<div id="cd-signup"> <!-- sign up form -->
 				<form class="cd-form">
+					<div class="alert text-center" id="signup-msg" style="display: none;"></div>
 					<p class="fieldset">
-					  <span>Login via</span>
+					  <span id="signup-processing-msg">Signup via</span>
 
-					  <div class="social-buttons">
-						 <button type="button" class="btn btn-g" id="customSignup"><i class="fa fa-google-plus"></i> Google+</button>
+					  <div class="social-buttons" id="customSignup">
+						 <div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign up with Google</span></span></div></div>
 
 					  </div>
 
+					  or
+
 				   </p>
-					<p class="fieldset">
-						<label class="image-replace cd-username" for="signup-username">Username</label>
-						<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-						<span class="cd-error-message">Error message here!</span>
-					</p>
 
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signup-email">E-mail</label>
@@ -259,19 +226,12 @@
 					</p>
 
 					<p class="fieldset">
-						<label class="image-replace cd-password" for="signup-password">Password</label>
-						<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a>
-						<span class="cd-error-message">Error message here!</span>
+						<input type="checkbox" id="accept-terms" checked="checked">
+						<label for="accept-terms">I agree to the <a href="#">Terms</a></label>
 					</p>
 
 					<p class="fieldset">
-						<input type="checkbox" id="accept-terms">
-						<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-					</p>
-
-					<p class="fieldset">
-						<input class="full-width has-padding" type="submit" value="Create account">
+						<input id="signup-button" class="full-width has-padding" type="submit" value="Create account">
 					</p>
 				</form>
 
@@ -299,8 +259,6 @@
 		</div> <!-- cd-user-modal-container -->
 	</div> <!-- cd-user-modal -->
 
-	<script>startApp();</script>
-
 	@endif
 
 
@@ -318,6 +276,8 @@
 
 	<!--======= Customize =========-->
 	<script src="{{ asset( 'assets/frontend/js/responsive_bootstrap_carousel.js' ) }}"></script>
+
+	<script src="{{ asset( 'assets/frontend/js/custom.js' ) }}"></script>
 
 	{{-- page specific scripts --}}
 	@stack( 'scripts' )

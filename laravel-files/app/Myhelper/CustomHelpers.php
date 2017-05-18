@@ -29,6 +29,15 @@ if (! function_exists('adminflash')) {
     }
 }
 
+if (! function_exists('userflash')) {
+    
+    function userflash($type='info', $msg)
+    {
+        Session::flash('flashtype', $type);
+        Session::flash('flashmsg', $msg);
+    }
+}
+
 /**
 *determines if multiple of the input number 
 */
