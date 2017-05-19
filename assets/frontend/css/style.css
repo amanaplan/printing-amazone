@@ -529,15 +529,15 @@ border-radius: 4px;
     margin: 0 auto;
 }
 .cd-form label a{font-weight:600; color:#0b6bae;}
-.cd-form input[type=submit] {
-    background: #3b5998 none repeat scroll 0 0;
-    border:2px solid #3b5998;
+.cd-form button[type=submit] {
+    background: #0e5577 none repeat scroll 0 0;
+    border:2px solid #fea;
     color: #fff;
     padding: 16px 0;
 	font-family: 'Raleway', sans-serif;
 	font-weight:600;
   }
- .cd-form input[type=submit]:hover {
+ .cd-form button[type=submit]:hover {
 	 background:transparent;
 	 border:2px solid #fff;
 	transition:all 0.4s;

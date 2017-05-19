@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2017 at 09:43 PM
+-- Generation Time: May 19, 2017 at 02:17 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -50,6 +50,20 @@ INSERT INTO `admins` (`id`, `name`, `email`, `profile_pic`, `password`, `remembe
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `email_authentication`
+--
+
+CREATE TABLE `email_authentication` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -67,7 +81,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2014_10_12_000000_create_users_table', 1),
 (6, '2014_10_12_100000_create_password_resets_table', 1),
 (7, '2017_05_03_101119_create_admins_tablele', 1),
-(9, '2017_05_06_093855_add_pic_active_col_to_admin', 2);
+(9, '2017_05_06_093855_add_pic_active_col_to_admin', 2),
+(10, '2017_05_19_215135_EmailAuthentication', 3);
 
 -- --------------------------------------------------------
 
@@ -102,7 +117,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'eOkRvDx9LCvyH2vX4fRNCBkH0NysoYWVcG41eiMCFHnUtMicmfcn0Q9doPku', '2017-05-03 05:53:37', '2017-05-03 05:53:37');
+(1, 'Sourav', 'developer.srv1@gmail.com', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'PTRHPZSu4KeFfE99Aequva98vVCEoT4H9ySIuAR7BSiAfJsNDj6i4rmrBnAD', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
+(2, 'Souravx Rakshit', 'srv.nxr@gmail.com', '$2y$10$ZxhOI7adSCWepga4/8swtu4azDoOmyiES3.TGMJ6ngcD4iJ7HO3du', 'TTajjF0tGSHrAtesEDMDKGSSPNAmEIMr8esZpMdjvv7teYrGuVf5tMuflrKm', '2017-05-18 16:08:04', '2017-05-18 16:55:12');
 
 --
 -- Indexes for dumped tables
@@ -114,6 +130,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `admins_email_unique` (`email`);
+
+--
+-- Indexes for table `email_authentication`
+--
+ALTER TABLE `email_authentication`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email_authentication_email_unique` (`email`);
 
 --
 -- Indexes for table `migrations`
@@ -144,15 +167,20 @@ ALTER TABLE `users`
 ALTER TABLE `admins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `email_authentication`
+--
+ALTER TABLE `email_authentication`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

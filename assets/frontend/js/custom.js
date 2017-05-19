@@ -145,3 +145,135 @@ $('nav.main-nav ol li.dropdown').hover(
 	 	$(this).find('.dropdown-menu').stop(true, true).delay(50).fadeOut(); 
 	}
 );
+
+/** user login via email password **/
+$("button#signin-button").click(function(){
+    var elem = $(this);
+    var mailfld = $("input#signin-email");
+    var passwfld = $("input#signin-password");
+
+    var mailId = $.trim(mailfld.val());
+    var passWord = $.trim(passwfld.val());
+    var rem = $("#remember-me").is(':checked') ? 1 : 0;
+    
+    if(mailId === '')
+    {
+        mailfld.css('border', '1px solid #ff0000');
+        passwfld.css('border', '1px solid #d2d8d8');
+    }
+    else if(passWord === ''){
+        passwfld.css('border', '1px solid #ff0000');
+        mailfld.css('border', '1px solid #d2d8d8');
+    }
+    else
+    {
+        mailfld.css('border', '1px solid #d2d8d8');
+        passwfld.css('border', '1px solid #d2d8d8');
+
+        elem.prop('disabled',true);
+        elem.html('<i class="fa fa-refresh fa-spin fa-fw"></i> Please wait. . .');
+
+        $.ajaxSetup({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            url: SERVER_ADDR+"attempt/user-login",
+            type: "POST",
+            dataType: 'json',
+            data: {email:mailId, password:passWord, rem:rem},
+            success: function(result){
+                if(result['error'] == 1)
+                {
+                    $("#login-msg").removeClass('alert-success').addClass('alert-danger').html('<strong>'+result['msg']+'</strong>').css('display','block');
+                    passwfld.val('');
+                }
+                else
+                {
+                    $("#login-msg").removeClass('alert-danger').addClass('alert-success').html('<strong>'+result['msg']+'</strong>').css('display','block');
+                    mailfld.val('');
+                    passwfld.val('');
+                    document.location.reload();
+                }
+                
+                elem.prop('disabled',false);
+                elem.html('Sign In');
+            },
+            error: function(xhr,status,error){
+                $("#login-msg").removeClass('alert-success').addClass('alert-danger').html('<strong>Upss! some server error occurred try again</strong>').css('display','block');
+                elem.prop('disabled',false);
+                elem.html('Sign In');
+            }
+         });
+
+        $.ajax();
+    }
+
+});
+
+$("form#login-form").submit(function(ev){
+    ev.preventDefault();
+    if($("button#signin-button").prop('disabled') != true)
+    {
+        $("button#signin-button").click();
+    }
+});
+
+/** user signup via email **/
+$("button#signup-button").click(function(){
+	var elem = $(this);
+	var mailfld = $("input#signup-email");
+    var mailId = $.trim(mailfld.val());
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(mailId === '')
+    {
+    	mailfld.css('border', '1px solid #ff0000');
+    }
+    else if(mailId != '')
+    {
+    	if(re.test(mailfld.val()) == true)
+    	{
+    		mailfld.css('border', '1px solid #d2d8d8');
+    		elem.prop('disabled',true);
+    		elem.html('<i class="fa fa-refresh fa-spin fa-fw"></i> Please wait. . .');
+
+    		$.ajaxSetup({
+		        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+		        url: SERVER_ADDR+"attempt/signup-via-email",
+		        type: "POST",
+		        dataType: 'json',
+		        data: {mail:mailfld.val()},
+		        success: function(result){
+		        	if(result['error'] == 1)
+		        	{
+		        		$("#signup-msg").removeClass('alert-success').addClass('alert-danger').html('<strong>'+result['msg']+'</strong>').css('display','block');
+		        	}
+		        	else
+		        	{
+		        		$("#signup-msg").removeClass('alert-danger').addClass('alert-success').html('<strong>'+result['msg']+'</strong>').css('display','block');
+		        		mailfld.val('');
+		        	}
+		        	
+		        	elem.prop('disabled',false);
+		        	elem.html('Create Account');
+		        },
+		        error: function(xhr,status,error){
+		          	$("#signup-msg").removeClass('alert-success').addClass('alert-danger').html('<strong>Upss! some server error occurred try again</strong>').css('display','block');
+		        	elem.prop('disabled',false);
+		        	elem.html('Create Account');
+		        }
+		     });
+
+		    $.ajax();
+    	}
+    	else
+    	{
+    		mailfld.css('border', '1px solid #ff0000');
+    	}
+    }
+});
+
+$("form#signup-form").submit(function(ev){
+    	ev.preventDefault();
+    	if($("button#signup-btn").prop('disabled') != true)
+    	{
+    		$("button#signup-btn").click();
+    	}
+    });

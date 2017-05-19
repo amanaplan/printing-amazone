@@ -77,7 +77,7 @@
 									<!-- inser more links here -->
 									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
 									<li class="dropdown">
-										<a class="cd-signin dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>Hi, {{ Auth::user()->name }}</a>
+										<a class="cd-signin dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>Hi, {{ nickname(Auth::user()->name) }}</a>
 										<ul class="dropdown-menu" style="display: none;">
 											<li><a href="{{ route('user.dashboard') }}">My Dashboard</a></li>
 											<li><a href="#">Profile</a></li>
@@ -148,7 +148,7 @@
 					</ul>
 				</div><!-- social -->
 				<div class="clearfix"></div>
-				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; printingamazon.com</p>
+				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; printingamazone.com</p>
 			</div>
 		</div>
 	</div><!-- footer -->
@@ -164,7 +164,7 @@
 			</ul>
 
 			<div id="cd-login"> <!-- log in form -->
-				<form class="cd-form">
+				<form class="cd-form" id="login-form">
 					<div class="alert text-center" id="login-msg" style="display: none;"></div>
 					<p class="fieldset">
 					  <span id="login-processing-msg">Login via</span>
@@ -180,14 +180,12 @@
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signin-email">E-mail</label>
 						<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-						<span class="cd-error-message">Error message here!</span>
 					</p>
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">Password</label>
 						<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
 						<a href="#0" class="hide-password">Hide</a>
-						<span class="cd-error-message">Error message here!</span>
 					</p>
 
 					<p class="fieldset">
@@ -196,7 +194,7 @@
 					</p>
 
 					<p class="fieldset">
-						<input class="full-width" id="signin-button" type="submit" value="Sign In">
+						<button class="full-width" id="signin-button" type="submit">Sign In</button>
 					</p>
 				</form>
 				
@@ -205,7 +203,7 @@
 			</div> <!-- cd-login -->
 
 			<div id="cd-signup"> <!-- sign up form -->
-				<form class="cd-form">
+				<form class="cd-form" id="signup-form">
 					<div class="alert text-center" id="signup-msg" style="display: none;"></div>
 					<p class="fieldset">
 					  <span id="signup-processing-msg">Signup via</span>
@@ -222,16 +220,15 @@
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signup-email">E-mail</label>
 						<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-						<span class="cd-error-message">Error message here!</span>
 					</p>
 
 					<p class="fieldset">
-						<input type="checkbox" id="accept-terms" checked="checked">
+						<input type="checkbox" id="accept-terms" checked="checked" disabled="disabled">
 						<label for="accept-terms">I agree to the <a href="#">Terms</a></label>
 					</p>
 
 					<p class="fieldset">
-						<input id="signup-button" class="full-width has-padding" type="submit" value="Create account">
+						<button id="signup-button" class="full-width has-padding" type="submit">Create account</button>
 					</p>
 				</form>
 
@@ -249,7 +246,7 @@
 					</p>
 
 					<p class="fieldset">
-						<input class="full-width has-padding" type="submit" value="Reset password">
+						<button class="full-width has-padding" type="submit">Reset password</button>
 					</p>
 				</form>
 

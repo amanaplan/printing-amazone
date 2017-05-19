@@ -28,8 +28,18 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
-Route::post('/attempt/google-login', 'Frontend\AjaxCtrl@googleLogin');
-Route::post('/attempt/google-signup', 'Frontend\AjaxCtrl@googleSignup');
+
+//users not allowed to access these routes if they are logged in
+Route::group(['middleware' => ['shouldnotbeloggedin']], function () {
+
+	Route::post('/attempt/google-login', 'Frontend\AjaxCtrl@googleLogin');
+	Route::post('/attempt/google-signup', 'Frontend\AjaxCtrl@googleSignup');
+	Route::post('/attempt/user-login', 'Frontend\AjaxCtrl@UserLogin');
+	Route::post('/attempt/signup-via-email', 'Frontend\AjaxCtrl@SignupViaEmail');
+
+});
+
+Route::get('/verify-mailid/{key}', 'Frontend\FrontendReqstCtrl@MailVerify')->name('verify.email'); //verify email id from mail redirected link
 Route::post('/user/logout', 'Frontend\AjaxCtrl@UserLogout');
 
 
@@ -39,7 +49,7 @@ Route::post('/user/logout', 'Frontend\AjaxCtrl@UserLogout');
 |front-end registered customers' accessible pages
 |------------------------------------------------------------------------------------------------------
 */
-Route::prefix('user')->group(function() {
+Route::prefix('user')->middleware('userloggedin')->group(function() {
 
 	Route::get('/dashboard', 'Frontend\UserPagesCtrl@index')->name('user.dashboard');
 	Route::get('/set-password', 'Frontend\UserPagesCtrl@InitPassword');

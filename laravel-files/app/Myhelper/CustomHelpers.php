@@ -56,6 +56,24 @@ if (! function_exists('ismultiple')) {
     }
 }
 
+/**
+*returns only first name
+*/
+if (! function_exists('nickname')) {
+    
+    function nickname($name)
+    {
+        if(preg_match("/^(.+)\s(.+)?/", $name, $match))
+        {
+            return $match[1];
+        }
+        else
+        {
+            return $name;
+        }
+    }
+}
+
 if ( ! function_exists('ending_soon'))
 {
     /**
