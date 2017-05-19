@@ -12,15 +12,15 @@
 */
 
 //[default laravel auth with remved register path]
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'Auth\LoginController@login');
+//Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+//Route::post('/login', 'Auth\LoginController@login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('/register', 'Auth\RegisterController@register');
+//Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+//Route::post('/register', 'Auth\RegisterController@register');
 
 
 /*-----------------------------------------------------------------------------------------------------
@@ -29,6 +29,18 @@ Route::post('/register', 'Auth\RegisterController@register');
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
 
+//users not allowed to access these routes if they are logged in
+Route::group(['middleware' => ['shouldnotbeloggedin']], function () {
+
+	Route::post('/attempt/google-login', 'Frontend\AjaxCtrl@googleLogin');
+	Route::post('/attempt/google-signup', 'Frontend\AjaxCtrl@googleSignup');
+	Route::post('/attempt/user-login', 'Frontend\AjaxCtrl@UserLogin');
+	Route::post('/attempt/signup-via-email', 'Frontend\AjaxCtrl@SignupViaEmail');
+
+});
+
+Route::get('/verify-mailid/{key}', 'Frontend\FrontendReqstCtrl@MailVerify')->name('verify.email'); //verify email id from mail redirected link
+Route::post('/user/logout', 'Frontend\AjaxCtrl@UserLogout');
 
 
 
@@ -36,9 +48,13 @@ Route::get('/', 'Frontend\PagesCtrl@index');
 |front-end registered customers' accessible pages
 |------------------------------------------------------------------------------------------------------
 */
-Route::get('/dashboard', 'Frontend\UserPagesCtrl@index')->name('user.dashboard');
+Route::prefix('user')->middleware('userloggedin')->group(function() {
 
+	Route::get('/dashboard', 'Frontend\UserPagesCtrl@index')->name('user.dashboard');
+	Route::get('/set-password', 'Frontend\UserPagesCtrl@InitPassword');
+	Route::put('/request/set-password', 'Frontend\UserRqstCtrl@InitPassword');
 
+});
 
 
 /*-----------------------------------------------------------------------------------------------------

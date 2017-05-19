@@ -182,7 +182,7 @@ xsigin/signup popup
   content: "";
   display: table;
 }
-.cd-form span{color:#202020; font-weight:600;font-family: 'Raleway', sans-serif;}
+.cd-form span{font-weight:600;font-family: 'Raleway', sans-serif;}
 .cd-user-modal-container .cd-switcher{background:url(../../images/form-bg.jpg) no-repeat; box-shadow:0px 1px 4px rgba(0, 0, 0, 0.3);}
 .cd-user-modal-container .cd-switcher li {
   width: 50%;
@@ -529,15 +529,15 @@ border-radius: 4px;
     margin: 0 auto;
 }
 .cd-form label a{font-weight:600; color:#0b6bae;}
-.cd-form input[type=submit] {
-    background: #3b5998 none repeat scroll 0 0;
-    border:2px solid #3b5998;
+.cd-form button[type=submit] {
+    background: #0e5577 none repeat scroll 0 0;
+    border:2px solid #fea;
     color: #fff;
     padding: 16px 0;
 	font-family: 'Raleway', sans-serif;
 	font-weight:600;
   }
- .cd-form input[type=submit]:hover {
+ .cd-form button[type=submit]:hover {
 	 background:transparent;
 	 border:2px solid #fff;
 	transition:all 0.4s;
@@ -551,4 +551,67 @@ border-radius: 4px;
 .review ul{display:inline-block;}
 .review ul li{display:inline-block; color:#ea8f00; font-size:23px;} 
 .review ul li:last-child{color:#dadada;}
+<<<<<<< HEAD
 .review span{display:inline-block; color:#141414; font-size:18px;font-weight:600;font-family: 'Raleway', sans-serif; margin-left:10px;}
+=======
+.review span{display:inline-block; color:#141414; font-size:18px;font-weight:600;font-family: 'Raleway', sans-serif; margin-left:10px;}
+
+/**************** css for oauth google buttons *****************/
+
+.abcRioButtonBlue {
+    background-color: #4285f4;
+    border: none;
+    color: #fff;
+}
+.abcRioButton {
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+    transition: background-color .218s,border-color .218s,box-shadow .218s;
+    -webkit-user-select: none;
+    -webkit-appearance: none;
+    background-color: #4285f4;
+    background-image: none;
+    color: #fff !important;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+  margin:0 auto;
+}
+.abcRioButton:hover{color:#202020 !important;}
+.abcRioButtonBlue .abcRioButtonContentWrapper {
+    border: 1px solid transparent;
+}
+.abcRioButtonContentWrapper {
+    height: 100%;
+    width: 100%;
+}
+.abcRioButtonBlue .abcRioButtonIcon {
+    background-color: #fff;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+}
+.abcRioButtonIcon {
+    float: left;
+}
+.abcRioButtonContents {
+    font-family: Roboto,arial,sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .21px;
+    margin-left: 6px;
+    margin-right: 6px;
+    vertical-align: top;
+}
+
+/**** user menu dropdown *****/
+ul.dropdown-menu{ background:#171717; text-align:left;  margin-top: 16px;left: 10px;}ul.dropdown-menu li{ display:block; text-align:left; border-bottom:1px solid;}ul.dropdown-menu li:last-child {    border-bottom: 1px none;}ul.dropdown-menu li a{color:#fff;font-size: 12px;font-weight: 300;padding: 6px 14px; transition:all 0.4s;}ul.dropdown-menu li a:hover{background:none; color:#999;}ul.dropdown-menu::after{    border-color: transparent transparent #171717;    border-image: none;    border-style: solid;    border-width: 6px 6px 5px;    content: "";    left: 22px;    position: absolute;    top: -11px;}
+>>>>>>> feature/signup-login

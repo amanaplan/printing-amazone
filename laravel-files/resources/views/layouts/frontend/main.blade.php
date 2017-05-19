@@ -42,6 +42,9 @@
 
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
+		{{-- the js library of google oauth2.0 --}}
+		<script src="https://apis.google.com/js/api:client.js"></script>
+
 		{{-- page specific styles --}}
 		@stack( 'styles' )
 
@@ -49,21 +52,44 @@
 
 <body>
 
-	<header class="main-header">
+	<header class="main-header {{ empty(Request::segment(1))? '' : 'inner' }}">
 		<div class="container">
 			<div class="row">
 				<div class="top-header">
 					<div class="logo">
 						<a href="#"><img src="{{ asset( 'assets/images/logo.png' ) }}" class="img-responsive" /></a>
 						<div class="top-menu">
+							@if(Auth::check() == false)
+
 							<nav class="main-nav">
 								<ol>
 									<!-- inser more links here -->
 									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-									<li><a class="cd-signin" href="#0"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-									<li><a class="cd-signup" href="#0"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
+									<li><a class="cd-signin" href="javascript:void();"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+									<li><a class="cd-signup" href="javascript:void();"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
 								</ol>
 							</nav>
+
+							@else
+
+							<nav class="main-nav">
+								<ol>
+									<!-- inser more links here -->
+									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+									<li class="dropdown">
+										<a class="cd-signin dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>Hi, {{ nickname(Auth::user()->name) }}</a>
+										<ul class="dropdown-menu" style="display: none;">
+											<li><a href="{{ route('user.dashboard') }}">My Dashboard</a></li>
+											<li><a href="#">Profile</a></li>
+											<li><a href="#">Orders</a></li>
+										</ul>
+									</li>
+									<li><a class="cd-signup" href="#" onclick="LogoffUser();"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+								</ol>
+							</nav>
+
+							@endif
+
 						</div><!-- top-menu -->
 					</div><!-- logo -->
 				</div><!-- top-header -->
@@ -100,7 +126,7 @@
 
 	@yield( 'contents' )
 	
-	<div class="footer">
+	<div class="footer {{ (Auth::check())? 'dash-footer' : '' }}">
 		<div class="container">
 			<div class="row">
 				<div class="footer-menu col-sm-8 col-lg-8">
@@ -122,40 +148,43 @@
 					</ul>
 				</div><!-- social -->
 				<div class="clearfix"></div>
-				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; printingamazon.com</p>
+				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; printingamazone.com</p>
 			</div>
 		</div>
 	</div><!-- footer -->
+
+	@if(Auth::check() == false)
 	
 	  <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
 			<ul class="cd-switcher">
-				<li><a href="#0">Sign in</a></li>
-				<li><a href="#0">New account</a></li>
+				<li><a href="javascript:void();">Sign in</a></li>
+				<li><a href="javascript:void();">New account</a></li>
 			</ul>
 
 			<div id="cd-login"> <!-- log in form -->
-				<form class="cd-form">
+				<form class="cd-form" id="login-form">
+					<div class="alert text-center" id="login-msg" style="display: none;"></div>
 					<p class="fieldset">
-					  <span>Login via</span>
+					  <span id="login-processing-msg">Login via</span>
 
-					  <div class="social-buttons">
-						 <a href="#" class="btn btn-g"><i class="fa fa-google-plus"></i> Google+</a>
+					  <div class="social-buttons" id="customLogin">
+						<div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign in with Google</span></span></div></div>
 
 					  </div>
+
+					  or
 
 				   </p>
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signin-email">E-mail</label>
 						<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-						<span class="cd-error-message">Error message here!</span>
 					</p>
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">Password</label>
-						<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a>
-						<span class="cd-error-message">Error message here!</span>
+						<input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
+						<a href="javascript:void();" class="hide-password">Hide</a>
 					</p>
 
 					<p class="fieldset">
@@ -164,51 +193,41 @@
 					</p>
 
 					<p class="fieldset">
-						<input class="full-width" type="submit" value="Sign In">
+						<button class="full-width" id="signin-button" type="submit">Sign In</button>
 					</p>
 				</form>
 				
-				<p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+				<p class="cd-form-bottom-message"><a href="javascript:void();">Forgot your password?</a></p>
 				<!-- <a href="#0" class="cd-close-form">Close</a> -->
 			</div> <!-- cd-login -->
 
 			<div id="cd-signup"> <!-- sign up form -->
-				<form class="cd-form">
+				<form class="cd-form" id="signup-form">
+					<div class="alert text-center" id="signup-msg" style="display: none;"></div>
 					<p class="fieldset">
-					  <span>Login via</span>
+					  <span id="signup-processing-msg">Signup via</span>
 
-					  <div class="social-buttons">
-						 <a href="#" class="btn btn-g"><i class="fa fa-google-plus"></i> Google+</a>
+					  <div class="social-buttons" id="customSignup">
+						 <div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign up with Google</span></span></div></div>
 
 					  </div>
 
+					  or
+
 				   </p>
-					<p class="fieldset">
-						<label class="image-replace cd-username" for="signup-username">Username</label>
-						<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-						<span class="cd-error-message">Error message here!</span>
-					</p>
 
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signup-email">E-mail</label>
 						<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-						<span class="cd-error-message">Error message here!</span>
 					</p>
 
 					<p class="fieldset">
-						<label class="image-replace cd-password" for="signup-password">Password</label>
-						<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a>
-						<span class="cd-error-message">Error message here!</span>
+						<input type="checkbox" id="accept-terms" checked="checked" disabled="disabled">
+						<label for="accept-terms">I agree to the <a href="#">Terms</a></label>
 					</p>
 
 					<p class="fieldset">
-						<input type="checkbox" id="accept-terms">
-						<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-					</p>
-
-					<p class="fieldset">
-						<input class="full-width has-padding" type="submit" value="Create account">
+						<button id="signup-button" class="full-width has-padding" type="submit">Create account</button>
 					</p>
 				</form>
 
@@ -226,7 +245,7 @@
 					</p>
 
 					<p class="fieldset">
-						<input class="full-width has-padding" type="submit" value="Reset password">
+						<button class="full-width has-padding" type="submit">Reset password</button>
 					</p>
 				</form>
 
@@ -235,6 +254,8 @@
 			<a href="#0" class="cd-close-form">Close</a>
 		</div> <!-- cd-user-modal-container -->
 	</div> <!-- cd-user-modal -->
+
+	@endif
 
 
 	<!--======= JavaScript =========-->
@@ -251,6 +272,8 @@
 
 	<!--======= Customize =========-->
 	<script src="{{ asset( 'assets/frontend/js/responsive_bootstrap_carousel.js' ) }}"></script>
+
+	<script src="{{ asset( 'assets/frontend/js/custom.js' ) }}"></script>
 
 	{{-- page specific scripts --}}
 	@stack( 'scripts' )

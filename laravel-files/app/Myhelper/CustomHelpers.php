@@ -29,6 +29,15 @@ if (! function_exists('adminflash')) {
     }
 }
 
+if (! function_exists('userflash')) {
+    
+    function userflash($type='info', $msg)
+    {
+        Session::flash('flashtype', $type);
+        Session::flash('flashmsg', $msg);
+    }
+}
+
 /**
 *determines if multiple of the input number 
 */
@@ -43,6 +52,24 @@ if (! function_exists('ismultiple')) {
         else
         {
             return false;
+        }
+    }
+}
+
+/**
+*returns only first name
+*/
+if (! function_exists('nickname')) {
+    
+    function nickname($name)
+    {
+        if(preg_match("/^(.+)\s(.+)?/", $name, $match))
+        {
+            return $match[1];
+        }
+        else
+        {
+            return $name;
         }
     }
 }
