@@ -184,8 +184,8 @@
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">Password</label>
-						<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a>
+						<input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
+						<a href="javascript:void();" class="hide-password">Hide</a>
 					</p>
 
 					<p class="fieldset">
