@@ -59,4 +59,46 @@ class UserRqstCtrl extends Controller
             abort(404);
         }
     }
+
+    /**
+    *user update password request
+    */
+    public function ChangePasswd(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current-password'      => 'required',
+            'new-password'          => 'required|min:5',
+            'retype-password'       => 'required|same:new-password',
+        ]);
+
+
+        if ($validator->fails()) {
+            userflash('warning', 'form error please provide inputs properly');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $curr_password  = $request->input('current-password');
+        $curr_hashed    = Auth::user()->password;
+
+        if (Hash::check($curr_password, $curr_hashed)) 
+        {
+            //current password is corrct process request
+            $user                   = \App\User::find(Auth::user()->id);
+            $user->password         = Hash::make($request->input('new-password'));
+            $update = $user->save();
+            if($update){
+                userflash('success', 'your password successfully updated');
+            }
+            else
+            {
+                userflash('danger', 'server error! try later');
+            }
+        }
+        else
+        {
+            userflash('warning', 'Denied! incorrect current password provided');
+        }
+
+        return redirect()->back();
+    }
 }

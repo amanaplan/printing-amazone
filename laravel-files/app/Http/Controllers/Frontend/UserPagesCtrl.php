@@ -41,4 +41,12 @@ class UserPagesCtrl extends Controller
             abort(404);
         }
     }
+
+    /**
+    *user change password page
+    */
+    public function ChangePasswd()
+    {
+        return view('frontend.user-change_password', ['page' => 'change_password']);
+    }
 }

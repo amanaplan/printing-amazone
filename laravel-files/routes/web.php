@@ -53,6 +53,8 @@ Route::prefix('user')->middleware('userloggedin')->group(function() {
 	Route::get('/dashboard', 'Frontend\UserPagesCtrl@index')->name('user.dashboard');
 	Route::get('/set-password', 'Frontend\UserPagesCtrl@InitPassword');
 	Route::put('/request/set-password', 'Frontend\UserRqstCtrl@InitPassword');
+	Route::get('/change-password', 'Frontend\UserPagesCtrl@ChangePasswd');
+	Route::put('/request/change-password', 'Frontend\UserRqstCtrl@ChangePasswd');
 
 });
 

@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="top-header">
 					<div class="logo">
-						<a href="#"><img src="{{ asset( 'assets/images/logo.png' ) }}" class="img-responsive" /></a>
+						<a href="{{ url('/') }}"><img src="{{ asset( 'assets/images/logo.png' ) }}" class="img-responsive" /></a>
 						<div class="top-menu">
 							@if(Auth::check() == false)
 
@@ -148,7 +148,7 @@
 					</ul>
 				</div><!-- social -->
 				<div class="clearfix"></div>
-				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; printingamazone.com</p>
+				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; <a href="{{ url('/') }}">printingamazone.com</a></p>
 			</div>
 		</div>
 	</div><!-- footer -->
@@ -168,8 +168,8 @@
 					<p class="fieldset">
 					  <span id="login-processing-msg">Login via</span>
 
-					  <div class="social-buttons" id="customLogin">
-						<div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign in with Google</span></span></div></div>
+					  <div class="social-buttons">
+						<div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper" id="customLogin"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign in with Google</span></span></div></div>
 
 					  </div>
 
@@ -184,7 +184,7 @@
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">Password</label>
 						<input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
-						<a href="javascript:void();" class="hide-password">Hide</a>
+						<a href="javascript:void();" class="hide-password">Show</a>
 					</p>
 
 					<p class="fieldset">
@@ -207,8 +207,8 @@
 					<p class="fieldset">
 					  <span id="signup-processing-msg">Signup via</span>
 
-					  <div class="social-buttons" id="customSignup">
-						 <div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign up with Google</span></span></div></div>
+					  <div class="social-buttons">
+						 <div style="height:50px;width:240px;" class="abcRioButton abcRioButtonBlue"><div class="abcRioButtonContentWrapper" id="customSignup"><div class="abcRioButtonIcon" style="padding:15px"><div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"><img src="{{ asset( 'assets/images/google.png' ) }}" style="width:20px;" /></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span>Sign up with Google</span></span></div></div>
 
 					  </div>
 

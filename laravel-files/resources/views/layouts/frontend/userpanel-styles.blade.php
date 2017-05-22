@@ -1,0 +1,1 @@
+<link href="{{ asset( 'assets/frontend/css/dashboard.css' ) }}" rel="stylesheet">

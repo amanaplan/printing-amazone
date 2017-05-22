@@ -10,7 +10,7 @@
 
 {{-- page specific styles --}}
 @push( 'styles' )
-<link href="{{ asset( 'assets/frontend/css/dashboard.css' ) }}" rel="stylesheet">
+	@include('layouts.frontend.userpanel-styles')
 @endpush
 
 {{-- main page contents --}}
@@ -32,10 +32,31 @@
     @endif
 
     <div class="white-box profile-form">
+		<h2>Account details</h2>
+		<table id="details" class="responsive" cellpadding="2" width="100%">
 
-    	<h4>Here is your dashboard</h4>
+			<tbody>
+			  <tr>
+				<td>Display name</td>
+				<td>{{ Auth::user()->name }}</td>
+			  </tr>
+			  <tr>
+				<td>Order history</td>
+				<td>
+					No past orders
+				</td>
+			  </tr>
+			  <tr>
+				<td id="default_shipping_address">
+				  Default shipping address
+				  <a href="#" class="edit">Edit</a>
+				</td>
+				<td id="default_shipping_address_line"></td>
+			  </tr>
+			</tbody>
+		 </table>
 
-    </div>
+	</div>
 
 					
 			</div>
