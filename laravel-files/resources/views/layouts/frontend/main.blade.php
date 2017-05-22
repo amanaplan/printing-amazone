@@ -80,7 +80,7 @@
 										<a class="cd-signin dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>Hi, {{ nickname(Auth::user()->name) }}</a>
 										<ul class="dropdown-menu" style="display: none;">
 											<li><a href="{{ route('user.dashboard') }}">My Dashboard</a></li>
-											<li><a href="#">Profile</a></li>
+											<li><a href="{{ url('/user/profile') }}">Profile</a></li>
 											<li><a href="#">Orders</a></li>
 										</ul>
 									</li>

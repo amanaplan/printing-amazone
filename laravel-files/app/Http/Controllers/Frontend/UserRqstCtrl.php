@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 //for password hashing
 use Illuminate\Support\Facades\Hash;
-
+use Intervention\Image\Facades\Image; //for image manupulation
 use Illuminate\Support\Facades\Session;
 
 class UserRqstCtrl extends Controller
@@ -97,6 +97,62 @@ class UserRqstCtrl extends Controller
         else
         {
             userflash('warning', 'Denied! incorrect current password provided');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+    *update user's profile pic & name
+    */
+    public function UpdateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'full-name'     => 'required|min:5',
+            'profile_pic'   => 'nullable|mimes:jpeg,png,jpg,gif'
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->except('profile_pic'));
+        }
+
+        //otherwise update profile info
+        $user = \App\User::findorFail(Auth::id());
+        $user->name = $request->input('full-name');
+
+
+        //profile picture upload attempt
+        if ($request->hasFile('profile_pic')) {
+            $file = $request->file('profile_pic');
+            $destinationPath = 'assets/images/users';
+            $basename = $file->getClientOriginalName();
+            $filename = pathinfo($basename,PATHINFO_FILENAME );
+            $extension = $file->getClientOriginalExtension();
+
+            //remove current profile picture if exist
+            if(!empty(Auth::user()->photo) && file_exists($destinationPath.'/'.Auth::user()->photo))
+            {
+                unlink($destinationPath.'/'.Auth::user()->photo);
+            }
+
+            //if new file name matches exising image name then save as different name
+            $save_as = (file_exists($destinationPath.'/'.$basename))? $filename.time().'.'.$extension : $basename;
+
+            $file->move($destinationPath,$save_as);
+            //crop
+            $img = Image::make($destinationPath.'/'.$save_as)->resize(200, 200)->save($destinationPath.'/'.$save_as);
+
+            $user->photo = $save_as;
+        }
+
+        if($user->save())
+        {
+            userflash('success', 'your profile successfully updated');
+        }
+        else
+        {
+            userflash('warning', 'server error! try later');
         }
 
         return redirect()->back();

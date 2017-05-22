@@ -1,5 +1,5 @@
 <div class="prf-block">
-					<div class="prf-img"><img id="content_imgdp" src="https://www.jonscoupons.com/assets/images/demo.jpg">
+					<div class="prf-img"><img id="content_imgdp" src="{{ asset('assets/images') }}/{{ (Auth::user()->photo)? 'users/'.Auth::user()->photo : 'user.png' }}">
 					</div>
 					<span>{{ Auth::user()->name }}</span>
 				</div>
@@ -11,7 +11,7 @@
 					<ul>
 	<li {!! ($page == 'dashboard')? 'class="current"' : '' !!} ><a href="{{ route('user.dashboard') }}" rel="nofollow"><div class="icon"><i class="fa fa-dashboard"></i></div><div class="txt">My Dashboard</div><div class="nf"></div></a></li>
 
-	<li><a href="#"><div class="icon"><i class="fa fa-user"></i></div><div class="txt">Update Profile Info</div></a></li>
+	<li {!! ($page == 'profile')? 'class="current"' : '' !!} ><a href="{{ url('/user/profile') }}"><div class="icon"><i class="fa fa-user"></i></div><div class="txt">Update Profile Info</div></a></li>
 
 	@if(session('init_signup'))
 		<li {!! ($page == 'init_password')? 'class="current"' : '' !!} ><a href="{{ url('/user/set-password') }}"><div class="icon"><i class="fa fa-key"></i></div><div class="txt">Set Password</div></a></li>

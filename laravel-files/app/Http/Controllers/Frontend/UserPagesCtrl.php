@@ -49,4 +49,12 @@ class UserPagesCtrl extends Controller
     {
         return view('frontend.user-change_password', ['page' => 'change_password']);
     }
+
+    /**
+    *user update basic profile details
+    */
+    public function UpdateProfile()
+    {
+        return view('frontend.user-update_profile', ['page' => 'profile']);
+    }
 }
