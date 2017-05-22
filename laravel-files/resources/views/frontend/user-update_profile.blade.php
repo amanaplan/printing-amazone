@@ -46,7 +46,7 @@
     <div class="form-group {{ $errors->has('profile_pic') ? ' has-error' : '' }}">
       <label class="control-label col-sm-2">Profile Picture</label>
       <div class="col-sm-10">
-        <input class="form-control" name="profile_pic" type="file" accept=".jpg,.png,.gif,.jpeg">
+        <input class="form-control" name="profile_pic" type="file" accept=".jpg,.png,.gif,.jpeg"><em>[ 200 x 200 PX]</em>
 
         @if ($errors->has('profile_pic'))
             <span class="help-block m-b-none">
