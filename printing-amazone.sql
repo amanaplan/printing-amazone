@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2017 at 02:17 PM
+-- Generation Time: May 22, 2017 at 01:37 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -82,7 +82,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2014_10_12_100000_create_password_resets_table', 1),
 (7, '2017_05_03_101119_create_admins_tablele', 1),
 (9, '2017_05_06_093855_add_pic_active_col_to_admin', 2),
-(10, '2017_05_19_215135_EmailAuthentication', 3);
+(10, '2017_05_19_215135_EmailAuthentication', 3),
+(11, '2017_05_22_200726_add_pic_col_to_user', 4);
 
 -- --------------------------------------------------------
 
@@ -106,6 +107,7 @@ CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -116,9 +118,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'PTRHPZSu4KeFfE99Aequva98vVCEoT4H9ySIuAR7BSiAfJsNDj6i4rmrBnAD', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
-(2, 'Souravx Rakshit', 'srv.nxr@gmail.com', '$2y$10$ZxhOI7adSCWepga4/8swtu4azDoOmyiES3.TGMJ6ngcD4iJ7HO3du', 'TTajjF0tGSHrAtesEDMDKGSSPNAmEIMr8esZpMdjvv7teYrGuVf5tMuflrKm', '2017-05-18 16:08:04', '2017-05-18 16:55:12');
+INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Sourav', 'developer.srv1@gmail.com', NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'PTRHPZSu4KeFfE99Aequva98vVCEoT4H9ySIuAR7BSiAfJsNDj6i4rmrBnAD', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'avatar.png', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'RjNLZ91C0mw4I2Lx0b2ruL5CAyfi4W6oWW3vU71COi45PyXvmovhCk5kHeoL', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
 
 --
 -- Indexes for dumped tables
@@ -175,7 +177,7 @@ ALTER TABLE `email_authentication`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
