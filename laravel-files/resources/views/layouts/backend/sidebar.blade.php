@@ -18,6 +18,14 @@
         
         @endif
 
+        <li {!! ($page == 'category_add' || $page == 'category_manage')? 'class="active"' : '' !!}>
+            <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Manage Categories </span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                <li><a {!! ($page == 'category_add')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/category/add') }}">Add New Category</a></li>
+                <li><a {!! ($page == 'category_manage')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/category/manage') }}">Manage Categories</a></li>
+            </ul>
+        </li>
+
         <li>
 
             <a href="#"><i class="icon-basket"></i> <span class="nav-label">Ecommerce</span><span class="fa arrow"></span></a>

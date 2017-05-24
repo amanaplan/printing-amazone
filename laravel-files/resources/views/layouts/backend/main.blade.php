@@ -41,7 +41,7 @@
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">
                         <a href="{{ url('/') }}" target="_blank">
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="absolute admin" class="img-responsive logo-default"/> </a>
+                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="absolute admin" class="img-responsive logo-default"/> </a>
                     </div><div class="menu-toggler sidebar-toggler">
                         <a href="javascript:;" class="navbar-minimalize minimalize-styl-2  pull-left "><i class="fa fa-bars"></i></a>
                     </div>
@@ -79,10 +79,10 @@
                     <div class="clearfix"></div>
                     <div class="footer">
                         <div class="pull-right">
-                            developed by <a href="http://www.creativefilament.com/" target="_blank">CreativeFilament</a>
+                            
                         </div>
                         <div>
-                            <strong>Copyright</strong> Example Company &copy; {{ date('Y', time()) }}
+                            <strong>Copyright</strong> <a href="{{ url('/') }}" target="_blank">Printing Amazone</a> &copy; {{ date('Y', time()) }}
                         </div>
                     </div>
                 </div>

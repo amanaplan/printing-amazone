@@ -60,4 +60,20 @@ class AdminController extends Controller
         return view('backend.addnewadmin', ['page' => 'new_admin']);
     }
 
+    /**
+    *add new category
+    */
+    public function AddCategory()
+    {
+        return view('backend.category-add', ['page' => 'category_add']);
+    }
+
+    /**
+    *manage categories
+    */
+    public function ManageCategory()
+    {
+        return view('backend.category-list', ['page' => 'category_manage']);
+    }
+
 }

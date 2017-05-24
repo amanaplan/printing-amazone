@@ -74,6 +74,12 @@ Route::prefix('admin')->group(function() {
 	Route::put('/profile/update-personal-info', 'Backend\ProfileCtrl@update')->name('admin.profile.update');
 	Route::put('/profile/update-password', 'Backend\ProfileCtrl@PasswordUpdate')->name('admin.profile.password');
 
+	//manage category
+	Route::get('/category/manage', 'Backend\AdminController@ManageCategory');
+	Route::get('/category/add', 'Backend\AdminController@AddCategory');
+	Route::post('/request/category/add', 'Backend\RequestHandlers\AdminRqstController@AddCategory');
+
+
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin
 	|----------------------------------------------------
