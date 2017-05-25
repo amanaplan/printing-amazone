@@ -36,17 +36,10 @@
             <div class="panel panel-card recent-activites">
                 <!-- Start .panel -->
                 <div class="panel-heading">
-                    Striped Rows
+                    All Categories
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info btn-rounded btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-                            <ul class="dropdown-menu panel-dropdown" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
+                            <a href="{{ url('/admin/category/add') }}" class="btn btn-info btn-rounded btn-xs">Add Category</a>
                         </div>
                     </div>
                 </div>
@@ -57,16 +50,23 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Photo</th>
-                                    <th>Full Name</th>
-                                    <th>Email-ID</th>
-                                    <th>Active / Inactive</th>
-                                    <th>Remove Account</th>
+                                    <th>Category Name</th>
+                                    <th>Available Products</th>
+                                    <th>Edit</th>
+                                    <th>Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                            
+                            @foreach($categories as $category)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $category->category_name }}</td>
+                                    <td>0</td>
+                                    <td><a href="{{ url('/admin/category/edit', ['id' => $category->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
+                                    <td><a href=""><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                            @endforeach
 
                             </tbody>
                         </table>

@@ -16,7 +16,7 @@ class ChkSuperAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() == false || Auth::user()->super_admin == 0)
+        if(Auth::guard('admin')->check() == false || Auth::user()->super_admin == 0)
         {
             abort(401, 'unauthorized access forbidden');
         }

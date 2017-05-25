@@ -17,4 +17,5 @@ class PagesCtrl extends Controller
     {
         return view('frontend.home');
     }
+
 }

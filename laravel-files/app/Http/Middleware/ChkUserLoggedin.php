@@ -16,7 +16,7 @@ class ChkUserLoggedin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() == false)
+        if(Auth::guard('web')->check() == false)
         {
             return redirect('/');
         }

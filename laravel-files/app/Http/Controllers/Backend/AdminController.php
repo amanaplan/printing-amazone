@@ -73,7 +73,23 @@ class AdminController extends Controller
     */
     public function ManageCategory()
     {
-        return view('backend.category-list', ['page' => 'category_manage']);
+        $data = [
+            'page'       => 'category_manage',
+            'categories' => \App\Category::orderBy('created_at', 'desc')->get() 
+        ];
+        return view('backend.category-list', $data);
+    }
+
+    /**
+    *edit category
+    */
+    public function EditCategory($id)
+    {
+        $data = [
+            'page'      => 'category_manage',
+            'category'  => \App\Category::findOrFail($id)
+        ];
+        return view('backend.category-edit', $data);
     }
 
 }

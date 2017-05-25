@@ -84,9 +84,9 @@ class AjaxCtrl extends Controller
     */
     public function UserLogout()
     {
-    	if(Auth::check() == true)
+    	if(Auth::guard('web')->check())
     	{
-    		Auth::logout();
+    		Auth::guard('web')->logout();
     	}
     	else
     	{

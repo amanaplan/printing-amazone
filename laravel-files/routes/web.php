@@ -78,6 +78,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/category/manage', 'Backend\AdminController@ManageCategory');
 	Route::get('/category/add', 'Backend\AdminController@AddCategory');
 	Route::post('/request/category/add', 'Backend\RequestHandlers\AdminRqstController@AddCategory');
+	Route::get('/category/edit/{id}', 'Backend\AdminController@EditCategory');
+	Route::put('/request/category/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditCategory');
 
 
 	/*___________________________________________________

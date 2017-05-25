@@ -16,7 +16,7 @@ class ChkUserNotLoggedin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() == true)
+        if(Auth::guard('web')->check() == true)
         {
             abort(401, 'unauthorized access forbidden');
         }
