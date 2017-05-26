@@ -92,4 +92,23 @@ class AdminController extends Controller
         return view('backend.category-edit', $data);
     }
 
+    /**
+    *add new product type i.e square sticker, rounded stickers etc.
+    */
+    public function AddProduct()
+    {
+        return view('backend.product-add', ['page' => 'product_add', 'categories' => \App\Category::orderBy('created_at', 'desc')->get()]);
+    }
+
+    /**
+    *manage Products
+    */
+    public function ManageProduct()
+    {
+        $data = [
+            'page'       => 'product_manage'
+        ];
+        return view('backend.product-list', $data);
+    }
+
 }

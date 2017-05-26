@@ -45,13 +45,6 @@
                     </div><div class="menu-toggler sidebar-toggler">
                         <a href="javascript:;" class="navbar-minimalize minimalize-styl-2  pull-left "><i class="fa fa-bars"></i></a>
                     </div>
-                    <div class="search-bar">
-                        <form class="sidebar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search...">
-                            </div>
-                        </form>
-                    </div>
                     <!-- END LOGO -->
                     {{-- BEGIN TOP NAVIGATION MENU --}}
                         @include('layouts.backend.headernav')

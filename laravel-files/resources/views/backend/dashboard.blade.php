@@ -77,7 +77,7 @@
 
                         <div class="col-xs-7 text-center card-content-left">
 
-                            <p class="card-stats-title right panel-title">Projects</p>
+                            <p class="card-stats-title right panel-title">Total Products</p>
 
                             <h4 class="right panel-middle margin-b-0">3100</h4>
 
@@ -143,7 +143,7 @@
 
                         <div class="col-xs-7 text-center card-content-left">
 
-                            <p class="card-stats-title right panel-title">Total TODO</p>
+                            <p class="card-stats-title right panel-title">Pending Orders</p>
 
                             <h4 class="right panel-middle margin-b-0">6,782</h4>
 
@@ -177,7 +177,7 @@
 
                         <div class="col-xs-7 text-center card-content-left">
 
-                            <p class="card-stats-title right panel-title">Todo Completed</p>
+                            <p class="card-stats-title right panel-title">Review Received</p>
 
                             <h4 class="right panel-middle margin-b-0">1782</h4>
 
@@ -211,7 +211,7 @@
 
                 <div class="panel-heading">
 
-                    All Tasks
+                    Process 1
 
                     <div class="pull-right">
 
@@ -257,7 +257,7 @@
 
                 <div class="panel-heading">
 
-                    All Projects
+                    Process 2
 
                     <div class="pull-right">
 

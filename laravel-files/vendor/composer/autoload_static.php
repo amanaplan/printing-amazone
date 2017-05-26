@@ -297,9 +297,12 @@ class ComposerStaticInita376957c934c4e46e48f702082a1d41a
     );
 
     public static $classMap = array (
+        'AddCategoryNSortColToProductsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_185022_add_category_n_sort_col_to_products_table.php',
+        'AddDescriptionColToProductsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_200907_add_description_col_to_products_table.php',
         'AddPicActiveColToAdmin' => __DIR__ . '/../..' . '/database/migrations/2017_05_06_093855_add_pic_active_col_to_admin.php',
         'AddPicColToUser' => __DIR__ . '/../..' . '/database/migrations/2017_05_22_200726_add_pic_col_to_user.php',
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
+        'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Emailauth' => __DIR__ . '/../..' . '/app/Emailauth.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -310,6 +313,7 @@ class ComposerStaticInita376957c934c4e46e48f702082a1d41a
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Backend\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/AdminController.php',
         'App\\Http\\Controllers\\Backend\\ProfileCtrl' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/ProfileCtrl.php',
+        'App\\Http\\Controllers\\Backend\\RequestHandlers\\AdminRqstController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/RequestHandlers/AdminRqstController.php',
         'App\\Http\\Controllers\\Backend\\RequestHandlers\\ManageAdmins' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/RequestHandlers/ManageAdmins.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Frontend\\AjaxCtrl' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/AjaxCtrl.php',
@@ -2760,6 +2764,7 @@ class ComposerStaticInita376957c934c4e46e48f702082a1d41a
         'Predis\\Transaction\\AbortedMultiExecException' => __DIR__ . '/..' . '/predis/predis/src/Transaction/AbortedMultiExecException.php',
         'Predis\\Transaction\\MultiExec' => __DIR__ . '/..' . '/predis/predis/src/Transaction/MultiExec.php',
         'Predis\\Transaction\\MultiExecState' => __DIR__ . '/..' . '/predis/predis/src/Transaction/MultiExecState.php',
+        'ProductsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_181014_products_table.php',
         'Prophecy\\Argument' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument.php',
         'Prophecy\\Argument\\ArgumentsWildcard' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
         'Prophecy\\Argument\\Token\\AnyValueToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',

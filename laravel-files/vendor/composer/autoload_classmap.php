@@ -6,9 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddCategoryNSortColToProductsTable' => $baseDir . '/database/migrations/2017_05_26_185022_add_category_n_sort_col_to_products_table.php',
+    'AddDescriptionColToProductsTable' => $baseDir . '/database/migrations/2017_05_26_200907_add_description_col_to_products_table.php',
     'AddPicActiveColToAdmin' => $baseDir . '/database/migrations/2017_05_06_093855_add_pic_active_col_to_admin.php',
     'AddPicColToUser' => $baseDir . '/database/migrations/2017_05_22_200726_add_pic_col_to_user.php',
     'App\\Admin' => $baseDir . '/app/Admin.php',
+    'App\\Category' => $baseDir . '/app/Category.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Emailauth' => $baseDir . '/app/Emailauth.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -19,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Backend\\AdminController' => $baseDir . '/app/Http/Controllers/Backend/AdminController.php',
     'App\\Http\\Controllers\\Backend\\ProfileCtrl' => $baseDir . '/app/Http/Controllers/Backend/ProfileCtrl.php',
+    'App\\Http\\Controllers\\Backend\\RequestHandlers\\AdminRqstController' => $baseDir . '/app/Http/Controllers/Backend/RequestHandlers/AdminRqstController.php',
     'App\\Http\\Controllers\\Backend\\RequestHandlers\\ManageAdmins' => $baseDir . '/app/Http/Controllers/Backend/RequestHandlers/ManageAdmins.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Frontend\\AjaxCtrl' => $baseDir . '/app/Http/Controllers/Frontend/AjaxCtrl.php',
@@ -2469,6 +2473,7 @@ return array(
     'Predis\\Transaction\\AbortedMultiExecException' => $vendorDir . '/predis/predis/src/Transaction/AbortedMultiExecException.php',
     'Predis\\Transaction\\MultiExec' => $vendorDir . '/predis/predis/src/Transaction/MultiExec.php',
     'Predis\\Transaction\\MultiExecState' => $vendorDir . '/predis/predis/src/Transaction/MultiExecState.php',
+    'ProductsTable' => $baseDir . '/database/migrations/2017_05_26_181014_products_table.php',
     'Prophecy\\Argument' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument.php',
     'Prophecy\\Argument\\ArgumentsWildcard' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
     'Prophecy\\Argument\\Token\\AnyValueToken' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',

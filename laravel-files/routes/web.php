@@ -81,6 +81,13 @@ Route::prefix('admin')->group(function() {
 	Route::get('/category/edit/{id}', 'Backend\AdminController@EditCategory');
 	Route::put('/request/category/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditCategory');
 
+	//manage products
+	Route::get('/product/manage', 'Backend\AdminController@ManageProduct');
+	Route::get('/product/add', 'Backend\AdminController@AddProduct');
+	Route::post('/request/product/add', 'Backend\RequestHandlers\AdminRqstController@AddProduct');
+	Route::get('/product/edit/{id}', 'Backend\AdminController@EditProduct');
+	Route::put('/request/product/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditProduct');
+
 
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin

@@ -35,14 +35,7 @@
                     Enter details of category
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info btn-rounded btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-                            <ul class="dropdown-menu panel-dropdown" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
+                            <a href="{{ url('/admin/category/manage') }}" class="btn btn-info btn-rounded btn-xs">Manage Categories</a>
                         </div>
                     </div>
                 </div>
@@ -96,14 +89,14 @@
                         <div class="form-group {{ $errors->has('og_image') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">OG Image</label>
                             <div class="col-sm-4">
-                                <input type="text" id="the_img_fld-1" class="form-control" name="og_image" value="{{ old('og_image') }}">
+                                <input type="text" id="the_img_fld-1" class="form-control" name="og_image" placeholder="image from category folder" value="{{ old('og_image') }}">
                             </div>
                             <div class="col-sm-6">
                                 <button class="btn btn-sm btn-primary pull-left fileSelector" elem-id="1" type="button">select file</button>
                             </div>
                             <div class="col-sm-12">
                                 <div class="row text-center">
-                                    <img id="picture_prvw-1" class="img-circle" width="150" src="" />
+                                    <img id="picture_prvw-1" width="150" src="" />
                                 </div>
                             </div>
                         </div>
