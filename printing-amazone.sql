@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2017 at 12:56 PM
+-- Generation Time: May 26, 2017 at 01:53 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -45,7 +45,7 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `name`, `email`, `profile_pic`, `password`, `remember_token`, `super_admin`, `active`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav R', 'srv.nxr@gmail.com', 'avatar2.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'YP2kTZH63ct9mbsJz2h9FBSPIJkVWm3ORJdPysYNKbJ25v8YyZqte0Z1C1K5', 1, 1, '2017-05-03 11:34:00', '2017-05-12 17:20:06'),
-(4, 'web dev', 'webdev@creativefilament.com', NULL, '$2y$10$QWewYf7ZGkh8HOVD42XhIud4wodDByvQ4ZcDg4mUWCqtPHGCmt2/O', NULL, 0, 1, '2017-05-12 18:28:35', '2017-05-12 18:32:16');
+(5, 'Printing Amazone', 'info@printingamazone.com', 'avatar2.png', '$2y$10$r4VO5fZ9pbx/FoXA4ksA4.djSsi2QLFenfjzFX90juuaBsQBa9N82', NULL, 0, 1, '2017-05-26 16:15:40', '2017-05-26 16:17:04');
 
 -- --------------------------------------------------------
 
@@ -65,6 +65,13 @@ CREATE TABLE `category` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `title`, `og_title`, `meta_desc`, `og_desc`, `og_img`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
+(1, 'sticker page title', 'sticker page title', 'sticker page meta desc', 'sticker page meta desc', 'banner-bg.jpg', 'Sticker', 'sticker', '2017-05-26 15:10:37', '2017-05-26 15:10:37');
 
 -- --------------------------------------------------------
 
@@ -102,7 +109,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2017_05_03_101119_create_admins_tablele', 1),
 (9, '2017_05_06_093855_add_pic_active_col_to_admin', 2),
 (10, '2017_05_19_215135_EmailAuthentication', 3),
-(11, '2017_05_22_200726_add_pic_col_to_user', 4);
+(12, '2017_05_22_200726_add_pic_col_to_user', 4),
+(13, '2017_05_24_191515_category_table', 4),
+(14, '2017_05_26_181014_products_table', 4),
+(15, '2017_05_26_185022_add_category_n_sort_col_to_products_table', 5),
+(16, '2017_05_26_200907_add_description_col_to_products_table', 6);
 
 -- --------------------------------------------------------
 
@@ -114,6 +125,28 @@ CREATE TABLE `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci,
+  `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  `product_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sample_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -138,8 +171,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'PTRHPZSu4KeFfE99Aequva98vVCEoT4H9ySIuAR7BSiAfJsNDj6i4rmrBnAD', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'avatar.png', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'yhS3ohzuiHg4Z4b5byWzMdF93AQEIB2C7jFoLGVypRFpDAqb6Lf5seyWbjkC', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
+(1, 'Sourav', 'developer.srv1@gmail.com', NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'Igi3RekkcO9RcX1bVrRuLvfDAynnqyhE74ilzJ6RRMDtgzgttp53OAD5lcGn', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'rM79VIg2Wk7lIrWr8UuiuzRuicnhyTPZNaKieMjRJn6IhvR7BjZyNFCI5Q60', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
 
 --
 -- Indexes for dumped tables
@@ -157,8 +190,8 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `category_name` (`category_name`),
-  ADD UNIQUE KEY `category_slug` (`category_slug`);
+  ADD UNIQUE KEY `category_category_name_unique` (`category_name`),
+  ADD UNIQUE KEY `category_category_slug_unique` (`category_slug`);
 
 --
 -- Indexes for table `email_authentication`
@@ -180,6 +213,14 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `products_product_name_unique` (`product_name`),
+  ADD UNIQUE KEY `products_product_slug_unique` (`product_slug`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -194,12 +235,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `email_authentication`
 --
@@ -209,7 +250,12 @@ ALTER TABLE `email_authentication`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
