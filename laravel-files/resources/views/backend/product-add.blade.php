@@ -111,7 +111,7 @@
                             <div class="col-sm-4">
                                 <input type="text" id="the_img_fld-3" class="form-control" name="sample_img" placeholder="image from products folder" value="{{ old('sample_img') }}">
                                 <span class="help-block m-b-none text-info">
-                                    if you want a slider then enter images separated by * or just the image name
+                                    if you want a slider then enter images separated by * otherwise just the image name
                                 </span>
                             </div>
                             <div class="col-sm-6">

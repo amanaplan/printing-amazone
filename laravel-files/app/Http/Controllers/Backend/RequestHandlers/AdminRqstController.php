@@ -89,5 +89,46 @@ class AdminRqstController extends Controller
         }
     }
 
+    /**
+    *add new product
+    */
+    public function AddProduct(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'category_id'   => 'required|numeric',
+            'product_name'  => 'required|min:5|unique:products,product_name',
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $product                    = new \App\Product();
+        $product->category_id       = $request->input('category_id');
+        $product->product_name      = $request->input('product_name');
+        $product->product_slug      = str_slug($request->input('product_name'), '-');
+
+        $product->logo              = $request->input('logo');
+        $product->description       = $request->input('description');
+        $product->sample_image      = $request->input('sample_img');
+
+        $product->title             = $request->input('page_title');
+        $product->meta_desc         = $request->input('meta_desc');
+        $product->og_img            = $request->input('og_image');
+
+        if($category->save())
+        {
+            adminflash('success', 'new product added');
+            return redirect('/admin/product/manage');
+        }
+        else
+        {
+            adminflash('warning', 'input data error');
+            return redirect()->back();
+        }
+    }
+
 
 }
