@@ -59,7 +59,14 @@
                             </thead>
                             <tbody>
 
-                            
+                                @foreach($products as $product)
+
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><img src="{{ asset('assets/images/products/'.$product->logo) }}" width="80"></td>
+                                </tr>
+
+                                @endforeach
 
                             </tbody>
                         </table>

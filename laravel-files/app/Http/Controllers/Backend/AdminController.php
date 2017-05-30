@@ -106,7 +106,8 @@ class AdminController extends Controller
     public function ManageProduct()
     {
         $data = [
-            'page'       => 'product_manage'
+            'page'      => 'product_manage',
+            'products'  => \App\Product::orderBy('created_at', 'desc')->get()
         ];
         return view('backend.product-list', $data);
     }

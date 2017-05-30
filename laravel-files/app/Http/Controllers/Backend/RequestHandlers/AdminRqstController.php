@@ -97,6 +97,8 @@ class AdminRqstController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id'   => 'required|numeric',
             'product_name'  => 'required|min:5|unique:products,product_name',
+            'description'   => 'required',
+            'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/']
         ]);
 
 
@@ -109,16 +111,21 @@ class AdminRqstController extends Controller
         $product->category_id       = $request->input('category_id');
         $product->product_name      = $request->input('product_name');
         $product->product_slug      = str_slug($request->input('product_name'), '-');
-
         $product->logo              = $request->input('logo');
         $product->description       = $request->input('description');
         $product->sample_image      = $request->input('sample_img');
+
+        //calculating the sort order of this product
+        $curr_max_sort = \App\Product::where('category_id', $request->input('category_id'))->max('sort');
+        $sort          = (empty($curr_max_sort))? 1 : $curr_max_sort + 1;
+
+        $product->sort              = $sort;
 
         $product->title             = $request->input('page_title');
         $product->meta_desc         = $request->input('meta_desc');
         $product->og_img            = $request->input('og_image');
 
-        if($category->save())
+        if($product->save())
         {
             adminflash('success', 'new product added');
             return redirect('/admin/product/manage');
