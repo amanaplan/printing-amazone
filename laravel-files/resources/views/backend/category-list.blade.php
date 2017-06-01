@@ -52,6 +52,7 @@
                                     <th>#</th>
                                     <th>Category Name</th>
                                     <th>Available Products</th>
+                                    <th>Sort Product Appearance</th>
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
@@ -62,7 +63,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $category->category_name }}</td>
-                                    <td>0</td>
+                                    <td>{{ $category->prod_count }}</td>
+                                    <td><a href="{{ ($category->prod_count > 0)? url('/admin/category/sort-products/'.$category->id) : '#' }}"><i class="fa fa-list-ol" aria-hidden="true"></i></a></td>
                                     <td><a href="{{ url('/admin/category/edit', ['id' => $category->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
                                     <td><a href=""><i class="fa fa-trash"></i></a></td>
                                 </tr>
