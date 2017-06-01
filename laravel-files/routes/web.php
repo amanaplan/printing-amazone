@@ -80,6 +80,7 @@ Route::prefix('admin')->group(function() {
 	Route::post('/request/category/add', 'Backend\RequestHandlers\AdminRqstController@AddCategory');
 	Route::get('/category/edit/{id}', 'Backend\AdminController@EditCategory');
 	Route::put('/request/category/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditCategory');
+	Route::get('/category/sort-products/{id}', 'Backend\AdminController@ReorderProducts');
 
 	//manage products
 	Route::get('/product/manage', 'Backend\AdminController@ManageProduct');
@@ -87,6 +88,7 @@ Route::prefix('admin')->group(function() {
 	Route::post('/request/product/add', 'Backend\RequestHandlers\AdminRqstController@AddProduct');
 	Route::get('/product/edit/{id}', 'Backend\AdminController@EditProduct');
 	Route::put('/request/product/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditProduct');
+	Route::put('/product/set-order', 'Backend\RequestHandlers\AdminRqstController@SortOrder');
 
 
 	/*___________________________________________________

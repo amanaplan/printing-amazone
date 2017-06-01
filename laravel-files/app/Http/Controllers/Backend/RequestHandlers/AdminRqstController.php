@@ -137,5 +137,70 @@ class AdminRqstController extends Controller
         }
     }
 
+    /**
+    *update product
+    */
+    public function EditProduct(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'category_id'   => 'required|numeric',
+            'product_name'  => ['required', 'min:5', Rule::unique('products','product_name')->ignore($id)],
+            'description'   => 'required',
+            'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/']
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $product                    = \App\Product::findOrFail($id);
+        $product->category_id       = $request->input('category_id');
+        $product->product_name      = $request->input('product_name');
+        $product->product_slug      = str_slug($request->input('product_name'), '-');
+        $product->logo              = $request->input('logo');
+        $product->description       = $request->input('description');
+        $product->sample_image      = $request->input('sample_img');
+
+        $product->title             = $request->input('page_title');
+        $product->meta_desc         = $request->input('meta_desc');
+        $product->og_img            = $request->input('og_image');
+
+        if($product->save())
+        {
+            adminflash('success', 'product updated');
+            return redirect('/admin/product/manage');
+        }
+        else
+        {
+            adminflash('warning', 'input data error');
+            return redirect()->back();
+        }
+    }
+
+    /**
+    *sort product order
+    */
+    public function SortOrder(Request $request)
+    {
+        if(empty($request->input('id')) || empty($request->input('sort')))
+        {
+            abort(401);
+        }
+
+        $prod       = \App\Product::findOrFail($request->input('id'));
+        $prod->sort = $request->input('sort');
+
+        if($prod->save())
+        {
+            return response('updated', 200);
+        }
+        else
+        {
+            return response('error occurred', 401);
+        }
+    }
+
 
 }
