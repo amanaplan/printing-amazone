@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend\RequestHandlers;
 
+use App\Category;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -199,6 +201,29 @@ class AdminRqstController extends Controller
         else
         {
             return response('error occurred', 401);
+        }
+    }
+
+    /**
+    *set navigation menu category order
+    */
+    public function SortNavOrder(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|numeric',
+            'sort' => 'required|numeric',
+        ]);
+
+        $category       = Category::findOrFail($request->input('id'));
+        $category->sort = $request->input('sort');
+
+        if($category->save())
+        {
+            return response('updated', 200);
+        }
+        else
+        {
+            return response('error occurred', 422);
         }
     }
 

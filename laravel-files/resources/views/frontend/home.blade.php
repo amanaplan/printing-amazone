@@ -4,7 +4,19 @@
 {{-- seo info --}}
 @section( 'seo_data' )
 
-<title>Printing Amazone</title>
+	@component('component.seo-data')
+		@slot('title')
+			Printing Amazone | Home
+		@endslot
+
+		@slot('meta_desc')
+			
+		@endslot
+		
+		@slot('og_image')
+			
+		@endslot
+	@endcomponent
 
 @stop
 

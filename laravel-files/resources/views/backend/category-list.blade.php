@@ -53,6 +53,7 @@
                                     <th>Category Name</th>
                                     <th>Available Products</th>
                                     <th>Sort Product Appearance</th>
+                                    <th>Navigation Order</th>
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
@@ -63,8 +64,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $category->category_name }}</td>
-                                    <td>{{ $category->prod_count }}</td>
-                                    <td><a href="{{ ($category->prod_count > 0)? url('/admin/category/sort-products/'.$category->id) : '#' }}"><i class="fa fa-list-ol" aria-hidden="true"></i></a></td>
+                                    <td>{{ $category->products()->count() }}</td>
+                                    <td><a href="{{ ($category->products()->count() > 0)? url('/admin/category/sort-products/'.$category->id) : '#' }}"><i class="fa fa-list-ol" aria-hidden="true"></i></a></td>
+                                    <td><input style="width: 70px;" type="number" min="1" step="1" value="{{ $category->sort }}" onchange="changeCatSort({{$category->id}}, this.value)" /></td>
                                     <td><a href="{{ url('/admin/category/edit', ['id' => $category->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
                                     <td><a href=""><i class="fa fa-trash"></i></a></td>
                                 </tr>
@@ -87,5 +89,25 @@
 {{-- page specific js --}}
 @push('scripts')
     
+    <script>
+        function changeCatSort(id, order) {
+            //ajax
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                url: "{{ url('/admin/category/set-order') }}",
+                type: "PUT",
+                data: {id:id, sort:order},
+                success: function(result){
+                    Command: toastr["success"]("order updated successfully", "Successfully Done. .");
+                },
+                error: function(xhr,status,error){
+                    Command: toastr["error"](error, "some error occurred");
+                }
+            });
+
+            $.ajax();
+            //ajax
+        }
+    </script>
 
 @endpush

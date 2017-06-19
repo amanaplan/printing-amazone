@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use Auth;
 
+use App\Admin;
+use App\Category;
+use App\Product;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +53,7 @@ class AdminController extends Controller
     */
     public function ListUsers()
     {
-        $data = ['page' => 'manage_admins', 'admins' => \App\Admin::where('id', '!=', Auth::user()->id)->orderBy('created_at', 'desc')->get()];
+        $data = ['page' => 'manage_admins', 'admins' => Admin::where('id', '!=', Auth::user()->id)->orderBy('created_at', 'desc')->get()];
         return view('backend.list-admins', $data);
     }
 
@@ -76,12 +80,7 @@ class AdminController extends Controller
     {
         $data = [
             'page'       => 'category_manage',
-            'categories' =>  DB::table('category')
-                            ->join('products', 'products.category_id', '=','category.id')
-                            ->select(DB::raw('category.*, COUNT(products.id) as prod_count'))
-                            ->groupBy('category.id')
-                            ->orderBy('created_at', 'desc')
-                            ->get()
+            'categories' =>  Category::with('products')->orderBy('created_at', 'desc')->get()
 
         ];
         return view('backend.category-list', $data);
@@ -94,7 +93,7 @@ class AdminController extends Controller
     {
         $data = [
             'page'      => 'category_manage',
-            'category'  => \App\Category::findOrFail($id)
+            'category'  => Category::findOrFail($id)
         ];
         return view('backend.category-edit', $data);
     }
@@ -104,7 +103,7 @@ class AdminController extends Controller
     */
     public function ReorderProducts($id)
     {
-        $prods  = \App\Product::where('category_id', $id);
+        $prods  = Product::where('category_id', $id);
         if($prods->count() == 0)
         {
             abort(404);
@@ -122,7 +121,7 @@ class AdminController extends Controller
     */
     public function AddProduct()
     {
-        return view('backend.product-add', ['page' => 'product_add', 'categories' => \App\Category::orderBy('created_at', 'desc')->get()]);
+        return view('backend.product-add', ['page' => 'product_add', 'categories' => Category::orderBy('created_at', 'desc')->get()]);
     }
 
     /**
@@ -132,7 +131,7 @@ class AdminController extends Controller
     {
         $data = [
             'page'      => 'product_manage',
-            'products'  => \App\Product::orderBy('created_at', 'desc')->get()
+            'products'  => Product::orderBy('created_at', 'desc')->get()
         ];
         return view('backend.product-list', $data);
     }
@@ -144,8 +143,8 @@ class AdminController extends Controller
     {
         $data = [
             'page'          => 'product_manage',
-            'product'       => \App\Product::findOrFail($id),
-            'categories'    => \App\Category::orderBy('created_at', 'desc')->get()
+            'product'       => Product::findOrFail($id),
+            'categories'    => Category::orderBy('created_at', 'desc')->get()
         ];
         return view('backend.product-edit', $data);
     }

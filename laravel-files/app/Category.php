@@ -8,4 +8,9 @@ class Category extends Model
 {
     protected $table = 'category';
     protected $guarded = ['category_slug','id'];
+
+    public function products()
+    {
+    	return $this->hasMany('App\Product', 'category_id', 'id');
+    }
 }

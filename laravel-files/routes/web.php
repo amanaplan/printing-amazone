@@ -28,6 +28,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
+Route::get('/{slug}', 'Frontend\PagesCtrl@category');
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {
@@ -81,6 +82,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/category/edit/{id}', 'Backend\AdminController@EditCategory');
 	Route::put('/request/category/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditCategory');
 	Route::get('/category/sort-products/{id}', 'Backend\AdminController@ReorderProducts');
+	Route::put('/category/set-order', 'Backend\RequestHandlers\AdminRqstController@SortNavOrder');
 
 	//manage products
 	Route::get('/product/manage', 'Backend\AdminController@ManageProduct');

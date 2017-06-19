@@ -31,6 +31,7 @@
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 		<link href="{{ asset( 'assets/frontend/css/animate.min.css' ) }}" rel="stylesheet">
 		<link href="{{ asset( 'assets/frontend/css/style.css' ) }}" rel="stylesheet" media="all">
+		<link href="{{ asset( 'assets/frontend/css/inner.css' ) }}" rel="stylesheet" media="all">
 		<link href="{{ asset( 'assets/frontend/css/responsive.css' ) }}" rel="stylesheet" media="all">
 		<link href="{{ asset( 'assets/frontend/css/hover.css' ) }}" rel="stylesheet" media="all">
 
@@ -94,29 +95,10 @@
 					</div><!-- logo -->
 				</div><!-- top-header -->
 				<div class="menu">
-					<nav role="navigation">
-			            <!-- Brand and toggle get grouped for better mobile display -->
-			            <div class="navbar-header">
-			                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-			                    <span class="sr-only">Toggle navigation</span>
-			                    <span class="icon-bar"></span>
-			                    <span class="icon-bar"></span>
-			                    <span class="icon-bar"></span>
-			                </button>
-			                <a href="#" class="navbar-brand sr-only">Menu</a>
-			            </div>
-			            <!-- Collection of nav links and other content for toggling -->
-			            <div id="navbarCollapse" class="collapse navbar-collapse">
-			                <ol class="nav navbar-nav">
-								<li class="active hvr-underline-from-center"><a href="#" class="">Stickers</a></li>
-								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Business Cards</a></li>
-								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Brochures/Flyers</a></li>
-								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Postcards</a></li>
-								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Labels</a></li>
-								<li class="hvr-underline-from-center"><a href="javascript:void(0)">Graphic designs</a></li>
-			                </ol>
-			            </div><!-- collapse navbar-collapse -->
-			        </nav>
+					
+					{{-- navigation menu --}}
+					@include('layouts.frontend.main-nav')
+
 				</div><!-- menu -->
 			</div>
 		</div>
