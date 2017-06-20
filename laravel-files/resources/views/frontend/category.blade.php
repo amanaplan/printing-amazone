@@ -1,4 +1,4 @@
-@extends('layouts/frontend/main')
+@extends('layouts.frontend.main')
 
 
 {{-- seo info --}}
@@ -22,6 +22,8 @@
 
 {{-- page specific styles --}}
 @push( 'styles' )
+	
+	<link rel="stylesheet" href="{{ asset( 'assets/frontend/css/star-rating.css' ) }}" media="all" type="text/css"/>
 
 @endpush
 
@@ -49,7 +51,7 @@
 
 				    <div class="row">
 				        @foreach ($chunk as $product)
-				        	<a href="#">
+				        	<a href="{{ url('/'.$category->category_slug.'/'.$product->product_slug) }}">
 					            <div class="col-sm-4 col-lg-4 dtls-box">
 					            	<img src="{{ asset('assets/images/products/'.$product->logo) }}" />
 					            	<h2>{{ $product->product_name }}</h2>
@@ -71,7 +73,7 @@
 <div class="review-sec">
     <div class="container">
 	    <div class="row">
-		    <h2>Reviews for Custom Sticker</h2>
+		    <h2>Reviews for {{ $category->category_name }}</h2>
 			<div class="rating-summary">
 			    <ul>
 				   <li>
@@ -104,9 +106,27 @@
 				</ul>
 			</div><!-- rating-summary -->
 			<div class="review-list">
+
+				<div class="row post-review">
+					<div class="col-md-8 col-md-offset-2 col-sm-12">
+						<div class="form-group">
+					      <textarea class="form-control" rows="3" placeholder="Type your review here..."></textarea>
+					    </div>
+
+					    <div class="col-md-6 col-sm-12">
+					    	<input type="text" class="rating rating-loading" data-size="xs" title="">
+					    </div>
+
+					    <div class="col-md-6 col-sm-12">
+					    	<button type="button" class="btn btn-primary pull-right">Post Review</button>
+					    </div>
+
+					</div>
+				</div>
+
 			    <div class="review-short">
 				   <div class="avatar">
-                      <img alt="" class="" src="{{ asset('assets/images/review-person.png') }}" />
+                      <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
                    </div>
 				   <div class="body">
                     <span class="rating-stars rating-5">
@@ -137,7 +157,7 @@
 				
 				<div class="review-short">
 				   <div class="avatar">
-                      <img alt="" class="" src="{{ asset('assets/images/review-person.png') }}" />
+                      <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
                    </div>
 				   <div class="body">
                     <span class="rating-stars rating-5">
@@ -168,7 +188,7 @@
 				
 				<div class="review-short">
 				   <div class="avatar">
-                      <img alt="" class="" src="{{ asset('assets/images/review-person.png') }}" />
+                      <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
                    </div>
 				   <div class="body">
                     <span class="rating-stars rating-5">
@@ -199,7 +219,7 @@
 				
 				<div class="review-short">
 				   <div class="avatar">
-                      <img alt="" class="" src="{{ asset('assets/images/review-person.png') }}" />
+                      <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
                    </div>
 				   <div class="body">
                     <span class="rating-stars rating-5">
@@ -240,5 +260,15 @@
 
 {{-- page specific scripts --}}
 @push( 'scripts' )
+	
+	<script src="{{ asset( 'assets/frontend/js/star-rating.js' ) }}" type="text/javascript"></script>
+
+	<script>
+	    $(document).on('ready', function () {
+	        $('.rating').on('change', function () {
+	            console.log('Rating selected: ' + $(this).val());
+	        });
+	    });
+	</script>
 
 @endpush

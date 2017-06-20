@@ -31,7 +31,11 @@
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 		<link href="{{ asset( 'assets/frontend/css/animate.min.css' ) }}" rel="stylesheet">
 		<link href="{{ asset( 'assets/frontend/css/style.css' ) }}" rel="stylesheet" media="all">
+
+		@if(!empty(Request::segment(1)))
 		<link href="{{ asset( 'assets/frontend/css/inner.css' ) }}" rel="stylesheet" media="all">
+		@endif
+		
 		<link href="{{ asset( 'assets/frontend/css/responsive.css' ) }}" rel="stylesheet" media="all">
 		<link href="{{ asset( 'assets/frontend/css/hover.css' ) }}" rel="stylesheet" media="all">
 
@@ -39,7 +43,7 @@
 		<link href="{{ asset( 'assets/frontend/css/responsive_bootstrap_carousel_mega_min.css' ) }}" rel="stylesheet" media="all">
 		<link href="{{ asset( 'assets/frontend/css/theme.css' ) }}" rel="stylesheet" media="all">
 		<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/reset.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> -->
 
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 

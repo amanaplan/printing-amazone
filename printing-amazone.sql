@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2017 at 01:56 PM
+-- Generation Time: Jun 20, 2017 at 01:57 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -161,12 +161,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `product_name`, `product_slug`, `logo`, `description`, `sample_image`, `sort`, `created_at`, `updated_at`) VALUES
-(1, 'asasasa', 'asasasas', 'li-active.jpg', 1, 'Free Shipping Sticker', 'free-shipping-sticker', 'cs-1.png', 't6t6gj5f sdfgsdgdgxd asfsfsafzfzsfzszsfzsfzsfzs', 'li-active.jpg', 1, '2017-05-30 14:16:18', '2017-06-01 16:01:38'),
-(2, 'ioi9iojo', 'some meta', 'cs-1.png', 1, 'Square Sticker', 'square-sticker', 'cs-4.png', 'okkoookokok hii', NULL, 2, '2017-05-30 14:35:51', '2017-06-01 16:01:41'),
-(3, NULL, NULL, NULL, 2, 'Rectangle Business Card', 'rectangle-business-card', 'cs-3.png', 'lorem ipsum', NULL, 1, '2017-06-19 15:21:40', '2017-06-19 15:21:40'),
-(4, NULL, NULL, NULL, 2, 'Free Shaping Card', 'free-shaping-card', 'f2.png', 'lorem lorem', NULL, 2, '2017-06-19 15:22:41', '2017-06-19 15:22:41'),
-(5, NULL, NULL, NULL, 2, 'Some Demo card', 'some-demo-card', 'f3.png', 'loremloremloremloremloremloremlorem', NULL, 3, '2017-06-19 15:23:31', '2017-06-19 15:23:31'),
-(6, NULL, NULL, NULL, 2, 'Bumper Card', 'bumper-card', 'cs-1.png', 'loremloremloremlorem', NULL, 4, '2017-06-19 15:24:45', '2017-06-19 15:24:45');
+(1, 'asasasa', 'asasasas', 'li-active.jpg', 1, 'Free Shipping Sticker', 'free-shipping-sticker', 'cs-1.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'li-active.jpg', 1, '2017-05-30 14:16:18', '2017-06-01 16:01:38'),
+(2, 'ioi9iojo', 'some meta', 'cs-1.png', 1, 'Square Sticker', 'square-sticker', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 2, '2017-05-30 14:35:51', '2017-06-01 16:01:41'),
+(3, NULL, NULL, NULL, 2, 'Rectangle Business Card', 'rectangle-business-card', 'cs-3.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 1, '2017-06-19 15:21:40', '2017-06-19 15:21:40'),
+(4, NULL, NULL, NULL, 2, 'Free Shaping Card', 'free-shaping-card', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 2, '2017-06-19 15:22:41', '2017-06-19 15:22:41'),
+(5, NULL, NULL, NULL, 2, 'Some Demo card', 'some-demo-card', 'f3.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', NULL, 3, '2017-06-19 15:23:31', '2017-06-19 15:23:31'),
+(6, NULL, NULL, NULL, 2, 'Bumper Card', 'bumper-card', 'cs-1.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 4, '2017-06-19 15:24:45', '2017-06-19 15:24:45');
 
 -- --------------------------------------------------------
 
@@ -191,7 +191,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'Igi3RekkcO9RcX1bVrRuLvfDAynnqyhE74ilzJ6RRMDtgzgttp53OAD5lcGn', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'ufIdijTszeUsJPeyBwERJvMifiAzjE20bnyQLmpmu5aMXpiIIHzlyHE42E3r', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', '6Z5fdqLjshXV5hJD3oijvSAxSdIzsiL3sZENqd7cUCbfpOaOnoGven6na3cD', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
 
 --
 -- Indexes for dumped tables

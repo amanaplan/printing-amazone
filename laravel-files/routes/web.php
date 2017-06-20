@@ -28,7 +28,6 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
-Route::get('/{slug}', 'Frontend\PagesCtrl@category');
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {
@@ -108,3 +107,12 @@ Route::prefix('admin')->group(function() {
 	Route::get('/manage-media', 'Backend\AdminController@MediaManager')->name('elfinder');
 
 });
+
+
+
+/*___________________________________________________
+| category page and product page dynamic URL
+|----------------------------------------------------
+*/
+Route::get('/{slug}', 'Frontend\PagesCtrl@category');
+Route::get('/{categorySlug}/{prodSlug}', 'Frontend\PagesCtrl@product');

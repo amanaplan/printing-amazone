@@ -1,6 +1,33 @@
+body{background:#fff;margin:0; /*font-family: 'Roboto', sans-serif;*/font-family: 'Arimo', sans-serif; font-family: 'Raleway', sans-serif;}
+header.main-header{padding:10px 0; z-index:999; width:100%;background: url(../../images/inner-header.jpg) no-repeat scroll center / cover;
+    position: relative;
+    min-height: 250px;}
+.feature{background:#fff url(../../images/bg.jpg) no-repeat; padding:50px 0 60px;background-size: 100%;background-position: center left;}
+.feature h2{text-align:center; font-size:40px; color:#292929; font-weight:800;font-family: 'Raleway', sans-serif; text-shadow:3px 2px 2px rgba(0, 0, 0, 0.2); display:block !important;}
+.feature-dtls .dtls-box{text-align:center; margin-top:60px; margin-bottom:20px;}
+.feature-dtls .dtls-box h2{text-decoration:none; transition:all 0.4s; display:block !important;font-size:24px !important; color:#141414; font-family: 'Raleway', sans-serif; font-weight:600 !important; text-align:center !important; margin-top:20px; text-shadow:none;}
+/*.feature-dtls .dtls-box h2 a{text-decoration:none; transition:all 0.4s; display:block !important;font-size:24px !important; color:#141414 !important; font-family: 'Raleway', sans-serif; font-weight:600 !important; text-align:center !important; margin-top:20px; text-shadow:none;}*/
+.feature-dtls a:hover h2{color:#eb8700 !important;}
+.footer{background: url(../../images/footer.png) no-repeat scroll 0 0 / cover; padding:100px 0 30px; margin-top:-50px;}
+.footer-menu ul{list-style:none;}
+.footer-menu ul li{position:relative; display:inline-block;}
+.footer-menu ul li a{color:#363636; font-size:15px; text-decoration:none;font-family: 'Raleway', sans-serif; font-weight:600; padding:0 12px 0; transition:all 0.4s;}
+.footer-menu ul li a:hover{color:#fff;}
+.social{text-align:right;}
+.social ul{list-style:none;}
+.social ul li{position:relative; display:inline-block;}
+.social ul li a{color:#363636; font-size:20px; text-decoration:none;font-family: 'Raleway', sans-serif; padding:0 7px 0; transition:all 0.4s;}
+.social ul li a.fb{color:#156db9;}
+.social ul li a.tw{color:#156db9;}
+.social ul li a.yt{color:#e50000;}
+.social ul li a.fb:hover, .social ul li a.tw:hover, .social ul li a.yt:hover{color:#fff;}
+p.copyright{text-align:left; font-size:13px; color:#010101; font-family: 'Raleway', sans-serif; margin-top:15px; font-weight:600; padding-left:25px;}
+
+
+
 /************ inner page ******************/
 
-.custom{background:#fff;padding:0px;}
+.custom{background:#fff;padding:0px 0 50px;}
 .custom h2{text-align:left; font-size:40px; color:#292929; font-weight:700;font-family: 'Raleway', sans-serif; text-shadow:none; display:inline-block !important;}
 .review{display:inline-block; margin-left:20px;}
 .review ul{display:inline-block;}
@@ -658,3 +685,4 @@ div#prd_date h5{color: #65a800;}
     height: auto;
     line-height: 20px;
 }
+div.post-review{padding-bottom: 50px;}
