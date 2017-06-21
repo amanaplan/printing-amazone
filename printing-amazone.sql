@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2017 at 01:57 PM
+-- Generation Time: Jun 21, 2017 at 02:13 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -96,6 +96,52 @@ CREATE TABLE `email_authentication` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `form_field_types`
+--
+
+CREATE TABLE `form_field_types` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `form_field_types`
+--
+
+INSERT INTO `form_field_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'paperstock', '2017-06-20 18:30:00', '2017-06-20 18:30:00'),
+(2, 'size', '2017-06-20 18:30:00', '2017-06-20 18:30:00'),
+(3, 'quantity', '2017-06-20 18:30:00', '2017-06-20 18:30:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `map_prod_form`
+--
+
+CREATE TABLE `map_prod_form` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `form_field_id` int(11) NOT NULL COMMENT 'paperstock, size etc.',
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `map_prod_form_options`
+--
+
+CREATE TABLE `map_prod_form_options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `mapping_field_id` int(11) NOT NULL COMMENT 'mapping id of map_prod_form table',
+  `option_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -120,7 +166,32 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2017_05_26_181014_products_table', 4),
 (15, '2017_05_26_185022_add_category_n_sort_col_to_products_table', 5),
 (16, '2017_05_26_200907_add_description_col_to_products_table', 6),
-(17, '2017_06_19_185132_add_sort_col_to_category', 7);
+(17, '2017_06_19_185132_add_sort_col_to_category', 7),
+(22, '2017_06_21_185142_add_form_col_to_category', 8),
+(23, '2017_06_21_190034_product_form_elements', 8),
+(24, '2017_06_21_192946_create_paperstock_options_table', 8),
+(25, '2017_06_21_200923_create_size_options_table', 9),
+(26, '2017_06_21_201003_create_qty_options_table', 9),
+(27, '2017_06_21_201804_mapping_of_product_and_form', 10),
+(28, '2017_06_21_201853_mapping_of_product_and_form_options', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paperstock_options`
+--
+
+CREATE TABLE `paperstock_options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `option` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `paperstock_options`
+--
+
+INSERT INTO `paperstock_options` (`id`, `option`) VALUES
+(1, 'Artboard Paper');
 
 -- --------------------------------------------------------
 
@@ -167,6 +238,45 @@ INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `pr
 (4, NULL, NULL, NULL, 2, 'Free Shaping Card', 'free-shaping-card', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 2, '2017-06-19 15:22:41', '2017-06-19 15:22:41'),
 (5, NULL, NULL, NULL, 2, 'Some Demo card', 'some-demo-card', 'f3.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', NULL, 3, '2017-06-19 15:23:31', '2017-06-19 15:23:31'),
 (6, NULL, NULL, NULL, 2, 'Bumper Card', 'bumper-card', 'cs-1.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 4, '2017-06-19 15:24:45', '2017-06-19 15:24:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qty_options`
+--
+
+CREATE TABLE `qty_options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `option` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `qty_options`
+--
+
+INSERT INTO `qty_options` (`id`, `option`) VALUES
+(1, 1000),
+(2, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `size_options`
+--
+
+CREATE TABLE `size_options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `display_value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `width` int(11) NOT NULL,
+  `height` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `size_options`
+--
+
+INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
+(1, 'small (10cm x 20cm)', 10, 20);
 
 -- --------------------------------------------------------
 
@@ -220,10 +330,36 @@ ALTER TABLE `email_authentication`
   ADD UNIQUE KEY `email_authentication_email_unique` (`email`);
 
 --
+-- Indexes for table `form_field_types`
+--
+ALTER TABLE `form_field_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `form_field_types_name_unique` (`name`);
+
+--
+-- Indexes for table `map_prod_form`
+--
+ALTER TABLE `map_prod_form`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `map_prod_form_options`
+--
+ALTER TABLE `map_prod_form_options`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `paperstock_options`
+--
+ALTER TABLE `paperstock_options`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `paperstock_options_option_unique` (`option`);
 
 --
 -- Indexes for table `password_resets`
@@ -238,6 +374,18 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `products_product_name_unique` (`product_name`),
   ADD UNIQUE KEY `products_product_slug_unique` (`product_slug`);
+
+--
+-- Indexes for table `qty_options`
+--
+ALTER TABLE `qty_options`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `size_options`
+--
+ALTER TABLE `size_options`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -266,15 +414,45 @@ ALTER TABLE `category`
 ALTER TABLE `email_authentication`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `form_field_types`
+--
+ALTER TABLE `form_field_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `map_prod_form`
+--
+ALTER TABLE `map_prod_form`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `map_prod_form_options`
+--
+ALTER TABLE `map_prod_form_options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT for table `paperstock_options`
+--
+ALTER TABLE `paperstock_options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `qty_options`
+--
+ALTER TABLE `qty_options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `size_options`
+--
+ALTER TABLE `size_options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --

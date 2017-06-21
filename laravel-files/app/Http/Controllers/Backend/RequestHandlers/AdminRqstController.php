@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Backend\RequestHandlers;
 
 use App\Category;
+use App\OptPaperstock;
+use App\OptQty;
+use App\OptSize;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -225,6 +228,86 @@ class AdminRqstController extends Controller
         {
             return response('error occurred', 422);
         }
+    }
+
+    /**
+    *new option add for paperstock
+    */
+    public function PaperstockInsert(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'option'   => 'required|min:3|unique:paperstock_options,option',
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $papopt = new OptPaperstock();
+        $papopt->option = $request->input('option');
+        if($papopt->save())
+        {
+            adminflash('success', 'new option added');
+            return redirect()->back();
+        }
+
+    }
+
+    /**
+    *new option add for size
+    */
+    public function SizeInsert(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'option'   => 'required|min:3|unique:size_options,display_value',
+            'width'    => 'required|numeric',
+            'height'   => 'required|numeric',
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $sizeopt = new OptSize();
+        $sizeopt->display_value = $request->input('option');
+        $sizeopt->width = $request->input('width');
+        $sizeopt->height = $request->input('height');
+
+        if($sizeopt->save())
+        {
+            adminflash('success', 'new option added');
+            return redirect()->back();
+        }
+
+    }
+
+    /**
+    *new option add for quantity
+    */
+    public function QtyInsert(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'option'   => 'required|numeric|unique:qty_options,option',
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $qtyopt = new OptQty();
+        $qtyopt->option = $request->input('option');
+        if($qtyopt->save())
+        {
+            adminflash('success', 'new option added');
+            return redirect()->back();
+        }
+
     }
 
 

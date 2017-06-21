@@ -7,6 +7,9 @@ use Auth;
 use App\Admin;
 use App\Category;
 use App\Product;
+use App\OptPaperstock;
+use App\OptQty;
+use App\OptSize;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -147,6 +150,45 @@ class AdminController extends Controller
             'categories'    => Category::orderBy('created_at', 'desc')->get()
         ];
         return view('backend.product-edit', $data);
+    }
+
+    /**
+    *paperstock field options
+    */
+    public function FormPaperstock()
+    {
+        $data = [
+            'page'      =>  'paperstock',
+            'options'   => OptPaperstock::all()
+        ];
+        
+        return view('backend.options-paperstock', $data);
+    }
+
+    /**
+    *size field options
+    */
+    public function FormSize()
+    {
+        $data = [
+            'page'      => 'size',
+            'options'   => OptSize::all()
+        ];
+        
+        return view('backend.options-size', $data);
+    }
+
+    /**
+    *quantity field options
+    */
+    public function FormQuantity()
+    {
+        $data = [
+            'page'      => 'qty',
+            'options'   => OptQty::all()
+        ];
+        
+        return view('backend.options-qty', $data);
     }
 
 }

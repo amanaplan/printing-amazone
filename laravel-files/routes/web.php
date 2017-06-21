@@ -92,6 +92,15 @@ Route::prefix('admin')->group(function() {
 	Route::put('/product/set-order', 'Backend\RequestHandlers\AdminRqstController@SortOrder');
 
 
+	//manage various form field options
+	Route::get('/form/paperstock', 'Backend\AdminController@FormPaperstock');
+	Route::get('/form/size', 'Backend\AdminController@FormSize');
+	Route::get('/form/qty', 'Backend\AdminController@FormQuantity');
+	Route::post('/form/insert/paperstock', 'Backend\RequestHandlers\AdminRqstController@PaperstockInsert');
+	Route::post('/form/insert/size', 'Backend\RequestHandlers\AdminRqstController@SizeInsert');
+	Route::post('/form/insert/qty', 'Backend\RequestHandlers\AdminRqstController@QtyInsert');
+
+
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin
 	|----------------------------------------------------

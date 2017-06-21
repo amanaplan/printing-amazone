@@ -34,6 +34,15 @@
             </ul>
         </li>
 
+        <li {!! ($page == 'paperstock' || $page == 'size' || $page == 'qty')? 'class="active"' : '' !!}>
+            <a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">Form Field Options </span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                <li><a {!! ($page == 'paperstock')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/paperstock') }}">Paperstock options</a></li>
+                <li><a {!! ($page == 'size')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/size') }}">Size (cm<sup>2</sup>) options</a></li>
+                <li><a {!! ($page == 'qty')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/qty') }}">Quantity options</a></li>
+            </ul>
+        </li>
+
 
         <li>
             <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Sample </span><span class="label label-rouded pull-right p3-bg note-icon">10</span></a>
