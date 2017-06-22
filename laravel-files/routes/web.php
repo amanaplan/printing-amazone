@@ -99,6 +99,10 @@ Route::prefix('admin')->group(function() {
 	Route::post('/form/insert/paperstock', 'Backend\RequestHandlers\AdminRqstController@PaperstockInsert');
 	Route::post('/form/insert/size', 'Backend\RequestHandlers\AdminRqstController@SizeInsert');
 	Route::post('/form/insert/qty', 'Backend\RequestHandlers\AdminRqstController@QtyInsert');
+	Route::get('/form/paperstock/edit/{id}', 'Backend\AdminController@EditFormPaperstock');
+	Route::get('/form/size/edit/{id}', 'Backend\AdminController@EditFormSize');
+	Route::put('/form/update/paperstock/{id}', 'Backend\RequestHandlers\AdminRqstController@PaperstockUpdate');
+	Route::put('/form/update/size/{id}', 'Backend\RequestHandlers\AdminRqstController@SizeUpdate');
 
 
 	/*___________________________________________________

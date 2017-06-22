@@ -121,6 +121,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Applicable form fields</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline"> <input type="checkbox" name="fields[]" value="1" {{ (in_array(1, $applicable_flds))? 'checked' : '' }}> Paperstock </label> 
+                                <label class="checkbox-inline"><input type="checkbox" name="fields[]" value="2" {{ (in_array(2, $applicable_flds))? 'checked' : '' }}> Size (cm<sup>2</sup>) </label> 
+                                <label class="checkbox-inline"><input type="checkbox" name="fields[]" value="3" {{ (in_array(3, $applicable_flds))? 'checked' : '' }}> Quantity </label>
+                            </div>
+                        </div>
+
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group {{ $errors->has('page_title') ? ' has-error' : '' }}">

@@ -2,7 +2,7 @@
 
 {{-- title of the page --}}
 @section('pagetitle')
-    list of options of Quantity
+    edit paperstock option
 @stop
 
 {{-- page specific css --}}
@@ -17,10 +17,10 @@
         <div class="col-sm-12">
             <div class="page-title">
                 <div class="row">
-                    <h4 class="pull-left">Manage Quantity Options</h4>
+                    <h4 class="pull-left">Update Field Option</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i></a></li>
-                        <li>added products</li>
+                        <li>paperstock options</li>
                     </ol>
                 </div>
             </div>
@@ -33,64 +33,33 @@
             <div class="panel panel-card margin-b-30">
                 <!-- Start .panel -->
                 <div class="panel-heading">
-                    Add New Option
+                    Edit Paperstock Option
                 </div>
                 <div class="panel-body">
-                    <form class="form-inline" action="{{ url('/admin/form/insert/qty') }}" method="post">
+                    <form class="form-inline" action="{{ url('/admin/form/update/paperstock/'.$option->id) }}" method="post">
                         {{ csrf_field() }}
+                        {{ method_field('put') }}
                         <div class="col-md-6">
                             <div class="form-group {{ ($errors->has('option'))? 'has-error' : '' }}">
                                 <label class="sr-only">Option Name</label>
-                                <input type="text" style="width: 500px;" name="option" value="{{ old('option') }}" placeholder="Enter Quantity option value" class="form-control">
+                                <input type="text" style="width: 500px;" name="option" value="{{ $option->option }}" placeholder="Enter paperstock option name" class="form-control">
+                                
                                 @if ($errors->has('option'))
                                     <span class="help-block">
                                         {{ $errors->first('option') }}
                                     </span>
                                 @endif
+
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <button class="btn btn-success" type="submit">Add Now</button>
+                                <button class="btn btn-success" type="submit">Save Changes</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-
-            <div class="panel panel-card recent-activites">
-                <!-- Start .panel -->
-                <div class="panel-heading">
-                    All Options
-                </div>
-                <div class="panel-body">
-
-                    <div class="col-md-12">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#No.</th>
-                                    <th>Quantity value</th>
-                                    <th>Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach($options as $option)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $option->option }}</td>
-                                        <td><a href="#"><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-            </div><!-- End .panel --> 
 
 
         </div>

@@ -144,10 +144,20 @@ class AdminController extends Controller
     */
     public function EditProduct($id)
     {
+        //the array list of applicable form field types
+        $product = Product::findOrFail($id);
+        $applicable_fields_arr = [];
+        foreach($product->formfields as $field)
+        {
+            $applicable_fields_arr[] = $field->pivot->form_field_id;
+        }
+        
+
         $data = [
-            'page'          => 'product_manage',
-            'product'       => Product::findOrFail($id),
-            'categories'    => Category::orderBy('created_at', 'desc')->get()
+            'page'              => 'product_manage',
+            'product'           => $product,
+            'applicable_flds'   => $applicable_fields_arr,
+            'categories'        => Category::orderBy('created_at', 'desc')->get()
         ];
         return view('backend.product-edit', $data);
     }
@@ -189,6 +199,32 @@ class AdminController extends Controller
         ];
         
         return view('backend.options-qty', $data);
+    }
+
+    /**
+    *edit page of paperstock option
+    */
+    public function EditFormPaperstock($id)
+    {
+        $data = [
+            'page'      => 'paperstock',
+            'option'   => OptPaperstock::findOrFail($id)
+        ];
+        
+        return view('backend.options-paperstock-edit', $data);
+    }
+
+    /**
+    *edit page of size option
+    */
+    public function EditFormSize($id)
+    {
+        $data = [
+            'page'      => 'size',
+            'option'   => OptSize::findOrFail($id)
+        ];
+        
+        return view('backend.options-size-edit', $data);
     }
 
 }

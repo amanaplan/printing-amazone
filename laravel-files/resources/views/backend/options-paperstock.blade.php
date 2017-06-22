@@ -83,7 +83,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $option->option }}</td>
-                                        <td><a href="#"><i class="fa fa-edit"></i></a></td>
+                                        <td><a href="{{ url('/admin/form/paperstock/edit/'.$option->id) }}"><i class="fa fa-edit"></i></a></td>
                                         <td><a href="#"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                 @endforeach

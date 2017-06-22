@@ -53,6 +53,7 @@
                                     <th>Logo/Img</th>
                                     <th>Product Name</th>
                                     <th>Category</th>
+                                    <th>Applicable Form Fields</th>
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
@@ -66,6 +67,16 @@
                                     <td><img src="{{ asset('assets/images/products/'.$product->logo) }}" width="80"></td>
                                     <td>{{ $product->product_name }}</td>
                                     <td><span class="label label-primary">{{ \App\Category::where('id', $product->category_id)->first()->category_name }}</span></td>
+                                    <td>
+                                        @if($product->formfields()->count() > 0)
+                                            @foreach($product->formfields as $field)
+                                                <a href="{{ url('/admin/form/editoption/'.$product->id.'/'.$field->pivot->form_field_id) }}"><span class="label label-default">{{ $field->name }}</span></a>
+                                            @endforeach
+
+                                        @else
+                                            <span class="label label-danger">Not Defined</span>
+                                        @endif
+                                    </td>
                                     <td><a href="{{ url('/admin/product/edit/'.$product->id) }}"><i class="fa fa-edit"></i></a></td>
                                     <td><a href="#"><i class="fa fa-trash"></i></a></td>
                                 </tr>

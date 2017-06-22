@@ -119,6 +119,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Applicable form fields</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline"> <input type="checkbox" name="fields[]" value="1"> Paperstock </label> 
+                                <label class="checkbox-inline"><input type="checkbox" name="fields[]" value="2"> Size (cm<sup>2</sup>) </label> 
+                                <label class="checkbox-inline"><input type="checkbox" name="fields[]" value="3"> Quantity </label>
+                            </div>
+                        </div>
+
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group {{ $errors->has('page_title') ? ' has-error' : '' }}">

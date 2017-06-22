@@ -103,7 +103,7 @@
                                         <td>{{ $option->display_value }}</td>
                                         <td>{{ $option->width }}</td>
                                         <td>{{ $option->height }}</td>
-                                        <td><a href="#"><i class="fa fa-edit"></i></a></td>
+                                        <td><a href="{{ url('/admin/form/size/edit/'.$option->id) }}"><i class="fa fa-edit"></i></a></td>
                                         <td><a href="#"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                 @endforeach

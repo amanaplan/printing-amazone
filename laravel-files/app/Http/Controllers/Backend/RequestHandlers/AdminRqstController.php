@@ -132,6 +132,16 @@ class AdminRqstController extends Controller
 
         if($product->save())
         {
+            //store applicable form fields
+            if(count($request->input('fields')) > 0)
+            {
+                foreach($request->input('fields') as $field)
+                {
+                    $product->formfields()->attach($field);
+                }
+
+            }
+
             adminflash('success', 'new product added');
             return redirect('/admin/product/manage');
         }
@@ -174,6 +184,49 @@ class AdminRqstController extends Controller
 
         if($product->save())
         {
+            /*update applicable form fields in mapping table*/
+
+            //fetching existing data
+            $existing_field = [];
+            foreach($product->formfields as $field)
+            {
+                $existing_field[] = $field->pivot->form_field_id;
+            }
+
+            //current input data
+            $inpitasfields = [];
+            if(count($request->input('fields')) > 0)
+            {
+                foreach($request->input('fields') as $inpfield)
+                {
+                    $inpitasfields[] = $inpfield;
+                }
+            }
+
+            /*new items to be inserted*/
+            $toinsert = array_diff($inpitasfields,$existing_field);
+
+            /*existing items to be removed*/
+            $toremove = array_diff($existing_field,$inpitasfields);
+
+            //processing insert
+            if(count($toinsert) > 0)
+            {
+                foreach($toinsert as $row)
+                {
+                    $product->formfields()->attach($row);
+                }
+            }
+
+            //processing remove
+            if(count($toremove) > 0)
+            {
+                foreach($toremove as $row)
+                {
+                    $product->formfields()->detach($row);
+                }
+            }
+
             adminflash('success', 'product updated');
             return redirect('/admin/product/manage');
         }
@@ -310,5 +363,58 @@ class AdminRqstController extends Controller
 
     }
 
+    /**
+    *update paperstock options
+    */
+    public function PaperstockUpdate(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'option'   => ['required', 'min:3', Rule::unique('paperstock_options','option')->ignore($id)],
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $papopt = OptPaperstock::findOrFail($id);
+        $papopt->option = $request->input('option');
+        if($papopt->save())
+        {
+            adminflash('success', 'option data updated');
+            return redirect('/admin/form/paperstock');
+        }
+    }
+
+    /**
+    *new option add for size
+    */
+    public function SizeUpdate(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'option'   => ['required', 'min:3', Rule::unique('size_options','display_value')->ignore($id)],
+            'width'    => 'required|numeric',
+            'height'   => 'required|numeric',
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $sizeopt = OptSize::findOrFail($id);
+        $sizeopt->display_value = $request->input('option');
+        $sizeopt->width = $request->input('width');
+        $sizeopt->height = $request->input('height');
+
+        if($sizeopt->save())
+        {
+            adminflash('success', 'option data updated');
+            return redirect('/admin/form/size');
+        }
+
+    }
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2017 at 02:13 PM
+-- Generation Time: Jun 22, 2017 at 02:13 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -127,6 +127,19 @@ CREATE TABLE `map_prod_form` (
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `map_prod_form`
+--
+
+INSERT INTO `map_prod_form` (`id`, `form_field_id`, `product_id`) VALUES
+(1, 1, 6),
+(2, 2, 6),
+(31, 1, 16),
+(33, 3, 16),
+(34, 2, 16),
+(35, 2, 3),
+(36, 3, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -191,7 +204,8 @@ CREATE TABLE `paperstock_options` (
 --
 
 INSERT INTO `paperstock_options` (`id`, `option`) VALUES
-(1, 'Artboard Paper');
+(1, 'Artboard Papers'),
+(2, 'Wooden Paper');
 
 -- --------------------------------------------------------
 
@@ -237,7 +251,8 @@ INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `pr
 (3, NULL, NULL, NULL, 2, 'Rectangle Business Card', 'rectangle-business-card', 'cs-3.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 1, '2017-06-19 15:21:40', '2017-06-19 15:21:40'),
 (4, NULL, NULL, NULL, 2, 'Free Shaping Card', 'free-shaping-card', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 2, '2017-06-19 15:22:41', '2017-06-19 15:22:41'),
 (5, NULL, NULL, NULL, 2, 'Some Demo card', 'some-demo-card', 'f3.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', NULL, 3, '2017-06-19 15:23:31', '2017-06-19 15:23:31'),
-(6, NULL, NULL, NULL, 2, 'Bumper Card', 'bumper-card', 'cs-1.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 4, '2017-06-19 15:24:45', '2017-06-19 15:24:45');
+(6, NULL, NULL, NULL, 2, 'Bumper Card', 'bumper-card', 'cs-1.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 4, '2017-06-19 15:24:45', '2017-06-19 15:24:45'),
+(16, 'whatever', 'whatever', NULL, 5, 'Somethinf testx', 'somethinf-testx', 'f2.png', 'whatever whatever whatever whatever whatever whatever whatever', 'cs-1.png', 1, '2017-06-22 15:54:12', '2017-06-22 15:54:12');
 
 -- --------------------------------------------------------
 
@@ -276,7 +291,7 @@ CREATE TABLE `size_options` (
 --
 
 INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
-(1, 'small (10cm x 20cm)', 10, 20);
+(1, 'small (11cm x 20cm)', 11, 20);
 
 -- --------------------------------------------------------
 
@@ -422,7 +437,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
@@ -437,12 +452,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `paperstock_options`
 --
 ALTER TABLE `paperstock_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `qty_options`
 --
