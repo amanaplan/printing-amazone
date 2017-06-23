@@ -47,7 +47,50 @@
 				<div class="feature-dtls">
 					<div class="col-sm-7 col-lg-7 sp-dtls">
 						<p class="sp-text">{{ $product->description }}</p>
-						<img src="{{ asset( 'assets/images/products/'.$product->sample_image ) }}" class="img-responsive" />
+
+						@if(preg_match("/\*+/",$product->sample_image))
+
+							{{-- carousal sample slider images --}}
+
+							@php
+								$slides = explode('*', $product->sample_image);
+							@endphp
+							<div id="myCarousel" class="carousel slide" data-ride="carousel">
+							    <!-- Indicators -->
+							    <ol class="carousel-indicators">
+							    	@foreach($slides as $slide)
+							    		<li data-target="#myCarousel" data-slide-to="{{ $loop->index }}" {{ ($loop->first)? 'class="active"' : '' }}></li>
+							    	@endforeach
+							    </ol>
+
+							    <!-- Wrapper for slides -->
+							    <div class="carousel-inner">
+
+							    	@foreach($slides as $slide)
+							    		<div class="item {{ ($loop->first)? 'active' : '' }}">
+									        <img src="{{ asset( 'assets/images/products/'.$slide ) }}" style="width:100%;">
+									     </div>
+							    	@endforeach
+
+							    </div>
+
+							    <!-- Left and right controls -->
+							    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+							      <span class="glyphicon glyphicon-chevron-left"></span>
+							      <span class="sr-only">Previous</span>
+							    </a>
+							    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+							      <span class="glyphicon glyphicon-chevron-right"></span>
+							      <span class="sr-only">Next</span>
+							    </a>
+							</div>
+
+						@else
+
+							<img src="{{ asset( 'assets/images/products/'.$product->sample_image ) }}" class="img-responsive" />
+
+						@endif
+
 					</div>
 					<div class="col-sm-1 col-lg-1"></div>
 					

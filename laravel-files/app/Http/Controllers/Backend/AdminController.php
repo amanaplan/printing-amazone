@@ -10,6 +10,9 @@ use App\Product;
 use App\OptPaperstock;
 use App\OptQty;
 use App\OptSize;
+use App\MapFrmProd;
+use App\FieldTypes;
+use App\MapProdFrmOpt;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -225,6 +228,57 @@ class AdminController extends Controller
         ];
         
         return view('backend.options-size-edit', $data);
+    }
+
+    /**
+    *form options edit
+    */
+    public function EditFormFieldMapping($prodid, $fieldtype, $mapid)
+    {
+        $exist = MapFrmProd::where([['id', $mapid],['form_field_id', $fieldtype],['product_id', $prodid]])->count();
+        if($exist == 0)
+        {
+            abort(404);
+        }
+
+        switch ($fieldtype) {
+            case 1:
+                $optios = OptPaperstock::all();
+                $table = 'paperstock_options';
+                break;
+            case 2:
+                $optios = OptSize::all();
+                $table = 'size_options';
+                break;
+            case 3:
+                $optios = OptQty::all();
+                $table = 'qty_options';
+                break;
+            default:
+                abort(401);
+        }
+
+
+        $optarr = [];
+        $curr_options = MapProdFrmOpt::where('mapping_field_id', $mapid)->select('option_id')->get();
+        foreach($curr_options as $row)
+        {
+            $optarr[] = $row->option_id;
+        }
+
+        $data = [
+            'page'      => 'product_manage',
+            'product'   => Product::find($prodid)->product_name,
+            'fieldname' => FieldTypes::find($fieldtype)->name,
+            'options'   => $optios,
+            'fieldtype' => $fieldtype,
+            'mapid'     => $mapid,
+            'curropt'   => $optarr,
+            'selected'  => MapProdFrmOpt::where('mapping_field_id', $mapid)->get(),
+            'table'     => $table
+        ];
+
+        return view('backend.map-field-options', $data);
     }
 
 }

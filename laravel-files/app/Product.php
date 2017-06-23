@@ -10,6 +10,6 @@ class Product extends Model
 
     public function formfields()
     {
-		return $this->belongsToMany('App\FieldTypes', 'map_prod_form', 'product_id', 'form_field_id')->withPivot('form_field_id');
+		return $this->belongsToMany('App\FieldTypes', 'map_prod_form', 'product_id', 'form_field_id')->withPivot('id','form_field_id');
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2017 at 02:13 PM
+-- Generation Time: Jun 23, 2017 at 02:43 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -136,9 +136,9 @@ INSERT INTO `map_prod_form` (`id`, `form_field_id`, `product_id`) VALUES
 (2, 2, 6),
 (31, 1, 16),
 (33, 3, 16),
-(34, 2, 16),
 (35, 2, 3),
-(36, 3, 3);
+(36, 3, 3),
+(37, 2, 16);
 
 -- --------------------------------------------------------
 
@@ -149,8 +149,21 @@ INSERT INTO `map_prod_form` (`id`, `form_field_id`, `product_id`) VALUES
 CREATE TABLE `map_prod_form_options` (
   `id` int(10) UNSIGNED NOT NULL,
   `mapping_field_id` int(11) NOT NULL COMMENT 'mapping id of map_prod_form table',
-  `option_id` int(11) NOT NULL
+  `option_id` int(11) NOT NULL,
+  `sort` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `map_prod_form_options`
+--
+
+INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sort`) VALUES
+(5, 37, 1, 0),
+(6, 31, 1, 0),
+(7, 31, 2, 0),
+(8, 36, 1, 0),
+(9, 36, 3, 0),
+(10, 36, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -186,7 +199,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (25, '2017_06_21_200923_create_size_options_table', 9),
 (26, '2017_06_21_201003_create_qty_options_table', 9),
 (27, '2017_06_21_201804_mapping_of_product_and_form', 10),
-(28, '2017_06_21_201853_mapping_of_product_and_form_options', 10);
+(28, '2017_06_21_201853_mapping_of_product_and_form_options', 10),
+(29, '2017_06_23_204532_add_sort_col_to_options_mapping', 11);
 
 -- --------------------------------------------------------
 
@@ -251,7 +265,7 @@ INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `pr
 (3, NULL, NULL, NULL, 2, 'Rectangle Business Card', 'rectangle-business-card', 'cs-3.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 1, '2017-06-19 15:21:40', '2017-06-19 15:21:40'),
 (4, NULL, NULL, NULL, 2, 'Free Shaping Card', 'free-shaping-card', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 2, '2017-06-19 15:22:41', '2017-06-19 15:22:41'),
 (5, NULL, NULL, NULL, 2, 'Some Demo card', 'some-demo-card', 'f3.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', NULL, 3, '2017-06-19 15:23:31', '2017-06-19 15:23:31'),
-(6, NULL, NULL, NULL, 2, 'Bumper Card', 'bumper-card', 'cs-1.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'shape-img.jpg', 4, '2017-06-19 15:24:45', '2017-06-19 15:24:45'),
+(6, NULL, NULL, NULL, 2, 'Bumper Card', 'bumper-card', 'cs-1.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices urna vitae mauris dictum dignissim. Pellentesque porta, lectus id pulvinar hendrerit, felis ligula varius lectus, eu auctor arcu lectus eleifend ipsum. Duis in magna nec tortor tincidunt feugiat eu ut eros. Morbi consectetur felis nec', 'hacker-internet-technology-computers-159195.jpeg*gshock-watch-sports-watch-stopwatch-158741.jpeg*pexels-photo-174673.jpeg', 4, '2017-06-19 15:24:45', '2017-06-23 16:48:29'),
 (16, 'whatever', 'whatever', NULL, 5, 'Somethinf testx', 'somethinf-testx', 'f2.png', 'whatever whatever whatever whatever whatever whatever whatever', 'cs-1.png', 1, '2017-06-22 15:54:12', '2017-06-22 15:54:12');
 
 -- --------------------------------------------------------
@@ -271,7 +285,9 @@ CREATE TABLE `qty_options` (
 
 INSERT INTO `qty_options` (`id`, `option`) VALUES
 (1, 1000),
-(2, 100);
+(2, 100),
+(3, 200),
+(4, 500);
 
 -- --------------------------------------------------------
 
@@ -291,7 +307,8 @@ CREATE TABLE `size_options` (
 --
 
 INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
-(1, 'small (11cm x 20cm)', 11, 20);
+(1, 'small (11cm x 20cm)', 11, 20),
+(2, 'Large A1 Paper (175 x 100)', 175, 100);
 
 -- --------------------------------------------------------
 
@@ -437,17 +454,17 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
@@ -462,12 +479,12 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `qty_options`
 --
 ALTER TABLE `qty_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `size_options`
 --
 ALTER TABLE `size_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --

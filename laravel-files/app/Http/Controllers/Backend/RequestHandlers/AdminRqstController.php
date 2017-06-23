@@ -6,6 +6,8 @@ use App\Category;
 use App\OptPaperstock;
 use App\OptQty;
 use App\OptSize;
+use App\MapFrmProd;
+use App\MapProdFrmOpt;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -223,6 +225,8 @@ class AdminRqstController extends Controller
             {
                 foreach($toremove as $row)
                 {
+                    $mapid = MapFrmProd::where([['product_id', $product->id],['form_field_id', $row]])->first()->id;
+                    MapProdFrmOpt::where('mapping_field_id', $mapid)->delete();
                     $product->formfields()->detach($row);
                 }
             }
@@ -415,6 +419,63 @@ class AdminRqstController extends Controller
             return redirect('/admin/form/size');
         }
 
+    }
+
+    /**
+    *update options mapping for a product's specific form field type
+    */
+    public function OptMapUpdate(Request $request, $mapid)
+    {
+        //curr data of applicable options for the field & for the product
+
+        $currindb = MapProdFrmOpt::where('mapping_field_id', $mapid);
+        $currarr = $selected = [];
+        if($currindb->count() > 0){
+            foreach($currindb->get() as $curr)
+            {
+                $currarr[] = $curr->option_id;
+            }
+        }
+
+        //selected checkboxes from the form
+
+        $inpoptions = $request->input('options');
+        if(count($inpoptions) > 0){
+            foreach($inpoptions as $row)
+            {
+                $selected[] = $row;
+            }
+        }
+
+
+        //to insert
+        $tosave = array_diff($selected,$currarr);
+
+        if(count($tosave) > 0)
+        {
+            foreach($tosave as $saveitem){
+                MapProdFrmOpt::create(['mapping_field_id' => $mapid, 'option_id' => $saveitem]);
+            }
+        }
+
+        //to remove
+        $torem = array_diff($currarr,$selected);
+
+        if(count($torem) > 0)
+        {
+            /*
+            *remember to remove the assigned pricing rule too
+            */
+
+            foreach($torem as $remitem){
+                MapProdFrmOpt::where([['mapping_field_id', $mapid], ['option_id', $remitem]])->delete();
+            }
+        }
+
+
+        adminflash('success', 'applicable options data updated');
+        return redirect()->back();
+        
     }
 
 }

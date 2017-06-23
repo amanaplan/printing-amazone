@@ -7,6 +7,7 @@
         <meta name="robots" content="noindex, nofollow">
         <!-- mobile settings -->
         <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+        <link rel="shortcut icon" href="{{ asset( 'assets/images/fabicon.png' ) }}">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->

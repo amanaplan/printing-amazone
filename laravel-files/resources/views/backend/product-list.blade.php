@@ -70,7 +70,7 @@
                                     <td>
                                         @if($product->formfields()->count() > 0)
                                             @foreach($product->formfields as $field)
-                                                <a href="{{ url('/admin/form/editoption/'.$product->id.'/'.$field->pivot->form_field_id) }}"><span class="label label-default">{{ $field->name }}</span></a>
+                                                <a href="{{ url('/admin/form/editoption/'.$product->id.'/'.$field->pivot->form_field_id.'/'.$field->pivot->id) }}" target="_blank"><span class="label label-success">{{ $field->name }}<span class="badge">{{ \App\MapProdFrmOpt::where('mapping_field_id',$field->pivot->id)->count() }}</span></span></a>
                                             @endforeach
 
                                         @else

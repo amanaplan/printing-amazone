@@ -62,7 +62,7 @@
 			<div class="row">
 				<div class="top-header">
 					<div class="logo">
-						<a href="{{ url('/') }}"><img src="{{ asset( 'assets/images/logo.png' ) }}" class="img-responsive" /></a>
+						<a href="{{ url('/') }}"><img src="{{ asset( 'assets/images/logo.jpg' ) }}" class="img-responsive" /></a>
 						<div class="top-menu">
 							@if(Auth::check() == false)
 
