@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2017 at 02:43 PM
+-- Generation Time: Jul 05, 2017 at 12:44 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -44,7 +44,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `profile_pic`, `password`, `remember_token`, `super_admin`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav R', 'srv.nxr@gmail.com', 'avatar2.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'YP2kTZH63ct9mbsJz2h9FBSPIJkVWm3ORJdPysYNKbJ25v8YyZqte0Z1C1K5', 1, 1, '2017-05-03 11:34:00', '2017-05-12 17:20:06'),
+(1, 'Sourav R', 'srv.nxr@gmail.com', 'avatar2.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'D9ViY5TiQjqHBuUzQB1rjVkUAeLZnWzKuEe9D12V7c4c0OQazcrc1hD1p3g3', 1, 1, '2017-05-03 11:34:00', '2017-05-12 17:20:06'),
 (5, 'Printing Amazone', 'printingamazon0902@gmail.com', 'avatar2.png', '$2y$10$ZkuO1h6NJbJIdsuJx1a3hO0tas.XRvxNCR/HcPAg2/5X21WVK5sZC', NULL, 0, 1, '2017-05-26 16:15:40', '2017-06-19 13:13:58');
 
 -- --------------------------------------------------------
@@ -138,7 +138,10 @@ INSERT INTO `map_prod_form` (`id`, `form_field_id`, `product_id`) VALUES
 (33, 3, 16),
 (35, 2, 3),
 (36, 3, 3),
-(37, 2, 16);
+(37, 2, 16),
+(38, 1, 4),
+(39, 2, 4),
+(40, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -159,11 +162,27 @@ CREATE TABLE `map_prod_form_options` (
 
 INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sort`) VALUES
 (5, 37, 1, 0),
-(6, 31, 1, 0),
-(7, 31, 2, 0),
+(6, 31, 1, 1),
+(7, 31, 2, 2),
 (8, 36, 1, 0),
 (9, 36, 3, 0),
-(10, 36, 4, 0);
+(10, 36, 4, 0),
+(11, 33, 2, 1),
+(12, 33, 3, 2),
+(13, 38, 1, 1),
+(14, 38, 5, 4),
+(15, 38, 3, 2),
+(16, 38, 4, 3),
+(17, 39, 3, 1),
+(18, 39, 4, 2),
+(19, 39, 5, 3),
+(20, 39, 6, 4),
+(21, 39, 7, 5),
+(22, 40, 1, 5),
+(23, 40, 2, 1),
+(24, 40, 3, 2),
+(25, 40, 4, 4),
+(26, 40, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -218,7 +237,10 @@ CREATE TABLE `paperstock_options` (
 --
 
 INSERT INTO `paperstock_options` (`id`, `option`) VALUES
-(1, 'Artboard Papers'),
+(1, 'Artboard'),
+(5, 'Kraft'),
+(3, 'Transparent'),
+(4, 'Waterproof'),
 (2, 'Wooden Paper');
 
 -- --------------------------------------------------------
@@ -287,7 +309,8 @@ INSERT INTO `qty_options` (`id`, `option`) VALUES
 (1, 1000),
 (2, 100),
 (3, 200),
-(4, 500);
+(4, 500),
+(5, 300);
 
 -- --------------------------------------------------------
 
@@ -308,7 +331,12 @@ CREATE TABLE `size_options` (
 
 INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
 (1, 'small (11cm x 20cm)', 11, 20),
-(2, 'Large A1 Paper (175 x 100)', 175, 100);
+(2, 'Large A1 Paper (175 x 100)', 175, 100),
+(3, '50 x 50 cm', 50, 50),
+(4, '70 x 70 cm', 70, 70),
+(5, '90 x 90 cm', 90, 90),
+(6, '120 x 120 cm', 120, 120),
+(7, '150 x 150 cm', 150, 150);
 
 -- --------------------------------------------------------
 
@@ -332,8 +360,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'Igi3RekkcO9RcX1bVrRuLvfDAynnqyhE74ilzJ6RRMDtgzgttp53OAD5lcGn', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', '6Z5fdqLjshXV5hJD3oijvSAxSdIzsiL3sZENqd7cUCbfpOaOnoGven6na3cD', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
+(1, 'Sourav', 'developer.srv1@gmail.com', NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'bcsoAR3bhWoqLhPVxQgPhvMIBA2EzwBw9Qkv0RjIALEJrIbmSCVAU9141jla', '2017-05-03 05:53:37', '2017-05-03 05:53:37'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'tqhDNJCG58Cqv4svwDzgO4lva9ptKPcScAFlYPBWeDAvF0lppJQrB1qt7Knp', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
 
 --
 -- Indexes for dumped tables
@@ -454,12 +482,12 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -469,7 +497,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `paperstock_options`
 --
 ALTER TABLE `paperstock_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -479,12 +507,12 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `qty_options`
 --
 ALTER TABLE `qty_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `size_options`
 --
 ALTER TABLE `size_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
