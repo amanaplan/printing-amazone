@@ -478,4 +478,27 @@ class AdminRqstController extends Controller
         
     }
 
+    /**
+    *sort field options
+    */
+    public function SortFieldOption(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|numeric',
+            'sort' => 'required|numeric',
+        ]);
+
+        $mapping       = MapProdFrmOpt::findOrFail($request->input('id'));
+        $mapping->sort = $request->input('sort');
+
+        if($mapping->save())
+        {
+            return response('updated', 200);
+        }
+        else
+        {
+            return response('error occurred', 422);
+        }
+    }
+
 }

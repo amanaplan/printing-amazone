@@ -105,6 +105,7 @@ Route::prefix('admin')->group(function() {
 	Route::put('/form/update/size/{id}', 'Backend\RequestHandlers\AdminRqstController@SizeUpdate');
 	Route::get('/form/editoption/{prod_id}/{fld_type_id}/{prod_form_map_id}', 'Backend\AdminController@EditFormFieldMapping');
 	Route::put('/form/set/options/{mapid}', 'Backend\RequestHandlers\AdminRqstController@OptMapUpdate');
+	Route::put('/form/sort/fieldoption', 'Backend\RequestHandlers\AdminRqstController@SortFieldOption');
 
 
 	/*___________________________________________________

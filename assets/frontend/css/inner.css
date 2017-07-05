@@ -44,7 +44,7 @@ p.sp-text{color:#808080; font-family: 'Raleway', sans-serif; font-size:15px; fon
     margin-right: 5px;
     vertical-align: bottom;
 }
-.custom-size ul li label{color:#686868; font-size:14px; font-family: 'Raleway', sans-serif; cursor:pointer; width:30%;}
+.custom-size ul li label{color:#686868; font-size:14px; font-family: 'Raleway', sans-serif; cursor:pointer; width:50%;}
 .custom-size ul li span {padding-left: 10px;color:#686868; font-size:14px; font-family: 'Raleway', sans-serif; display:inline-block; width:20%;}
 .custom-size ul li span.saving{color:#f30; width:auto;font-size:13px; font-weight:600;}
 .custom-input {

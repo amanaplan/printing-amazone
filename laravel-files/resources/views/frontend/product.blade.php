@@ -95,9 +95,59 @@
 					<div class="col-sm-1 col-lg-1"></div>
 					
 					{{-- the sidebar selection form --}}
-					@component('component.product-forms.common')
+					@if($has_fields)
 
-					@endcomponent
+						<div class="col-sm-4 col-lg-4 custom-size">
+							<form action="" method="post">
+
+								{{ csrf_field() }}
+
+								@if(array_key_exists(1,$fields))
+								<div class="paperstock">
+									<h2>Select a Paperstock</h2>
+									<ul>
+										@foreach($fields[1] as $key => $val)
+											<li><input id="{{ $val }}" type="radio" name="paperstock" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
+										@endforeach
+									</ul>
+								</div>
+								@endif
+
+								@if(array_key_exists(2,$fields))
+								<div class="paperstock">
+									<h2>Select a Size</h2>
+									<ul>
+										@foreach($fields[2] as $key => $val)
+											<li><input id="{{ $val }}" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span>$56</span></li>
+										@endforeach
+										
+										<li><input id="custom" type="radio" name="size" value="custom"> <label for="custom">Custom Size</label>
+											<div class="custom-input" style="display: none;">
+												<input type="text" placeholder="Width"> x <input type="text" placeholder="height">
+											</div>
+										</li>
+									</ul>
+								</div>
+								@endif
+
+								@if(array_key_exists(3,$fields))
+								<div class="quantity">
+									<h2>Select a Quantity</h2>
+									<ul>
+										@foreach($fields[3] as $key => $val)
+											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
+										@endforeach
+									</ul>
+								</div>
+								@endif
+
+								<a href="#" class="continue">Continue</a>
+								<a href="#" class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+							</form>
+						</div>
+
+					@endif
+					{{-- sidebar form --}}
 
 					<div class="clearfix"></div>
 				</div><!-- feature-dtls -->
@@ -303,6 +353,18 @@
 	        $('.rating').on('change', function () {
 	            console.log('Rating selected: ' + $(this).val());
 	        });
+	    });
+
+	    $(document).ready(function(){
+	    	$("input[name='size']").change(function(){
+	    		if($(this).val() == 'custom')
+	    		{
+	    			$("div.custom-input").show();
+	    		}
+	    		else{
+	    			$("div.custom-input").hide();
+	    		}
+	    	});
 	    });
 	</script>
 

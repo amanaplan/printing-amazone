@@ -87,7 +87,7 @@
                                                 {{ DB::table($table)->where('id', $option->option_id)->first()->option }}
                                             @endif
                                         </td>
-                                        <td><input type="number" name="" min="1" step="1" value="{{ $option->sort }}"></td>
+                                        <td><input type="number" name="" min="1" step="1" value="{{ $option->sort }}" onchange="changeOptSort({{ $option->id }}, this.value);"></td>
                                     </tr>
                                                                     
                                 @endforeach
@@ -108,5 +108,25 @@
 {{-- page specific js --}}
 @push('scripts')
     
+    <script>
+        function changeOptSort(id, order) {
+            //ajax
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                url: "{{ url('/admin/form/sort/fieldoption') }}",
+                type: "PUT",
+                data: {id:id, sort:order},
+                success: function(result){
+                    Command: toastr["success"]("order updated successfully", "Successfully Done. .");
+                },
+                error: function(xhr,status,error){
+                    Command: toastr["error"](error, "some error occurred");
+                }
+            });
+
+            $.ajax();
+            //ajax
+        }
+    </script>
 
 @endpush
