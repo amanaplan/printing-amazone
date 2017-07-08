@@ -190,24 +190,48 @@
 					   <div class="clearfix"></div>
 					</ul>
 				</div><!-- rating-summary -->
-				<div class="review-list">
+				<div class="review-list" id="app">
 
-					<div class="row post-review">
-						<div class="col-md-8 col-md-offset-2 col-sm-12">
-							<div class="form-group">
-						      <textarea class="form-control" rows="3" placeholder="Type your review here..."></textarea>
-						    </div>
+					@if(Auth::guard('web')->check())
 
-						    <div class="col-md-6 col-sm-12">
-						    	<input type="text" class="rating rating-loading" data-size="xs" title="">
-						    </div>
+						<div class="row post-review">
+							<div class="col-md-8 col-md-offset-2 col-sm-12">
+								<form @submit.prevent="postReview">
+									<div class="form-group" v-bind:class="{'has-error' : showHeadingErr}">
+								      <input class="form-control" type="text" placeholder="Enter your review hedaing" v-model="heading">
+								    	<span class="help-block text-danger" v-if="showHeadingErr">@{{ headingErr }}</span>
+								    </div>
 
-						    <div class="col-md-6 col-sm-12">
-						    	<button type="button" class="btn btn-primary pull-right">Post Review</button>
-						    </div>
+									<div class="form-group" v-bind:class="{'has-error' : showReviewMsgErr}">
+								      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
+								    	<span class="help-block text-danger" v-if="showReviewMsgErr">@{{ reviewErr }}</span>
+								    </div>
 
+								    <div class="col-md-6 col-sm-12">
+								    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
+								    	<span class="help-block text-danger" v-if="showRatingMsgErr">@{{ ratingErr }}</span>
+								    </div>
+
+								    <div class="col-md-6 col-sm-12">
+								    	<button type="submit" class="btn btn-primary pull-right">Post Review</button>
+								    </div>
+							    </form>
+
+							</div>
 						</div>
-					</div>
+
+					@else
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3 col-sm-12">
+								<a href="javascript:void();" class="continue" onclick="document.querySelector('a.cd-signin').click();">Post Your Review</a>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					@endif
+
+					<template v-if="givenReview">
+						<div v-html="givenReviewText"></div>
+					</template>
 
 				    <div class="review-short">
 					   <div class="avatar">
@@ -253,7 +277,7 @@
                          <i class="fa fa-star"></i>
                         </span>
 
-                        <strong class="title">Crisp fresh printing and high quality</strong>
+                        <strong class="title">Crisp fresh printing and high quality</strong> <a href="#" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
 
                         <div class="details">
                         <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -268,6 +292,7 @@
                            These stickers are excellent quality and the print is bold and crisp. Not to mention they threw in a couple extra stickers with my order. Bonus! I'll be ordering a large batch again soon!
 
                         </p>  </div>
+
 					   <div class="clearfix"></div>
 					</div><!-- review-short -->
 					
@@ -351,7 +376,8 @@
 	<script>
 	    $(document).on('ready', function () {
 	        $('.rating').on('change', function () {
-	            console.log('Rating selected: ' + $(this).val());
+	            //console.log('Rating selected: ' + $(this).val());
+	            $(this).attr('value', $(this).val());
 	        });
 	    });
 
@@ -366,6 +392,89 @@
 	    		}
 	    	});
 	    });
+	</script>
+
+	<script>
+
+		new Vue({
+			el: '#app',
+			data: {
+				heading: '',
+				review: '',
+				rating: 0,
+				showReviewMsgErr: false,
+				showRatingMsgErr : false,
+				showHeadingErr: false,
+				reviewErr: '',
+				ratingErr : '',
+				headingErr: '',
+				givenReview: false,
+				givenReviewText: '',
+				customer: '{{ Auth::user()->name }}'
+			},
+			methods: {
+				postReview: function()
+				{
+					this.rating = $('.rating').val();
+					this.review = this.review.trim();
+					this.heading = this.heading.trim();
+
+					if(this.heading.length < 8)
+					{
+						this.headingErr = `review heading is too small`;
+						this.showHeadingErr = true;
+						this.showReviewMsgErr = false;
+						this.showRatingMsgErr = false;
+					}
+					else if(this.review.length < 10)
+					{
+						this.reviewErr = `review message is too small`;
+						this.showReviewMsgErr = true;
+						this.showRatingMsgErr = false;
+						this.showHeadingErr = false;
+					}
+					else if(this.rating <= 0)
+					{
+						this.ratingErr = `please provide your rating`;
+						this.showRatingMsgErr = true;
+						this.showReviewMsgErr = false;
+						this.showHeadingErr = false;
+					}
+					else
+					{
+						this.showReviewMsgErr = this.showRatingMsgErr = this.showHeadingErr = false;
+						$('.post-review').fadeOut(function(){
+							$('.post-review').remove();
+						});
+						//ajax here
+
+						this.givenReview = true;
+						this.givenReviewText = 
+						`
+							<div class="review-short">
+							<div class="avatar"><img alt="" src="http://localhost/srv/printing-amazone/assets/images/user.png" class="img-circle img-thumbnail"></div> 
+							<div class="body">
+								<span class="rating-stars rating-5">
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+								</span> 
+							<strong class="title">
+
+								${this.heading}
+
+							</strong> 
+							<div class="details">
+							<span itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+							<strong itemprop="name">${this.customer}</strong></span> <time class="date relative-time">14 hours ago</time> 
+							<meta itemprop="datePublished" content="2017-05-25"></div> <p itemprop="description">
+
+	                           ${this.review}
+
+	                        </p></div> <div class="clearfix"></div></div>
+						`
+					}					
+				}
+			}
+		})
 	</script>
 
 @endpush

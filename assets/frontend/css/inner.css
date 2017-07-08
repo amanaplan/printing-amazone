@@ -137,6 +137,7 @@ span.rating-stars i{color:#ea8f00;}
 .review-short .body .details .date {
     color: #686868;
 	font-family: 'Raleway', sans-serif;
+    font-size: 15px;
 }
 .review-short .body p{color:#202020;font-family: 'Raleway', sans-serif;font-size: 15px; line-height:22px;}
 .see_all{text-align:center; margin-bottom: 40px;}
