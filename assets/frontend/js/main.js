@@ -51,10 +51,10 @@ jQuery(document).ready(function($){
 	});
 
 	//show forgot-password form 
-	forgotPasswordLink.on('click', function(event){
-		event.preventDefault();
-		forgot_password_selected();
-	});
+	// forgotPasswordLink.on('click', function(event){
+	// 	event.preventDefault();
+	// 	forgot_password_selected();
+	// });
 
 	//back to login from the forgot-password form
 	backToLoginLink.on('click', function(event){

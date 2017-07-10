@@ -183,7 +183,7 @@
 					</p>
 				</form>
 				
-				<p class="cd-form-bottom-message"><a href="javascript:void();">Forgot your password?</a></p>
+				<p class="cd-form-bottom-message"><a href="{{ route('password.request') }}">Forgot your password?</a></p>
 				<!-- <a href="#0" class="cd-close-form">Close</a> -->
 			</div> <!-- cd-login -->
 

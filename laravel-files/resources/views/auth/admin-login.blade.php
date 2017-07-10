@@ -70,7 +70,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block ">Login</button>
-                        <a class="btn  btn-default btn-block" href="{{ route('password.request') }}">Forgot password?</a>
+                        <a class="btn  btn-default btn-block" href="{{ route('admin.password.request') }}">Forgot password?</a>
 
                     </form>
                 </div>

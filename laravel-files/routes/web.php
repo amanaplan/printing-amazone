@@ -13,7 +13,7 @@
 
 //[default laravel auth with remved register path]
 //Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-//Route::post('/login', 'Auth\LoginController@login');
+Route::post('/login', 'Auth\LoginController@login');
 Route::post('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -73,6 +73,12 @@ Route::prefix('admin')->group(function() {
 	Route::get('/profile', 'Backend\AdminController@profile')->name('admin.profile');
 	Route::put('/profile/update-personal-info', 'Backend\ProfileCtrl@update')->name('admin.profile.update');
 	Route::put('/profile/update-password', 'Backend\ProfileCtrl@PasswordUpdate')->name('admin.profile.password');
+
+	//forgot password & reset
+    Route::post('password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+    Route::get('password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+    Route::post('password/reset', 'Auth\AdminResetPasswordController@reset');
+    Route::get('password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
 	//manage category
 	Route::get('/category/manage', 'Backend\AdminController@ManageCategory');
