@@ -197,19 +197,19 @@
 						<div class="row post-review">
 							<div class="col-md-8 col-md-offset-2 col-sm-12">
 								<form @submit.prevent="postReview">
-									<div class="form-group" v-bind:class="{'has-error' : showHeadingErr}">
+									<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
 								      <input class="form-control" type="text" placeholder="Enter your review hedaing" v-model="heading">
-								    	<span class="help-block text-danger" v-if="showHeadingErr">@{{ headingErr }}</span>
+								    	<span class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
 								    </div>
 
-									<div class="form-group" v-bind:class="{'has-error' : showReviewMsgErr}">
+									<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
 								      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
-								    	<span class="help-block text-danger" v-if="showReviewMsgErr">@{{ reviewErr }}</span>
+								    	<span class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
 								    </div>
 
 								    <div class="col-md-6 col-sm-12">
 								    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
-								    	<span class="help-block text-danger" v-if="showRatingMsgErr">@{{ ratingErr }}</span>
+								    	<span class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
 								    </div>
 
 								    <div class="col-md-6 col-sm-12">
@@ -395,6 +395,69 @@
 	</script>
 
 	<script>
+		class ReviewForm
+		{
+			constructor(){
+				this.errors = {};
+			}
+
+			getError(field){
+				return this.errors[field];
+			}
+
+			hasError(field){
+				return this.errors.hasOwnProperty(field);
+			}
+
+			chkError(arrOfObj){
+				arrOfObj.forEach( pair => {
+					switch (pair.field) 
+					{
+					    case 'heading':
+					        if(pair.fieldVal.length < 8){
+					        	this.errors = {};
+					        	this.errors[pair.field] = `review heading is too small`;
+					        }
+					        else{
+					        	delete this.errors[pair.field];
+					        }
+
+					        break; 
+
+					    case 'review':
+					        if(pair.fieldVal.length < 10){
+					        	this.errors = {};
+					        	this.errors[pair.field] = `review message is too small`;
+					        }
+					        else{
+					        	delete this.errors[pair.field];
+					        }
+					        break;
+
+					    default: 
+					        if(pair.fieldVal <= 0 || pair.fieldVal > 5){
+					        	this.errors = {};
+					        	this.errors[pair.field] = `please provide your rating`;
+					        }
+					        else{
+					        	delete this.errors[pair.field];
+					        }
+
+					}
+				});
+
+				//reurn true / false if any error or not
+				if(Object.keys(this.errors).length > 0)
+				{
+					return false;
+				}
+				else
+				{
+					this.errors = {};
+					return true;
+				}
+			}
+		}
 
 		new Vue({
 			el: '#app',
@@ -402,15 +465,10 @@
 				heading: '',
 				review: '',
 				rating: 0,
-				showReviewMsgErr: false,
-				showRatingMsgErr : false,
-				showHeadingErr: false,
-				reviewErr: '',
-				ratingErr : '',
-				headingErr: '',
 				givenReview: false,
 				givenReviewText: '',
-				customer: '{{ Auth::user()->name }}'
+				customer: "{{ Auth::guard('web')->check()? Auth::user()->name : '' }}",
+				formobj: new ReviewForm()
 			},
 			methods: {
 				postReview: function()
@@ -419,30 +477,10 @@
 					this.review = this.review.trim();
 					this.heading = this.heading.trim();
 
-					if(this.heading.length < 8)
-					{
-						this.headingErr = `review heading is too small`;
-						this.showHeadingErr = true;
-						this.showReviewMsgErr = false;
-						this.showRatingMsgErr = false;
-					}
-					else if(this.review.length < 10)
-					{
-						this.reviewErr = `review message is too small`;
-						this.showReviewMsgErr = true;
-						this.showRatingMsgErr = false;
-						this.showHeadingErr = false;
-					}
-					else if(this.rating <= 0)
-					{
-						this.ratingErr = `please provide your rating`;
-						this.showRatingMsgErr = true;
-						this.showReviewMsgErr = false;
-						this.showHeadingErr = false;
-					}
-					else
-					{
-						this.showReviewMsgErr = this.showRatingMsgErr = this.showHeadingErr = false;
+					let state = this.formobj.chkError([{field: 'rating', fieldVal: this.rating}, {field: 'review', fieldVal: this.review}, {field: 'heading', fieldVal: this.heading}]);
+					if(state == true){
+						//process ajax
+
 						$('.post-review').fadeOut(function(){
 							$('.post-review').remove();
 						});
@@ -457,11 +495,8 @@
 								<span class="rating-stars rating-5">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
 								</span> 
-							<strong class="title">
-
-								${this.heading}
-
-							</strong> 
+							<strong class="title">${this.heading}</strong> 
+							<button type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
 							<div class="details">
 							<span itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
 							<strong itemprop="name">${this.customer}</strong></span> <time class="date relative-time">14 hours ago</time> 
@@ -471,7 +506,7 @@
 
 	                        </p></div> <div class="clearfix"></div></div>
 						`
-					}					
+					}			
 				}
 			}
 		})
