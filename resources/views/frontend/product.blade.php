@@ -192,6 +192,9 @@
 				</div><!-- rating-summary -->
 				<div class="review-list" id="app">
 
+					<input id="photo" type="hidden" value="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}">
+					<input id="customerName" type="hidden" value="{{ (Auth::guard('web')->check())? Auth::user()->name : '' }}">
+
 					@if(Auth::guard('web')->check())
 
 						<div class="row post-review">
@@ -200,7 +203,7 @@
 								<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
 
 								<form @submit.prevent="postReview">
-									<input type="hidden" v-model="photo" value="{{ (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
+
 									<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
 								      <input class="form-control" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading">
 								    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
@@ -503,16 +506,17 @@
 			}
 		}
 
+
 		new Vue({
 			el: '#app',
 			data: {
 				heading: '',
 				review: '',
 				rating: 0,
-				photo: "{{ Auth::guard('web')->check()? (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}",
+				photo: document.querySelector("#photo").value,
 				givenReview: false,
 				givenReviewText: '',
-				customer: "{{ Auth::guard('web')->check()? Auth::user()->name : '' }}",
+				customer: document.querySelector("#customerName").value,
 				formobj: new ReviewForm()
 			},
 			methods: {
