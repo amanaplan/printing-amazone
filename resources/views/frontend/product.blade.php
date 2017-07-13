@@ -195,37 +195,40 @@
 					<input id="photo" type="hidden" value="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}">
 					<input id="customerName" type="hidden" value="{{ (Auth::guard('web')->check())? Auth::user()->name : '' }}">
 
+
 					@if(Auth::guard('web')->check())
 
-						<div class="row post-review">
-							
-							<div class="col-md-8 col-md-offset-2 col-sm-12">
-								<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
+						<transition name="fade">
+							<div class="row post-review" v-show="showform">
+								
+								<div class="col-md-8 col-md-offset-2 col-sm-12">
+									<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
 
-								<form @submit.prevent="postReview">
+									<form @submit.prevent="postReview">
 
-									<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
-								      <input class="form-control" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading">
-								    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
-								    </div>
+										<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
+									      <input class="form-control" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading">
+									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
+									    </div>
 
-									<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
-								      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
-								    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
-								    </div>
+										<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
+									      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
+									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
+									    </div>
 
-								    <div class="col-md-6 col-sm-12">
-								    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
-								    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
-								    </div>
+									    <div class="col-md-6 col-sm-12">
+									    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
+									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
+									    </div>
 
-								    <div class="col-md-6 col-sm-12">
-								    	<button type="submit" class="btn btn-primary pull-right">Post Review</button>
-								    </div>
-							    </form>
+									    <div class="col-md-6 col-sm-12">
+									    	<button type="submit" class="btn btn-primary pull-right" :disabled="disableForm">Post Review</button>
+									    </div>
+								    </form>
 
+								</div>
 							</div>
-						</div>
+						</transition>
 
 					@else
 						<div class="row">
@@ -237,7 +240,7 @@
 					@endif
 
 					<template v-if="givenReview">
-						<div v-html="givenReviewText"></div>
+						<reviewitem photo="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" :heading="heading" customer="{{ (Auth::guard('web')->check())? (Auth::user()->name) : '' }}" :review="review" :rating="genRatedStar(rating)" @editreview="showform = true; givenReview = false; disableForm = false"></reviewitem>
 					</template>
 
 				    <div class="review-short">
@@ -377,16 +380,14 @@
 
 {{-- page specific scripts --}}
 @push( 'scripts' )
-	
-	<script src="{{ asset( 'assets/frontend/js/star-rating.js' ) }}" type="text/javascript"></script>
 
 	<script>
-	    $(document).on('ready', function () {
-	        $('.rating').on('change', function () {
-	            //console.log('Rating selected: ' + $(this).val());
-	            $(this).attr('value', $(this).val());
-	        });
-	    });
+	    // $(document).on('ready', function () {
+	    //     $('.rating').on('change', function () {
+	    //         //console.log('Rating selected: ' + $(this).val());
+	    //         $(this).attr('value', $(this).val());
+	    //     });
+	    // });
 
 	    $(document).ready(function(){
 	    	$("input[name='size']").change(function(){
@@ -401,164 +402,6 @@
 	    });
 	</script>
 
-	<script>
-		class ReviewForm
-		{
-			constructor(){
-				this.errors = {};
-			}
-
-			getError(field){
-				return this.errors[field];
-			}
-
-			hasError(field){
-				return this.errors.hasOwnProperty(field);
-			}
-
-			genRatedStar(rating)
-			{
-				let starMap = '';
-
-				if (!isNaN(rating) && rating.toString().indexOf('.') != -1)
-				{
-				    let floor = Math.floor(parseInt(rating));
-				    for(let i=0; i<floor; i++){
-						starMap += `<i class="fa fa-star"></i>`;
-					}
-					starMap += `<i class="fa fa-star-half-o"></i>`;
-
-					if(floor < 5 && floor != 4)
-					{
-						for(let i=0; i<parseInt(5 - (floor + 1)); i++){
-							starMap += `<i class="fa fa-star-o"></i>`;
-						}
-					}
-				}
-				else
-				{
-					for(let i=0; i<parseInt(rating); i++){
-						starMap += `<i class="fa fa-star"></i>`;
-					}
-					if(rating < 5)
-					{
-						for(let i=0; i<parseInt(5 - rating); i++){
-							starMap += `<i class="fa fa-star-o"></i>`;
-						}
-					}
-				}
-
-				return starMap;
-			}
-
-			chkError(arrOfObj){
-				arrOfObj.forEach( pair => {
-					switch (pair.field) 
-					{
-					    case 'heading':
-					        if(pair.fieldVal.length < 8){
-					        	this.errors = {};
-					        	this.errors[pair.field] = `review heading is too small`;
-					        }
-					        else if(pair.fieldVal.length > 60)
-					        {
-					        	this.errors = {};
-					        	this.errors[pair.field] = `you have exceeded maximum character`;
-					        }
-					        else{
-					        	delete this.errors[pair.field];
-					        }
-
-					        break; 
-
-					    case 'review':
-					        if(pair.fieldVal.length < 10){
-					        	this.errors = {};
-					        	this.errors[pair.field] = `review message is too small`;
-					        }
-					        else{
-					        	delete this.errors[pair.field];
-					        }
-					        break;
-
-					    default: 
-					        if(pair.fieldVal <= 0 || pair.fieldVal > 5){
-					        	this.errors = {};
-					        	this.errors[pair.field] = `please provide your rating`;
-					        }
-					        else{
-					        	delete this.errors[pair.field];
-					        }
-
-					}
-				});
-
-				//reurn true / false if any error or not
-				if(Object.keys(this.errors).length > 0)
-				{
-					return false;
-				}
-				else
-				{
-					this.errors = {};
-					return true;
-				}
-			}
-		}
-
-
-		new Vue({
-			el: '#app',
-			data: {
-				heading: '',
-				review: '',
-				rating: 0,
-				photo: document.querySelector("#photo").value,
-				givenReview: false,
-				givenReviewText: '',
-				customer: document.querySelector("#customerName").value,
-				formobj: new ReviewForm()
-			},
-			methods: {
-				postReview: function()
-				{
-					this.rating = $('.rating').val();
-					this.review = this.review.trim();
-					this.heading = this.heading.trim();
-
-					let state = this.formobj.chkError([{field: 'rating', fieldVal: this.rating}, {field: 'review', fieldVal: this.review}, {field: 'heading', fieldVal: this.heading}]);
-					if(state == true){
-						//process ajax
-
-						$('.post-review').fadeOut(function(){
-							$('.post-review').remove();
-						});
-						//ajax here
-
-						this.givenReview = true;
-						this.givenReviewText = 
-						`
-							<div class="review-short">
-							<div class="avatar"><img alt="" src="${this.photo}" class="img-circle img-thumbnail"></div> 
-							<div class="body">
-								<span class="rating-stars rating-5">
-									${this.formobj.genRatedStar(this.rating)}
-								</span> 
-							<strong class="title">${this.heading}</strong> 
-							<button type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
-							<div class="details">
-							<span itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
-							<strong itemprop="name">${this.customer}</strong></span> <time class="date relative-time">a moment ago</time> 
-							<meta itemprop="datePublished" content="2017-05-25"></div> <p itemprop="description">
-
-	                           ${this.review}
-
-	                        </p></div> <div class="clearfix"></div></div>
-						`
-					}			
-				}
-			}
-		})
-	</script>
+	<script type="text/javascript" src="{{ asset( mix('assets/frontend/js/review.js') ) }}"></script>
 
 @endpush
