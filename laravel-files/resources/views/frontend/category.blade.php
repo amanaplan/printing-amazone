@@ -107,23 +107,6 @@
 			</div><!-- rating-summary -->
 			<div class="review-list">
 
-				<div class="row post-review">
-					<div class="col-md-8 col-md-offset-2 col-sm-12">
-						<div class="form-group">
-					      <textarea class="form-control" rows="3" placeholder="Type your review here..."></textarea>
-					    </div>
-
-					    <div class="col-md-6 col-sm-12">
-					    	<input type="text" class="rating rating-loading" data-size="xs" title="">
-					    </div>
-
-					    <div class="col-md-6 col-sm-12">
-					    	<button type="button" class="btn btn-primary pull-right">Post Review</button>
-					    </div>
-
-					</div>
-				</div>
-
 			    <div class="review-short">
 				   <div class="avatar">
                       <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />

@@ -118,7 +118,7 @@
 									<h2>Select a Size</h2>
 									<ul>
 										@foreach($fields[2] as $key => $val)
-											<li><input id="{{ $val }}" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span>$56</span></li>
+											<li><input id="{{ $val }}" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
 										@endforeach
 										
 										<li><input id="custom" type="radio" name="size" value="custom"> <label for="custom">Custom Size</label>
@@ -131,11 +131,11 @@
 								@endif
 
 								@if(array_key_exists(3,$fields))
-								<div class="quantity">
+								<div class="paperstock">
 									<h2>Select a Quantity</h2>
 									<ul>
 										@foreach($fields[3] as $key => $val)
-											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
+											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span>$56</span></li>
 										@endforeach
 									</ul>
 								</div>
@@ -195,21 +195,25 @@
 					@if(Auth::guard('web')->check())
 
 						<div class="row post-review">
+							
 							<div class="col-md-8 col-md-offset-2 col-sm-12">
+								<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
+
 								<form @submit.prevent="postReview">
+									<input type="hidden" v-model="photo" value="{{ (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
 									<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
-								      <input class="form-control" type="text" placeholder="Enter your review hedaing" v-model="heading">
-								    	<span class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
+								      <input class="form-control" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading">
+								    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
 								    </div>
 
 									<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
 								      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
-								    	<span class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
+								    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
 								    </div>
 
 								    <div class="col-md-6 col-sm-12">
 								    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
-								    	<span class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
+								    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
 								    </div>
 
 								    <div class="col-md-6 col-sm-12">
@@ -409,6 +413,41 @@
 				return this.errors.hasOwnProperty(field);
 			}
 
+			genRatedStar(rating)
+			{
+				let starMap = '';
+
+				if (!isNaN(rating) && rating.toString().indexOf('.') != -1)
+				{
+				    let floor = Math.floor(parseInt(rating));
+				    for(let i=0; i<floor; i++){
+						starMap += `<i class="fa fa-star"></i>`;
+					}
+					starMap += `<i class="fa fa-star-half-o"></i>`;
+
+					if(floor < 5 && floor != 4)
+					{
+						for(let i=0; i<parseInt(5 - (floor + 1)); i++){
+							starMap += `<i class="fa fa-star-o"></i>`;
+						}
+					}
+				}
+				else
+				{
+					for(let i=0; i<parseInt(rating); i++){
+						starMap += `<i class="fa fa-star"></i>`;
+					}
+					if(rating < 5)
+					{
+						for(let i=0; i<parseInt(5 - rating); i++){
+							starMap += `<i class="fa fa-star-o"></i>`;
+						}
+					}
+				}
+
+				return starMap;
+			}
+
 			chkError(arrOfObj){
 				arrOfObj.forEach( pair => {
 					switch (pair.field) 
@@ -417,6 +456,11 @@
 					        if(pair.fieldVal.length < 8){
 					        	this.errors = {};
 					        	this.errors[pair.field] = `review heading is too small`;
+					        }
+					        else if(pair.fieldVal.length > 60)
+					        {
+					        	this.errors = {};
+					        	this.errors[pair.field] = `you have exceeded maximum character`;
 					        }
 					        else{
 					        	delete this.errors[pair.field];
@@ -465,6 +509,7 @@
 				heading: '',
 				review: '',
 				rating: 0,
+				photo: "{{ Auth::guard('web')->check()? (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}",
 				givenReview: false,
 				givenReviewText: '',
 				customer: "{{ Auth::guard('web')->check()? Auth::user()->name : '' }}",
@@ -490,16 +535,16 @@
 						this.givenReviewText = 
 						`
 							<div class="review-short">
-							<div class="avatar"><img alt="" src="http://localhost/srv/printing-amazone/assets/images/user.png" class="img-circle img-thumbnail"></div> 
+							<div class="avatar"><img alt="" src="${this.photo}" class="img-circle img-thumbnail"></div> 
 							<div class="body">
 								<span class="rating-stars rating-5">
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+									${this.formobj.genRatedStar(this.rating)}
 								</span> 
 							<strong class="title">${this.heading}</strong> 
 							<button type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
 							<div class="details">
 							<span itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
-							<strong itemprop="name">${this.customer}</strong></span> <time class="date relative-time">14 hours ago</time> 
+							<strong itemprop="name">${this.customer}</strong></span> <time class="date relative-time">a moment ago</time> 
 							<meta itemprop="datePublished" content="2017-05-25"></div> <p itemprop="description">
 
 	                           ${this.review}

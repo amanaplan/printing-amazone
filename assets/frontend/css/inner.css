@@ -687,3 +687,6 @@ div#prd_date h5{color: #65a800;}
     line-height: 20px;
 }
 div.post-review{padding-bottom: 50px;}
+[v-cloak] {
+  display: none;
+}
