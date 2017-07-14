@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2017 at 03:38 PM
--- Server version: 10.2.6-MariaDB
--- PHP Version: 7.1.6
+-- Generation Time: Jul 14, 2017 at 03:06 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -35,8 +33,8 @@ CREATE TABLE `admins` (
   `profile_pic` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `super_admin` tinyint(4) NOT NULL DEFAULT 0,
-  `active` tinyint(4) NOT NULL DEFAULT 1,
+  `super_admin` tinyint(4) NOT NULL DEFAULT '0',
+  `active` tinyint(4) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -46,7 +44,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `profile_pic`, `password`, `remember_token`, `super_admin`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav R', 'srv.nxr@gmail.com', 'avatar2.png', '$2y$10$DthpoWChWGjVH1umsbU9JOpGLfftjpCuQ1kksHObpvjXwL6l56F3i', 'joP9v3xajjP0SuhUelA3dT9AJGX0RqF0KJGCM3oCkaczPO07Sk5FL6VvvUzp', 1, 1, '2017-05-03 11:34:00', '2017-07-10 17:39:06'),
+(1, 'Sourav R', 'srv.nxr@gmail.com', 'avatar2.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'D9ViY5TiQjqHBuUzQB1rjVkUAeLZnWzKuEe9D12V7c4c0OQazcrc1hD1p3g3', 1, 1, '2017-05-03 11:34:00', '2017-05-12 17:20:06'),
 (5, 'Printing Amazone', 'printingamazon0902@gmail.com', 'avatar2.png', '$2y$10$ZkuO1h6NJbJIdsuJx1a3hO0tas.XRvxNCR/HcPAg2/5X21WVK5sZC', NULL, 0, 1, '2017-05-26 16:15:40', '2017-06-19 13:13:58');
 
 -- --------------------------------------------------------
@@ -69,14 +67,14 @@ CREATE TABLE `admin_password_resets` (
 
 CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `og_title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `og_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `og_title` text COLLATE utf8mb4_unicode_ci,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci,
+  `og_desc` text COLLATE utf8mb4_unicode_ci,
   `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sort` int(11) NOT NULL DEFAULT 0,
+  `sort` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -167,7 +165,7 @@ CREATE TABLE `map_prod_form_options` (
   `id` int(10) UNSIGNED NOT NULL,
   `mapping_field_id` int(11) NOT NULL COMMENT 'mapping id of map_prod_form table',
   `option_id` int(11) NOT NULL,
-  `sort` int(11) NOT NULL DEFAULT 0
+  `sort` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -234,7 +232,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2017_06_21_201804_mapping_of_product_and_form', 10),
 (28, '2017_06_21_201853_mapping_of_product_and_form_options', 10),
 (29, '2017_06_23_204532_add_sort_col_to_options_mapping', 11),
-(30, '2017_07_10_214057_create_admin_password_reset_table', 12);
+(30, '2017_07_10_214057_create_admin_password_reset_table', 12),
+(31, '2017_07_14_184436_create_review_table', 12),
+(32, '2017_07_14_185909_add_publish_column_to_review_table', 13);
 
 -- --------------------------------------------------------
 
@@ -278,8 +278,8 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci,
   `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_id` int(11) NOT NULL,
   `product_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -287,7 +287,7 @@ CREATE TABLE `products` (
   `logo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `sample_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sort` int(11) NOT NULL DEFAULT 0,
+  `sort` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -326,6 +326,31 @@ INSERT INTO `qty_options` (`id`, `option`) VALUES
 (3, 200),
 (4, 500),
 (5, 300);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `publish` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `product_id`, `user_id`, `title`, `description`, `rating`, `publish`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, 'weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'esssssweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2.5', 0, '2017-07-14 14:52:37', '2017-07-14 16:59:21');
 
 -- --------------------------------------------------------
 
@@ -375,8 +400,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', NULL, '$2y$10$ZZoUQ71dKzaDg5He5lrGtuWNkxZLECX8db9IMMeHVNBrB5Esq2XUS', 'gVUGj2qY1tahCwuF687i1impyo6mWSRF9DXz33roSAg2updVXobU77m7kY8i', '2017-05-03 05:53:37', '2017-07-10 18:04:31'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$mHLVHINMybs3fiS0YAb/Qu5H7swwFiAxqJbJJgc7qqO2xJVLsc38O', 'kPE2AKyupsxSbXMMyo1pEz2MgljI6qla3cHWrxwcybxaiaChpKUteOK7QXVL', '2017-05-18 16:08:04', '2017-07-10 16:21:32');
+(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500020593.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', '5ZrEM5S4nUF45yQc1OIVuAOHWpnDmcbfVM7XmDEKNUCPJD5Pjw8uq5M2fWZW', '2017-05-03 05:53:37', '2017-07-14 12:53:13'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'JS7gSyPtXr0IiugoauppfML4Zd9D50sL8TLxQJ1yzkUBObsNvKZGZaf29RGB', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
 
 --
 -- Indexes for dumped tables
@@ -463,6 +488,12 @@ ALTER TABLE `qty_options`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `size_options`
 --
 ALTER TABLE `size_options`
@@ -513,7 +544,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
@@ -530,6 +561,11 @@ ALTER TABLE `products`
 ALTER TABLE `qty_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `size_options`
 --
 ALTER TABLE `size_options`
@@ -538,8 +574,7 @@ ALTER TABLE `size_options`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

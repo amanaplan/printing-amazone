@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Auth;
+
 use App\Category;
 use App\Product;
 use App\MapFrmProd;
 use App\MapProdFrmOpt;
+use App\Review;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -100,10 +103,20 @@ class PagesCtrl extends Controller
             }
         }
 
+        $pendingReview = null;
+
+        if(Auth::guard('web')->check())
+        {
+            $unpublishedReview = $product->review()->where([['user_id', Auth::user()->id],['publish', 0]]);
+            $pendingReview = ($unpublishedReview->count() > 0)? $unpublishedReview->first() : null;
+        }
+
         $data = [
             'product'       => $product,
             'has_fields'    => $has_fields,
-            'fields'        => $fieldstruct
+            'fields'        => $fieldstruct,
+            'pubreviews'    => $product->review()->published()->latest()->with('user')->get(),
+            'unpubreview'   => $pendingReview
         ];
 
         return view('frontend.product', $data);

@@ -1,7 +1,10 @@
 import StarRating from './star-rating';
 import ReviewForm from './formClass';
 import Vue from 'vue';
+import axios from 'axios';
 import reviewitem from './components/reviewitem.vue';
+
+const APP_URL = 'http://localhost/srv/printing-amazone/public/';
 
 new Vue({
 	el: '#app',
@@ -14,6 +17,7 @@ new Vue({
 		givenReview: false,
 		disableForm: false,
 		showform: true,
+		errMsg: '',
 		customer: document.querySelector("#customerName").value,
 		formobj: new ReviewForm()
 	},
@@ -29,10 +33,33 @@ new Vue({
 				this.disableForm = true;
 				this.showform = false;
 				this.givenReview = true;
-
+				this.errMsg = ''; //resetting review submit server msg
 				
 				//ajax here
-
+				let vueThis = this;
+				axios.post(`${APP_URL}product/give-review`, {
+				    heading: this.heading,
+				    review: this.review,
+				    star: this.rating,
+				    product: document.querySelector("#product").value
+				})
+				.then(function (response) {
+				    vueThis.errMsg = `
+					<div class="alert alert-success alert-dismissable text-success">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
+						<strong><i class="fa fa-check-circle" aria-hidden="true"></i> Your review submitted,</strong> 
+						it will be published after admin approval</em>
+					</div>`;
+				})
+				.catch(function (error) {
+					vueThis.errMsg = `
+					<div class="alert alert-danger alert-dismissable text-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
+						<strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Oops something went wrong!</strong> 
+						review can't be posted now <em>please try later</em>
+					</div>`;
+				    //console.log('oops something went wrong, please try later');
+				});
 				
 			}			
 		},

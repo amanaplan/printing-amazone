@@ -12,4 +12,9 @@ class Product extends Model
     {
 		return $this->belongsToMany('App\FieldTypes', 'map_prod_form', 'product_id', 'form_field_id')->withPivot('id','form_field_id');
     }
+
+    public function review()
+    {
+		return $this->hasMany('App\Review');
+    }
 }

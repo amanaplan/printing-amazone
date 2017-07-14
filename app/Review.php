@@ -1,0 +1,20 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Review extends Model
+{
+    protected $guarded = ['id'];
+
+    public function scopePublished($query)
+    {
+        return $query->where('publish', 1);
+    }
+
+    public function user()
+    {
+		return $this->belongsTo('App\User');
+    }
+}

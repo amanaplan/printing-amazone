@@ -192,43 +192,45 @@
 				</div><!-- rating-summary -->
 				<div class="review-list" id="app">
 
-					<input id="photo" type="hidden" value="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}">
+					<input id="photo" type="hidden" value="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}">
 					<input id="customerName" type="hidden" value="{{ (Auth::guard('web')->check())? Auth::user()->name : '' }}">
-
+					<input id="product" type="hidden" value="{{ Request::segment(2) }}">
 
 					@if(Auth::guard('web')->check())
 
-						<transition name="fade">
-							<div class="row post-review" v-show="showform">
-								
-								<div class="col-md-8 col-md-offset-2 col-sm-12">
-									<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
+						@if(empty($unpubreview))
+							<transition name="fade">
+								<div class="row post-review" v-show="showform">
+									
+									<div class="col-md-8 col-md-offset-2 col-sm-12">
+										<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
 
-									<form @submit.prevent="postReview">
+										<form @submit.prevent="postReview">
 
-										<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
-									      <input class="form-control" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading">
-									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
-									    </div>
+											<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
+										      <input class="form-control" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading">
+										    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
+										    </div>
 
-										<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
-									      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
-									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
-									    </div>
+											<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
+										      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
+										    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
+										    </div>
 
-									    <div class="col-md-6 col-sm-12">
-									    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
-									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
-									    </div>
+										    <div class="col-md-6 col-sm-12">
+										    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
+										    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
+										    </div>
 
-									    <div class="col-md-6 col-sm-12">
-									    	<button type="submit" class="btn btn-primary pull-right" :disabled="disableForm">Post Review</button>
-									    </div>
-								    </form>
+										    <div class="col-md-6 col-sm-12">
+										    	<button type="submit" class="btn btn-primary pull-right" :disabled="disableForm">Post Review</button>
+										    </div>
+									    </form>
 
+									</div>
 								</div>
-							</div>
-						</transition>
+							</transition>
+						@endif
 
 					@else
 						<div class="row">
@@ -239,134 +241,81 @@
 						<div class="clearfix"></div>
 					@endif
 
-					<template v-if="givenReview">
-						<reviewitem photo="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/profile').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" :heading="heading" customer="{{ (Auth::guard('web')->check())? (Auth::user()->name) : '' }}" :review="review" :rating="genRatedStar(rating)" @editreview="showform = true; givenReview = false; disableForm = false"></reviewitem>
-					</template>
+					@if(empty($unpubreview))
+						<template v-if="givenReview">
+							<div class="col-md-6 col-sm-12" v-html="errMsg"></div>
+							<div class="clearfix"></div>
 
-				    <div class="review-short">
-					   <div class="avatar">
-                          <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
-                       </div>
-					   <div class="body">
-                        <span class="rating-stars rating-5">
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                        </span>
+							<reviewitem photo="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" :heading="heading" customer="{{ (Auth::guard('web')->check())? (Auth::user()->name) : '' }}" :review="review" :rating="genRatedStar(rating)" @editreview="showform = true; givenReview = false; disableForm = false"></reviewitem>
+						</template>
+					@endif
 
-                        <strong class="title">Crisp fresh printing and high quality</strong>
 
-                        <div class="details">
-                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-                         <strong itemprop="name"></strong>
-                        </span>
+					{{-- unpublished review of the logged in user --}}
+					@if( !empty($unpubreview))
 
-                        <time class="date relative-time" datetime="2017-05-25">14 hours ago</time>
-                        <meta itemprop="datePublished" content="2017-05-25">
-                        </div><!-- details -->
+						<div class="review-short">
+						   <div class="avatar">
+		                        <img alt="" class="img-circle img-thumbnail" src="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" />
+		                    </div>
+							<div class="body">
+		                        <span class="rating-stars rating-5">
+									{!! genRatedStar($unpubreview->rating) !!}
+		                        </span>
 
-                        <p itemprop="description">
-                           These stickers are excellent quality and the print is bold and crisp. Not to mention they threw in a couple extra stickers with my order. Bonus! I'll be ordering a large batch again soon!
+		                        <strong class="title">{{ $unpubreview->title }}</strong> <button type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
 
-                        </p>  </div>
-					   <div class="clearfix"></div>
-					</div><!-- review-short -->
+		                        <div class="details">
+			                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+			                         	<strong itemprop="name">{{ Auth::user()->name }}</strong>
+			                        </span>
+
+		                        	<time class="date relative-time">some days ago</time>
+		                        	<meta itemprop="datePublished">
+		                        </div>
+
+		                        <p itemprop="description">
+		                           {{ $unpubreview->description }}
+		                        </p>  
+		                    </div>
+							   <div class="clearfix"></div>
+						</div>
+
+					@endif
 					
-					<div class="review-short">
-					   <div class="avatar">
-                          <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
-                       </div>
-					   <div class="body">
-                        <span class="rating-stars rating-5">
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                        </span>
+					{{-- published reviews --}}
+					@foreach($pubreviews as $review)
 
-                        <strong class="title">Crisp fresh printing and high quality</strong> <a href="#" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
+						<div class="review-short">
+						   <div class="avatar">
+	                          <img alt="" class="img-circle img-thumbnail" src="{{ ($review->user->photo)? asset('assets/images/users').'/'.$review->user->photo : asset('assets/images/user.png') }}" />
+	                       </div>
+						   <div class="body">
+	                        <span class="rating-stars rating-5">
+	                         {!! genRatedStar($review->rating) !!}
+	                        </span>
 
-                        <div class="details">
-                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-                         <strong itemprop="name"></strong>
-                        </span>
+	                        <strong class="title">{{ $review->title }}</strong>
 
-                        <time class="date relative-time" datetime="2017-05-25">14 hours ago</time>
-                        <meta itemprop="datePublished" content="2017-05-25">
-                        </div><!-- details -->
+	                        <div class="details">
+	                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+	                         <strong itemprop="name">{{ $review->user->name }}</strong>
+	                        </span>
 
-                        <p itemprop="description">
-                           These stickers are excellent quality and the print is bold and crisp. Not to mention they threw in a couple extra stickers with my order. Bonus! I'll be ordering a large batch again soon!
+	                        <time class="date relative-time">some days ago</time>
+	                        <meta itemprop="datePublished">
+	                        </div>
 
-                        </p>  </div>
+	                        <p itemprop="description">
+	                           {{ $review->description }}
 
-					   <div class="clearfix"></div>
-					</div><!-- review-short -->
-					
-					<div class="review-short">
-					   <div class="avatar">
-                          <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
-                       </div>
-					   <div class="body">
-                        <span class="rating-stars rating-5">
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                        </span>
+	                        </p>  </div>
 
-                        <strong class="title">Crisp fresh printing and high quality</strong>
+						   <div class="clearfix"></div>
+						</div>
 
-                        <div class="details">
-                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-                         <strong itemprop="name"></strong>
-                        </span>
+					@endforeach
 
-                        <time class="date relative-time" datetime="2017-05-25">14 hours ago</time>
-                        <meta itemprop="datePublished" content="2017-05-25">
-                        </div><!-- details -->
-
-                        <p itemprop="description">
-                           These stickers are excellent quality and the print is bold and crisp. Not to mention they threw in a couple extra stickers with my order. Bonus! I'll be ordering a large batch again soon!
-
-                        </p>  </div>
-					   <div class="clearfix"></div>
-					</div><!-- review-short -->
-					
-					<div class="review-short">
-					   <div class="avatar">
-                          <img alt="" class="img-circle img-thumbnail" src="{{ asset('assets/images/user.png') }}" />
-                       </div>
-					   <div class="body">
-                        <span class="rating-stars rating-5">
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                         <i class="fa fa-star"></i>
-                        </span>
-
-                        <strong class="title">Crisp fresh printing and high quality</strong>
-
-                        <div class="details">
-                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-                         <strong itemprop="name"></strong>
-                        </span>
-
-                        <time class="date relative-time" datetime="2017-05-25">14 hours ago</time>
-                        <meta itemprop="datePublished" content="2017-05-25">
-                        </div><!-- details -->
-
-                        <p itemprop="description">
-                           These stickers are excellent quality and the print is bold and crisp. Not to mention they threw in a couple extra stickers with my order. Bonus! I'll be ordering a large batch again soon!
-
-                        </p>  </div>
-					   <div class="clearfix"></div>
-					</div><!-- review-short -->
 					<div class="see_all">
 					  <a href="#">See all reviews</a>
 					</div>
@@ -382,12 +331,6 @@
 @push( 'scripts' )
 
 	<script>
-	    // $(document).on('ready', function () {
-	    //     $('.rating').on('change', function () {
-	    //         //console.log('Rating selected: ' + $(this).val());
-	    //         $(this).attr('value', $(this).val());
-	    //     });
-	    // });
 
 	    $(document).ready(function(){
 	    	$("input[name='size']").change(function(){

@@ -28,6 +28,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
+Route::post('/product/give-review', 'Frontend\UserReviewPost');
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {

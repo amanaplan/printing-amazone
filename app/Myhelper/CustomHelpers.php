@@ -150,3 +150,43 @@ if ( ! function_exists('random_string'))
         }
     }
 }
+
+/**
+*generate font awesome star rating map
+*
+*@param rating value
+*/
+function genRatedStar($rating)
+{
+    $starMap = '';
+
+    if (!is_float($rating))
+    {
+        $floor = floor($rating);
+        for($i=0; $i<$floor; $i++){
+            $starMap .= '<i class="fa fa-star"></i> ';
+        }
+        $starMap .= '<i class="fa fa-star-half-o"></i> ';
+
+        if($floor < 5 && $floor != 4)
+        {
+            for($i=0; $i< (5 - ($floor + 1)); $i++){
+                $starMap .= '<i class="fa fa-star-o"></i> ';
+            }
+        }
+    }
+    else
+    {
+        for($i=0; $i< $rating; $i++){
+            $starMap .= '<i class="fa fa-star"></i> ';
+        }
+        if($rating < 5)
+        {
+            for($i=0; $i< (5 - $rating); $i++){
+                $starMap .= '<i class="fa fa-star-o"></i> ';
+            }
+        }
+    }
+
+    return $starMap;
+}
