@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2017 at 03:06 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: Jul 14, 2017 at 08:19 PM
+-- Server version: 10.2.6-MariaDB
+-- PHP Version: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -33,8 +35,8 @@ CREATE TABLE `admins` (
   `profile_pic` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `super_admin` tinyint(4) NOT NULL DEFAULT '0',
-  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `super_admin` tinyint(4) NOT NULL DEFAULT 0,
+  `active` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -67,14 +69,14 @@ CREATE TABLE `admin_password_resets` (
 
 CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci,
-  `og_title` text COLLATE utf8mb4_unicode_ci,
-  `meta_desc` text COLLATE utf8mb4_unicode_ci,
-  `og_desc` text COLLATE utf8mb4_unicode_ci,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sort` int(11) NOT NULL DEFAULT '0',
+  `sort` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -165,7 +167,7 @@ CREATE TABLE `map_prod_form_options` (
   `id` int(10) UNSIGNED NOT NULL,
   `mapping_field_id` int(11) NOT NULL COMMENT 'mapping id of map_prod_form table',
   `option_id` int(11) NOT NULL,
-  `sort` int(11) NOT NULL DEFAULT '0'
+  `sort` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -278,8 +280,8 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci,
-  `meta_desc` text COLLATE utf8mb4_unicode_ci,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_id` int(11) NOT NULL,
   `product_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -287,7 +289,7 @@ CREATE TABLE `products` (
   `logo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `sample_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sort` int(11) NOT NULL DEFAULT '0',
+  `sort` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -339,8 +341,8 @@ CREATE TABLE `reviews` (
   `user_id` int(11) NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rating` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `publish` int(11) NOT NULL DEFAULT '0',
+  `rating` decimal(4,1) NOT NULL,
+  `publish` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -350,7 +352,10 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `product_id`, `user_id`, `title`, `description`, `rating`, `publish`, `created_at`, `updated_at`) VALUES
-(1, 4, 1, 'weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'esssssweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2.5', 0, '2017-07-14 14:52:37', '2017-07-14 16:59:21');
+(1, 3, 1, 'Lorem ipsum dolor sit amet, consectetur', 'Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur edited', '2.5', 0, '2017-07-14 20:39:19', '2017-07-14 22:47:36'),
+(2, 4, 1, 'Lorem ipsum dolor sit amet, consectetur', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.', '2.5', 1, '2017-07-14 21:41:53', '2017-07-14 22:09:17'),
+(3, 4, 2, 'est, qui dolorem ipsum quia dolor sit amet', 'est, qui dolorem ipsum quia dolor sit ametest, qui dolorem ipsum quia dolor sit ametest, qui dolorem ipsum quia dolor sit ametest, qui dolorem ipsum quia dolor sit ametest, qui dolorem ipsum quia dolor sit amet', '3.5', 1, '2017-07-14 21:44:15', '2017-07-14 21:44:44'),
+(4, 4, 2, 'est, qui dolorem ipsum quia dolor sit', 'est, qui dolorem ipsum quia dolor sit ametest, qui dolorem ipsum quia dolor sit ametest, qui dolorem ipsum quia dolor sit amet', '3.5', 0, '2017-07-14 22:10:12', '2017-07-14 22:10:35');
 
 -- --------------------------------------------------------
 
@@ -400,8 +405,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500020593.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', '5ZrEM5S4nUF45yQc1OIVuAOHWpnDmcbfVM7XmDEKNUCPJD5Pjw8uq5M2fWZW', '2017-05-03 05:53:37', '2017-07-14 12:53:13'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'JS7gSyPtXr0IiugoauppfML4Zd9D50sL8TLxQJ1yzkUBObsNvKZGZaf29RGB', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
+(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500020593.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'WXpD9ewfZ2KWsm7o5RL44K4JAs3zwWULs4a6rwrCyATi3o5qJ3KYa2mOFtRr', '2017-05-03 05:53:37', '2017-07-14 12:53:13'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', NULL, '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'Rrm8tQMnUge1SBK34fc7QyATtikPoueGBfn0DqH7evCTxSgbo7U2NpaxALsU', '2017-05-18 16:08:04', '2017-05-22 15:47:33');
 
 --
 -- Indexes for dumped tables
@@ -564,7 +569,7 @@ ALTER TABLE `qty_options`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `size_options`
 --
@@ -574,7 +579,8 @@ ALTER TABLE `size_options`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

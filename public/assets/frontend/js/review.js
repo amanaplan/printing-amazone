@@ -764,9 +764,9 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 	el: '#app',
 	components: { reviewitem: __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default.a },
 	data: {
-		heading: '',
-		review: '',
-		rating: 0,
+		heading: $("input[name='heading']").val(),
+		review: $("textarea[name='review']").val(),
+		rating: $('.rating').val(),
 		photo: document.querySelector("#photo").value,
 		givenReview: false,
 		disableForm: false,
@@ -786,7 +786,7 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 				this.disableForm = true;
 				this.showform = false;
 				this.givenReview = true;
-				this.errMsg = ''; //resetting review submit server msg
+				this.errMsg = '<div class="postingloader"></div>'; //resetting review submit server msg
 
 				//ajax here
 				var vueThis = this;
@@ -832,6 +832,17 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 			return starMap;
 		}
 	}
+});
+
+/*jquery page specific*/
+$(document).ready(function () {
+	$("input[name='size']").change(function () {
+		if ($(this).val() == 'custom') {
+			$("div.custom-input").show();
+		} else {
+			$("div.custom-input").hide();
+		}
+	});
 });
 
 /***/ }),

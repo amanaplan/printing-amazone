@@ -198,39 +198,37 @@
 
 					@if(Auth::guard('web')->check())
 
-						@if(empty($unpubreview))
-							<transition name="fade">
-								<div class="row post-review" v-show="showform">
-									
-									<div class="col-md-8 col-md-offset-2 col-sm-12">
-										<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
+						<transition name="fade">
+							<div class="row post-review" v-show="showform" {!! (!empty($unpubreview))? 'style="display:none;"' : '' !!}>
+								
+								<div class="col-md-8 col-md-offset-2 col-sm-12">
+									<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
 
-										<form @submit.prevent="postReview">
+									<form @submit.prevent="postReview">
 
-											<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
-										      <input class="form-control" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading">
-										    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
-										    </div>
+										<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
+									      <input class="form-control" name="heading" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading" value="{{ (!empty($unpubreview))? $unpubreview->title : '' }}">
+									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
+									    </div>
 
-											<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
-										      <textarea class="form-control" rows="3" placeholder="Type your review text here..." v-model="review"></textarea>
-										    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
-										    </div>
+										<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('review')}">
+									      <textarea class="form-control" name="review" rows="3" placeholder="Type your review text here..." v-model="review">{{ (!empty($unpubreview))? $unpubreview->description : '' }}</textarea>
+									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('review')">@{{ formobj.getError('review') }}</span>
+									    </div>
 
-										    <div class="col-md-6 col-sm-12">
-										    	<input type="text" value="0" class="rating rating-loading" data-size="xs" title="">
-										    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
-										    </div>
+									    <div class="col-md-6 col-sm-12">
+									    	<input type="text" value="{{ (!empty($unpubreview))? $unpubreview->rating : 0 }}" class="rating rating-loading" data-size="xs" title="">
+									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('rating')">@{{ formobj.getError('rating') }}</span>
+									    </div>
 
-										    <div class="col-md-6 col-sm-12">
-										    	<button type="submit" class="btn btn-primary pull-right" :disabled="disableForm">Post Review</button>
-										    </div>
-									    </form>
+									    <div class="col-md-6 col-sm-12">
+									    	<button type="submit" class="btn btn-primary pull-right" :disabled="disableForm">Post Review</button>
+									    </div>
+								    </form>
 
-									</div>
 								</div>
-							</transition>
-						@endif
+							</div>
+						</transition>
 
 					@else
 						<div class="row">
@@ -240,15 +238,14 @@
 						</div>
 						<div class="clearfix"></div>
 					@endif
+					
 
-					@if(empty($unpubreview))
-						<template v-if="givenReview">
-							<div class="col-md-6 col-sm-12" v-html="errMsg"></div>
-							<div class="clearfix"></div>
+					<template v-if="givenReview">
+						<div class="col-md-6 col-md-offset-1 col-sm-12" v-html="errMsg"></div>
+						<div class="clearfix"></div>
 
-							<reviewitem photo="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" :heading="heading" customer="{{ (Auth::guard('web')->check())? (Auth::user()->name) : '' }}" :review="review" :rating="genRatedStar(rating)" @editreview="showform = true; givenReview = false; disableForm = false"></reviewitem>
-						</template>
-					@endif
+						<reviewitem photo="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" :heading="heading" customer="{{ (Auth::guard('web')->check())? (Auth::user()->name) : '' }}" :review="review" :rating="genRatedStar(rating)" @editreview="showform = true; givenReview = false; disableForm = false"></reviewitem>
+					</template>
 
 
 					{{-- unpublished review of the logged in user --}}
@@ -263,14 +260,14 @@
 									{!! genRatedStar($unpubreview->rating) !!}
 		                        </span>
 
-		                        <strong class="title">{{ $unpubreview->title }}</strong> <button type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
+		                        <strong class="title">{{ $unpubreview->title }}</strong> <button type="button" onclick="letEdit(this);" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
 
 		                        <div class="details">
 			                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
 			                         	<strong itemprop="name">{{ Auth::user()->name }}</strong>
 			                        </span>
 
-		                        	<time class="date relative-time">some days ago</time>
+		                        	<time class="date relative-time">{{ \Carbon\Carbon::parse($unpubreview->updated_at)->diffForHumans() }}</time>
 		                        	<meta itemprop="datePublished">
 		                        </div>
 
@@ -302,7 +299,7 @@
 	                         <strong itemprop="name">{{ $review->user->name }}</strong>
 	                        </span>
 
-	                        <time class="date relative-time">some days ago</time>
+	                        <time class="date relative-time">{{ \Carbon\Carbon::parse($review->updated_at)->diffForHumans() }}</time>
 	                        <meta itemprop="datePublished">
 	                        </div>
 
@@ -316,9 +313,12 @@
 
 					@endforeach
 
-					<div class="see_all">
-					  <a href="#">See all reviews</a>
-					</div>
+					@if($loadmore)
+						<div class="see_all">
+						  <a href="#">See all reviews</a>
+						</div>
+					@endif
+
 				</div><!-- review-list -->
 			</div><!-- row -->
 		</div><!-- container -->
@@ -331,18 +331,12 @@
 @push( 'scripts' )
 
 	<script>
-
-	    $(document).ready(function(){
-	    	$("input[name='size']").change(function(){
-	    		if($(this).val() == 'custom')
-	    		{
-	    			$("div.custom-input").show();
-	    		}
-	    		else{
-	    			$("div.custom-input").hide();
-	    		}
-	    	});
-	    });
+	    function letEdit(elem)
+		{
+			$('.post-review').show();
+			$("input[name='heading']").focus();
+			$(elem).closest(".review-short").remove();
+		}
 	</script>
 
 	<script type="text/javascript" src="{{ asset( mix('assets/frontend/js/review.js') ) }}"></script>

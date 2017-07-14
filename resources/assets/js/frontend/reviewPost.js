@@ -10,9 +10,9 @@ new Vue({
 	el: '#app',
 	components: { reviewitem },
 	data: {
-		heading: '',
-		review: '',
-		rating: 0,
+		heading: $("input[name='heading']").val(),
+		review: $("textarea[name='review']").val(),
+		rating: $('.rating').val(),
 		photo: document.querySelector("#photo").value,
 		givenReview: false,
 		disableForm: false,
@@ -33,7 +33,7 @@ new Vue({
 				this.disableForm = true;
 				this.showform = false;
 				this.givenReview = true;
-				this.errMsg = ''; //resetting review submit server msg
+				this.errMsg = '<div class="postingloader"></div>'; //resetting review submit server msg
 				
 				//ajax here
 				let vueThis = this;
@@ -98,4 +98,17 @@ new Vue({
 			return starMap;
 		}
 	}
+});
+
+/*jquery page specific*/
+$(document).ready(function(){
+	$("input[name='size']").change(function(){
+		if($(this).val() == 'custom')
+		{
+			$("div.custom-input").show();
+		}
+		else{
+			$("div.custom-input").hide();
+		}
+	});
 });

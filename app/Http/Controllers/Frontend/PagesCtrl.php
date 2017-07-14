@@ -99,7 +99,6 @@ class PagesCtrl extends Controller
                         $fieldstruct[$row->form_field_id] = $opt_arr;
                 }
 
-                //$fieldstruct[$row->form_field_id] = MapProdFrmOpt::where('mapping_field_id', $row->id)->first()->option_id;
             }
         }
 
@@ -111,12 +110,16 @@ class PagesCtrl extends Controller
             $pendingReview = ($unpublishedReview->count() > 0)? $unpublishedReview->first() : null;
         }
 
+        $publishedReviews = $product->review()->published()->orderBy('updated_at', 'desc')->with('user');
+        $showmore = ($publishedReviews->count() > 10)? true : false;
+
         $data = [
             'product'       => $product,
             'has_fields'    => $has_fields,
             'fields'        => $fieldstruct,
-            'pubreviews'    => $product->review()->published()->latest()->with('user')->get(),
-            'unpubreview'   => $pendingReview
+            'pubreviews'    => $publishedReviews->get(),
+            'unpubreview'   => $pendingReview,
+            'loadmore'      => $showmore
         ];
 
         return view('frontend.product', $data);
