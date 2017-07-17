@@ -8,6 +8,7 @@ use App\OptQty;
 use App\OptSize;
 use App\MapFrmProd;
 use App\MapProdFrmOpt;
+use App\Review;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -499,6 +500,40 @@ class AdminRqstController extends Controller
         {
             return response('error occurred', 422);
         }
+    }
+
+    /**
+    *publish or unpublish review
+    */
+    public function ToggleReviewState(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+
+        $review = Review::findOrFail($request->input('id'));
+
+        $review->publish = ($review->publish == 0)? 1 : 0;
+        if($review->save())
+        {
+            return response('review state updated', 200);
+        }
+        else
+        {
+            abort(401);
+        }
+    }
+
+    /**
+    *delete review
+    */
+    public function DeleteReview(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+
+        Review::destroy($request->input('id'));
     }
 
 }

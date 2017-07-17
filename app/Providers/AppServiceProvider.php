@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 use App\Category;
+use App\Review;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
         //for main navigation view composer
         View::composer('layouts.frontend.main-nav', function () {
             View::share('nav', Category::orderBy('sort', 'asc')->get());
+        });
+
+        //for admin sidebar
+        View::composer('layouts.backend.sidebar', function () {
+            $sidebar_conts['pending_review'] = Review::unpublished()->count();
+            View::share($sidebar_conts);
         });
     }
 

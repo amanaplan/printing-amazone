@@ -43,15 +43,22 @@
             </ul>
         </li>
 
+        <li {!! ($page == 'review-published' || $page == 'review-unpublished')? 'class="active"' : '' !!}>
+            <a href="#"><i class="fa fa-comment"></i> <span class="nav-label">Product Reviews </span>@if($pending_review > 0)<span class="label label-success label-rouded pull-right p3-bg note-icon">{{ $pending_review }} New</span> @endif</a>
+            <ul class="nav nav-second-level collapse">
+                <li><a {!! ($page == 'review-published')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/product/reviews/published') }}">Published Reviews</a></li>
+                <li><a {!! ($page == 'review-unpublished')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/product/reviews/unpublished') }}">Pending Reviews @if($pending_review > 0)<span class="label label-success label-rouded pull-right p3-bg note-icon">{{ $pending_review }}</span> @endif</a></li>
+            </ul>
+        </li>
 
         <li>
-            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Sample </span><span class="label label-rouded pull-right p3-bg note-icon">10</span></a>
+            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Sample </span><span class="label label-info label-rouded pull-right p3-bg note-icon">10</span></a>
         </li>
 
         <li class="nav-heading"><span>Components</span></li>
 
         <li>
-            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Sample </span><span class="label label-rouded pull-right p3-bg note-icon">2</span></a>
+            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Sample </span><span class="label label-warning label-rouded pull-right p3-bg note-icon">2</span></a>
         </li>
 
 

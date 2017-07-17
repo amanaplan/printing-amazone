@@ -76,7 +76,7 @@
                             
                         </div>
                         <div>
-                            <strong>Copyright</strong> <a href="{{ url('/') }}" target="_blank">Printing Amazone</a> &copy; {{ date('Y', time()) }}
+                            <strong>Copyright</strong> <a href="{{ url('/') }}" target="_blank">Printing Amazon</a> &copy; {{ date('Y', time()) }}
                         </div>
                     </div>
                 </div>

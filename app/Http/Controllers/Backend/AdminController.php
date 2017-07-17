@@ -13,6 +13,7 @@ use App\OptSize;
 use App\MapFrmProd;
 use App\FieldTypes;
 use App\MapProdFrmOpt;
+use App\Review;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -137,7 +138,7 @@ class AdminController extends Controller
     {
         $data = [
             'page'      => 'product_manage',
-            'products'  => Product::orderBy('created_at', 'desc')->get()
+            'products'  => Product::orderBy('created_at', 'desc')->with('category', 'review')->get()
         ];
         return view('backend.product-list', $data);
     }
@@ -279,6 +280,33 @@ class AdminController extends Controller
         ];
 
         return view('backend.map-field-options', $data);
+    }
+
+    /**
+    *manage published and unpublished reviews
+    */
+    public function ManageReviews($state)
+    {
+        if($state == 'published')
+        {
+            $data = [
+                'page'      => 'review-published',
+                'reviews'   => Review::published()->orderBy('updated_at', 'desc')->with('user', 'product')->get()
+            ];
+            return view('backend.review-published-list', $data);
+        }
+        else if($state == 'unpublished')
+        {
+            $data = [
+                'page'      => 'review-unpublished',
+                'reviews'   => Review::unpublished()->orderBy('updated_at', 'desc')->with('user', 'product')->get()
+            ];
+            return view('backend.review-unpublished-list', $data);
+        }
+        else
+        {
+            abort(404);
+        }
     }
 
 }

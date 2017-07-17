@@ -1,5 +1,5 @@
 <div class="prf-block">
-					<div class="prf-img"><img id="content_imgdp" src="{{ asset('assets/images') }}/{{ (Auth::user()->photo)? 'users/'.Auth::user()->photo : 'user.png' }}">
+					<div class="prf-img"><img id="content_imgdp" src="{{ getLoggedinCustomerPic() }}">
 					</div>
 					<span>{{ Auth::user()->name }}</span>
 				</div>

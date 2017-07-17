@@ -13054,7 +13054,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('strong', {
     staticClass: "title"
-  }, [_vm._v(_vm._s(_vm.heading))]), _vm._v(" "), _c('button', {
+  }, [_vm._v(_vm._s(_vm.heading))]), _vm._v(" "), _c('span', {
+    staticClass: "label label-warning"
+  }, [_vm._v("pending")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-default",
     attrs: {
       "type": "button"

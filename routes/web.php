@@ -98,6 +98,10 @@ Route::prefix('admin')->group(function() {
 	Route::put('/request/product/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditProduct');
 	Route::put('/product/set-order', 'Backend\RequestHandlers\AdminRqstController@SortOrder');
 
+	//manage product reviews
+	Route::get('/product/reviews/{publishstate}', 'Backend\AdminController@ManageReviews');
+	Route::put('/product/review/toggle-publish', 'Backend\RequestHandlers\AdminRqstController@ToggleReviewState');
+	Route::delete('/product/review/delete', 'Backend\RequestHandlers\AdminRqstController@DeleteReview');
 
 	//manage various form field options
 	Route::get('/form/paperstock', 'Backend\AdminController@FormPaperstock');

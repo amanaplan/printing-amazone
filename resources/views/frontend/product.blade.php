@@ -192,7 +192,7 @@
 				</div><!-- rating-summary -->
 				<div class="review-list" id="app">
 
-					<input id="photo" type="hidden" value="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}">
+					<input id="photo" type="hidden" value="{{ getLoggedinCustomerPic() }}">
 					<input id="customerName" type="hidden" value="{{ (Auth::guard('web')->check())? Auth::user()->name : '' }}">
 					<input id="product" type="hidden" value="{{ Request::segment(2) }}">
 
@@ -202,12 +202,12 @@
 							<div class="row post-review" v-show="showform" {!! (!empty($unpubreview))? 'style="display:none;"' : '' !!}>
 								
 								<div class="col-md-8 col-md-offset-2 col-sm-12">
-									<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') }}">
+									<img class="img-circle img-thumbnail img-responsive" width="80" src="{{ getLoggedinCustomerPic() }}">
 
 									<form @submit.prevent="postReview">
 
 										<div class="form-group" v-bind:class="{'has-error' : formobj.hasError('heading')}">
-									      <input class="form-control" name="heading" type="text" placeholder="Enter your review hedaing, max 60 character" v-model="heading" value="{{ (!empty($unpubreview))? $unpubreview->title : '' }}">
+									      <div style="display: flex;"><input class="form-control" name="heading" type="text" placeholder="Enter your review hedaing, max 60 character" maxlength="60" v-model="heading" value="{{ (!empty($unpubreview))? $unpubreview->title : '' }}"> <span v-cloak>@{{ heading.length }}/60</span></div>
 									    	<span v-cloak class="help-block text-danger" v-if="formobj.hasError('heading')">@{{ formobj.getError('heading') }}</span>
 									    </div>
 
@@ -244,7 +244,7 @@
 						<div class="col-md-6 col-md-offset-1 col-sm-12" v-html="errMsg"></div>
 						<div class="clearfix"></div>
 
-						<reviewitem photo="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" :heading="heading" customer="{{ (Auth::guard('web')->check())? (Auth::user()->name) : '' }}" :review="review" :rating="genRatedStar(rating)" @editreview="showform = true; givenReview = false; disableForm = false"></reviewitem>
+						<reviewitem photo="{{ getLoggedinCustomerPic() }}" :heading="heading" customer="{{ (Auth::guard('web')->check())? (Auth::user()->name) : '' }}" :review="review" :rating="genRatedStar(rating)" @editreview="showform = true; givenReview = false; disableForm = false"></reviewitem>
 					</template>
 
 
@@ -253,14 +253,14 @@
 
 						<div class="review-short">
 						   <div class="avatar">
-		                        <img alt="" class="img-circle img-thumbnail" src="{{ (Auth::guard('web')->check())? (Auth::user()->photo)? asset('assets/images/users').'/'.Auth::user()->photo : asset('assets/images/user.png') : '' }}" />
+		                        <img alt="" class="img-circle img-thumbnail" src="{{ getLoggedinCustomerPic() }}" />
 		                    </div>
 							<div class="body">
 		                        <span class="rating-stars rating-5">
 									{!! genRatedStar($unpubreview->rating) !!}
 		                        </span>
 
-		                        <strong class="title">{{ $unpubreview->title }}</strong> <button type="button" onclick="letEdit(this);" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
+		                        <strong class="title">{{ $unpubreview->title }}</strong> <span class="label label-warning">pending</span> <button type="button" onclick="letEdit(this);" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
 
 		                        <div class="details">
 			                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -285,7 +285,7 @@
 
 						<div class="review-short">
 						   <div class="avatar">
-	                          <img alt="" class="img-circle img-thumbnail" src="{{ ($review->user->photo)? asset('assets/images/users').'/'.$review->user->photo : asset('assets/images/user.png') }}" />
+	                          <img alt="" class="img-circle img-thumbnail" src="{{ getTheCustomerPic($review->user->id) }}" />
 	                       </div>
 						   <div class="body">
 	                        <span class="rating-stars rating-5">

@@ -4,7 +4,7 @@
     <div class="body">
 
       <span class="rating-stars rating-5" v-html="rating"></span> 
-      <strong class="title">{{heading}}</strong> 
+      <strong class="title">{{heading}}</strong> <span class="label label-warning">pending</span>
       <button type="button" class="btn btn-default" @click="editReview"><i class="fa fa-edit"></i> Edit</button>
 
       <div class="details">
