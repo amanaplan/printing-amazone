@@ -1,6 +1,6 @@
 <?php
 
-//use App\Http\Srvmultipurpose\Multipurpose;
+use App\Http\HelperClass\Multipurpose;
 
 use Illuminate\Support\Facades\Session;
 
@@ -191,3 +191,20 @@ function genRatedStar($rating)
 
     return $starMap;
 }
+
+/**
+*get loggedin customer profile pic
+*/
+function getLoggedinCustomerPic()
+{
+    return app(Multipurpose::class)->getCurrentUserPhoto();
+}
+
+/**
+*get specific customer profile pic
+*/
+function getTheCustomerPic($id)
+{
+    return app(Multipurpose::class)->getUserPhoto($id);
+}
+
