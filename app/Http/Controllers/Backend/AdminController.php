@@ -291,7 +291,7 @@ class AdminController extends Controller
         {
             $data = [
                 'page'      => 'review-published',
-                'reviews'   => Review::published()->orderBy('updated_at', 'desc')->with('user', 'product')->get()
+                'reviews'   => Review::published()->latest()->with('user', 'product')->paginate(5)
             ];
             return view('backend.review-published-list', $data);
         }
@@ -299,7 +299,7 @@ class AdminController extends Controller
         {
             $data = [
                 'page'      => 'review-unpublished',
-                'reviews'   => Review::unpublished()->orderBy('updated_at', 'desc')->with('user', 'product')->get()
+                'reviews'   => Review::unpublished()->latest()->with('user', 'product')->paginate(5)
             ];
             return view('backend.review-unpublished-list', $data);
         }
@@ -307,6 +307,18 @@ class AdminController extends Controller
         {
             abort(404);
         }
+    }
+
+    /**
+    *edit page of review
+    */
+    public function EditReview($id)
+    {
+        $data = [
+            'page'     => 'review-published',
+            'review'   => Review::findOrFail($id)
+        ];
+        return view('backend.review-edit', $data);
     }
 
 }

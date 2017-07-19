@@ -715,3 +715,4 @@ div.post-review{padding-bottom: 50px;}
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+#not-loggedIn-postReview{padding-bottom: 70px;}

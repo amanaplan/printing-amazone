@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'sg2plcpnl0106.prod.sin2.secureserver.net'),
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'printingamazone@atanudas.com'),
-        'name' => env('MAIL_FROM_NAME', 'Printing Amazone'),
+        'address' => env('MAIL_FROM_ADDRESS', 'nexzurt@nexzurt.com'),
+        'name' => env('MAIL_FROM_NAME', 'Nexzurt'),
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('printingamazone@atanudas.com'),
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => env('v9Z7hS~mV=ay'),
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------

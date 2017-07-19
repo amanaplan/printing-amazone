@@ -536,4 +536,34 @@ class AdminRqstController extends Controller
         Review::destroy($request->input('id'));
     }
 
+    /**
+    *edit review request
+    */
+    public function EditReviewRq(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title'         => 'required|min:8|max:60',
+            'description'   => 'required|min:10',
+            'rating'        => 'required|numeric',
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $review                 = Review::findOrFail($id);
+        $review->title          = $request->input('title');
+        $review->description    = $request->input('description');
+        $review->rating         = $request->input('rating');
+
+        if($review->save())
+        {
+            adminflash('success', 'review updated');
+            return redirect()->back();
+        }
+
+    }
+
 }

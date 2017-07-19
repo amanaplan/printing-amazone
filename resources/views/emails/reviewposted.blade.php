@@ -439,7 +439,7 @@
                     <table class="logo" align="left" border="0" cellpadding="0" cellspacing="0" style="padding:0 12px;">
                         <tbody><tr>
                             <td align="center">
-                                <a href="{{url('/')}}" style="display: block;"><img style="display: block;height: 70px;" src="{{ asset( 'assets/images/logo.png' ) }}" alt="printingamazone" width="200"></a>
+                                <a href="{{url('/')}}" style="display: block;"><img style="display: block;height: 70px;" src="{{ asset( 'assets/images/logo.png' ) }}" alt="printingamazon" width="200"></a>
                             </td>
                         </tr>
                         </tbody></table>
@@ -465,28 +465,27 @@
                     <table class="mainContent" align="center" border="0" cellpadding="0" cellspacing="0" width="528">
                         <tbody>
                         <tr>
-                            <td style="padding:0 0 3px; font:bold 25px/2px Arial, Helvetica, sans-serif; color:#323a46;">Welcome to PrintingAmazone!</td>
+                            <td style="padding:0 0 3px; font:bold 22px Arial, Helvetica, sans-serif; color:#323a46;">New review posted by customer awaiting to be published!</td>
                         </tr>
 						<tr><td height="20"></td></tr>
 							<tr>
-								<td style="padding:0 0 10px; font:16px/24px Arial, Helvetica, sans-serif; color:#333;">In order to verify your mail id and the validity of this request,</td>
+								<td style="padding:0 0 10px;">
+                                    <img src="{{ $photo }}" style="border-radius: 50%;width:20%;"> <strong>{{ $name }}</strong> &lt;{{ $email }}&gt;
+                                </td>
 							</tr>
 							<tr>
-								<td style="padding:0 0 12px; font:16px/24px Arial, Helvetica, sans-serif; color:#333;">please signify your approval by clicking the button below.</td>
+								<td style="padding:0 0 12px; font:16px/24px Arial, Helvetica, sans-serif; color:#333;"><strong><u>Review Heading</u>:</strong>  {{ $title }}</td>
 							</tr>
                             <tr>
-                                <td style="padding:0 0 17px;">
+                                <td style="padding:30 0 17px;">
                                     <table cellspacing="0" cellpadding="0">
                                         <tbody><tr>
-                                            <td class="button-outlook" style="border-radius:4px; font:bold 18px/20px Arial, Helvetica, sans-serif; color:#fff;" bgcolor="#e85c41" align="center"><a href="{{$activation_url}}" style="text-decoration:none;background-color: rgb(0, 193, 149); color:#fff; display:block; padding:13px 16px 14px;">Activate My Account</a></td>
+                                            <td class="button-outlook" style="border-radius:4px; font:bold 18px/20px Arial, Helvetica, sans-serif; color:#fff;" bgcolor="#e85c41" align="center"><a href="{{ $linktoadmin }}" style="text-decoration:none;background-color: rgb(0, 124, 193); color:#fff; display:block; padding:10px 16px 10px;">Check Review</a></td>
                                         </tr>
                                     </tbody></table>
                                 </td>
                             </tr>
                             <tr>
-                            </tr>
-                            <tr>
-                                <td style="padding:0 0 18px; font:16px/24px Arial, Helvetica, sans-serif; color:#333;">If you have any trouble or questions, contact us and let us know.</td>
                             </tr>
                         <tr><td height="20"></td></tr>
                         

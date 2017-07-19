@@ -40,6 +40,7 @@ auth2.attachClickHandler(element, {},
 	        		$("#login-msg").removeClass('alert-success').addClass('alert-danger').html('<strong>'+result['msg']+'</strong>').css('display','block');
 	        		$("#login-processing-msg").html('Login via');
 	        		$("signin-button").prop('disabled', false);
+                    alert('some error');
 	        	}
 	        	else
 	        	{

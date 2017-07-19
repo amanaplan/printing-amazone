@@ -232,7 +232,7 @@
 
 					@else
 						<div class="row">
-							<div class="col-md-6 col-md-offset-3 col-sm-12">
+							<div class="col-md-6 col-md-offset-3 col-sm-12" id="not-loggedIn-postReview">
 								<a href="javascript:void();" class="continue" onclick="document.querySelector('a.cd-signin').click();">Post Your Review</a>
 							</div>
 						</div>
@@ -267,7 +267,7 @@
 			                         	<strong itemprop="name">{{ Auth::user()->name }}</strong>
 			                        </span>
 
-		                        	<time class="date relative-time">{{ \Carbon\Carbon::parse($unpubreview->updated_at)->diffForHumans() }}</time>
+		                        	<time class="date relative-time">{{ \Carbon\Carbon::parse($unpubreview->created_at)->diffForHumans() }}</time>
 		                        	<meta itemprop="datePublished">
 		                        </div>
 
@@ -299,7 +299,7 @@
 	                         <strong itemprop="name">{{ $review->user->name }}</strong>
 	                        </span>
 
-	                        <time class="date relative-time">{{ \Carbon\Carbon::parse($review->updated_at)->diffForHumans() }}</time>
+	                        <time class="date relative-time">{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</time>
 	                        <meta itemprop="datePublished">
 	                        </div>
 

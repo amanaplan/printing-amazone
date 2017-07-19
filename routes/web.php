@@ -102,6 +102,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/product/reviews/{publishstate}', 'Backend\AdminController@ManageReviews');
 	Route::put('/product/review/toggle-publish', 'Backend\RequestHandlers\AdminRqstController@ToggleReviewState');
 	Route::delete('/product/review/delete', 'Backend\RequestHandlers\AdminRqstController@DeleteReview');
+	Route::get('/product/review/update/{id}', 'Backend\AdminController@EditReview');
+	Route::put('/request/product/review/update/{id}', 'Backend\RequestHandlers\AdminRqstController@EditReviewRq');
 
 	//manage various form field options
 	Route::get('/form/paperstock', 'Backend\AdminController@FormPaperstock');

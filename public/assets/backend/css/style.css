@@ -1017,7 +1017,7 @@ Mail Box
     font-size: 14px;
     margin-top: 2px;
 }
-.star {
+/*.star {
     color: #fff;
     background: #B7C1D3;
     display: block;
@@ -1028,7 +1028,7 @@ Mail Box
     font-size: 14px;
     border-radius: 50%;
     border: 1px solid #B7C1D3;
-}
+}*/
 .file-box {
     float: left;
     width: 220px;

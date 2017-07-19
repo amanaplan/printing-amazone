@@ -7,14 +7,18 @@ use App\Http\Controllers\Controller;
 
 use Auth;
 
+use App\Mail\ReviewPosted;
+
 use App\Product;
 use App\Review;
+use App\Admin;
 
 //required for validation checking
 use Validator;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class UserReviewPost extends Controller
 {
@@ -55,6 +59,19 @@ class UserReviewPost extends Controller
                 'description'   => $request->input('review'),
                 'rating'        => $request->input('star')
             ]);
+
+            /** sending notification mail to admins **/
+            $mailIds = Admin::where('active', 1)->select(['email'])->get();
+
+            $rvwdata = [
+                'title'         => $request->input('heading'),
+                'photo'         => getLoggedinCustomerPic(),
+                'name'          => Auth::user()->name,
+                'email'         => Auth::user()->email,
+                'linktoadmin'   => url('/admin/product/reviews/unpublished')
+            ];
+            
+            Mail::to($mailIds)->send(new ReviewPosted($rvwdata));
         }
         else
         {

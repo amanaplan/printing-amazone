@@ -37,7 +37,7 @@
             <div class="panel panel-card recent-activites">
                 <!-- Start .panel -->
                 <div class="panel-heading">
-                    Un-Published Reviews
+                    Un-Published Reviews <code>Total:{{ $reviews->total() }}</code>
                     <div class="pull-right">
                         <div class="btn-group">
                             <a href="{{ url('/admin/product/reviews/published') }}" class="btn btn-info btn-rounded btn-xs">check published</a>
@@ -77,14 +77,14 @@
                                     <td>{{ $review->title }}</td>
                                     <td>{{ $review->description }}</td>
                                     <td>{!! genRatedStar($review->rating) !!}</td>
-                                    <td>{{ \Carbon\Carbon::parse($review->updated_at)->toDayDateTimeString() }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($review->created_at)->toDayDateTimeString() }}</td>
                                     <td>
                                         <label class="switch">
                                             <input type="checkbox" onchange="toggleReview({{$review->id}}, this)" checked>
                                             <div class="slider round"></div>
                                         </label>
                                     </td>
-                                    <td><a href="#"><i class="fa fa-pencil"></i></a></td>
+                                    <td><a href="{{ url('/admin/product/review/update/'.$review->id) }}"><i class="fa fa-pencil"></i></a></td>
                                     <td><button type="button" class="btn btn-default" onclick="DeleteReview({{$review->id}}, this);"><i class="fa fa-trash"></i></button></td>
                                 </tr>
 
@@ -94,6 +94,11 @@
                         </table>
 
                     </div>
+
+                    <div class="col-md-8 col-md-offset-4">
+                        {{ $reviews->links() }}
+                    </div>
+                    <div class="clearfix"></div>
 
                 </div>
             </div><!-- End .panel --> 

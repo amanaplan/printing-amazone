@@ -110,7 +110,7 @@ class PagesCtrl extends Controller
             $pendingReview = ($unpublishedReview->count() > 0)? $unpublishedReview->first() : null;
         }
 
-        $publishedReviews = $product->review()->published()->orderBy('updated_at', 'desc')->with('user');
+        $publishedReviews = $product->review()->published()->latest()->with('user');
         $showmore = ($publishedReviews->count() > 10)? true : false;
 
         $data = [
