@@ -372,7 +372,7 @@
                                     <table class="date" border="0" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <td>
-                                                <img  style="display: block;" src="{{ asset( 'assets/images/email-img/icon-cal.png' ) }}" alt="icon 1" width="13">
+                                                <img  style="display: block;" src="{{ $logo_call }}" alt="icon 1" width="13">
                                             </td>
                                             <td>&nbsp;&nbsp;</td>
                                             <td style="color: #fefefe; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
@@ -397,7 +397,7 @@
                                     <table class="tel" align="center" border="0" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <td>
-                                                <img  style="display: block;" src="{{ asset( 'assets/images/email-img/icon-tel.png' ) }}" alt="icon 2" width="17">
+                                                
                                             </td>
                                             <td>&nbsp;&nbsp;</td>
                                             <td style="color: #fefefe; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
@@ -439,7 +439,7 @@
                     <table class="logo" align="left" border="0" cellpadding="0" cellspacing="0" style="padding:0 12px;">
                         <tbody><tr>
                             <td align="center">
-                                <a href="{{url('/')}}" style="display: block;"><img style="display: block;height: 70px;" src="{{ asset( 'assets/images/logo.png' ) }}" alt="printingamazon" width="200"></a>
+                                <a href="{{ $website }}" style="display: block;"><img style="display: block;height: 70px;" src="{{ $logo_main }}" alt="printingamazon" width="200"></a>
                             </td>
                         </tr>
                         </tbody></table>
@@ -496,56 +496,6 @@
     </td>
 </tr>
 <!-- end main section -->
-
-<tr><td height="20"></td></tr>
-
-
-<!-- prefooter -->
-
-<tr>
-    <td>
-        <table class="container-middle" align="center" border="0" cellpadding="0" cellspacing="0" width="560">
-            <tbody><tr>
-                <td>
-
-
-                    <table class="nav" align="center" border="0" cellpadding="0" cellspacing="0">
-                        <tbody><tr><td height="10"></td></tr>
-                        <tr>
-                            <td  style="font-size: 13px; font-family: Helvetica, Arial, sans-serif;" align="center">
-                                <table align="center" border="0" cellpadding="0" cellspacing="0">
-                                    <tbody><tr>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-google.png' ) }}" alt="google plus" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-youtube.png' ) }}" alt="youtube" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img style="display: block;" src="{{ asset( 'assets/images/email-img/social-facebook.png' ) }}" alt="facebook" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-twitter.png' ) }}" alt="twitter" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-linkedin.png' ) }}" alt="linkedin" width="16"></a>
-                                        </td>
-                                    </tr>
-                                    </tbody></table>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            </tbody></table>
-    </td>
-</tr>
-<!-- end prefooter  -->
 
 <tr><td height="20"></td></tr>
 

@@ -67,11 +67,18 @@ class UserReviewPost extends Controller
                 'title'         => $request->input('heading'),
                 'photo'         => getLoggedinCustomerPic(),
                 'name'          => Auth::user()->name,
-                'email'         => Auth::user()->email,
-                'linktoadmin'   => url('/admin/product/reviews/unpublished')
+                'email'         => Auth::user()->email
+            ];
+
+            $common = [
+                'linktoadmin'   => url('/admin/product/reviews/unpublished'),
+                'logo_call'     => asset( 'assets/images/email-img/icon-cal.png' ),
+                'logo_main'     => asset( 'assets/images/logo.png' ),
+                'website'       => url('/')
             ];
             
-            Mail::to($mailIds)->send(new ReviewPosted($rvwdata));
+            Mail::to($mailIds)->send(new ReviewPosted($rvwdata, $common));
+            /** sending notification mail to admins **/
         }
         else
         {

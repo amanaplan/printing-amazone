@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\User;
+use App\Review;
+use Auth;
+
 use Illuminate\Support\Facades\Session;
 
 class UserPagesCtrl extends Controller
@@ -56,5 +60,20 @@ class UserPagesCtrl extends Controller
     public function UpdateProfile()
     {
         return view('frontend.user-update_profile', ['page' => 'profile']);
+    }
+
+    /**
+    *list of reviews
+    */
+    public function ListReviews()
+    {
+        $data = [
+            'page'      => 'reviews',
+            'reviews'   =>  User::find(Auth::user()->id)->reviews()->latest()->with('product')->paginate(3),
+            'published' =>  Review::where([['user_id', Auth::user()->id],['publish', 1]])->count(),
+            'pending'   =>  Review::where([['user_id', Auth::user()->id],['publish', 0]])->count()
+        ];
+
+        return view('frontend.user-reviews-list', $data);
     }
 }

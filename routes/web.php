@@ -58,6 +58,7 @@ Route::prefix('user')->middleware('userloggedin')->group(function() {
 	Route::put('/request/change-password', 'Frontend\UserRqstCtrl@ChangePasswd');
 	Route::get('/profile', 'Frontend\UserPagesCtrl@UpdateProfile');
 	Route::put('/request/update-profile', 'Frontend\UserRqstCtrl@UpdateProfile');
+	Route::get('/my-reviews', 'Frontend\UserPagesCtrl@ListReviews');
 
 });
 

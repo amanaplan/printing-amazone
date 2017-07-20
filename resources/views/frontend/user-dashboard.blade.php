@@ -4,7 +4,7 @@
 {{-- seo info --}}
 @section( 'seo_data' )
 
-<title>My Dashboard | Printing Amazone</title>
+<title>My Dashboard | {{ config('app.name') }}</title>
 
 @stop
 

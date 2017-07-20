@@ -4,7 +4,7 @@
 {{-- seo info --}}
 @section( 'seo_data' )
 
-<title>Change account password | Printing Amazone</title>
+<title>Change account password | {{ config('app.name') }}</title>
 
 @stop
 

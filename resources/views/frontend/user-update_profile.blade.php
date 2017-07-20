@@ -4,7 +4,7 @@
 {{-- seo info --}}
 @section( 'seo_data' )
 
-<title>Update profile | Printing Amazone</title>
+<title>Update profile | {{ config('app.name') }}</title>
 
 @stop
 

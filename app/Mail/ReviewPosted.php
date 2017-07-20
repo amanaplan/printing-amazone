@@ -14,15 +14,17 @@ class ReviewPosted extends Mailable implements ShouldQueue
     public $tries = 5;
     public $timeout = 120;
     public $content = [];
+    public $common_conts = [];
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($reviewData)
+    public function __construct($reviewData, $common)
     {
         $this->content = $reviewData;
+        $this->common_conts = $common;
     }
 
     /**
@@ -40,7 +42,10 @@ class ReviewPosted extends Mailable implements ShouldQueue
                         'name'          => $this->content['name'],
                         'email'         => $this->content['email'],
                         'title'         => $this->content['title'],
-                        'linktoadmin'   => $this->content['linktoadmin']
+                        'linktoadmin'   => $this->common_conts['linktoadmin'],
+                        'logo_call'     => $this->common_conts['logo_call'],
+                        'logo_main'     => $this->common_conts['logo_main'],
+                        'website'       => $this->common_conts['website']
                     ]);
     }
 }
