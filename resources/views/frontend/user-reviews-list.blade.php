@@ -11,21 +11,7 @@
 {{-- page specific styles --}}
 @push( 'styles' )
 	@include('layouts.frontend.userpanel-styles')
-	<style type="text/css">
-		.my-review-item .title .heading{    
-			font-size: 19px;
-		    padding: 6px 0px 8px;
-		    font-weight: bold;
-		}
-		.my-review-item .title{    
-			display: -webkit-inline-box;
-		}
-		.my-review-item div.review-text{
-		    font-size: 17px;
-		    padding: 10px 0px 40px;
-		    font: 14px 'Raleway', sans-serif;
-		}
-	</style>
+
 @endpush
 
 {{-- main page contents --}}

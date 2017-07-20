@@ -716,3 +716,16 @@ div.post-review{padding-bottom: 50px;}
   100% { transform: rotate(360deg); }
 }
 #not-loggedIn-postReview{padding-bottom: 70px;}
+.my-review-item .title .heading{    
+    font-size: 19px;
+    padding: 6px 0px 8px;
+    font-weight: bold;
+}
+.my-review-item .title{    
+    display: -webkit-inline-box;
+}
+.my-review-item div.review-text{
+    font-size: 17px;
+    padding: 10px 0px 40px;
+    font: 14px 'Raleway', sans-serif;
+}
