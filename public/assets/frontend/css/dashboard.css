@@ -116,8 +116,8 @@ button.btn-info{
 	border-radius:4px;
 	transition:all 0.4s;
 	font-family:'Raleway', sans-serif;
-	font-size:16px;
-	padding:10px 30px;
+	font-size:14px;
+	padding:6px 12px;
 	font-weight:600;
 }
 button.btn-info:hover{

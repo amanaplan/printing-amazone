@@ -29,6 +29,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
 Route::post('/product/give-review', 'Frontend\UserReviewPost');
+Route::post('/product/load-reviews', 'Frontend\AjaxCtrl@LoadReviews');
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {
@@ -59,6 +60,10 @@ Route::prefix('user')->middleware('userloggedin')->group(function() {
 	Route::get('/profile', 'Frontend\UserPagesCtrl@UpdateProfile');
 	Route::put('/request/update-profile', 'Frontend\UserRqstCtrl@UpdateProfile');
 	Route::get('/my-reviews', 'Frontend\UserPagesCtrl@ListReviews');
+	Route::get('/review/edit/{id}', 'Frontend\UserPagesCtrl@EditReview');
+	Route::put('/request/review-edit/{id}', 'Frontend\UserRqstCtrl@EditReviewRq');
+	Route::get('/review/share', 'Frontend\UserPagesCtrl@AddReview');
+	Route::post('/request/review-add', 'Frontend\UserRqstCtrl@AddReviewRq');
 
 });
 

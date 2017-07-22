@@ -28,7 +28,7 @@
 
 		<!--======= Helping Plug-in StyleSheets =========-->
 		<!--<link href="css/bootstrap.min.css" rel="stylesheet" media="all">-->
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href="{{ asset( 'assets/frontend/bootstrap/css/bootstrap.min.css' ) }}" rel="stylesheet">
 		<link href="{{ asset( 'assets/frontend/css/animate.min.css' ) }}" rel="stylesheet">
 		<link href="{{ asset( 'assets/frontend/css/style.css' ) }}" rel="stylesheet" media="all">
 
@@ -247,9 +247,9 @@
 	<!--======= JavaScript =========-->
 
 	<!--======= jQuery =========-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="{{ asset( 'assets/frontend/js/jquery.min.js' ) }}"></script>
 	<!--======= Bootstrap =========-->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="{{ asset( 'assets/frontend/bootstrap/js/bootstrap.min.js' ) }}"></script>
 	
 	<script src="{{ asset( 'assets/frontend/js/main.js' ) }}"></script>
 

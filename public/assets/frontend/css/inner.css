@@ -74,7 +74,7 @@ a.next-up:hover{color:#202020;}
 
 ul.dropdown-menu{
 	background:#171717; text-align:left;
-	margin-top: 16px;left: 10px;
+	margin-top: 0px;left: 10px;
 }
 ul.dropdown-menu li{
 	display:block; text-align:left; border-bottom:1px solid;
@@ -141,7 +141,7 @@ span.rating-stars i{color:#ea8f00;}
 }
 .review-short .body p{color:#202020;font-family: 'Raleway', sans-serif;font-size: 15px; line-height:22px;}
 .see_all{text-align:center; margin-bottom: 40px;}
-.see_all a{background: #5fd282;
+.see_all button{background: #5fd282;
     color: #fff;
     font-size: 18px;
     font-family: 'Raleway', sans-serif;
@@ -729,3 +729,4 @@ div.post-review{padding-bottom: 50px;}
     padding: 10px 0px 40px;
     font: 14px 'Raleway', sans-serif;
 }
+.review span.avg-rating{color: #ea8f00;font-size: 23px;}

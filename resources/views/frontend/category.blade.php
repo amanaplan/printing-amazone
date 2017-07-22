@@ -34,16 +34,18 @@
 	<div class="container">
 		<div class="row">
 			<h2>{{ $category->category_name }}</h2>
+
+			@if($avgrate)
+
 			<div class="review">
-				<ul>
-					<li><i class="fa fa-star" aria-hidden="true"></i></li>
-					<li><i class="fa fa-star" aria-hidden="true"></i></li>
-					<li><i class="fa fa-star" aria-hidden="true"></i></li>
-					<li><i class="fa fa-star" aria-hidden="true"></i></li>
-					<li><i class="fa fa-star" aria-hidden="true"></i></li>
-				</ul>
-				<span>58,604 reviews</span>
-			</div><!-- review -->
+
+				<span class="avg-rating">{!! genRatedStar($avgrate) !!}</span>
+
+				<span>{{ number_format($totgiven) }} review{{ ($totgiven > 1)? 's' : '' }}</span>
+			</div>
+
+			@endif
+
 			<div class="feature-dtls">
 
 				{{-- the products --}}

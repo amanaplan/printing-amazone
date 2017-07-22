@@ -10,9 +10,12 @@ use App\MapFrmProd;
 use App\MapProdFrmOpt;
 use App\Review;
 
+use App\Http\HelperClass\Multipurpose;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class PagesCtrl extends Controller
 {
@@ -33,11 +36,33 @@ class PagesCtrl extends Controller
     public function category($slug)
     {
     	$category = Category::with('products')->where('category_slug', $slug)->firstOrFail();
-    	$data = [
-    		'category' => $category
-    	];
 
-    	return view('frontend.category', $data);
+        //if redis has the data
+        if(Redis::command('exists',['category:id:'.$category->id.':rate']))
+        {
+            $cacheData = Redis::get('category:id:'.$category->id.':rate');
+            $cacheData = json_decode($cacheData);
+            $averageRate    = $cacheData->rating;
+            $totgiven       = $cacheData->total;
+        }
+        //otherwise evaluate and cach again
+        else
+        {
+            $cache = new Multipurpose();
+            $freshData = $cache->setCategoryCache($category->id);
+            $freshData = json_decode($freshData);
+
+            $averageRate    = $freshData->rating;
+            $totgiven       = $freshData->total;
+        }
+
+        $data = [
+            'category'  => $category,
+            'avgrate'   => $averageRate,
+            'totgiven'  => $totgiven
+        ];
+
+        return view('frontend.category', $data);
     }
 
     /**
@@ -102,6 +127,7 @@ class PagesCtrl extends Controller
             }
         }
 
+        //user have pending review
         $pendingReview = null;
 
         if(Auth::guard('web')->check())
@@ -109,16 +135,49 @@ class PagesCtrl extends Controller
             $unpublishedReview = $product->review()->where([['user_id', Auth::user()->id],['publish', 0]]);
             $pendingReview = ($unpublishedReview->count() > 0)? $unpublishedReview->first() : null;
         }
+        //user have pending review
 
-        $publishedReviews = $product->review()->published()->latest()->with('user');
-        $showmore = ($publishedReviews->count() > 10)? true : false;
+        //loadmore review button & the reviews to display
+        if(Redis::command('exists',['product:id:'.$product->id.':reviews']))
+        {
+            $publishedReviewsToShow = json_decode(Redis::get('product:id:'.$product->id.':reviews'));
+        }
+        else
+        {
+            $cacheReview = new Multipurpose();
+            $publishedReviewsToShow = $cacheReview->setProductCache($product->id, true);
+        }
+
+        $showmore = ($product->review()->published()->count() > 2)? true : false;
+        //loadmore review button & the reviews to display
+
+        //if redis has the data
+        if(Redis::command('exists',['product:id:'.$product->id.':rate']))
+        {
+            $cacheData = Redis::get('product:id:'.$product->id.':rate');
+            $cacheData = json_decode($cacheData);
+            $averageRate    = $cacheData->rating;
+            $totgiven       = $cacheData->total;
+        }
+        //otherwise evaluate and cach again
+        else
+        {
+            $cache = new Multipurpose();
+            $freshData = $cache->setProductCache($product->id);
+            $freshData = json_decode($freshData);
+
+            $averageRate    = $freshData->rating;
+            $totgiven       = $freshData->total;
+        }
 
         $data = [
             'product'       => $product,
             'has_fields'    => $has_fields,
             'fields'        => $fieldstruct,
-            'pubreviews'    => $publishedReviews->get(),
+            'pubreviews'    => $publishedReviewsToShow,
             'unpubreview'   => $pendingReview,
+            'avgrate'       => $averageRate,
+            'totgiven'      => $totgiven,
             'loadmore'      => $showmore
         ];
 

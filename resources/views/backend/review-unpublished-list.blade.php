@@ -80,7 +80,7 @@
                                     <td>{{ \Carbon\Carbon::parse($review->created_at)->toDayDateTimeString() }}</td>
                                     <td>
                                         <label class="switch">
-                                            <input type="checkbox" onchange="toggleReview({{$review->id}}, this)" checked>
+                                            <input type="checkbox" onchange="toggleReview({{$review->id}}, this)">
                                             <div class="slider round"></div>
                                         </label>
                                     </td>

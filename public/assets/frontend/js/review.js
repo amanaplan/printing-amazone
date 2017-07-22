@@ -772,6 +772,10 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 		disableForm: false,
 		showform: true,
 		errMsg: '',
+		offset: 2,
+		showLoadBtn: true,
+		LoadBtnText: 'Load more reviews',
+		lockLoadBtn: false,
 		customer: document.querySelector("#customerName").value,
 		formobj: new __WEBPACK_IMPORTED_MODULE_1__formClass__["a" /* default */]()
 	},
@@ -802,6 +806,28 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 					//console.log('oops something went wrong, please try later');
 				});
 			}
+		},
+		loadReviews: function loadReviews($event) {
+			var vueThis = this;
+
+			$event.preventDefault();
+			vueThis.lockLoadBtn = true;
+			vueThis.LoadBtnText = '<i class="fa fa-spinner fa-pulse fa-fw"></i> Loading reviews. . .';
+			__WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(APP_URL + 'product/load-reviews', {
+				offset: this.offset,
+				product: document.querySelector("#product").value
+			}).then(function (response) {
+				vueThis.offset = response.data.offset;
+				$("#published-reviews").append(response.data.reviews);
+				vueThis.LoadBtnText = 'Load more review';
+				vueThis.lockLoadBtn = false;
+				if (response.data.removeloadBtn == 1) {
+					vueThis.showLoadBtn = false;
+				}
+				//console.log(response.data.offset);
+			}).catch(function (error) {
+				console.log('oops something went wrong, please try later');
+			});
 		},
 		genRatedStar: function genRatedStar(rating) {
 			var starMap = '';

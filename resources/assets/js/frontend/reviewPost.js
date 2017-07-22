@@ -18,6 +18,10 @@ new Vue({
 		disableForm: false,
 		showform: true,
 		errMsg: '',
+		offset: 2,
+		showLoadBtn: true,
+		LoadBtnText: 'Load more reviews',
+		lockLoadBtn: false,
 		customer: document.querySelector("#customerName").value,
 		formobj: new ReviewForm()
 	},
@@ -62,6 +66,32 @@ new Vue({
 				});
 				
 			}			
+		},
+		loadReviews($event)
+		{
+			let vueThis = this;
+
+			$event.preventDefault();
+			vueThis.lockLoadBtn = true;
+			vueThis.LoadBtnText = `<i class="fa fa-spinner fa-pulse fa-fw"></i> Loading reviews. . .`;
+			axios.post(`${APP_URL}product/load-reviews`, {
+			    offset: this.offset,
+			    product: document.querySelector("#product").value
+			})
+			.then(function (response) {
+			 	vueThis.offset = response.data.offset;
+			 	$("#published-reviews").append(response.data.reviews);
+			 	vueThis.LoadBtnText = `Load more review`;
+			 	vueThis.lockLoadBtn = false;
+			 	if(response.data.removeloadBtn == 1)
+			 	{
+			 		vueThis.showLoadBtn = false;
+			 	}
+				//console.log(response.data.offset);
+			})
+			.catch(function (error) {
+			    console.log('oops something went wrong, please try later');
+			});
 		},
 		genRatedStar(rating)
 		{

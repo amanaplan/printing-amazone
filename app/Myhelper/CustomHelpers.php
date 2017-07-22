@@ -158,10 +158,11 @@ if ( ! function_exists('random_string'))
 */
 function genRatedStar($rating)
 {
+    $rating = floatval($rating);
     $rating = (preg_match("/\.0*$/", $rating))? floor($rating) : $rating;
     $starMap = '';
 
-    if (!is_float($rating))
+    if (preg_match("/\.{1}.*$/", $rating))
     {
         $floor = floor($rating);
         for($i=0; $i<$floor; $i++){

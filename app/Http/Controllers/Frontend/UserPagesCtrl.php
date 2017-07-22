@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Review;
+use App\Product;
+
 use Auth;
 
 use Illuminate\Support\Facades\Session;
@@ -76,4 +78,40 @@ class UserPagesCtrl extends Controller
 
         return view('frontend.user-reviews-list', $data);
     }
+
+    /**
+    *review edit form for users
+    */
+    public function EditReview($id)
+    {
+        $review = Review::findOrFail($id);
+        $owner = $review->user->id;
+        if($owner != Auth::user()->id || $review->publish == 1)
+        {
+            abort(404);
+        }
+        else
+        {
+            $data = [
+                'page'     => 'reviews',
+                'review'   =>  $review,
+            ];
+
+            return view('frontend.user-reviews-edit', $data);
+        }
+    }
+
+    /**
+    *add new review
+    */
+    public function AddReview()
+    {
+        $data = [
+            'page'      => 'reviews',
+            'products'  => Product::select('id','product_name')->get()
+        ];
+
+        return view('frontend.user-review-add', $data);
+    }
+
 }

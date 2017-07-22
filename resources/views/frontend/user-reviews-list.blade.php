@@ -35,7 +35,7 @@
     <div class="white-box profile-form">
 		<div class="col-md-6"><h2>Given Reviews</h2></div>
 		<div class="col-md-6"><div class="well well-sm"><code>Published: {{ $published }},  Pending: {{ $pending }}</code></div></div>
-
+		<div class="col-md-4 col-md-offset-8"><a href="{{ url('/user/review/share') }}" class="btn btn-primary pull-right">Give a Review</a></div>
 		<div class="clearfix"></div>
 
 		<div class="my-reviews">
@@ -58,11 +58,11 @@
 							@if($review->publish == 0)
 								&nbsp; 
 								<span class="label label-warning">pending</span> 
-								<a href="#" class="btn btn-default btn-sm"><i class="fa fa-edit"></i> Edit</a>
+								<a href="{{ url('/user/review/edit/'.$review->id) }}" class="btn btn-default btn-sm"><i class="fa fa-edit"></i> Edit</a>
 							@endif
 						</div>
 							@if($review->publish == 1)
-								<span class="text-success">&nbsp; <i class="fa fa-check-circle"></i></span><a href="{{ url('/'.$review->product->category->category_slug.'/'.$review->product->product_slug) }}" target="_blank"> &nbsp; <i class="fa fa-external-link"></i></a> 
+								<span class="text-success" data-toggle="tooltip" data-placement="top" title="published">&nbsp; <i class="fa fa-check-circle"></i></span><a href="{{ url('/'.$review->product->category->category_slug.'/'.$review->product->product_slug) }}" target="_blank"> &nbsp; <i class="fa fa-external-link"></i></a> 
 							@endif
 						<br>
 						<span class="rating-stars rating-5">

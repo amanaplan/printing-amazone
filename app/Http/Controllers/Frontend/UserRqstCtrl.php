@@ -6,6 +6,11 @@ use Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\ReviewPosted;
+
+use App\Review;
+use App\Product;
+use App\Admin;
 
 //required for validation checking
 use Validator;
@@ -15,6 +20,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image; //for image manupulation
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class UserRqstCtrl extends Controller
 {
@@ -157,4 +163,105 @@ class UserRqstCtrl extends Controller
 
         return redirect()->back();
     }
+
+    /**
+    *edit review request
+    */
+    public function EditReviewRq(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title'         => 'required|min:8|max:60',
+            'description'   => 'required|min:10',
+            'rating'        => 'required|numeric',
+        ]);
+
+
+        if ($validator->fails()) {
+            userflash('warning', 'Error ! Incorrent input data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $review = Review::findOrFail($id);
+
+        $owner = $review->user->id;
+        if($owner != Auth::user()->id || $review->publish == 1)
+        {
+            userflash('danger', 'unauthorized access forbidden');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $review->title          = $request->input('title');
+        $review->description    = $request->input('description');
+        $review->rating         = $request->input('rating');
+
+        if($review->save())
+        {
+            userflash('success', 'Review updated successfully! it will be posted soon .');
+            return redirect()->back();
+        }
+    }
+
+    /**
+    *add new review request
+    */
+    public function AddReviewRq(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product'       => 'required',
+            'title'         => 'required|min:8|max:60',
+            'description'   => 'required|min:10',
+            'rating'        => 'required|numeric',
+        ]);
+
+
+        if ($validator->fails()) {
+            userflash('warning', 'Error ! Incorrent input data');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $review = new Review();
+        $product = Product::findOrFail($request->input('product'));
+
+        //check if user has pending review for the product
+        $pendingReview = Review::where([['product_id', $product->id],['user_id', Auth::user()->id],['publish', 0]]);
+        if($pendingReview->count() == 1)
+        {
+            userflash('warning', 'Sorry ! you already have one pending review for this product');
+            return redirect()->back()->withInput();
+        }
+        //check if user has pending review for the product
+
+        $review->product_id     = $product->id;
+        $review->user_id        = Auth::user()->id;
+        $review->title          = $request->input('title');
+        $review->description    = $request->input('description');
+        $review->rating         = $request->input('rating');
+
+        if($review->save())
+        {
+            /** sending notification mail to admins **/
+            $mailIds = Admin::where('active', 1)->select(['email'])->get();
+
+            $rvwdata = [
+                'title'         => $request->input('title'),
+                'photo'         => getLoggedinCustomerPic(),
+                'name'          => Auth::user()->name,
+                'email'         => Auth::user()->email
+            ];
+
+            $common = [
+                'linktoadmin'   => url('/admin/product/reviews/unpublished'),
+                'logo_call'     => asset( 'assets/images/email-img/icon-cal.png' ),
+                'logo_main'     => asset( 'assets/images/logo.png' ),
+                'website'       => url('/')
+            ];
+            
+            Mail::to($mailIds)->send(new ReviewPosted($rvwdata, $common));
+            /** sending notification mail to admins **/
+
+            userflash('success', 'Review submitted successfully! it will be posted soon .');
+            return redirect('/user/my-reviews');
+        }
+    }
+
 }

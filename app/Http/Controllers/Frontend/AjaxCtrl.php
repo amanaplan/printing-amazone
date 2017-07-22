@@ -6,6 +6,8 @@ use Auth;
 
 use App\Mail\VerifyEmail;
 
+use App\Product;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redis;
 
 class AjaxCtrl extends Controller
 {
@@ -188,5 +191,72 @@ class AjaxCtrl extends Controller
     		$resp = ['error' => 1, 'msg' => 'Please Provide Mail-Id'];
 			return response()->json($resp);
     	}
+    }
+
+    /**
+    *load product reviews
+    */
+    public function LoadReviews(Request $request)
+    {
+        $this->validate($request, [
+            'offset' => 'required|integer',
+            'product' => 'required',
+        ]);
+
+        $product = Product::where('product_slug', $request->input('product'))->firstOrFail();
+
+        $reviews = Redis::get('product:id:'.$product->id.':reviews');
+        $reviews = json_decode($reviews);
+
+        $currOffset = $request->input('offset');
+        $perloadDisplay = 2;
+
+        $filtered = array_slice($reviews, $currOffset, $perloadDisplay);  //per load show 2
+
+        $ret = [];
+        $ret['offset'] = (count($filtered) > 0)? $currOffset + $perloadDisplay : $currOffset;
+        $ret['reviews'] = '';
+
+        if(count($filtered) > 0)
+        {
+            foreach($filtered as $review)
+            {
+                $ret['reviews'] .= '
+
+                <div class="review-short">
+                   <div class="avatar">
+                      <img alt="" class="img-circle img-thumbnail" src="'.getTheCustomerPic($review->user->id).'" />
+                   </div>
+                   <div class="body">
+                    <span class="rating-stars rating-5">
+                     '.genRatedStar($review->rating).'
+                    </span>
+
+                    <strong class="title">'.$review->title.'</strong>
+
+                    <div class="details">
+                    <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                     <strong itemprop="name">'.$review->user->name.'</strong>
+                    </span>
+
+                    <time class="date relative-time">'.\Carbon\Carbon::parse($review->created_at)->diffForHumans().'</time>
+                    <meta itemprop="datePublished">
+                    </div>
+
+                    <p itemprop="description">
+                       '.$review->description.'
+
+                    </p>  </div>
+
+                   <div class="clearfix"></div>
+                </div>';
+            }
+        }
+
+        //whether to show the load button or not
+        $upcomingFilter = array_slice($reviews, $currOffset + $perloadDisplay, $perloadDisplay);  //per load show 1
+        $ret['removeloadBtn'] = (count($upcomingFilter) == 0)? 1 : 0;
+
+        return json_encode($ret);
     }
 }

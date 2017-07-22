@@ -73,7 +73,7 @@
 
     <div class="form-group"> 
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-info">Save</button>
+        <button type="submit" class="btn btn-info">Save Changes</button>
       </div>
     </div>
 

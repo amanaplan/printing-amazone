@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Backend\RequestHandlers;
 
 use App\Category;
+use App\Product;
 use App\OptPaperstock;
 use App\OptQty;
 use App\OptSize;
 use App\MapFrmProd;
 use App\MapProdFrmOpt;
 use App\Review;
+
+use App\Http\HelperClass\Multipurpose;
+use Illuminate\Support\Facades\Redis;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -516,6 +520,13 @@ class AdminRqstController extends Controller
         $review->publish = ($review->publish == 0)? 1 : 0;
         if($review->save())
         {
+            //refreshing the cache data
+            $product_id = $review->product_id;
+            $category_id = Product::find($product_id)->category_id;
+            $cache = new Multipurpose();
+            $cache->setCategoryCache($category_id);
+            $cache->setProductCache($product_id);
+
             return response('review state updated', 200);
         }
         else
@@ -533,7 +544,17 @@ class AdminRqstController extends Controller
             'id' => 'required|numeric',
         ]);
 
-        Review::destroy($request->input('id'));
+        $review = Review::find($request->input('id'));
+
+        $product_id = $review->product_id;
+        $category_id = Product::find($product_id)->category_id;
+
+        //delete review
+        $review->delete();
+
+        $cache = new Multipurpose();
+        $cache->setCategoryCache($category_id);
+        $cache->setProductCache($product_id);
     }
 
     /**
@@ -560,6 +581,13 @@ class AdminRqstController extends Controller
 
         if($review->save())
         {
+            //refreshing the cache data
+            $product_id = $review->product_id;
+            $category_id = Product::find($product_id)->category_id;
+            $cache = new Multipurpose();
+            $cache->setCategoryCache($category_id);
+            $cache->setProductCache($product_id);
+            
             adminflash('success', 'review updated');
             return redirect()->back();
         }

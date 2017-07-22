@@ -34,16 +34,18 @@
 		<div class="container">
 			<div class="row">
 				<h2>{{ $product->product_name }}</h2>
+				
+				@if($avgrate)
+
 				<div class="review">
-					<ul>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-					</ul>
-					<span>58,604 reviews</span>
-				</div><!-- review -->
+
+					<span class="avg-rating">{!! genRatedStar($avgrate) !!}</span>
+
+					<span>{{ number_format($totgiven) }} review{{ ($totgiven > 1)? 's' : '' }}</span>
+				</div>
+
+				@endif
+
 				<div class="feature-dtls">
 					<div class="col-sm-7 col-lg-7 sp-dtls">
 						<p class="sp-text">{{ $product->description }}</p>
@@ -158,38 +160,30 @@
 	<div class="review-sec">
 	    <div class="container">
 		    <div class="row">
-			    <h2>Reviews for Free Shaping Stickers</h2>
+			    <h2>Reviews for {{ $product->product_name }}</h2>
+
+			    @if($avgrate)
 				<div class="rating-summary">
 				    <ul>
 					   <li>
 					       <div class="col-sm-4 col-md-offset-2">
-						       <h2>4.9 / 5</h2>
-							   <div class="review">
-					            <ul>
-						         <li><i class="fa fa-star" aria-hidden="true"></i></li>
-						         <li><i class="fa fa-star" aria-hidden="true"></i></li>
-						         <li><i class="fa fa-star" aria-hidden="true"></i></li>
-						         <li><i class="fa fa-star" aria-hidden="true"></i></li>
-						         <li><i class="fa fa-star" aria-hidden="true"></i></li>
-					            </ul>
-				            </div>
+						       <h2>{{ $avgrate }} / 5</h2>
+							   	<div class="review">
+					            	<span class="avg-rating">{!! genRatedStar($avgrate) !!}</span>
+				            	</div>
 						   </div>
 					   </li>
 					   <li>
 					       <div class="col-sm-4">
-						     <h2>7,020</h2>
-							 <span>Total reviews</span>
+						     <h2>{{ number_format($totgiven) }}</h2>
+							 <span>Total review{{ ($totgiven > 1)? 's' : '' }}</span>
 						   </div>
 					   </li>
-					   <!--<li>
-					       <div class="col-sm-4">
-						     <h2>99%</h2>
-							 <span>Would order again</span>   
-						   </div>
-					   </li>-->
 					   <div class="clearfix"></div>
 					</ul>
-				</div><!-- rating-summary -->
+				</div>
+				@endif
+
 				<div class="review-list" id="app">
 
 					<input id="photo" type="hidden" value="{{ getLoggedinCustomerPic() }}">
@@ -281,41 +275,47 @@
 					@endif
 					
 					{{-- published reviews --}}
-					@foreach($pubreviews as $review)
+					<div id="published-reviews">
+						@foreach($pubreviews as $review)
 
-						<div class="review-short">
-						   <div class="avatar">
-	                          <img alt="" class="img-circle img-thumbnail" src="{{ getTheCustomerPic($review->user->id) }}" />
-	                       </div>
-						   <div class="body">
-	                        <span class="rating-stars rating-5">
-	                         {!! genRatedStar($review->rating) !!}
-	                        </span>
+							@if($loop->iteration < 3)
+							<div class="review-short">
+							   <div class="avatar">
+		                          <img alt="" class="img-circle img-thumbnail" src="{{ getTheCustomerPic($review->user->id) }}" />
+		                       </div>
+							   <div class="body">
+		                        <span class="rating-stars rating-5">
+		                         {!! genRatedStar($review->rating) !!}
+		                        </span>
 
-	                        <strong class="title">{{ $review->title }}</strong>
+		                        <strong class="title">{{ $review->title }}</strong>
 
-	                        <div class="details">
-	                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-	                         <strong itemprop="name">{{ $review->user->name }}</strong>
-	                        </span>
+		                        <div class="details">
+		                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		                         <strong itemprop="name">{{ $review->user->name }}</strong>
+		                        </span>
 
-	                        <time class="date relative-time">{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</time>
-	                        <meta itemprop="datePublished">
-	                        </div>
+		                        <time class="date relative-time">{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</time>
+		                        <meta itemprop="datePublished">
+		                        </div>
 
-	                        <p itemprop="description">
-	                           {{ $review->description }}
+		                        <p itemprop="description">
+		                           {{ $review->description }}
 
-	                        </p>  </div>
+		                        </p>  </div>
 
-						   <div class="clearfix"></div>
-						</div>
+							   <div class="clearfix"></div>
+							</div>
+							@endif
 
-					@endforeach
+						@endforeach
+					</div>
+
 
 					@if($loadmore)
 						<div class="see_all">
-						  <a href="#">See all reviews</a>
+							<input type="hidden" v-model="offset" value="2">
+						  	<button type="button" v-on:click="loadReviews" :disabled="lockLoadBtn" v-if="showLoadBtn" v-html="LoadBtnText">Load more reviews</button>
 						</div>
 					@endif
 
