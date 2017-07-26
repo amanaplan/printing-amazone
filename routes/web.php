@@ -126,6 +126,10 @@ Route::prefix('admin')->group(function() {
 	Route::put('/form/set/options/{mapid}', 'Backend\RequestHandlers\AdminRqstController@OptMapUpdate');
 	Route::put('/form/sort/fieldoption', 'Backend\RequestHandlers\AdminRqstController@SortFieldOption');
 
+	//manage pricing presets
+	Route::get('/product/presets/{prod_id}', 'Backend\PricingRules@RuleOptions');
+	Route::get('/product/presets/general/{prod_id}', 'Backend\PricingRules@GeneralSetup');
+
 
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin

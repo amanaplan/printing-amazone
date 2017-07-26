@@ -55,6 +55,7 @@
                                     <th>Category</th>
                                     <th>Applicable Form Fields</th>
                                     <th>Total Reviews</th>
+                                    <th>Set Pricing</th>
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
@@ -79,6 +80,27 @@
                                         @endif
                                     </td>
                                     <td>{{ $product->review()->count() }}</td>
+                                    <td>
+                                        @if($product->formfields()->count() > 0)
+                                             @php
+                                                $fieldTypes = [];
+                                            @endphp
+                                            @foreach($product->formfields as $field)
+                                                @php
+                                                    $fieldTypes[] = $field->id;
+                                                @endphp
+                                            @endforeach
+
+                                            @if(in_array(1, $fieldTypes))
+                                                <a href="{{ url('/admin/product/presets/'.$product->id) }}" class="btn btn-default"><i class="fa fa-wrench" aria-hidden="true"></i></a>
+                                            @else
+                                                <span class="label label-danger">Not applicable</span>
+                                            @endif
+
+                                        @else
+                                            <span class="label label-danger">Not applicable</span>
+                                        @endif
+                                    </td>
                                     <td><a href="{{ url('/admin/product/edit/'.$product->id) }}"><i class="fa fa-edit"></i></a></td>
                                     <td><a href="#"><i class="fa fa-trash"></i></a></td>
                                 </tr>

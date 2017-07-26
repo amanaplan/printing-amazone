@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2017 at 07:31 PM
+-- Generation Time: Jul 26, 2017 at 03:40 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -276,7 +276,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (31, '2017_07_14_184436_create_review_table', 12),
 (32, '2017_07_14_185909_add_publish_column_to_review_table', 13),
 (33, '2017_07_19_234257_create_jobs_table', 14),
-(34, '2017_07_19_235016_create_failed_jobs_table', 15);
+(34, '2017_07_19_235016_create_failed_jobs_table', 15),
+(35, '2017_07_26_205807_create_preset_general_pricing', 16),
+(36, '2017_07_26_210109_create_preset_qtyrule_one', 16),
+(37, '2017_07_26_210126_create_preset_qtyrule_two', 16);
 
 -- --------------------------------------------------------
 
@@ -310,6 +313,53 @@ CREATE TABLE `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preset_general`
+--
+
+CREATE TABLE `preset_general` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `map_prod_form_option` int(11) NOT NULL,
+  `from` int(11) NOT NULL,
+  `to` int(11) NOT NULL,
+  `val_per_mmsq` double(4,2) DEFAULT NULL,
+  `profit_percent` double(4,2) DEFAULT NULL,
+  `min_size` int(11) NOT NULL,
+  `max_size` int(11) NOT NULL,
+  `is_base` tinyint(4) NOT NULL DEFAULT 0,
+  `base_price` double(4,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preset_qty_rule_one`
+--
+
+CREATE TABLE `preset_qty_rule_one` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `map_prod_form_option` int(11) NOT NULL,
+  `order_qty` int(11) NOT NULL,
+  `disc_rate` double(4,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preset_qty_rule_two`
+--
+
+CREATE TABLE `preset_qty_rule_two` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `map_prod_form_option` int(11) NOT NULL,
+  `every_extra_qty` int(11) NOT NULL,
+  `from` int(11) NOT NULL,
+  `to` int(11) NOT NULL,
+  `disc_rate` double(4,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -451,8 +501,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'ZGIDIUVKQaw9fGzfxwXwivVZeJiEgzRJFt4dVF2UQVcYDkwJy31TWDO5SAuJ', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'ghH7m4YalVwSRi8mTgOxEee4llcoZPhUTfSo1d4TsOv4moDBFQXa5RJsqHmH', '2017-05-18 16:08:04', '2017-07-22 18:16:07');
+(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'bvbc01TRl5wQWhm6r2HHGDqx8zHyt2G6jccFmgeb7Mh3ySHvlX863pRhw9uW', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'EDu4vmu6ohdA0RyjUrbugmt5DZs6xAQnPH7Dj1utcNj7fK79WH3cXt7zWJmE', '2017-05-18 16:08:04', '2017-07-22 18:16:07');
 
 --
 -- Indexes for dumped tables
@@ -538,6 +588,24 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `preset_general`
+--
+ALTER TABLE `preset_general`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `preset_qty_rule_one`
+--
+ALTER TABLE `preset_qty_rule_one`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `preset_qty_rule_two`
+--
+ALTER TABLE `preset_qty_rule_two`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -618,12 +686,27 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
 ALTER TABLE `paperstock_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `preset_general`
+--
+ALTER TABLE `preset_general`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `preset_qty_rule_one`
+--
+ALTER TABLE `preset_qty_rule_one`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `preset_qty_rule_two`
+--
+ALTER TABLE `preset_qty_rule_two`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `products`
 --
