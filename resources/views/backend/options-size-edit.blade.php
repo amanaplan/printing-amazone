@@ -50,8 +50,8 @@
                                 @endif
                             </div>
                             <div class="form-group {{ ($errors->has('width'))? 'has-error' : '' }}">
-                                <label>Width Dimension (in cm)</label>
-                                <input type="text" name="width" value="{{ $option->width }}" placeholder="width in cm" class="form-control">
+                                <label>Width Dimension (in mm)</label>
+                                <input type="text" name="width" value="{{ $option->width }}" placeholder="width in mm" class="form-control">
                                 @if ($errors->has('width'))
                                     <span class="help-block">
                                         {{ $errors->first('width') }}
@@ -59,8 +59,8 @@
                                 @endif
                             </div>
                             <div class="form-group {{ ($errors->has('height'))? 'has-error' : '' }}">
-                                <label>Height Dimension (in cm)</label>
-                                <input type="text" name="height" value="{{ $option->height }}" placeholder="height in cm" class="form-control">
+                                <label>Height Dimension (in mm)</label>
+                                <input type="text" name="height" value="{{ $option->height }}" placeholder="height in mm" class="form-control">
                                 @if ($errors->has('height'))
                                     <span class="help-block">
                                         {{ $errors->first('height') }}

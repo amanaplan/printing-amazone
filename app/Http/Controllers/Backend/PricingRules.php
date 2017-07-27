@@ -10,6 +10,9 @@ use App\OptSize;
 use App\MapFrmProd;
 use App\FieldTypes;
 use App\MapProdFrmOpt;
+use App\PresetGeneral;
+
+use Validator;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -73,6 +76,26 @@ class PricingRules extends Controller
     }
 
     /**
+    *list of added presets of general preset group
+    */
+    public function GeneralList($id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            abort(404);
+        }
+
+        $data = [  
+            'page'          => 'product_manage',
+            'product_id'    => $id,
+            'product_name'  => Product::findOrFail($id)->product_name,
+            'presets'       => PresetGeneral::all()
+        ];
+
+        return view('backend.preset-general-price-list', $data);
+    }
+
+    /**
     *pricing rules for general preset values
     */
     public function GeneralSetup($id)
@@ -94,6 +117,73 @@ class PricingRules extends Controller
         ];
 
         return view('backend.preset-general-price', $data);
+    }
+
+    /**
+    *add general preset rules
+    */
+    public function RqGeneralSetup(Request $request, $id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            adminflash('error', 'action prevented');
+            return redirect()->back();
+        }
+
+        /** validation **/
+         $validator = Validator::make($request->all(), [
+            'paperstock_option' => 'required|integer',
+            'from'              => 'required|integer',
+            'to'                => 'required|integer',
+            'val_per_mm'        => 'nullable|required_unless:from,0|numeric',
+            'profit'            => 'nullable|required_unless:from,0|numeric',
+            'min_dimenssion'    => 'required|integer',
+            'max_dimenssion'    => 'required|integer',
+            'is_base'           => 'required|boolean',
+            'fixed_price'       => 'nullable|required_unless:is_base,0|numeric',
+        ],
+        [
+            'val_per_mm.required_unless'    => "unless it's the base preset you must provide value/mm2",
+            'profit.required_unless'        => "unless it's the base preset you must provide profit %",
+            'fixed_price.required_unless'   => "it is the base preset so you must provide base price",
+        ]
+        );
+
+        if ($validator->fails()) {
+            adminflash('warning', 'input error, please enter data correctly');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        /** finding the mappig option id **/
+        $inp_paperstock_option = $request->input('paperstock_option');
+        $field_mapping_id = MapFrmProd::where([['product_id', $id],['form_field_id', 1]])->firstOrFail()->id;
+
+        $map_prod_form_option = MapProdFrmOpt::where([['mapping_field_id', $field_mapping_id],['option_id', $inp_paperstock_option]])->firstOrFail()->id;
+
+
+        /** whether there is already a preset available for the specific paperstock option **/
+        if(PresetGeneral::where('map_prod_form_option', $map_prod_form_option)->count() > 0)
+        {
+            adminflash('error', 'a preset for this option already exist');
+            return redirect('/admin/product/presets/general/list/'.$id);
+        }
+
+        /** adding new preset **/
+        PresetGeneral::create([
+            'map_prod_form_option'  => $map_prod_form_option,
+            'from'                  => $request->input('from'),
+            'to'                    => $request->input('to'),
+            'val_per_mmsq'          => $request->input('val_per_mm'),
+            'profit_percent'        => $request->input('profit'),
+            'min_size'              => $request->input('min_dimenssion'),
+            'max_size'              => $request->input('max_dimenssion'),
+            'is_base'               => $request->input('is_base'),
+            'base_price'            => $request->input('fixed_price'),
+        ]);
+
+        adminflash('success', 'new preset successfully added');
+        return redirect('/admin/product/presets/general/list/'.$id);
     }
 
 }

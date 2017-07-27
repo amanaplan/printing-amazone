@@ -59,7 +59,7 @@
                                 <p>
                                     Set val/mm<sup>2</sup>, minimum & max allowed dimenssion, profit % etc.
                                 </p>
-                                <a href="{{ url('/admin/product/presets/general/'.$product_id) }}" class="btn btn-success btn-block">Set Pricing</a>
+                                <a href="{{ url('/admin/product/presets/general/list/'.$product_id) }}" class="btn btn-success btn-block">Manage Pricing</a>
                             </div>
                         </div>
 

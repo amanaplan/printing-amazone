@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2017 at 03:40 PM
+-- Generation Time: Jul 27, 2017 at 03:51 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -334,6 +334,13 @@ CREATE TABLE `preset_general` (
   `base_price` double(4,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `preset_general`
+--
+
+INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_per_mmsq`, `profit_percent`, `min_size`, `max_size`, `is_base`, `base_price`) VALUES
+(1, 6, 0, 47, 0.25, 0.50, 30, 450, 1, 69.00);
+
 -- --------------------------------------------------------
 
 --
@@ -473,11 +480,11 @@ CREATE TABLE `size_options` (
 INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
 (1, 'small (11cm x 20cm)', 11, 20),
 (2, 'Large A1 Paper (175 x 100)', 175, 100),
-(3, '50 x 50 cm', 50, 50),
-(4, '70 x 70 cm', 70, 70),
-(5, '90 x 90 cm', 90, 90),
-(6, '120 x 120 cm', 120, 120),
-(7, '150 x 150 cm', 150, 150);
+(3, '50 x 50 mm', 50, 50),
+(4, '70 x 70 mm', 70, 70),
+(5, '90 x 90 mm', 90, 90),
+(6, '120 x 120 mm', 120, 120),
+(7, '150 x 150 mm', 150, 150);
 
 -- --------------------------------------------------------
 
@@ -696,7 +703,7 @@ ALTER TABLE `paperstock_options`
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --

@@ -129,6 +129,8 @@ Route::prefix('admin')->group(function() {
 	//manage pricing presets
 	Route::get('/product/presets/{prod_id}', 'Backend\PricingRules@RuleOptions');
 	Route::get('/product/presets/general/{prod_id}', 'Backend\PricingRules@GeneralSetup');
+	Route::get('/product/presets/general/list/{prod_id}', 'Backend\PricingRules@GeneralList');
+	Route::post('/product/presets/general/post/{prod_id}', 'Backend\PricingRules@RqGeneralSetup');
 
 
 	/*___________________________________________________

@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group {{ ($errors->has('width'))? 'has-error' : '' }}">
                                 <label class="sr-only">Width Dimension</label>
-                                <input type="text" style="width: 150px;" name="width" value="{{ old('width') }}" placeholder="width in cm" class="form-control">
+                                <input type="text" style="width: 150px;" name="width" value="{{ old('width') }}" placeholder="width in mm" class="form-control">
                                 @if ($errors->has('width'))
                                     <span class="help-block">
                                         {{ $errors->first('width') }}
@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group {{ ($errors->has('height'))? 'has-error' : '' }}">
                                 <label class="sr-only">Height Dimension</label>
-                                <input type="text" style="width: 150px;" name="height" value="{{ old('height') }}" placeholder="height in cm" class="form-control">
+                                <input type="text" style="width: 150px;" name="height" value="{{ old('height') }}" placeholder="height in mm" class="form-control">
                                 @if ($errors->has('height'))
                                     <span class="help-block">
                                         {{ $errors->first('height') }}
@@ -89,8 +89,8 @@
                                 <tr>
                                     <th>#No.</th>
                                     <th>Size Display Name</th>
-                                    <th>Width (in cm)</th>
-                                    <th>Height (in cm)</th>
+                                    <th>Width (in mm)</th>
+                                    <th>Height (in mm)</th>
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
