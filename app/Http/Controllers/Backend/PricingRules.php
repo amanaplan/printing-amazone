@@ -162,13 +162,6 @@ class PricingRules extends Controller
         $map_prod_form_option = MapProdFrmOpt::where([['mapping_field_id', $field_mapping_id],['option_id', $inp_paperstock_option]])->firstOrFail()->id;
 
 
-        /** whether there is already a preset available for the specific paperstock option **/
-        if(PresetGeneral::where('map_prod_form_option', $map_prod_form_option)->count() > 0)
-        {
-            adminflash('error', 'a preset for '.OptPaperstock::find($inp_paperstock_option)->option.' already exist');
-            return redirect('/admin/product/presets/general/list/'.$id);
-        }
-
         /** adding new preset **/
         PresetGeneral::create([
             'map_prod_form_option'  => $map_prod_form_option,
@@ -210,6 +203,71 @@ class PricingRules extends Controller
                 abort(422);
         }
 
+    }
+
+    /**
+    *edit page of general preset
+    */
+    public function EditPageGenPreset($preset_id, $prod_id)
+    {
+        $preset = PresetGeneral::findOrFail($preset_id);
+        $paperstock_opt = MapProdFrmOpt::findOrFail($preset->map_prod_form_option)->option_id;
+
+        $data = [  
+            'page'          => 'product_manage',
+            'option'        => OptPaperstock::findOrFail($paperstock_opt)->option,
+            'preset'        => $preset,
+            'preset_id'     => $preset_id,
+            'product_id'    => $prod_id
+        ];
+
+        return view('backend.preset-general-price-edit', $data);
+    }
+
+    /**
+    *edit general preset
+    */
+    public function EditGenPreset(Request $request, $preset_id, $prod_id)
+    {
+        /** validation **/
+         $validator = Validator::make($request->all(), [
+            'from'              => 'required|integer',
+            'to'                => 'required|integer',
+            'val_per_mm'        => 'nullable|required_unless:from,0|numeric',
+            'profit'            => 'nullable|required_unless:from,0|numeric',
+            'min_dimenssion'    => 'required|integer',
+            'max_dimenssion'    => 'required|integer',
+            'is_base'           => 'required|boolean',
+            'fixed_price'       => 'nullable|required_unless:is_base,0|numeric|between:1,10000',
+        ],
+        [
+            'val_per_mm.required_unless'    => "unless it's the base preset you must provide value/mm2",
+            'profit.required_unless'        => "unless it's the base preset you must provide profit %",
+            'fixed_price.required_unless'   => "it is the base preset so you must provide base price",
+        ]
+        );
+
+        if ($validator->fails()) {
+            adminflash('warning', 'input error, please enter data correctly');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        /** updating preset data **/
+        $preset = PresetGeneral::findOrFail($preset_id);
+        $preset->from               = $request->input('from');
+        $preset->to                 = $request->input('to');
+        $preset->val_per_mmsq       = $request->input('val_per_mm');
+        $preset->profit_percent     = $request->input('profit');
+        $preset->min_size           = $request->input('min_dimenssion');
+        $preset->max_size           = $request->input('max_dimenssion');
+        $preset->is_base            = $request->input('is_base');
+        $preset->base_price         = ($request->input('is_base') == 0) ? 0.00 : $request->input('fixed_price');
+
+        $preset->save();
+
+        adminflash('success', 'preset data updated');
+        return redirect('/admin/product/presets/general/list/'.$prod_id);
     }
 
 }

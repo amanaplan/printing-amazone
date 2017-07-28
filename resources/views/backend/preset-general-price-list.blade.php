@@ -8,6 +8,8 @@
 {{-- page specific css --}}
 @push('styles')
 
+<link href="{{ asset('assets/backend/plugins/tablesaw/tablesaw.css') }}" rel="stylesheet">
+
 @endpush
 
 {{-- main page content --}}
@@ -46,12 +48,30 @@
                 <div class="panel-body">
 
                     <div class="col-md-12">
-                        <table class="table table-striped">
+                        <table class="tablesaw" data-tablesaw-sortable data-tablesaw-sortable-switch>
                             <thead>
                                 <tr>
+                                    <th scope="col">#No.</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Paperstock</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Dimension (mm<sup>2</sup> range)</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Value/mm<sup>2</sup></th>
+
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Profit %</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Min. (mm)</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5">Max. (mm)</th>
+                                    <th scope="col">Base Preset Group</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="6">Fixed Base Price</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Remove</th>
+                                </tr>
+                            </thead>
+
+                            <!-- <thead>
+
+                                <tr>
                                     <th>#No.</th>
-                                    <th>Paperstock Option</th>
-                                    <th>Limited Dimension (mm<sup>2</sup> range)</th>
+                                    <th>Paperstock</th>
+                                    <th>Dimension (mm<sup>2</sup> range)</th>
                                     <th>Value/mm<sup>2</sup></th>
                                     <th>Profit %</th>
                                     <th>Min. (mm)</th>
@@ -61,7 +81,7 @@
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
-                            </thead>
+                            </thead> -->
                             <tbody>
 
                                 @foreach($presets as $preset)
@@ -80,8 +100,8 @@
                                         <td>{{ $preset->min_size }}</td>
                                         <td>{{ $preset->max_size }}</td>
                                         <td>{!! ($preset->is_base)? '<i class="fa fa-check fa-lg text-success"></i>' : '<i class="fa fa-times-circle-o fa-lg"></i>' !!}</td>
-                                        <td>{{ ($preset->is_base)? '$ '.$preset->base_price : 'NA' }}</td>
-                                        <td><a href="#" class="btn btn-default"><i class="fa fa-pencil"></i></a></td>
+                                        <td>{{ ($preset->is_base)? '$ '.$preset->base_price.' /1000 qty.' : 'NA' }}</td>
+                                        <td><a href="{{ url('/admin/product/presets/general/edit/'.$preset->id.'/'.$product_id) }}" class="btn btn-default"><i class="fa fa-pencil"></i></a></td>
                                         <td><a href="javascript:void();" onclick="remPreset({{$preset->id}}, this);" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                 @endforeach
@@ -102,6 +122,13 @@
 @stop
 {{-- page specific js --}}
 @push('scripts')
+    <script src="{{ asset('assets/backend/plugins/data-tables/dataTables.responsive.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/backend/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/backend/plugins/tablesaw/tablesaw.js') }}"></script>
+    <script src="{{ asset('assets/backend/plugins/tablesaw/tablesaw-init.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/tablesaw-custom.js') }}"></script>
+
     <script>
         function remPreset(id, elem)
         {
