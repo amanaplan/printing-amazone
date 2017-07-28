@@ -131,6 +131,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/product/presets/general/{prod_id}', 'Backend\PricingRules@GeneralSetup');
 	Route::get('/product/presets/general/list/{prod_id}', 'Backend\PricingRules@GeneralList');
 	Route::post('/product/presets/general/post/{prod_id}', 'Backend\PricingRules@RqGeneralSetup');
+	Route::delete('/product/presets/general/remove', 'Backend\PricingRules@RmvGeneralPreset');
 
 
 	/*___________________________________________________

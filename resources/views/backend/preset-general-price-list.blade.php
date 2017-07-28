@@ -74,7 +74,7 @@
 
                                             <span class="label label-info">{{ \App\OptPaperstock::find($opt_id)->option }}</span>
                                         </td>
-                                        <td>{{ $preset->from }} to {{ $preset->to }}</td>
+                                        <td>{{ $preset->from }} - {{ $preset->to }}</td>
                                         <td>{{ ($preset->val_per_mmsq)? '$ '.$preset->val_per_mmsq : 'NA' }}</td>
                                         <td>{{ ($preset->profit_percent)? $preset->profit_percent.' %' : 'NA' }}</td>
                                         <td>{{ $preset->min_size }}</td>
@@ -82,7 +82,7 @@
                                         <td>{!! ($preset->is_base)? '<i class="fa fa-check fa-lg text-success"></i>' : '<i class="fa fa-times-circle-o fa-lg"></i>' !!}</td>
                                         <td>{{ ($preset->is_base)? '$ '.$preset->base_price : 'NA' }}</td>
                                         <td><a href="#" class="btn btn-default"><i class="fa fa-pencil"></i></a></td>
-                                        <td><a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+                                        <td><a href="javascript:void();" onclick="remPreset({{$preset->id}}, this);" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                 @endforeach
 
@@ -102,6 +102,30 @@
 @stop
 {{-- page specific js --}}
 @push('scripts')
-    
+    <script>
+        function remPreset(id, elem)
+        {
+            let conf = confirm('sure to remove this preset data? this process is irreversible');
+            if(conf)
+            {
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: "{{ url('/admin/product/presets/general/remove') }}",
+                    type: "DELETE",
+                    data: {id: id, type: 'general'},
+                    success: function(result){
+                    $(elem).prop('disabled',false);
+                       Command: toastr["success"]("Preset Deleted Successfully", "Successfully Done. .");
+                       $(elem).closest('tr').fadeOut();
+                    },
+                    error: function(xhr,status,error){
+                       Command: toastr["error"](error, "Error Occurred. .");
+                    }
+                });
+                $.ajax();
+            }
+        }
+
+    </script>
 
 @endpush

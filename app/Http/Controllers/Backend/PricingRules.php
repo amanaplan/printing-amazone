@@ -165,7 +165,7 @@ class PricingRules extends Controller
         /** whether there is already a preset available for the specific paperstock option **/
         if(PresetGeneral::where('map_prod_form_option', $map_prod_form_option)->count() > 0)
         {
-            adminflash('error', 'a preset for this option already exist');
+            adminflash('error', 'a preset for '.OptPaperstock::find($inp_paperstock_option)->option.' already exist');
             return redirect('/admin/product/presets/general/list/'.$id);
         }
 
@@ -184,6 +184,32 @@ class PricingRules extends Controller
 
         adminflash('success', 'new preset successfully added');
         return redirect('/admin/product/presets/general/list/'.$id);
+    }
+
+    /**
+    *remove general preset data
+    */
+    public function RmvGeneralPreset(Request $request)
+    {
+        $this->validate($request, [
+            'id'    => 'required|integer',
+            'type'  => 'required|alpha_dash',
+        ]);
+
+        switch ($request->input('type')) {
+            case "general":
+                PresetGeneral::destroy($request->input('id'));
+                break;
+            case "qty_one":
+                //remove from quantity rule 1 model
+                break;
+            case "qty_two":
+                //remove from quantity rule 2 model
+                break;
+            default:
+                abort(422);
+        }
+
     }
 
 }
