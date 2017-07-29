@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2017 at 02:48 PM
+-- Generation Time: Jul 29, 2017 at 02:11 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -339,7 +339,8 @@ CREATE TABLE `preset_general` (
 INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_per_mmsq`, `profit_percent`, `min_size`, `max_size`, `is_base`, `base_price`) VALUES
 (1, 6, 0, 47, NULL, NULL, 40, 450, 1, 69.00),
 (2, 7, 48, 90, 0.24, 0.49, 40, 450, 0, NULL),
-(3, 7, 0, 47, NULL, NULL, 40, 450, 1, 69.00);
+(3, 7, 0, 47, NULL, NULL, 40, 450, 1, 69.00),
+(4, 16, 0, 50, 0.25, 0.78, 50, 450, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -353,6 +354,14 @@ CREATE TABLE `preset_qty_rule_one` (
   `order_qty` int(11) NOT NULL,
   `disc_rate` double(4,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `preset_qty_rule_one`
+--
+
+INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `disc_rate`) VALUES
+(1, 6, 100, 8.00),
+(2, 6, 250, 0.20);
 
 -- --------------------------------------------------------
 
@@ -368,6 +377,15 @@ CREATE TABLE `preset_qty_rule_two` (
   `to` int(11) NOT NULL,
   `disc_rate` double(4,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `preset_qty_rule_two`
+--
+
+INSERT INTO `preset_qty_rule_two` (`id`, `map_prod_form_option`, `every_extra_qty`, `from`, `to`, `disc_rate`) VALUES
+(2, 7, 1000, 1000, 4000, 5.00),
+(3, 15, 1050, 2000, 3000, 0.60),
+(4, 7, 2000, 8000, 20000, 4.00);
 
 -- --------------------------------------------------------
 
@@ -668,7 +686,7 @@ ALTER TABLE `email_authentication`
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `form_field_types`
 --
@@ -703,17 +721,17 @@ ALTER TABLE `paperstock_options`
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --
 ALTER TABLE `preset_qty_rule_two`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `products`
 --
