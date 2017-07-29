@@ -81,7 +81,7 @@
                                 <p>
                                     preset discount values for order quantity 100, 200 .. etc
                                 </p>
-                                <a href="#" class="btn btn-info btn-block">Set Discount</a>
+                                <a href="{{ url('/admin/product/presets/qty-rule-first/list/'.$product_id) }}" class="btn btn-info btn-block">Set Discount</a>
                             </div>
                         </div>
 
@@ -101,7 +101,7 @@
                                 <p>
                                     preset discount values for higner order quantity like 1000, 2000 ...
                                 </p>
-                                <a href="#" class="btn btn-warning btn-block">Set Discount</a>
+                                <a href="{{ url('/admin/product/presets/qty-rule-sec/list/'.$product_id) }}" class="btn btn-warning btn-block">Set Discount</a>
                             </div>
                         </div>
 

@@ -11,6 +11,8 @@ use App\MapFrmProd;
 use App\FieldTypes;
 use App\MapProdFrmOpt;
 use App\PresetGeneral;
+use App\PresetQtyGrpOne;
+use App\PresetQtyGrpTwo;
 
 use Validator;
 
@@ -85,11 +87,14 @@ class PricingRules extends Controller
             abort(404);
         }
 
+        $map_field_id = MapFrmProd::where([['product_id', $id],['form_field_id', 1]])->firstOrFail()->id;
+        $map_form_opt_id = MapProdFrmOpt::where('mapping_field_id', $map_field_id)->select('id')->get();
+
         $data = [  
             'page'          => 'product_manage',
             'product_id'    => $id,
             'product_name'  => Product::findOrFail($id)->product_name,
-            'presets'       => PresetGeneral::all()
+            'presets'       => PresetGeneral::whereIn('map_prod_form_option', $map_form_opt_id)->get()
         ];
 
         return view('backend.preset-general-price-list', $data);
@@ -134,7 +139,7 @@ class PricingRules extends Controller
          $validator = Validator::make($request->all(), [
             'paperstock_option' => 'required|integer',
             'from'              => 'required|integer',
-            'to'                => 'required|integer',
+            'to'                => 'required|integer|greater_than_field:from',
             'val_per_mm'        => 'nullable|required_unless:from,0|numeric',
             'profit'            => 'nullable|required_unless:from,0|numeric',
             'min_dimenssion'    => 'required|integer',
@@ -194,10 +199,10 @@ class PricingRules extends Controller
                 PresetGeneral::destroy($request->input('id'));
                 break;
             case "qty_one":
-                //remove from quantity rule 1 model
+                PresetQtyGrpOne::destroy($request->input('id'));
                 break;
             case "qty_two":
-                //remove from quantity rule 2 model
+                PresetQtyGrpTwo::destroy($request->input('id'));
                 break;
             default:
                 abort(422);
@@ -232,7 +237,7 @@ class PricingRules extends Controller
         /** validation **/
          $validator = Validator::make($request->all(), [
             'from'              => 'required|integer',
-            'to'                => 'required|integer',
+            'to'                => 'required|integer|greater_than_field:from',
             'val_per_mm'        => 'nullable|required_unless:from,0|numeric',
             'profit'            => 'nullable|required_unless:from,0|numeric',
             'min_dimenssion'    => 'required|integer',
@@ -268,6 +273,287 @@ class PricingRules extends Controller
 
         adminflash('success', 'preset data updated');
         return redirect('/admin/product/presets/general/list/'.$prod_id);
+    }
+
+    /**
+    *pricing rules for quantity rule one
+    */
+    public function QtyRuleOneSetup($id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            abort(404);
+        }
+
+        $mapid = MapFrmProd::where([['form_field_id', 1], ['product_id', $id]])->first()->id;
+        $curr_options = MapProdFrmOpt::where('mapping_field_id', $mapid)->select('option_id')->get()->toArray();
+        $paperstock_options = OptPaperstock::find($curr_options);
+
+        $data = [  
+            'page'          => 'product_manage',
+            'product_id'    => $id,
+            'product_name'  => Product::findOrFail($id)->product_name,
+            'options'       => $paperstock_options
+        ];
+
+        return view('backend.preset-qtyrule-one', $data);
+    }
+
+    /**
+    *list of added presets of quantity rule 1 preset group
+    */
+    public function QtyRuleOneList($id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            abort(404);
+        }
+
+        $map_field_id = MapFrmProd::where([['product_id', $id],['form_field_id', 1]])->firstOrFail()->id;
+        $map_form_opt_id = MapProdFrmOpt::where('mapping_field_id', $map_field_id)->select('id')->get();
+
+        $data = [  
+            'page'          => 'product_manage',
+            'product_id'    => $id,
+            'product_name'  => Product::findOrFail($id)->product_name,
+            'presets'       => PresetQtyGrpOne::whereIn('map_prod_form_option', $map_form_opt_id)->get()
+        ];
+
+        return view('backend.preset-qtyrule-one-list', $data);
+    }
+
+    /**
+    *add quantity rule group 1 preset data
+    */
+    public function RqQtyRuleOneSetup(Request $request, $id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            adminflash('error', 'action prevented');
+            return redirect()->back();
+        }
+
+        /** validation **/
+         $validator = Validator::make($request->all(), [
+            'paperstock_option' => 'required|integer',
+            'qty'               => 'required|integer',
+            'discount'          => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            adminflash('warning', 'input error, please enter data correctly');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        /** finding the mappig option id **/
+        $inp_paperstock_option = $request->input('paperstock_option');
+        $field_mapping_id = MapFrmProd::where([['product_id', $id],['form_field_id', 1]])->firstOrFail()->id;
+
+        $map_prod_form_option = MapProdFrmOpt::where([['mapping_field_id', $field_mapping_id],['option_id', $inp_paperstock_option]])->firstOrFail()->id;
+
+
+        /** adding new preset **/
+        PresetQtyGrpOne::create([
+            'map_prod_form_option'  => $map_prod_form_option,
+            'order_qty'             => $request->input('qty'),
+            'disc_rate'             => $request->input('discount'),
+        ]);
+
+        adminflash('success', 'new preset successfully added');
+        return redirect('/admin/product/presets/qty-rule-first/list/'.$id);
+    }
+
+    /**
+    *edit page of quantity rule group 1 preset
+    */
+    public function EditPageQtyRuleOnePreset($preset_id, $prod_id)
+    {
+        $preset = PresetQtyGrpOne::findOrFail($preset_id);
+        $paperstock_opt = MapProdFrmOpt::findOrFail($preset->map_prod_form_option)->option_id;
+
+        $data = [  
+            'page'          => 'product_manage',
+            'option'        => OptPaperstock::findOrFail($paperstock_opt)->option,
+            'preset'        => $preset,
+            'preset_id'     => $preset_id,
+            'product_id'    => $prod_id
+        ];
+
+        return view('backend.preset-qtyrule-one-edit', $data);
+    }
+
+    /**
+    *edit quantity rule group 1 preset
+    */
+    public function EditQtyRuleOnePreset(Request $request, $preset_id, $prod_id)
+    {
+        /** validation **/
+         $validator = Validator::make($request->all(), [
+            'qty'               => 'required|integer',
+            'discount'          => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            adminflash('warning', 'input error, please enter data correctly');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        /** updating preset data **/
+        $preset = PresetQtyGrpOne::findOrFail($preset_id);
+        $preset->order_qty           = $request->input('qty');
+        $preset->disc_rate           = $request->input('discount');
+
+        $preset->save();
+
+        adminflash('success', 'preset data updated');
+        return redirect('/admin/product/presets/qty-rule-first/list/'.$prod_id);
+    }
+
+    /**
+    *pricing rules for quantity rule two
+    */
+    public function QtyRuleTwoSetup($id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            abort(404);
+        }
+
+        $mapid = MapFrmProd::where([['form_field_id', 1], ['product_id', $id]])->first()->id;
+        $curr_options = MapProdFrmOpt::where('mapping_field_id', $mapid)->select('option_id')->get()->toArray();
+        $paperstock_options = OptPaperstock::find($curr_options);
+
+        $data = [  
+            'page'          => 'product_manage',
+            'product_id'    => $id,
+            'product_name'  => Product::findOrFail($id)->product_name,
+            'options'       => $paperstock_options
+        ];
+
+        return view('backend.preset-qtyrule-two', $data);
+    }
+
+    /**
+    *list of added presets of quantity rule 2 preset group
+    */
+    public function QtyRuleTwoList($id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            abort(404);
+        }
+
+        $map_field_id = MapFrmProd::where([['product_id', $id],['form_field_id', 1]])->firstOrFail()->id;
+        $map_form_opt_id = MapProdFrmOpt::where('mapping_field_id', $map_field_id)->select('id')->get();
+
+        $data = [  
+            'page'          => 'product_manage',
+            'product_id'    => $id,
+            'product_name'  => Product::findOrFail($id)->product_name,
+            'presets'       => PresetQtyGrpTwo::whereIn('map_prod_form_option', $map_form_opt_id)->get()
+        ];
+
+        return view('backend.preset-qtyrule-two-list', $data);
+    }
+
+    /**
+    *add quantity rule group 2 preset data
+    */
+    public function RqQtyRuleTwoSetup(Request $request, $id)
+    {
+        if(! $this->is_applicable($id))
+        {
+            adminflash('error', 'action prevented');
+            return redirect()->back();
+        }
+
+        /** validation **/
+         $validator = Validator::make($request->all(), [
+            'paperstock_option' => 'required|integer',
+            'from'              => 'required|integer',
+            'to'                => 'required|integer|greater_than_field:from',
+            'extra'             => 'required|integer',
+            'discount'          => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            adminflash('warning', 'input error, please enter data correctly');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        /** finding the mappig option id **/
+        $inp_paperstock_option = $request->input('paperstock_option');
+        $field_mapping_id = MapFrmProd::where([['product_id', $id],['form_field_id', 1]])->firstOrFail()->id;
+
+        $map_prod_form_option = MapProdFrmOpt::where([['mapping_field_id', $field_mapping_id],['option_id', $inp_paperstock_option]])->firstOrFail()->id;
+
+
+        /** adding new preset **/
+        PresetQtyGrpTwo::create([
+            'map_prod_form_option'  => $map_prod_form_option,
+            'every_extra_qty'       => $request->input('extra'),
+            'from'                  => $request->input('from'),
+            'to'                    => $request->input('to'),
+            'disc_rate'             => $request->input('discount'),
+        ]);
+
+        adminflash('success', 'new preset successfully added');
+        return redirect('/admin/product/presets/qty-rule-sec/list/'.$id);
+    }
+
+    /**
+    *edit page of quantity rule group 2 preset
+    */
+    public function EditPageQtyRuleTwoPreset($preset_id, $prod_id)
+    {
+        $preset = PresetQtyGrpTwo::findOrFail($preset_id);
+        $paperstock_opt = MapProdFrmOpt::findOrFail($preset->map_prod_form_option)->option_id;
+
+        $data = [  
+            'page'          => 'product_manage',
+            'option'        => OptPaperstock::findOrFail($paperstock_opt)->option,
+            'preset'        => $preset,
+            'preset_id'     => $preset_id,
+            'product_id'    => $prod_id
+        ];
+
+        return view('backend.preset-qtyrule-two-edit', $data);
+    }
+
+
+    /**
+    *edit quantity rule group 2 preset
+    */
+    public function EditQtyRuleTwoPreset(Request $request, $preset_id, $prod_id)
+    {
+        /** validation **/
+         $validator = Validator::make($request->all(), [
+            'from'              => 'required|integer',
+            'to'                => 'required|integer|greater_than_field:from',
+            'extra'             => 'required|integer',
+            'discount'          => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            adminflash('warning', 'input error, please enter data correctly');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        /** updating preset data **/
+        $preset = PresetQtyGrpTwo::findOrFail($preset_id);
+        $preset->from               = $request->input('from');
+        $preset->to                 = $request->input('to');
+        $preset->every_extra_qty    = $request->input('extra');
+        $preset->disc_rate          = $request->input('discount');
+
+        $preset->save();
+
+        adminflash('success', 'preset data updated');
+        return redirect('/admin/product/presets/qty-rule-sec/list/'.$prod_id);
     }
 
 }

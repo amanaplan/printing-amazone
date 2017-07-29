@@ -128,12 +128,25 @@ Route::prefix('admin')->group(function() {
 
 	//manage pricing presets
 	Route::get('/product/presets/{prod_id}', 'Backend\PricingRules@RuleOptions');
+
 	Route::get('/product/presets/general/{prod_id}', 'Backend\PricingRules@GeneralSetup');
 	Route::get('/product/presets/general/list/{prod_id}', 'Backend\PricingRules@GeneralList');
 	Route::post('/product/presets/general/post/{prod_id}', 'Backend\PricingRules@RqGeneralSetup');
 	Route::delete('/product/presets/general/remove', 'Backend\PricingRules@RmvGeneralPreset');
 	Route::get('/product/presets/general/edit/{preset_id}/{product_id}', 'Backend\PricingRules@EditPageGenPreset');
 	Route::put('/product/presets/general/edit-rq/{preset_id}/{product_id}', 'Backend\PricingRules@EditGenPreset');
+
+	Route::get('/product/presets/qty-rule-first/{prod_id}', 'Backend\PricingRules@QtyRuleOneSetup');
+	Route::get('/product/presets/qty-rule-first/list/{prod_id}', 'Backend\PricingRules@QtyRuleOneList');
+	Route::post('/product/presets/qty-rule-first/post/{prod_id}', 'Backend\PricingRules@RqQtyRuleOneSetup');
+	Route::get('/product/presets/qty-rule-first/edit/{preset_id}/{product_id}', 'Backend\PricingRules@EditPageQtyRuleOnePreset');
+	Route::put('/product/presets/qty-rule-first/edit-rq/{preset_id}/{product_id}', 'Backend\PricingRules@EditQtyRuleOnePreset');
+
+	Route::get('/product/presets/qty-rule-sec/{prod_id}', 'Backend\PricingRules@QtyRuleTwoSetup');
+	Route::get('/product/presets/qty-rule-sec/list/{prod_id}', 'Backend\PricingRules@QtyRuleTwoList');
+	Route::post('/product/presets/qty-rule-sec/post/{prod_id}', 'Backend\PricingRules@RqQtyRuleTwoSetup');
+	Route::get('/product/presets/qty-rule-sec/edit/{preset_id}/{product_id}', 'Backend\PricingRules@EditPageQtyRuleTwoPreset');
+	Route::put('/product/presets/qty-rule-sec/edit-rq/{preset_id}/{product_id}', 'Backend\PricingRules@EditQtyRuleTwoPreset');
 
 
 	/*___________________________________________________
