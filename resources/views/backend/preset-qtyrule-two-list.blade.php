@@ -92,7 +92,7 @@
                                         </td>
                                         <td>{{ $preset->every_extra_qty }} qty.</td>
                                         <td>{{ $preset->from }} qty.</td>
-                                        <td>{{ $preset->to }} qty.</td>
+                                        <td>{!! ($preset->to)? $preset->to.' qty.' : '<i class="fa fa-random" aria-hidden="true"></i>' !!}</td>
                                         <td>{{ $preset->disc_rate.' %' }}</td>
                                         <td><a href="{{ url('/admin/product/presets/qty-rule-sec/edit/'.$preset->id.'/'.$product_id) }}" class="btn btn-default"><i class="fa fa-pencil"></i></a></td>
                                         <td><a href="javascript:void();" onclick="remPreset({{$preset->id}}, this);" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>

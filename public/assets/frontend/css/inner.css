@@ -365,7 +365,7 @@ img.crt-list-thumb {
     padding: 2px 5px;
 }*/
 .text-danger {
-    color: #f44336;
+    color: #f44336 !important;
 }
 a.cnt-shopping{
 	font-size: 14px;

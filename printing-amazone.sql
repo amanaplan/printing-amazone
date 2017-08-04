@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2017 at 02:11 PM
+-- Generation Time: Aug 04, 2017 at 05:23 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -340,7 +340,14 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (1, 6, 0, 47, NULL, NULL, 40, 450, 1, 69.00),
 (2, 7, 48, 90, 0.24, 0.49, 40, 450, 0, NULL),
 (3, 7, 0, 47, NULL, NULL, 40, 450, 1, 69.00),
-(4, 16, 0, 50, 0.25, 0.78, 50, 450, 0, NULL);
+(5, 13, 0, 47, NULL, NULL, 30, 450, 1, 69.00),
+(6, 13, 48, 90, 0.25, 0.50, 30, 450, 0, 0.00),
+(7, 13, 91, 135, 0.24, 0.49, 30, 450, 0, NULL),
+(8, 13, 136, 450, 0.23, 0.48, 30, 450, 0, NULL),
+(9, 14, 0, 47, NULL, NULL, 30, 450, 1, 68.00),
+(10, 14, 48, 90, 0.25, 0.50, 40, 450, 0, NULL),
+(11, 14, 91, 135, 0.24, 0.49, 40, 450, 0, NULL),
+(12, 14, 136, 450, 0.20, 0.40, 40, 450, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -361,7 +368,17 @@ CREATE TABLE `preset_qty_rule_one` (
 
 INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `disc_rate`) VALUES
 (1, 6, 100, 8.00),
-(2, 6, 250, 0.20);
+(2, 6, 250, 0.20),
+(4, 13, 100, 57.00),
+(5, 13, 200, 70.00),
+(6, 13, 300, 83.00),
+(7, 13, 400, 89.00),
+(8, 13, 500, 95.00),
+(9, 14, 100, 57.00),
+(10, 14, 200, 70.00),
+(11, 14, 300, 83.00),
+(12, 14, 400, 89.00),
+(13, 14, 500, 95.00);
 
 -- --------------------------------------------------------
 
@@ -374,7 +391,7 @@ CREATE TABLE `preset_qty_rule_two` (
   `map_prod_form_option` int(11) NOT NULL,
   `every_extra_qty` int(11) NOT NULL,
   `from` int(11) NOT NULL,
-  `to` int(11) NOT NULL,
+  `to` int(11) DEFAULT NULL,
   `disc_rate` double(4,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -384,8 +401,13 @@ CREATE TABLE `preset_qty_rule_two` (
 
 INSERT INTO `preset_qty_rule_two` (`id`, `map_prod_form_option`, `every_extra_qty`, `from`, `to`, `disc_rate`) VALUES
 (2, 7, 1000, 1000, 4000, 5.00),
-(3, 15, 1050, 2000, 3000, 0.60),
-(4, 7, 2000, 8000, 20000, 4.00);
+(4, 7, 2000, 8000, 20000, 4.00),
+(5, 13, 2000, 1000, 4000, 8.00),
+(6, 13, 1000, 5000, 20000, 1.00),
+(7, 13, 1000, 20000, NULL, 0.20),
+(8, 14, 2000, 1000, 4000, 8.00),
+(9, 14, 1000, 5000, 20000, 1.00),
+(10, 14, 1000, 20000, NULL, 0.20);
 
 -- --------------------------------------------------------
 
@@ -721,17 +743,17 @@ ALTER TABLE `paperstock_options`
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --
 ALTER TABLE `preset_qty_rule_two`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `products`
 --

@@ -104,12 +104,14 @@
 
 								{{ csrf_field() }}
 
+								<input type="hidden" name="product" id="prodName" value="{{ $product->product_slug }}">
+
 								@if(array_key_exists(1,$fields))
 								<div class="paperstock">
 									<h2>Select a Paperstock</h2>
 									<ul>
 										@foreach($fields[1] as $key => $val)
-											<li><input id="{{ $val }}" type="radio" name="paperstock" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
+											<li><input id="{{ $val }}" class="paperstock-opt" type="radio" name="paperstock" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
 										@endforeach
 									</ul>
 								</div>
@@ -120,12 +122,13 @@
 									<h2>Select a Size</h2>
 									<ul>
 										@foreach($fields[2] as $key => $val)
-											<li><input id="{{ $val }}" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
+											<li><input id="{{ $val }}" class="size-opt" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
 										@endforeach
 										
 										<li><input id="custom" type="radio" name="size" value="custom"> <label for="custom">Custom Size</label>
 											<div class="custom-input" style="display: none;">
-												<input type="text" placeholder="Width"> x <input type="text" placeholder="height">
+												<input type="text" placeholder="Width" name="size_w"> x <input type="text" placeholder="height" name="size_h"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button>
+												<span id="size-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
 											</div>
 										</li>
 									</ul>
@@ -137,7 +140,7 @@
 									<h2>Select a Quantity</h2>
 									<ul>
 										@foreach($fields[3] as $key => $val)
-											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span>$56</span></li>
+											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$56</span></li>
 										@endforeach
 									</ul>
 								</div>
@@ -336,6 +339,97 @@
 			$('.post-review').show();
 			$("input[name='heading']").focus();
 			$(elem).closest(".review-short").remove();
+		}
+	</script>
+
+	<script>
+		$(document).ready(function(){
+			$(".paperstock-opt").change(function(){
+				gatherInput();
+			});
+
+			$(".size-opt").change(function(){
+				gatherInput();
+			});
+
+			$("button.check-price").click(function(){
+				//validate then check
+				$("span#size-err").html('');
+
+				gatherInput();
+			});
+		});
+
+		function checkPrice(product,paperstock,size,customSize)
+		{
+			$("span[id^=priceof]").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
+			//console.log(`product: ${product}, paperstock: ${paperstock}, size: ${size}, customSize: ${customSize}`);
+			$.ajaxSetup({
+		        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+		        url: "{{ url('/product/calculate-price') }}",
+		        type: "POST",
+		        dataType: 'json',
+		        data: {product:product, paperstock:paperstock, customsize:customSize, size:size},
+		        success: function(result){
+		        	if(result['error'] == 1){
+		        		$("span#size-err").html(result['msg']).show();
+		        	}
+		        	else{
+		        		$("span#size-err").html('').hide();
+		        		console.log(result)
+		        	}
+		        },
+		        error: function(xhr,status,error){
+		        	alert(`some server error occurred! please refresh and try again`);
+		        }
+		    });
+
+		    $.ajax();
+
+		    $(document).ajaxComplete(function(){
+			    $("span[id^=priceof]").html('$ 56');
+			});
+		}
+
+		function gatherInput(){
+			let product = $("input#prodName").val();
+			let paperstock = $("input[name='paperstock']:checked").val();
+			let size = $("input[name='size']:checked").val();
+			let customSize = 0;
+			if(size == 'custom')
+			{
+				let widthBox = $("input[name='size_w']");
+				let heightBox = $("input[name='size_h']");
+				let width = $.trim(widthBox.val());
+				let height = $.trim(heightBox.val());
+
+				//validation
+				if(isNaN(width) || width == ""){
+					$("span#size-err").html('upss! invalid input').show();
+					widthBox.css('border', '1px solid red');
+					heightBox.css('border', '1px none');
+				}
+				else if(isNaN(height) || height == ""){
+					$("span#size-err").html('upss! invalid input').show();
+					heightBox.css('border', '1px solid red');
+					widthBox.css('border', '1px none');
+				}
+				else
+				{
+					$("span#size-err").html('').hide();
+					heightBox.css('border', '1px none');
+					widthBox.css('border', '1px none');
+
+					size = {"width":width, "height":height};
+					customSize = 1;
+
+					checkPrice(product,paperstock,size,customSize);
+				}
+			}
+			else
+			{
+				checkPrice(product,paperstock,size,customSize);
+			}
 		}
 	</script>
 

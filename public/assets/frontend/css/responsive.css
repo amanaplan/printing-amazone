@@ -15,6 +15,7 @@
 	.responsive-slider .slides ul li .slide-body .caption.img-twitter{left:10%;}
 	.responsive-slider .slides ul li .slide-body .caption.header h2{font-size:46px;}
 	.feature-dtls{margin-top:20px;}
+	.my-review-item .title{display: inline-block;}
 }
 
 @media (max-width:767px){
@@ -27,6 +28,15 @@
 		overflow: visible;
 	}
 	.carousel-inner{min-height:600px;}*/
+	.my-review-item .title{display: inline-block;}
+	a.btn.btn-primary.pull-right{
+		float: none !important;
+		display: block;
+
+	}
+	.dasboard .right-part{padding: 12px 0 0 !important;}
+	.custom-size{width: 96%; margin: 30px auto;}
+	.review-sec{padding: 40px 30px;}
 }
 
 @media (max-width:736px) and (min-width:480px){
@@ -38,6 +48,7 @@
 		overflow: visible;
 	}
 	.carousel-inner{min-height:600px;}*/
+
 	.logo img{margin:0;}
 	.top-menu {
 		float: none;
@@ -95,7 +106,7 @@
 		text-align: center;
 	}
 	.responsive-slider-parallax .slides-container ul li .slide-body .caption.img-twitter img{width:50%;}
-	.footer{margin-top:-82px; padding:80px 0 30px;}
+	.footer{margin-top:-60px; padding:80px 0 30px;}
 	.footer-menu ul{text-align:center; padding:0;}
 	.social{text-align:center;}
 	.social{text-align:center;}

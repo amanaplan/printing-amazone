@@ -18,7 +18,7 @@ class CreatePresetQtyruleTwo extends Migration
             $table->integer('map_prod_form_option');
             $table->integer('every_extra_qty');
             $table->integer('from');
-            $table->integer('to');
+            $table->integer('to')->nullable();
             $table->float('disc_rate', 4, 2);
         });
     }

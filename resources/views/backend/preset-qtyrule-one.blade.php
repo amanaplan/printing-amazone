@@ -65,7 +65,6 @@
 
                         <label class="col-sm-2 control-label">Order Quantity</label>
                         <div class="input-group m-b col-sm-10 {{ $errors->has('qty') ? ' has-error' : '' }}">
-                            <span class="input-group-addon">$</span> 
                             <input type="number" name="qty" min="1" class="form-control" value="{{ old('qty') }}"> 
 
                             @if ($errors->has('qty'))
