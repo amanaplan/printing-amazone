@@ -342,6 +342,8 @@
 		}
 	</script>
 
+	{{-- calculation form --}}
+
 	<script>
 		$(document).ready(function(){
 			$(".paperstock-opt").change(function(){
@@ -364,6 +366,34 @@
 			});
 		});
 
+		class calForm {
+
+			errorFor(field, msg){
+				let widthBox = $("input[name='size_w']");
+				let heightBox = $("input[name='size_h']");
+
+				if(field == 'h'){
+					heightBox.css('border', '1px solid red');
+		        	widthBox.css('border', '1px none');
+				}
+				else{
+					widthBox.css('border', '1px solid red');
+		        	heightBox.css('border', '1px none');
+				}
+
+				$("span#size-err").html(msg).show();
+			}
+
+			noError(){
+				let widthBox = $("input[name='size_w']");
+				let heightBox = $("input[name='size_h']");
+
+				heightBox.css('border', '1px none');
+		        widthBox.css('border', '1px none');
+		        $("span#size-err").html('').hide();
+			}
+		}
+
 		function checkPrice(product,paperstock,size,customSize)
 		{
 			$("span[id^=priceof]").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
@@ -375,23 +405,20 @@
 		        dataType: 'json',
 		        data: {product:product, paperstock:paperstock, customsize:customSize, size:size},
 		        success: function(result){
+		        	let calform = new calForm();
+
 		        	if(result['error'] == 1){
-		        		let widthBox = $("input[name='size_w']");
-						let heightBox = $("input[name='size_h']");
 
 		        		if(result['for'] == 'h'){
-		        			heightBox.css('border', '1px solid red');
-		        			widthBox.css('border', '1px none');
+		        			calform.errorFor('h', result['msg']);
 		        		}
 		        		else
 		        		{
-		        			widthBox.css('border', '1px solid red');
-		        			heightBox.css('border', '1px none');
+		        			calform.errorFor('w', result['msg']);
 		        		}
-		        		$("span#size-err").html(result['msg']).show();
 		        	}
 		        	else{
-		        		$("span#size-err").html('').hide();
+		        		calform.noError();
 		        		console.log(result)
 		        	}
 		        },
@@ -414,6 +441,8 @@
 			let customSize = 0;
 			if(size == 'custom')
 			{
+				let calform = new calForm();
+
 				let widthBox = $("input[name='size_w']");
 				let heightBox = $("input[name='size_h']");
 				let width = $.trim(widthBox.val());
@@ -421,20 +450,14 @@
 
 				//validation
 				if(isNaN(width) || width == ""){
-					$("span#size-err").html('upss! invalid input').show();
-					widthBox.css('border', '1px solid red');
-					heightBox.css('border', '1px none');
+					calform.errorFor('w', 'upss! invalid input');
 				}
 				else if(isNaN(height) || height == ""){
-					$("span#size-err").html('upss! invalid input').show();
-					heightBox.css('border', '1px solid red');
-					widthBox.css('border', '1px none');
+					calform.errorFor('h', 'upss! invalid input');
 				}
 				else
 				{
-					$("span#size-err").html('').hide();
-					heightBox.css('border', '1px none');
-					widthBox.css('border', '1px none');
+					calform.noError();
 
 					size = {"width":width, "height":height};
 					customSize = 1;

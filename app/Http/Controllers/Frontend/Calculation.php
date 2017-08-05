@@ -10,6 +10,8 @@ use App\OptQty;
 use App\OptSize;
 use App\PresetGeneral;
 
+use App\Http\Controllers\Frontend\AutoCalculator; //custom class calculates the pricing based on the preset
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +101,17 @@ class Calculation extends Controller
             $height = $size->height;
         }
 
-        return response()->json(['error' => 0, 'width' => $width, 'height' => $height]);
+        //calculate the pricing
+        $calculator = new AutoCalculator(($width * $height), 100, $map_paperstock_option->first()->id);
+        $price = $calculator->CalculatedPrice();
+        if($price == false)
+        {
+            abort(404, 'preset not defined');
+            //return response()->json(['error' => 0, 'msg' => 'preset not defined']);
+        }
+        else
+        {
+            return response()->json(['error' => 0, 'price' => $price]);
+        }
     }
 }

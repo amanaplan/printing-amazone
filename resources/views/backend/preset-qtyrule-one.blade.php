@@ -63,13 +63,24 @@
                             </div>
                         </div>
 
-                        <label class="col-sm-2 control-label">Order Quantity</label>
-                        <div class="input-group m-b col-sm-10 {{ $errors->has('qty') ? ' has-error' : '' }}">
-                            <input type="number" name="qty" min="1" class="form-control" value="{{ old('qty') }}"> 
+                        <label class="col-sm-2 control-label">Order Quantity (from)</label>
+                        <div class="input-group m-b col-sm-10 {{ $errors->has('qty_frm') ? ' has-error' : '' }}">
+                            <input type="number" name="qty_frm" min="1" class="form-control" value="{{ old('qty_frm') }}"> 
 
-                            @if ($errors->has('qty'))
+                            @if ($errors->has('qty_frm'))
                                 <span class="help-block m-b-none">
-                                    <strong>{{ $errors->first('qty') }}</strong>
+                                    <strong>{{ $errors->first('qty_frm') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <label class="col-sm-2 control-label">Order Quantity (to)</label>
+                        <div class="input-group m-b col-sm-10 {{ $errors->has('qty_to') ? ' has-error' : '' }}">
+                            <input type="number" name="qty_to" min="1" class="form-control" value="{{ old('qty_to') }}"> 
+
+                            @if ($errors->has('qty_to'))
+                                <span class="help-block m-b-none">
+                                    <strong>{{ $errors->first('qty_to') }}</strong>
                                 </span>
                             @endif
                         </div>

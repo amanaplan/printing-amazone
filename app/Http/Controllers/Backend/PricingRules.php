@@ -267,7 +267,7 @@ class PricingRules extends Controller
         $preset->min_size           = $request->input('min_dimenssion');
         $preset->max_size           = $request->input('max_dimenssion');
         $preset->is_base            = $request->input('is_base');
-        $preset->base_price         = ($request->input('is_base') == 0) ? 0.00 : $request->input('fixed_price');
+        $preset->base_price         = ($request->input('is_base') == 0) ? null : $request->input('fixed_price');
 
         $preset->save();
 
@@ -336,7 +336,8 @@ class PricingRules extends Controller
         /** validation **/
          $validator = Validator::make($request->all(), [
             'paperstock_option' => 'required|integer',
-            'qty'               => 'required|integer',
+            'qty_frm'           => 'required|integer',
+            'qty_to'            => 'required|integer',
             'discount'          => 'required|numeric',
         ]);
 
@@ -356,7 +357,8 @@ class PricingRules extends Controller
         /** adding new preset **/
         PresetQtyGrpOne::create([
             'map_prod_form_option'  => $map_prod_form_option,
-            'order_qty'             => $request->input('qty'),
+            'order_qty_frm'         => $request->input('qty_frm'),
+            'order_qty_to'          => $request->input('qty_to'),
             'disc_rate'             => $request->input('discount'),
         ]);
 
@@ -390,7 +392,8 @@ class PricingRules extends Controller
     {
         /** validation **/
          $validator = Validator::make($request->all(), [
-            'qty'               => 'required|integer',
+            'qty_frm'           => 'required|integer',
+            'qty_to'            => 'required|integer',
             'discount'          => 'required|numeric',
         ]);
 
@@ -402,7 +405,8 @@ class PricingRules extends Controller
 
         /** updating preset data **/
         $preset = PresetQtyGrpOne::findOrFail($preset_id);
-        $preset->order_qty           = $request->input('qty');
+        $preset->order_qty_frm       = $request->input('qty_frm');
+        $preset->order_qty_to        = $request->input('qty_to');
         $preset->disc_rate           = $request->input('discount');
 
         $preset->save();

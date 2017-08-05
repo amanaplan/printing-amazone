@@ -16,7 +16,8 @@ class CreatePresetQtyruleOne extends Migration
         Schema::create('preset_qty_rule_one', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('map_prod_form_option');
-            $table->integer('order_qty');
+            $table->integer('order_qty_frm');
+            $table->integer('order_qty_to');
             $table->float('disc_rate', 4, 2);
         });
     }

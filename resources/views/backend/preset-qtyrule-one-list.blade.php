@@ -53,7 +53,8 @@
                                 <tr>
                                     <th scope="col">#No.</th>
                                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Paperstock</th>
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Order Qty.</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">From Order Qty.</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">To Order Qty.</th>
                                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Discount %</th>
                                     <th scope="col">Edit</th>
                                     <th scope="col">Remove</th>
@@ -88,7 +89,8 @@
 
                                             <span class="label label-info">{{ \App\OptPaperstock::find($opt_id)->option }}</span>
                                         </td>
-                                        <td>{{ $preset->order_qty }}</td>
+                                        <td>{{ $preset->order_qty_frm }}</td>
+                                        <td>{{ $preset->order_qty_to }}</td>
                                         <td>{{ $preset->disc_rate.' %' }}</td>
                                         <td><a href="{{ url('/admin/product/presets/qty-rule-first/edit/'.$preset->id.'/'.$product_id) }}" class="btn btn-default"><i class="fa fa-pencil"></i></a></td>
                                         <td><a href="javascript:void();" onclick="remPreset({{$preset->id}}, this);" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>

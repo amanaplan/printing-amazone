@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2017 at 05:23 PM
+-- Generation Time: Aug 05, 2017 at 03:11 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -340,13 +340,13 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (1, 6, 0, 47, NULL, NULL, 40, 450, 1, 69.00),
 (2, 7, 48, 90, 0.24, 0.49, 40, 450, 0, NULL),
 (3, 7, 0, 47, NULL, NULL, 40, 450, 1, 69.00),
-(5, 13, 0, 47, NULL, NULL, 30, 450, 1, 69.00),
-(6, 13, 48, 90, 0.25, 0.50, 30, 450, 0, 0.00),
-(7, 13, 91, 135, 0.24, 0.49, 30, 450, 0, NULL),
-(8, 13, 136, 450, 0.23, 0.48, 30, 450, 0, NULL),
-(9, 14, 0, 47, NULL, NULL, 30, 450, 1, 68.00),
-(10, 14, 48, 90, 0.25, 0.50, 40, 450, 0, NULL),
-(11, 14, 91, 135, 0.24, 0.49, 40, 450, 0, NULL),
+(5, 13, 0, 47, NULL, NULL, 3, 45, 1, 69.00),
+(6, 13, 48, 90, 0.25, 0.50, 3, 45, 0, NULL),
+(7, 13, 91, 135, 0.24, 0.49, 3, 45, 0, NULL),
+(8, 13, 136, 450, 0.23, 0.48, 3, 45, 0, NULL),
+(9, 14, 0, 47, NULL, NULL, 3, 45, 1, 68.00),
+(10, 14, 48, 90, 0.25, 0.50, 4, 45, 0, NULL),
+(11, 14, 91, 135, 0.24, 0.49, 4, 45, 0, NULL),
 (12, 14, 136, 450, 0.20, 0.40, 40, 450, 0, NULL);
 
 -- --------------------------------------------------------
@@ -358,7 +358,8 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 CREATE TABLE `preset_qty_rule_one` (
   `id` int(10) UNSIGNED NOT NULL,
   `map_prod_form_option` int(11) NOT NULL,
-  `order_qty` int(11) NOT NULL,
+  `order_qty_frm` int(11) NOT NULL,
+  `order_qty_to` int(11) NOT NULL,
   `disc_rate` double(4,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -366,19 +367,19 @@ CREATE TABLE `preset_qty_rule_one` (
 -- Dumping data for table `preset_qty_rule_one`
 --
 
-INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `disc_rate`) VALUES
-(1, 6, 100, 8.00),
-(2, 6, 250, 0.20),
-(4, 13, 100, 57.00),
-(5, 13, 200, 70.00),
-(6, 13, 300, 83.00),
-(7, 13, 400, 89.00),
-(8, 13, 500, 95.00),
-(9, 14, 100, 57.00),
-(10, 14, 200, 70.00),
-(11, 14, 300, 83.00),
-(12, 14, 400, 89.00),
-(13, 14, 500, 95.00);
+INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty_frm`, `order_qty_to`, `disc_rate`) VALUES
+(1, 6, 100, 0, 8.00),
+(2, 6, 250, 0, 0.20),
+(4, 13, 100, 199, 57.00),
+(5, 13, 200, 299, 70.00),
+(6, 13, 300, 399, 83.00),
+(7, 13, 400, 499, 89.00),
+(8, 13, 500, 599, 95.00),
+(9, 14, 100, 199, 57.00),
+(10, 14, 200, 299, 70.00),
+(11, 14, 300, 399, 83.00),
+(12, 14, 400, 499, 89.00),
+(13, 14, 500, 599, 95.00);
 
 -- --------------------------------------------------------
 
@@ -519,12 +520,12 @@ CREATE TABLE `size_options` (
 
 INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
 (1, 'small (11cm x 20cm)', 11, 20),
-(2, 'Large A1 Paper (175 x 100)', 175, 100),
-(3, '50 x 50 mm', 50, 50),
-(4, '70 x 70 mm', 70, 70),
-(5, '90 x 90 mm', 90, 90),
-(6, '120 x 120 mm', 120, 120),
-(7, '150 x 150 mm', 150, 150);
+(2, 'Large A1 Paper (17 x 10)', 17, 10),
+(3, '5 x 5 mm', 5, 5),
+(4, '7 x 7 mm', 7, 7),
+(5, '9 x 9 mm', 9, 9),
+(6, '12 x 12 mm', 12, 12),
+(7, '15 x 15 mm', 15, 15);
 
 -- --------------------------------------------------------
 
@@ -748,7 +749,7 @@ ALTER TABLE `preset_general`
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --
