@@ -730,3 +730,6 @@ div.post-review{padding-bottom: 50px;}
     font: 14px 'Raleway', sans-serif;
 }
 .review span.avg-rating{color: #ea8f00;font-size: 23px;}
+.btn:focus {
+  outline: none !important;
+}

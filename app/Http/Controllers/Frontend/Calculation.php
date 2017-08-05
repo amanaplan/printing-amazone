@@ -50,6 +50,14 @@ class Calculation extends Controller
         {
             abort(401);
         }
+        else
+        {
+            //checking the paperstock has predefined presets or not
+            if(PresetGeneral::where('map_prod_form_option', $map_paperstock_option->first()->id)->count() == 0)
+            {
+                abort(401, 'preset not defined');
+            }
+        }
 
         //---------------size option
         if($request->input('customsize') == 1)
@@ -69,11 +77,11 @@ class Calculation extends Controller
 
             if($width < $min || $width > $max)
             {
-                return response()->json(['error' => 1, 'msg' => 'width must be within '.$min.' to '.$max]);
+                return response()->json(['error' => 1, 'for' => 'w', 'msg' => 'width must be within '.$min.' to '.$max]);
             }
             else if($height < $min || $height > $max)
             {
-                return response()->json(['error' => 1, 'msg' => 'height must be within '.$min.' to '.$max]);
+                return response()->json(['error' => 1, 'for' => 'h', 'msg' => 'height must be within '.$min.' to '.$max]);
             }
         }
         else

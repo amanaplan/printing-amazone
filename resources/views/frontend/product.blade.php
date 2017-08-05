@@ -358,6 +358,10 @@
 
 				gatherInput();
 			});
+
+			$("input:text").on('input', function(){
+				$(this).css('border', '1px none');
+			});
 		});
 
 		function checkPrice(product,paperstock,size,customSize)
@@ -372,6 +376,18 @@
 		        data: {product:product, paperstock:paperstock, customsize:customSize, size:size},
 		        success: function(result){
 		        	if(result['error'] == 1){
+		        		let widthBox = $("input[name='size_w']");
+						let heightBox = $("input[name='size_h']");
+
+		        		if(result['for'] == 'h'){
+		        			heightBox.css('border', '1px solid red');
+		        			widthBox.css('border', '1px none');
+		        		}
+		        		else
+		        		{
+		        			widthBox.css('border', '1px solid red');
+		        			heightBox.css('border', '1px none');
+		        		}
 		        		$("span#size-err").html(result['msg']).show();
 		        	}
 		        	else{
