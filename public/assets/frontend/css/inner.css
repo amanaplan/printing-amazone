@@ -45,14 +45,23 @@ p.sp-text{color:#808080; font-family: 'Raleway', sans-serif; font-size:15px; fon
     vertical-align: bottom;
 }
 .custom-size ul li label{color:#686868; font-size:14px; font-family: 'Raleway', sans-serif; cursor:pointer; width:50%;}
-.custom-size ul li span {padding-left: 10px;color:#686868; font-size:14px; font-family: 'Raleway', sans-serif; display:inline-block; width:20%;}
+.custom-size ul li span {padding-left: 10px;color:#67b57f; font-size:14px; font-family: 'Raleway', sans-serif; display:inline-block; width:20%;}
+span#qty-price{color:#67b57f;}
 .custom-size ul li span.saving{color:#f30; width:auto;font-size:13px; font-weight:600;}
-.custom-input {
+.custom-input, .custom-qty-input {
     padding-left: 15px;
     margin-top: 10px;
 }
 .custom-input input[type="text"] {
     width: 27%;
+    border: 1px none;
+    font-size: 14px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.29);
+    padding: 5px 8px;
+    margin: 0 8px;
+}
+.custom-qty-input input[type="text"] {
+    width: 35%;
     border: 1px none;
     font-size: 14px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.29);

@@ -34,7 +34,9 @@ class Calculation extends Controller
             'product'       => 'required|alpha_dash',
             'paperstock'    => 'required|integer',
             'size'          => 'required',
-            'customsize'    => 'required|boolean',
+            'qty'           => 'nullable|integer',
+            'customsize'    => 'nullable|boolean',
+            'customqty'     => 'nullable|boolean',
         ]);
 
         //get the product
@@ -101,17 +103,82 @@ class Calculation extends Controller
             $height = $size->height;
         }
 
+        //--------------------quantity option
+        if($request->input('customqty') == 1)
+        {
+            $validate = $this->validateqty($request->input('qty'));
+            if($validate == false){
+                return response()->json(['error' => 1, 'for' => 'q', 'msg' => 'qty. must be multiple of 10 & atleast 10']);
+            }
+
+            $customQuantity = true;
+        }
+        else
+        {
+            $customQuantity = false;
+        }
+
         //calculate the pricing
         $calculator = new AutoCalculator(($width * $height), 100, $map_paperstock_option->first()->id);
         $price = $calculator->CalculatedPrice();
         if($price == false)
         {
             abort(404, 'preset not defined');
-            //return response()->json(['error' => 0, 'msg' => 'preset not defined']);
         }
         else
         {
-            return response()->json(['error' => 0, 'price' => $price]);
+            //calculate price for the listed quantities
+            $map_field_qty_id = MapFrmProd::where([['product_id', $product], ['form_field_id', 3]])->firstOrFail()->id;
+            $map_qty_option = MapProdFrmOpt::where('mapping_field_id', $map_field_qty_id)->select('option_id');
+            if($map_qty_option->count() == 0)
+            {
+                abort(401, 'size options not selected by admin');
+            }
+
+            $orderedSizeOptns = $map_qty_option->orderBy('sort', 'asc')->get();
+            $qtyValues = OptQty::find($orderedSizeOptns)->orderBy('option', 'asc')->get();
+            $setOfPrices = [];
+            foreach($qtyValues as $qtyOpt)
+            {
+                $calculator = new AutoCalculator(($width * $height), $qtyOpt->option, $map_paperstock_option->first()->id);
+                $setOfPrices[] = $calculator->CalculatedPrice();
+            }
+
+            //if custom quantity entered then process it too
+            if($customQuantity)
+            {
+                $calculator = new AutoCalculator(($width * $height), $request->input('qty'), $map_paperstock_option->first()->id);
+                $customQtyPrice = $calculator->CalculatedPrice();
+            }
+            else
+            {
+                $customQtyPrice = 0.00;
+            }
+
+            return response()->json(['quantityPrice' => $customQtyPrice, 'setOfPrices' => $setOfPrices]);
+        }
+    }
+
+    /**
+    *quantity validation
+    */
+    function validateqty($qty)
+    {
+        if(empty($qty))
+        {
+            return false;
+        }
+        elseif ($qty < 10)
+        {
+            return false;
+        }
+        elseif (is_float($qty/10))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }

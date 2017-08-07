@@ -129,16 +129,3 @@ new Vue({
 		}
 	}
 });
-
-/*jquery page specific*/
-$(document).ready(function(){
-	$("input[name='size']").change(function(){
-		if($(this).val() == 'custom')
-		{
-			$("div.custom-input").show();
-		}
-		else{
-			$("div.custom-input").hide();
-		}
-	});
-});

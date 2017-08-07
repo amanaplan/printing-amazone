@@ -860,17 +860,6 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 	}
 });
 
-/*jquery page specific*/
-$(document).ready(function () {
-	$("input[name='size']").change(function () {
-		if ($(this).val() == 'custom') {
-			$("div.custom-input").show();
-		} else {
-			$("div.custom-input").hide();
-		}
-	});
-});
-
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {

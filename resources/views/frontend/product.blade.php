@@ -142,6 +142,13 @@
 										@foreach($fields[3] as $key => $val)
 											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$56</span></li>
 										@endforeach
+
+										<li><input id="custom-qty" type="radio" name="qty" value="custom"> <label for="custom-qty">Custom Quantity</label>
+											<div class="custom-qty-input" style="display: none;">
+												<input type="text" placeholder="Enter quantity" name="quantity"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button><span id="qty-price" style="margin-left: 10px;"></span>
+												<span id="qty-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
+											</div>
+										</li>
 									</ul>
 								</div>
 								@endif
@@ -149,6 +156,10 @@
 								<a href="#" class="continue">Continue</a>
 								<a href="#" class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
 							</form>
+
+							{{-- snackbar --}}
+							
+
 						</div>
 
 					@endif
@@ -346,6 +357,35 @@
 
 	<script>
 		$(document).ready(function(){
+
+			/** shows the custom input data enter boxes **/
+			$("input[name='size']").change(function(){
+				if($(this).val() == 'custom')
+				{
+					$("div.custom-input").show();
+
+					erasePriceOverview('all');
+				}
+				else{
+					$("div.custom-input").hide();
+					$("div.custom-input input:text").val('');
+				}
+			});
+
+			$("input[name='qty']").change(function(){
+				erasePriceOverview('qty');
+
+				if($(this).val() == 'custom')
+				{
+					$("div.custom-qty-input").show();
+				}
+				else{
+					$("div.custom-qty-input").hide();
+					$("div.custom-qty-input input:text").val('');
+				}
+			});
+			/** shows the custom input data enter boxes **/
+
 			$(".paperstock-opt").change(function(){
 				gatherInput();
 			});
@@ -356,54 +396,121 @@
 
 			$("button.check-price").click(function(){
 				//validate then check
-				$("span#size-err").html('');
+				$("span#size-err").html('').hide();
+				$("span#qty-err").html('').hide();
 
 				gatherInput();
 			});
 
-			$("input:text").on('input', function(){
+			$("div.custom-input input:text").on('input', function(){
 				$(this).css('border', '1px none');
+				erasePriceOverview('all');
+			});
+
+			$("div.custom-qty-input input:text").on('input', function(){
+				$(this).css('border', '1px none');
+				erasePriceOverview('qty');
+			});
+
+			$("div.custom-input input:text").on('keydown', function(e){
+				if(e.keyCode == 13){
+			        $("span#size-err").html('').hide();
+			        $("span#qty-err").html('').hide();
+			        gatherInput();
+			    }
+			});
+			$("div.custom-qty-input input:text").on('keydown', function(e){
+				if(e.keyCode == 13){
+			        $("span#size-err").html('').hide();
+			        $("span#qty-err").html('').hide();
+			        gatherInput();
+			    }
 			});
 		});
+
+		function erasePriceOverview(type='all')
+		{
+			if(type == 'all'){
+				$("span[id^=priceof]").each(function(){
+					$(this).html('$ __');
+	    		});
+	    		$("span#qty-price").html('');
+	    	}
+	    	else if(type == 'size'){
+	    		$("span[id^=priceof]").each(function(){
+					$(this).html('$ __');
+	    		});
+	    	}
+	    	else if(type == 'qty'){
+	    		$("span#qty-price").html('');
+	    	}
+		}
 
 		class calForm {
 
 			errorFor(field, msg){
 				let widthBox = $("input[name='size_w']");
 				let heightBox = $("input[name='size_h']");
+				let qtyBox = $("input[name='quantity']");
 
 				if(field == 'h'){
+					heightBox.focus();
 					heightBox.css('border', '1px solid red');
 		        	widthBox.css('border', '1px none');
+		        	qtyBox.css('border', '1px none');
+
+		        	erasePriceOverview('all');
+
+	        		$("span#size-err").html(msg).show();
 				}
-				else{
+				else if(field == 'w'){
+					widthBox.focus();
 					widthBox.css('border', '1px solid red');
 		        	heightBox.css('border', '1px none');
+		        	qtyBox.css('border', '1px none');
+
+		        	erasePriceOverview('all');
+
+	        		$("span#size-err").html(msg).show();
+				}
+				else
+				{
+					qtyBox.focus();
+					qtyBox.css('border', '1px solid red');
+					widthBox.css('border', '1px none');
+		        	heightBox.css('border', '1px none');
+
+		        	erasePriceOverview('all');
+
+	        		$("span#qty-err").html(msg).show();
 				}
 
-				$("span#size-err").html(msg).show();
 			}
 
 			noError(){
 				let widthBox = $("input[name='size_w']");
 				let heightBox = $("input[name='size_h']");
+				let qtyBox = $("input[name='quantity']");
 
 				heightBox.css('border', '1px none');
 		        widthBox.css('border', '1px none');
+		        qtyBox.css('border', '1px none');
 		        $("span#size-err").html('').hide();
+		        $("span#qty-err").html('').hide();
 			}
 		}
 
-		function checkPrice(product,paperstock,size,customSize)
+		function checkPrice(product,paperstock,size,quantityVal,customSize,customQty)
 		{
 			$("span[id^=priceof]").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
-			//console.log(`product: ${product}, paperstock: ${paperstock}, size: ${size}, customSize: ${customSize}`);
+			$("span#qty-price").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
+
 			$.ajaxSetup({
 		        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 		        url: "{{ url('/product/calculate-price') }}",
 		        type: "POST",
 		        dataType: 'json',
-		        data: {product:product, paperstock:paperstock, customsize:customSize, size:size},
+		        data: {product:product, paperstock:paperstock, customsize:customSize, size:size, qty:quantityVal, customqty:customQty},
 		        success: function(result){
 		        	let calform = new calForm();
 
@@ -412,34 +519,49 @@
 		        		if(result['for'] == 'h'){
 		        			calform.errorFor('h', result['msg']);
 		        		}
-		        		else
+		        		else if(result['for'] == 'w')
 		        		{
 		        			calform.errorFor('w', result['msg']);
+		        		}
+		        		else
+		        		{
+		        			calform.errorFor('q', result['msg']);
 		        		}
 		        	}
 		        	else{
 		        		calform.noError();
-		        		console.log(result)
+
+		        		let count = 0;
+		        		$("span[id^=priceof]").each(function(){
+		        			$(this).html('$ '+result['setOfPrices'][count]);
+		        			count++;
+		        		});
+
+		        		if(result['quantityPrice'] != 0)
+		        		{
+		        			$("span#qty-price").html('$ '+result['quantityPrice']);
+		        		}
 		        	}
 		        },
 		        error: function(xhr,status,error){
-		        	alert(`some server error occurred! please refresh and try again`);
+		        	alert('Some server error occurred! please refresh and try again.');
+
+		        	erasePriceOverview('all');
 		        }
 		    });
 
 		    $.ajax();
 
-		    $(document).ajaxComplete(function(){
-			    $("span[id^=priceof]").html('$ 56');
-			});
 		}
 
 		function gatherInput(){
 			let product = $("input#prodName").val();
 			let paperstock = $("input[name='paperstock']:checked").val();
 			let size = $("input[name='size']:checked").val();
+			let quantity = $("input[name='qty']:checked").val();
 			let customSize = 0;
-			if(size == 'custom')
+			let customQty = 0;
+			if(size == 'custom' && quantity != 'custom')
 			{
 				let calform = new calForm();
 
@@ -462,12 +584,69 @@
 					size = {"width":width, "height":height};
 					customSize = 1;
 
-					checkPrice(product,paperstock,size,customSize);
+					checkPrice(product,paperstock,size,0,customSize,customQty);
+				}
+			}
+			else if(quantity == 'custom' && size != 'custom')
+			{
+				let calform = new calForm();
+
+				let qtyBox = $("input[name='quantity']");
+				let quantityVal = $.trim(qtyBox.val());
+
+				//validation
+				if(isNaN(quantityVal) || quantityVal == ""){
+					calform.errorFor('q', 'upss! invalid input');
+				}
+				else if((quantityVal/10) % 1 !== 0){
+					calform.errorFor('q', 'qty. must be multiple of 10');
+				}
+				else
+				{
+					calform.noError();
+					customQty = 1;
+
+					checkPrice(product,paperstock,size,quantityVal,customSize,customQty);
+				}
+			}
+			else if(quantity == 'custom' && size == 'custom')
+			{
+				let calform = new calForm();
+
+				let widthBox = $("input[name='size_w']");
+				let heightBox = $("input[name='size_h']");
+				let qtyBox = $("input[name='quantity']");
+				let quantityVal = $.trim(qtyBox.val());
+				let width = $.trim(widthBox.val());
+				let height = $.trim(heightBox.val());
+
+				//validation
+				if(isNaN(width) || width == ""){
+					calform.errorFor('w', 'upss! invalid input');
+				}
+				else if(isNaN(height) || height == ""){
+					calform.errorFor('h', 'upss! invalid input');
+				}
+				else if(isNaN(quantityVal) || quantityVal == ""){
+					calform.errorFor('q', 'upss! invalid input');
+				}
+				else if((quantityVal/10) % 1 !== 0){
+					calform.errorFor('q', 'qty. must be multiple of 10');
+				}
+				else
+				{
+					calform.noError();
+
+					size = {"width":width, "height":height};
+					customSize = 1;
+					customQty = 1;
+
+					checkPrice(product,paperstock,size,quantityVal,customSize,customQty);
 				}
 			}
 			else
 			{
-				checkPrice(product,paperstock,size,customSize);
+				checkPrice(product,paperstock,size,0,customSize,customQty);
 			}
 		}
 	</script>

@@ -113,23 +113,4 @@ class AutoCalculator{
 		}
 	}
 
-	// function validateqty($qty)
-	// {
-	// 	if(empty($qty))
-	// 	{
-	// 		return false;
-	// 	}
-	// 	elseif ($qty < 100)
-	// 	{
-	// 		return false;
-	// 	}
-	// 	elseif (is_float($qty/10))
-	// 	{
-	// 		return false;
-	// 	}
-	// 	else
-	// 	{
-	// 		return true;
-	// 	}
-	// }
 }
