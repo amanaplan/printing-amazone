@@ -20,6 +20,16 @@
 
 @media (max-width:767px){
 	.responsive-slider .slides ul li .slide-body .container .wrapper{width:100%;}	
+	header.main-header {
+    position: fixed;
+    background: url(../../images/responsive-bg.png) no-repeat scroll 7px 0 / cover;
+    z-index: 999;
+}
+.one_color_blue_carousel_wrapper {
+    position: relative;
+    z-index: 9;
+    background: url(../../images/responsive-bg.png) no-repeat scroll 0px 0 / cover!important;
+}
 	.custom h2{text-align:center; display: block !important;}
 	.review{display:block; text-align:center; margin:10px 0;}
 	/*.one_color_blue_carousel_wrapper {
@@ -48,6 +58,12 @@
 		overflow: visible;
 	}
 	.carousel-inner{min-height:600px;}*/
+	.one_color_blue_carousel_wrapper {
+    position: relative;
+    z-index: 9;
+    background: url(../../images/responsive-bg.jpg) no-repeat scroll -9px 0 / cover!important;
+}
+
 
 	.logo img{margin:0;}
 	.top-menu {
