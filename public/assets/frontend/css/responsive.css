@@ -21,9 +21,9 @@
 @media (max-width:767px){
 	.responsive-slider .slides ul li .slide-body .container .wrapper{width:100%;}	
 	header.main-header {
-    position: fixed;
-    background: url(../../images/responsive-bg.png) no-repeat scroll 7px 0 / cover;
-    z-index: 999;
+    position: relative;
+    /*background: url(../../images/responsive-bg.png) no-repeat scroll 0 0 / cover;*/
+    /*z-index: 999;*/
 }
 .one_color_blue_carousel_wrapper {
     position: relative;
@@ -148,12 +148,12 @@
 	}
 	.menu{text-align:center;}
 	.navbar-toggle {
-		background: #fff;
+		background: #eca400;
 		float: none;
 		margin:15px 0 0;
 	}
 	.navbar-toggle .icon-bar{
-		background:#000;
+		background: #fff;
 		width:26px;
 		height:3px;
 	}
@@ -169,3 +169,4 @@
 	.custom-size{width:92%; margin:10px auto 0;}
 	.custom-size h2{text-align:left;}
 }
+.top-menu a i{color:#111;}
