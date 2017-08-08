@@ -80,7 +80,7 @@
 <div class="feature">
 	<div class="container">
 		<div class="row">
-			<h2>Printing Amazone Features</h2>
+			<h2>Printing Amazon Features</h2>
 			<div class="feature-dtls">
 				<a href="custom-sticker.html"><div class="col-sm-4 col-lg-4 dtls-box">
 					<img src="{{ asset( 'assets/images/f1.png' ) }}" />

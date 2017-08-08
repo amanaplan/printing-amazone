@@ -24,6 +24,7 @@
 @push( 'styles' )
 	
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/css/star-rating.css' ) }}" media="all" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/snackbar/snackbar.css' ) }}" type="text/css"/>
 
 @endpush
 
@@ -140,7 +141,7 @@
 									<h2>Select a Quantity</h2>
 									<ul>
 										@foreach($fields[3] as $key => $val)
-											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$56</span></li>
+											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$ __</span></li>
 										@endforeach
 
 										<li><input id="custom-qty" type="radio" name="qty" value="custom"> <label for="custom-qty">Custom Quantity</label>
@@ -156,8 +157,6 @@
 								<a href="#" class="continue">Continue</a>
 								<a href="#" class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
 							</form>
-
-							{{-- snackbar --}}
 							
 
 						</div>
@@ -353,10 +352,19 @@
 		}
 	</script>
 
+	{{-- snackbar --}}
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/snackbar/CSSPlugin.min.js' ) }}"></script>
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/snackbar/EasePack.min.js' ) }}"></script>
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/snackbar/TweenLite.min.js' ) }}"></script>
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/snackbar/main.js' ) }}"></script>
+
 	{{-- calculation form --}}
 
 	<script>
 		$(document).ready(function(){
+
+			/** when page load complete then fetch prices asynchronously **/
+			gatherInput();
 
 			/** shows the custom input data enter boxes **/
 			$("input[name='size']").change(function(){
@@ -385,6 +393,8 @@
 				}
 			});
 			/** shows the custom input data enter boxes **/
+
+			/** fetch price upon user interaction **/
 
 			$(".paperstock-opt").change(function(){
 				gatherInput();
@@ -497,6 +507,9 @@
 		        qtyBox.css('border', '1px none');
 		        $("span#size-err").html('').hide();
 		        $("span#qty-err").html('').hide();
+
+		        //removing the snackbar
+		        $("div.paper-snackbar").remove();
 			}
 		}
 
@@ -544,7 +557,7 @@
 		        	}
 		        },
 		        error: function(xhr,status,error){
-		        	alert('Some server error occurred! please refresh and try again.');
+		        	createSnackbar('Some server error occurred! please refresh and try again.', 'Dismiss');
 
 		        	erasePriceOverview('all');
 		        }
