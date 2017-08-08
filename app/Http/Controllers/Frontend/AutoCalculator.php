@@ -51,15 +51,16 @@ class AutoCalculator{
 				$previousPreset = PresetGeneral::where([['map_prod_form_option', $this->map_prod_form_option], ['from', '<=', $tmpImaginaryMMsq], ['to', '>=', $tmpImaginaryMMsq]])->first();
 				if(! $previousPreset->is_base)
 				{
-					//we'll proceed only if it is not the base preset group
-
+					//this group is not base i.e. it has predefined val/mm2 profit% etc.
 					$this->price2 = $this->qty * $previousPreset->val_per_mmsq * $tmpImaginaryMMsq * ($previousPreset->profit_percent / 100);
-					$this->price = ($this->price2 > $this->price1)? $this->price2 : $this->price1;
 				}
 				else
 				{
-					$this->price = $this->price1;
+					//this is the base group
+					$this->price2 = ($previousPreset->base_price/1000) * $this->qty;
 				}
+
+				$this->price = ($this->price2 > $this->price1)? $this->price2 : $this->price1;
 			}
 
 			//apply qty rules
