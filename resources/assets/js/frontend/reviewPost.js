@@ -4,7 +4,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import reviewitem from './components/reviewitem.vue';
 
-const APP_URL = 'http://localhost/srv/printing-amazone/public/';
+import APP_URL from './boot.js';
 
 new Vue({
 	el: '#app',

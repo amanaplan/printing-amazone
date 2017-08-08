@@ -11,4 +11,5 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/frontend/reviewPost.js', 'public/assets/frontend/js/review.js');
+mix.js('resources/assets/js/frontend/reviewPost.js', 'public/assets/frontend/js/review.js')
+	.js('resources/assets/js/frontend/calculation/calculation-main.js', 'public/assets/frontend/js/calculation.js');
