@@ -498,7 +498,7 @@
 		.one_color_blue_carousel_control_left,
 		.one_color_blue_carousel_control_right{border:0}
 		.one_color_blue_carousel_control_icons{font-size:18px!important}
-		.one_color_blue_carousel_caption{top:45px; /*bottom:26px;*/ padding:0; /*position: relative;*/}
+		.one_color_blue_carousel_caption{top:-110px; /*bottom:26px;*/ padding:0; position: relative;}
 		.one_color_blue_carousel_caption_text{left:0;width:100%;padding:2px;text-align:center; top:-10px;}
 		.one_color_blue_carousel_caption_text h1{font-size:25px;margin:0 0 10px 0}
 		.one_color_blue_carousel_caption_text p{font-size:11px;margin:0 0 10px 0}
