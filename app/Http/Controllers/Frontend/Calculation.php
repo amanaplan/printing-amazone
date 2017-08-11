@@ -52,14 +52,14 @@ class Calculation extends Controller
         $map_paperstock_option = MapProdFrmOpt::where([['mapping_field_id', $map_field_paperstock_id],['option_id', $paperstock]]);
         if($map_paperstock_option->count() == 0)
         {
-            abort(401);
+            abort(403, 'forbidden - paperstock not available');
         }
         else
         {
             //checking the paperstock has predefined presets or not
             if(PresetGeneral::where('map_prod_form_option', $map_paperstock_option->first()->id)->count() == 0)
             {
-                abort(401, 'preset not defined');
+                abort(503, 'preset not defined');
             }
         }
 
@@ -95,7 +95,7 @@ class Calculation extends Controller
             $map_size_option = MapProdFrmOpt::where([['mapping_field_id', $map_field_size_id],['option_id', $request->input('size')]])->count();
             if($map_size_option == 0)
             {
-                abort(401);
+                abort(403, 'forbidden');
             }
 
             $size = OptSize::findOrFail($request->input('size'));
@@ -108,7 +108,7 @@ class Calculation extends Controller
         {
             $validate = $this->validateqty($request->input('qty'));
             if($validate == false){
-                return response()->json(['error' => 1, 'for' => 'q', 'msg' => 'qty. must be multiple of 10 & atleast 10']);
+                return response()->json(['error' => 1, 'for' => 'q', 'msg' => 'qty. must be multiple of 10 & max 50k']);
             }
 
             $customQuantity = true;
@@ -123,7 +123,7 @@ class Calculation extends Controller
         $price = $calculator->CalculatedPrice();
         if($price == false)
         {
-            abort(404, 'preset not defined');
+            abort(503, 'preset not defined');
         }
         else
         {
@@ -132,7 +132,7 @@ class Calculation extends Controller
             $map_qty_option = MapProdFrmOpt::where('mapping_field_id', $map_field_qty_id)->select('option_id');
             if($map_qty_option->count() == 0)
             {
-                abort(401, 'size options not selected by admin');
+                abort(503, 'size options not selected by admin');
             }
 
             $orderedSizeOptns = $map_qty_option->orderBy('sort', 'asc')->get();
@@ -173,6 +173,10 @@ class Calculation extends Controller
             return false;
         }
         elseif (is_float($qty/10))
+        {
+            return false;
+        }
+        elseif($qty > 50000)
         {
             return false;
         }

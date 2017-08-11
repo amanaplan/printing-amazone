@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2017 at 03:05 PM
+-- Generation Time: Aug 11, 2017 at 03:06 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -408,7 +408,7 @@ INSERT INTO `preset_qty_rule_two` (`id`, `map_prod_form_option`, `every_extra_qt
 (7, 13, 1000, 20000, NULL, 0.20),
 (8, 14, 2000, 1000, 4000, 8.00),
 (9, 14, 1000, 5000, 20000, 1.00),
-(10, 14, 1000, 20000, NULL, 0.20);
+(10, 14, 1000, 20000, 50000, 0.20);
 
 -- --------------------------------------------------------
 

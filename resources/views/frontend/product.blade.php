@@ -150,6 +150,7 @@
 												<span id="qty-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
 											</div>
 										</li>
+
 									</ul>
 								</div>
 								@endif

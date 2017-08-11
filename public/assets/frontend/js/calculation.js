@@ -63,12 +63,22 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 28:
+/***/ 2:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var APP_URL = 'http://localhost/srv/printing-amazone/public/';
+
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
+
+/***/ }),
+
+/***/ 29:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -122,31 +132,21 @@ function createSnackbar(message, actionText, action) {
 
 /***/ }),
 
-/***/ 38:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(7);
+module.exports = __webpack_require__(8);
 
 
 /***/ }),
 
-/***/ 40:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var APP_URL = 'http://localhost/srv/printing-amazone/public/';
-
-/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
-
-/***/ }),
-
-/***/ 7:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__snackbar_main__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__snackbar_main__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(2);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -393,8 +393,12 @@ function gatherInput() {
 		//validation
 		if (isNaN(quantityVal) || quantityVal == "") {
 			_calform.errorFor('q', 'upss! invalid input');
-		} else if (quantityVal / 10 % 1 !== 0) {
+		} else if (quantityVal.toString().indexOf('.') != -1) {
+			_calform.errorFor('q', 'qty. should be integer');
+		} else if (parseInt(quantityVal) / 10 % 1 !== 0) {
 			_calform.errorFor('q', 'qty. must be multiple of 10');
+		} else if (parseInt(quantityVal) > 50000) {
+			_calform.errorFor('q', 'for quantity more than 50k please <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'contact">contact us</a>');
 		} else {
 			_calform.noError();
 			customQty = 1;
@@ -418,8 +422,12 @@ function gatherInput() {
 			_calform2.errorFor('h', 'upss! invalid input');
 		} else if (isNaN(_quantityVal) || _quantityVal == "") {
 			_calform2.errorFor('q', 'upss! invalid input');
+		} else if (_quantityVal.toString().indexOf('.') != -1) {
+			_calform2.errorFor('q', 'qty. should be integer');
 		} else if (_quantityVal / 10 % 1 !== 0) {
 			_calform2.errorFor('q', 'qty. must be multiple of 10');
+		} else if (parseInt(_quantityVal) > 50000) {
+			_calform2.errorFor('q', 'for quantity more than 50k please <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'contact">contact us</a>');
 		} else {
 			_calform2.noError();
 

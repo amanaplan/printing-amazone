@@ -99,18 +99,48 @@ class AutoCalculator{
 				{
 					$this->price = $this->price - ($this->price * ($thePresetTwo->disc_rate/100));
 				}
-
-
-				return $this->price;
 			}
-			else
-			{
-				return $this->price;
-			}
+
+			//now add discount rates of all the previous predefined preset of qty rule 2
+			$this->price = $this->recursivePercents($thePresetTwo, $this->price);
+
+			return $this->price;
 		}
 		else
 		{
 			return $this->price;
+		}
+	}
+
+	/**
+	*recusively adds % for the previous preset groups for qty rule group 2
+	*/
+	public function recursivePercents(PresetQtyGrpTwo $currGroup, $currPrice)
+	{
+		$currFrom = $currGroup->from;
+		$arbitraryQty = $currFrom - 1100;  //an arbitrary qty that belongs to the previous preset group qty range
+		$presetTwo = PresetQtyGrpTwo::where([['map_prod_form_option', $this->map_prod_form_option], ['from', '<=', $arbitraryQty], ['to', '>=', $arbitraryQty]]);
+
+		if($presetTwo->count() > 0)
+		{
+			$thePresetTwo = $presetTwo->first();
+
+			$excess = $thePresetTwo->to - $thePresetTwo->from;
+			$j = floor($excess / $thePresetTwo->every_extra_qty);
+			for($d = 0; $d < $j; $d++)
+			{
+				$currPrice = $currPrice - ($currPrice * ($thePresetTwo->disc_rate/100));
+			}
+
+			$this->recursivePercents($thePresetTwo, $currPrice);
+
+
+			return $currPrice;
+		}
+		else
+		{
+			//there is no more qty rule group 2 previous preset
+			return $currPrice;
 		}
 	}
 

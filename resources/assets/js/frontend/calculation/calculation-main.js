@@ -254,8 +254,15 @@ function gatherInput(){
 		if(isNaN(quantityVal) || quantityVal == ""){
 			calform.errorFor('q', 'upss! invalid input');
 		}
-		else if((quantityVal/10) % 1 !== 0){
+		else if(quantityVal.toString().indexOf('.') != -1)
+		{
+			calform.errorFor('q', 'qty. should be integer');
+		}
+		else if((parseInt(quantityVal)/10) % 1 !== 0){
 			calform.errorFor('q', 'qty. must be multiple of 10');
+		}
+		else if(parseInt(quantityVal) > 50000){
+			calform.errorFor('q', `for quantity more than 50k please <a href="${APP_URL}contact">contact us</a>`);
 		}
 		else
 		{
@@ -286,8 +293,15 @@ function gatherInput(){
 		else if(isNaN(quantityVal) || quantityVal == ""){
 			calform.errorFor('q', 'upss! invalid input');
 		}
+		else if(quantityVal.toString().indexOf('.') != -1)
+		{
+			calform.errorFor('q', 'qty. should be integer');
+		}
 		else if((quantityVal/10) % 1 !== 0){
 			calform.errorFor('q', 'qty. must be multiple of 10');
+		}
+		else if(parseInt(quantityVal) > 50000){
+			calform.errorFor('q', `for quantity more than 50k please <a href="${APP_URL}contact">contact us</a>`);
 		}
 		else
 		{

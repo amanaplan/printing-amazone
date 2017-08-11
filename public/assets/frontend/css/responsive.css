@@ -25,6 +25,18 @@
     /*background: url(../../images/responsive-bg.png) no-repeat scroll 0 0 / cover;*/
     /*z-index: 999;*/
 }
+.top-menu a i{color:#111;}
+.review-short .avatar{width: 15%; margin-bottom: 10px;}
+.review-short .body{width: 100%;}
+.review-short .body .title{line-height: 26px;}
+.review-short .body p{line-height: 25px;}
+.review-sec h2{text-align: center;}
+header.inner .menu {
+    position: absolute;
+    width: 100%;
+}
+header.inner .menu .navbar-collapse{background: #fff; padding: 0;margin-top: 6px;}
+header.inner .top-menu a i{color: #fff;}
 .one_color_blue_carousel_wrapper {
     position: relative;
     z-index: 9;
@@ -169,4 +181,3 @@
 	.custom-size{width:92%; margin:10px auto 0;}
 	.custom-size h2{text-align:left;}
 }
-.top-menu a i{color:#111;}
