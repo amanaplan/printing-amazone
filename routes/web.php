@@ -31,6 +31,8 @@ Route::get('/', 'Frontend\PagesCtrl@index');
 Route::post('/product/give-review', 'Frontend\UserReviewPost');
 Route::post('/product/load-reviews', 'Frontend\AjaxCtrl@LoadReviews');
 Route::post('/product/calculate-price', 'Frontend\Calculation@GenPrice');
+Route::get('/labels', 'Frontend\DirectProduct');
+Route::get('/graphic-designs', 'Frontend\DirectProduct');
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {
@@ -96,6 +98,7 @@ Route::prefix('admin')->group(function() {
 	Route::put('/request/category/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditCategory');
 	Route::get('/category/sort-products/{id}', 'Backend\AdminController@ReorderProducts');
 	Route::put('/category/set-order', 'Backend\RequestHandlers\AdminRqstController@SortNavOrder');
+	Route::delete('/category/delete', 'Backend\RequestHandlers\AdminRqstController@RemoveCategory');
 
 	//manage products
 	Route::get('/product/manage', 'Backend\AdminController@ManageProduct');
@@ -104,6 +107,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/product/edit/{id}', 'Backend\AdminController@EditProduct');
 	Route::put('/request/product/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditProduct');
 	Route::put('/product/set-order', 'Backend\RequestHandlers\AdminRqstController@SortOrder');
+	Route::delete('/product/delete', 'Backend\RequestHandlers\AdminRqstController@RemoveProduct');
 
 	//manage product reviews
 	Route::get('/product/reviews/{publishstate}', 'Backend\AdminController@ManageReviews');

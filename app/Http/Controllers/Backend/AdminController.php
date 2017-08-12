@@ -87,7 +87,7 @@ class AdminController extends Controller
     {
         $data = [
             'page'       => 'category_manage',
-            'categories' =>  Category::with('products')->orderBy('created_at', 'desc')->get()
+            'categories' =>  Category::with('products')->orderBy('sort', 'asc')->get()
 
         ];
         return view('backend.category-list', $data);

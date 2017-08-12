@@ -102,7 +102,7 @@
                                         @endif
                                     </td>
                                     <td><a href="{{ url('/admin/product/edit/'.$product->id) }}"><i class="fa fa-edit"></i></a></td>
-                                    <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                                    <td><button type="button" onclick="remProd({{$product->id}}, this)" class="btn btn-warning"><i class="fa fa-trash"></i></button></td>
                                 </tr>
 
                                 @endforeach
@@ -124,5 +124,39 @@
 {{-- page specific js --}}
 @push('scripts')
     
+    <script type="text/javascript">
+
+        function remProd(prod, elem)
+        {
+            let conf = confirm('sure to remove the product completely!');
+
+            if(conf)
+            {
+                var xhttp = new XMLHttpRequest();
+                
+                xhttp.open("DELETE", "{{ url('/admin/product/delete') }}", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                let data = '_token={{ csrf_token() }}';
+                data += '&product='+prod;
+
+                xhttp.send(data);
+
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if(this.status == 200)
+                        {
+                            Command: toastr["success"]("product removed successfully", "Successfully Done. .");
+                            $(elem).closest('tr').fadeOut();
+                        }
+                        else
+                        {
+                            Command: toastr["error"]("Upss! some error occurred", "Error. .");
+                        }
+                    }
+                };
+            }
+        }
+    </script>
 
 @endpush

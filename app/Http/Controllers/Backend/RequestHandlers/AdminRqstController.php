@@ -10,6 +10,9 @@ use App\OptSize;
 use App\MapFrmProd;
 use App\MapProdFrmOpt;
 use App\Review;
+use App\PresetGeneral;
+use App\PresetQtyGrpOne;
+use App\PresetQtyGrpTwo;
 
 use App\Http\HelperClass\Multipurpose;
 use Illuminate\Support\Facades\Redis;
@@ -594,4 +597,78 @@ class AdminRqstController extends Controller
 
     }
 
+    /**
+    *remove product
+    */
+    public function RemoveProduct(Request $request)
+    {
+        $productId = $request->input('product');
+        $product = (array) $productId;
+
+        $this->RemoveProductAndDependencs($product);
+    }
+
+    /**
+    *remove category
+    */
+    public function RemoveCategory(Request $request)
+    {
+        $id = $request->input('category');
+        $category = Category::findOrFail($id);
+
+        $products = $category->products()->select('id')->get();
+        $prodArr = [];
+
+        //extracting to array
+        foreach($products as $prod)
+        {
+            $prodArr[] = $prod->id;
+        }
+
+        //remove the products
+        $this->RemoveProductAndDependencs($prodArr);
+
+        //remove the category
+        $category->delete();
+    }
+
+    /**
+    *remove the products & associated data
+    */
+    public function RemoveProductAndDependencs(array $ids) :void
+    {
+        foreach($ids as $id)
+        {
+            $product = Product::findOrFail($id);
+
+            //remove all the reviews
+            $product->review()->delete();
+
+            $formFields = MapFrmProd::where('product_id', $id);
+            if($formFields->count() > 0)
+            {
+                $fieldMapIds = $formFields->get();
+
+                foreach($fieldMapIds as $fieldId)
+                {
+                    $theOption = MapProdFrmOpt::where('mapping_field_id', $fieldId->id);
+                    $fieldMapOptions = $theOption->select('id')->get();
+
+                    //remove presets
+                    PresetGeneral::whereIn('map_prod_form_option', $fieldMapOptions)->delete();
+                    PresetQtyGrpOne::whereIn('map_prod_form_option', $fieldMapOptions)->delete();
+                    PresetQtyGrpTwo::whereIn('map_prod_form_option', $fieldMapOptions)->delete();
+
+                    //remove field options
+                    $theOption->delete();
+                }
+
+                //remove field mappings
+                $formFields->delete();
+            }
+
+            //remove the product
+            $product->delete();
+        }
+    }
 }

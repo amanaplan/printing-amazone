@@ -68,6 +68,7 @@ class AutoCalculator{
 			$this->price = $this->applyQtyRuleTwo();
 
 			return round($this->price);
+			return $this->price;
 		}
 	}
 

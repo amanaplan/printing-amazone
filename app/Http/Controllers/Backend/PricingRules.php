@@ -477,7 +477,7 @@ class PricingRules extends Controller
          $validator = Validator::make($request->all(), [
             'paperstock_option' => 'required|integer',
             'from'              => 'required|integer',
-            'to'                => 'nullable|integer|greater_than_field:from',
+            'to'                => 'required|integer|greater_than_field:from',
             'extra'             => 'required|integer',
             'discount'          => 'required|numeric',
         ]);
@@ -536,7 +536,7 @@ class PricingRules extends Controller
         /** validation **/
          $validator = Validator::make($request->all(), [
             'from'              => 'required|integer',
-            'to'                => 'nullable|integer|greater_than_field:from',
+            'to'                => 'required|integer|greater_than_field:from',
             'extra'             => 'required|integer',
             'discount'          => 'required|numeric',
         ]);

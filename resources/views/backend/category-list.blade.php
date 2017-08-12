@@ -68,7 +68,7 @@
                                     <td><a href="{{ ($category->products()->count() > 0)? url('/admin/category/sort-products/'.$category->id) : '#' }}"><i class="fa fa-list-ol" aria-hidden="true"></i></a></td>
                                     <td><input style="width: 70px;" type="number" min="1" step="1" value="{{ $category->sort }}" onchange="changeCatSort({{$category->id}}, this.value)" /></td>
                                     <td><a href="{{ url('/admin/category/edit', ['id' => $category->id]) }}"><i class="fa fa-pencil-square-o"></i></a></td>
-                                    <td><a href=""><i class="fa fa-trash"></i></a></td>
+                                    <td><button type="button" class="btn btn-danger" onclick="remCategory({{$category->id}}, this)"><i class="fa fa-trash"></i></button></td>
                                 </tr>
                             @endforeach
 
@@ -107,6 +107,38 @@
 
             $.ajax();
             //ajax
+        }
+
+        function remCategory(catId, elem)
+        {
+            let conf = confirm('sure to remove the category completely!\nall related products will be deleted too');
+
+            if(conf)
+            {
+                var xhttp = new XMLHttpRequest();
+                
+                xhttp.open("DELETE", "{{ url('/admin/category/delete') }}", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                let data = '_token={{ csrf_token() }}';
+                data += '&category='+catId;
+
+                xhttp.send(data);
+
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if(this.status == 200)
+                        {
+                            Command: toastr["success"]("category removed successfully", "Successfully Done. .");
+                            $(elem).closest('tr').fadeOut();
+                        }
+                        else
+                        {
+                            Command: toastr["error"]("Upss! some error occurred", "Error. .");
+                        }
+                    }
+                };
+            }
         }
     </script>
 
