@@ -742,3 +742,37 @@ div.post-review{padding-bottom: 50px;}
 .btn:focus {
   outline: none !important;
 }
+.custom-form .field {
+    margin: 15px 0;
+}
+.custom-form .field input, .custom-form .field textarea{
+    background:#eee;
+    border:1px solid #ccc;
+    padding:8px 10px;
+    border-radius:4px;
+    width:100%;
+    font-family: 'Raleway', sans-serif;
+    font-size:13px;
+}
+.custom-form .field textarea{
+    min-height:70px;
+    resize:vertical;
+}
+.custom-form .field input[type="submit"]{
+    background:#ea8f00;
+    color:#fff;
+    border:2px solid #ea8f00;
+    text-transform:uppercase;
+    transition:all 0.4s;
+    font-family: 'Raleway', sans-serif;
+    padding:18px;
+    font-weight:600;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
+    font-size:16px;
+}
+.custom-form .field input[type="submit"]:hover{
+    background:transparent;
+    color:#141414;
+    border:2px solid #ea8f00;
+    box-shadow:none;
+}

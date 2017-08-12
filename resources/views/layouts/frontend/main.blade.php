@@ -117,13 +117,10 @@
 			<div class="row">
 				<div class="footer-menu col-sm-8 col-lg-8">
 					<ul>
+						<li><a href="{{ url('/') }}">Home</a> /</li>
 						<li><a href="#">About</a> /</li>
-						<li><a href="#">Blog</a> /</li>
-						<li><a href="#">Uses</a> /</li>
-						<li><a href="#">Templates</a> /</li>
 						<li><a href="#">FAQs</a> /</li>
-						<li><a href="#">Returns &amp; Refund</a> /</li>
-						<li><a href="#">Contact</a></li>
+						<li><a href="{{ url('/contact') }}">Contact</a></li>
 					</ul>
 				</div><!-- footer-menu -->
 				<div class="social col-sm-4 col-lg-4">

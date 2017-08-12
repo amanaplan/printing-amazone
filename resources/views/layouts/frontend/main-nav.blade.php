@@ -19,6 +19,9 @@
 
         	@endforeach
 
+                <li class="hvr-underline-from-center"><a href="{{ url( '/labels' ) }}" class=""> Labels </a></li>
+                <li class="hvr-underline-from-center"><a href="{{ url( '/graphic-designs' ) }}" class=""> Graphic designs </a></li>
+
         </ol>
     </div><!-- collapse navbar-collapse -->
 </nav>

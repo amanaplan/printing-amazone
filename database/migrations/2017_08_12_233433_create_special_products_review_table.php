@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewTable extends Migration
+class CreateSpecialProductsReviewTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateReviewTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('review_special', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id');
+            $table->integer('special_product_id');
             $table->integer('user_id');
             $table->string('title',191);
             $table->text('description');
             $table->decimal('rating', 4, 1);
+            $table->integer('publish')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateReviewTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('review_special');
     }
 }
