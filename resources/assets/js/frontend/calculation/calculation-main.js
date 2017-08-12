@@ -228,10 +228,10 @@ function gatherInput(){
 
 		//validation
 		if(isNaN(width) || width == ""){
-			calform.errorFor('w', 'upss! invalid input');
+			calform.errorFor('w', 'Oops! invalid input');
 		}
 		else if(isNaN(height) || height == ""){
-			calform.errorFor('h', 'upss! invalid input');
+			calform.errorFor('h', 'Oops! invalid input');
 		}
 		else
 		{
@@ -252,7 +252,7 @@ function gatherInput(){
 
 		//validation
 		if(isNaN(quantityVal) || quantityVal == ""){
-			calform.errorFor('q', 'upss! invalid input');
+			calform.errorFor('q', 'Oops! invalid input');
 		}
 		else if(quantityVal.toString().indexOf('.') != -1)
 		{
@@ -285,13 +285,13 @@ function gatherInput(){
 
 		//validation
 		if(isNaN(width) || width == ""){
-			calform.errorFor('w', 'upss! invalid input');
+			calform.errorFor('w', 'Oops! invalid input');
 		}
 		else if(isNaN(height) || height == ""){
-			calform.errorFor('h', 'upss! invalid input');
+			calform.errorFor('h', 'Oops! invalid input');
 		}
 		else if(isNaN(quantityVal) || quantityVal == ""){
-			calform.errorFor('q', 'upss! invalid input');
+			calform.errorFor('q', 'Oops! invalid input');
 		}
 		else if(quantityVal.toString().indexOf('.') != -1)
 		{

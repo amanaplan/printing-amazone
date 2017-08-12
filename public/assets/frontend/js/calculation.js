@@ -373,9 +373,9 @@ function gatherInput() {
 
 		//validation
 		if (isNaN(width) || width == "") {
-			calform.errorFor('w', 'upss! invalid input');
+			calform.errorFor('w', 'Oops! invalid input');
 		} else if (isNaN(height) || height == "") {
-			calform.errorFor('h', 'upss! invalid input');
+			calform.errorFor('h', 'Oops! invalid input');
 		} else {
 			calform.noError();
 
@@ -392,7 +392,7 @@ function gatherInput() {
 
 		//validation
 		if (isNaN(quantityVal) || quantityVal == "") {
-			_calform.errorFor('q', 'upss! invalid input');
+			_calform.errorFor('q', 'Oops! invalid input');
 		} else if (quantityVal.toString().indexOf('.') != -1) {
 			_calform.errorFor('q', 'qty. should be integer');
 		} else if (parseInt(quantityVal) / 10 % 1 !== 0) {
@@ -417,11 +417,11 @@ function gatherInput() {
 
 		//validation
 		if (isNaN(_width) || _width == "") {
-			_calform2.errorFor('w', 'upss! invalid input');
+			_calform2.errorFor('w', 'Oops! invalid input');
 		} else if (isNaN(_height) || _height == "") {
-			_calform2.errorFor('h', 'upss! invalid input');
+			_calform2.errorFor('h', 'Oops! invalid input');
 		} else if (isNaN(_quantityVal) || _quantityVal == "") {
-			_calform2.errorFor('q', 'upss! invalid input');
+			_calform2.errorFor('q', 'Oops! invalid input');
 		} else if (_quantityVal.toString().indexOf('.') != -1) {
 			_calform2.errorFor('q', 'qty. should be integer');
 		} else if (_quantityVal / 10 % 1 !== 0) {
