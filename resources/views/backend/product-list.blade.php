@@ -107,6 +107,22 @@
 
                                 @endforeach
 
+                                {{-- special products --}}
+                                @foreach($spProducts as $product)
+                                    <tr>
+                                        <td>#</td>
+                                        <td><img src="{{ asset('assets/images/products/'.$product->logo) }}" width="80"></td>
+                                        <td>{{ $product->product_name }} <a href="{{ url('/'.$product->product_slug) }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>{{ $product->review()->count() }}</td>
+                                        <td>-</td>
+                                        <td><a href="{{ url('/admin/special-product/edit/'.$product->id) }}"><i class="fa fa-edit"></i></a></td>
+                                        <td>-</td>
+                                    </tr>
+                                @endforeach
+                                {{-- special products --}}
+
                             </tbody>
                         </table>
 

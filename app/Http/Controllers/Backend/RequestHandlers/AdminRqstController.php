@@ -13,6 +13,7 @@ use App\Review;
 use App\PresetGeneral;
 use App\PresetQtyGrpOne;
 use App\PresetQtyGrpTwo;
+use App\ProductSpecial;
 
 use App\Http\HelperClass\Multipurpose;
 use Illuminate\Support\Facades\Redis;
@@ -239,6 +240,46 @@ class AdminRqstController extends Controller
                 }
             }
 
+            adminflash('success', 'product updated');
+            return redirect('/admin/product/manage');
+        }
+        else
+        {
+            adminflash('warning', 'input data error');
+            return redirect()->back();
+        }
+    }
+
+    /**
+    *update special product
+    */
+    /**
+    *update product
+    */
+    public function EditSpProduct(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'description'   => 'required',
+            'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/']
+        ]);
+
+
+        if ($validator->fails()) {
+            adminflash('warning', 'incorrent input data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $product                    = \App\ProductSpecial::findOrFail($id);
+        $product->logo              = $request->input('logo');
+        $product->description       = $request->input('description');
+        $product->sample_image      = $request->input('sample_img');
+
+        $product->title             = $request->input('page_title');
+        $product->meta_desc         = $request->input('meta_desc');
+        $product->og_img            = $request->input('og_image');
+
+        if($product->save())
+        {
             adminflash('success', 'product updated');
             return redirect('/admin/product/manage');
         }

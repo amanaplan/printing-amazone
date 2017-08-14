@@ -14,6 +14,7 @@ use App\MapFrmProd;
 use App\FieldTypes;
 use App\MapProdFrmOpt;
 use App\Review;
+use App\ProductSpecial;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -137,8 +138,9 @@ class AdminController extends Controller
     public function ManageProduct()
     {
         $data = [
-            'page'      => 'product_manage',
-            'products'  => Product::orderBy('created_at', 'desc')->with('category', 'review')->get()
+            'page'          => 'product_manage',
+            'products'      => Product::orderBy('created_at', 'desc')->with('category', 'review')->get(),
+            'spProducts'    => ProductSpecial::with('review')->get(),
         ];
         return view('backend.product-list', $data);
     }
@@ -164,6 +166,20 @@ class AdminController extends Controller
             'categories'        => Category::orderBy('created_at', 'desc')->get()
         ];
         return view('backend.product-edit', $data);
+    }
+
+    /**
+    *edit special product page
+    */
+    public function EditSpProduct($id)
+    {
+        $product = ProductSpecial::findOrFail($id);
+
+        $data = [
+            'page'              => 'product_manage',
+            'product'           => $product,
+        ];
+        return view('backend.product-special-edit', $data);
     }
 
     /**
