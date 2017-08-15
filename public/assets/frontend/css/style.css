@@ -94,7 +94,7 @@ ol.nav.navbar-nav li :hover{background:none;}
     margin-right: 10px;
 }*/
 .carousel-control{opacity:1;}
-.carousel-indicators li{margin:0 -10px;}
+/*.carousel-indicators li{margin:0 -10px;}*/
 .testimonial small{font-size:15px; color:#fff; font-style:italic; font-family: 'Raleway', sans-serif;margin-top:15px;}
 .testimonial small span{color:#ff9c00;}
 .testimonial blockquote p {

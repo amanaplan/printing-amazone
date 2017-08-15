@@ -155,8 +155,8 @@
 								</div>
 								@endif
 
-								<a href="#" class="continue">Continue</a>
-								<a href="#" class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								<button type="button" class="continue">Continue</button>
+								<span class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 							</form>
 							
 

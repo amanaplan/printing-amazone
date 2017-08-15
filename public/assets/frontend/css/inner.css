@@ -75,11 +75,14 @@ span#qty-price{color:#67b57f;}
 .quantity ul li input[type="radio"] {
     margin-right: 2px;
 }
-a.continue{background:#5fd282; color:#fff; font-size:24px; font-family: 'Raleway', sans-serif; border-radius:4px; box-shadow:0 2px 2px rgba(0, 0, 0, 0.8);
+button.continue{width: 100%;background:#5fd282; color:#fff; font-size:24px; font-family: 'Raleway', sans-serif; border-radius:4px; box-shadow:0 2px 2px rgba(0, 0, 0, 0.8);
 	text-decoration:none; font-weight:400; padding:15px 10px; display:block; text-align:center;border:2px solid #5fd282; margin-bottom:20px;}
+button.continue:hover{background:transparent; color:#202020; border:2px solid #5fd282; box-shadow:none; transition:all 0.4s;}
+a.continue{width: 100%;background:#5fd282; color:#fff; font-size:24px; font-family: 'Raleway', sans-serif; border-radius:4px; box-shadow:0 2px 2px rgba(0, 0, 0, 0.8);
+    text-decoration:none; font-weight:400; padding:15px 10px; display:block; text-align:center;border:2px solid #5fd282; margin-bottom:20px;}
 a.continue:hover{background:transparent; color:#202020; border:2px solid #5fd282; box-shadow:none; transition:all 0.4s;}
-a.next-up{text-decoration:none;color:#9d9d9d; font-size:16px; text-align:center; font-family: 'Raleway', sans-serif; display:block; transition:all 0.4s;}
-a.next-up:hover{color:#202020;}
+span.next-up{text-decoration:none;color:#9d9d9d; font-size:16px; text-align:center; font-family: 'Raleway', sans-serif; display:block; transition:all 0.4s;}
+span.next-up:hover{color:#202020;}
 
 ul.dropdown-menu{
 	background:#171717; text-align:left;
