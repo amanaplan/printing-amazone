@@ -6,7 +6,7 @@
 
 	@component('component.seo-data')
 		@slot('title')
-			Printing Amazone | Home
+			Printing Amazon | Home
 		@endslot
 
 		@slot('meta_desc')
