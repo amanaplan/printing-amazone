@@ -217,46 +217,12 @@ class AjaxCtrl extends Controller
         $ret['offset'] = (count($filtered) > 0)? $currOffset + $perloadDisplay : $currOffset;
         $ret['reviews'] = '';
 
-        if(count($filtered) > 0)
-        {
-            foreach($filtered as $review)
-            {
-                $ret['reviews'] .= '
-
-                <div class="review-short">
-                   <div class="avatar">
-                      <img alt="" class="img-circle img-thumbnail" src="'.getTheCustomerPic($review->user->id).'" />
-                   </div>
-                   <div class="body">
-                    <span class="rating-stars rating-5">
-                     '.genRatedStar($review->rating).'
-                    </span>
-
-                    <strong class="title">'.$review->title.'</strong>
-
-                    <div class="details">
-                    <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-                     <strong itemprop="name">'.$review->user->name.'</strong>
-                    </span>
-
-                    <time class="date relative-time">'.\Carbon\Carbon::parse($review->created_at)->diffForHumans().'</time>
-                    <meta itemprop="datePublished">
-                    </div>
-
-                    <p itemprop="description">
-                       '.$review->description.'
-
-                    </p>  </div>
-
-                   <div class="clearfix"></div>
-                </div>';
-            }
-        }
+        $ret['reviews'] = view('frontend.review-component', ['filtered' => $filtered])->render();
 
         //whether to show the load button or not
         $upcomingFilter = array_slice($reviews, $currOffset + $perloadDisplay, $perloadDisplay);  //per load show 1
         $ret['removeloadBtn'] = (count($upcomingFilter) == 0)? 1 : 0;
 
-        return json_encode($ret);
+        return json_encode($ret, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_NUMERIC_CHECK | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 }
