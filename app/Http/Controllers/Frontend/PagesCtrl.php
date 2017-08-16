@@ -181,7 +181,14 @@ class PagesCtrl extends Controller
             'loadmore'      => $showmore
         ];
 
-        return view('frontend.product', $data);
+        //redirect to controller action of it is name sticker
+        if($prodSlug == 'name-stickers'){
+            return view('frontend.product-name-stickers', $data);
+        }
+        else{
+            //otherwise general product view page
+            return view('frontend.product', $data);
+        }
     }
 
 }

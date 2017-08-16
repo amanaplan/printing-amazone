@@ -97,76 +97,87 @@
 					</div>
 					<div class="col-sm-1 col-lg-1"></div>
 					
-					{{-- the sidebar selection form --}}
-					@if($has_fields)
+					{{-- the sidebar form --}}
 
 						<div class="col-sm-4 col-lg-4 custom-size">
-							<form action="" method="post">
-
-								{{ csrf_field() }}
-
-								<input type="hidden" name="product" id="prodName" value="{{ $product->product_slug }}">
-
-								@if(array_key_exists(1,$fields))
-								<div class="paperstock">
-									<h2>Select a Paperstock</h2>
-									<ul>
-										@foreach($fields[1] as $key => $val)
-											<li><input id="{{ $val }}" class="paperstock-opt" type="radio" name="paperstock" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
-										@endforeach
-									</ul>
+							<div class="custom-form">
+								<div class="field">
+									<label>Sticker Type</label>
+									<select>
+										<option>5x5mm</option>
+										<option>7x7mm</option>
+										<option>9x9mm</option>
+										<option>12x12mm</option>
+										<option>15x15mm</option>
+									</select>
 								</div>
-								@endif
-
-								@if(array_key_exists(2,$fields))
-								<div class="paperstock">
-									<h2>Select a Size</h2>
+								<div class="col-md-6 col-sm-12" style="padding-left: 0;">
+								<div class="field">
+									<label>Size</label>
+									<select>
+										<option>5x5mm</option>
+										<option>7x7mm</option>
+										<option>9x9mm</option>
+										<option>12x12mm</option>
+										<option>15x15mm</option>
+									</select>
+								</div>
+								</div>
+								<div class="col-md-6 col-sm-12" style="padding-right: 0;">
+								<div class="field">
+									<label>Paperstock</label>
+									<select>
+										<option>artboard</option>
+										<option>$ 4</option>
+										<option>$ 10</option>
+										<option>$ 17</option>
+										<option>$ 33</option>
+										<option>$ 69</option>
+									</select>
+								</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="field">
+									<label>Laminating</label>
+									<select>
+										<option>Select Quantity</option>
+										<option>$ 4</option>
+										<option>$ 10</option>
+										<option>$ 17</option>
+										<option>$ 33</option>
+										<option>$ 69</option>
+									</select>
+								</div>
+								<div class="field">
+									<label>Printing Name</label><input type="text" placeholder="Enter Printing Name">
+								</div>
+								<div class="field">
+									<label>Select a Quantity</label>
 									<ul>
-										@foreach($fields[2] as $key => $val)
-											<li><input id="{{ $val }}" class="size-opt" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
-										@endforeach
+										<li><input id="100" type="radio" name="qty" value="2" checked=""> <label for="100">100</label><span id="priceof-100">$ 4</span></li>
+										<li><input id="200" type="radio" name="qty" value="3"> <label for="200">200</label><span id="priceof-200">$ 10</span></li>
+										<li><input id="300" type="radio" name="qty" value="5"> <label for="300">300</label><span id="priceof-300">$ 17</span></li>
+										<li><input id="500" type="radio" name="qty" value="4"> <label for="500">500</label><span id="priceof-500">$ 33</span></li>
+										<li><input id="1000" type="radio" name="qty" value="1"> <label for="1000">1000</label><span id="priceof-1000">$ 69</span></li>
 										
-										<li><input id="custom" type="radio" name="size" value="custom"> <label for="custom">Custom Size</label>
-											<div class="custom-input" style="display: none;">
-												<input type="text" placeholder="Width" name="size_w"> x <input type="text" placeholder="height" name="size_h"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button>
-												<span id="size-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
-											</div>
-										</li>
-									</ul>
-								</div>
-								@endif
-
-								@if(array_key_exists(3,$fields))
-								<div class="paperstock">
-									<h2>Select a Quantity</h2>
-									<ul>
-										@foreach($fields[3] as $key => $val)
-											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$ __</span></li>
-										@endforeach
-
 										<li><input id="custom-qty" type="radio" name="qty" value="custom"> <label for="custom-qty">Custom Quantity</label>
 											<div class="custom-qty-input" style="display: none;">
-												<input type="text" placeholder="Enter quantity" name="quantity"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button><span id="qty-price" style="margin-left: 10px;"></span>
-												<span id="qty-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
+												<input type="text" placeholder="Enter quantity" name="quantity" style="border: 1px none;"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button><span id="qty-price" style="margin-left: 10px;"><i class="fa fa-spinner fa-pulse fa-lg text-success"></i></span>
+												<span id="qty-err" class="text-danger" style="width: 100%;display: none;"></span>
 											</div>
 										</li>
 
-										<li>
-											<strong>**for order quantiry more than 20k please <a href="{{ url('/contact') }}">contact</a></strong>
-										</li>
-
 									</ul>
+									
 								</div>
-								@endif
-
-								<button type="button" class="continue">Continue</button>
-								<span class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-							</form>
-							
-
+								
+								<div class="field">
+									<button type="button" class="continue">Continue</button>
+									<span class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+								</div>
+							</div>
 						</div>
 
-					@endif
 					{{-- sidebar form --}}
 
 					<div class="clearfix"></div>

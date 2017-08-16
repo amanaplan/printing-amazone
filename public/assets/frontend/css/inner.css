@@ -779,3 +779,40 @@ div.post-review{padding-bottom: 50px;}
     border:2px solid #ea8f00;
     box-shadow:none;
 }
+.custom-form .field label{ display: block;    font-family: 'Raleway', sans-serif;    font-size:13px;    margin-bottom: 10px;    text-transform: uppercase;    font-weight: 800;}
+.custom-form .field select{ background:#eee; border:1px solid #ccc; padding:8px 10px; border-radius:4px; width:100%; font-family: 'Raleway', sans-serif; font-size:13px;}.custom-form .field select{cursor: pointer;}
+
+.field{margin-bottom: 0!important;}
+.field ul {
+    padding: 0;
+    list-style: none;
+    margin: 10px 0;
+}
+.field ul li {
+    display: block;
+    padding-bottom: 2px;
+}
+.field ul li input[type="radio"] {
+    margin-right: 5px;
+    vertical-align: middle;
+    width: auto;
+    margin-top: 0;
+}
+.field ul li label {
+    color: #686868;
+    font-size: 14px!important;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    width: 50%;
+    font-weight: 400!important;
+    display: inline-block!important;
+    text-transform: none!important;
+}
+.field ul li span {
+    padding-left: 10px;
+    color: #1d9e45;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    display: inline-block;
+    width: 20%;
+}
