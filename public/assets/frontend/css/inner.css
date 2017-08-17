@@ -52,13 +52,15 @@ span#qty-price{color:#67b57f;}
     padding-left: 15px;
     margin-top: 10px;
 }
+.custom-size .paperstock{margin: 19px 0px 10px 5px;}
 .custom-input input[type="text"] {
-    width: 27%;
-    border: 1px none;
-    font-size: 14px;
+    width: 27% !important;
+    border: 1px none!important;
+    font-size: 14px!important;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.29);
-    padding: 5px 8px;
+    padding: 5px 8px!important;
     margin: 0 8px;
+    background: #eee;
 }
 .custom-qty-input input[type="text"] {
     width: 35%;
@@ -727,6 +729,7 @@ div.post-review{padding-bottom: 50px;}
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 #not-loggedIn-postReview{padding-bottom: 70px;}
 .my-review-item .title .heading{    
     font-size: 19px;
@@ -745,9 +748,9 @@ div.post-review{padding-bottom: 50px;}
 .btn:focus {
   outline: none !important;
 }
-.custom-form .field {
+/*.custom-form .field {
     margin: 15px 0;
-}
+}*/
 .custom-form .field input, .custom-form .field textarea{
     background:#eee;
     border:1px solid #ccc;
@@ -756,6 +759,7 @@ div.post-review{padding-bottom: 50px;}
     width:100%;
     font-family: 'Raleway', sans-serif;
     font-size:13px;
+    margin-bottom: 8px;
 }
 .custom-form .field textarea{
     min-height:70px;
@@ -779,10 +783,11 @@ div.post-review{padding-bottom: 50px;}
     border:2px solid #ea8f00;
     box-shadow:none;
 }
-.custom-form .field label{ display: block;    font-family: 'Raleway', sans-serif;    font-size:13px;    margin-bottom: 10px;    text-transform: uppercase;    font-weight: 800;}
-.custom-form .field select{ background:#eee; border:1px solid #ccc; padding:8px 10px; border-radius:4px; width:100%; font-family: 'Raleway', sans-serif; font-size:13px;}.custom-form .field select{cursor: pointer;}
+.custom-form .field label{ display: block;    font-family: 'Raleway', sans-serif;    font-size:13px; text-transform: uppercase;    font-weight: 800;}
+.custom-form .field select{ background:#eee; border:1px solid #ccc; padding:8px 10px; border-radius:4px; width:100%; font-family: 'Raleway', sans-serif; font-size:15px;}.custom-form .field select{cursor: pointer;}
+.custom-form .field input[type="text"]{padding: 8px 10px;}
 
-.field{margin-bottom: 0!important;}
+.field{margin: 15px 0px 10px 5px;}
 .field ul {
     padding: 0;
     list-style: none;
@@ -790,7 +795,7 @@ div.post-review{padding-bottom: 50px;}
 }
 .field ul li {
     display: block;
-    padding-bottom: 2px;
+    padding-bottom: 5px;
 }
 .field ul li input[type="radio"] {
     margin-right: 5px;
@@ -815,4 +820,21 @@ div.post-review{padding-bottom: 50px;}
     font-family: 'Raleway', sans-serif;
     display: inline-block;
     width: 20%;
+}
+select {
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    border-radius: 4px;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    margin: 10px 0;
+}
+.paperstock h2 {
+    display: block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 800;
 }

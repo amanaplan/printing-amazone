@@ -225,4 +225,30 @@ class AjaxCtrl extends Controller
 
         return json_encode($ret, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_NUMERIC_CHECK | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
+
+    /**
+    *preview for pre-uploaded artworks
+    */
+    public function ShowPreview(Request $request)
+    {
+        $optName = $request->input('artwork');
+
+        $artWorks = Product::where('product_slug', 'name-stickers')->firstOrFail()->sample_image;
+        $images = explode('*', $artWorks);
+
+        $found = 0;
+        foreach($images as $image)
+        {
+            if(preg_match("/(.+)\[".$optName."\]/", trim($image), $match))
+            {
+                $found = 1;
+                return $match[1];
+            }
+        }
+        
+        if($found == 0)
+        {
+            abort(401);
+        }
+    }
 }

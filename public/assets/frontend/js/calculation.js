@@ -63,22 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 2:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var APP_URL = 'http://localhost/srv/printing-amazone/public/';
-
-/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
-
-/***/ }),
-
-/***/ 29:
+/***/ 26:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -132,21 +122,13 @@ function createSnackbar(message, actionText, action) {
 
 /***/ }),
 
-/***/ 39:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(8);
-
-
-/***/ }),
-
-/***/ 8:
+/***/ 28:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__snackbar_main__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__snackbar_main__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(7);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -172,16 +154,18 @@ $(document).ready(function () {
 		}
 	});
 
-	$("input[name='qty']").change(function () {
-		erasePriceOverview('qty');
-
-		if ($(this).val() == 'custom') {
-			$("div.custom-qty-input").show();
-		} else {
-			$("div.custom-qty-input").hide();
-			$("div.custom-qty-input input:text").val('');
-		}
-	});
+	/*$("input[name='qty']").change(function(){
+ 	erasePriceOverview('qty');
+ 
+ 	if($(this).val() == 'custom')
+ 	{
+ 		$("div.custom-qty-input").show();
+ 	}
+ 	else{
+ 		$("div.custom-qty-input").hide();
+ 		$("div.custom-qty-input input:text").val('');
+ 	}
+ });*/
 	/** shows the custom input data enter boxes **/
 
 	/** fetch price upon user interaction **/
@@ -197,7 +181,7 @@ $(document).ready(function () {
 	$("button.check-price").click(function () {
 		//validate then check
 		$("span#size-err").html('').hide();
-		$("span#qty-err").html('').hide();
+		//$("span#qty-err").html('').hide();
 
 		gatherInput();
 	});
@@ -207,25 +191,25 @@ $(document).ready(function () {
 		erasePriceOverview('all');
 	});
 
-	$("div.custom-qty-input input:text").on('input', function () {
-		$(this).css('border', '1px none');
-		erasePriceOverview('qty');
-	});
+	/*$("div.custom-qty-input input:text").on('input', function(){
+ 	$(this).css('border', '1px none');
+ 	erasePriceOverview('qty');
+ });*/
 
 	$("div.custom-input input:text").on('keydown', function (e) {
 		if (e.keyCode == 13) {
 			$("span#size-err").html('').hide();
-			$("span#qty-err").html('').hide();
+			//$("span#qty-err").html('').hide();
 			gatherInput();
 		}
 	});
-	$("div.custom-qty-input input:text").on('keydown', function (e) {
-		if (e.keyCode == 13) {
-			$("span#size-err").html('').hide();
-			$("span#qty-err").html('').hide();
-			gatherInput();
-		}
-	});
+	/*$("div.custom-qty-input input:text").on('keydown', function(e){
+ 	if(e.keyCode == 13){
+         $("span#size-err").html('').hide();
+         $("span#qty-err").html('').hide();
+         gatherInput();
+     }
+ });*/
 });
 
 function erasePriceOverview() {
@@ -240,9 +224,10 @@ function erasePriceOverview() {
 		$("span[id^=priceof]").each(function () {
 			$(this).html('$ __');
 		});
-	} else if (type == 'qty') {
-		$("span#qty-price").html('');
 	}
+	/*else if(type == 'qty'){
+ 	$("span#qty-price").html('');
+ }*/
 }
 
 var calForm = function () {
@@ -255,13 +240,13 @@ var calForm = function () {
 		value: function errorFor(field, msg) {
 			var widthBox = $("input[name='size_w']");
 			var heightBox = $("input[name='size_h']");
-			var qtyBox = $("input[name='quantity']");
+			//let qtyBox = $("input[name='quantity']");
 
 			if (field == 'h') {
 				heightBox.focus();
 				heightBox.css('border', '1px solid red');
 				widthBox.css('border', '1px none');
-				qtyBox.css('border', '1px none');
+				//qtyBox.css('border', '1px none');
 
 				erasePriceOverview('all');
 
@@ -270,34 +255,34 @@ var calForm = function () {
 				widthBox.focus();
 				widthBox.css('border', '1px solid red');
 				heightBox.css('border', '1px none');
-				qtyBox.css('border', '1px none');
+				//qtyBox.css('border', '1px none');
 
 				erasePriceOverview('all');
 
 				$("span#size-err").html(msg).show();
-			} else {
-				qtyBox.focus();
-				qtyBox.css('border', '1px solid red');
-				widthBox.css('border', '1px none');
-				heightBox.css('border', '1px none');
-
-				erasePriceOverview('all');
-
-				$("span#qty-err").html(msg).show();
 			}
+			/*else
+   {
+   	qtyBox.focus();
+   	qtyBox.css('border', '1px solid red');
+   	widthBox.css('border', '1px none');
+         	heightBox.css('border', '1px none');
+           	erasePriceOverview('all');
+       		$("span#qty-err").html(msg).show();
+   }*/
 		}
 	}, {
 		key: 'noError',
 		value: function noError() {
 			var widthBox = $("input[name='size_w']");
 			var heightBox = $("input[name='size_h']");
-			var qtyBox = $("input[name='quantity']");
+			//let qtyBox = $("input[name='quantity']");
 
 			heightBox.css('border', '1px none');
 			widthBox.css('border', '1px none');
-			qtyBox.css('border', '1px none');
+			//qtyBox.css('border', '1px none');
 			$("span#size-err").html('').hide();
-			$("span#qty-err").html('').hide();
+			//$("span#qty-err").html('').hide();
 
 			//removing the snackbar
 			$("div.paper-snackbar").remove();
@@ -310,9 +295,13 @@ var calForm = function () {
 /** main price calculation ajax **/
 
 
-function checkPrice(product, paperstock, size, quantityVal, customSize, customQty) {
-	$("span[id^=priceof]").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
-	$("span#qty-price").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
+function checkPrice(product, paperstock, size) {
+	var quantityVal = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+	var customSize = arguments[4];
+	var customQty = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+
+	$("span[id^=priceof]").html('<i class="fa fa-cog fa-spin fa-lg text-success"></i>');
+	//$("span#qty-price").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
 
 	$.ajaxSetup({
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -329,9 +318,11 @@ function checkPrice(product, paperstock, size, quantityVal, customSize, customQt
 					calform.errorFor('h', result['msg']);
 				} else if (result['for'] == 'w') {
 					calform.errorFor('w', result['msg']);
-				} else {
-					calform.errorFor('q', result['msg']);
 				}
+				/*else
+    {
+    	calform.errorFor('q', result['msg']);
+    }*/
 			} else {
 				calform.noError();
 
@@ -341,9 +332,10 @@ function checkPrice(product, paperstock, size, quantityVal, customSize, customQt
 					count++;
 				});
 
-				if (result['quantityPrice'] != 0) {
-					$("span#qty-price").html('$ ' + result['quantityPrice']);
-				}
+				/*if(result['quantityPrice'] != 0)
+    {
+    	$("span#qty-price").html('$ '+result['quantityPrice']);
+    }*/
 			}
 		},
 		error: function error(xhr, status, _error) {
@@ -358,12 +350,12 @@ function checkPrice(product, paperstock, size, quantityVal, customSize, customQt
 
 function gatherInput() {
 	var product = $("input#prodName").val();
-	var paperstock = $("input[name='paperstock']:checked").val();
+	var paperstock = $("select[name='paperstock']").val();
 	var size = $("input[name='size']:checked").val();
-	var quantity = $("input[name='qty']:checked").val();
+	//let quantity = $("input[name='qty']:checked").val();
 	var customSize = 0;
-	var customQty = 0;
-	if (size == 'custom' && quantity != 'custom') {
+	//let customQty = 0;
+	if (size == 'custom') {
 		var calform = new calForm();
 
 		var widthBox = $("input[name='size_w']");
@@ -382,65 +374,102 @@ function gatherInput() {
 			size = { "width": width, "height": height };
 			customSize = 1;
 
-			checkPrice(product, paperstock, size, 0, customSize, customQty);
+			checkPrice(product, paperstock, size, 0, customSize, 0);
 		}
-	} else if (quantity == 'custom' && size != 'custom') {
-		var _calform = new calForm();
-
-		var qtyBox = $("input[name='quantity']");
-		var quantityVal = $.trim(qtyBox.val());
-
-		//validation
-		if (isNaN(quantityVal) || quantityVal == "") {
-			_calform.errorFor('q', 'Oops! invalid input');
-		} else if (quantityVal.toString().indexOf('.') != -1) {
-			_calform.errorFor('q', 'qty. should be integer');
-		} else if (parseInt(quantityVal) / 10 % 1 !== 0) {
-			_calform.errorFor('q', 'qty. must be multiple of 10');
-		} else if (parseInt(quantityVal) > 50000) {
-			_calform.errorFor('q', 'for quantity more than 50k please <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'contact">contact us</a>');
-		} else {
-			_calform.noError();
-			customQty = 1;
-
-			checkPrice(product, paperstock, size, quantityVal, customSize, customQty);
-		}
-	} else if (quantity == 'custom' && size == 'custom') {
-		var _calform2 = new calForm();
-
-		var _widthBox = $("input[name='size_w']");
-		var _heightBox = $("input[name='size_h']");
-		var _qtyBox = $("input[name='quantity']");
-		var _quantityVal = $.trim(_qtyBox.val());
-		var _width = $.trim(_widthBox.val());
-		var _height = $.trim(_heightBox.val());
-
-		//validation
-		if (isNaN(_width) || _width == "") {
-			_calform2.errorFor('w', 'Oops! invalid input');
-		} else if (isNaN(_height) || _height == "") {
-			_calform2.errorFor('h', 'Oops! invalid input');
-		} else if (isNaN(_quantityVal) || _quantityVal == "") {
-			_calform2.errorFor('q', 'Oops! invalid input');
-		} else if (_quantityVal.toString().indexOf('.') != -1) {
-			_calform2.errorFor('q', 'qty. should be integer');
-		} else if (_quantityVal / 10 % 1 !== 0) {
-			_calform2.errorFor('q', 'qty. must be multiple of 10');
-		} else if (parseInt(_quantityVal) > 50000) {
-			_calform2.errorFor('q', 'for quantity more than 50k please <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'contact">contact us</a>');
-		} else {
-			_calform2.noError();
-
-			size = { "width": _width, "height": _height };
-			customSize = 1;
-			customQty = 1;
-
-			checkPrice(product, paperstock, size, _quantityVal, customSize, customQty);
-		}
-	} else {
-		checkPrice(product, paperstock, size, 0, customSize, customQty);
 	}
+	/*else if(quantity == 'custom' && size != 'custom')
+ {
+ 	let calform = new calForm();
+ 
+ 	let qtyBox = $("input[name='quantity']");
+ 	let quantityVal = $.trim(qtyBox.val());
+ 
+ 	//validation
+ 	if(isNaN(quantityVal) || quantityVal == ""){
+ 		calform.errorFor('q', 'Oops! invalid input');
+ 	}
+ 	else if(quantityVal.toString().indexOf('.') != -1)
+ 	{
+ 		calform.errorFor('q', 'qty. should be integer');
+ 	}
+ 	else if((parseInt(quantityVal)/10) % 1 !== 0){
+ 		calform.errorFor('q', 'qty. must be multiple of 10');
+ 	}
+ 	else if(parseInt(quantityVal) > 50000){
+ 		calform.errorFor('q', `for quantity more than 50k please <a href="${APP_URL}contact">contact us</a>`);
+ 	}
+ 	else
+ 	{
+ 		calform.noError();
+ 		customQty = 1;
+ 
+ 		checkPrice(product,paperstock,size,quantityVal,customSize,customQty);
+ 	}
+ }
+ else if(quantity == 'custom' && size == 'custom')
+ {
+ 	let calform = new calForm();
+ 
+ 	let widthBox = $("input[name='size_w']");
+ 	let heightBox = $("input[name='size_h']");
+ 	let qtyBox = $("input[name='quantity']");
+ 	let quantityVal = $.trim(qtyBox.val());
+ 	let width = $.trim(widthBox.val());
+ 	let height = $.trim(heightBox.val());
+ 
+ 	//validation
+ 	if(isNaN(width) || width == ""){
+ 		calform.errorFor('w', 'Oops! invalid input');
+ 	}
+ 	else if(isNaN(height) || height == ""){
+ 		calform.errorFor('h', 'Oops! invalid input');
+ 	}
+ 	else if(isNaN(quantityVal) || quantityVal == ""){
+ 		calform.errorFor('q', 'Oops! invalid input');
+ 	}
+ 	else if(quantityVal.toString().indexOf('.') != -1)
+ 	{
+ 		calform.errorFor('q', 'qty. should be integer');
+ 	}
+ 	else if((quantityVal/10) % 1 !== 0){
+ 		calform.errorFor('q', 'qty. must be multiple of 10');
+ 	}
+ 	else if(parseInt(quantityVal) > 50000){
+ 		calform.errorFor('q', `for quantity more than 50k please <a href="${APP_URL}contact">contact us</a>`);
+ 	}
+ 	else
+ 	{
+ 		calform.noError();
+ 
+ 		size = {"width":width, "height":height};
+ 		customSize = 1;
+ 		customQty = 1;
+ 
+ 		checkPrice(product,paperstock,size,quantityVal,customSize,customQty);
+ 	}
+ }*/
+	else {
+			checkPrice(product, paperstock, size, 0, customSize, 0);
+		}
 }
+
+/***/ }),
+
+/***/ 40:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(28);
+
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var APP_URL = 'http://localhost/srv/printing-amazone/public/';
+
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
 /***/ })
 

@@ -110,11 +110,12 @@
 								@if(array_key_exists(1,$fields))
 								<div class="paperstock">
 									<h2>Select a Paperstock</h2>
-									<ul>
+
+									<select name="paperstock" class="paperstock-opt">
 										@foreach($fields[1] as $key => $val)
-											<li><input id="{{ $val }}" class="paperstock-opt" type="radio" name="paperstock" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
+											<option value="{{ $key }}">{{ $val }}</option>
 										@endforeach
-									</ul>
+									</select>
 								</div>
 								@endif
 
@@ -138,18 +139,13 @@
 
 								@if(array_key_exists(3,$fields))
 								<div class="paperstock">
-									<h2>Select a Quantity</h2>
+									<h2>Select Quantity</h2>
 									<ul>
 										@foreach($fields[3] as $key => $val)
 											<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$ __</span></li>
 										@endforeach
 
-										<li><input id="custom-qty" type="radio" name="qty" value="custom"> <label for="custom-qty">Custom Quantity</label>
-											<div class="custom-qty-input" style="display: none;">
-												<input type="text" placeholder="Enter quantity" name="quantity"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button><span id="qty-price" style="margin-left: 10px;"></span>
-												<span id="qty-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
-											</div>
-										</li>
+										<li>&nbsp;</li>
 
 										<li>
 											<strong>**for order quantiry more than 20k please <a href="{{ url('/contact') }}">contact</a></strong>

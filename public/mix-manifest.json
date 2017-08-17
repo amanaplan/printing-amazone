@@ -1,5 +1,7 @@
 {
   "/assets/frontend/js/custom.js": "/assets/frontend/js/custom.js",
   "/assets/frontend/js/review.js": "/assets/frontend/js/review.js",
-  "/assets/frontend/js/calculation.js": "/assets/frontend/js/calculation.js"
+  "/assets/frontend/js/calculation.js": "/assets/frontend/js/calculation.js",
+  "/mix.js": "/mix.js",
+  "/assets/frontend/js/nameStickerPreview.js": "/assets/frontend/js/nameStickerPreview.js"
 }

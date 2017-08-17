@@ -82,7 +82,7 @@
 		<div class="row">
 			<h2>Printing Amazon Features</h2>
 			<div class="feature-dtls">
-				<a href="custom-sticker.html"><div class="col-sm-4 col-lg-4 dtls-box">
+				<a href="#"><div class="col-sm-4 col-lg-4 dtls-box">
 					<img src="{{ asset( 'assets/images/f1.png' ) }}" />
 					<h2>Custom Stickers</h2>
 				</div></a>

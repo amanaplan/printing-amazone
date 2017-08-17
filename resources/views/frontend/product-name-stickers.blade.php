@@ -26,6 +26,12 @@
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/css/star-rating.css' ) }}" media="all" type="text/css"/>
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/snackbar/snackbar.css' ) }}" type="text/css"/>
 
+	<style type="text/css">
+	#container {position: relative;}
+	.middle {transition: .5s ease;opacity: 0;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%)}
+	.loadtext {font-size: 30px;padding: 16px 32px;font-weight: bold;}
+	</style>
+
 @endpush
 
 {{-- main page contents --}}
@@ -51,48 +57,22 @@
 					<div class="col-sm-7 col-lg-7 sp-dtls">
 						<p class="sp-text">{{ $product->description }}</p>
 
-						@if(preg_match("/\*+/",$product->sample_image))
+						@php
+							$preArtWorks = explode('*', $product->sample_image);
+							$firstSample =  $preArtWorks[0];
 
-							{{-- carousal sample slider images --}}
+							//finding the first pre-uploaded sample image 
+							preg_match("/(.+)\[.+\]/", $firstSample, $match);
 
-							@php
-								$slides = explode('*', $product->sample_image);
-							@endphp
-							<div id="myCarousel" class="carousel slide" data-ride="carousel">
-							    <!-- Indicators -->
-							    <ol class="carousel-indicators">
-							    	@foreach($slides as $slide)
-							    		<li data-target="#myCarousel" data-slide-to="{{ $loop->index }}" {{ ($loop->first)? 'class="active"' : '' }}></li>
-							    	@endforeach
-							    </ol>
+						@endphp
 
-							    <!-- Wrapper for slides -->
-							    <div class="carousel-inner">
+						<div id="container">
+						<img id="sticker-preview" src="{{ asset( 'assets/images/products/'.$match[1] ) }}" class="img-responsive" />
 
-							    	@foreach($slides as $slide)
-							    		<div class="item {{ ($loop->first)? 'active' : '' }}">
-									        <img src="{{ asset( 'assets/images/products/'.$slide ) }}" style="width:100%;">
-									     </div>
-							    	@endforeach
-
-							    </div>
-
-							    <!-- Left and right controls -->
-							    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-							      <span class="glyphicon glyphicon-chevron-left"></span>
-							      <span class="sr-only">Previous</span>
-							    </a>
-							    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-							      <span class="glyphicon glyphicon-chevron-right"></span>
-							      <span class="sr-only">Next</span>
-							    </a>
-							</div>
-
-						@else
-
-							<img src="{{ asset( 'assets/images/products/'.$product->sample_image ) }}" class="img-responsive" />
-
-						@endif
+						<div class="middle">
+						    <div class="loadtext"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>
+						</div>
+						</div>
 
 					</div>
 					<div class="col-sm-1 col-lg-1"></div>
@@ -101,80 +81,93 @@
 
 						<div class="col-sm-4 col-lg-4 custom-size">
 							<div class="custom-form">
-								<div class="field">
-									<label>Sticker Type</label>
-									<select>
-										<option>5x5mm</option>
-										<option>7x7mm</option>
-										<option>9x9mm</option>
-										<option>12x12mm</option>
-										<option>15x15mm</option>
-									</select>
-								</div>
-								<div class="col-md-6 col-sm-12" style="padding-left: 0;">
-								<div class="field">
-									<label>Size</label>
-									<select>
-										<option>5x5mm</option>
-										<option>7x7mm</option>
-										<option>9x9mm</option>
-										<option>12x12mm</option>
-										<option>15x15mm</option>
-									</select>
-								</div>
-								</div>
-								<div class="col-md-6 col-sm-12" style="padding-right: 0;">
-								<div class="field">
-									<label>Paperstock</label>
-									<select>
-										<option>artboard</option>
-										<option>$ 4</option>
-										<option>$ 10</option>
-										<option>$ 17</option>
-										<option>$ 33</option>
-										<option>$ 69</option>
-									</select>
-								</div>
-								</div>
-								<div class="clearfix"></div>
-								<div class="field">
-									<label>Laminating</label>
-									<select>
-										<option>Select Quantity</option>
-										<option>$ 4</option>
-										<option>$ 10</option>
-										<option>$ 17</option>
-										<option>$ 33</option>
-										<option>$ 69</option>
-									</select>
-								</div>
-								<div class="field">
-									<label>Printing Name</label><input type="text" placeholder="Enter Printing Name">
-								</div>
-								<div class="field">
-									<label>Select a Quantity</label>
-									<ul>
-										<li><input id="100" type="radio" name="qty" value="2" checked=""> <label for="100">100</label><span id="priceof-100">$ 4</span></li>
-										<li><input id="200" type="radio" name="qty" value="3"> <label for="200">200</label><span id="priceof-200">$ 10</span></li>
-										<li><input id="300" type="radio" name="qty" value="5"> <label for="300">300</label><span id="priceof-300">$ 17</span></li>
-										<li><input id="500" type="radio" name="qty" value="4"> <label for="500">500</label><span id="priceof-500">$ 33</span></li>
-										<li><input id="1000" type="radio" name="qty" value="1"> <label for="1000">1000</label><span id="priceof-1000">$ 69</span></li>
-										
-										<li><input id="custom-qty" type="radio" name="qty" value="custom"> <label for="custom-qty">Custom Quantity</label>
-											<div class="custom-qty-input" style="display: none;">
-												<input type="text" placeholder="Enter quantity" name="quantity" style="border: 1px none;"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button><span id="qty-price" style="margin-left: 10px;"><i class="fa fa-spinner fa-pulse fa-lg text-success"></i></span>
-												<span id="qty-err" class="text-danger" style="width: 100%;display: none;"></span>
-											</div>
-										</li>
 
-									</ul>
+								<form action="" method="post">
+
+									{{ csrf_field() }}
+
+									<input type="hidden" name="product" id="prodName" value="{{ $product->product_slug }}">
+
+									<div class="field">
+										<label>Sticker Type</label>
+										<select name="type">
+											@foreach($preArtWorks as $row)
+
+											@php 
+												preg_match("/.+\[(.+)\]/", trim($row), $opt);
+											@endphp
+
+											<option value="{{ $opt[1] }}">{{ $opt[1] }}</option>
+
+											@endforeach
+										</select>
+									</div>
+									<div class="field">
+										<label>Paperstock</label>
+										<select name="paperstock" class="paperstock-opt">
+											@if(array_key_exists(1,$fields))
+
+												@foreach($fields[1] as $key => $val)
+													<option value="{{ $key }}">{{ $val }}</option>
+												@endforeach
+
+											@endif
+										</select>
+									</div>
+									<div class="field">
+										<label>Laminating</label>
+										<select>
+											<option>option 1</option>
+											<option>option 2</option>
+											<option>option 3</option>
+										</select>
+									</div>
+									<div class="field">
+										<label style="padding-bottom: 10px;">Printing Name</label>
+										<input type="text" placeholder="Enter Printing Name">
+									</div>
+									<div class="field">
+										<label>Select a Size</label>
+										<ul>
+											@foreach($fields[2] as $key => $val)
+												<li><input id="{{ $val }}" class="size-opt" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
+											@endforeach
+											
+											<li><input id="custom" type="radio" name="size" value="custom"> <label for="custom">Custom Size</label>
+												<div class="custom-input" style="display: none;">
+													<input type="text" placeholder="Width" name="size_w"> x <input type="text" placeholder="height" name="size_h"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button>
+													<span id="size-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
+												</div>
+											</li>
+										</ul>
+										
+									</div>
+									<div class="field">
+										<label>Select Quantity</label>
+										<ul>
+											@if(array_key_exists(3,$fields))
+
+												@foreach($fields[3] as $key => $val)
+													<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$ __</span></li>
+												@endforeach
+
+											@endif
+
+											<li>&nbsp;</li>
+
+											<li>
+												<strong>**for order quantiry more than 20k please <a href="{{ url('/contact') }}">contact</a></strong>
+											</li>
+										</ul>
+										
+									</div>
 									
-								</div>
-								
-								<div class="field">
-									<button type="button" class="continue">Continue</button>
-									<span class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-								</div>
+									<div class="field">
+										<button type="button" class="continue">Continue</button>
+										<span class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+									</div>
+
+								</form>
 							</div>
 						</div>
 
@@ -367,6 +360,9 @@
 			$(elem).closest(".review-short").remove();
 		}
 	</script>
+
+	{{-- sticker type preview section --}}
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/js/nameStickerPreview.js' ) }}"></script>
 
 	{{-- calculation form --}}
 	<script type="text/javascript" src="{{ asset( 'assets/frontend/js/calculation.js' ) }}"></script>

@@ -168,15 +168,34 @@ class Calculation extends Controller
         {
             return false;
         }
+        elseif(is_float($qty))
+        {
+            return false;
+        }
         elseif ($qty < 10)
         {
             return false;
         }
-        elseif (is_float($qty/10))
+        elseif (is_float($qty))
         {
             return false;
         }
-        elseif($qty > 50000)
+        elseif($qty < 1000 && !in_array($qty, [10, 50, 100, 200, 300, 400, 500]))
+        {
+            return false;
+        }
+        elseif($qty > 999)
+        {
+            if ($qty % 1000 != 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        elseif($qty > 20000)
         {
             return false;
         }

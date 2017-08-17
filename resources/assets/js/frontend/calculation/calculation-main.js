@@ -22,7 +22,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("input[name='qty']").change(function(){
+	/*$("input[name='qty']").change(function(){
 		erasePriceOverview('qty');
 
 		if($(this).val() == 'custom')
@@ -33,7 +33,7 @@ $(document).ready(function(){
 			$("div.custom-qty-input").hide();
 			$("div.custom-qty-input input:text").val('');
 		}
-	});
+	});*/
 	/** shows the custom input data enter boxes **/
 
 	/** fetch price upon user interaction **/
@@ -49,7 +49,7 @@ $(document).ready(function(){
 	$("button.check-price").click(function(){
 		//validate then check
 		$("span#size-err").html('').hide();
-		$("span#qty-err").html('').hide();
+		//$("span#qty-err").html('').hide();
 
 		gatherInput();
 	});
@@ -59,25 +59,25 @@ $(document).ready(function(){
 		erasePriceOverview('all');
 	});
 
-	$("div.custom-qty-input input:text").on('input', function(){
+	/*$("div.custom-qty-input input:text").on('input', function(){
 		$(this).css('border', '1px none');
 		erasePriceOverview('qty');
-	});
+	});*/
 
 	$("div.custom-input input:text").on('keydown', function(e){
 		if(e.keyCode == 13){
 	        $("span#size-err").html('').hide();
-	        $("span#qty-err").html('').hide();
+	        //$("span#qty-err").html('').hide();
 	        gatherInput();
 	    }
 	});
-	$("div.custom-qty-input input:text").on('keydown', function(e){
+	/*$("div.custom-qty-input input:text").on('keydown', function(e){
 		if(e.keyCode == 13){
 	        $("span#size-err").html('').hide();
 	        $("span#qty-err").html('').hide();
 	        gatherInput();
 	    }
-	});
+	});*/
 });
 
 function erasePriceOverview(type='all')
@@ -93,9 +93,9 @@ function erasePriceOverview(type='all')
 			$(this).html('$ __');
 		});
 	}
-	else if(type == 'qty'){
+	/*else if(type == 'qty'){
 		$("span#qty-price").html('');
-	}
+	}*/
 }
 
 class calForm {
@@ -103,13 +103,13 @@ class calForm {
 	errorFor(field, msg){
 		let widthBox = $("input[name='size_w']");
 		let heightBox = $("input[name='size_h']");
-		let qtyBox = $("input[name='quantity']");
+		//let qtyBox = $("input[name='quantity']");
 
 		if(field == 'h'){
 			heightBox.focus();
 			heightBox.css('border', '1px solid red');
         	widthBox.css('border', '1px none');
-        	qtyBox.css('border', '1px none');
+        	//qtyBox.css('border', '1px none');
 
         	erasePriceOverview('all');
 
@@ -119,13 +119,13 @@ class calForm {
 			widthBox.focus();
 			widthBox.css('border', '1px solid red');
         	heightBox.css('border', '1px none');
-        	qtyBox.css('border', '1px none');
+        	//qtyBox.css('border', '1px none');
 
         	erasePriceOverview('all');
 
     		$("span#size-err").html(msg).show();
 		}
-		else
+		/*else
 		{
 			qtyBox.focus();
 			qtyBox.css('border', '1px solid red');
@@ -135,20 +135,20 @@ class calForm {
         	erasePriceOverview('all');
 
     		$("span#qty-err").html(msg).show();
-		}
+		}*/
 
 	}
 
 	noError(){
 		let widthBox = $("input[name='size_w']");
 		let heightBox = $("input[name='size_h']");
-		let qtyBox = $("input[name='quantity']");
+		//let qtyBox = $("input[name='quantity']");
 
 		heightBox.css('border', '1px none');
         widthBox.css('border', '1px none');
-        qtyBox.css('border', '1px none');
+        //qtyBox.css('border', '1px none');
         $("span#size-err").html('').hide();
-        $("span#qty-err").html('').hide();
+        //$("span#qty-err").html('').hide();
 
         //removing the snackbar
         $("div.paper-snackbar").remove();
@@ -156,10 +156,10 @@ class calForm {
 }
 
 /** main price calculation ajax **/
-function checkPrice(product,paperstock,size,quantityVal,customSize,customQty)
+function checkPrice(product,paperstock,size,quantityVal=0,customSize,customQty=0)
 {
-	$("span[id^=priceof]").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
-	$("span#qty-price").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
+	$("span[id^=priceof]").html('<i class="fa fa-cog fa-spin fa-lg text-success"></i>');
+	//$("span#qty-price").html('<i class="fa fa-spinner fa-pulse fa-lg text-success"></i>');
 
 	$.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -179,10 +179,10 @@ function checkPrice(product,paperstock,size,quantityVal,customSize,customQty)
         		{
         			calform.errorFor('w', result['msg']);
         		}
-        		else
+        		/*else
         		{
         			calform.errorFor('q', result['msg']);
-        		}
+        		}*/
         	}
         	else{
         		calform.noError();
@@ -193,10 +193,10 @@ function checkPrice(product,paperstock,size,quantityVal,customSize,customQty)
         			count++;
         		});
 
-        		if(result['quantityPrice'] != 0)
+        		/*if(result['quantityPrice'] != 0)
         		{
         			$("span#qty-price").html('$ '+result['quantityPrice']);
-        		}
+        		}*/
         	}
         },
         error: function(xhr,status,error){
@@ -212,12 +212,12 @@ function checkPrice(product,paperstock,size,quantityVal,customSize,customQty)
 
 function gatherInput(){
 	let product = $("input#prodName").val();
-	let paperstock = $("input[name='paperstock']:checked").val();
+	let paperstock = $("select[name='paperstock']").val();
 	let size = $("input[name='size']:checked").val();
-	let quantity = $("input[name='qty']:checked").val();
+	//let quantity = $("input[name='qty']:checked").val();
 	let customSize = 0;
-	let customQty = 0;
-	if(size == 'custom' && quantity != 'custom')
+	//let customQty = 0;
+	if(size == 'custom')
 	{
 		let calform = new calForm();
 
@@ -240,10 +240,10 @@ function gatherInput(){
 			size = {"width":width, "height":height};
 			customSize = 1;
 
-			checkPrice(product,paperstock,size,0,customSize,customQty);
+			checkPrice(product,paperstock,size,0,customSize,0);
 		}
 	}
-	else if(quantity == 'custom' && size != 'custom')
+	/*else if(quantity == 'custom' && size != 'custom')
 	{
 		let calform = new calForm();
 
@@ -313,9 +313,9 @@ function gatherInput(){
 
 			checkPrice(product,paperstock,size,quantityVal,customSize,customQty);
 		}
-	}
+	}*/
 	else
 	{
-		checkPrice(product,paperstock,size,0,customSize,customQty);
+		checkPrice(product,paperstock,size,0,customSize,0);
 	}
 }
