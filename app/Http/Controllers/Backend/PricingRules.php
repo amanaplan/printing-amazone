@@ -336,8 +336,7 @@ class PricingRules extends Controller
         /** validation **/
          $validator = Validator::make($request->all(), [
             'paperstock_option' => 'required|integer',
-            'qty_frm'           => 'required|integer',
-            'qty_to'            => 'required|integer',
+            'qty'               => 'required|integer',
             'discount'          => 'required|numeric',
         ]);
 
@@ -357,8 +356,7 @@ class PricingRules extends Controller
         /** adding new preset **/
         PresetQtyGrpOne::create([
             'map_prod_form_option'  => $map_prod_form_option,
-            'order_qty_frm'         => $request->input('qty_frm'),
-            'order_qty_to'          => $request->input('qty_to'),
+            'order_qty'             => $request->input('qty'),
             'disc_rate'             => $request->input('discount'),
         ]);
 
@@ -392,8 +390,7 @@ class PricingRules extends Controller
     {
         /** validation **/
          $validator = Validator::make($request->all(), [
-            'qty_frm'           => 'required|integer',
-            'qty_to'            => 'required|integer',
+            'qty'               => 'required|integer',
             'discount'          => 'required|numeric',
         ]);
 
@@ -405,8 +402,7 @@ class PricingRules extends Controller
 
         /** updating preset data **/
         $preset = PresetQtyGrpOne::findOrFail($preset_id);
-        $preset->order_qty_frm       = $request->input('qty_frm');
-        $preset->order_qty_to        = $request->input('qty_to');
+        $preset->order_qty           = $request->input('qty');
         $preset->disc_rate           = $request->input('discount');
 
         $preset->save();

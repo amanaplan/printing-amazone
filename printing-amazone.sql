@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2017 at 06:02 PM
+-- Generation Time: Aug 18, 2017 at 02:39 PM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -225,7 +225,6 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (13, 38, 1, 1),
 (14, 38, 5, 4),
 (17, 39, 3, 1),
-(18, 39, 4, 2),
 (19, 39, 5, 3),
 (20, 39, 6, 4),
 (21, 39, 7, 5),
@@ -236,7 +235,6 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (26, 40, 5, 3),
 (27, 44, 1, 1),
 (28, 44, 5, 2),
-(30, 44, 6, 3),
 (31, 44, 7, 7),
 (32, 45, 8, 1),
 (33, 45, 9, 2),
@@ -250,7 +248,6 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (42, 41, 5, 1),
 (44, 41, 7, 2),
 (45, 41, 4, 3),
-(46, 41, 6, 4),
 (47, 41, 3, 5),
 (48, 42, 8, 0),
 (49, 42, 9, 0),
@@ -275,7 +272,6 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (68, 53, 7, 1),
 (69, 53, 3, 2),
 (70, 54, 8, 1),
-(71, 54, 9, 2),
 (72, 54, 10, 3),
 (73, 54, 11, 4),
 (74, 55, 1, 5),
@@ -308,7 +304,8 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (101, 60, 8, 1),
 (102, 60, 9, 2),
 (103, 60, 10, 3),
-(104, 60, 11, 4);
+(104, 60, 11, 4),
+(107, 54, 9, 2);
 
 -- --------------------------------------------------------
 
@@ -355,7 +352,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (36, '2017_07_26_210109_create_preset_qtyrule_one', 16),
 (37, '2017_07_26_210126_create_preset_qtyrule_two', 16),
 (38, '2017_08_12_233433_create_special_products_review_table', 17),
-(39, '2017_08_12_233958_create_special_products_table', 18);
+(39, '2017_08_12_233958_create_special_products_table', 18),
+(40, '2017_08_18_222233_rename_and_remove_qty_preset_one_table', 19);
 
 -- --------------------------------------------------------
 
@@ -375,7 +373,6 @@ CREATE TABLE `paperstock_options` (
 INSERT INTO `paperstock_options` (`id`, `option`) VALUES
 (1, 'Glossy & Matt paperboard (Artboard)'),
 (5, 'Kraft Paperboard'),
-(6, 'PVC paperboard'),
 (7, 'Silver Matt paperboard'),
 (3, 'Transparent Paper'),
 (4, 'Waterproof paperboard');
@@ -433,12 +430,6 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (19, 28, 601, 800, 0.24, 0.49, 30, 250, 0, NULL),
 (20, 28, 801, 1200, 0.24, 0.49, 30, 250, 0, NULL),
 (22, 28, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(23, 30, 0, 320, 0.25, 0.50, 30, 250, 1, 99.99),
-(24, 30, 321, 500, 0.24, 0.49, 30, 250, 0, NULL),
-(25, 30, 501, 700, 0.24, 0.49, 30, 250, 0, NULL),
-(26, 30, 701, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(27, 30, 901, 1200, 0.24, 0.49, 30, 250, 0, NULL),
-(28, 30, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
 (29, 31, 0, 320, 0.25, 0.50, 30, 250, 1, 99.00),
 (30, 31, 321, 500, 0.24, 0.49, 30, 250, 0, NULL),
 (31, 31, 501, 800, 0.24, 0.49, 30, 250, 0, NULL),
@@ -448,12 +439,6 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (35, 42, 601, 800, 0.24, 0.49, 30, 250, 0, NULL),
 (36, 42, 801, 1200, 0.24, 0.49, 30, 250, 0, NULL),
 (37, 42, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(38, 46, 0, 320, 0.24, 0.50, 30, 250, 1, 99.99),
-(39, 46, 321, 500, 0.24, 0.49, 30, 250, 0, NULL),
-(40, 46, 501, 700, 0.24, 0.49, 30, 250, 0, NULL),
-(41, 46, 701, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(42, 46, 901, 1200, 0.24, 0.49, 30, 250, 0, NULL),
-(43, 46, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
 (44, 44, 0, 320, 0.25, 0.50, 30, 250, 1, 99.00),
 (45, 44, 321, 500, 0.24, 0.49, 30, 250, 0, NULL),
 (46, 44, 501, 800, 0.24, 0.49, 30, 250, 0, NULL),
@@ -514,8 +499,7 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 CREATE TABLE `preset_qty_rule_one` (
   `id` int(10) UNSIGNED NOT NULL,
   `map_prod_form_option` int(11) NOT NULL,
-  `order_qty_frm` int(11) NOT NULL,
-  `order_qty_to` int(11) NOT NULL,
+  `order_qty` int(11) NOT NULL,
   `disc_rate` double(4,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -523,17 +507,20 @@ CREATE TABLE `preset_qty_rule_one` (
 -- Dumping data for table `preset_qty_rule_one`
 --
 
-INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty_frm`, `order_qty_to`, `disc_rate`) VALUES
-(4, 13, 100, 199, 57.00),
-(5, 13, 200, 299, 70.00),
-(6, 13, 300, 399, 83.00),
-(7, 13, 400, 499, 89.00),
-(8, 13, 500, 599, 95.00),
-(9, 14, 100, 199, 57.00),
-(10, 14, 200, 299, 70.00),
-(11, 14, 300, 399, 83.00),
-(12, 14, 400, 499, 89.00),
-(13, 14, 500, 599, 95.00);
+INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `disc_rate`) VALUES
+(4, 13, 100, 57.00),
+(5, 13, 200, 70.00),
+(6, 13, 300, 83.00),
+(7, 13, 400, 89.00),
+(8, 13, 500, 95.00),
+(9, 14, 100, 57.00),
+(10, 14, 200, 70.00),
+(11, 14, 300, 83.00),
+(12, 14, 400, 89.00),
+(13, 14, 500, 95.00),
+(15, 92, 10, 6.00),
+(16, 92, 50, 20.00),
+(17, 92, 100, 57.00);
 
 -- --------------------------------------------------------
 
@@ -718,7 +705,6 @@ INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
 (1, 'small (11cm x 20cm)', 11, 20),
 (2, 'Large A1 Paper (17 x 10)', 17, 10),
 (3, '5 x 5 mm', 5, 5),
-(4, '7 x 7 mm', 7, 7),
 (5, '9 x 9 mm', 9, 9),
 (6, '12 x 12 mm', 12, 12),
 (7, '15 x 15 mm', 15, 15),
@@ -943,12 +929,12 @@ ALTER TABLE `map_prod_form`
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
@@ -958,12 +944,12 @@ ALTER TABLE `paperstock_options`
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --
@@ -983,7 +969,7 @@ ALTER TABLE `product_special`
 -- AUTO_INCREMENT for table `qty_options`
 --
 ALTER TABLE `qty_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `reviews`
 --
