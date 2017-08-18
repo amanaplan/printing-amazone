@@ -512,12 +512,22 @@ class AdminRqstController extends Controller
 
         if(count($torem) > 0)
         {
-            /*
-            *remember to remove the assigned pricing rule too
-            */
+            $isPaperstock = (MapFrmProd::find($mapid)->form_field_id == 1)? true : false;
 
             foreach($torem as $remitem){
-                MapProdFrmOpt::where([['mapping_field_id', $mapid], ['option_id', $remitem]])->delete();
+                $theOptMaping = MapProdFrmOpt::where([['mapping_field_id', $mapid], ['option_id', $remitem]]);
+
+                //if it is a paperstock option then remove the presets
+                if($isPaperstock)
+                {
+                    $optMapId = $theOptMaping->first()->id;
+                    PresetGeneral::where('map_prod_form_option', $optMapId)->delete();
+                    PresetQtyGrpOne::where('map_prod_form_option', $optMapId)->delete();
+                    PresetQtyGrpTwo::where('map_prod_form_option', $optMapId)->delete();    
+                }            
+                //or skip
+
+                $theOptMaping->delete();
             }
         }
 
@@ -712,4 +722,70 @@ class AdminRqstController extends Controller
             $product->delete();
         }
     }
+
+    /**
+    *remove quantity option
+    */
+    public function QtyRemove(Request $request)
+    {
+        $this->validate($request, [
+            'option_id' => 'required|integer',
+        ]);
+
+        $qtyMappings = MapFrmProd::where('form_field_id', 3)->select('id')->get();
+        MapProdFrmOpt::whereIn('mapping_field_id', $qtyMappings)->where('option_id', $request->input('option_id'))->delete();
+
+        OptQty::destroy($request->input('option_id'));
+        
+        adminflash('success', 'quantity option removed completely');
+        return redirect()->back();
+    }
+
+    /**
+    *remove size option
+    */
+    public function SizeRemove(Request $request)
+    {
+        $this->validate($request, [
+            'option_id' => 'required|integer',
+        ]);
+
+        $sizeMappings = MapFrmProd::where('form_field_id', 2)->select('id')->get();
+        MapProdFrmOpt::whereIn('mapping_field_id', $sizeMappings)->where('option_id', $request->input('option_id'))->delete();
+
+        OptSize::destroy($request->input('option_id'));
+        
+        adminflash('success', 'size option removed completely');
+        return redirect()->back();
+    }
+
+    /**
+    *remove paperstock option
+    */
+    public function PaperstockRemove(Request $request)
+    {
+        $this->validate($request, [
+            'option_id' => 'required|integer',
+        ]);
+
+        $papstockMappings = MapFrmProd::where('form_field_id', 1)->select('id')->get();
+        $papOPtMaps = MapProdFrmOpt::whereIn('mapping_field_id', $papstockMappings)->where('option_id', $request->input('option_id'));
+
+        $optionMapIds = $papOPtMaps->select('id')->get();
+
+        //remove the option mappings
+        $papOPtMaps->delete();
+
+        OptPaperstock::destroy($request->input('option_id'));
+
+        //remove the price presets
+        PresetGeneral::whereIn('map_prod_form_option', $optionMapIds)->delete();
+        PresetQtyGrpOne::whereIn('map_prod_form_option', $optionMapIds)->delete();
+        PresetQtyGrpTwo::whereIn('map_prod_form_option', $optionMapIds)->delete();
+        
+        adminflash('success', 'paperstock option removed completely');
+        return redirect()->back();
+    }
+    
+
 }

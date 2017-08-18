@@ -215,7 +215,7 @@ class AdminController extends Controller
     {
         $data = [
             'page'      => 'qty',
-            'options'   => OptQty::all()
+            'options'   => OptQty::orderBy('option', 'asc')->get()
         ];
         
         return view('backend.options-qty', $data);
@@ -268,7 +268,7 @@ class AdminController extends Controller
                 $table = 'size_options';
                 break;
             case 3:
-                $optios = OptQty::all();
+                $optios = OptQty::orderBy('option','asc')->get();
                 $table = 'qty_options';
                 break;
             default:
@@ -291,7 +291,7 @@ class AdminController extends Controller
             'fieldtype' => $fieldtype,
             'mapid'     => $mapid,
             'curropt'   => $optarr,
-            'selected'  => MapProdFrmOpt::where('mapping_field_id', $mapid)->get(),
+            'selected'  => MapProdFrmOpt::where('mapping_field_id', $mapid)->orderBy('sort', 'asc')->get(),
             'table'     => $table
         ];
 

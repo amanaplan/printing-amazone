@@ -125,8 +125,11 @@ Route::prefix('admin')->group(function() {
 	Route::get('/form/size', 'Backend\AdminController@FormSize');
 	Route::get('/form/qty', 'Backend\AdminController@FormQuantity');
 	Route::post('/form/insert/paperstock', 'Backend\RequestHandlers\AdminRqstController@PaperstockInsert');
+	Route::delete('/form/remove/paperstock', 'Backend\RequestHandlers\AdminRqstController@PaperstockRemove');
 	Route::post('/form/insert/size', 'Backend\RequestHandlers\AdminRqstController@SizeInsert');
+	Route::delete('/form/remove/size', 'Backend\RequestHandlers\AdminRqstController@SizeRemove');
 	Route::post('/form/insert/qty', 'Backend\RequestHandlers\AdminRqstController@QtyInsert');
+	Route::delete('/form/remove/qty', 'Backend\RequestHandlers\AdminRqstController@QtyRemove');
 	Route::get('/form/paperstock/edit/{id}', 'Backend\AdminController@EditFormPaperstock');
 	Route::get('/form/size/edit/{id}', 'Backend\AdminController@EditFormSize');
 	Route::put('/form/update/paperstock/{id}', 'Backend\RequestHandlers\AdminRqstController@PaperstockUpdate');

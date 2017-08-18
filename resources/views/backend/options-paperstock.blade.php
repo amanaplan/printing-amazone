@@ -83,8 +83,16 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $option->option }}</td>
-                                        <td><a href="{{ url('/admin/form/paperstock/edit/'.$option->id) }}"><i class="fa fa-edit"></i></a></td>
-                                        <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                                        <td><a class="btn btn-info" href="{{ url('/admin/form/paperstock/edit/'.$option->id) }}"><i class="fa fa-edit"></i></a></td>
+                                        <td>
+                                            <form action="{{ url('/admin/form/remove/paperstock') }}" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                
+                                                <input type="hidden" name="option_id" value="{{ $option->id }}">
+                                                <button onclick="return confirm('sure to remove this option !');" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
 

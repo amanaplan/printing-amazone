@@ -103,8 +103,16 @@
                                         <td>{{ $option->display_value }}</td>
                                         <td>{{ $option->width }}</td>
                                         <td>{{ $option->height }}</td>
-                                        <td><a href="{{ url('/admin/form/size/edit/'.$option->id) }}"><i class="fa fa-edit"></i></a></td>
-                                        <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                                        <td><a class="btn btn-default" href="{{ url('/admin/form/size/edit/'.$option->id) }}"><i class="fa fa-edit"></i></a></td>
+                                        <td>
+                                            <form action="{{ url('/admin/form/remove/size') }}" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                
+                                                <input type="hidden" name="option_id" value="{{ $option->id }}">
+                                                <button onclick="return confirm('sure to remove this option !');" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
 
