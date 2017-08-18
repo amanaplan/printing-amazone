@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2017 at 02:39 PM
--- Server version: 10.1.24-MariaDB
+-- Generation Time: Aug 18, 2017 at 04:49 PM
+-- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -35,8 +35,8 @@ CREATE TABLE `admins` (
   `profile_pic` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `super_admin` tinyint(4) NOT NULL DEFAULT '0',
-  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `super_admin` tinyint(4) NOT NULL DEFAULT 0,
+  `active` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -69,14 +69,14 @@ CREATE TABLE `admin_password_resets` (
 
 CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci,
-  `og_title` text COLLATE utf8mb4_unicode_ci,
-  `meta_desc` text COLLATE utf8mb4_unicode_ci,
-  `og_desc` text COLLATE utf8mb4_unicode_ci,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sort` int(11) NOT NULL DEFAULT '0',
+  `sort` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -124,7 +124,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -214,7 +214,7 @@ CREATE TABLE `map_prod_form_options` (
   `id` int(10) UNSIGNED NOT NULL,
   `mapping_field_id` int(11) NOT NULL COMMENT 'mapping id of map_prod_form table',
   `option_id` int(11) NOT NULL,
-  `sort` int(11) NOT NULL DEFAULT '0'
+  `sort` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -404,7 +404,7 @@ CREATE TABLE `preset_general` (
   `profit_percent` double(4,2) DEFAULT NULL,
   `min_size` int(11) NOT NULL,
   `max_size` int(11) NOT NULL,
-  `is_base` tinyint(4) NOT NULL DEFAULT '0',
+  `is_base` tinyint(4) NOT NULL DEFAULT 0,
   `base_price` double(4,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -520,7 +520,12 @@ INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `d
 (13, 14, 500, 95.00),
 (15, 92, 10, 6.00),
 (16, 92, 50, 20.00),
-(17, 92, 100, 57.00);
+(17, 92, 100, 57.00),
+(18, 42, 100, 57.00),
+(19, 42, 200, 70.00),
+(20, 42, 300, 83.00),
+(21, 42, 400, 89.00),
+(22, 42, 500, 95.00);
 
 -- --------------------------------------------------------
 
@@ -557,8 +562,8 @@ INSERT INTO `preset_qty_rule_two` (`id`, `map_prod_form_option`, `every_extra_qt
 
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci,
-  `meta_desc` text COLLATE utf8mb4_unicode_ci,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_id` int(11) NOT NULL,
   `product_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -566,7 +571,7 @@ CREATE TABLE `products` (
   `logo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `sample_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sort` int(11) NOT NULL DEFAULT '0',
+  `sort` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -592,8 +597,8 @@ INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `pr
 
 CREATE TABLE `product_special` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci,
-  `meta_desc` text COLLATE utf8mb4_unicode_ci,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `og_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -647,7 +652,7 @@ CREATE TABLE `reviews` (
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `rating` decimal(4,1) NOT NULL,
-  `publish` int(11) NOT NULL DEFAULT '0',
+  `publish` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -679,7 +684,7 @@ CREATE TABLE `review_special` (
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `rating` decimal(4,1) NOT NULL,
-  `publish` int(11) NOT NULL DEFAULT '0',
+  `publish` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -949,7 +954,7 @@ ALTER TABLE `preset_general`
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --

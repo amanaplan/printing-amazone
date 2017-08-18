@@ -74,10 +74,12 @@ class AutoCalculator{
 
 	public function applyQtyRuleOne()
 	{
-		$presetOne = PresetQtyGrpOne::where([['map_prod_form_option', $this->map_prod_form_option], ['order_qty_frm', '<=', $this->qty], ['order_qty_to', '>=', $this->qty]]);
+		$presetOne = PresetQtyGrpOne::where([['map_prod_form_option', $this->map_prod_form_option], ['order_qty', $this->qty]]);
 		if($presetOne->count() > 0)
 		{
-			return $this->price * ($presetOne->first()->disc_rate/100);
+			$this->price = $this->price / $this->qty;
+
+			return $this->price * 1000 * ($presetOne->first()->disc_rate/100);
 		}
 		else
 		{
