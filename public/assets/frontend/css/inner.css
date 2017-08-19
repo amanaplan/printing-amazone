@@ -838,3 +838,6 @@ select {
     text-transform: uppercase;
     font-weight: 800;
 }
+.content strong{font-weight: 600; font-size: 18px; display: block; margin-bottom: 10px;font-family: 'Raleway', sans-serif; color: #156db9;}
+.content p{font-size: 14px;font-family: 'Raleway', sans-serif; color: #111; opacity: 0.85; line-height: 24px; margin-bottom: 30px; text-align: justify;}
+.content p b{font-weight: 600; color: #000; opacity: 1;}

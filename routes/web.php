@@ -34,6 +34,8 @@ Route::post('/product/calculate-price', 'Frontend\Calculation@GenPrice');
 Route::get('/labels', 'Frontend\DirectProduct');
 Route::get('/graphic-designs', 'Frontend\DirectProduct');
 Route::get('/product/name-sticker/get-preview', 'Frontend\AjaxCtrl@ShowPreview');
+Route::get('/contact', 'Frontend\PagesCtrl@contact');
+Route::get('/about', 'Frontend\PagesCtrl@about');
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2017 at 11:28 AM
+-- Generation Time: Aug 19, 2017 at 02:11 PM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -87,10 +87,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `title`, `og_title`, `meta_desc`, `og_desc`, `og_img`, `category_name`, `category_slug`, `sort`, `show_in_menu`, `created_at`, `updated_at`) VALUES
-(1, 'sticker page title', 'sticker page title', 'sticker page meta desc', 'sticker page meta desc', 'banner-bg.jpg', 'Sticker', 'sticker', 1, 1, '2017-05-26 15:10:37', '2017-08-19 13:03:29'),
-(2, NULL, NULL, NULL, NULL, NULL, 'Business Card', 'business-card', 2, 1, '2017-06-19 13:00:47', '2017-06-19 13:38:27'),
-(3, NULL, NULL, NULL, NULL, NULL, 'Brochures/Flyers', 'brochuresflyers', 3, 1, '2017-06-19 13:14:34', '2017-06-19 13:38:35'),
-(4, NULL, NULL, NULL, NULL, NULL, 'Postcards', 'postcards', 4, 1, '2017-06-19 13:14:52', '2017-06-19 13:38:36'),
+(1, 'Sticker - Printing Amazon', 'Sticker - Printing Amazon', 'sticker page meta desc', 'sticker page meta desc', 'banner-bg.jpg', 'Sticker', 'sticker', 1, 1, '2017-05-26 15:10:37', '2017-08-19 15:08:22'),
+(2, 'Business Card - Printing Amazon', 'Business Card - Printing Amazon', NULL, NULL, NULL, 'Business Card', 'business-card', 2, 1, '2017-06-19 13:00:47', '2017-08-19 15:08:36'),
+(3, 'Brochures/Flyers - Printing Amazon', 'Brochures/Flyers - Printing Amazon', NULL, NULL, NULL, 'Brochures/Flyers', 'brochuresflyers', 3, 1, '2017-06-19 13:14:34', '2017-08-19 15:08:51'),
+(4, 'Postcards - Printing Amazon', 'Postcards - Printing Amazon', NULL, NULL, NULL, 'Postcards', 'postcards', 4, 1, '2017-06-19 13:14:52', '2017-08-19 15:09:02'),
 (5, NULL, NULL, NULL, NULL, NULL, 'Uncategorized', 'uncategorized', 0, 0, '2017-08-19 13:05:36', '2017-08-19 13:05:36');
 
 -- --------------------------------------------------------
@@ -230,11 +230,11 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (19, 39, 5, 3),
 (20, 39, 6, 4),
 (21, 39, 7, 5),
-(22, 40, 1, 5),
-(23, 40, 2, 1),
-(24, 40, 3, 2),
-(25, 40, 4, 4),
-(26, 40, 5, 3),
+(22, 40, 1, 7),
+(23, 40, 2, 3),
+(24, 40, 3, 4),
+(25, 40, 4, 6),
+(26, 40, 5, 5),
 (27, 44, 1, 1),
 (28, 44, 5, 2),
 (31, 44, 7, 7),
@@ -242,11 +242,11 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (33, 45, 9, 2),
 (34, 45, 10, 3),
 (35, 45, 11, 4),
-(36, 46, 1, 5),
-(37, 46, 2, 1),
-(38, 46, 3, 2),
-(39, 46, 4, 4),
-(40, 46, 5, 3),
+(36, 46, 1, 7),
+(37, 46, 2, 3),
+(38, 46, 3, 4),
+(39, 46, 4, 6),
+(40, 46, 5, 5),
 (42, 41, 5, 1),
 (44, 41, 7, 2),
 (45, 41, 4, 3),
@@ -255,32 +255,32 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (49, 42, 9, 0),
 (50, 42, 10, 0),
 (51, 42, 11, 0),
-(52, 43, 1, 5),
-(53, 43, 2, 1),
-(54, 43, 3, 2),
-(55, 43, 4, 4),
-(56, 43, 5, 3),
+(52, 43, 1, 7),
+(53, 43, 2, 3),
+(54, 43, 3, 4),
+(55, 43, 4, 6),
+(56, 43, 5, 5),
 (57, 50, 1, 1),
 (58, 50, 5, 2),
 (59, 51, 8, 0),
 (60, 51, 9, 0),
 (61, 51, 10, 0),
 (62, 51, 11, 0),
-(63, 52, 1, 5),
-(64, 52, 2, 1),
-(65, 52, 3, 2),
-(66, 52, 4, 4),
-(67, 52, 5, 3),
+(63, 52, 1, 7),
+(64, 52, 2, 3),
+(65, 52, 3, 4),
+(66, 52, 4, 6),
+(67, 52, 5, 5),
 (68, 53, 7, 1),
 (69, 53, 3, 2),
 (70, 54, 8, 1),
 (72, 54, 10, 3),
 (73, 54, 11, 4),
-(74, 55, 1, 5),
-(75, 55, 2, 1),
-(76, 55, 3, 2),
-(77, 55, 4, 4),
-(78, 55, 5, 3),
+(74, 55, 1, 7),
+(75, 55, 2, 3),
+(76, 55, 3, 4),
+(77, 55, 4, 6),
+(78, 55, 5, 5),
 (79, 56, 1, 1),
 (80, 56, 5, 4),
 (81, 56, 3, 3),
@@ -289,25 +289,39 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (84, 57, 9, 2),
 (85, 57, 10, 3),
 (86, 57, 11, 4),
-(87, 58, 1, 5),
-(88, 58, 2, 1),
-(89, 58, 3, 2),
-(90, 58, 4, 4),
-(91, 58, 5, 3),
+(87, 58, 1, 7),
+(88, 58, 2, 3),
+(89, 58, 3, 4),
+(90, 58, 4, 6),
+(91, 58, 5, 5),
 (92, 59, 1, 1),
 (93, 59, 5, 2),
 (94, 59, 7, 3),
 (95, 59, 4, 4),
-(96, 61, 1, 5),
-(97, 61, 2, 1),
-(98, 61, 3, 2),
-(99, 61, 4, 4),
-(100, 61, 5, 3),
+(96, 61, 1, 7),
+(97, 61, 2, 3),
+(98, 61, 3, 4),
+(99, 61, 4, 6),
+(100, 61, 5, 5),
 (101, 60, 8, 1),
 (102, 60, 9, 2),
 (103, 60, 10, 3),
 (104, 60, 11, 4),
-(107, 54, 9, 2);
+(107, 54, 9, 2),
+(108, 61, 7, 1),
+(109, 61, 8, 2),
+(110, 58, 7, 1),
+(111, 58, 8, 2),
+(112, 55, 7, 1),
+(113, 55, 8, 2),
+(114, 43, 7, 1),
+(115, 43, 8, 2),
+(116, 52, 7, 1),
+(117, 52, 8, 2),
+(118, 46, 7, 1),
+(119, 46, 8, 2),
+(120, 40, 7, 1),
+(121, 40, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -491,7 +505,19 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (91, 92, 0, 470, 0.25, 0.50, 30, 250, 1, 99.00),
 (92, 92, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (93, 92, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
-(94, 92, 1351, 62500, 0.25, 0.49, 30, 250, 0, NULL);
+(94, 92, 1351, 62500, 0.25, 0.49, 30, 250, 0, NULL),
+(96, 93, 0, 470, 0.25, 0.50, 30, 250, 1, 69.00),
+(97, 93, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
+(98, 93, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
+(99, 93, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
+(100, 94, 0, 470, 0.25, 0.50, 30, 250, 1, 63.00),
+(101, 94, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
+(102, 94, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
+(103, 94, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
+(104, 95, 0, 470, 0.25, 0.50, 30, 250, 1, 69.00),
+(105, 95, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
+(106, 95, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
+(107, 95, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -584,14 +610,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `product_name`, `product_slug`, `logo`, `description`, `sample_image`, `sort`, `created_at`, `updated_at`) VALUES
-(2, 'Square Stickers - Printing Amazon', 'some meta', 'Square Sticker_3.jpg', 1, 'Square Stickers', 'square-stickers', 'cs-4.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', 'Square Sticker.png*Square Sticker_2.jpg*Square Sticker_3.jpg*Square Sticker_4.jpg', 2, '2017-05-30 14:35:51', '2017-08-15 13:46:29'),
-(4, 'Free Shaping Business Card', NULL, NULL, 2, 'Free Shaping Cards', 'free-shaping-cards', 'f2.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Lettering Decal_1.jpg', 2, '2017-06-19 15:22:41', '2017-08-15 16:07:48'),
+(2, 'Square Stickers - Printing Amazon', 'some meta', 'Square Sticker_3.jpg', 1, 'Square Stickers', 'square-stickers', 'cs-3.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', '1242-gloss_stickers.jpg*Square Sticker_3.jpg*Square Sticker_4.jpg', 2, '2017-05-30 14:35:51', '2017-08-19 16:12:51'),
+(4, 'Free Shaping Business Card', NULL, NULL, 2, 'Free Shaping Cards', 'free-shaping-cards', 'f1.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Lettering Decal_1.jpg', 2, '2017-06-19 15:22:41', '2017-08-19 16:22:27'),
 (17, 'Rectangle Stickers - Printing Amazon', NULL, NULL, 1, 'Rectangle Stickers', 'rectangle-stickers', 'cs-4.png', 'Custom rectangle stickers make great business card stickers, product labels, envelope seals and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 3, '2017-08-15 14:00:51', '2017-08-15 14:19:28'),
 (19, 'Rectangle Postcards', NULL, NULL, 4, 'Rectangle Postcards', 'rectangle-postcards', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Postcard_1.jpg', 1, '2017-08-15 16:23:21', '2017-08-15 16:23:21'),
-(20, 'Rounded Corner', NULL, NULL, 3, 'Rounded Corner', 'rounded-corner', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 1, '2017-08-15 16:42:47', '2017-08-15 16:42:47'),
-(21, 'Circle Stickers', NULL, NULL, 1, 'Circle Stickers', 'circle-stickers', 'cs-4.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 4, '2017-08-15 16:57:52', '2017-08-15 16:57:52'),
-(22, 'Name stickers - Printing Amazon', NULL, NULL, 1, 'Name stickers', 'name-stickers', 'cs-4.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of.', 'KidsStickers.jpg[Animal Town - 0004582] * NameStickers_V2.jpg[Ben10 Ultimate Pack]', 5, '2017-08-16 13:48:57', '2017-08-17 13:42:56'),
-(23, 'Labels - Printing Amazon', NULL, NULL, 5, 'Labels', 'labels', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur.', 'Decal Sticker_3.jpg', 1, '2017-08-19 13:08:47', '2017-08-19 13:08:47'),
+(20, 'Rounded Corner', NULL, NULL, 3, 'Rounded Corner', 'rounded-corner', 'cs-6.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 1, '2017-08-15 16:42:47', '2017-08-19 16:20:42'),
+(21, 'Circle Stickers', NULL, NULL, 1, 'Circle Stickers', 'circle-stickers', 'cs-2.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 4, '2017-08-15 16:57:52', '2017-08-19 16:13:40'),
+(22, 'Name stickers - Printing Amazon', NULL, NULL, 1, 'Name stickers', 'name-stickers', 'namesticker_icon.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of.', '8-bit-zombie-custom-rectangle-vinyl-stickers-kiss-cut-1.jpg[B-Bit Zombie] * KidsStickers.jpg[Animal Town - 0004582] * 9e17.jpg[Ben10 Ultimate Pack]', 5, '2017-08-16 13:48:57', '2017-08-19 16:27:52'),
+(23, 'Labels - Printing Amazon', NULL, NULL, 5, 'Labels', 'labels', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo', 'PVC-paper-custom-label-sticker-logo-printing-self-adhesive-shipping-labels-custom-sticker-label-stickers.jpg', 1, '2017-08-19 13:08:47', '2017-08-19 15:57:18'),
 (24, 'Graphic Designs - Printing Amazon', NULL, NULL, 5, 'Graphic Designs', 'graphic-designs', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo', 'gshock-watch-sports-watch-stopwatch-158741.jpeg*hacker-internet-technology-computers-159195.jpeg', 2, '2017-08-19 13:24:07', '2017-08-19 13:24:07');
 
 -- --------------------------------------------------------
@@ -614,7 +640,9 @@ INSERT INTO `qty_options` (`id`, `option`) VALUES
 (2, 100),
 (3, 200),
 (4, 500),
-(5, 300);
+(5, 300),
+(7, 10),
+(8, 50);
 
 -- --------------------------------------------------------
 
@@ -649,7 +677,7 @@ INSERT INTO `reviews` (`id`, `product_id`, `user_id`, `title`, `description`, `r
 (75, 22, 2, 'Sed ut perspiciatis unde omnis iste natus error sit voluptat', 'quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione', '4.0', 1, '2017-08-17 20:07:07', '2017-08-17 20:07:42'),
 (76, 20, 2, 'nostrud exercitation ullamco laboris nisi aliquip', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non loqaugfa aytggu aghaewyese y4qaqalug', '5.0', 1, '2017-08-19 10:50:20', '2017-08-19 10:53:59'),
 (77, 23, 1, 'sunt in culpa qui officia deserunt mollit anim id est', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip', '5.0', 1, '2017-08-19 13:47:49', '2017-08-19 13:49:23'),
-(78, 24, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam edit', '3.5', 0, '2017-08-19 13:49:54', '2017-08-19 13:50:41');
+(78, 24, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam edit', '3.5', 1, '2017-08-19 13:49:54', '2017-08-19 14:02:05');
 
 -- --------------------------------------------------------
 
@@ -882,7 +910,7 @@ ALTER TABLE `map_prod_form`
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -897,7 +925,7 @@ ALTER TABLE `paperstock_options`
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
@@ -917,7 +945,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `qty_options`
 --
 ALTER TABLE `qty_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `reviews`
 --

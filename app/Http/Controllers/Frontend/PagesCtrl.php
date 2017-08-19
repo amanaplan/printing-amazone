@@ -191,4 +191,20 @@ class PagesCtrl extends Controller
         }
     }
 
+    /**
+    *contact page
+    */
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
+
+    /**
+    *about page
+    */
+    public function about()
+    {
+        return view('frontend.about');
+    }
+
 }
