@@ -41,7 +41,7 @@
 				<div class="one_color_blue_carousel_caption_text">
 					<h1>Make your own<br> Custom <span>Stickers</span></h1>
 					<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit<br> amet, consectetur, adipisci velit</p>
-					<a href="#" class="pink">Get Samples</a><a href="#" class="green">Shop Now</a>
+					<a href="#" class="pink">Get Samples</a><a href="{{ url('/sticker') }}" class="green">Shop Now</a>
 				</div>						
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 				<div class="one_color_blue_carousel_caption_text">
 					<h1>Make your own<br> Custom <span>Stickers</span></h1>
 					<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit<br> amet, consectetur, adipisci velit</p>
-					<a href="#" class="pink">Get Samples</a><a href="#" class="green">Shop Now</a>
+					<a href="#" class="pink">Get Samples</a><a href="{{ url('/sticker') }}" class="green">Shop Now</a>
 				</div>						
 			</div>
 		</div>
