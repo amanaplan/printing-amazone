@@ -73,7 +73,23 @@
                                         <p><i class="fa fa-user"></i> {{ $review->user->name }}</p>
                                         <p><i class="fa fa-envelope"></i> {{ $review->user->email }}</p>
                                     </td>
-                                    <td><span class="label label-primary">{{ $review->product->product_name }}</span> <a href="{{ url('/'.$review->product->category->category_slug.'/'.$review->product->product_slug) }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                                    <td>
+                                        <span class="label label-primary">{{ $review->product->product_name }}</span> 
+
+                                        @if($review->product->category->category_slug == 'uncategorized')
+
+                                        <a href="{{ url('/'.$review->product->product_slug) }}" target="_blank">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                        </a>
+
+                                        @else
+
+                                            <a href="{{ url('/'.$review->product->category->category_slug.'/'.$review->product->product_slug) }}" target="_blank">
+                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            </a>
+
+                                        @endif
+                                    </td>
                                     <td>{{ $review->title }}</td>
                                     <td>{{ $review->description }}</td>
                                     <td>{!! genRatedStar($review->rating) !!}</td>

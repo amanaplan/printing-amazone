@@ -67,7 +67,19 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td><img src="{{ asset('assets/images/products/'.$product->logo) }}" width="80"></td>
-                                    <td>{{ $product->product_name }} <a href="{{ url('/'.$product->category->category_slug.'/'.$product->product_slug) }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                                    <td>{{ $product->product_name }} 
+                                        @if($product->category->category_slug == 'uncategorized')
+
+                                        <a href="{{ url('/'.$product->product_slug) }}" target="_blank">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                        </a>
+
+                                        @else
+                                            <a href="{{ url('/'.$product->category->category_slug.'/'.$product->product_slug) }}" target="_blank">
+                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            </a>
+                                        @endif
+                                    </td>
                                     <td><span class="label label-primary">{{ \App\Category::where('id', $product->category_id)->first()->category_name }}</span></td>
                                     <td>
                                         @if($product->formfields()->count() > 0)
@@ -106,22 +118,6 @@
                                 </tr>
 
                                 @endforeach
-
-                                {{-- special products --}}
-                                @foreach($spProducts as $product)
-                                    <tr>
-                                        <td>#</td>
-                                        <td><img src="{{ asset('assets/images/products/'.$product->logo) }}" width="80"></td>
-                                        <td>{{ $product->product_name }} <a href="{{ url('/'.$product->product_slug) }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>{{ $product->review()->count() }}</td>
-                                        <td>-</td>
-                                        <td><a href="{{ url('/admin/special-product/edit/'.$product->id) }}"><i class="fa fa-edit"></i></a></td>
-                                        <td>-</td>
-                                    </tr>
-                                @endforeach
-                                {{-- special products --}}
 
                             </tbody>
                         </table>

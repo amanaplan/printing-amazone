@@ -13,7 +13,6 @@ use App\Review;
 use App\PresetGeneral;
 use App\PresetQtyGrpOne;
 use App\PresetQtyGrpTwo;
-use App\ProductSpecial;
 
 use App\Http\HelperClass\Multipurpose;
 use Illuminate\Support\Facades\Redis;
@@ -40,6 +39,7 @@ class AdminRqstController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_name'	=> 'required|min:5|unique:category,category_name',
+            'show'          => 'nullable|boolean',
         ]);
 
 
@@ -51,6 +51,7 @@ class AdminRqstController extends Controller
         $category                  	= new \App\Category();
         $category->category_name   	= $request->input('category_name');
         $category->category_slug   	= str_slug($request->input('category_name'), '-');
+        $category->show_in_menu     = $request->input('show')? 1 : 0;
         $category->title 			= $request->input('page_title');
         $category->og_title    		= $request->input('page_title');
         $category->meta_desc     	= $request->input('meta_desc');
@@ -75,7 +76,8 @@ class AdminRqstController extends Controller
     public function EditCategory(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'category_name' => ['required', 'min:5', Rule::unique('category','category_name')->ignore($id)]
+            'category_name' => ['required', 'min:5', Rule::unique('category','category_name')->ignore($id)],
+            'show'          => 'nullable|boolean',
         ]);
 
 
@@ -87,6 +89,7 @@ class AdminRqstController extends Controller
         $category                   = \App\Category::findOrFail($id);
         $category->category_name    = $request->input('category_name');
         $category->category_slug    = str_slug($request->input('category_name'), '-');
+        $category->show_in_menu     = $request->input('show')? 1 : 0;
         $category->title            = $request->input('page_title');
         $category->og_title         = $request->input('page_title');
         $category->meta_desc        = $request->input('meta_desc');
@@ -240,46 +243,6 @@ class AdminRqstController extends Controller
                 }
             }
 
-            adminflash('success', 'product updated');
-            return redirect('/admin/product/manage');
-        }
-        else
-        {
-            adminflash('warning', 'input data error');
-            return redirect()->back();
-        }
-    }
-
-    /**
-    *update special product
-    */
-    /**
-    *update product
-    */
-    public function EditSpProduct(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'description'   => 'required',
-            'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/']
-        ]);
-
-
-        if ($validator->fails()) {
-            adminflash('warning', 'incorrent input data');
-            return redirect()->back()->withErrors($validator);
-        }
-
-        $product                    = \App\ProductSpecial::findOrFail($id);
-        $product->logo              = $request->input('logo');
-        $product->description       = $request->input('description');
-        $product->sample_image      = $request->input('sample_img');
-
-        $product->title             = $request->input('page_title');
-        $product->meta_desc         = $request->input('meta_desc');
-        $product->og_img            = $request->input('og_image');
-
-        if($product->save())
-        {
             adminflash('success', 'product updated');
             return redirect('/admin/product/manage');
         }

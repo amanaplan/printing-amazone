@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
 
         //for main navigation view composer
         View::composer('layouts.frontend.main-nav', function () {
-            View::share('nav', Category::orderBy('sort', 'asc')->get());
+            View::share('nav', Category::where('show_in_menu', 1)->orderBy('sort', 'asc')->get());
         });
 
         //for admin sidebar

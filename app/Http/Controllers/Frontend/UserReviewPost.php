@@ -12,9 +12,6 @@ use App\Mail\ReviewPosted;
 use App\Product;
 use App\Review;
 
-use App\ProductSpecial;
-use App\ReviewSpecial;
-
 use App\Admin;
 
 //required for validation checking
@@ -48,15 +45,8 @@ class UserReviewPost extends Controller
             'product'   => 'required'
         ]);
 
-        $product = Product::where('product_slug', $request->input('product'));
+        $product = Product::where('product_slug', $request->input('product'))->firstOrFail();
 
-        /*the product could be special product*/
-        if($product->count() == 0)
-        {
-            return $this->specialProdReview($request);
-        }
-
-        $product = $product->first();
         $product_id = $product->id;
         $user_id = Auth::user()->id;
 
@@ -91,47 +81,6 @@ class UserReviewPost extends Controller
             $review->save();
         }
 
-    }
-
-    /**
-    *review for special products
-    */
-    public function specialProdReview(Request $request)
-    {
-        $product = ProductSpecial::where('product_slug', $request->input('product'))->firstOrFail();
-        $product_id = $product->id;
-        $user_id = Auth::user()->id;
-
-        $pendingReview = ReviewSpecial::where([['special_product_id', $product_id],['user_id', $user_id],['publish', 0]]);
-        if($pendingReview->count() == 0)
-        {
-            //no pending review awaiting for admin approval let add new
-            ReviewSpecial::create([
-                'special_product_id'    => $product_id, 
-                'user_id'               => $user_id, 
-                'title'                 => $request->input('heading'), 
-                'description'           => $request->input('review'),
-                'rating'                => $request->input('star')
-            ]);
-
-            /** sending notification mail to admins **/
-
-            $this->notifyAdmin($request->input('heading'));
-
-            /** sending notification mail to admins **/
-        }
-        else
-        {
-            //user has pending review for this product type, let update the review only
-            $reviewId = $pendingReview->first()->id;
-
-            $review                 = ReviewSpecial::findOrFail($reviewId);
-            $review->title          = $request->input('heading');
-            $review->description    = $request->input('review');
-            $review->rating         = $request->input('star');
-
-            $review->save();
-        }
     }
 
     /**

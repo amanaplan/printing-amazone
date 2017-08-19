@@ -109,9 +109,6 @@ Route::prefix('admin')->group(function() {
 	Route::put('/request/product/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditProduct');
 	Route::put('/product/set-order', 'Backend\RequestHandlers\AdminRqstController@SortOrder');
 	Route::delete('/product/delete', 'Backend\RequestHandlers\AdminRqstController@RemoveProduct');
-	//special products
-	Route::get('/special-product/edit/{id}', 'Backend\AdminController@EditSpProduct');
-	Route::put('/request/special-product/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditSpProduct');
 
 	//manage product reviews
 	Route::get('/product/reviews/{publishstate}', 'Backend\AdminController@ManageReviews');

@@ -60,6 +60,15 @@
                         </div>
                         <div class="hr-line-dashed"></div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Show in menu</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline"> <input type="checkbox" name="show" value="1" {{ ($category->show_in_menu == 1)? 'checked' : '' }}> Show </label>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
                         <div class="form-group {{ $errors->has('page_title') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Page Title</label>
                             <div class="col-sm-10">

@@ -62,7 +62,17 @@
 							@endif
 						</div>
 							@if($review->publish == 1)
-								<span class="text-success" data-toggle="tooltip" data-placement="top" title="published">&nbsp; <i class="fa fa-check-circle"></i></span><a href="{{ url('/'.$review->product->category->category_slug.'/'.$review->product->product_slug) }}" target="_blank"> &nbsp; <i class="fa fa-external-link"></i></a> 
+								<span class="text-success" data-toggle="tooltip" data-placement="top" title="published">&nbsp; <i class="fa fa-check-circle"></i></span>
+
+								@if($review->product->category->category_slug == 'uncategorized')
+
+									<a href="{{ url('/'.$review->product->product_slug) }}" target="_blank"> &nbsp; <i class="fa fa-external-link"></i></a> 
+
+								@else
+
+									<a href="{{ url('/'.$review->product->category->category_slug.'/'.$review->product->product_slug) }}" target="_blank"> &nbsp; <i class="fa fa-external-link"></i></a> 
+
+								@endif
 							@endif
 						<br>
 						<span class="rating-stars rating-5">
