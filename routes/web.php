@@ -36,6 +36,8 @@ Route::get('/graphic-designs', 'Frontend\DirectProduct');
 Route::get('/product/name-sticker/get-preview', 'Frontend\AjaxCtrl@ShowPreview');
 Route::get('/contact', 'Frontend\PagesCtrl@contact');
 Route::get('/about', 'Frontend\PagesCtrl@about');
+Route::post('/place-order/proceed', 'Frontend\ProceedOrder@Index');
+Route::get('/upload-artwork', 'Frontend\ProceedOrder@UploadArtwork')->name('upload.artwork');
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {

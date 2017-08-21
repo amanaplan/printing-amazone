@@ -101,7 +101,7 @@
 					@if($has_fields)
 
 						<div class="col-sm-4 col-lg-4 custom-size">
-							<form action="" method="post">
+							<form action="{{ url('/place-order/proceed') }}" method="post">
 
 								{{ csrf_field() }}
 
@@ -155,7 +155,7 @@
 								</div>
 								@endif
 
-								<button type="button" class="continue">Continue</button>
+								<button type="submit" class="continue">Continue</button>
 								<span class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 							</form>
 							
@@ -351,7 +351,18 @@
 			$("input[name='heading']").focus();
 			$(elem).closest(".review-short").remove();
 		}
+
 	</script>
+
+	@if(session('formError'))
+		<link rel="stylesheet" type="text/css" href="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.css' ) }}" />
+		<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.min.js' ) }}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				swal("Error!", "{{ session('formError') }}", "error");
+			});
+		</script>
+	@endif
 
 	{{-- calculation form --}}
 	<script type="text/javascript" src="{{ asset( 'assets/frontend/js/calculation.js' ) }}"></script>

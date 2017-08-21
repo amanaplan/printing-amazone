@@ -841,3 +841,22 @@ select {
 .content strong{font-weight: 600; font-size: 18px; display: block; margin-bottom: 10px;font-family: 'Raleway', sans-serif; color: #156db9;}
 .content p{font-size: 14px;font-family: 'Raleway', sans-serif; color: #111; opacity: 0.85; line-height: 24px; margin-bottom: 30px; text-align: justify;}
 .content p b{font-weight: 600; color: #000; opacity: 1;}
+.file-upload .field {
+    margin-top: 20px;
+}
+.file-upload .field label {
+    display: block;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+}
+.file-upload .field textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    padding: 8px 10px;
+    width: 100%;
+    margin-top: 10px;
+    min-height: 80px;
+    background: #eee;
+    font-family: 'Raleway', sans-serif;
+}
