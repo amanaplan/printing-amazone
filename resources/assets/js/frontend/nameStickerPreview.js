@@ -11,8 +11,9 @@ $("select[name='type']").change(function(){
 	axios.get(`${APP_URL}product/name-sticker/get-preview?artwork=${stickerType}`)
 	.then(function (response) {
 	    $("img#sticker-preview").attr("src", `${APP_URL}assets/images/products/${response.data}`);
-
-	    stopAnimation();
+	    $("img#sticker-preview").on('load', function(){
+	    	stopAnimation();
+	    });
 	})
 	.catch(function (error) {
 

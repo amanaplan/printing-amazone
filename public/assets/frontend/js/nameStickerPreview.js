@@ -1853,8 +1853,9 @@ $("select[name='type']").change(function () {
 	var stickerType = $(this).val();
 	__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'product/name-sticker/get-preview?artwork=' + stickerType).then(function (response) {
 		$("img#sticker-preview").attr("src", __WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'assets/images/products/' + response.data);
-
-		stopAnimation();
+		$("img#sticker-preview").on('load', function () {
+			stopAnimation();
+		});
 	}).catch(function (error) {
 
 		stopAnimation();
