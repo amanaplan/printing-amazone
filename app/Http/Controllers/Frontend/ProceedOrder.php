@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Validator;
 
 use App\Http\Controllers\Frontend\AutoCalculator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Product;
 use App\MapFrmProd;
@@ -167,4 +168,24 @@ class ProceedOrder extends Controller
 
 		return view('frontend.upload-artwork');
 	}
+
+    /**
+    *upload artwork file
+    */
+    public function UploadFile(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|max:51200',
+        ]);
+
+        $file = $request->file('file');
+        Storage::disk('public')->putFile('artworks', $file);
+        
+        if (! $file->isValid()) 
+        {
+            return response('not uploaded, 408');
+        }
+
+        return response('uploaded, 200');
+    }
 }

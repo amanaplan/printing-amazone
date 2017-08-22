@@ -23,7 +23,8 @@
 {{-- page specific styles --}}
 @push( 'styles' )
 	
-	<link rel="stylesheet" href="{{ asset( 'assets/frontend/css/star-rating.css' ) }}" media="all" type="text/css"/>
+	{{-- sweet alert --}}
+	<link rel="stylesheet" type="text/css" href="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.css' ) }}" />
 
 @endpush
 
@@ -36,7 +37,7 @@
 		<div class="row">
 			<div class="col-md-4">
 
-				{{ dd(Session::all()) }}
+				{{-- dd(Session::all()) --}}
 
 				<ul>
 					<li>
@@ -45,13 +46,30 @@
 					<li>Size : 20 x 20 mm</li>
 					<li>Qty. : 200</li>
 				</ul>
+
+				<br/>
+
+				<div id="artwork-prvw" style="display: none;">
+					<img id="prvw-img" class="img-responsive img-rounded" id="artwork-prvw" width="400" src="#" onerror="showFileImg(this);" />
+					<button id="rem-artwork" type="button" style="margin-top: 10px;display: none;" class="btn btn-danger btn-sm"><i class="fa fa-times-circle"></i> Remove</button>
+				</div>
 			</div>
 
 			<div class="col-md-8">
 				<h2>Upload your Artwork</h2>
 
 				<div class="file-upload">
-					<input type="file" class="filestyle" data-buttonname="btn-primary" placeholder="No file Chosen" id="filestyle-0" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " placeholder="" disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-0" class="btn btn-primary "><span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span class="buttonText">Choose file</span></label></span></div>
+					<input type="file" class="filestyle" id="upload" tabindex="-1" data-buttonname="btn-info" placeholder="No file Chosen" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " placeholder="" disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="upload" class="btn btn-primary "><span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span class="buttonText"> Choose file</span></label></span></div>
+					
+					<div class="field" id="op-progress" style="display: none;">
+						<div id="output" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:00%">
+      						0%
+    					</div>
+					</div>
+					<div class="field" >
+					</div>
+					<br/>
+
 					<div class="field">
 						<label for="instruction">Instruction (Optional)</label>
 						<textarea row="8" placeholder="Let us know if you have any instructions to prepare your proof"></textarea>
@@ -72,5 +90,16 @@
 {{-- page specific scripts --}}
 @push( 'scripts' )
 	
+	{{-- sweet alert --}}
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.min.js' ) }}"></script>
+
+	<script type="text/javascript" src="{{ asset('assets/frontend/js/uploadArtwork.js') }}"></script>
+
+	<script type="text/javascript">
+		function showFileImg(elem)
+		{
+			elem.src="{{ asset('assets/images/sample-file.png') }}";
+		}
+	</script>
 
 @endpush

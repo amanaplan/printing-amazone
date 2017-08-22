@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 42);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1778,105 +1778,96 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = createSnackbar;
-function createSnackbar(message, actionText, action) {
-  // Any snackbar that is already shown
-  var previous = null;
-
-  if (previous) {
-    previous.dismiss();
-  }
-  var snackbar = document.createElement('div');
-  snackbar.className = 'paper-snackbar';
-  snackbar.dismiss = function () {
-    this.style.opacity = 0;
-  };
-  var text = document.createTextNode(message);
-  snackbar.appendChild(text);
-  if (actionText) {
-    if (!action) {
-      action = snackbar.dismiss.bind(snackbar);
-    }
-    var actionButton = document.createElement('button');
-    actionButton.className = 'action';
-    actionButton.innerHTML = actionText;
-    actionButton.addEventListener('click', action);
-    snackbar.appendChild(actionButton);
-  }
-  setTimeout(function () {
-    if (previous === this) {
-      previous.dismiss();
-    }
-  }.bind(snackbar), 5000);
-
-  snackbar.addEventListener('transitionend', function (event, elapsed) {
-    if (event.propertyName === 'opacity' && this.style.opacity == 0) {
-      this.parentElement.removeChild(this);
-      if (previous === this) {
-        previous = null;
-      }
-    }
-  }.bind(snackbar));
-
-  previous = snackbar;
-  document.body.appendChild(snackbar);
-  // In order for the animations to trigger, I have to force the original style to be computed, and then change it.
-  getComputedStyle(snackbar).bottom;
-  snackbar.style.bottom = '0px';
-  snackbar.style.opacity = 1;
-}
-
-/***/ }),
+/* 27 */,
 /* 28 */,
-/* 29 */
+/* 29 */,
+/* 30 */,
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__boot_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(7);
 
 
 
 
+(function () {
+    var output = document.getElementById('output');
+    document.getElementById('upload').onchange = function () {
 
-$("select[name='type']").change(function () {
-	/*animation started*/
-	startAnimation();
+        //preview of the file
+        readURL(this);
 
-	var stickerType = $(this).val();
-	__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'product/name-sticker/get-preview?artwork=' + stickerType).then(function (response) {
-		$("img#sticker-preview").attr("src", __WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'assets/images/products/' + response.data);
-		$("img#sticker-preview").on('load', function () {
-			stopAnimation();
-		});
-	}).catch(function (error) {
+        var fileField = document.getElementById('upload');
 
-		stopAnimation();
+        //disable the field
+        fileField.setAttribute('disabled', 'disabled');
+        //hide img remove btn
+        $("button#rem-artwork").hide();
 
-		__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__["a" /* default */])('Invalid Sticker Type! try after some time', 'Dismiss');
-	});
-});
+        var data = new FormData();
+        data.append('file', fileField.files[0]);
 
-function startAnimation() {
-	$("#sticker-preview").css('opacity', 0.3);
-	$(".middle").css('opacity', 1);
+        var config = {
+            headers: { 'Content-Type': 'multipart/form-data' },
+            onUploadProgress: function onUploadProgress(progressEvent) {
+                var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
+                if (percentCompleted > 0) {
+                    document.getElementById("op-progress").style.display = 'block';
+                    output.setAttribute('aria-valuenow', percentCompleted);
+                    output.style.width = percentCompleted + '%';
+                    output.innerHTML = percentCompleted + '%';
+                }
+            }
+        };
+
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/process-upload', data, config).then(function (res) {
+            resetAnimation();
+
+            //the remove button
+            $("button#rem-artwork").show();
+            swal("", "Artwork uploaded successfully", "success");
+        }).catch(function (err) {
+            resetAnimation();
+
+            swal("Error!", err.message, "error");
+        });
+    };
+})();
+
+function resetAnimation() {
+    //active the file field
+    var fileField = document.getElementById('upload');
+    fileField.removeAttribute('disabled');
+
+    document.getElementById("op-progress").style.display = 'none';
+    output.setAttribute('aria-valuenow', '00');
+    output.style.width = '0%';
+    output.innerHTML = '0%';
 }
 
-function stopAnimation() {
-	$("#sticker-preview").css('opacity', 1);
-	$(".middle").css('opacity', 0);
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#artwork-prvw').show();
+
+            $('#prvw-img').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function getFileExtension(filename) {
+    return filename.split('.').pop();
 }
 
 /***/ }),
-/* 30 */,
-/* 31 */,
 /* 32 */,
 /* 33 */,
 /* 34 */,
@@ -1887,10 +1878,12 @@ function stopAnimation() {
 /* 39 */,
 /* 40 */,
 /* 41 */,
-/* 42 */
+/* 42 */,
+/* 43 */,
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(29);
+module.exports = __webpack_require__(31);
 
 
 /***/ })
