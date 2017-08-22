@@ -42,11 +42,11 @@
 				<ul>
 					<li>
 						<div class="stk">
-							<img class="img-responsive" src="http://localhost/srv/printing-amazone/public/assets/images/products/cs-3.png" />
+							<img class="img-responsive" src="{{ asset('assets/images/products/'.$product_img) }}" />
 						</div>
-						<div class="stk-dtls"><a href="#"><strong> Square Stickers</strong></a>
-						  <p><strong>Size :</strong> 20 x 20 mm</p>
-						  <p><strong>Qty. :</strong> 200</p>
+						<div class="stk-dtls"><h3> {{ $product_name }}</h3>
+						  <p><strong>Size :</strong> {{ $width }} x {{ $height }} mm</p>
+						  <p><strong>Qty. :</strong> {{ $qty }}</p>
 					    </div>
 					    <div class="clr"></div>
 					</li>

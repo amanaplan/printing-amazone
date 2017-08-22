@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Session;
+
+use App\Cart;
 
 use Validator;
 
@@ -37,6 +40,18 @@ class AppServiceProvider extends ServiceProvider
         //for main navigation view composer
         View::composer('layouts.frontend.main-nav', function () {
             View::share('nav', Category::where('show_in_menu', 1)->orderBy('sort', 'asc')->get());
+        });
+
+        //for cart icon in the main.blade.php
+        View::composer('layouts.frontend.main', function () {
+            if(Session::has('cart_token')){
+                $in_cart = Cart::where('cart_token', Session::get('cart_token'))->count();
+            }
+            else{
+                $in_cart = 0;
+            }
+            
+            View::share('in_cart', $in_cart);
         });
 
         //for admin sidebar

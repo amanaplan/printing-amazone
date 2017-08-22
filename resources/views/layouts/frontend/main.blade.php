@@ -69,7 +69,7 @@
 							<nav class="main-nav">
 								<ol>
 									<!-- inser more links here -->
-									<li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a></li>
+									<li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>@if ($in_cart > 0) <span>{{ $in_cart }}</span> @endif</a></li>
 									<li><a class="cd-signin" href="javascript:void();"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 									<li><a class="cd-signup" href="javascript:void();"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
 								</ol>
@@ -80,7 +80,7 @@
 							<nav class="main-nav">
 								<ol>
 									<!-- inser more links here -->
-									<li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a></li>
+									<li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>@if ($in_cart > 0) <span>{{ $in_cart }}</span> @endif</a></li>
 									<li class="dropdown">
 										<a class="cd-signin dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>Hi, {{ nickname(Auth::user()->name) }}</a>
 										<ul class="dropdown-menu" style="display: none;">

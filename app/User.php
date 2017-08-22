@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Review');
     }
+
+    public function cartitems()
+    {
+        return $this->hasMany('App\Cart');
+    }
 }

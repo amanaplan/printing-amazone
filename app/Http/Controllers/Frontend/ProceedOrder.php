@@ -169,7 +169,18 @@ class ProceedOrder extends Controller
 			return redirect('/');
 		}
 
-		return view('frontend.upload-artwork');
+        $collection = Session::get('curr_product_payload');
+        $product = Product::find($collection->get('product'));
+        $data = [
+            'product_name'      =>  $product->product_name,
+            'product_img'       =>  $product->logo,
+            'product_url'       =>  '#',
+            'width'             =>  $collection->get('width'),
+            'height'            =>  $collection->get('height'),
+            'qty'               =>  $collection->get('qty'),
+        ];
+
+		return view('frontend.upload-artwork', $data);
 	}
 
     /**

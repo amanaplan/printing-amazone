@@ -7,6 +7,8 @@ use Auth;
 use App\Mail\VerifyEmail;
 
 use App\Product;
+use App\Cart;
+use App\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,6 +22,37 @@ use Illuminate\Support\Facades\Redis;
 class AjaxCtrl extends Controller
 {
 
+    /**
+    *refreshing the cart items as soon as user logged in
+    */
+    public function ResolveCartItems()
+    {
+        $user = User::find(Auth::user()->id);
+        $left_in_cart = $user->cartitems()->count();
+        if($left_in_cart > 0)
+        {
+            if(Session::has('cart_token'))
+            {
+                Cart::where('user_id', $user->id)->update(['cart_token' => Session::get('cart_token')]);
+                Cart::where('cart_token', Session::get('cart_token'))->update(['user_id' => $user->id]);
+            }
+            else
+            {
+                $new_token = bin2hex(openssl_random_pseudo_bytes(20));
+                Session::put('cart_token', $new_token);
+
+                Cart::where('user_id', $user->id)->update(['cart_token' => $new_token]);
+            }
+        }
+        else
+        {
+            if(Session::has('cart_token'))
+            {
+                Cart::where('cart_token', Session::get('cart_token'))->update(['user_id' => $user->id]);
+            }
+        }
+    }
+
 	/**
 	*logging in user by google oauth2.0 js library verification
 	*/
@@ -32,8 +65,12 @@ class AjaxCtrl extends Controller
         	if($user->count() == 1)
         	{
         		Auth::login($user->first(), true);
+
+                //user login confirm now resolve cart
+                $this->ResolveCartItems();
+
         		return response()->json(['error' => 0, 'msg' => '<i class="fa fa-check-circle" aria-hidden="true"></i> Authorized! Logged in successfully']);
-        	}
+            }
         	else
         	{
         		return response()->json(['error' => 1, 'msg' => 'please signup first with this mail id']);
@@ -90,6 +127,7 @@ class AjaxCtrl extends Controller
     	if(Auth::guard('web')->check())
     	{
             Session::forget('curr_product_payload');
+            Session::forget('cart_token');
     		Auth::guard('web')->logout();
     	}
     	else
@@ -121,6 +159,10 @@ class AjaxCtrl extends Controller
                     Auth::login($user->first(), $remember);
 
                     $resp = ['error' => 0, 'msg' => $successMsg];
+
+                    //user login confirm now resolve cart
+                    $this->ResolveCartItems();
+
                     return response()->json($resp);
                 }
                 else

@@ -883,4 +883,6 @@ select {
     display: inline-block;
     line-height: 20px;
 }
+.stk-dtls h3{font-size: 24px;padding: 10px;}
+.stk-dtls p{padding-left: 10px;}
 .clr{clear: both;}
