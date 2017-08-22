@@ -1829,9 +1829,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             //the remove button
             $("button#rem-artwork").show();
+
+            //proceed button active
+            $("div.proceed-to-cart").html('<div class="field"><button type="submit" class="btn btn-success">Proceed <i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div>');
+
+            //skip button off
+            $("p#skip-step").html('');
+
             swal("", "Artwork uploaded successfully", "success");
         }).catch(function (err) {
             resetAnimation();
+
+            //proceed button off
+            $(".proceed-to-cart").html('');
+
+            //skip button on
+            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
 
             swal("Error!", err.message, "error");
         });

@@ -69,7 +69,7 @@
 							<nav class="main-nav">
 								<ol>
 									<!-- inser more links here -->
-									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+									<li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a></li>
 									<li><a class="cd-signin" href="javascript:void();"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 									<li><a class="cd-signup" href="javascript:void();"><i class="fa fa-lock" aria-hidden="true"></i> Sign Up</a></li>
 								</ol>
