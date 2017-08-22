@@ -10,6 +10,20 @@ header.inner {
 .top-menu{text-align:right; float:right;margin-top: 28px;position: relative;right: 10px;}
 .top-menu ol li{display:inline-block;}
 .top-menu ol li a{text-decoration:none; color:#01141a; font-size:14px; font-family: 'Raleway', sans-serif; font-weight:400;text-shadow: 0 1px 0px; padding-left:10px;}
+.top-menu ol li a span {
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+    height: 18px;
+    line-height: 16px;
+    font-size: 13px;
+    position: relative;
+    left: -10px;
+    top: -10px;
+}
 .top-menu a i {
     color: #fff;
     font-size: 18px;
@@ -615,18 +629,3 @@ border-radius: 4px;
 /**** user menu dropdown *****/
 ul.dropdown-menu{ background:#171717; text-align:left;left: 10px;}ul.dropdown-menu li{ display:block; text-align:left; border-bottom:1px solid;}ul.dropdown-menu li:last-child {    border-bottom: 1px none;}ul.dropdown-menu li a{color:#fff;font-size: 12px;font-weight: 300;padding: 6px 14px; transition:all 0.4s;}ul.dropdown-menu li a:hover{background:none; color:#999;}ul.dropdown-menu::after{    border-color: transparent transparent #171717;    border-image: none;    border-style: solid;    border-width: 6px 6px 5px;    content: "";    left: 22px;    position: absolute;    top: -11px;}
 >>>>>>> feature/signup-login
-
-.top-menu ol li a span {
-    background: #000;
-    color: #fff;
-    border-radius: 50%;
-    display: inline-block;
-    width: 18px;
-    text-align: center;
-    height: 18px;
-    line-height: 16px;
-    font-size: 13px;
-    position: relative;
-    left: -10px;
-    top: -10px;
-}

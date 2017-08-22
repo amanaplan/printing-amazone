@@ -874,3 +874,13 @@ select {
     left: -10px;
     top: -10px;
 }
+.stk {
+    display: inline-block;
+    width: 85px;
+    float: left;
+}
+.stk-dtls {
+    display: inline-block;
+    line-height: 20px;
+}
+.clr{clear: both;}

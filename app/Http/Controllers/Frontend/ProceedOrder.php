@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Validator;
+use Auth;
 
 use App\Http\Controllers\Frontend\AutoCalculator;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +18,7 @@ use App\OptPaperstock;
 use App\OptQty;
 use App\OptSize;
 use App\PresetGeneral;
+use App\Cart;
 
 use Illuminate\Support\Facades\Session;
 
@@ -144,10 +146,11 @@ class ProceedOrder extends Controller
         	'width'			=> $width,
         	'height'		=> $height,
         	'qty'			=> $qty,
-        	'price'			=> $price
+        	'price'			=> $price,
+            'mapper'        => $map_paperstock_option->first()->id
         ];
 
-        $request->session()->put('curr_product_payload', json_encode($storeInSession));
+        $request->session()->put('curr_product_payload', collect($storeInSession));
 
         /*-----------------------------------------------------------------------------------------------
         | calculate the pricing & set data to the session
@@ -178,14 +181,100 @@ class ProceedOrder extends Controller
             'file' => 'required|max:51200',
         ]);
 
+        //current payload collection
+        $collection = $request->session()->get('curr_product_payload');
+
+        //remove if any previous uploaded file exist
+        if($collection->has('artwork'))
+        {
+            Storage::disk('public')->delete($collection->get('artwork'));
+            $collection->forget('artwork');
+        }
+
+
+        //upload attempt curr file
         $file = $request->file('file');
-        Storage::disk('public')->putFile('artworks', $file);
+        $url = Storage::disk('public')->putFile('artworks', $file);
         
         if (! $file->isValid()) 
         {
             return response('not uploaded, 408');
         }
 
+        //add artwork to payload collection
+        $collection->put('artwork', $url);
+
         return response('uploaded, 200');
+    }
+
+    /**
+    *remove the current uploaded artwork
+    */
+    public function RemoveArtwork(Request $request)
+    {
+        //current payload collection
+        $collection = $request->session()->get('curr_product_payload');
+
+        if($collection->has('artwork'))
+        {
+            Storage::disk('public')->delete($collection->get('artwork'));
+            $collection->forget('artwork');
+        }
+    }
+
+    /**
+    *add product to cart
+    */
+    public function AddToCart(Request $request)
+    {
+        $this->validate($request, [
+            'instructions' => 'nullable|string',
+        ]);
+
+
+        /*---------------------------------------------------------------------------------------------
+        |   check if cart token already exist otherwise create one
+        -----------------------------------------------------------------------------------------------*/
+        
+        if($request->session()->has('cart_token'))
+        {
+            $cart_token = $request->session()->get('cart_token');
+        }
+        else
+        {
+            $cart_token = bin2hex(openssl_random_pseudo_bytes(20));
+            $request->session()->put('cart_token', $cart_token);
+        }
+        
+
+        /*---------------------------------------------------------------------------------------------
+        |   check if cart token already exist otherwise create one
+        -----------------------------------------------------------------------------------------------*/
+
+        //current payload collection
+        $collection = $request->session()->get('curr_product_payload');
+
+        $cart = Cart::create([
+            'cart_token'    =>  $cart_token,
+            'user_id'       =>  (Auth::guard('web')->check())? Auth::user()->id : 0,
+            'product_id'    =>  $collection->get('product'),
+            'paperstock'    =>  $collection->get('paperstock'),
+            'width'         =>  $collection->get('width'),
+            'height'        =>  $collection->get('height'),
+            'qty'           =>  $collection->get('qty'),
+            'label_option'  =>  $collection->get('label_option'),
+            'sticker_name'  =>  $collection->get('sticker_name'),
+            'artwork'       =>  $collection->get('artwork'),
+            'instructions'  =>  $request->input('instructions'),
+            'preset_mapper' =>  $collection->get('mapper'),
+        ]);
+
+        $cart->price = $collection->get('price');
+        $cart->save();
+
+        //flush the curr product payload
+        $request->session()->forget('curr_product_payload');
+
+        return redirect()->route('cart');
     }
 }

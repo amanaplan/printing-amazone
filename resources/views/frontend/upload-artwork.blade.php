@@ -41,24 +41,41 @@
 
 				<ul>
 					<li>
-						<a href="#"><img class="img-responsive" width="80" height="80" src="http://localhost/srv/printing-amazone/public/assets/images/products/cs-3.png"> Square Stickers</a>
+						<div class="stk">
+							<img class="img-responsive" src="http://localhost/srv/printing-amazone/public/assets/images/products/cs-3.png" />
+						</div>
+						<div class="stk-dtls"><a href="#"><strong> Square Stickers</strong></a>
+						  <p><strong>Size :</strong> 20 x 20 mm</p>
+						  <p><strong>Qty. :</strong> 200</p>
+					    </div>
+					    <div class="clr"></div>
 					</li>
-					<li>Size : 20 x 20 mm</li>
-					<li>Qty. : 200</li>
 				</ul>
 
 				<br/>
 
-				<div id="artwork-prvw" style="display: none;">
-					<img id="prvw-img" class="img-responsive img-rounded" id="artwork-prvw" width="400" src="#" onerror="showFileImg(this);" />
-					<button id="rem-artwork" type="button" style="margin-top: 10px;display: none;" class="btn btn-danger btn-sm"><i class="fa fa-times-circle"></i> Remove</button>
-				</div>
+				@if(session('curr_product_payload')->has('artwork'))
+
+					<div id="artwork-prvw">
+						<img id="prvw-img" class="img-responsive img-rounded" id="artwork-prvw" width="400" src="{{ asset('storage/'.session('curr_product_payload')->get('artwork')) }}" onerror="showFileImg(this);" />
+						<button id="rem-artwork" type="button" style="margin-top: 10px;" class="btn btn-danger btn-sm"><i class="fa fa-times-circle"></i> Remove</button>
+					</div>
+
+				@else
+
+					<div id="artwork-prvw" style="display: none;">
+						<img id="prvw-img" class="img-responsive img-rounded" id="artwork-prvw" width="400" src="#" onerror="showFileImg(this);" />
+						<button id="rem-artwork" type="button" style="margin-top: 10px;display: none;" class="btn btn-danger btn-sm"><i class="fa fa-times-circle"></i> Remove</button>
+					</div>
+
+				@endif
+
 			</div>
 
 			<div class="col-md-8">
 				<h2>Upload your Artwork</h2>
 
-				<form action="" method="post">
+				<form action="{{ route('addto.cart') }}" method="post">
 
 					{{ csrf_field() }}
 
@@ -70,21 +87,32 @@
 	      						0%
 	    					</div>
 						</div>
-						<div class="field" >
-						</div>
+
+						<div class="field"></div>
+
 						<br/>
 
 						<div class="field">
 							<label for="instruction">Instruction (Optional)</label>
-							<textarea style="height: 180px;" placeholder="Let us know if you have any instructions to prepare your proof"></textarea>
+							<textarea style="height: 180px;" name="instructions" placeholder="Let us know if you have any instructions to prepare your proof"></textarea>
 						</div>
 
-						<div class="proceed-to-cart"></div>
-						
+						@if(session('curr_product_payload')->has('artwork'))
+							<div class="proceed-to-cart">
+								<div class="field"><button type="submit" class="btn btn-success">Proceed <i class="fa fa-cart-plus"></i> <i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div>
+							</div>
+						@else
+							<div class="proceed-to-cart"></div>
+						@endif
+
 					</div>
+
+
 					<p id="skip-step">
-					  or,
-					  <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>
+						@if(! session('curr_product_payload')->has('artwork'))
+						  or,
+						  <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>
+						@endif
 					</p>
 
 				</form>

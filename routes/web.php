@@ -39,6 +39,10 @@ Route::get('/about', 'Frontend\PagesCtrl@about');
 Route::post('/place-order/proceed', 'Frontend\ProceedOrder@Index');
 Route::get('/upload-artwork', 'Frontend\ProceedOrder@UploadArtwork')->name('upload.artwork');
 Route::post('/upload-artwork/process-upload', 'Frontend\ProceedOrder@UploadFile');
+Route::post('/upload-artwork/remove-current', 'Frontend\ProceedOrder@RemoveArtwork');
+Route::post('/cart/add-product', 'Frontend\ProceedOrder@AddToCart')->name('addto.cart');
+Route::get('/cart', 'Frontend\CartCtrl@Visit')->name('cart');
+
 
 //users not allowed to access these routes if they are logged in
 Route::group(['middleware' => ['shouldnotbeloggedin']], function () {

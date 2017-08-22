@@ -1831,7 +1831,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $("button#rem-artwork").show();
 
             //proceed button active
-            $("div.proceed-to-cart").html('<div class="field"><button type="submit" class="btn btn-success">Proceed <i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div>');
+            $("div.proceed-to-cart").html('<div class="field"><button type="submit" class="btn btn-success">Proceed <i class="fa fa-cart-plus"></i> <i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div>');
 
             //skip button off
             $("p#skip-step").html('');
@@ -1879,6 +1879,28 @@ function readURL(input) {
 function getFileExtension(filename) {
     return filename.split('.').pop();
 }
+
+$(document).ready(function () {
+    $("button#rem-artwork").click(function () {
+
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/remove-current', {
+            removecurrent: 1
+        }).then(function (res) {
+
+            $("img#prvw-img").attr('src', '');
+            $("div#artwork-prvw").hide();
+
+            //proceed button off
+            $(".proceed-to-cart").html('');
+
+            //skip button on
+            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
+        }).catch(function (err) {
+
+            swal("Error!", 'Something went wrong', "error");
+        });
+    });
+});
 
 /***/ }),
 /* 32 */,

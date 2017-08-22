@@ -80,7 +80,7 @@
 							<nav class="main-nav">
 								<ol>
 									<!-- inser more links here -->
-									<li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+									<li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a></li>
 									<li class="dropdown">
 										<a class="cd-signin dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user"></i>Hi, {{ nickname(Auth::user()->name) }}</a>
 										<ul class="dropdown-menu" style="display: none;">
