@@ -131,7 +131,7 @@
 					</ul>
 				</div><!-- social -->
 				<div class="clearfix"></div>
-				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; <a href="{{ url('/') }}">printingamazon.com</a></p>
+				<p class="copyright">Copyright {{ date( 'Y', time() ) }} - All Rights Reserved &copy; <a href="{{ url('/') }}">printingamazon</a></p>
 			</div>
 		</div>
 	</div><!-- footer -->

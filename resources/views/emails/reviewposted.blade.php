@@ -504,7 +504,7 @@
 <tr>
     <td  style="color: #939393; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" class="prefooter-subheader" align="center">
 
-        <span style="color: #ed8f01">Adress :</span> 3423 Dream Land &nbsp;&nbsp;&nbsp;   <span style="color: #ed8f01">Phone :</span> 123233243    &nbsp;&nbsp;&nbsp;<span style="color: #ed8f01">Email :</span> printingamazone@atanudas.com
+        <span style="color: #ed8f01">Adress :</span> 3423 Dream Land &nbsp;&nbsp;&nbsp;   <span style="color: #ed8f01">Phone :</span> 123233243    &nbsp;&nbsp;&nbsp;<span style="color: #ed8f01">Email :</span> info@printingamazon.com.au
 
 
     </td>

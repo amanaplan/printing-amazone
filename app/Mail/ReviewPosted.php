@@ -34,7 +34,7 @@ class ReviewPosted extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->from('notifications@atanudas.com', config('app.name').' Notification')
+        return $this->from('notifications@printingamazon.com.au', config('app.name').' Notification')
                     ->subject('Review awaiting for approval')
                     ->view('emails.reviewposted')
                     ->with([

@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'nexzurt@nexzurt.com'),
-        'name' => env('MAIL_FROM_NAME', 'Nexzurt'),
+        'address' => env('MAIL_FROM_ADDRESS', 'notifications@printingamazon.com.au'),
+        'name' => env('MAIL_FROM_NAME', 'PrintingAmazon'),
     ],
 
     /*
