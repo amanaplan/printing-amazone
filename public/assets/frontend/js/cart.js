@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 46);
+/******/ 	return __webpack_require__(__webpack_require__.s = 43);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1780,10 +1780,7 @@ process.umask = function() { return 0; };
 /***/ }),
 /* 27 */,
 /* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1794,116 +1791,165 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-(function () {
-    var output = document.getElementById('output');
-    document.getElementById('upload').onchange = function () {
-
-        //preview of the file
-        readURL(this);
-
-        var fileField = document.getElementById('upload');
-
-        //disable the field
-        fileField.setAttribute('disabled', 'disabled');
-        //hide img remove btn
-        $("button#rem-artwork").hide();
-
-        var data = new FormData();
-        data.append('file', fileField.files[0]);
-
-        var config = {
-            headers: { 'Content-Type': 'multipart/form-data' },
-            onUploadProgress: function onUploadProgress(progressEvent) {
-                var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
-                if (percentCompleted > 0) {
-                    document.getElementById("op-progress").style.display = 'block';
-                    output.setAttribute('aria-valuenow', percentCompleted);
-                    output.style.width = percentCompleted + '%';
-                    output.innerHTML = percentCompleted + '%';
-                }
-            }
-        };
-
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/process-upload', data, config).then(function (res) {
-            resetAnimation();
-
-            //the remove button
-            $("button#rem-artwork").show();
-
-            //proceed button active
-            $("div.proceed-to-cart").html('<div class="field"><button type="submit" class="btn btn-success">Proceed <i class="fa fa-cart-plus"></i> <i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div>');
-
-            //skip button off
-            $("p#skip-step").html('');
-
-            swal("", "Artwork uploaded successfully", "success");
-        }).catch(function (err) {
-            resetAnimation();
-
-            //proceed button off
-            $(".proceed-to-cart").html('');
-
-            //skip button on
-            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
-
-            swal("Error!", err.message, "error");
-        });
-    };
-})();
-
-function resetAnimation() {
-    //active the file field
-    var fileField = document.getElementById('upload');
-    fileField.removeAttribute('disabled');
-
-    document.getElementById("op-progress").style.display = 'none';
-    output.setAttribute('aria-valuenow', '00');
-    output.style.width = '0%';
-    output.innerHTML = '0%';
-}
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#artwork-prvw').show();
-
-            $('#prvw-img').attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function getFileExtension(filename) {
-    return filename.split('.').pop();
-}
-
 $(document).ready(function () {
-    $("button#rem-artwork").click(function () {
+	$("span.remove-item").on('click', function () {
 
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/remove-current', {
-            removecurrent: 1
-        }).then(function (res) {
+		startOverlay();
 
-            $("img#prvw-img").attr('src', '');
-            $("div#artwork-prvw").hide();
+		var item = $(this).attr('data-cart-item');
+		var elem = $(this);
 
-            //proceed button off
-            $(".proceed-to-cart").html('');
+		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/remove-product', {
+			params: { item: item }
+		}).then(function (response) {
+			if (response.data == 0) {
+				$("div#cart").html('\n\t\t    \t\t<div class="feature">\n\t\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="{{ url(\'/sticker\') }}">product</a> in your cart.</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t    \t');
 
-            //skip button on
-            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
-        }).catch(function (err) {
+				$("span#cartcount").remove();
+			} else {
+				$("span#cartcount").html(response.data);
+				elem.closest('tr').fadeOut();
+			}
 
-            swal("Error!", 'Something went wrong', "error");
-        });
-    });
+			closeOverlay();
+		}).catch(function (error) {
+			closeOverlay();
+			swal("Error!", error.message, "error");
+		});
+	});
+
+	$(".clr-shopping").click(function (e) {
+		e.preventDefault();
+		startOverlay();
+
+		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/empty-cart', {}).then(function (response) {
+			$("div#cart").html('\n\t    \t\t<div class="feature">\n\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="{{ url(\'/sticker\') }}">product</a> in your cart.</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t    \t');
+
+			$("span#cartcount").remove();
+
+			closeOverlay();
+		}).catch(function (error) {
+			closeOverlay();
+			swal("Error!", error.message, "error");
+		});
+	});
+
+	$("button.add-qty").click(function () {
+		var qtyBox = $(this).closest('tr').find('input:text');
+		var cartItemId = qtyBox.attr('data-cart-id');
+		var currQty = parseInt($.trim(qtyBox.val()));
+
+		var nextQty = 0;
+
+		switch (currQty) {
+			case 10:
+				nextQty = 50;
+				break;
+			case 50:
+				nextQty = 100;
+				break;
+			case 100:
+				nextQty = 200;
+				break;
+			case 200:
+				nextQty = 300;
+				break;
+			case 300:
+				nextQty = 400;
+				break;
+			case 400:
+				nextQty = 500;
+				break;
+			case 500:
+				nextQty = 1000;
+				break;
+			case 20000:
+				nextQty = 20000;
+				break;
+			default:
+				nextQty = 1000;
+		}
+
+		if (currQty >= 1000 && currQty < 20000 && currQty % 1000 == 0) {
+			nextQty = currQty + 1000;
+		}
+
+		qtyBox.val(nextQty);
+
+		//change price
+		updateProductPrice(cartItemId, qtyBox);
+	});
+
+	$("button.remove-qty").click(function () {
+		var qtyBox = $(this).closest('tr').find('input:text');
+		var cartItemId = qtyBox.attr('data-cart-id');
+		var currQty = parseInt($.trim(qtyBox.val()));
+
+		var nextQty = 0;
+
+		switch (currQty) {
+			case 10:
+				nextQty = 10;
+				break;
+			case 50:
+				nextQty = 10;
+				break;
+			case 100:
+				nextQty = 50;
+				break;
+			case 200:
+				nextQty = 100;
+				break;
+			case 300:
+				nextQty = 200;
+				break;
+			case 400:
+				nextQty = 300;
+				break;
+			case 500:
+				nextQty = 400;
+				break;
+			case 1000:
+				nextQty = 500;
+				break;
+			default:
+				nextQty = 1000;
+		}
+
+		if (currQty > 1000 && currQty <= 20000 && currQty % 1000 == 0) {
+			nextQty = currQty - 1000;
+		}
+
+		qtyBox.val(nextQty);
+
+		//change price
+		updateProductPrice(cartItemId, qtyBox);
+	});
+
+	$("input.cart-qty").change(function () {
+		var cartItemId = $(this).attr('data-cart-id');
+		var qtyBox = $(this);
+		updateProductPrice(cartItemId, qtyBox);
+	});
 });
 
+function startOverlay() {
+	$("div#loading-overlay").show();
+}
+
+function closeOverlay() {
+	$("div#loading-overlay").hide();
+}
+
+function updateProductPrice(cartId, qtyBox) {
+	//qty validation + tooltip error message 
+	//alert(qtyBox.closest('tr').find('span.current-price').html());
+}
+
 /***/ }),
+/* 30 */,
+/* 31 */,
+/* 32 */,
 /* 33 */,
 /* 34 */,
 /* 35 */,
@@ -1914,13 +1960,10 @@ $(document).ready(function () {
 /* 40 */,
 /* 41 */,
 /* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(32);
+module.exports = __webpack_require__(29);
 
 
 /***/ })

@@ -42,6 +42,8 @@ Route::post('/upload-artwork/process-upload', 'Frontend\ProceedOrder@UploadFile'
 Route::post('/upload-artwork/remove-current', 'Frontend\ProceedOrder@RemoveArtwork');
 Route::post('/cart/add-product', 'Frontend\ProceedOrder@AddToCart')->name('addto.cart');
 Route::get('/cart', 'Frontend\CartCtrl@Visit')->name('cart');
+Route::delete('/cart/remove-product', 'Frontend\CartCtrl@RemoveItem');
+Route::delete('/cart/empty-cart', 'Frontend\CartCtrl@ClearCart');
 
 
 //users not allowed to access these routes if they are logged in
