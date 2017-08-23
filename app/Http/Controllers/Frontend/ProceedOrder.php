@@ -90,6 +90,7 @@ class ProceedOrder extends Controller
             if($width < $min || $width > $max || $height < $min || $height > $max)
             {
                 $request->session()->flash('formError', 'Max. size (height x width) limit crossed');
+                return redirect()->back();
             }
         }
         else
