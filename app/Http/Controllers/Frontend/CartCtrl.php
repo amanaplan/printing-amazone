@@ -28,11 +28,18 @@ class CartCtrl extends Controller
 
     		if($avlbl_in_cart->count() > 0)
     		{
-    			$cart_data =  $avlbl_in_cart->latest()->with('product.category', 'paperstockopt')->get();
+    			$cart_data =  $avlbl_in_cart->oldest()->with('product.category', 'paperstockopt')->get();
+
+                // subtotal & multiple prod discount
+                $pricing = $this->GenPricing();
+                $pricing = json_decode($pricing);
     			
     			$data = [
-    				'cart_empty'	=> false,
-    				'cart_data'		=> $cart_data
+    				'cart_empty'	      => false,
+    				'cart_data'		      => $cart_data,
+                    'subtotal'            => $pricing->subtotal,
+                    'discount_amount'     => $pricing->discount_amount,
+                    'payable'             => $pricing->payable
     			];
 
     			return view('frontend.cart', $data);
@@ -44,6 +51,41 @@ class CartCtrl extends Controller
 
     	//please add some product you have nothing in cart
     	return view('frontend.cart', ['cart_empty' => true]);
+    }
+
+    /**
+    *calculate the subtotal & the discount
+    */
+    public function GenPricing()
+    {
+        $cart_token = Session::get('cart_token');
+        $cart_items = Cart::where('cart_token', $cart_token);
+
+        $subtotal = $cart_items->sum('price');
+        $items = $cart_items->count();
+
+        if($items == 2)
+        {
+            $disc = 3;
+        }
+        else if($items == 3)
+        {
+            $disc = 6;
+        }
+        else if($items >= 4)
+        {
+            $diff = $items - 3;
+            $disc = $diff + 6;
+        }
+        else
+        {
+            $disc = 0;
+        }
+
+        $payable = ($disc > 0)? $subtotal - ($subtotal * ($disc / 100)) : $subtotal;
+        $payable = round($payable);
+
+        return json_encode( ['subtotal' => $subtotal, 'payable' => $payable, 'discount_amount' => ($subtotal-$payable) ]);
     }
 
     /**
@@ -66,7 +108,15 @@ class CartCtrl extends Controller
         	
         	$cart_item->delete();
 
-        	return Cart::where('cart_token', $cart_token)->count();
+            $pricing = $this->GenPricing();
+            $pricing = json_decode($pricing);
+
+        	return response()->json([
+                'count'     => Cart::where('cart_token', $cart_token)->count(),
+                'total'     => number_format($pricing->subtotal),
+                'discount'  => $pricing->discount_amount,
+                'payable'   => number_format($pricing->payable)
+            ]);
         }
         else
         {
@@ -152,7 +202,16 @@ class CartCtrl extends Controller
             $cartitem->qty = $request->input('qty');
             $cartitem->save();
 
-            return response()->json(['error' => 0, 'price' => number_format($price)]);
+            $pricing = $this->GenPricing();
+            $pricing = json_decode($pricing);
+
+            return response()->json([
+                'error'               => 0, 
+                'price'               => number_format($price), 
+                'total'               => number_format($pricing->subtotal),
+                'discount'            => $pricing->discount_amount,
+                'payable'             => number_format($pricing->payable)
+            ]);
         }
     }
 }

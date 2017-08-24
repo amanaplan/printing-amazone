@@ -1795,6 +1795,7 @@ $(document).ready(function () {
 	$("span.remove-item").on('click', function () {
 
 		startOverlay();
+		fillPricing(true, {});
 
 		var item = $(this).attr('data-cart-item');
 		var elem = $(this);
@@ -1802,18 +1803,23 @@ $(document).ready(function () {
 		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/remove-product', {
 			params: { item: item }
 		}).then(function (response) {
-			if (response.data == 0) {
+			if (response.data.count == 0) {
 				$("div#cart").html('\n\t\t    \t\t<div class="feature">\n\t\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'sticker">product</a> in your cart.</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t    \t');
 
 				$("span#cartcount").remove();
 			} else {
-				$("span#cartcount").html(response.data);
+				$("span#cartcount").html(response.data.count);
+
+				fillPricing(false, { total: response.data.total, discount: response.data.discount, payable: response.data.payable });
+
 				elem.closest('tr').fadeOut();
 			}
 
 			closeOverlay();
 		}).catch(function (error) {
 			closeOverlay();
+			fillPricing(false, { total: '__', discount: '__', payable: '__' });
+
 			swal("Error!", error.message, "error");
 		});
 	});
@@ -1979,6 +1985,7 @@ function updateProductPrice(cartId, qtyBox) {
 	disableUpdateBtns(qtyBox, true);
 
 	priceFld.html('<i class="fa fa-refresh fa-spin fa-lg"></i>');
+	fillPricing(true, {});
 
 	__WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/update-quantity', {
 		cartid: cartId,
@@ -1990,12 +1997,33 @@ function updateProductPrice(cartId, qtyBox) {
 		}
 
 		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + response.data.price);
+		fillPricing(false, { total: response.data.total, discount: response.data.discount, payable: response.data.payable });
+
 		disableUpdateBtns(qtyBox, false);
 	}).catch(function (error) {
 		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i>__');
+		fillPricing(false, { total: '__', discount: '__', payable: '__' });
+
 		disableUpdateBtns(qtyBox, false);
 		swal("Error!", "Oops some server error occurred", "error");
 	});
+}
+
+function fillPricing(animate, prices) {
+	var payable = $("#tot-price");
+	var discount = $("#cart-discount");
+	var total = $("#cart-subtotal");
+
+	if (animate) {
+		var animation = '<i class="fa fa-refresh fa-spin fa-lg"></i>';
+		total.html(animation);
+		discount.html(animation);
+		payable.html(animation);
+	} else {
+		total.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.total);
+		discount.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.discount);
+		payable.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.payable);
+	}
 }
 
 function showErrorMsg(qtyBox) {

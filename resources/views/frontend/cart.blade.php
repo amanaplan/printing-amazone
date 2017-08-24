@@ -137,16 +137,16 @@
 					<table class="table table-responsive">
 						<tbody>
 							<tr>
-								<td>Cart Subtotal</td>
-								<td class="text-right"><h5 id="cart-sub-total"><i class="fa fa-usd" aria-hidden="true"></i> 250.00</h5></td>
+								<td>Subtotal</td>
+								<td class="text-right"><h5 id="cart-subtotal"><i class="fa fa-usd" aria-hidden="true"></i> {{ number_format($subtotal) }}</h5></td>
 							</tr>
-							<tr>
-								<td>Coupon Discount</td>
-								<td class="text-right"><h5 id="coupon-discount"><i class="fa fa-usd" aria-hidden="true"></i> 0.00</h5></td>
+							<tr class="happy-text">
+								<td>Discount For Multiple Designs</td>
+								<td class="text-right"><h5 id="cart-discount"><i class="fa fa-usd" aria-hidden="true"></i> {{ $discount_amount }}</h5></td>
 							</tr>
 							<tr>
 								<td>Cart Total</td>
-								<td class="text-right"><h5 class="price" id="tot-price"><i class="fa fa-usd" aria-hidden="true"></i> 250.00</h5></td>
+								<td class="text-right"><h5 class="price" id="tot-price"><i class="fa fa-usd" aria-hidden="true"></i> {{ number_format($payable) }}</h5></td>
 							</tr>
 							<tr><td></td><td></td></tr>
 						</tbody>

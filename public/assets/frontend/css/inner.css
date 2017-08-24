@@ -329,11 +329,6 @@ img.crt-list-thumb {
 	font-family: 'Raleway', sans-serif;
 	font-size:14px;
 }
-.price {
-    color: #65a800;
-    font-weight: 700;
-	padding-right: 10px !important;
-}
 .spinner {
     width: 100px;
 }
@@ -417,7 +412,7 @@ a.clr-shopping:hover{background:none; color:#202020; border:2px solid #5fd282;}
     padding: 30px;
     border-radius: 4px;
 }
-.shop_measures .table tbody tr td{font-size:14px; font-weight:600;}
+.shop_measures .table tbody tr td{font-size:14px; font-weight:600; width: 100px;}
 .checkout{min-height:200px; margin:20px 0 110px;}
 h4.bill-head{padding-left:15px;}
 .bill-form{margin-top:30px;}
@@ -999,3 +994,4 @@ p.subtitle {    text-align: center;    margin: 16px 0 0;    font-size: 18px;    
 }
 span.remove-item{cursor: pointer;}
 td.price h5{width: 70px;}
+.happy-text{color: #0ca73b;}

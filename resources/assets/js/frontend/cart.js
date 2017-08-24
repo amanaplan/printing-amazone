@@ -5,6 +5,7 @@ $(document).ready(function(){
 	$("span.remove-item").on('click', function(){
 
 		startOverlay();
+		fillPricing(true, {});
 
 		let item = $(this).attr('data-cart-item');
 		let elem = $(this);
@@ -13,7 +14,7 @@ $(document).ready(function(){
 		    params : { item: item },
 		})
 		.then(function (response) {
-		    if(response.data == 0)
+		    if(response.data.count == 0)
 		    {
 		    	$("div#cart").html(`
 		    		<div class="feature">
@@ -30,7 +31,10 @@ $(document).ready(function(){
 		    }
 		    else
 		    {
-		    	$("span#cartcount").html(response.data);
+		    	$("span#cartcount").html(response.data.count);
+
+		    	fillPricing(false, {total: response.data.total, discount: response.data.discount, payable: response.data.payable});
+
 		    	elem.closest('tr').fadeOut();
 		    }
 
@@ -38,6 +42,8 @@ $(document).ready(function(){
 		})
 		.catch(function (error) {
 			closeOverlay();
+			fillPricing(false, {total: '__', discount: '__', payable: '__'});
+
 			swal("Error!", error.message, "error");
 		});
 	});
@@ -237,6 +243,7 @@ function updateProductPrice(cartId, qtyBox)
 	disableUpdateBtns(qtyBox, true);
 
 	priceFld.html('<i class="fa fa-refresh fa-spin fa-lg"></i>');
+	fillPricing(true, {});
 
 	axios.post(`${APP_URL}cart/update-quantity`, {
 	    cartid : cartId,
@@ -250,15 +257,40 @@ function updateProductPrice(cartId, qtyBox)
 	    }
 
 	    priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i> '+response.data.price);
+	    fillPricing(false, {total: response.data.total, discount: response.data.discount, payable: response.data.payable});
+
 	    disableUpdateBtns(qtyBox, false);
 
 	})
 	.catch(function (error) {
 		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i>__');
+		fillPricing(false, {total: '__', discount: '__', payable: '__'});
+
 		disableUpdateBtns(qtyBox, false);
 		swal("Error!", "Oops some server error occurred", "error");
 	});
 
+}
+
+function fillPricing(animate, prices)
+{
+	let payable = $("#tot-price");
+	let discount = $("#cart-discount");
+	let total = $("#cart-subtotal");
+
+	if(animate)
+	{
+		let animation = '<i class="fa fa-refresh fa-spin fa-lg"></i>';
+		total.html(animation);
+		discount.html(animation);
+		payable.html(animation);
+	}
+	else
+	{
+		total.html('<i class="fa fa-usd" aria-hidden="true"></i> '+prices.total);
+		discount.html('<i class="fa fa-usd" aria-hidden="true"></i> '+prices.discount);
+		payable.html('<i class="fa fa-usd" aria-hidden="true"></i> '+prices.payable);
+	}
 }
 
 function showErrorMsg(qtyBox, msg = '')
