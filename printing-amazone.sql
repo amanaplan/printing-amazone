@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2017 at 03:06 PM
+-- Generation Time: Aug 24, 2017 at 02:58 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -76,7 +76,7 @@ CREATE TABLE `cart` (
   `width` double(7,2) NOT NULL,
   `height` double(7,2) NOT NULL,
   `qty` int(11) NOT NULL,
-  `price` double(7,2) NOT NULL DEFAULT 0.00,
+  `price` decimal(15,2) NOT NULL DEFAULT 0.00,
   `label_option` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sticker_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `artwork` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -91,7 +91,9 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `label_option`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, 4763.00, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33');
+(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
+(5, '33e133a3162010b4d01bb5e186cdc9b7956ca216', 2, 21, 1, 90.00, 90.00, 2000, '19051.00', NULL, NULL, 'artworks/iHC34caWRkfyVif9FyIvK3XiZfdU7jVjdVUJ0m4I.jpeg', 'disk uses the local driver and stores these files in storage/app/public. To make them accessible from the web, you should create a symbolic link from public/storage', 79, '2017-08-24 13:35:23', '2017-08-24 17:26:47'),
+(6, '33e133a3162010b4d01bb5e186cdc9b7956ca216', 2, 4, 1, 15.00, 15.00, 500, '236.00', NULL, NULL, NULL, NULL, 13, '2017-08-24 16:18:20', '2017-08-24 17:27:07');
 
 -- --------------------------------------------------------
 
@@ -403,7 +405,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (39, '2017_08_12_233958_create_special_products_table', 18),
 (40, '2017_08_18_222233_rename_and_remove_qty_preset_one_table', 19),
 (41, '2017_08_19_181849_add_show_in_menu_col_to_category', 20),
-(42, '2017_08_22_213717_create_cart_table', 21);
+(42, '2017_08_22_213717_create_cart_table', 21),
+(45, '2017_08_24_210353_change_cart_price_length', 22);
 
 -- --------------------------------------------------------
 
@@ -919,7 +922,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -959,7 +962,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --

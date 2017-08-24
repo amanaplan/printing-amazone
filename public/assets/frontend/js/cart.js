@@ -1803,7 +1803,7 @@ $(document).ready(function () {
 			params: { item: item }
 		}).then(function (response) {
 			if (response.data == 0) {
-				$("div#cart").html('\n\t\t    \t\t<div class="feature">\n\t\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="{{ url(\'/sticker\') }}">product</a> in your cart.</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t    \t');
+				$("div#cart").html('\n\t\t    \t\t<div class="feature">\n\t\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'sticker">product</a> in your cart.</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t    \t');
 
 				$("span#cartcount").remove();
 			} else {
@@ -1823,7 +1823,7 @@ $(document).ready(function () {
 		startOverlay();
 
 		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/empty-cart', {}).then(function (response) {
-			$("div#cart").html('\n\t    \t\t<div class="feature">\n\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="{{ url(\'/sticker\') }}">product</a> in your cart.</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t    \t');
+			$("div#cart").html('\n\t    \t\t<div class="feature">\n\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'sticker">product</a> in your cart.</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t    \t');
 
 			$("span#cartcount").remove();
 
@@ -1943,7 +1943,94 @@ function closeOverlay() {
 
 function updateProductPrice(cartId, qtyBox) {
 	//qty validation + tooltip error message 
-	//alert(qtyBox.closest('tr').find('span.current-price').html());
+	var allowedQty = [10, 50, 100, 200, 300, 400, 500];
+	var currQty = parseInt(qtyBox.val());
+
+	if (qtyBox.val().toString().indexOf('.') != -1) {
+		showErrorMsg(qtyBox, 'must be of type integer');
+		return false;
+	}
+
+	if (currQty < 1000) {
+		if (allowedQty.indexOf(currQty) != -1) {
+			showErrorMsg(qtyBox);
+		} else {
+			showErrorMsg(qtyBox, 'quantity not available');
+			return false;
+		}
+	} else if (currQty >= 1000 && currQty <= 20000) {
+		if (currQty % 1000 == 0) {
+			showErrorMsg(qtyBox);
+		} else {
+			showErrorMsg(qtyBox, 'only multipe of 1k after 1k');
+			return false;
+		}
+	} else if (currQty > 20000) {
+		showErrorMsg(qtyBox, 'for more than 20k contact us');
+		return false;
+	} else {
+		showErrorMsg(qtyBox, 'not a valid quantity');
+		return false;
+	}
+
+	var priceFld = qtyBox.closest('tr').find('span.current-price');
+	qtyBox.val(currQty);
+
+	disableUpdateBtns(qtyBox, true);
+
+	priceFld.html('<i class="fa fa-refresh fa-spin fa-lg"></i>');
+
+	__WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/update-quantity', {
+		cartid: cartId,
+		qty: currQty
+	}).then(function (response) {
+
+		if (response.data.error == 1) {
+			swal("Error!", response.data.msg, "error");
+		}
+
+		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + response.data.price);
+		disableUpdateBtns(qtyBox, false);
+	}).catch(function (error) {
+		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i>__');
+		disableUpdateBtns(qtyBox, false);
+		swal("Error!", "Oops some server error occurred", "error");
+	});
+}
+
+function showErrorMsg(qtyBox) {
+	var msg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+	var errorTooltip = qtyBox.closest('tr').find('div.errtooltip');
+	var errorMsgBox = qtyBox.closest('tr').find('div.errtooltip span.text');
+
+	if (msg == '') {
+		errorTooltip.hide();
+		errorMsgBox.html('');
+	} else {
+		errorTooltip.show();
+		errorMsgBox.html(msg + ' <span class="instructions" title="we accept order quantity 10, 50, 100, multiple of 100 upto 500, 1000 then multiple of 1000 upto 20k"> <i class="fa fa-info-circle"></i></span>');
+
+		$('.instructions').tooltipster({
+			theme: 'tooltipster-punk',
+			side: 'bottom',
+			maxWidth: 400
+		});
+	}
+}
+
+function disableUpdateBtns(qtyBox) {
+	var block = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+	var rmvBtn = qtyBox.closest('tr').find('button.remove-qty');
+	var addBtn = qtyBox.closest('tr').find('button.add-qty');
+	if (block) {
+		rmvBtn.prop('disabled', true);
+		addBtn.prop('disabled', true);
+	} else {
+		rmvBtn.prop('disabled', false);
+		addBtn.prop('disabled', false);
+	}
 }
 
 /***/ }),

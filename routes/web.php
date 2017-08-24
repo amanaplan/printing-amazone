@@ -44,6 +44,7 @@ Route::post('/cart/add-product', 'Frontend\ProceedOrder@AddToCart')->name('addto
 Route::get('/cart', 'Frontend\CartCtrl@Visit')->name('cart');
 Route::delete('/cart/remove-product', 'Frontend\CartCtrl@RemoveItem');
 Route::delete('/cart/empty-cart', 'Frontend\CartCtrl@ClearCart');
+Route::post('/cart/update-quantity', 'Frontend\CartCtrl@UpdateQty');
 
 
 //users not allowed to access these routes if they are logged in

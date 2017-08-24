@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/css/star-rating.css' ) }}" media="all" type="text/css"/>
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/tooltipster/css/tooltipster.bundle.min.css' ) }}" media="all" type="text/css"/>
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/tooltipster/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css' ) }}" media="all" type="text/css"/>
+	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/tooltipster/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css' ) }}" media="all" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.css' ) }}" />
 
 @endpush
@@ -73,13 +74,13 @@
 
 										@if($item->artwork)
 										<div class="pinned-artwork" data-tooltip-content="#prod-artwork-{{$item->id}}">
-											<img src="{{ asset('storage/'.$item->artwork) }}" alt="Artwork" width="96" height="96">
+											<img src="{{ asset('storage/'.$item->artwork) }}" onerror="showFileImg(this);" alt="Artwork" width="96" height="96">
 											Artwork <i class="fa fa-paperclip"></i>
 										</div>
 
 										<div class="tooltip_templates" style="display: none;">
 										    <span id="prod-artwork-{{$item->id}}">
-										        <img width="200" src="{{ asset('storage/'.$item->artwork) }}" alt="Artwork" />
+										        <img width="200" src="{{ asset('storage/'.$item->artwork) }}" onerror="showFileImg(this);" alt="Artwork" />
 										    </span>
 										</div>
 										@endif
@@ -98,13 +99,19 @@
 									<td>
 										<div class="form-group">
 											<button type="button" class="btn btn-default remove-qty"><i class="fa fa-minus" aria-hidden="true"></i></button>
+
 											<input class="cart-qty" type="text" data-cart-id="{{ $item->id }}" value="{{ $item->qty }}">
+											<div class="errtooltip" style="display: none;">
+												<span class="arrow"></span>
+												<span class="text">This field is required</span>
+											</div>
+
 											<button type="button" class="btn btn-default add-qty"><i class="fa fa-plus" aria-hidden="true"></i></button>
 										</div>
 									</td>
 									
-									<td class="price multiplied-price"><h5><i class="fa fa-usd" aria-hidden="true"></i> <span class="current-price">{{ $item->price }}</span></h5></td>
-									<td class="text-center text-danger"><span class="remove-item" style="cursor:pointer" data-cart-item="{{$item->id}}"><i class="fa fa-times-circle"></i></span></td>
+									<td class="price multiplied-price"><h5> <span class="current-price"><i class="fa fa-usd" aria-hidden="true"></i> {{ number_format($item->price) }}</span></h5></td>
+									<td class="text-center text-danger"><span class="remove-item" data-cart-item="{{$item->id}}"><i class="fa fa-times-circle"></i></span></td>
 								</tr>	
 								@endforeach
 
@@ -189,5 +196,12 @@
 				maxWidth: 300,
 			});
 		});
+	</script>
+
+	<script type="text/javascript">
+		function showFileImg(elem)
+		{
+			elem.src="{{ asset('assets/images/sample-file.png') }}";
+		}
 	</script>
 @endpush

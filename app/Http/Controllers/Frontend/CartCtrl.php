@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\AutoCalculator;
 
 use App\Cart;
 use Auth;
+use Validator;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -88,5 +90,69 @@ class CartCtrl extends Controller
     	}
 
     	$cart_items->delete();
+    }
+
+    /**
+    *quantity validation
+    */
+    public function ValidateQty($attribute, $qty, $parameters, $validator)
+    {
+        if ($qty < 10)
+        {
+            return false;
+        }
+        elseif($qty < 1000 && !in_array($qty, [10, 50, 100, 200, 300, 400, 500]))
+        {
+            return false;
+        }
+        elseif($qty > 999)
+        {
+            if ($qty % 1000 != 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        elseif($qty > 20000)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    /**
+    *update cart product qty
+    */
+    public function UpdateQty(Request $request)
+    {
+        $this->validate($request, [
+            'cartid'    => 'required|integer',
+            'qty'       => 'required|integer|valid_qty',
+        ]);
+
+        $cart_token = Session::get('cart_token');
+        $cartitem = Cart::where([['cart_token', $cart_token],['id', $request->input('cartid')]])->firstOrFail();
+
+        $calculator = new AutoCalculator(($cartitem->width * $cartitem->height), $request->input('qty'), $cartitem->preset_mapper);
+        $price = $calculator->CalculatedPrice();
+
+        if($price == false)
+        {
+            return response()->json(['error' => 1, 'msg' => "Oops can't calculate price", 'price' => $cartitem->price]);
+        }
+        else
+        {
+            $cartitem->price = $price;
+            $cartitem->qty = $request->input('qty');
+            $cartitem->save();
+
+            return response()->json(['error' => 0, 'price' => number_format($price)]);
+        }
     }
 }

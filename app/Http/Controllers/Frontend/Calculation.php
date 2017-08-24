@@ -176,10 +176,6 @@ class Calculation extends Controller
         {
             return false;
         }
-        elseif (is_float($qty))
-        {
-            return false;
-        }
         elseif($qty < 1000 && !in_array($qty, [10, 50, 100, 200, 300, 400, 500]))
         {
             return false;

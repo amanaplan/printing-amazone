@@ -968,4 +968,34 @@ h3.instructions:after {
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
 }
-p.subtitle {    text-align: center;    margin: 16px 0 0;    font-size: 18px;    font-family: 'Raleway', sans-serif;    font-weight: 600;}p.subtitle a{color: #ea8f00; text-decoration: none;
+p.subtitle {    text-align: center;    margin: 16px 0 0;    font-size: 18px;    font-family: 'Raleway', sans-serif;    font-weight: 600;}p.subtitle a{color: #ea8f00; text-decoration: none;}
+.errtooltip {
+    font-weight: 700;
+    font-size: 85%;
+    color: #fff;
+    background: #ff4242;
+    border-radius: 4px;
+    /*top: -12px;*/
+    min-width: 30px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 999;
+    margin-top: 10px;
+}
+.errtooltip .arrow {
+    position: absolute;
+    display: block;
+    /*bottom: -10px;*/
+    top: -10px;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    /*border-top: 5px solid #ff4242;*/
+    border-bottom: 5px solid #ff4242;
+    left: 70px;
+}
+.errtooltip .text {
+    white-space: nowrap;
+}
+span.remove-item{cursor: pointer;}
+td.price h5{width: 70px;}

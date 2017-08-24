@@ -37,6 +37,9 @@ class AppServiceProvider extends ServiceProvider
           return str_replace(':field', $parameters[0], 'field data must be greater');
         });
 
+        //custom validation for order quantity
+        Validator::extend('valid_qty', '\App\Http\Controllers\Frontend\CartCtrl@ValidateQty');
+
         //for main navigation view composer
         View::composer('layouts.frontend.main-nav', function () {
             View::share('nav', Category::where('show_in_menu', 1)->orderBy('sort', 'asc')->get());
