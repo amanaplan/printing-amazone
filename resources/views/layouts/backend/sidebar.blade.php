@@ -40,6 +40,8 @@
                 <li><a {!! ($page == 'paperstock')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/paperstock') }}">Paperstock options</a></li>
                 <li><a {!! ($page == 'size')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/size') }}">Size (mm<sup>2</sup>) options</a></li>
                 <li><a {!! ($page == 'qty')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/qty') }}">Quantity options</a></li>
+                <li><a {!! ($page == 'sticker_type')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/sticker-type') }}">Sticker Type (name sticker)</a></li>
+                <li><a {!! ($page == 'lamination')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/form/lamination') }}">Lamination (name sticker)</a></li>
             </ul>
         </li>
 

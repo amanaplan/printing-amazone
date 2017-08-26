@@ -9,6 +9,7 @@ use App\Mail\VerifyEmail;
 use App\Product;
 use App\Cart;
 use App\User;
+use App\StickerType;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -274,24 +275,14 @@ class AjaxCtrl extends Controller
     */
     public function ShowPreview(Request $request)
     {
+        $this->validate($request, [
+            'artwork' => 'required',
+        ]);
+
         $optName = $request->input('artwork');
 
-        $artWorks = Product::where('product_slug', 'name-stickers')->firstOrFail()->sample_image;
-        $images = explode('*', $artWorks);
+        $artwork = StickerType::where('name', $optName)->firstOrFail()->image;
 
-        $found = 0;
-        foreach($images as $image)
-        {
-            if(preg_match("/(.+)\[".$optName."\]/", trim($image), $match))
-            {
-                $found = 1;
-                return $match[1];
-            }
-        }
-        
-        if($found == 0)
-        {
-            abort(401);
-        }
+        return $artwork;
     }
 }

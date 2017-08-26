@@ -9,6 +9,8 @@ use App\Product;
 use App\MapFrmProd;
 use App\MapProdFrmOpt;
 use App\Review;
+use App\OptLamination;
+use App\StickerType;
 
 use App\Http\HelperClass\Multipurpose;
 
@@ -183,6 +185,9 @@ class PagesCtrl extends Controller
 
         //redirect to controller action of it is name sticker
         if($prodSlug == 'name-stickers'){
+            $data['laminations'] = OptLamination::orderBy('sort', 'asc')->get();
+            $data['sticker_types'] = StickerType::orderBy('sort', 'asc')->get();
+            
             return view('frontend.product-name-stickers', $data);
         }
         else{

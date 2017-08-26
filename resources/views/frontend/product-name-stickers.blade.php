@@ -57,17 +57,8 @@
 					<div class="col-sm-7 col-lg-7 sp-dtls">
 						<p class="sp-text">{{ $product->description }}</p>
 
-						@php
-							$preArtWorks = explode('*', $product->sample_image);
-							$firstSample =  $preArtWorks[0];
-
-							//finding the first pre-uploaded sample image 
-							preg_match("/(.+)\[.+\]/", $firstSample, $match);
-
-						@endphp
-
 						<div id="container">
-						<img id="sticker-preview" src="{{ asset( 'assets/images/products/'.$match[1] ) }}" class="img-responsive" />
+						<img id="sticker-preview" src="{{ asset( 'assets/images/products/'.$sticker_types->first()->image ) }}" class="img-responsive" />
 
 						<div class="middle">
 						    <div class="loadtext"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>
@@ -91,13 +82,9 @@
 									<div class="field">
 										<label>Sticker Type</label>
 										<select name="type">
-											@foreach($preArtWorks as $row)
+											@foreach($sticker_types as $row)
 
-											@php 
-												preg_match("/.+\[(.+)\]/", trim($row), $opt);
-											@endphp
-
-											<option value="{{ $opt[1] }}">{{ $opt[1] }}</option>
+											<option value="{{ $row->name }}">{{ $row->name }}</option>
 
 											@endforeach
 										</select>
@@ -117,9 +104,9 @@
 									<div class="field">
 										<label>Laminating</label>
 										<select name="laminating">
-											<option value="1">option 1</option>
-											<option>option 2</option>
-											<option>option 3</option>
+											@foreach($laminations as $lamination)
+												<option value="{{ $lamination->id }}">{{ $lamination->option }}</option>
+											@endforeach
 										</select>
 									</div>
 									<div class="field">

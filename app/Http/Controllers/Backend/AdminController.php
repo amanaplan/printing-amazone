@@ -14,6 +14,8 @@ use App\MapFrmProd;
 use App\FieldTypes;
 use App\MapProdFrmOpt;
 use App\Review;
+use App\OptLamination;
+use App\StickerType;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -319,6 +321,42 @@ class AdminController extends Controller
             'review'   => Review::findOrFail($id)
         ];
         return view('backend.review-edit', $data);
+    }
+
+    /**
+    *see lamination options page
+    */
+    public function VisitLaminationOptions()
+    {
+        $data = [
+            'page'     => 'lamination',
+            'options'  => OptLamination::orderBy('sort', 'asc')->get()
+        ];
+        return view('backend.options-lamination', $data);
+    }
+
+    /**
+    *name sticker types list pages
+    */
+    public function VisitStickerTypes()
+    {
+        $data = [
+            'page'     => 'sticker_type',
+            'options'  => StickerType::orderBy('sort', 'asc')->get()
+        ];
+        return view('backend.options-sticker-type', $data);
+    }
+
+    /**
+    *edit sticker type details
+    */
+    public function EditStickerType($id)
+    {
+        $data = [
+            'page'     => 'sticker_type',
+            'option'  => StickerType::findOrFail($id)
+        ];
+        return view('backend.options-edit-sticker-type', $data);
     }
 
 }

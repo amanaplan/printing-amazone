@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2017 at 12:26 PM
+-- Generation Time: Aug 26, 2017 at 02:53 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -93,9 +93,10 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
 (1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
-(5, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 21, 1, 90.00, 90.00, 3000, '28577.00', NULL, NULL, NULL, 'artworks/iHC34caWRkfyVif9FyIvK3XiZfdU7jVjdVUJ0m4I.jpeg', 'disk uses the local driver and stores these files in storage/app/public. To make them accessible from the web, you should create a symbolic link from public/storage', 79, '2017-08-24 13:35:23', '2017-08-26 14:48:46'),
+(5, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 21, 1, 90.00, 90.00, 1000, '9526.00', NULL, NULL, NULL, 'artworks/iHC34caWRkfyVif9FyIvK3XiZfdU7jVjdVUJ0m4I.jpeg', 'disk uses the local driver and stores these files in storage/app/public. To make them accessible from the web, you should create a symbolic link from public/storage', 79, '2017-08-24 13:35:23', '2017-08-26 15:29:02'),
 (8, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 22, 7, 90.00, 90.00, 10, '95.00', 'Animal Town - 0004582', 'option 2', 'sourav', 'artworks/GvFWtVhc3tdf0XCb7H8ITC47Gt6BcaQqaWEX2wvO.jpeg', 'nothing special', 94, '2017-08-26 14:26:00', '2017-08-26 14:48:43'),
-(9, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 17, 5, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 28, '2017-08-26 14:55:44', '2017-08-26 14:55:44');
+(9, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 17, 5, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 28, '2017-08-26 14:55:44', '2017-08-26 14:55:44'),
+(10, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 22, 5, 120.00, 120.00, 10, '169.00', 'Animal Town 007', '4', 'John Cena', 'artworks/iq6j9eoL3h2P7DdxNMR0ricN2XJLpFJtJLTYkWxH.png', NULL, 93, '2017-08-26 17:19:08', '2017-08-26 17:19:09');
 
 -- --------------------------------------------------------
 
@@ -202,6 +203,27 @@ CREATE TABLE `jobs` (
   `available_at` int(10) UNSIGNED NOT NULL,
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lamination_options`
+--
+
+CREATE TABLE `lamination_options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `option` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sort` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lamination_options`
+--
+
+INSERT INTO `lamination_options` (`id`, `option`, `sort`) VALUES
+(3, 'Lamination 1', 1),
+(4, 'Lamination 2', 2),
+(5, 'lamination 3', 3);
 
 -- --------------------------------------------------------
 
@@ -409,7 +431,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2017_08_19_181849_add_show_in_menu_col_to_category', 20),
 (42, '2017_08_22_213717_create_cart_table', 21),
 (45, '2017_08_24_210353_change_cart_price_length', 22),
-(46, '2017_08_26_194900_add_sticker_type_col_rename_laminate_col', 23);
+(46, '2017_08_26_194900_add_sticker_type_col_rename_laminate_col', 23),
+(47, '2017_08_26_210839_create_lamination_options_table', 24),
+(48, '2017_08_26_214504_create_sticker_type_table', 25),
+(49, '2017_08_26_215304_add_sort_col-to_sticker_type_table', 26);
 
 -- --------------------------------------------------------
 
@@ -655,7 +680,7 @@ INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `pr
 (19, 'Rectangle Postcards', NULL, NULL, 4, 'Rectangle Postcards', 'rectangle-postcards', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Postcard_1.jpg', 1, '2017-08-15 16:23:21', '2017-08-15 16:23:21'),
 (20, 'Rounded Corner', NULL, NULL, 3, 'Rounded Corner', 'rounded-corner', 'cs-6.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 1, '2017-08-15 16:42:47', '2017-08-19 16:20:42'),
 (21, 'Circle Stickers', NULL, NULL, 1, 'Circle Stickers', 'circle-stickers', 'cs-2.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 4, '2017-08-15 16:57:52', '2017-08-19 16:13:40'),
-(22, 'Name stickers - Printing Amazon', NULL, NULL, 1, 'Name stickers', 'name-stickers', 'namesticker_icon.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of.', '8-bit-zombie-custom-rectangle-vinyl-stickers-kiss-cut-1.jpg[B-Bit Zombie] * KidsStickers.jpg[Animal Town - 0004582] * 9e17.jpg[Ben10 Ultimate Pack]', 5, '2017-08-16 13:48:57', '2017-08-19 16:27:52'),
+(22, 'Name stickers - Printing Amazon', NULL, NULL, 1, 'Name stickers', 'name-stickers', 'namesticker_icon.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of.', NULL, 5, '2017-08-16 13:48:57', '2017-08-26 17:17:23'),
 (23, 'Labels - Printing Amazon', NULL, NULL, 5, 'Labels', 'labels', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo', 'PVC-paper-custom-label-sticker-logo-printing-self-adhesive-shipping-labels-custom-sticker-label-stickers.jpg', 1, '2017-08-19 13:08:47', '2017-08-19 15:57:18'),
 (24, 'Graphic Designs - Printing Amazon', NULL, NULL, 5, 'Graphic Designs', 'graphic-designs', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo', 'gshock-watch-sports-watch-stopwatch-158741.jpeg*hacker-internet-technology-computers-159195.jpeg', 2, '2017-08-19 13:24:07', '2017-08-19 13:24:07');
 
@@ -750,6 +775,27 @@ INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sticker_types`
+--
+
+CREATE TABLE `sticker_types` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sort` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sticker_types`
+--
+
+INSERT INTO `sticker_types` (`id`, `name`, `image`, `sort`) VALUES
+(2, 'Ben 10 Ulimate Alien', '8-bit-zombie-custom-rectangle-vinyl-stickers-kiss-cut-1.jpg', 2),
+(3, 'Animal Town 007', '9e17.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -831,6 +877,12 @@ ALTER TABLE `jobs`
   ADD KEY `jobs_queue_reserved_at_index` (`queue`,`reserved_at`);
 
 --
+-- Indexes for table `lamination_options`
+--
+ALTER TABLE `lamination_options`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
@@ -906,6 +958,12 @@ ALTER TABLE `size_options`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sticker_types`
+--
+ALTER TABLE `sticker_types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -925,7 +983,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -952,6 +1010,11 @@ ALTER TABLE `form_field_types`
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `lamination_options`
+--
+ALTER TABLE `lamination_options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
@@ -965,7 +1028,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
@@ -1006,6 +1069,11 @@ ALTER TABLE `reviews`
 --
 ALTER TABLE `size_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `sticker_types`
+--
+ALTER TABLE `sticker_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --

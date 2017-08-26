@@ -13,6 +13,8 @@ use App\Review;
 use App\PresetGeneral;
 use App\PresetQtyGrpOne;
 use App\PresetQtyGrpTwo;
+use App\OptLamination;
+use App\StickerType;
 
 use App\Http\HelperClass\Multipurpose;
 use Illuminate\Support\Facades\Redis;
@@ -749,6 +751,115 @@ class AdminRqstController extends Controller
         adminflash('success', 'paperstock option removed completely');
         return redirect()->back();
     }
+
+    /**
+    *insert new lamination option
+    */
+    public function LaminationInsert(Request $request)
+    {
+        $this->validate($request, [
+            'option' => 'required|min:5',
+        ]);
+
+        OptLamination::create(['option' => $request->input('option')]);
+
+        adminflash('success', 'lamination option added completely');
+        return redirect()->back();
+    }
     
+    /**
+    *delete lamination option
+    */
+    public function LaminationRemove(Request $request)
+    {
+        $this->validate($request, [
+            'option_id' => 'required|integer',
+        ]);
+
+        OptLamination::findOrFail($request->input('option_id'))->delete();
+
+        adminflash('success', 'lamination option removed completely');
+        return redirect()->back();
+    }
+
+    /**
+    *sort lamination option
+    */
+    public function SortLamination(Request $request)
+    {
+        $this->validate($request, [
+            'option_id' =>  'required|integer',
+            'sort'      =>  'required|integer'
+        ]);
+
+        $option = OptLamination::findOrFail($request->input('option_id'));
+        $option->sort = $request->input('sort');
+        $option->save();
+    }
+
+    /**
+    *add new name sticker type
+    */
+    public function StickerTypesInsert(Request $request)
+    {
+        $this->validate($request, [
+            'sticker_type'  =>  'required',
+            'image'         =>  'required'
+        ]);
+
+        StickerType::create(['name' => $request->input('sticker_type'), 'image' => $request->input('image')]);
+
+        adminflash('success', 'sticker type added successfully');
+        return redirect()->back();
+    }
+
+    /**
+    *delete lamination option
+    */
+    public function StickerTypesRemove(Request $request)
+    {
+        $this->validate($request, [
+            'option_id' => 'required|integer',
+        ]);
+
+        StickerType::findOrFail($request->input('option_id'))->delete();
+
+        adminflash('success', 'sticker type option removed completely');
+        return redirect()->back();
+    }
+
+    /**
+    *sort lamination option
+    */
+    public function SortStickerTypes(Request $request)
+    {
+        $this->validate($request, [
+            'option_id' =>  'required|integer',
+            'sort'      =>  'required|integer'
+        ]);
+
+        $option = StickerType::findOrFail($request->input('option_id'));
+        $option->sort = $request->input('sort');
+        $option->save();
+    }
+
+    /**
+    *edit sticker type
+    */
+    public function EditRqStickerType(Request $request, $id)
+    {
+        $this->validate($request, [
+            'sticker_type'  =>  'required',
+            'image'         =>  'required'
+        ]);
+
+        $option = StickerType::findOrFail($id);
+        $option->name = $request->input('sticker_type');
+        $option->image = $request->input('image');
+        $option->save();
+
+        adminflash('success', 'sticker type updated successfully');
+        return redirect('/admin/form/sticker-type');
+    }
 
 }
