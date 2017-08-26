@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2017 at 02:53 PM
+-- Generation Time: Aug 26, 2017 at 04:57 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -92,11 +92,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
-(5, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 21, 1, 90.00, 90.00, 1000, '9526.00', NULL, NULL, NULL, 'artworks/iHC34caWRkfyVif9FyIvK3XiZfdU7jVjdVUJ0m4I.jpeg', 'disk uses the local driver and stores these files in storage/app/public. To make them accessible from the web, you should create a symbolic link from public/storage', 79, '2017-08-24 13:35:23', '2017-08-26 15:29:02'),
-(8, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 22, 7, 90.00, 90.00, 10, '95.00', 'Animal Town - 0004582', 'option 2', 'sourav', 'artworks/GvFWtVhc3tdf0XCb7H8ITC47Gt6BcaQqaWEX2wvO.jpeg', 'nothing special', 94, '2017-08-26 14:26:00', '2017-08-26 14:48:43'),
-(9, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 17, 5, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 28, '2017-08-26 14:55:44', '2017-08-26 14:55:44'),
-(10, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 22, 5, 120.00, 120.00, 10, '169.00', 'Animal Town 007', '4', 'John Cena', 'artworks/iq6j9eoL3h2P7DdxNMR0ricN2XJLpFJtJLTYkWxH.png', NULL, 93, '2017-08-26 17:19:08', '2017-08-26 17:19:09');
+(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33');
 
 -- --------------------------------------------------------
 
@@ -816,7 +812,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', '1r1rgoSLEZ199YdOZK5D1hefhDSpLhV9DsxxipAiKlojxAjwufQMyHhPhxPc', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'D6iFx0nIgVi8v5X500jBOOurcV7W25T8wrVx4Dbc4OQj1EIePDd34l4fj5Qt', '2017-05-18 16:08:04', '2017-07-22 18:16:07');
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'D6iFx0nIgVi8v5X500jBOOurcV7W25T8wrVx4Dbc4OQj1EIePDd34l4fj5Qt', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
+(3, 'angellous99', 'angellous99@gmail.com', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wqupgczDAwlp3sCuzfFMet8fC6EBIHvHteCGXtnyTFeh5T2ioufdAs9O8s7i', '2017-08-22 11:25:02', '2017-08-22 11:25:13');
 
 --
 -- Indexes for dumped tables
@@ -983,7 +980,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -1078,7 +1075,7 @@ ALTER TABLE `sticker_types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
