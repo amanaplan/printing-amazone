@@ -88,6 +88,19 @@
 									</td>
 									<td class="product-name">
 										<p>{{ $item->paperstockopt->option }}</p>
+
+										@if($item->sticker_type) 
+										<h5>Sticker Type : <span>{{ $item->sticker_type }}</span> </h5> 
+										@endif
+
+										@if($item->laminating) 
+										<h5>Laminating : <span>{{ $item->laminating }}</span> </h5> 
+										@endif
+
+										@if($item->sticker_name) 
+										<h5>Printing Name : <span>{{ $item->sticker_name }}</span> </h5> 
+										@endif
+
 										<h5>Size : <span>{{ $item->width }} mm x {{ $item->height }} mm</span> </h5>
 
 										@if($item->instructions) 

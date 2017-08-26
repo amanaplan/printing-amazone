@@ -51,6 +51,40 @@ class ProceedOrder extends Controller
         }
 
         /*-----------------------------------------------------------------------------------------------
+        | detect if it is name sticker & validate upon the provided form data
+        -----------------------------------------------------------------------------------------------*/
+        if($request->input('product') == 'name-stickers')
+        {
+            $sticker_type = $request->input('type');
+            $laminating = $request->input('laminating');
+            $sticker_name = $request->input('sticker_name');
+
+            if($sticker_type == null)
+            {
+                $request->session()->flash('formError', 'Please select a valid sticker type');
+                return redirect()->back();
+            }
+            else if($laminating == null)
+            {
+                $request->session()->flash('formError', 'Please select a laminating option');
+                return redirect()->back();
+            }
+            else if($sticker_name == null)
+            {
+                $request->session()->flash('formError', 'Please enter printing name');
+                return redirect()->back();
+            }
+
+            $name_sticker_data = [
+                'sticker_type'  => $sticker_type,
+                'laminating'    => $laminating,
+                'sticker_name'  => $sticker_name
+            ];
+        }
+
+
+
+        /*-----------------------------------------------------------------------------------------------
         | validating the input provided
         -----------------------------------------------------------------------------------------------*/
         $product = Product::where('product_slug', $request->input('product'))->firstOrFail()->id;
@@ -141,7 +175,7 @@ class ProceedOrder extends Controller
         	return redirect()->back();
         }
 
-        $storeInSession = [
+        $common_data = [
         	'product'		=> $product,
         	'paperstock'	=> $paperstock,
         	'width'			=> $width,
@@ -150,6 +184,9 @@ class ProceedOrder extends Controller
         	'price'			=> $price,
             'mapper'        => $map_paperstock_option->first()->id
         ];
+
+        //if name sticker then add the additional parameters
+        $storeInSession = ($request->input('product') == 'name-stickers')? array_merge($common_data, $name_sticker_data) : $common_data;
 
         $request->session()->put('curr_product_payload', collect($storeInSession));
 
@@ -175,10 +212,12 @@ class ProceedOrder extends Controller
         $data = [
             'product_name'      =>  $product->product_name,
             'product_img'       =>  $product->logo,
-            'product_url'       =>  '#',
             'width'             =>  $collection->get('width'),
             'height'            =>  $collection->get('height'),
             'qty'               =>  $collection->get('qty'),
+            'sticker_type'      =>  $collection->has('sticker_type')? $collection->get('sticker_type') : null,
+            'laminating'        =>  $collection->has('laminating')? $collection->get('laminating') : null,
+            'sticker_name'      =>  $collection->has('sticker_name')? $collection->get('sticker_name') : null,
         ];
 
 		return view('frontend.upload-artwork', $data);
@@ -274,7 +313,8 @@ class ProceedOrder extends Controller
             'width'         =>  $collection->get('width'),
             'height'        =>  $collection->get('height'),
             'qty'           =>  $collection->get('qty'),
-            'label_option'  =>  $collection->get('label_option'),
+            'sticker_type'  =>  $collection->get('sticker_type'),
+            'laminating'    =>  $collection->get('laminating'),
             'sticker_name'  =>  $collection->get('sticker_name'),
             'artwork'       =>  $collection->get('artwork'),
             'instructions'  =>  $request->input('instructions'),

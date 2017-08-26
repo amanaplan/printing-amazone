@@ -45,7 +45,7 @@ p.sp-text{color:#808080; font-family: 'Raleway', sans-serif; font-size:15px; fon
     vertical-align: bottom;
 }
 .custom-size ul li label{color:#686868; font-size:14px; font-family: 'Raleway', sans-serif; cursor:pointer; width:50%;}
-.custom-size ul li span {padding-left: 10px;color:#1d9e45; font-size:14px; font-family: 'Raleway', sans-serif; display:inline-block; width:20%;}
+.custom-size ul li span {padding-left: 10px;color:#1d9e45; font-size:14px; font-family: 'arial', sans-serif; display:inline-block; width:20%;}
 span#qty-price{color:#67b57f;}
 .custom-size ul li span.saving{color:#f30; width:auto;font-size:13px; font-weight:600;}
 .custom-input, .custom-qty-input {
@@ -383,14 +383,16 @@ a.cnt-shopping{
 	font-weight: 600;
 	font-family: 'Raleway', sans-serif;
 	border-radius:4px;
-	background:#4b4aa1;
+	background:#ed9704;
 	color:#fff;
 	text-decoration:none;
 	transition:all 0.4s;
-	border:2px solid #4b4aa1;
+	border:2px solid #ea8e03;
 	text-align: center;
 }
-a.cnt-shopping:hover{background:none; color:#4b4aa1; border:2px solid #4b4aa1;}
+a.cnt-shopping:hover{
+    /*background:none; color:#4b4aa1; border:2px solid #4b4aa1;*/
+}
 .btn-right{text-align:right;}
 a.clr-shopping{
 	font-size: 14px;
@@ -399,7 +401,7 @@ a.clr-shopping{
 	font-weight: 600;
 	font-family: 'Raleway', sans-serif;
 	border-radius:4px;
-	background:#5fd282;
+	background:#59b575;
 	color:#fff;
 	text-decoration:none;
 	transition:all 0.4s;
@@ -995,3 +997,8 @@ p.subtitle {    text-align: center;    margin: 16px 0 0;    font-size: 18px;    
 span.remove-item{cursor: pointer;}
 td.price h5{width: 70px;}
 .happy-text{color: #0ca73b;}
+
+span.current-price {
+    font-family: arial;
+}
+h5#cart-subtotal, h5#cart-discount, h5.price{font-family: arial;}

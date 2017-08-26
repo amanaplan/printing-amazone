@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2017 at 02:58 PM
+-- Generation Time: Aug 26, 2017 at 12:26 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -77,7 +77,8 @@ CREATE TABLE `cart` (
   `height` double(7,2) NOT NULL,
   `qty` int(11) NOT NULL,
   `price` decimal(15,2) NOT NULL DEFAULT 0.00,
-  `label_option` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sticker_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `laminating` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sticker_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `artwork` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `instructions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -90,10 +91,11 @@ CREATE TABLE `cart` (
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `label_option`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
-(5, '33e133a3162010b4d01bb5e186cdc9b7956ca216', 2, 21, 1, 90.00, 90.00, 2000, '19051.00', NULL, NULL, 'artworks/iHC34caWRkfyVif9FyIvK3XiZfdU7jVjdVUJ0m4I.jpeg', 'disk uses the local driver and stores these files in storage/app/public. To make them accessible from the web, you should create a symbolic link from public/storage', 79, '2017-08-24 13:35:23', '2017-08-24 17:26:47'),
-(6, '33e133a3162010b4d01bb5e186cdc9b7956ca216', 2, 4, 1, 15.00, 15.00, 500, '236.00', NULL, NULL, NULL, NULL, 13, '2017-08-24 16:18:20', '2017-08-24 17:27:07');
+INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
+(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
+(5, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 21, 1, 90.00, 90.00, 3000, '28577.00', NULL, NULL, NULL, 'artworks/iHC34caWRkfyVif9FyIvK3XiZfdU7jVjdVUJ0m4I.jpeg', 'disk uses the local driver and stores these files in storage/app/public. To make them accessible from the web, you should create a symbolic link from public/storage', 79, '2017-08-24 13:35:23', '2017-08-26 14:48:46'),
+(8, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 22, 7, 90.00, 90.00, 10, '95.00', 'Animal Town - 0004582', 'option 2', 'sourav', 'artworks/GvFWtVhc3tdf0XCb7H8ITC47Gt6BcaQqaWEX2wvO.jpeg', 'nothing special', 94, '2017-08-26 14:26:00', '2017-08-26 14:48:43'),
+(9, 'c84f19fd0dcde03c15997c49cc87989c339c3169', 2, 17, 5, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 28, '2017-08-26 14:55:44', '2017-08-26 14:55:44');
 
 -- --------------------------------------------------------
 
@@ -406,7 +408,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (40, '2017_08_18_222233_rename_and_remove_qty_preset_one_table', 19),
 (41, '2017_08_19_181849_add_show_in_menu_col_to_category', 20),
 (42, '2017_08_22_213717_create_cart_table', 21),
-(45, '2017_08_24_210353_change_cart_price_length', 22);
+(45, '2017_08_24_210353_change_cart_price_length', 22),
+(46, '2017_08_26_194900_add_sticker_type_col_rename_laminate_col', 23);
 
 -- --------------------------------------------------------
 
@@ -767,7 +770,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', '1r1rgoSLEZ199YdOZK5D1hefhDSpLhV9DsxxipAiKlojxAjwufQMyHhPhxPc', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'Huzco5I1o59grghjp71rjMBP2O2RO8XPANsq6XAVx65Lm8IlzYnQCFgg2JOf', '2017-05-18 16:08:04', '2017-07-22 18:16:07');
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'D6iFx0nIgVi8v5X500jBOOurcV7W25T8wrVx4Dbc4OQj1EIePDd34l4fj5Qt', '2017-05-18 16:08:04', '2017-07-22 18:16:07');
 
 --
 -- Indexes for dumped tables
@@ -922,7 +925,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -962,7 +965,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --

@@ -45,8 +45,10 @@
 							<img class="img-responsive" src="{{ asset('assets/images/products/'.$product_img) }}" />
 						</div>
 						<div class="stk-dtls"><h3> {{ $product_name }}</h3>
-						  <p><strong>Size :</strong> {{ $width }} x {{ $height }} mm</p>
-						  <p><strong>Qty. :</strong> {{ $qty }}</p>
+							@if($sticker_type) <p><strong>Sticker Type :</strong> {{ $sticker_type }}</p> @endif
+							@if($sticker_name) <p><strong>Printing Name :</strong> {{ $sticker_name }}</p> @endif
+							<p><strong>Size :</strong> {{ $width }} x {{ $height }} mm</p>
+							<p><strong>Qty. :</strong> {{ $qty }}</p>
 					    </div>
 					    <div class="clr"></div>
 					</li>

@@ -82,7 +82,7 @@
 						<div class="col-sm-4 col-lg-4 custom-size">
 							<div class="custom-form">
 
-								<form action="" method="post">
+								<form action="{{ url('/place-order/proceed') }}" method="post">
 
 									{{ csrf_field() }}
 
@@ -116,15 +116,15 @@
 									</div>
 									<div class="field">
 										<label>Laminating</label>
-										<select>
-											<option>option 1</option>
+										<select name="laminating">
+											<option value="1">option 1</option>
 											<option>option 2</option>
 											<option>option 3</option>
 										</select>
 									</div>
 									<div class="field">
 										<label style="padding-bottom: 10px;">Printing Name</label>
-										<input type="text" placeholder="Enter Printing Name">
+										<input type="text" name="sticker_name" value="{{ old('sticker_name') }}" placeholder="Enter Printing Name">
 									</div>
 									<div class="field">
 										<label>Select a Size</label>
@@ -163,7 +163,7 @@
 									</div>
 									
 									<div class="field">
-										<button type="button" class="continue">Continue</button>
+										<button type="submit" class="continue">Continue</button>
 										<span class="next-up">Next : Upload Artwork <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
 									</div>
 
@@ -363,6 +363,16 @@
 
 	{{-- sticker type preview section --}}
 	<script type="text/javascript" src="{{ asset( 'assets/frontend/js/nameStickerPreview.js' ) }}"></script>
+
+	@if(session('formError'))
+		<link rel="stylesheet" type="text/css" href="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.css' ) }}" />
+		<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.min.js' ) }}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				swal("Error!", "{{ session('formError') }}", "error");
+			});
+		</script>
+	@endif
 
 	{{-- calculation form --}}
 	<script type="text/javascript" src="{{ asset( 'assets/frontend/js/calculation.js' ) }}"></script>
