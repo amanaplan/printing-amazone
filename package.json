@@ -17,5 +17,9 @@
     "laravel-mix": "^0.12.1",
     "lodash": "^4.17.4",
     "vue": "^2.4.1"
+  },
+  "dependencies": {
+    "connect": "^3.6.3",
+    "express": "^4.15.4"
   }
 }
