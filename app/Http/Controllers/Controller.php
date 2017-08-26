@@ -14,19 +14,4 @@ use Illuminate\Support\Facades\Session;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function __construct()
-    {
-	    if(Auth::guard('web')->check())
-	    {
-	    	if(! Session::has('cart_token'))
-	    	{
-	    		$in_cart = Cart::where('user_id', Auth::user()->id);
-	    		if($in_cart->count() > 0)
-	    		{
-	    			Session::put('cart_token', $in_cart->first()->cart_token);
-	    		}
-	    	}
-	    }
-	}
 }
