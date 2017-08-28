@@ -1002,3 +1002,11 @@ span.current-price {
     font-family: arial;
 }
 h5#cart-subtotal, h5#cart-discount, h5.price{font-family: arial;}
+.checkout-summary h4{display: inline-block;}
+.checkout-summary {
+    background: #eee;
+    padding: 30px;
+    border-radius: 4px;
+}
+.checkout-summary .table tbody tr td{font-size:14px; font-weight:600;}
+.summary-price {text-align: right;font-family: arial !important;}

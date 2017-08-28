@@ -19,6 +19,7 @@
     "vue": "^2.4.1"
   },
   "dependencies": {
+    "braintree-web-drop-in": "^1.7.0",
     "connect": "^3.6.3",
     "express": "^4.15.4"
   }

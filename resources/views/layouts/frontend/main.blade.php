@@ -256,9 +256,6 @@
 	<!--======= Customize =========-->
 	<script src="{{ asset( 'assets/frontend/js/responsive_bootstrap_carousel.js' ) }}"></script>
 
-	{{-- vue.js --}}
-	<!-- <script type="text/javascript" src="{{ asset( 'assets/frontend/js/vue.js' ) }}"></script> -->
-
 	<script src="{{ asset( 'assets/frontend/js/custom.js' ) }}"></script>
 
 	{{-- page specific scripts --}}

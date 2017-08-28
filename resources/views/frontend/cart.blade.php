@@ -164,7 +164,7 @@
 							<tr><td></td><td></td></tr>
 						</tbody>
 					</table>
-					<a href="#" class="cnt-shopping">Proceed to checkout</a>
+					<a href="{{ url('/checkout') }}" class="cnt-shopping">Proceed to checkout</a>
 				</div>
 			</div>
 
