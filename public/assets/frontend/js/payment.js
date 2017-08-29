@@ -3907,6 +3907,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'checkout/get-client-token', {
 	generate: 1
 }).then(function (response) {
+	//client token received
 
 	var client_token = response.data.token;
 
@@ -3921,28 +3922,78 @@ __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__
 		}
 	}, function (createErr, instance) {
 		if (createErr) {
-			console.log('Error', createErr);
+			//console.log('Error', createErr);
+			swal("Error!", 'Oops! something went wrong try again', "error");
 			return;
 		}
 		form.addEventListener('submit', function (event) {
 			event.preventDefault();
+			disableOrderPlaceBtn(true);
 
-			instance.requestPaymentMethod(function (err, payload) {
-				if (err) {
-					console.log('Error', err);
-					return;
+			//check if basic field validation is ok
+			__WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'checkout/place-order', {
+				name: $("input[name='name']").val(),
+				email: $("input[name='email']").val(),
+				phone: $("input[name='phone']").val(),
+				country: $("select[name='country']").val(),
+				state: $("input[name='state']").val(),
+				city: $("input[name='city']").val(),
+				zipcode: $("input[name='zipcode']").val(),
+				street: $("textarea[name='street']").val(),
+				company: $("input[name='company']").val()
+
+			}).then(function (response) {
+
+				if (response.data.error == 1) {
+					swal("Error!", response.data.err_msg, "error");
+					disableOrderPlaceBtn(false);
+				} else {
+					//general validation success now get nonce
+
+					instance.requestPaymentMethod(function (err, payload) {
+						if (err) {
+							//console.log('Error', err);
+							swal("Error!", "Invalid payment details, try again", "error");
+							disableOrderPlaceBtn(false);
+							return;
+						}
+
+						//client token + nonce all receiced process the price detuction
+
+						__WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'checkout/process-payment', {
+							payment_method_nonce: payload.nonce
+						}).then(function (response) {
+
+							//return to order confirm page with order & transaction id
+							document.location.assign(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'order-confirm');
+						}).catch(function (error) {
+							swal("Error!", 'Oops! payment processing unsuccessful, try again', "error");
+							disableOrderPlaceBtn(false);
+						});
+					});
 				}
-
-				// Add the nonce to the form and submit
-				document.querySelector('#nonce').value = payload.nonce;
-				form.submit();
+			}).catch(function (error) {
+				//server level validation process page error
+				swal("Error!", 'Oops! something went wrong try again', "error");
 			});
 		});
 	});
 }).catch(function (error) {
-
-	alert('need client token');
+	//client token not found
+	swal("Error!", 'Oops! something went wrong try again', "error");
 });
+
+function disableOrderPlaceBtn() {
+	var disable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+	if (disable) {
+		$("button#place-order").html('<i class="fa fa-spinner fa-pulse"></i> Processing. .');
+		$("button#place-order").prop('disabled', true);
+	} else {
+		$("button#place-order").html('Place Order');
+		$("button#place-order").prop('disabled', false);
+	}
+}
 
 /***/ }),
 /* 70 */,

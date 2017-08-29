@@ -127,8 +127,7 @@ class AjaxCtrl extends Controller
     {
     	if(Auth::guard('web')->check())
     	{
-            Session::forget('curr_product_payload');
-            Session::forget('cart_token');
+            Session::forget(['cart_token', 'payable', 'discount', 'order', 'curr_product_payload', 'order_id', 'transaction_id']);
     		Auth::guard('web')->logout();
     	}
     	else

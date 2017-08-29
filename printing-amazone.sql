@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2017 at 04:57 PM
+-- Generation Time: Aug 29, 2017 at 07:45 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -92,7 +92,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33');
+(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
+(19, 'b6b49d6fc372792272a215ae851873edd8b08a2b', 2, 2, 5, 50.00, 50.00, 500, '2793.00', NULL, NULL, NULL, NULL, NULL, 42, '2017-08-29 22:02:29', '2017-08-29 22:02:34');
 
 -- --------------------------------------------------------
 
@@ -125,6 +126,295 @@ INSERT INTO `category` (`id`, `title`, `og_title`, `meta_desc`, `og_desc`, `og_i
 (3, 'Brochures/Flyers - Printing Amazon', 'Brochures/Flyers - Printing Amazon', NULL, NULL, NULL, 'Brochures/Flyers', 'brochuresflyers', 3, 1, '2017-06-19 13:14:34', '2017-08-19 15:08:51'),
 (4, 'Postcards - Printing Amazon', 'Postcards - Printing Amazon', NULL, NULL, NULL, 'Postcards', 'postcards', 4, 1, '2017-06-19 13:14:52', '2017-08-19 15:09:02'),
 (5, NULL, NULL, NULL, NULL, NULL, 'Uncategorized', 'uncategorized', 0, 0, '2017-08-19 13:05:36', '2017-08-19 13:05:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country`
+--
+
+CREATE TABLE `country` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `cc_fips` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cc_iso` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tld` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `country`
+--
+
+INSERT INTO `country` (`id`, `cc_fips`, `cc_iso`, `tld`, `country_name`) VALUES
+(1, 'AA', 'AW', '.aw', 'Aruba'),
+(2, 'AC', 'AG', '.ag', 'Antigua and Barbuda'),
+(3, 'AE', 'AE', '.ae', 'United Arab Emirates'),
+(4, 'AF', 'AF', '.af', 'Afghanistan'),
+(5, 'AG', 'DZ', '.dz', 'Algeria'),
+(6, 'AJ', 'AZ', '.az', 'Azerbaijan'),
+(7, 'AL', 'AL', '.al', 'Albania'),
+(8, 'AM', 'AM', '.am', 'Armenia'),
+(9, 'AN', 'AD', '.ad', 'Andorra'),
+(10, 'AO', 'AO', '.ao', 'Angola'),
+(11, 'AQ', 'AS', '.as', 'American Samoa'),
+(12, 'AR', 'AR', '.ar', 'Argentina'),
+(13, 'AS', 'AU', '.au', 'Australia'),
+(14, 'AT', '-', '-', 'Ashmore and Cartier Islands'),
+(15, 'AU', 'AT', '.at', 'Austria'),
+(16, 'AV', 'AI', '.ai', 'Anguilla'),
+(17, 'AX', 'AX', '.ax', 'Åland Islands'),
+(18, 'AY', 'AQ', '.aq', 'Antarctica'),
+(19, 'BA', 'BH', '.bh', 'Bahrain'),
+(20, 'BB', 'BB', '.bb', 'Barbados'),
+(21, 'BC', 'BW', '.bw', 'Botswana'),
+(22, 'BD', 'BM', '.bm', 'Bermuda'),
+(23, 'BE', 'BE', '.be', 'Belgium'),
+(24, 'BF', 'BS', '.bs', 'Bahamas, The'),
+(25, 'BG', 'BD', '.bd', 'Bangladesh'),
+(26, 'BH', 'BZ', '.bz', 'Belize'),
+(27, 'BK', 'BA', '.ba', 'Bosnia and Herzegovina'),
+(28, 'BL', 'BO', '.bo', 'Bolivia'),
+(29, 'BM', 'MM', '.mm', 'Myanmar'),
+(30, 'BN', 'BJ', '.bj', 'Benin'),
+(31, 'BO', 'BY', '.by', 'Belarus'),
+(32, 'BP', 'SB', '.sb', 'Solomon Islands'),
+(33, 'BQ', '-', '-', 'Navassa Island'),
+(34, 'BR', 'BR', '.br', 'Brazil'),
+(35, 'BS', '-', '-', 'Bassas da India'),
+(36, 'BT', 'BT', '.bt', 'Bhutan'),
+(37, 'BU', 'BG', '.bg', 'Bulgaria'),
+(38, 'BV', 'BV', '.bv', 'Bouvet Island'),
+(39, 'BX', 'BN', '.bn', 'Brunei'),
+(40, 'BY', 'BI', '.bi', 'Burundi'),
+(41, 'CA', 'CA', '.ca', 'Canada'),
+(42, 'CB', 'KH', '.kh', 'Cambodia'),
+(43, 'CD', 'TD', '.td', 'Chad'),
+(44, 'CE', 'LK', '.lk', 'Sri Lanka'),
+(45, 'CF', 'CG', '.cg', 'Congo, Republic of the'),
+(46, 'CG', 'CD', '.cd', 'Congo, Democratic Republic of the'),
+(47, 'CH', 'CN', '.cn', 'China'),
+(48, 'CI', 'CL', '.cl', 'Chile'),
+(49, 'CJ', 'KY', '.ky', 'Cayman Islands'),
+(50, 'CK', 'CC', '.cc', 'Cocos (Keeling) Islands'),
+(51, 'CM', 'CM', '.cm', 'Cameroon'),
+(52, 'CN', 'KM', '.km', 'Comoros'),
+(53, 'CO', 'CO', '.co', 'Colombia'),
+(54, 'CQ', 'MP', '.mp', 'Northern Mariana Islands'),
+(55, 'CR', '-', '-', 'Coral Sea Islands'),
+(56, 'CS', 'CR', '.cr', 'Costa Rica'),
+(57, 'CT', 'CF', '.cf', 'Central African Republic'),
+(58, 'CU', 'CU', '.cu', 'Cuba'),
+(59, 'CV', 'CV', '.cv', 'Cape Verde'),
+(60, 'CW', 'CK', '.ck', 'Cook Islands'),
+(61, 'CY', 'CY', '.cy', 'Cyprus'),
+(62, 'DA', 'DK', '.dk', 'Denmark'),
+(63, 'DJ', 'DJ', '.dj', 'Djibouti'),
+(64, 'DO', 'DM', '.dm', 'Dominica'),
+(65, 'DQ', 'UM', '-', 'Jarvis Island'),
+(66, 'DR', 'DO', '.do', 'Dominican Republic'),
+(67, 'DX', '-', '-', 'Dhekelia Sovereign Base Area'),
+(68, 'EC', 'EC', '.ec', 'Ecuador'),
+(69, 'EG', 'EG', '.eg', 'Egypt'),
+(70, 'EI', 'IE', '.ie', 'Ireland'),
+(71, 'EK', 'GQ', '.gq', 'Equatorial Guinea'),
+(72, 'EN', 'EE', '.ee', 'Estonia'),
+(73, 'ER', 'ER', '.er', 'Eritrea'),
+(74, 'ES', 'SV', '.sv', 'El Salvador'),
+(75, 'ET', 'ET', '.et', 'Ethiopia'),
+(76, 'EU', '-', '-', 'Europa Island'),
+(77, 'EZ', 'CZ', '.cz', 'Czech Republic'),
+(78, 'FG', 'GF', '.gf', 'French Guiana'),
+(79, 'FI', 'FI', '.fi', 'Finland'),
+(80, 'FJ', 'FJ', '.fj', 'Fiji'),
+(81, 'FK', 'FK', '.fk', 'Falkland Islands (Islas Malvinas)'),
+(82, 'FM', 'FM', '.fm', 'Micronesia, Federated States of'),
+(83, 'FO', 'FO', '.fo', 'Faroe Islands'),
+(84, 'FP', 'PF', '.pf', 'French Polynesia'),
+(85, 'FQ', 'UM', '-', 'Baker Island'),
+(86, 'FR', 'FR', '.fr', 'France'),
+(87, 'FS', 'TF', '.tf', 'French Southern and Antarctic Lands'),
+(88, 'GA', 'GM', '.gm', 'Gambia, The'),
+(89, 'GB', 'GA', '.ga', 'Gabon'),
+(90, 'GG', 'GE', '.ge', 'Georgia'),
+(91, 'GH', 'GH', '.gh', 'Ghana'),
+(92, 'GI', 'GI', '.gi', 'Gibraltar'),
+(93, 'GJ', 'GD', '.gd', 'Grenada'),
+(94, 'GK', '-', '.gg', 'Guernsey'),
+(95, 'GL', 'GL', '.gl', 'Greenland'),
+(96, 'GM', 'DE', '.de', 'Germany'),
+(97, 'GO', '-', '-', 'Glorioso Islands'),
+(98, 'GP', 'GP', '.gp', 'Guadeloupe'),
+(99, 'GQ', 'GU', '.gu', 'Guam'),
+(100, 'GR', 'GR', '.gr', 'Greece'),
+(101, 'GT', 'GT', '.gt', 'Guatemala'),
+(102, 'GV', 'GN', '.gn', 'Guinea'),
+(103, 'GY', 'GY', '.gy', 'Guyana'),
+(104, 'GZ', '-', '-', 'Gaza Strip'),
+(105, 'HA', 'HT', '.ht', 'Haiti'),
+(106, 'HK', 'HK', '.hk', 'Hong Kong'),
+(107, 'HM', 'HM', '.hm', 'Heard Island and McDonald Islands'),
+(108, 'HO', 'HN', '.hn', 'Honduras'),
+(109, 'HQ', 'UM', '-', 'Howland Island'),
+(110, 'HR', 'HR', '.hr', 'Croatia'),
+(111, 'HU', 'HU', '.hu', 'Hungary'),
+(112, 'IC', 'IS', '.is', 'Iceland'),
+(113, 'ID', 'ID', '.id', 'Indonesia'),
+(114, 'IM', 'IM', '.im', 'Isle of Man'),
+(115, 'IN', 'IN', '.in', 'India'),
+(116, 'IO', 'IO', '.io', 'British Indian Ocean Territory'),
+(117, 'IP', '-', '-', 'Clipperton Island'),
+(118, 'IR', 'IR', '.ir', 'Iran'),
+(119, 'IS', 'IL', '.il', 'Israel'),
+(120, 'IT', 'IT', '.it', 'Italy'),
+(121, 'IV', 'CI', '.ci', 'Cote d\'Ivoire'),
+(122, 'IZ', 'IQ', '.iq', 'Iraq'),
+(123, 'JA', 'JP', '.jp', 'Japan'),
+(124, 'JE', 'JE', '.je', 'Jersey'),
+(125, 'JM', 'JM', '.jm', 'Jamaica'),
+(126, 'JN', 'SJ', '-', 'Jan Mayen'),
+(127, 'JO', 'JO', '.jo', 'Jordan'),
+(128, 'JQ', 'UM', '-', 'Johnston Atoll'),
+(129, 'JU', '-', '-', 'Juan de Nova Island'),
+(130, 'KE', 'KE', '.ke', 'Kenya'),
+(131, 'KG', 'KG', '.kg', 'Kyrgyzstan'),
+(132, 'KN', 'KP', '.kp', 'Korea, North'),
+(133, 'KQ', 'UM', '-', 'Kingman Reef'),
+(134, 'KR', 'KI', '.ki', 'Kiribati'),
+(135, 'KS', 'KR', '.kr', 'Korea, South'),
+(136, 'KT', 'CX', '.cx', 'Christmas Island'),
+(137, 'KU', 'KW', '.kw', 'Kuwait'),
+(138, 'KV', 'KV', '-', 'Kosovo'),
+(139, 'KZ', 'KZ', '.kz', 'Kazakhstan'),
+(140, 'LA', 'LA', '.la', 'Laos'),
+(141, 'LE', 'LB', '.lb', 'Lebanon'),
+(142, 'LG', 'LV', '.lv', 'Latvia'),
+(143, 'LH', 'LT', '.lt', 'Lithuania'),
+(144, 'LI', 'LR', '.lr', 'Liberia'),
+(145, 'LO', 'SK', '.sk', 'Slovakia'),
+(146, 'LQ', 'UM', '-', 'Palmyra Atoll'),
+(147, 'LS', 'LI', '.li', 'Liechtenstein'),
+(148, 'LT', 'LS', '.ls', 'Lesotho'),
+(149, 'LU', 'LU', '.lu', 'Luxembourg'),
+(150, 'LY', 'LY', '.ly', 'Libyan Arab'),
+(151, 'MA', 'MG', '.mg', 'Madagascar'),
+(152, 'MB', 'MQ', '.mq', 'Martinique'),
+(153, 'MC', 'MO', '.mo', 'Macau'),
+(154, 'MD', 'MD', '.md', 'Moldova, Republic of'),
+(155, 'MF', 'YT', '.yt', 'Mayotte'),
+(156, 'MG', 'MN', '.mn', 'Mongolia'),
+(157, 'MH', 'MS', '.ms', 'Montserrat'),
+(158, 'MI', 'MW', '.mw', 'Malawi'),
+(159, 'MJ', 'ME', '.me', 'Montenegro'),
+(160, 'MK', 'MK', '.mk', 'The Former Yugoslav Republic of Macedonia'),
+(161, 'ML', 'ML', '.ml', 'Mali'),
+(162, 'MN', 'MC', '.mc', 'Monaco'),
+(163, 'MO', 'MA', '.ma', 'Morocco'),
+(164, 'MP', 'MU', '.mu', 'Mauritius'),
+(165, 'MQ', 'UM', '-', 'Midway Islands'),
+(166, 'MR', 'MR', '.mr', 'Mauritania'),
+(167, 'MT', 'MT', '.mt', 'Malta'),
+(168, 'MU', 'OM', '.om', 'Oman'),
+(169, 'MV', 'MV', '.mv', 'Maldives'),
+(170, 'MX', 'MX', '.mx', 'Mexico'),
+(171, 'MY', 'MY', '.my', 'Malaysia'),
+(172, 'MZ', 'MZ', '.mz', 'Mozambique'),
+(173, 'NC', 'NC', '.nc', 'New Caledonia'),
+(174, 'NE', 'NU', '.nu', 'Niue'),
+(175, 'NF', 'NF', '.nf', 'Norfolk Island'),
+(176, 'NG', 'NE', '.ne', 'Niger'),
+(177, 'NH', 'VU', '.vu', 'Vanuatu'),
+(178, 'NI', 'NG', '.ng', 'Nigeria'),
+(179, 'NL', 'NL', '.nl', 'Netherlands'),
+(180, 'NM', '', '', 'No Man\'s Land'),
+(181, 'NO', 'NO', '.no', 'Norway'),
+(182, 'NP', 'NP', '.np', 'Nepal'),
+(183, 'NR', 'NR', '.nr', 'Nauru'),
+(184, 'NS', 'SR', '.sr', 'Suriname'),
+(185, 'NT', 'AN', '.an', 'Netherlands Antilles'),
+(186, 'NU', 'NI', '.ni', 'Nicaragua'),
+(187, 'NZ', 'NZ', '.nz', 'New Zealand'),
+(188, 'PA', 'PY', '.py', 'Paraguay'),
+(189, 'PC', 'PN', '.pn', 'Pitcairn Islands'),
+(190, 'PE', 'PE', '.pe', 'Peru'),
+(191, 'PF', '-', '-', 'Paracel Islands'),
+(192, 'PG', '-', '-', 'Spratly Islands'),
+(193, 'PK', 'PK', '.pk', 'Pakistan'),
+(194, 'PL', 'PL', '.pl', 'Poland'),
+(195, 'PM', 'PA', '.pa', 'Panama'),
+(196, 'PO', 'PT', '.pt', 'Portugal'),
+(197, 'PP', 'PG', '.pg', 'Papua New Guinea'),
+(198, 'PS', 'PW', '.pw', 'Palau'),
+(199, 'PU', 'GW', '.gw', 'Guinea-Bissau'),
+(200, 'QA', 'QA', '.qa', 'Qatar'),
+(201, 'RE', 'RE', '.re', 'Reunion'),
+(202, 'RI', 'RS', '.rs', 'Serbia'),
+(203, 'RM', 'MH', '.mh', 'Marshall Islands'),
+(204, 'RN', 'MF', '-', 'Saint Martin'),
+(205, 'RO', 'RO', '.ro', 'Romania'),
+(206, 'RP', 'PH', '.ph', 'Philippines'),
+(207, 'RQ', 'PR', '.pr', 'Puerto Rico'),
+(208, 'RS', 'RU', '.ru', 'Russia'),
+(209, 'RW', 'RW', '.rw', 'Rwanda'),
+(210, 'SA', 'SA', '.sa', 'Saudi Arabia'),
+(211, 'SB', 'PM', '.pm', 'Saint Pierre and Miquelon'),
+(212, 'SC', 'KN', '.kn', 'Saint Kitts and Nevis'),
+(213, 'SE', 'SC', '.sc', 'Seychelles'),
+(214, 'SF', 'ZA', '.za', 'South Africa'),
+(215, 'SG', 'SN', '.sn', 'Senegal'),
+(216, 'SH', 'SH', '.sh', 'Saint Helena'),
+(217, 'SI', 'SI', '.si', 'Slovenia'),
+(218, 'SL', 'SL', '.sl', 'Sierra Leone'),
+(219, 'SM', 'SM', '.sm', 'San Marino'),
+(220, 'SN', 'SG', '.sg', 'Singapore'),
+(221, 'SO', 'SO', '.so', 'Somalia'),
+(222, 'SP', 'ES', '.es', 'Spain'),
+(223, 'ST', 'LC', '.lc', 'Saint Lucia'),
+(224, 'SU', 'SD', '.sd', 'Sudan'),
+(225, 'SV', 'SJ', '.sj', 'Svalbard'),
+(226, 'SW', 'SE', '.se', 'Sweden'),
+(227, 'SX', 'GS', '.gs', 'South Georgia and the Islands'),
+(228, 'SY', 'SY', '.sy', 'Syrian Arab Republic'),
+(229, 'SZ', 'CH', '.ch', 'Switzerland'),
+(230, 'TD', 'TT', '.tt', 'Trinidad and Tobago'),
+(231, 'TE', '-', '-', 'Tromelin Island'),
+(232, 'TH', 'TH', '.th', 'Thailand'),
+(233, 'TI', 'TJ', '.tj', 'Tajikistan'),
+(234, 'TK', 'TC', '.tc', 'Turks and Caicos Islands'),
+(235, 'TL', 'TK', '.tk', 'Tokelau'),
+(236, 'TN', 'TO', '.to', 'Tonga'),
+(237, 'TO', 'TG', '.tg', 'Togo'),
+(238, 'TP', 'ST', '.st', 'Sao Tome and Principe'),
+(239, 'TS', 'TN', '.tn', 'Tunisia'),
+(240, 'TT', 'TL', '.tl', 'East Timor'),
+(241, 'TU', 'TR', '.tr', 'Turkey'),
+(242, 'TV', 'TV', '.tv', 'Tuvalu'),
+(243, 'TW', 'TW', '.tw', 'Taiwan'),
+(244, 'TX', 'TM', '.tm', 'Turkmenistan'),
+(245, 'TZ', 'TZ', '.tz', 'Tanzania, United Republic of'),
+(246, 'UG', 'UG', '.ug', 'Uganda'),
+(247, 'UK', 'GB', '.uk', 'United Kingdom'),
+(248, 'UP', 'UA', '.ua', 'Ukraine'),
+(249, 'US', 'US', '.us', 'United States'),
+(250, 'UV', 'BF', '.bf', 'Burkina Faso'),
+(251, 'UY', 'UY', '.uy', 'Uruguay'),
+(252, 'UZ', 'UZ', '.uz', 'Uzbekistan'),
+(253, 'VC', 'VC', '.vc', 'Saint Vincent and the Grenadines'),
+(254, 'VE', 'VE', '.ve', 'Venezuela'),
+(255, 'VI', 'VG', '.vg', 'British Virgin Islands'),
+(256, 'VM', 'VN', '.vn', 'Vietnam'),
+(257, 'VQ', 'VI', '.vi', 'Virgin Islands (US)'),
+(258, 'VT', 'VA', '.va', 'Holy See (Vatican City)'),
+(259, 'WA', 'NA', '.na', 'Namibia'),
+(260, 'WE', '-', '-', 'West Bank'),
+(261, 'WF', 'WF', '.wf', 'Wallis and Futuna'),
+(262, 'WI', 'EH', '.eh', 'Western Sahara'),
+(263, 'WQ', 'UM', '-', 'Wake Island'),
+(264, 'WS', 'WS', '.ws', 'Samoa'),
+(265, 'WZ', 'SZ', '.sz', 'Swaziland'),
+(266, 'YI', 'CS', '.yu', 'Serbia and Montenegro'),
+(267, 'YM', 'YE', '.ye', 'Yemen'),
+(268, 'ZA', 'ZM', '.zm', 'Zambia'),
+(269, 'ZI', 'ZW', '.zw', 'Zimbabwe');
 
 -- --------------------------------------------------------
 
@@ -430,7 +720,71 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (46, '2017_08_26_194900_add_sticker_type_col_rename_laminate_col', 23),
 (47, '2017_08_26_210839_create_lamination_options_table', 24),
 (48, '2017_08_26_214504_create_sticker_type_table', 25),
-(49, '2017_08_26_215304_add_sort_col-to_sticker_type_table', 26);
+(49, '2017_08_26_215304_add_sort_col-to_sticker_type_table', 26),
+(50, '2017_08_29_185728_create_country_table', 27),
+(51, '2017_08_30_005123_create_order_table', 28),
+(52, '2017_08_30_005214_create_order_billing_table', 28),
+(53, '2017_08_30_005245_create_order_items_table', 28);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transaction_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `discount` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `price` decimal(15,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_billing`
+--
+
+CREATE TABLE `order_billing` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_fips` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zipcode` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `paperstock` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `width` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `height` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` decimal(15,2) NOT NULL,
+  `sticker_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `laminating` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sticker_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `artwork` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instructions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -812,7 +1166,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', '1r1rgoSLEZ199YdOZK5D1hefhDSpLhV9DsxxipAiKlojxAjwufQMyHhPhxPc', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'D6iFx0nIgVi8v5X500jBOOurcV7W25T8wrVx4Dbc4OQj1EIePDd34l4fj5Qt', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'jwNHtEXDDWRDujAmfZ53fyqUWKvvYuBVp5MyleZaDtokg4ZB5G6zQm5lfrWa', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
 (3, 'angellous99', 'angellous99@gmail.com', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wqupgczDAwlp3sCuzfFMet8fC6EBIHvHteCGXtnyTFeh5T2ioufdAs9O8s7i', '2017-08-22 11:25:02', '2017-08-22 11:25:13');
 
 --
@@ -845,6 +1199,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `category_category_name_unique` (`category_name`),
   ADD UNIQUE KEY `category_category_slug_unique` (`category_slug`);
+
+--
+-- Indexes for table `country`
+--
+ALTER TABLE `country`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `email_authentication`
@@ -895,6 +1255,26 @@ ALTER TABLE `map_prod_form_options`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `orders_order_token_unique` (`order_token`);
+
+--
+-- Indexes for table `order_billing`
+--
+ALTER TABLE `order_billing`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `order_billing_order_id_unique` (`order_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -980,12 +1360,17 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `country`
+--
+ALTER TABLE `country`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=270;
 --
 -- AUTO_INCREMENT for table `email_authentication`
 --
@@ -1025,7 +1410,22 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order_billing`
+--
+ALTER TABLE `order_billing`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Session;
 
 class PagesCtrl extends Controller
 {
@@ -210,6 +211,19 @@ class PagesCtrl extends Controller
     public function about()
     {
         return view('frontend.about');
+    }
+
+    /**
+    *order confirmation page
+    */
+    public function OrderConfirm(Request $request)
+    {
+        if(Session::has('order_id') && Session::has('transaction_id'))
+        {
+            return view('frontend.order-confirm');
+        }
+        
+        abort(404);
     }
 
 }
