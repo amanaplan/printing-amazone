@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2017 at 07:45 PM
+-- Generation Time: Aug 30, 2017 at 05:31 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -92,8 +92,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
-(19, 'b6b49d6fc372792272a215ae851873edd8b08a2b', 2, 2, 5, 50.00, 50.00, 500, '2793.00', NULL, NULL, NULL, NULL, NULL, 42, '2017-08-29 22:02:29', '2017-08-29 22:02:34');
+(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33');
 
 -- --------------------------------------------------------
 
@@ -724,7 +723,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (50, '2017_08_29_185728_create_country_table', 27),
 (51, '2017_08_30_005123_create_order_table', 28),
 (52, '2017_08_30_005214_create_order_billing_table', 28),
-(53, '2017_08_30_005245_create_order_items_table', 28);
+(53, '2017_08_30_005245_create_order_items_table', 28),
+(54, '2017_08_30_190320_create_order_status_table', 29),
+(55, '2017_08_30_190457_add_status_col_to_order_table', 29);
 
 -- --------------------------------------------------------
 
@@ -739,9 +740,19 @@ CREATE TABLE `orders` (
   `user_id` int(11) DEFAULT NULL,
   `discount` decimal(15,2) NOT NULL DEFAULT 0.00,
   `price` decimal(15,2) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discount`, `price`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'PA2017083001', 'pccq8g1h', 1, '0.00', '7906.00', 1, '2017-08-30 13:10:22', '2017-08-30 13:10:22'),
+(2, 'PA2017083002', 'r1zkz7mq', 2, '170.00', '5481.00', 1, '2017-08-30 15:27:36', '2017-08-30 15:27:36'),
+(3, 'PA2017083003', '8rpwsqqm', NULL, '0.00', '236.00', 1, '2017-08-30 15:29:48', '2017-08-30 15:29:48');
 
 -- --------------------------------------------------------
 
@@ -764,6 +775,15 @@ CREATE TABLE `order_billing` (
   `company` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `order_billing`
+--
+
+INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_address`, `country_fips`, `state`, `city`, `zipcode`, `street`, `company`) VALUES
+(1, 1, 'Sourav', 'srv.nxr@gmail.com', '813463113', '::1', 'IN', 'WB', 'Kolkata', '712222', 'Baidyabati', 'my company'),
+(2, 2, 'Sourav Rakshit', 'srv.nxr@gmail.com', '7278863258', '::1', 'IN', 'Abc', 'iojhio', '7122222', 'anywhere in world', NULL),
+(3, 3, 'Sammy Gurho', 'abc@example.com', '96587456', '::1', 'US', 'TX', 'Houston', 'TX1234', 'Texas', 'Printing Comopany');
+
 -- --------------------------------------------------------
 
 --
@@ -785,6 +805,38 @@ CREATE TABLE `order_items` (
   `artwork` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `instructions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`) VALUES
+(1, 1, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
+(2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, NULL),
+(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '3', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper'),
+(4, 3, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_status`
+--
+
+CREATE TABLE `order_status` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `status_text` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_status`
+--
+
+INSERT INTO `order_status` (`id`, `status_text`) VALUES
+(1, 'Processing'),
+(2, 'Cancelled'),
+(3, 'Processed'),
+(4, 'Shipped'),
+(5, 'Completed');
 
 -- --------------------------------------------------------
 
@@ -1166,7 +1218,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', '1r1rgoSLEZ199YdOZK5D1hefhDSpLhV9DsxxipAiKlojxAjwufQMyHhPhxPc', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'jwNHtEXDDWRDujAmfZ53fyqUWKvvYuBVp5MyleZaDtokg4ZB5G6zQm5lfrWa', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 't6Oq9wPS4Qi8sTxWPxwvwQP18F6xNkqsuk2wkIgkUjl1NusIxPGljJTugI97', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
 (3, 'angellous99', 'angellous99@gmail.com', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wqupgczDAwlp3sCuzfFMet8fC6EBIHvHteCGXtnyTFeh5T2ioufdAs9O8s7i', '2017-08-22 11:25:02', '2017-08-22 11:25:13');
 
 --
@@ -1278,6 +1330,12 @@ ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order_status`
+--
+ALTER TABLE `order_status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `paperstock_options`
 --
 ALTER TABLE `paperstock_options`
@@ -1360,7 +1418,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -1410,22 +1468,27 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `order_status`
+--
+ALTER TABLE `order_status`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --

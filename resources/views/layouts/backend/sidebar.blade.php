@@ -53,6 +53,14 @@
             </ul>
         </li>
 
+        <li {!! ($page == 'order_complete' || $page == 'order_pending')? 'class="active"' : '' !!}>
+            <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Orders </span> <span class="label label-success label-rouded pull-right p3-bg note-icon">2</span> </a>
+            <ul class="nav nav-second-level collapse">
+                <li><a {!! ($page == 'order_complete')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/order/manage/completed') }}">Completed Orders</a></li>
+                <li><a {!! ($page == 'order_pending')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/order/manage/pending') }}">Pending Orders <span class="label label-success label-rouded pull-right p3-bg note-icon">5</span> </a></li>
+            </ul>
+        </li>
+
         <li>
             <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Sample </span><span class="label label-info label-rouded pull-right p3-bg note-icon">10</span></a>
         </li>

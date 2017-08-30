@@ -185,6 +185,9 @@ Route::prefix('admin')->group(function() {
 	Route::get('/product/presets/qty-rule-sec/edit/{preset_id}/{product_id}', 'Backend\PricingRules@EditPageQtyRuleTwoPreset');
 	Route::put('/product/presets/qty-rule-sec/edit-rq/{preset_id}/{product_id}', 'Backend\PricingRules@EditQtyRuleTwoPreset');
 
+	//order related
+	Route::get('/order/manage/{status}', 'Backend\OrderCtrl@Visit')->where('status', '(completed|pending)');
+
 
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin
