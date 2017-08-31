@@ -188,6 +188,9 @@ Route::prefix('admin')->group(function() {
 	//order related
 	Route::get('/order/manage/{status}', 'Backend\OrderCtrl@Visit')->where('status', '(completed|pending)');
 
+	Route::get('/settings/notification', 'Backend\SettingsCtrl@Visit');
+	Route::put('/settings/notification/save', 'Backend\SettingsCtrl@SaveSettings');
+
 
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Facades\App\Http\Controllers\Frontend\CartCtrl;
 use Braintree\ClientToken;
 use Braintree\Transaction;
+use App\Mail\OrderCustomer;
+use App\Mail\OrderAdmin;
 
 use Auth;
 use Validator;
@@ -19,6 +21,8 @@ use App\OrderItem;
 use App\OptPaperstock;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use Facades\App\Http\HelperClass\Multipurpose;
 
 class Checkout extends Controller
 {
@@ -138,7 +142,7 @@ class Checkout extends Controller
 
             if (! in_array($transaction->status, $transactionSuccessStatuses)) 
             {
-                abost(500); //unsuccessful payment
+                abort(500); //unsuccessful payment
             } 
             
             /*------------------------------------------------------------------------------------------------
@@ -228,6 +232,10 @@ class Checkout extends Controller
             $order_item->save();
         }
 
+        //retaining data before they flush
+        $discount = Session::get('discount');
+        $payable = Session::get('payable');
+        $subtotal = $payable + $discount;
 
         //flushing data
         Cart::where('cart_token', Session::get('cart_token'))->delete();
@@ -237,7 +245,52 @@ class Checkout extends Controller
         Session::put('order_id', $order_token);
         Session::put('transaction_id', $transaction_id);
 
-        //send email in queue
+        /*------------------------------------------------------------------------------------------------------------
+        | sending queued email to customer + admin
+        ------------------------------------------------------------------------------------------------------------*/
+        $user_email = $billing_data->get('email');
+
+        $order_info = [
+            'order_id'      =>  $order_token,
+            'transaction_id'    => $transaction_id,
+            'country'       =>  $billing_data->get('country'),
+            'state'         =>  json_encode($billing_data->get('state')),
+            'city'          =>  json_encode($billing_data->get('city')),
+            'zipcode'       =>  json_encode($billing_data->get('zipcode')),
+            'street'        =>  json_encode($billing_data->get('street')),
+            'subtotal'      =>  $subtotal,
+            'discount'      =>  $discount,
+            'payable'       =>  $payable,
+            'items'         =>  json_encode($cart_items),
+        ];
+
+        $personal_data = [
+            'name'  => json_encode($billing_data->get('name')),
+            'email' => json_encode($billing_data->get('email')),
+            'phone' => json_encode($billing_data->get('phone')),
+            'company'   => json_encode($billing_data->get('company', 'NA')),
+        ];
+
+        $common = [
+            'logo'     => asset( 'assets/images/logo.png' ),
+            'website'       => url('/'),
+            'delivery_img'  => asset( 'assets/images/email-img/delivery.png' ),
+            'prod_logo_dir' => asset( 'assets/images/products/' ),
+        ];
+
+        
+        //send email to customer
+        $message = (new OrderCustomer(collect($common), collect($order_info)))->onQueue('order');
+        Mail::to($user_email)->queue($message);
+
+        //send email to admins
+        $mail_ids = Multipurpose::getMailIdsFor('order');
+        $admin_message = (new OrderAdmin( collect($common), collect($order_info), collect($personal_data) ))->onQueue('order');
+        Mail::to($mail_ids)->queue($admin_message);
+
+        /*------------------------------------------------------------------------------------------------------------
+        | sending queued email to customer + admin
+        ------------------------------------------------------------------------------------------------------------*/
 
         return redirect()->route('order.confirm');
         

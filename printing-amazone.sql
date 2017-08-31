@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2017 at 05:31 PM
+-- Generation Time: Aug 31, 2017 at 03:32 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -725,7 +725,29 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (52, '2017_08_30_005214_create_order_billing_table', 28),
 (53, '2017_08_30_005245_create_order_items_table', 28),
 (54, '2017_08_30_190320_create_order_status_table', 29),
-(55, '2017_08_30_190457_add_status_col_to_order_table', 29);
+(55, '2017_08_30_190457_add_status_col_to_order_table', 29),
+(56, '2017_08_31_184512_create_settiongs_table', 30);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notificationsetting`
+--
+
+CREATE TABLE `notificationsetting` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_ids` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notificationsetting`
+--
+
+INSERT INTO `notificationsetting` (`id`, `type`, `mail_ids`) VALUES
+(1, 'order', 'developer.srv1@gmail.com, srv.nxr@gmail.com'),
+(2, 'contact', 'srv.nxr@gmail.com'),
+(3, 'review', 'developer.srv1@gmail.com, srv.nxr@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -752,7 +774,15 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discount`, `price`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'PA2017083001', 'pccq8g1h', 1, '0.00', '7906.00', 1, '2017-08-30 13:10:22', '2017-08-30 13:10:22'),
 (2, 'PA2017083002', 'r1zkz7mq', 2, '170.00', '5481.00', 1, '2017-08-30 15:27:36', '2017-08-30 15:27:36'),
-(3, 'PA2017083003', '8rpwsqqm', NULL, '0.00', '236.00', 1, '2017-08-30 15:29:48', '2017-08-30 15:29:48');
+(3, 'PA2017083003', '8rpwsqqm', NULL, '0.00', '236.00', 1, '2017-08-30 15:29:48', '2017-08-30 15:29:48'),
+(4, 'PA2017083101', 'jw1jz7vc', NULL, '261.00', '8442.00', 1, '2017-08-31 10:56:12', '2017-08-31 10:56:12'),
+(5, 'PA2017083102', 'f111m0hs', 1, '453.00', '14655.00', 1, '2017-08-31 15:56:28', '2017-08-31 15:56:28'),
+(6, 'PA2017083103', 'qd38txnk', 1, '0.00', '8467.00', 1, '2017-08-31 16:17:17', '2017-08-31 16:17:17'),
+(7, 'PA2017083104', 'mfes3cbb', 1, '180.00', '5811.00', 1, '2017-08-31 16:51:50', '2017-08-31 16:51:50'),
+(8, 'PA2017083105', '7s9bwzjd', 1, '1097.00', '17181.00', 1, '2017-08-31 17:00:53', '2017-08-31 17:00:53'),
+(9, 'PA2017083106', '3rnzp51j', 1, '500.00', '7838.00', 1, '2017-08-31 17:04:19', '2017-08-31 17:04:19'),
+(10, 'PA2017083107', 'hmfk8s25', NULL, '93.00', '3001.00', 1, '2017-08-31 17:48:45', '2017-08-31 17:48:45'),
+(11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 1, '2017-08-31 18:00:05', '2017-08-31 18:00:05');
 
 -- --------------------------------------------------------
 
@@ -782,7 +812,15 @@ CREATE TABLE `order_billing` (
 INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_address`, `country_fips`, `state`, `city`, `zipcode`, `street`, `company`) VALUES
 (1, 1, 'Sourav', 'srv.nxr@gmail.com', '813463113', '::1', 'IN', 'WB', 'Kolkata', '712222', 'Baidyabati', 'my company'),
 (2, 2, 'Sourav Rakshit', 'srv.nxr@gmail.com', '7278863258', '::1', 'IN', 'Abc', 'iojhio', '7122222', 'anywhere in world', NULL),
-(3, 3, 'Sammy Gurho', 'abc@example.com', '96587456', '::1', 'US', 'TX', 'Houston', 'TX1234', 'Texas', 'Printing Comopany');
+(3, 3, 'Sammy Gurho', 'abc@example.com', '96587456', '::1', 'US', 'TX', 'Houston', 'TX1234', 'Texas', 'Printing Comopany'),
+(4, 4, 'Brock Lesnar', 'brock@wwe.com', '54896547', '::1', 'IN', 'WB', 'KOL', '712222', 'Mn', NULL),
+(5, 5, 'Sourav', 'developer.srv1@gmail.com', '8013463113', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', '59 (25/C/D) Kaibarta Para Lane, Baidyabati, dist.- Hooghly', NULL),
+(6, 6, 'Sourav', 'developer.srv1@gmail.com', '8965874466', '::1', 'UK', 'West Bengal', 'Kolkata', '71254789', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non', NULL),
+(7, 7, 'Sourav', 'developer.srv1@gmail.com', '5587654841', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
+(8, 8, 'Sourav', 'developer.srv1@gmail.com', '58965478796', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
+(9, 9, 'Sourav', 'developer.srv1@gmail.com', '8785459632', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
+(10, 10, 'Sourav Rakshit', 'reach@devsourav.com', '8013463113', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', '59 (25/C/D) Kaibarta Para Lane, Baidyabati, dist.- Hooghly', NULL),
+(11, 11, 'Sourav Rakshit', 'srv.nxr@gmail.com', '5698745896', '::1', 'IN', 'West Bengal', 'KOlkata', '712222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', NULL);
 
 -- --------------------------------------------------------
 
@@ -814,7 +852,24 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (1, 1, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
 (2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, NULL),
 (3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '3', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper'),
-(4, 3, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem');
+(4, 3, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem'),
+(5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
+(6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, 'artworks/Q6f8VWei6BqfC5QobFbgbzSlc2zyqqQcKbVQUeEC.jpeg', NULL),
+(7, 5, 22, 'Glossy & Matt paperboard (Artboard)', '50', '50', '4000', '12250.00', 'Animal Town 007', '3', 'Sourav', NULL, NULL),
+(8, 5, 2, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL),
+(9, 6, 19, 'Glossy & Matt paperboard (Artboard)', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
+(10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, NULL),
+(11, 7, 4, 'Kraft Paperboard', '12', '12', '200', '111.00', NULL, NULL, NULL, NULL, NULL),
+(12, 8, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
+(13, 8, 21, 'Transparent Paper', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
+(14, 8, 17, 'Silver Matt paperboard', '90', '90', '200', '1905.00', NULL, NULL, NULL, NULL, NULL),
+(15, 9, 21, 'Glossy & Matt paperboard (Artboard)', '50', '50', '300', '882.00', NULL, NULL, NULL, NULL, NULL),
+(16, 9, 2, 'Kraft Paperboard', '70', '70', '200', '4034.00', NULL, NULL, NULL, NULL, NULL),
+(17, 9, 17, 'Silver Matt paperboard', '48.5', '200', '300', '3422.00', NULL, NULL, NULL, NULL, NULL),
+(18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, NULL),
+(19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL),
+(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, NULL),
+(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1198,8 @@ INSERT INTO `reviews` (`id`, `product_id`, `user_id`, `title`, `description`, `r
 (75, 22, 2, 'Sed ut perspiciatis unde omnis iste natus error sit voluptat', 'quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione', '4.0', 1, '2017-08-17 20:07:07', '2017-08-17 20:07:42'),
 (76, 20, 2, 'nostrud exercitation ullamco laboris nisi aliquip', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non loqaugfa aytggu aghaewyese y4qaqalug', '5.0', 1, '2017-08-19 10:50:20', '2017-08-19 10:53:59'),
 (77, 23, 1, 'sunt in culpa qui officia deserunt mollit anim id est', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip', '5.0', 1, '2017-08-19 13:47:49', '2017-08-19 13:49:23'),
-(78, 24, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam edit', '3.5', 1, '2017-08-19 13:49:54', '2017-08-19 14:02:05');
+(78, 24, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam edit', '3.5', 1, '2017-08-19 13:49:54', '2017-08-19 14:02:05'),
+(80, 19, 1, 'proident, sunt in culpa qui officia deserunt mollit anim', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non', '4.0', 0, '2017-08-31 16:15:08', '2017-08-31 16:15:08');
 
 -- --------------------------------------------------------
 
@@ -1217,8 +1273,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', '1r1rgoSLEZ199YdOZK5D1hefhDSpLhV9DsxxipAiKlojxAjwufQMyHhPhxPc', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 't6Oq9wPS4Qi8sTxWPxwvwQP18F6xNkqsuk2wkIgkUjl1NusIxPGljJTugI97', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
+(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'c3PMMPMwdpB2GsistxSbMV9WeZSgTPBrGbWeJWVIhcfswHceMqAeKUcAYi27', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'Vm6To5vtytN6KOw8gvAzDy4yuFzf96Gc4bgEdj1PXuGD4gI3TKlXneKM3S30', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
 (3, 'angellous99', 'angellous99@gmail.com', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wqupgczDAwlp3sCuzfFMet8fC6EBIHvHteCGXtnyTFeh5T2ioufdAs9O8s7i', '2017-08-22 11:25:02', '2017-08-22 11:25:13');
 
 --
@@ -1307,6 +1363,12 @@ ALTER TABLE `map_prod_form_options`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notificationsetting`
+--
+ALTER TABLE `notificationsetting`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1418,7 +1480,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -1448,7 +1510,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `lamination_options`
 --
@@ -1468,22 +1530,27 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+--
+-- AUTO_INCREMENT for table `notificationsetting`
+--
+ALTER TABLE `notificationsetting`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `order_status`
 --
@@ -1523,7 +1590,7 @@ ALTER TABLE `qty_options`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `size_options`
 --

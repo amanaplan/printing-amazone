@@ -7,6 +7,7 @@ use App\User;
 use App\Category;
 use App\Product;
 use App\Review;
+use App\NotificationSetting;
 
 use Illuminate\Support\Facades\Redis;
 
@@ -133,4 +134,45 @@ class Multipurpose {
         }
         
 	}
+
+
+
+    /**
+    *returns array of appropriate mail ids
+    *
+    *@param notification type of App\NotificationSetting
+    */
+    public function getMailIdsFor($type='contact')
+    {
+        $comma_separated = NotificationSetting::ofType($type)->first()->mail_ids;
+        $exploded_arr = explode(',', $comma_separated);
+
+        $list_ids = [];
+        foreach($exploded_arr as $mail)
+        {
+            $the_id = trim($mail);
+
+            if(filter_var($the_id, FILTER_VALIDATE_EMAIL))
+            {
+                $list_ids[] = $the_id;
+            }
+        }
+
+        if(count($list_ids) > 0)
+        {
+            return $list_ids;
+        }
+        else
+        {
+            $contact_ids = $this->getMailIdsFor();
+            if(count($contact_ids) == 0)
+            {
+                return 'developer.srv1@gmail.com';
+            }
+            else
+            {
+                return $contact_ids;
+            }
+        }
+    }
 }

@@ -32,8 +32,14 @@
 {{-- main page contents --}}
 @section('contents')
 
-<div class="feature custom">
+<div class="feature custom checkout-page">
 	<div class="container">
+
+		<div class="row">
+			<h2 class="checkout-head">
+				Checkout
+			</h2>
+		</div>
 
 		<div class="row">
 			<div class="col-md-7">
@@ -51,7 +57,7 @@
 						@endif
 				    </div>
 
-				    <div class="form-group">
+				    <div class="form-group col-sm-6 col-xs-12" style="padding-left: 0;">
 						<label>Email ID</label>
 						@if(Auth::guard('web')->check())
 						<input type="text" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly="readonly" />
@@ -60,12 +66,13 @@
 						@endif
 				    </div>
 
-				    <div class="form-group">
+				    <div class="form-group col-sm-6 col-xs-12" style="padding-right: 0;">
 						<label>Phone</label>
 						<input name="phone" data-validation="custom" data-validation-regexp="^(\+{1})?\d+$" type="text" class="form-control" />
 				    </div>
+				    <div class="clearfix"></div>
 
-				    <div class="form-group">
+				    <div class="form-group col-sm-6 col-xs-12" style="padding-left: 0;">
 						<label>Country</label>
 						<select name="country" class="form-control" data-validation="custom" data-validation-regexp="^[A-Z]{2}$">
 							<option>--Select an appropriate option--</option>
@@ -75,20 +82,22 @@
 						</select>
 				    </div>
 
-				    <div class="form-group">
+				    <div class="form-group col-sm-6 col-xs-12" style="padding-right: 0;">
 						<label>State</label>
 						<input name="state" data-validation="required" type="text" class="form-control" />
 				    </div>
+				    <div class="clearfix"></div>
 
-				    <div class="form-group">
+				    <div class="form-group col-sm-6 col-xs-12" style="padding-left: 0;">
 						<label>City</label>
 						<input name="city" data-validation="required" type="text" class="form-control" />
 				    </div>
 
-				    <div class="form-group">
+				    <div class="form-group col-sm-6 col-xs-12" style="padding-right: 0;">
 						<label>Zipcode</label>
 						<input name="zipcode" data-validation="required" type="text" class="form-control" />
 				    </div>
+				    <div class="clearfix"></div>
 
 				    <div class="form-group">
 						<label>Street Address</label>
@@ -118,7 +127,7 @@
 								<td>
 									<ol>
 										@foreach($cart_items as $prod)
-										<li>{{ $prod->product->product_name }} x {{ $prod->qty }} qty.</li>
+										<li><span>{{ $prod->product->product_name }}</span> x {{ $prod->qty }} qty.</li>
 										@endforeach
 									</ol>
 								</td>

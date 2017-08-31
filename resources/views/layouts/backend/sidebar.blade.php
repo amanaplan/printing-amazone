@@ -62,7 +62,7 @@
         </li>
 
         <li>
-            <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Sample </span><span class="label label-info label-rouded pull-right p3-bg note-icon">10</span></a>
+            <a {!! ($page == 'notification')? 'style="color:#fff;background-color: #6a717b;"' : '' !!} href="{{ url('/admin/settings/notification') }}"><i class="fa fa-cog"></i> <span class="nav-label">Notification Settings </span></a>
         </li>
 
         <li class="nav-heading"><span>Components</span></li>

@@ -1010,3 +1010,65 @@ h5#cart-subtotal, h5#cart-discount, h5.price{font-family: arial;}
 }
 .checkout-summary .table tbody tr td{font-size:14px; font-weight:600;}
 .summary-price {text-align: right;font-family: arial !important;}
+
+
+/************* 30-8-17 ***************/
+#checkout-form .form-group label {
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #535353;
+}
+#checkout-form .form-group input, 
+#checkout-form .form-group textarea, 
+#checkout-form .form-group select{background: #eee; border:1px solid #999;font-family: 'Raleway', sans-serif;}
+.panel-primary>.panel-heading{font-family: 'Raleway', sans-serif; font-weight: 600; text-align: center; background: #212121;}
+.panel-body{line-height: 24px; background: #eee;font-family: 'Raleway', sans-serif; text-align: center;}
+.panel-body p {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.panel-body p strong {
+    color: #fff;
+    background: #337ab7;
+    padding: 4px 7px;
+    border-radius: 6px;
+}
+.panel-primary{border-color: #212121;}
+.panel{border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;margin: 30px 0 60px;}
+h2.checkout-head {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+h2.checkout-head::after {
+    height: 2px;
+    width: 30px;
+    display: block;
+    margin-top: 15px;
+    background: #303030;
+    content: '';
+}
+.checkout-page {
+    margin-bottom: 40px;
+}
+button#place-order {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.4s;
+    border: 2px solid #31b0d5;
+}
+.checkout-summary table.table.table-responsive ol li span {
+    display: inline-block;
+    width: 70%;
+}
+.checkout-summary table.table.table-responsive li {
+    line-height: 27px;
+}

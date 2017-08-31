@@ -11,6 +11,7 @@ use App\Mail\ReviewPosted;
 
 use App\Product;
 use App\Review;
+use App\NotificationSetting;
 
 use App\Admin;
 
@@ -20,6 +21,7 @@ use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use Facades\App\Http\HelperClass\Multipurpose;
 
 class UserReviewPost extends Controller
 {
@@ -88,7 +90,7 @@ class UserReviewPost extends Controller
     */
     public function notifyAdmin($reviewTitle)
     {
-        $mailIds = Admin::where('active', 1)->select(['email'])->get();
+        $mailIds = Multipurpose::getMailIdsFor('review');
 
         $rvwdata = [
             'title'         => $reviewTitle,
