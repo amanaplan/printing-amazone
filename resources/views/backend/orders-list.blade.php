@@ -26,7 +26,7 @@
                         <h4 class="pull-left">{{ $page_title }} 
                             @if(Request::has('page'))
                                 <br><br>
-                                <small class="text-info">Showing page: {{ $orders->currentPage() }}, among total: {{ $orders->total() }} page(s)</small>
+                                <small class="text-info">Showing page: {{ $orders->currentPage() }}, Total order(s): {{ $orders->total() }}</small>
                             @endif
                         </h4>
 
@@ -77,7 +77,6 @@
                         </div>
                     </div>
                 </div>
-                <form method="post" enctype="multipart/form-data" target="_blank" id="form-order">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead>
@@ -119,27 +118,25 @@
                                     <td class="text-right"><span class="label label-success">$ {{ $order->price }}</span></td>
                                     <td class="text-left">{{ $order->created_at }}</td>
                                     <td class="text-left">
-                                         <select class="form-control" onchange="showSaveBtn(this);">
-                                            @foreach($statuses as $status)
-                                                <option value="{{ $status->id }}" {{ ($order->orderStatus->id == $status->id)? 'selected' : '' }}>{{ $status->status_text }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        <button style="display: none;" type="button" class="btn btn-success btn-sm savestatus"><i class="fa fa-check"></i> save</button>
+                                        {{ $order->orderStatus->status_text }}
                                     </td>
                                     <td class="text-left">
 
-                                        <a href="#" class="btn btn-info">view order</a>
+                                        <a href="{{ route('order.details', ['id' => $order->id]) }}" class="btn btn-info">view order</a>
                                     </td>
                                     <td class="text-right">
-                                        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <form action="{{ route('order.delete') }}" method="post">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                            <input type="hidden" name="order" value="{{ $order->id }}">
+                                            <button onclick="return confirm('this action will remove entire history of this order');" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                </form>
 
 
 
@@ -158,12 +155,5 @@
 @stop
 {{-- page specific js --}}
 @push('scripts')
-
-    <script type="text/javascript">
-        function showSaveBtn(elem)
-        {
-            $(elem).closest('tr').find('button.savestatus').show();
-        }
-    </script>
 
 @endpush

@@ -33,10 +33,10 @@ class Order extends Model
     {
     	if($type == 'complete')
     	{
-    		return $query->where('status', 5);
+    		return $query->whereIn('status', [5,6]);
     	}
 
-        return $query->where('status', '!=', 5);
+        return $query->whereNotIn('status', [5,6]);
     }
 
     public function getCreatedAtAttribute($value)

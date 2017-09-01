@@ -9,6 +9,7 @@ use App\Order;
 use App\OrderStatus;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class OrderCtrl extends Controller
 {
@@ -50,11 +51,11 @@ class OrderCtrl extends Controller
 
             if($page == 'completed')
             {
-                $common->where('status', 5);
+                $common->whereIn('status', [5,6]);
             }
             else
             {
-                $common->where('status', '!=', 5);
+                $common->whereNotIn('status', [5,6]);
             }
 
 
@@ -114,7 +115,7 @@ class OrderCtrl extends Controller
             }
 
             $page = $request->input('page', 1);
-            $perpage = 1;
+            $perpage = 5;
 
             $offSet = ($page * $perpage) - $perpage;
             $itemsForCurrentPage = array_slice($res->toArray(), $offSet, $perpage, true);
@@ -129,11 +130,11 @@ class OrderCtrl extends Controller
         {
             if($page == 'completed')
             {
-                $data['orders'] = Order::ofType('complete')->with(['user', 'orderStatus', 'billing'])->latest()->paginate(1);
+                $data['orders'] = Order::ofType('complete')->with(['user', 'orderStatus', 'billing'])->latest()->paginate(5);
             }
             else
             {
-                $data['orders'] = Order::ofType('pending')->with(['user', 'orderStatus', 'billing'])->latest()->paginate(1);
+                $data['orders'] = Order::ofType('pending')->with(['user', 'orderStatus', 'billing'])->latest()->paginate(5);
             }
 
             return view('backend.orders-list', $data);
@@ -141,5 +142,82 @@ class OrderCtrl extends Controller
         
     }
 
+
+    /**
+    *the order details page
+    */
+    public function OrderDetails($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+
+        $data = [
+            'page'  => 'order_pending',
+            'order' => $order,
+            'statuses'  => OrderStatus::all(),
+        ];
+
+        return view('backend.order-details', $data);
+    }
+
+    /**
+    *download artwork
+    */
+    public function DownloadArtwork(Request $request)
+    {
+        $this->validate($request,[
+            'artwork'   => 'required'
+        ]);
+
+        return response()->download('storage/'.$request->input('artwork'));
+    }
+
+
+    /**
+    *update order status
+    */
+    public function UpdateStatus(Request $request)
+    {
+        $this->validate($request,[
+            'order' => 'required|exists:orders,id',
+            'status' => 'required|exists:order_status,id'
+        ]);
+
+        $order = Order::find($request->input('order'));
+        $order->status = $request->input('status');
+        $order->save();
+
+        adminflash('success', 'order status updated');
+        return redirect()->back();
+    }
+
+    /**
+    *order delete
+    */
+    public function DeleteOrder(Request $request)
+    {
+        $this->validate($request,[
+            'order' => 'required|exists:orders,id',
+        ]);
+
+        $order = Order::find($request->input('order'));
+
+        //delete artworks
+        $items = $order->orderItems;
+        foreach($items as $item)
+        {
+            if($item->artwork)
+            {
+                Storage::disk('public')->delete($item->artwork);
+            }
+        }
+
+        //delete billing + items + order history
+        $order->billing()->delete();
+        $order->orderItems()->delete();
+        $order->delete();
+
+        adminflash('success', 'order deleted successfully');
+        return redirect()->back();
+    }
 
 }

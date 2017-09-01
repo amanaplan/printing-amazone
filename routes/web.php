@@ -187,6 +187,10 @@ Route::prefix('admin')->group(function() {
 
 	//order related
 	Route::get('/order/manage/{status}', 'Backend\OrderCtrl@Visit')->where('status', '(completed|pending)');
+	Route::get('/order-details/{id}', 'Backend\OrderCtrl@OrderDetails')->name('order.details');
+	Route::post('/order/manage/download-artwork', 'Backend\OrderCtrl@DownloadArtwork')->name('download.artwork');
+	Route::put('/order/update-status', 'Backend\OrderCtrl@UpdateStatus');
+	Route::delete('/order/manage/delete', 'Backend\OrderCtrl@DeleteOrder')->name('order.delete');
 
 	Route::get('/settings/notification', 'Backend\SettingsCtrl@Visit');
 	Route::put('/settings/notification/save', 'Backend\SettingsCtrl@SaveSettings');

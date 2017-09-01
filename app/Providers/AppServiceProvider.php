@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Session;
 
 use App\Cart;
+use App\Order;
 
 use Validator;
 
@@ -60,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
         //for admin sidebar
         View::composer('layouts.backend.sidebar', function () {
             $sidebar_conts['pending_review'] = Review::unpublished()->count();
+            $sidebar_conts['pending_orders'] = Order::ofType('pending')->count();
             View::share($sidebar_conts);
         });
     }
