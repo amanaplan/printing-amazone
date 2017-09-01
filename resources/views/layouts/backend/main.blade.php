@@ -28,6 +28,11 @@
         <link href="{{ asset( 'assets/backend/css/style.css' ) }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset( 'assets/backend/css/theme/dark.css' ) }}" rel="stylesheet" type="text/css" />
         <!-- PAGE LEVEL SCRIPTS -->
+
+        <style type="text/css">
+            .current-menu{color:#fff !important;background-color: #6a717b;}
+        </style>
+
         {{-- page specific --}}
             @stack('styles')
         {{-- page specific --}}

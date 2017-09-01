@@ -16,6 +16,7 @@ use App\MapProdFrmOpt;
 use App\Review;
 use App\OptLamination;
 use App\StickerType;
+use App\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -357,6 +358,34 @@ class AdminController extends Controller
             'option'  => StickerType::findOrFail($id)
         ];
         return view('backend.options-edit-sticker-type', $data);
+    }
+
+    /**
+    *manage customers
+    */
+    public function ManageCustomers(Request $request)
+    {
+        //search
+        if($request->has('customer'))
+        {
+            $term = $request->input('customer');
+            $customers = User::where('name', 'like', '%'.$term.'%')->orWhere('email', 'like', '%'.$term.'%')->withCount(['reviews' => function($query){
+                return $query->where('publish', 1);
+            }])->latest()->paginate(10);
+        }
+        else
+        {
+            $customers =  User::withCount(['reviews' => function($query){
+                return $query->where('publish', 1);
+            }])->latest()->paginate(10);
+        }
+
+        $data = [
+            'page'  => 'customers',
+            'customers' => $customers,
+        ];
+
+        return view('backend.customers', $data);
     }
 
 }

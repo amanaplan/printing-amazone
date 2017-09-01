@@ -4,7 +4,7 @@
 
         <!-- BEGIN NOTIFICATION DROPDOWN -->
 
-        <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+        <!-- <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
 
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 
@@ -200,7 +200,7 @@
 
             </ul>
 
-        </li>
+        </li> -->
 
         <!-- END NOTIFICATION DROPDOWN -->
 
@@ -228,11 +228,9 @@
 
                 <li>
 
-                    <a href="#">
+                    <a href="{{ url('/admin/settings/notification') }}">
 
-                        <i class="icon-rocket"></i> My Tasks
-
-                        <span class="badge badge-success"> 7 </span>
+                        <i class="icon-wrench"></i> Settimgs
 
                     </a>
 

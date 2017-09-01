@@ -195,6 +195,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/settings/notification', 'Backend\SettingsCtrl@Visit');
 	Route::put('/settings/notification/save', 'Backend\SettingsCtrl@SaveSettings');
 
+	Route::get('/customer/manage', 'Backend\AdminController@ManageCustomers')->name('manage.customers');
+
 
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin

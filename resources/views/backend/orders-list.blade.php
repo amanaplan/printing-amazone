@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="input-customer">Customer</label>
-                                    <input type="text" name="customer" value="" placeholder="Customer" id="input-customer" class="form-control" autocomplete="off"><ul class="dropdown-menu"></ul>
+                                    <input type="text" name="customer" value="" placeholder="Customer name or email" id="input-customer" class="form-control" autocomplete="off"><ul class="dropdown-menu"></ul>
                                 </div>
                             </div>
                             <div class="col-sm-4">
