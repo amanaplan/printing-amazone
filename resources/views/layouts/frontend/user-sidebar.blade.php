@@ -39,7 +39,13 @@
 			</a>
 		</li>
 		
-		<li><a href="#"><div class="icon"><i class="fa fa-th-list"></i></div><div class="txt">My Orders</div><div class="nf"></div></a></li>
+		<li {!! ($page == 'orders')? 'class="current"' : '' !!}>
+			<a href="{{ url('/user/my-orders') }}">
+				<div class="icon"><i class="fa fa-th-list"></i></div>
+				<div class="txt">My Orders</div>
+				<div class="nf"></div>
+			</a>
+		</li>
 		
 		<li><a id="content_LinkButton1" href="javascript:void();" onclick="LogoffUser();"><div class="icon"><img title="" alt="" src="{{ asset( 'assets/images/icon8.png' ) }}" width="22" height="22"></div><div class="txt">Logout</div></a></li>
 	</ul>			

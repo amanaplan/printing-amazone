@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2017 at 05:31 PM
+-- Generation Time: Sep 02, 2017 at 10:07 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -92,8 +92,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
-(43, '8345442ff1461efb32b224239da0aaf6b8f7f312', 2, 2, 5, 50.00, 50.00, 10, '29.00', NULL, NULL, NULL, NULL, NULL, 42, '2017-09-02 18:09:44', '2017-09-02 18:09:44');
+(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33');
 
 -- --------------------------------------------------------
 
@@ -490,14 +489,6 @@ CREATE TABLE `jobs` (
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `jobs`
---
-
-INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
-(16, 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderCustomer\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:22:\\\"App\\\\Mail\\\\OrderCustomer\\\":20:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:67:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:44:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\\";s:12:\\\"delivery_img\\\";s:81:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:67:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017090201\\\";s:14:\\\"transaction_id\\\";s:8:\\\"fzk0wgcn\\\";s:7:\\\"country\\\";s:2:\\\"IN\\\";s:5:\\\"state\\\";s:4:\\\"\\\"WB\\\"\\\";s:4:\\\"city\\\";s:9:\\\"\\\"Kolkata\\\"\\\";s:7:\\\"zipcode\\\";s:8:\\\"\\\"712222\\\"\\\";s:6:\\\"street\\\";s:14:\\\"\\\"lorem street\\\"\\\";s:8:\\\"subtotal\\\";i:687;s:8:\\\"discount\\\";i:21;s:7:\\\"payable\\\";i:666;s:5:\\\"items\\\";s:811:\\\"[{\\\"id\\\":41,\\\"cart_token\\\":\\\"1f6deddb4250320528db5d45eaa24672c82c5282\\\",\\\"user_id\\\":2,\\\"product_id\\\":4,\\\"paperstock\\\":5,\\\"width\\\":12,\\\"height\\\":12,\\\"qty\\\":200,\\\"price\\\":\\\"111.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"artwork\\\":\\\"artworks\\\\\\/SUWLZ0DSz8kK9jPhaRn4zUTNO92Hy8na3AUSiQdm.jpeg\\\",\\\"instructions\\\":null,\\\"preset_mapper\\\":14,\\\"created_at\\\":\\\"2017-09-02 00:47:55\\\",\\\"updated_at\\\":\\\"2017-09-02 00:47:55\\\"},{\\\"id\\\":42,\\\"cart_token\\\":\\\"1f6deddb4250320528db5d45eaa24672c82c5282\\\",\\\"user_id\\\":2,\\\"product_id\\\":22,\\\"paperstock\\\":7,\\\"width\\\":70,\\\"height\\\":70,\\\"qty\\\":100,\\\"price\\\":\\\"576.00\\\",\\\"sticker_type\\\":\\\"Ben 10 Ulimate Alien\\\",\\\"laminating\\\":\\\"5\\\",\\\"sticker_name\\\":\\\"Sourav R\\\",\\\"artwork\\\":\\\"artworks\\\\\\/N07zLNAHqYUJhrvz9W5R4I246rP2NOrWIhjOjYL2.jpeg\\\",\\\"instructions\\\":null,\\\"preset_mapper\\\":94,\\\"created_at\\\":\\\"2017-09-02 00:48:23\\\",\\\"updated_at\\\":\\\"2017-09-02 00:48:23\\\"}]\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 0, NULL, 1504277348, 1504277348),
-(17, 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderAdmin\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\OrderAdmin\\\":21:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:67:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:44:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\\";s:12:\\\"delivery_img\\\";s:81:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:67:\\\"http:\\/\\/localhost\\/srv\\/printing-amazone\\/public\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017090201\\\";s:14:\\\"transaction_id\\\";s:8:\\\"fzk0wgcn\\\";s:7:\\\"country\\\";s:2:\\\"IN\\\";s:5:\\\"state\\\";s:4:\\\"\\\"WB\\\"\\\";s:4:\\\"city\\\";s:9:\\\"\\\"Kolkata\\\"\\\";s:7:\\\"zipcode\\\";s:8:\\\"\\\"712222\\\"\\\";s:6:\\\"street\\\";s:14:\\\"\\\"lorem street\\\"\\\";s:8:\\\"subtotal\\\";i:687;s:8:\\\"discount\\\";i:21;s:7:\\\"payable\\\";i:666;s:5:\\\"items\\\";s:811:\\\"[{\\\"id\\\":41,\\\"cart_token\\\":\\\"1f6deddb4250320528db5d45eaa24672c82c5282\\\",\\\"user_id\\\":2,\\\"product_id\\\":4,\\\"paperstock\\\":5,\\\"width\\\":12,\\\"height\\\":12,\\\"qty\\\":200,\\\"price\\\":\\\"111.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"artwork\\\":\\\"artworks\\\\\\/SUWLZ0DSz8kK9jPhaRn4zUTNO92Hy8na3AUSiQdm.jpeg\\\",\\\"instructions\\\":null,\\\"preset_mapper\\\":14,\\\"created_at\\\":\\\"2017-09-02 00:47:55\\\",\\\"updated_at\\\":\\\"2017-09-02 00:47:55\\\"},{\\\"id\\\":42,\\\"cart_token\\\":\\\"1f6deddb4250320528db5d45eaa24672c82c5282\\\",\\\"user_id\\\":2,\\\"product_id\\\":22,\\\"paperstock\\\":7,\\\"width\\\":70,\\\"height\\\":70,\\\"qty\\\":100,\\\"price\\\":\\\"576.00\\\",\\\"sticker_type\\\":\\\"Ben 10 Ulimate Alien\\\",\\\"laminating\\\":\\\"5\\\",\\\"sticker_name\\\":\\\"Sourav R\\\",\\\"artwork\\\":\\\"artworks\\\\\\/N07zLNAHqYUJhrvz9W5R4I246rP2NOrWIhjOjYL2.jpeg\\\",\\\"instructions\\\":null,\\\"preset_mapper\\\":94,\\\"created_at\\\":\\\"2017-09-02 00:48:23\\\",\\\"updated_at\\\":\\\"2017-09-02 00:48:23\\\"}]\\\";}}s:13:\\\"personal_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"name\\\";s:16:\\\"\\\"Sourav Rakshit\\\"\\\";s:5:\\\"email\\\";s:19:\\\"\\\"srv.nxr@gmail.com\\\"\\\";s:5:\\\"phone\\\";s:12:\\\"\\\"2547896547\\\"\\\";s:7:\\\"company\\\";s:4:\\\"null\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:24:\\\"developer.srv1@gmail.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 0, NULL, 1504277348, 1504277348);
-
 -- --------------------------------------------------------
 
 --
@@ -786,12 +777,13 @@ INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discoun
 (3, 'PA2017083003', '8rpwsqqm', NULL, '0.00', '236.00', 1, '2017-08-30 15:29:48', '2017-08-30 15:29:48'),
 (4, 'PA2017083101', 'jw1jz7vc', NULL, '261.00', '8442.00', 1, '2017-08-31 10:56:12', '2017-08-31 10:56:12'),
 (5, 'PA2017083102', 'f111m0hs', 1, '453.00', '14655.00', 1, '2017-08-31 15:56:28', '2017-08-31 15:56:28'),
-(6, 'PA2017083103', 'qd38txnk', 1, '0.00', '8467.00', 1, '2017-08-31 16:17:17', '2017-08-31 16:17:17'),
+(6, 'PA2017083103', 'qd38txnk', 1, '0.00', '8467.00', 6, '2017-08-31 16:17:17', '2017-09-02 22:33:17'),
 (7, 'PA2017083104', 'mfes3cbb', 1, '180.00', '5811.00', 1, '2017-08-31 16:51:50', '2017-08-31 16:51:50'),
-(8, 'PA2017083105', '7s9bwzjd', 1, '1097.00', '17181.00', 1, '2017-08-31 17:00:53', '2017-08-31 17:00:53'),
+(8, 'PA2017083105', '7s9bwzjd', 1, '1097.00', '17181.00', 5, '2017-08-31 17:00:53', '2017-09-02 22:33:09'),
 (9, 'PA2017083106', '3rnzp51j', 1, '500.00', '7838.00', 1, '2017-08-31 17:04:19', '2017-08-31 17:04:19'),
 (10, 'PA2017083107', 'hmfk8s25', NULL, '93.00', '3001.00', 6, '2017-08-31 17:48:45', '2017-09-01 18:03:27'),
-(11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 5, '2017-08-31 18:00:05', '2017-09-01 18:03:39');
+(11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 5, '2017-08-31 18:00:05', '2017-09-01 18:03:39'),
+(13, 'PA2017090301', '40cq85b0', 2, '0.00', '29.00', 1, '2017-09-02 20:10:34', '2017-09-02 20:10:34');
 
 -- --------------------------------------------------------
 
@@ -829,7 +821,8 @@ INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_add
 (8, 8, 'Sourav', 'developer.srv1@gmail.com', '58965478796', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
 (9, 9, 'Sourav', 'developer.srv1@gmail.com', '8785459632', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
 (10, 10, 'Sourav Rakshit', 'reach@devsourav.com', '8013463113', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', '59 (25/C/D) Kaibarta Para Lane, Baidyabati, dist.- Hooghly', NULL),
-(11, 11, 'Sourav Rakshit', 'srv.nxr@gmail.com', '5698745896', '::1', 'IN', 'West Bengal', 'KOlkata', '712222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 'C Company');
+(11, 11, 'Sourav Rakshit', 'srv.nxr@gmail.com', '5698745896', '::1', 'IN', 'West Bengal', 'KOlkata', '712222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 'C Company'),
+(13, 13, 'Sourav Rakshit', 'srv.nxr@gmail.com', '8596547896', '::1', 'BA', 'West Bengal', 'Kolkata', '58964778', 'consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL);
 
 -- --------------------------------------------------------
 
@@ -878,7 +871,8 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, NULL),
 (19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL),
 (20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, NULL),
-(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL);
+(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL),
+(24, 13, 2, 'Kraft Paperboard', '50', '50', '10', '29.00', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1283,7 +1277,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'c3PMMPMwdpB2GsistxSbMV9WeZSgTPBrGbWeJWVIhcfswHceMqAeKUcAYi27', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'Vm6To5vtytN6KOw8gvAzDy4yuFzf96Gc4bgEdj1PXuGD4gI3TKlXneKM3S30', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', '6o1VOiAPaIOifeUP9b8GM0ZET3GyXkPcKRbtvUTqmKCkWRozHJyCalon05gf', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
 (3, 'angellous99', 'angellous99@gmail.com', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wqupgczDAwlp3sCuzfFMet8fC6EBIHvHteCGXtnyTFeh5T2ioufdAs9O8s7i', '2017-08-22 11:25:02', '2017-08-22 11:25:13');
 
 --
@@ -1519,7 +1513,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `lamination_options`
 --
@@ -1549,17 +1543,17 @@ ALTER TABLE `notificationsetting`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `order_status`
 --

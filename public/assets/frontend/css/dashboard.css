@@ -81,7 +81,7 @@
 }
 .dasboard .right-part {
     margin: 0;
-    padding: 12px 18px;
+    padding: 0px 18px;
     background: #fff;
     min-height: 500px;
 }
@@ -132,3 +132,30 @@ table td, table th {
 	border:1px solid #ddd;
 }
 table#details{margin-bottom:20px;}
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+div.order-id{
+    background: #d03707;
+    font-size: 14px;
+    border: 1px;
+    border-radius: 2px;
+    color: #fff;
+    padding: 8px 15px;
+    text-align: center;
+    font-family: monospace;
+}
+div.trans-id{
+    background: #9e9b12;
+    font-size: 12px;
+    border: 1px;
+    border-radius: 2px;
+    color: #fff;
+    padding: 2px;
+    text-align: center;
+}
+#order-list .order-price{font-family: arial;}
+.table>tbody>tr>td.price{font-family: 'arial';}
+.dasboard .right-part .white-box .total h5{font-family: 'arial';}

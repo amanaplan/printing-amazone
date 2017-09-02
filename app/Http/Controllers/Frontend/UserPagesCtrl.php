@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Review;
 use App\Product;
+use App\Order;
 
 use Auth;
 
@@ -30,7 +31,13 @@ class UserPagesCtrl extends Controller
     */
     public function index()
     {
-        return view('frontend.user-dashboard', ['page' => 'dashboard']);
+        $data = [
+            'page'  => 'dashboard',
+            'reviews' => User::find(Auth::user()->id)->reviews()->count(),
+            'purchase'  => Order::where('user_id', Auth::user()->id)->sum('price'),
+        ];
+
+        return view('frontend.user-dashboard', $data);
     }
 
     /**
@@ -112,6 +119,37 @@ class UserPagesCtrl extends Controller
         ];
 
         return view('frontend.user-review-add', $data);
+    }
+
+    /**
+    *order list
+    */
+    public function ListOrders()
+    {
+        $order = Order::where('user_id', Auth::user()->id)->with('orderStatus');
+
+        $data = [
+            'page'  => 'orders',
+            'orders'    => ($order->count() == 0)? null : $order->latest()->paginate(5),
+        ];
+
+        return view('frontend.user-order-list', $data);
+    }
+
+    /**
+    *order details page
+    *@param order token
+    */
+    public function OrderDetails($token)
+    {
+        $order = Order::byToken($token)->ofCurrentUser()->with('billing', 'orderItems.product.category')->firstOrFail();
+
+        $data = [
+            'page'  => 'orders',
+            'order' => $order,
+        ];
+
+        return view('frontend.user-order-details', $data);
     }
 
 }

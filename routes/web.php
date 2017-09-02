@@ -87,6 +87,8 @@ Route::prefix('user')->middleware('userloggedin')->group(function() {
 	Route::put('/request/review-edit/{id}', 'Frontend\UserRqstCtrl@EditReviewRq');
 	Route::get('/review/share', 'Frontend\UserPagesCtrl@AddReview');
 	Route::post('/request/review-add', 'Frontend\UserRqstCtrl@AddReviewRq');
+	Route::get('/my-orders', 'Frontend\UserPagesCtrl@ListOrders');
+	Route::get('/my-order/{token}', 'Frontend\UserPagesCtrl@OrderDetails');
 
 });
 

@@ -41,17 +41,22 @@
 				<td>{{ Auth::user()->name }}</td>
 			  </tr>
 			  <tr>
-				<td>Order history</td>
+				<td>Email ID</td>
 				<td>
-					No past orders
+					{{ Auth::user()->email }}
 				</td>
 			  </tr>
 			  <tr>
-				<td id="default_shipping_address">
-				  Default shipping address
-				  <a href="#" class="edit">Edit</a>
+				<td>Total Purchase</td>
+				<td>
+					$ {{ number_format($purchase) }}
 				</td>
-				<td id="default_shipping_address_line"></td>
+			  </tr>
+			  <tr>
+				<td>Reviews Given</td>
+				<td>
+					{{ $reviews }}
+				</td>
 			  </tr>
 			</tbody>
 		 </table>

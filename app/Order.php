@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
+use Auth;
+
 class Order extends Model
 {
     protected $guarded = ['order_token', 'transaction_id', 'user_id', 'price'];
@@ -37,6 +39,16 @@ class Order extends Model
     	}
 
         return $query->whereNotIn('status', [5,6]);
+    }
+
+    public function scopeByToken($query, $token)
+    {
+        return $query->where('order_token', $token);
+    }
+
+    public function scopeOfCurrentUser($query)
+    {
+        return $query->where('user_id', Auth::user()->id);
     }
 
     public function getCreatedAtAttribute($value)

@@ -89,7 +89,7 @@
 				@endforeach
 
 				<div class="row">
-					{{ $reviews->links() }}
+					{{ $reviews->links('vendor.pagination.userpanel') }}
 				</div>
 
 			@endif
