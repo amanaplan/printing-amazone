@@ -2006,7 +2006,7 @@ function updateProductPrice(cartId, qtyBox) {
 			return false;
 		}
 	} else if (currQty > 20000) {
-		showErrorMsg(qtyBox, 'for more than 20k contact us');
+		showErrorMsg(qtyBox, 'for more than 20,000 contact us');
 		return false;
 	} else {
 		showErrorMsg(qtyBox, 'not a valid quantity');
@@ -2071,7 +2071,7 @@ function showErrorMsg(qtyBox) {
 		errorMsgBox.html('');
 	} else {
 		errorTooltip.show();
-		errorMsgBox.html(msg + ' <span class="instructions" title="we accept order quantity 10, 50, 100, multiple of 100 upto 500, 1000 then multiple of 1000 upto 20k"> <i class="fa fa-info-circle"></i></span>');
+		errorMsgBox.html(msg + ' <span class="instructions" title="we accept order quantity 10, 50, 100, multiple of 100 upto 500, 1000 then multiple of 1000 upto 20,000"> <i class="fa fa-info-circle"></i></span>');
 
 		$('.instructions').tooltipster({
 			theme: 'tooltipster-punk',

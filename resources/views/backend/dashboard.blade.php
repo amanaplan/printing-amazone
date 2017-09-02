@@ -79,7 +79,7 @@
 
                             <p class="card-stats-title right panel-title">Total Products</p>
 
-                            <h4 class="right panel-middle margin-b-0">3100</h4>
+                            <h4 class="right panel-middle margin-b-0">{{ $product }} @if($product < 100)&nbsp;&nbsp;@endif</h4>
 
                         </div>
 
@@ -109,9 +109,9 @@
 
                         <div class="col-xs-7 text-center card-content-left">
 
-                            <p class="card-stats-title right panel-title">All Users</p>
+                            <p class="card-stats-title right panel-title">Customers</p>
 
-                            <h4 class="right panel-middle margin-b-0">6,782</h4>
+                            <h4 class="right panel-middle margin-b-0">{{number_format($customers)}} @if($customers < 100)&nbsp;&nbsp;&nbsp;&nbsp;@endif</h4>
 
                         </div>
 
@@ -145,7 +145,7 @@
 
                             <p class="card-stats-title right panel-title">Pending Orders</p>
 
-                            <h4 class="right panel-middle margin-b-0">6,782</h4>
+                            <h4 class="right panel-middle margin-b-0">{{ $pending_order }}</h4>
 
                         </div>
 
@@ -177,9 +177,9 @@
 
                         <div class="col-xs-7 text-center card-content-left">
 
-                            <p class="card-stats-title right panel-title">Review Received</p>
+                            <p class="card-stats-title right panel-title">Active Reviews</p>
 
-                            <h4 class="right panel-middle margin-b-0">1782</h4>
+                            <h4 class="right panel-middle margin-b-0">{{ $total_reviews }}</h4>
 
                         </div>
 
@@ -201,101 +201,6 @@
 
 
 
-    <div class="row">
-
-        <div class="col-sm-6">
-
-            <div class="panel panel-card recent-activites">
-
-                <!-- Start .panel -->
-
-                <div class="panel-heading">
-
-                    Process 1
-
-                    <div class="pull-right">
-
-                        <div class="btn-group">
-
-                            <button type="button" class="btn btn-info btn-rounded btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-
-                            <ul class="dropdown-menu panel-dropdown" role="menu">
-
-                                <li><a href="#">Action</a></li>
-
-                                <li><a href="#">Another action</a></li>
-
-                                <li><a href="#">Something else here</a></li>
-
-                                <li class="divider"></li>
-
-                                <li><a href="#">Separated link</a></li>
-
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="panel-body text-center">
-
-                    <div id="piechart"></div>
-
-                </div>
-
-            </div><!-- End .panel --> 
-
-        </div>
-
-        <div class="col-sm-6">
-
-            <div class="panel panel-card recent-activites">
-
-                <!-- Start .panel -->
-
-                <div class="panel-heading">
-
-                    Process 2
-
-                    <div class="pull-right">
-
-                        <div class="btn-group">
-
-                            <button type="button" class="btn btn-info btn-rounded btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-
-                            <ul class="dropdown-menu panel-dropdown" role="menu">
-
-                                <li><a href="#">Action</a></li>
-
-                                <li><a href="#">Another action</a></li>
-
-                                <li><a href="#">Something else here</a></li>
-
-                                <li class="divider"></li>
-
-                                <li><a href="#">Separated link</a></li>
-
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="panel-body text-center">
-
-                    <div id="columnchart_material" ></div>
-
-                </div>
-
-            </div><!-- End .panel --> 
-
-        </div>
-
-    </div>
 
 
 

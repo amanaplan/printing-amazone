@@ -130,12 +130,12 @@
 										
 									</div>
 									<div class="field">
-										<label>Select Quantity</label>
+										<label>Select Quantity <strong class="text-danger">GST &amp; Delivery inclusive</strong></label>
 										<ul>
 											@if(array_key_exists(3,$fields))
 
 												@foreach($fields[3] as $key => $val)
-													<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label><span id="priceof-{{ $val }}">$ __</span></li>
+													<li><input id="{{ $val }}" type="radio" name="qty" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ number_format($val) }}</label><span id="priceof-{{ $val }}">$ __</span></li>
 												@endforeach
 
 											@endif
@@ -143,7 +143,7 @@
 											<li>&nbsp;</li>
 
 											<li>
-												<strong>**for order quantiry more than 20k please <a href="{{ url('/contact') }}">contact</a></strong>
+												<strong>**for quantiry more than 20,000 please <a href="{{ url('/contact') }}">contact</a></strong>
 											</li>
 										</ul>
 										

@@ -83,7 +83,8 @@
 
 					<div class="file-upload">
 						<input type="file" class="filestyle" id="upload" tabindex="-1" data-buttonname="btn-info" placeholder="No file Chosen" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " placeholder="" disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="upload" class="btn btn-primary "><span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span class="buttonText"> Choose file</span></label></span></div>
-						
+						<span>max upload size 50MB</span>
+
 						<div class="field" id="op-progress" style="display: none;">
 							<div id="output" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:00%">
 	      						0%

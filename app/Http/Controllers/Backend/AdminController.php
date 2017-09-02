@@ -17,6 +17,7 @@ use App\Review;
 use App\OptLamination;
 use App\StickerType;
 use App\User;
+use App\Order;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,7 +40,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('backend.dashboard', ['page' => 'dashboard']);
+        $data = [
+            'page'  => 'dashboard',
+            'product'   => Product::all()->count(),
+            'customers' => User::all()->count(),
+            'pending_order' => Order::ofType('pending')->count(),
+            'total_reviews' => Review::published()->count(),
+        ];
+
+        return view('backend.dashboard', $data);
     }
 
     /**

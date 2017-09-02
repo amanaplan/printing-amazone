@@ -37,43 +37,16 @@
 		<div class="item active">
 			<img src="{{ asset( 'assets/images/one_color_slider.png' ) }}" alt="slider 01" />
 			<div class="carousel-caption one_color_blue_carousel_caption">
-				<img src="{{ asset( 'assets/images/banner-img1.png' ) }}" alt="slider 01"  data-animation="animated fadeInUp" class="img-responsive" />
+				<img src="{{ asset( 'assets/images/banner-img1.png' ) }}" alt="slider 01" class="img-responsive" />
 				<div class="one_color_blue_carousel_caption_text">
 					<h1>Make your own<br> Custom <span>Stickers</span></h1>
 					<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit<br> amet, consectetur, adipisci velit</p>
-					<a href="#" class="pink">Get Samples</a><a href="{{ url('/sticker') }}" class="green">Shop Now</a>
-				</div>						
-			</div>
-		</div>
-
-		<!--========= Second slide =========-->
-		<div class="item">
-			<img src="{{ asset( 'assets/images/one_color_slider.png' ) }}" alt="slider 02" />
-			<div class="carousel-caption one_color_blue_carousel_caption">
-				<img src="{{ asset( 'assets/images/banner-img2.png' ) }}" alt="slider 01"  data-animation="animated fadeInUp" class="img-responsive" />
-				<div class="one_color_blue_carousel_caption_text">
-					<h1>Make your own<br> Custom <span>Stickers</span></h1>
-					<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit<br> amet, consectetur, adipisci velit</p>
-					<a href="#" class="pink">Get Samples</a><a href="{{ url('/sticker') }}" class="green">Shop Now</a>
+					<a href="{{ url('/contact') }}" class="pink">Contact Us</a><a href="{{ url('/sticker') }}" class="green">Shop Now</a>
 				</div>						
 			</div>
 		</div>
 
 	</div>
-
-	<!--======= Navigation Buttons =========-->
-
-	<!--======= Left Button =========-->
-	<a class="left carousel-control one_color_blue_carousel_control_left" href="#one_color_blue_carousel" role="button" data-slide="prev">
-		<span class="fa fa-angle-left one_color_blue_carousel_control_icons" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-	</a>
-
-	<!--======= Right Button =========-->
-	<a class="right carousel-control one_color_blue_carousel_control_right" href="#one_color_blue_carousel" role="button" data-slide="next">
-		<span class="fa fa-angle-right one_color_blue_carousel_control_icons" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-	</a>
 
 </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
 		

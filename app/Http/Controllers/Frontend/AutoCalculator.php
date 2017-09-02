@@ -43,6 +43,8 @@ class AutoCalculator{
 
 				$this->price1 = $this->qty * $theGenPreset->val_per_mmsq * $this->mmsquare * ($theGenPreset->profit_percent / 100);
 
+				$this->price1 /= 100; //for the mm problem
+
 				/**check if previous group highest price is greater than current calculated**/
 
 				//finding the previous preset range group
@@ -53,6 +55,8 @@ class AutoCalculator{
 				{
 					//this group is not base i.e. it has predefined val/mm2 profit% etc.
 					$this->price2 = $this->qty * $previousPreset->val_per_mmsq * $tmpImaginaryMMsq * ($previousPreset->profit_percent / 100);
+					
+					$this->price2 /= 100; //for the mm problem
 				}
 				else
 				{

@@ -254,10 +254,10 @@ class Checkout extends Controller
             'order_id'      =>  $order_token,
             'transaction_id'    => $transaction_id,
             'country'       =>  $billing_data->get('country'),
-            'state'         =>  json_encode($billing_data->get('state')),
-            'city'          =>  json_encode($billing_data->get('city')),
-            'zipcode'       =>  json_encode($billing_data->get('zipcode')),
-            'street'        =>  json_encode($billing_data->get('street')),
+            'state'         =>  base64_encode($billing_data->get('state')),
+            'city'          =>  base64_encode($billing_data->get('city')),
+            'zipcode'       =>  base64_encode($billing_data->get('zipcode')),
+            'street'        =>  base64_encode($billing_data->get('street')),
             'subtotal'      =>  $subtotal,
             'discount'      =>  $discount,
             'payable'       =>  $payable,
@@ -265,10 +265,10 @@ class Checkout extends Controller
         ];
 
         $personal_data = [
-            'name'  => json_encode($billing_data->get('name')),
-            'email' => json_encode($billing_data->get('email')),
-            'phone' => json_encode($billing_data->get('phone')),
-            'company'   => json_encode($billing_data->get('company', 'NA')),
+            'name'  => base64_encode($billing_data->get('name')),
+            'email' => base64_encode($billing_data->get('email')),
+            'phone' => base64_encode($billing_data->get('phone')),
+            'company'   => base64_encode($billing_data->get('company', 'NA')),
         ];
 
         $common = [
