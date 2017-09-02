@@ -50,6 +50,8 @@ Route::post('/checkout/get-client-token', 'Frontend\Checkout@GetBTClientToken');
 Route::post('/checkout/place-order', 'Frontend\Checkout@PlaceOrder')->name('checkout.post');
 Route::post('/checkout/process-payment', 'Frontend\Checkout@PaymentProcess');
 Route::get('/order-confirm', 'Frontend\PagesCtrl@OrderConfirm')->name('order.confirm');
+Route::post('/request/label-graphics', 'Frontend\CustomRequest@CustomProds')->name('product.request');
+Route::post('/request/contact', 'Frontend\CustomRequest@Contact')->name('contact.request');
 
 
 //users not allowed to access these routes if they are logged in

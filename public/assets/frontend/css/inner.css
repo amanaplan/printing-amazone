@@ -1072,3 +1072,5 @@ button#place-order {
 .checkout-summary table.table.table-responsive li {
     line-height: 27px;
 }
+form#contact-form div.row{margin-bottom: 10px;}
+form#contact-form .has-error{border: 1px solid #ff1818;}

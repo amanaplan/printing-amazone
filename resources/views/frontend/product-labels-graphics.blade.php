@@ -26,6 +26,10 @@
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/css/star-rating.css' ) }}" media="all" type="text/css"/>
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/snackbar/snackbar.css' ) }}" type="text/css"/>
 
+	<style>
+		.frmfielderror{border: 1px solid #f92626 !important;}
+	</style>
+
 @endpush
 
 {{-- main page contents --}}
@@ -100,31 +104,67 @@
 					{{-- the sidebar form --}}
 
 					<div class="col-sm-4 col-lg-4 custom-size">
+
+					@if(session('formError'))
+						<div class="alert alert-danger alert-dismissable">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Oops!</strong> {{ session('formError') }}
+						</div>
+					@elseif(session('request_ok'))
+						<div class="alert alert-success alert-dismissable">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Thank you!</strong> your request sent successfully
+						</div>
+					@endif
+
 						<div class="custom-form">
-							<h2>Name of the Company</h2>
-							<div class="field">
-								<input type="text" placeholder="Company Name">
-							</div>
-							<h2>Contact Details</h2>
-							<div class="field">
-								<input type="text" placeholder="Full Name">
-							</div>
-							<div class="field">
-								<input type="email" placeholder="Email ID">
-							</div>
-							<div class="field">
-								<input type="tel" placeholder="Phone Number">
-							</div>
-							<div class="field">
-								<textarea type="text" placeholder="Enter your Address"></textarea>
-							</div>
-							<h2>Short description of your requirment</h2>
-							<div class="field">
-								<textarea type="text" placeholder="Brief description"></textarea>
-							</div>
-							<div class="field">
-								<input type="submit" value="Send Request">
-							</div>
+
+							<form action="{{ route('product.request') }}" method="post" id="request-form">
+
+								{{ csrf_field() }}
+								<input type="hidden" name="product" value="{{ $product->product_slug }}">
+
+								<h2>Name of the Company</h2>
+								<div class="field">
+									<input type="text" name="company" placeholder="Company Name" value="{{ old('company') }}">
+								</div>
+								<h2>Contact Details</h2>
+								<div class="field">
+									<input type="text" class="{{ ($errors->has('name'))? 'frmfielderror' : '' }}" name="name" placeholder="Full Name" value="{{ old('name') }}" required="required">
+									@if($errors->has('name'))
+										<span class="text-danger">{{ $errors->first('name') }}</span>
+									@endif
+								</div>
+								<div class="field">
+									<input type="email" class="{{ ($errors->has('email'))? 'frmfielderror' : '' }}" name="email" placeholder="Email ID" value="{{ old('email') }}" required="required">
+									@if($errors->has('email'))
+										<span class="text-danger">{{ $errors->first('email') }}</span>
+									@endif
+								</div>
+								<div class="field">
+									<input type="tel" class="{{ ($errors->has('phone'))? 'frmfielderror' : '' }}" name="phone" placeholder="Phone Number" value="{{ old('phone') }}" required="required">
+									@if($errors->has('phone'))
+										<span class="text-danger">{{ $errors->first('phone') }}</span>
+									@endif
+								</div>
+								<div class="field">
+									<textarea type="text" class="{{ ($errors->has('address'))? 'frmfielderror' : '' }}" name="address" placeholder="Enter your Address" required="required">{{ old('address') }}</textarea>
+									@if($errors->has('address'))
+										<span class="text-danger">{{ $errors->first('address') }}</span>
+									@endif
+								</div>
+								<h2>Short description of your requirment</h2>
+								<div class="field">
+									<textarea type="text" class="{{ ($errors->has('desc'))? 'frmfielderror' : '' }}" name="desc" placeholder="Brief description" required="required">{{ old('desc') }}</textarea>
+									@if($errors->has('desc'))
+										<span class="text-danger">{{ $errors->first('desc') }}</span>
+									@endif
+								</div>
+								<div class="field">
+									<input id="send-request" type="submit" value="Send Request" />
+								</div>
+							</form>
+
 						</div>
 					</div>
 
@@ -316,6 +356,10 @@
 			$("input[name='heading']").focus();
 			$(elem).closest(".review-short").remove();
 		}
+
+		$("form#request-form").submit(function(){
+			$("input#send-request").prop('disabled', true);
+		});
 	</script>
 
 	{{-- review --}}

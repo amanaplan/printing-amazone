@@ -42,4 +42,9 @@ return [
         'privateKey' => '370eb033959ec19415a5e19b83e068c5',
     ],
 
+    'recaptcha' => [
+        'site'    => '6LcSHy8UAAAAAM4Sb3Y7xjZonfkKNRoWYq3JGxU-',
+        'secret'  => '6LcSHy8UAAAAAMShQi7liGq0lzhapNPayfL7gMl_'
+    ],
+
 ];

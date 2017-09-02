@@ -175,4 +175,46 @@ class Multipurpose {
             }
         }
     }
+
+
+    /**
+    *google recaptcha verification
+    *
+    *@param client ip address
+    *@param recaptcha input data //$request->input('recaptcha');
+    *
+    *@return bool
+    */
+    public function RecaptchaValid($client_ip='127.0.0.1', $response)
+    {
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $data = array('secret' => config('services.recaptcha.secret'), 'response' => $response, 'remoteip' => $client_ip);
+        
+        // use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === false)
+        {
+            return false;
+        }
+        else
+        {
+            $google_res = json_decode($result, true);
+            if($google_res['success'] === true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 }
