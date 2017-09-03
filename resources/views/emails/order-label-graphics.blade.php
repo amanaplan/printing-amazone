@@ -303,14 +303,17 @@ table.details th{background-image: linear-gradient( 135deg, #0060ce 10%, #68dad5
     <td>{{ $company }}</td>
 
   </tr>
+  <tr>
   <th>Phone</th>
     <td>{{ $phone }}</td>
 
   </tr>
+  <tr>
     <th>Address</th>
     <td>{{ $address }}</td>
 
   </tr>
+  <tr>
     <th>Requirement Description</th>
     <td>{{ $description }}</td>
   </tr>

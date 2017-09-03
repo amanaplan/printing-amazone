@@ -292,6 +292,7 @@ table.details th{background-image: linear-gradient( 135deg, #0060ce 10%, #68dad5
     <td>{{ $email }}</td>
 
   </tr>
+  <tr>
   <th>IP Address</th>
     <td>{{ $ip }}</td>
 
