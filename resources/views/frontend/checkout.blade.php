@@ -57,7 +57,7 @@
 						@endif
 				    </div>
 
-				    <div class="form-group col-sm-6 col-xs-12" style="padding-left: 0;">
+				    <div class="form-group col-sm-6 col-xs-12 res-right" style="padding-left: 0;">
 						<label>Email ID</label>
 						@if(Auth::guard('web')->check())
 						<input type="text" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly="readonly" />
@@ -66,13 +66,13 @@
 						@endif
 				    </div>
 
-				    <div class="form-group col-sm-6 col-xs-12" style="padding-right: 0;">
+				    <div class="form-group col-sm-6 col-xs-12 res" style="padding-right: 0;">
 						<label>Phone</label>
 						<input name="phone" data-validation="custom" data-validation-regexp="^(\+{1})?\d+$" type="text" class="form-control" />
 				    </div>
 				    <div class="clearfix"></div>
 
-				    <div class="form-group col-sm-6 col-xs-12" style="padding-left: 0;">
+				    <div class="form-group col-sm-6 col-xs-12 res-right" style="padding-left: 0;">
 						<label>Country</label>
 						<select name="country" class="form-control" data-validation="custom" data-validation-regexp="^[A-Z]{2}$">
 							<option>--Select an appropriate option--</option>
@@ -82,18 +82,18 @@
 						</select>
 				    </div>
 
-				    <div class="form-group col-sm-6 col-xs-12" style="padding-right: 0;">
+				    <div class="form-group col-sm-6 col-xs-12 res" style="padding-right: 0;">
 						<label>State</label>
 						<input name="state" data-validation="required" type="text" class="form-control" />
 				    </div>
 				    <div class="clearfix"></div>
 
-				    <div class="form-group col-sm-6 col-xs-12" style="padding-left: 0;">
+				    <div class="form-group col-sm-6 col-xs-12 res-right" style="padding-left: 0;">
 						<label>Suburb</label>
 						<input name="city" data-validation="required" type="text" class="form-control" />
 				    </div>
 
-				    <div class="form-group col-sm-6 col-xs-12" style="padding-right: 0;">
+				    <div class="form-group col-sm-6 col-xs-12 res" style="padding-right: 0;">
 						<label>Post Code</label>
 						<input name="zipcode" data-validation="required" type="text" class="form-control" />
 				    </div>

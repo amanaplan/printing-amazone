@@ -70,7 +70,7 @@
 											>{{ $order->orderStatus->status_text }}</div>
 										</td>
 
-										<td><a href="{{ url('/user/my-order/'.$order->order_token) }}" class="btn btn-default">View Details</a></td>
+										<td><a href="{{ url('/user/my-order/'.$order->order_token) }}" class="view-order">View Details</a></td>
 									</tr>
 									@endforeach
 															

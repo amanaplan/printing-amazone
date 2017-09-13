@@ -9,7 +9,7 @@ header.main-header{padding:10px 0; z-index:999; width:100%;background: url(../..
 /*.feature-dtls .dtls-box h2 a{text-decoration:none; transition:all 0.4s; display:block !important;font-size:24px !important; color:#141414 !important; font-family: 'Raleway', sans-serif; font-weight:600 !important; text-align:center !important; margin-top:20px; text-shadow:none;}*/
 .feature-dtls a:hover h2{color:#eb8700 !important;}
 .footer{background: url(../../images/footer.png) no-repeat scroll 0 0 / cover; padding:100px 0 30px; margin-top:-50px;}
-.footer-menu ul{list-style:none;}
+.footer-menu ul{list-style:none; padding-left: 0; margin-bottom: 0;}
 .footer-menu ul li{position:relative; display:inline-block;}
 .footer-menu ul li a{color:#363636; font-size:15px; text-decoration:none;font-family: 'Raleway', sans-serif; font-weight:600; padding:0 12px 0; transition:all 0.4s;}
 .footer-menu ul li a:hover{color:#fff;}
@@ -393,6 +393,10 @@ a.cnt-shopping{
 a.cnt-shopping:hover{
     /*background:none; color:#4b4aa1; border:2px solid #4b4aa1;*/
 }
+a.process{background:#4ab96c; border: 2px solid #4ab96c }
+a.process:hover{
+    background:none; color:#000; border:2px solid #4ab96c;
+}
 .btn-right{text-align:right;}
 a.clr-shopping{
 	font-size: 14px;
@@ -401,14 +405,14 @@ a.clr-shopping{
 	font-weight: 600;
 	font-family: 'Raleway', sans-serif;
 	border-radius:4px;
-	background:#59b575;
+	background:rgb(97, 21, 25);
 	color:#fff;
 	text-decoration:none;
 	transition:all 0.4s;
-	border:2px solid #5fd282;
+	border:2px solid #632124;
 	text-align: center;
 }
-a.clr-shopping:hover{background:none; color:#202020; border:2px solid #5fd282;}
+a.clr-shopping:hover{background:none; color:#632124; border:2px solid #632124;}
 .shop_measures {
     background: #eee;
     padding: 30px;
@@ -635,7 +639,7 @@ div#pid {
     color: #535353;
 }
 .total h5 {
-    width: 40%; display:inline-block;
+    /*width: 40%;*/ display:inline-block;
 }
 .product-name span{font-weight:600;}
 .progress{margin:10px 0;}
@@ -995,7 +999,7 @@ p.subtitle {    text-align: center;    margin: 16px 0 0;    font-size: 18px;    
     white-space: nowrap;
 }
 span.remove-item{cursor: pointer;}
-td.price h5{width: 70px;}
+td.price h5{/*width: 70px;*/ display: block;}
 .happy-text{color: #0ca73b;}
 
 span.current-price {
