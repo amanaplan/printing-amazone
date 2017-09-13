@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2017 at 08:46 AM
+-- Generation Time: Sep 13, 2017 at 10:29 AM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -186,14 +186,6 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `failed_jobs`
---
-
-INSERT INTO `failed_jobs` (`id`, `connection`, `queue`, `payload`, `exception`, `failed_at`) VALUES
-(1, 'database', 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderCustomer\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:22:\\\"App\\\\Mail\\\\OrderCustomer\\\":20:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:32:\\\"http:\\/\\/www.printingamazon.com.au\\\";s:12:\\\"delivery_img\\\";s:69:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017090301\\\";s:14:\\\"transaction_id\\\";s:8:\\\"4ma57q56\\\";s:7:\\\"country\\\";s:2:\\\"IN\\\";s:5:\\\"state\\\";s:16:\\\"V0VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:16:\\\"ODU2OTc0ODU5OQ==\\\";s:6:\\\"street\\\";s:52:\\\"c2V1amh3ZyBhaXVnYWh3Z2J1ZyBhd2l1aGdhd2dhd2d3YWd3YQ==\\\";s:8:\\\"subtotal\\\";i:191;s:8:\\\"discount\\\";i:0;s:7:\\\"payable\\\";i:191;s:5:\\\"items\\\";s:408:\\\"[{\\\"id\\\":44,\\\"cart_token\\\":\\\"beed3358be2a87c49cbe5283889447dba7a620db\\\",\\\"user_id\\\":2,\\\"product_id\\\":17,\\\"paperstock\\\":1,\\\"width\\\":90,\\\"height\\\":90,\\\"qty\\\":2000,\\\"price\\\":\\\"191.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"artwork\\\":\\\"artworks\\\\\\/gUyNwNHQR1QFjdOUuratx12eXvAmI96qQsxANn9L.png\\\",\\\"instructions\\\":\\\"nothing special\\\",\\\"preset_mapper\\\":27,\\\"created_at\\\":\\\"2017-09-03 18:38:32\\\",\\\"updated_at\\\":\\\"2017-09-03 18:38:41\\\"}]\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 'ErrorException: file_put_contents(/var/www/pa-laravel/storage/framework/views/5f8e726fe36b52a43512e51e2ce9538d085764fa.php): failed to open stream: Permission denied in /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:111\nStack trace:\n#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'file_put_conten...\', \'/var/www/pa-lar...\', 111, Array)\n#1 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(111): file_put_contents(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\', 0)\n#2 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(122): Illuminate\\Filesystem\\Filesystem->put(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\')\n#3 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile(\'/var/www/pa-lar...\')\n#4 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(137): Illuminate\\View\\Engines\\CompilerEngine->get(\'/var/www/pa-lar...\', Array)\n#5 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(120): Illuminate\\View\\View->getContents()\n#6 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(85): Illuminate\\View\\View->renderContents()\n#7 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(303): Illuminate\\View\\View->render()\n#8 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(276): Illuminate\\Mail\\Mailer->renderView(\'emails.order-cu...\', Array)\n#9 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(200): Illuminate\\Mail\\Mailer->addContent(Object(Illuminate\\Mail\\Message), \'emails.order-cu...\', NULL, NULL, Array)\n#10 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailable.php(124): Illuminate\\Mail\\Mailer->send(\'emails.order-cu...\', Array, Object(Closure))\n#11 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/SendQueuedMailable.php(52): Illuminate\\Mail\\Mailable->send(Object(Illuminate\\Mail\\Mailer))\n#12 [internal function]: Illuminate\\Mail\\SendQueuedMailable->handle(Object(Illuminate\\Mail\\Mailer))\n#13 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#14 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#15 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#16 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#17 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(94): Illuminate\\Container\\Container->call(Array)\n#18 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(114): Illuminate\\Bus\\Dispatcher->Illuminate\\Bus\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#19 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#20 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(98): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))\n#21 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): Illuminate\\Bus\\Dispatcher->dispatchNow(Object(Illuminate\\Mail\\SendQueuedMailable), false)\n#22 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(69): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#23 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(291): Illuminate\\Queue\\Jobs\\Job->fire()\n#24 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(258): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#25 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(110): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#26 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'order,default\', Object(Illuminate\\Queue\\WorkerOptions))\n#27 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'order,default\')\n#28 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->fire()\n#29 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#30 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#31 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#32 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#33 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Illuminate\\Container\\Container->call(Array)\n#34 /var/www/pa-laravel/vendor/symfony/console/Command/Command.php(262): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#35 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(167): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#36 /var/www/pa-laravel/vendor/symfony/console/Application.php(826): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#37 /var/www/pa-laravel/vendor/symfony/console/Application.php(190): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#38 /var/www/pa-laravel/vendor/symfony/console/Application.php(121): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#39 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(123): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#40 /var/www/pa-laravel/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#41 {main}', '2017-09-03 18:47:03'),
-(2, 'database', 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderAdmin\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\OrderAdmin\\\":21:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:32:\\\"http:\\/\\/www.printingamazon.com.au\\\";s:12:\\\"delivery_img\\\";s:69:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017090301\\\";s:14:\\\"transaction_id\\\";s:8:\\\"4ma57q56\\\";s:7:\\\"country\\\";s:2:\\\"IN\\\";s:5:\\\"state\\\";s:16:\\\"V0VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:16:\\\"ODU2OTc0ODU5OQ==\\\";s:6:\\\"street\\\";s:52:\\\"c2V1amh3ZyBhaXVnYWh3Z2J1ZyBhd2l1aGdhd2dhd2d3YWd3YQ==\\\";s:8:\\\"subtotal\\\";i:191;s:8:\\\"discount\\\";i:0;s:7:\\\"payable\\\";i:191;s:5:\\\"items\\\";s:408:\\\"[{\\\"id\\\":44,\\\"cart_token\\\":\\\"beed3358be2a87c49cbe5283889447dba7a620db\\\",\\\"user_id\\\":2,\\\"product_id\\\":17,\\\"paperstock\\\":1,\\\"width\\\":90,\\\"height\\\":90,\\\"qty\\\":2000,\\\"price\\\":\\\"191.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"artwork\\\":\\\"artworks\\\\\\/gUyNwNHQR1QFjdOUuratx12eXvAmI96qQsxANn9L.png\\\",\\\"instructions\\\":\\\"nothing special\\\",\\\"preset_mapper\\\":27,\\\"created_at\\\":\\\"2017-09-03 18:38:32\\\",\\\"updated_at\\\":\\\"2017-09-03 18:38:41\\\"}]\\\";}}s:13:\\\"personal_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"name\\\";s:20:\\\"U291cmF2IFJha3NoaXQ=\\\";s:5:\\\"email\\\";s:24:\\\"c3J2Lm54ckBnbWFpbC5jb20=\\\";s:5:\\\"phone\\\";s:16:\\\"NTY5ODc0ODU5Ng==\\\";s:7:\\\"company\\\";s:0:\\\"\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:24:\\\"developer.srv1@gmail.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 'ErrorException: file_put_contents(/var/www/pa-laravel/storage/framework/views/e803e68130bd2952a0173be0ccaeaef021111a33.php): failed to open stream: Permission denied in /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:111\nStack trace:\n#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'file_put_conten...\', \'/var/www/pa-lar...\', 111, Array)\n#1 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(111): file_put_contents(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\', 0)\n#2 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(122): Illuminate\\Filesystem\\Filesystem->put(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\')\n#3 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile(\'/var/www/pa-lar...\')\n#4 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(137): Illuminate\\View\\Engines\\CompilerEngine->get(\'/var/www/pa-lar...\', Array)\n#5 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(120): Illuminate\\View\\View->getContents()\n#6 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(85): Illuminate\\View\\View->renderContents()\n#7 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(303): Illuminate\\View\\View->render()\n#8 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(276): Illuminate\\Mail\\Mailer->renderView(\'emails.order-ad...\', Array)\n#9 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(200): Illuminate\\Mail\\Mailer->addContent(Object(Illuminate\\Mail\\Message), \'emails.order-ad...\', NULL, NULL, Array)\n#10 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailable.php(124): Illuminate\\Mail\\Mailer->send(\'emails.order-ad...\', Array, Object(Closure))\n#11 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/SendQueuedMailable.php(52): Illuminate\\Mail\\Mailable->send(Object(Illuminate\\Mail\\Mailer))\n#12 [internal function]: Illuminate\\Mail\\SendQueuedMailable->handle(Object(Illuminate\\Mail\\Mailer))\n#13 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#14 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#15 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#16 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#17 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(94): Illuminate\\Container\\Container->call(Array)\n#18 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(114): Illuminate\\Bus\\Dispatcher->Illuminate\\Bus\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#19 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#20 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(98): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))\n#21 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): Illuminate\\Bus\\Dispatcher->dispatchNow(Object(Illuminate\\Mail\\SendQueuedMailable), false)\n#22 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(69): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#23 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(291): Illuminate\\Queue\\Jobs\\Job->fire()\n#24 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(258): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#25 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(110): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#26 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'order,default\', Object(Illuminate\\Queue\\WorkerOptions))\n#27 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'order,default\')\n#28 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->fire()\n#29 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#30 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#31 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#32 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#33 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Illuminate\\Container\\Container->call(Array)\n#34 /var/www/pa-laravel/vendor/symfony/console/Command/Command.php(262): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#35 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(167): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#36 /var/www/pa-laravel/vendor/symfony/console/Application.php(826): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#37 /var/www/pa-laravel/vendor/symfony/console/Application.php(190): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#38 /var/www/pa-laravel/vendor/symfony/console/Application.php(121): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#39 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(123): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#40 /var/www/pa-laravel/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#41 {main}', '2017-09-03 18:47:05');
 
 -- --------------------------------------------------------
 
@@ -636,7 +628,7 @@ CREATE TABLE `order_items` (
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`) VALUES
 (1, 1, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
 (2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, NULL),
-(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '3', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper'),
+(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '6', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper'),
 (5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
 (6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, 'artworks/Q6f8VWei6BqfC5QobFbgbzSlc2zyqqQcKbVQUeEC.jpeg', NULL),
 (10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, NULL),
@@ -729,7 +721,7 @@ CREATE TABLE `preset_general` (
   `min_size` int(11) NOT NULL,
   `max_size` int(11) NOT NULL,
   `is_base` tinyint(4) NOT NULL DEFAULT 0,
-  `base_price` double(4,2) DEFAULT NULL
+  `base_price` decimal(15,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -737,64 +729,64 @@ CREATE TABLE `preset_general` (
 --
 
 INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_per_mmsq`, `profit_percent`, `min_size`, `max_size`, `is_base`, `base_price`) VALUES
-(5, 13, 0, 4000, NULL, NULL, 10, 300, 1, 99.00),
-(13, 27, 0, 470, 0.25, 0.50, 30, 250, 1, 63.00),
+(5, 13, 0, 4000, NULL, NULL, 10, 300, 1, '99.00'),
+(13, 27, 0, 470, 0.25, 0.50, 30, 250, 1, '63.00'),
 (14, 27, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (15, 27, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
 (16, 27, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(17, 28, 0, 410, 0.25, 0.50, 30, 250, 1, 93.00),
+(17, 28, 0, 410, 0.25, 0.50, 30, 250, 1, '93.00'),
 (18, 28, 411, 600, 0.24, 0.49, 30, 250, 0, NULL),
 (19, 28, 601, 800, 0.24, 0.49, 30, 250, 0, NULL),
 (20, 28, 801, 1200, 0.24, 0.49, 30, 250, 0, NULL),
 (22, 28, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(29, 31, 0, 320, 0.25, 0.50, 30, 250, 1, 99.00),
+(29, 31, 0, 320, 0.25, 0.50, 30, 250, 1, '99.00'),
 (30, 31, 321, 500, 0.24, 0.49, 30, 250, 0, NULL),
 (31, 31, 501, 800, 0.24, 0.49, 30, 250, 0, NULL),
 (32, 31, 801, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(33, 42, 0, 5400, 0.00, 0.00, 40, 300, 1, 84.00),
+(33, 42, 0, 5400, 0.00, 0.00, 40, 300, 1, '84.00'),
 (34, 42, 5401, 7000, 0.29, 0.55, 40, 300, 0, NULL),
 (35, 42, 7001, 9000, 0.29, 0.54, 40, 300, 0, NULL),
 (36, 42, 9001, 12000, 0.28, 0.55, 40, 300, 0, NULL),
 (37, 42, 12001, 15000, 0.28, 0.54, 40, 300, 0, NULL),
-(44, 44, 0, 5400, 0.00, 0.00, 40, 300, 1, 99.99),
+(44, 44, 0, 5400, 0.00, 0.00, 40, 300, 1, '200.25'),
 (45, 44, 5401, 8000, 0.33, 0.55, 40, 300, 0, NULL),
 (46, 44, 8001, 10000, 0.33, 0.54, 40, 300, 0, NULL),
 (47, 44, 10001, 12000, 0.32, 0.55, 40, 300, 0, NULL),
-(48, 47, 0, 5400, 0.00, 0.00, 40, 300, 1, 99.00),
+(48, 47, 0, 5400, 0.00, 0.00, 40, 300, 1, '99.00'),
 (49, 47, 5401, 6000, 0.33, 0.55, 40, 300, 0, NULL),
 (50, 47, 6001, 8000, 0.33, 0.54, 40, 300, 0, NULL),
 (51, 47, 8001, 10000, 0.32, 0.55, 40, 300, 0, NULL),
-(65, 69, 0, 470, 0.25, 0.50, 30, 250, 1, 69.00),
+(65, 69, 0, 470, 0.25, 0.50, 30, 250, 1, '69.00'),
 (66, 69, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (67, 69, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
 (68, 69, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(69, 68, 0, 470, 0.25, 0.50, 30, 250, 1, 99.00),
+(69, 68, 0, 470, 0.25, 0.50, 30, 250, 1, '99.00'),
 (70, 68, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (71, 68, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
 (72, 68, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(73, 79, 0, 250, 0.25, 0.50, 30, 250, 1, 75.00),
+(73, 79, 0, 250, 0.25, 0.50, 30, 250, 1, '75.00'),
 (74, 79, 251, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (75, 79, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
 (76, 79, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(77, 80, 0, 250, 0.25, 0.50, 30, 250, 1, 95.00),
+(77, 80, 0, 250, 0.25, 0.50, 30, 250, 1, '95.00'),
 (78, 80, 251, 600, 0.24, 0.49, 30, 250, 0, NULL),
 (79, 80, 601, 800, 0.24, 0.49, 30, 250, 0, NULL),
 (80, 80, 801, 1200, 0.24, 0.49, 30, 250, 0, NULL),
 (81, 80, 1201, 1500, 0.24, 0.49, 30, 250, 0, NULL),
 (82, 80, 1501, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(83, 81, 0, 250, 0.25, 0.50, 30, 250, 1, 99.00),
+(83, 81, 0, 250, 0.25, 0.50, 30, 250, 1, '200.00'),
 (84, 81, 251, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (85, 81, 901, 1200, 0.24, 0.49, 30, 250, 0, NULL),
 (86, 81, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(87, 82, 0, 250, 0.25, 0.50, 30, 250, 1, 95.00),
+(87, 82, 0, 250, 0.25, 0.50, 30, 250, 1, '95.00'),
 (88, 82, 251, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (89, 82, 901, 1200, 0.24, 0.49, 30, 250, 0, NULL),
 (90, 82, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(91, 92, 0, 470, NULL, NULL, 30, 250, 1, 99.00),
+(91, 92, 0, 470, NULL, NULL, 30, 250, 1, '99.00'),
 (92, 92, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (93, 92, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
 (94, 92, 1351, 62500, 0.25, 0.49, 30, 250, 0, NULL),
-(104, 95, 0, 470, 0.25, 0.50, 30, 250, 1, 69.00),
+(104, 95, 0, 470, 0.25, 0.50, 30, 250, 1, '69.00'),
 (105, 95, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (106, 95, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
 (107, 95, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
@@ -821,7 +813,7 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (132, 13, 20001, 23000, 0.34, 0.50, 10, 300, 0, NULL),
 (133, 13, 23001, 25000, 0.33, 0.49, 10, 300, 0, NULL),
 (134, 13, 25000, 90000, 0.32, 0.48, 10, 300, 0, NULL),
-(135, 150, 0, 5400, 0.00, 0.00, 40, 300, 1, 65.00),
+(135, 150, 0, 5400, 0.00, 0.00, 40, 300, 1, '65.00'),
 (136, 150, 5401, 6000, 0.25, 0.47, 40, 300, 0, NULL),
 (137, 150, 6001, 8000, 0.24, 0.48, 40, 300, 0, NULL),
 (138, 150, 8001, 10000, 0.24, 0.47, 40, 300, 0, NULL),
@@ -832,16 +824,16 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (143, 150, 20001, 23000, 0.21, 0.48, 40, 300, 0, NULL),
 (144, 150, 23001, 26000, 0.21, 0.47, 40, 300, 0, NULL),
 (145, 150, 26001, 90000, 0.20, 0.48, 40, 300, 0, NULL),
-(146, 153, 0, 5400, 0.00, 0.00, 40, 300, 1, 65.00),
-(148, 153, 8100, 8101, 0.00, 0.00, 40, 300, 1, 81.00),
-(150, 153, 10000, 10001, 0.00, 0.00, 40, 300, 1, 99.99),
+(146, 153, 0, 5400, 0.00, 0.00, 40, 300, 1, '65.00'),
+(148, 153, 8100, 8101, 0.00, 0.00, 40, 300, 1, '81.00'),
+(150, 153, 10000, 10001, 0.00, 0.00, 40, 300, 1, '99.99'),
 (151, 44, 12001, 15000, 0.32, 0.54, 40, 300, 0, NULL),
 (152, 44, 15001, 18000, 0.31, 0.55, 40, 300, 0, NULL),
 (153, 44, 18001, 20000, 0.31, 0.54, 40, 300, 0, NULL),
 (154, 44, 20001, 23000, 0.30, 0.55, 40, 300, 0, NULL),
 (155, 44, 23001, 26000, 0.30, 0.54, 40, 300, 0, NULL),
 (156, 44, 26001, 90000, 0.29, 0.55, 40, 300, 0, NULL),
-(157, 151, 0, 5400, 0.00, 0.00, 40, 300, 1, 65.00),
+(157, 151, 0, 5400, 0.00, 0.00, 40, 300, 1, '65.00'),
 (158, 151, 5401, 6000, 0.25, 0.47, 40, 300, 0, NULL),
 (159, 151, 6001, 8000, 0.24, 0.48, 40, 300, 0, NULL),
 (160, 151, 8001, 10000, 0.24, 0.47, 40, 300, 0, NULL),
@@ -851,7 +843,7 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (171, 151, 20001, 23000, 0.21, 0.48, 40, 300, 0, NULL),
 (172, 151, 23001, 26000, 0.21, 0.47, 40, 300, 0, NULL),
 (173, 151, 26001, 90000, 0.20, 0.48, 40, 300, 0, NULL),
-(177, 45, 0, 5400, 0.00, 0.00, 40, 300, 1, 87.00),
+(177, 45, 0, 5400, 0.00, 0.00, 40, 300, 1, '87.00'),
 (178, 45, 5401, 6000, 0.29, 0.55, 40, 300, 0, NULL),
 (179, 45, 6001, 8000, 0.29, 0.54, 40, 300, 0, NULL),
 (180, 45, 8001, 10000, 0.28, 0.55, 40, 300, 0, NULL),
