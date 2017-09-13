@@ -168,7 +168,7 @@
                                     <span class="label label-danger">Not Provided</span>
                                     @endif
                                 </td>
-                                <td class="text-right">$ {{ $item-> price }}</td>
+                                <td class="text-right">$ {{ $item->price }}</td>
                             </tr>
                             @endforeach
 

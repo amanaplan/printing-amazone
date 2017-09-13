@@ -89,12 +89,12 @@
 				    <div class="clearfix"></div>
 
 				    <div class="form-group col-sm-6 col-xs-12" style="padding-left: 0;">
-						<label>City</label>
+						<label>Suburb</label>
 						<input name="city" data-validation="required" type="text" class="form-control" />
 				    </div>
 
 				    <div class="form-group col-sm-6 col-xs-12" style="padding-right: 0;">
-						<label>Zipcode</label>
+						<label>Post Code</label>
 						<input name="zipcode" data-validation="required" type="text" class="form-control" />
 				    </div>
 				    <div class="clearfix"></div>
@@ -113,6 +113,17 @@
 
 				    {{-- braintree dropin ui --}}
 				    <div id="bt-dropin"></div>
+
+				    <br>
+				    <div class="form-group">
+						<input type="checkbox" checked="checked" disabled="disabled" />
+						<span>I agree with the <a href="#">Terms &amp; Conditions</a></span>
+				    </div>
+				    <div class="form-group">
+						<input type="checkbox" checked="checked" disabled="disabled" />
+						<span>I agree with the <a href="#">Estimated Delivery Time Policy</a></span>
+				    </div>
+				    <br>
 
     				<button type="submit" id="place-order" class="btn btn-info btn-lg">Place Order</button>
   				</form>

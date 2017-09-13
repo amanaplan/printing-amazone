@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2017 at 10:07 PM
+-- Generation Time: Sep 13, 2017 at 08:46 AM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -47,7 +47,7 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `name`, `email`, `profile_pic`, `password`, `remember_token`, `super_admin`, `active`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav R', 'srv.nxr@gmail.com', 'avatar2.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'P3kRQNccqpr6Y3XvqzpxuIIBxSRy6yqklfcAlBdPpeRVExJWWBa7wx4vZAqv', 1, 1, '2017-05-03 11:34:00', '2017-05-12 17:20:06'),
-(5, 'Printing Amazone', 'printingamazon0902@gmail.com', 'avatar2.png', '$2y$10$ZkuO1h6NJbJIdsuJx1a3hO0tas.XRvxNCR/HcPAg2/5X21WVK5sZC', NULL, 0, 1, '2017-05-26 16:15:40', '2017-06-19 13:13:58');
+(5, 'Printing Amazone', 'printingamazon0902@gmail.com', 'avatar2.png', '$2y$10$ZkuO1h6NJbJIdsuJx1a3hO0tas.XRvxNCR/HcPAg2/5X21WVK5sZC', 'doaiZ0syVp3f0kdppl6dE3ZmS691BTIqNlYO0iIonQ1697LHoCgs0t6hI0Sl', 0, 1, '2017-05-26 16:15:40', '2017-09-05 00:05:13');
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,10 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33');
+(1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
+(62, 'f69cac096d0363504e604cc1d5f862128d513531', 0, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-08 02:10:00', '2017-09-08 02:10:00'),
+(68, '1cf01403e1a2a9f5e9008a57c6e86c0c6e5d5b3a', 0, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-12 03:04:07', '2017-09-12 03:04:07'),
+(70, '96181f0cb4e52467977ff1d9e28dc263d4565439', 1, 25, 1, 50.00, 50.00, 3000, '131.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-13 09:57:45', '2017-09-13 09:57:45');
 
 -- --------------------------------------------------------
 
@@ -120,11 +123,12 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `title`, `og_title`, `meta_desc`, `og_desc`, `og_img`, `category_name`, `category_slug`, `sort`, `show_in_menu`, `created_at`, `updated_at`) VALUES
-(1, 'Sticker - Printing Amazon', 'Sticker - Printing Amazon', 'sticker page meta desc', 'sticker page meta desc', 'banner-bg.jpg', 'Sticker', 'sticker', 1, 1, '2017-05-26 15:10:37', '2017-08-19 15:08:22'),
-(2, 'Business Card - Printing Amazon', 'Business Card - Printing Amazon', NULL, NULL, NULL, 'Business Card', 'business-card', 2, 1, '2017-06-19 13:00:47', '2017-08-19 15:08:36'),
-(3, 'Brochures/Flyers - Printing Amazon', 'Brochures/Flyers - Printing Amazon', NULL, NULL, NULL, 'Brochures/Flyers', 'brochuresflyers', 3, 1, '2017-06-19 13:14:34', '2017-08-19 15:08:51'),
-(4, 'Postcards - Printing Amazon', 'Postcards - Printing Amazon', NULL, NULL, NULL, 'Postcards', 'postcards', 4, 1, '2017-06-19 13:14:52', '2017-08-19 15:09:02'),
-(5, NULL, NULL, NULL, NULL, NULL, 'Uncategorized', 'uncategorized', 0, 0, '2017-08-19 13:05:36', '2017-08-19 13:05:36');
+(1, 'Sticker - Printing Amazon', 'Sticker - Printing Amazon', 'sticker page meta desc', 'sticker page meta desc', 'banner-bg.jpg', 'Custom Stickers', 'custom-stickers', 1, 1, '2017-05-26 15:10:37', '2017-09-05 13:59:32'),
+(2, 'Business Card - Printing Amazon', 'Business Card - Printing Amazon', NULL, NULL, NULL, 'Business Card', 'business-card', 2, 0, '2017-06-19 13:00:47', '2017-09-05 13:59:44'),
+(3, 'Brochures/Flyers - Printing Amazon', 'Brochures/Flyers - Printing Amazon', NULL, NULL, NULL, 'Brochures/Flyers', 'brochuresflyers', 3, 0, '2017-06-19 13:14:34', '2017-09-05 13:59:50'),
+(4, 'Postcards - Printing Amazon', 'Postcards - Printing Amazon', NULL, NULL, NULL, 'Postcards', 'postcards', 4, 0, '2017-06-19 13:14:52', '2017-09-05 13:59:54'),
+(5, NULL, NULL, NULL, NULL, NULL, 'Uncategorized', 'uncategorized', 0, 0, '2017-08-19 13:05:36', '2017-08-19 13:05:36'),
+(6, 'Preset Sized Stickers', 'Preset Sized Stickers', NULL, NULL, NULL, 'Preset Sized Stickers', 'preset-sized-stickers', 0, 1, '2017-09-05 14:00:15', '2017-09-08 13:18:15');
 
 -- --------------------------------------------------------
 
@@ -145,275 +149,7 @@ CREATE TABLE `country` (
 --
 
 INSERT INTO `country` (`id`, `cc_fips`, `cc_iso`, `tld`, `country_name`) VALUES
-(1, 'AA', 'AW', '.aw', 'Aruba'),
-(2, 'AC', 'AG', '.ag', 'Antigua and Barbuda'),
-(3, 'AE', 'AE', '.ae', 'United Arab Emirates'),
-(4, 'AF', 'AF', '.af', 'Afghanistan'),
-(5, 'AG', 'DZ', '.dz', 'Algeria'),
-(6, 'AJ', 'AZ', '.az', 'Azerbaijan'),
-(7, 'AL', 'AL', '.al', 'Albania'),
-(8, 'AM', 'AM', '.am', 'Armenia'),
-(9, 'AN', 'AD', '.ad', 'Andorra'),
-(10, 'AO', 'AO', '.ao', 'Angola'),
-(11, 'AQ', 'AS', '.as', 'American Samoa'),
-(12, 'AR', 'AR', '.ar', 'Argentina'),
-(13, 'AS', 'AU', '.au', 'Australia'),
-(14, 'AT', '-', '-', 'Ashmore and Cartier Islands'),
-(15, 'AU', 'AT', '.at', 'Austria'),
-(16, 'AV', 'AI', '.ai', 'Anguilla'),
-(17, 'AX', 'AX', '.ax', 'Åland Islands'),
-(18, 'AY', 'AQ', '.aq', 'Antarctica'),
-(19, 'BA', 'BH', '.bh', 'Bahrain'),
-(20, 'BB', 'BB', '.bb', 'Barbados'),
-(21, 'BC', 'BW', '.bw', 'Botswana'),
-(22, 'BD', 'BM', '.bm', 'Bermuda'),
-(23, 'BE', 'BE', '.be', 'Belgium'),
-(24, 'BF', 'BS', '.bs', 'Bahamas, The'),
-(25, 'BG', 'BD', '.bd', 'Bangladesh'),
-(26, 'BH', 'BZ', '.bz', 'Belize'),
-(27, 'BK', 'BA', '.ba', 'Bosnia and Herzegovina'),
-(28, 'BL', 'BO', '.bo', 'Bolivia'),
-(29, 'BM', 'MM', '.mm', 'Myanmar'),
-(30, 'BN', 'BJ', '.bj', 'Benin'),
-(31, 'BO', 'BY', '.by', 'Belarus'),
-(32, 'BP', 'SB', '.sb', 'Solomon Islands'),
-(33, 'BQ', '-', '-', 'Navassa Island'),
-(34, 'BR', 'BR', '.br', 'Brazil'),
-(35, 'BS', '-', '-', 'Bassas da India'),
-(36, 'BT', 'BT', '.bt', 'Bhutan'),
-(37, 'BU', 'BG', '.bg', 'Bulgaria'),
-(38, 'BV', 'BV', '.bv', 'Bouvet Island'),
-(39, 'BX', 'BN', '.bn', 'Brunei'),
-(40, 'BY', 'BI', '.bi', 'Burundi'),
-(41, 'CA', 'CA', '.ca', 'Canada'),
-(42, 'CB', 'KH', '.kh', 'Cambodia'),
-(43, 'CD', 'TD', '.td', 'Chad'),
-(44, 'CE', 'LK', '.lk', 'Sri Lanka'),
-(45, 'CF', 'CG', '.cg', 'Congo, Republic of the'),
-(46, 'CG', 'CD', '.cd', 'Congo, Democratic Republic of the'),
-(47, 'CH', 'CN', '.cn', 'China'),
-(48, 'CI', 'CL', '.cl', 'Chile'),
-(49, 'CJ', 'KY', '.ky', 'Cayman Islands'),
-(50, 'CK', 'CC', '.cc', 'Cocos (Keeling) Islands'),
-(51, 'CM', 'CM', '.cm', 'Cameroon'),
-(52, 'CN', 'KM', '.km', 'Comoros'),
-(53, 'CO', 'CO', '.co', 'Colombia'),
-(54, 'CQ', 'MP', '.mp', 'Northern Mariana Islands'),
-(55, 'CR', '-', '-', 'Coral Sea Islands'),
-(56, 'CS', 'CR', '.cr', 'Costa Rica'),
-(57, 'CT', 'CF', '.cf', 'Central African Republic'),
-(58, 'CU', 'CU', '.cu', 'Cuba'),
-(59, 'CV', 'CV', '.cv', 'Cape Verde'),
-(60, 'CW', 'CK', '.ck', 'Cook Islands'),
-(61, 'CY', 'CY', '.cy', 'Cyprus'),
-(62, 'DA', 'DK', '.dk', 'Denmark'),
-(63, 'DJ', 'DJ', '.dj', 'Djibouti'),
-(64, 'DO', 'DM', '.dm', 'Dominica'),
-(65, 'DQ', 'UM', '-', 'Jarvis Island'),
-(66, 'DR', 'DO', '.do', 'Dominican Republic'),
-(67, 'DX', '-', '-', 'Dhekelia Sovereign Base Area'),
-(68, 'EC', 'EC', '.ec', 'Ecuador'),
-(69, 'EG', 'EG', '.eg', 'Egypt'),
-(70, 'EI', 'IE', '.ie', 'Ireland'),
-(71, 'EK', 'GQ', '.gq', 'Equatorial Guinea'),
-(72, 'EN', 'EE', '.ee', 'Estonia'),
-(73, 'ER', 'ER', '.er', 'Eritrea'),
-(74, 'ES', 'SV', '.sv', 'El Salvador'),
-(75, 'ET', 'ET', '.et', 'Ethiopia'),
-(76, 'EU', '-', '-', 'Europa Island'),
-(77, 'EZ', 'CZ', '.cz', 'Czech Republic'),
-(78, 'FG', 'GF', '.gf', 'French Guiana'),
-(79, 'FI', 'FI', '.fi', 'Finland'),
-(80, 'FJ', 'FJ', '.fj', 'Fiji'),
-(81, 'FK', 'FK', '.fk', 'Falkland Islands (Islas Malvinas)'),
-(82, 'FM', 'FM', '.fm', 'Micronesia, Federated States of'),
-(83, 'FO', 'FO', '.fo', 'Faroe Islands'),
-(84, 'FP', 'PF', '.pf', 'French Polynesia'),
-(85, 'FQ', 'UM', '-', 'Baker Island'),
-(86, 'FR', 'FR', '.fr', 'France'),
-(87, 'FS', 'TF', '.tf', 'French Southern and Antarctic Lands'),
-(88, 'GA', 'GM', '.gm', 'Gambia, The'),
-(89, 'GB', 'GA', '.ga', 'Gabon'),
-(90, 'GG', 'GE', '.ge', 'Georgia'),
-(91, 'GH', 'GH', '.gh', 'Ghana'),
-(92, 'GI', 'GI', '.gi', 'Gibraltar'),
-(93, 'GJ', 'GD', '.gd', 'Grenada'),
-(94, 'GK', '-', '.gg', 'Guernsey'),
-(95, 'GL', 'GL', '.gl', 'Greenland'),
-(96, 'GM', 'DE', '.de', 'Germany'),
-(97, 'GO', '-', '-', 'Glorioso Islands'),
-(98, 'GP', 'GP', '.gp', 'Guadeloupe'),
-(99, 'GQ', 'GU', '.gu', 'Guam'),
-(100, 'GR', 'GR', '.gr', 'Greece'),
-(101, 'GT', 'GT', '.gt', 'Guatemala'),
-(102, 'GV', 'GN', '.gn', 'Guinea'),
-(103, 'GY', 'GY', '.gy', 'Guyana'),
-(104, 'GZ', '-', '-', 'Gaza Strip'),
-(105, 'HA', 'HT', '.ht', 'Haiti'),
-(106, 'HK', 'HK', '.hk', 'Hong Kong'),
-(107, 'HM', 'HM', '.hm', 'Heard Island and McDonald Islands'),
-(108, 'HO', 'HN', '.hn', 'Honduras'),
-(109, 'HQ', 'UM', '-', 'Howland Island'),
-(110, 'HR', 'HR', '.hr', 'Croatia'),
-(111, 'HU', 'HU', '.hu', 'Hungary'),
-(112, 'IC', 'IS', '.is', 'Iceland'),
-(113, 'ID', 'ID', '.id', 'Indonesia'),
-(114, 'IM', 'IM', '.im', 'Isle of Man'),
-(115, 'IN', 'IN', '.in', 'India'),
-(116, 'IO', 'IO', '.io', 'British Indian Ocean Territory'),
-(117, 'IP', '-', '-', 'Clipperton Island'),
-(118, 'IR', 'IR', '.ir', 'Iran'),
-(119, 'IS', 'IL', '.il', 'Israel'),
-(120, 'IT', 'IT', '.it', 'Italy'),
-(121, 'IV', 'CI', '.ci', 'Cote d\'Ivoire'),
-(122, 'IZ', 'IQ', '.iq', 'Iraq'),
-(123, 'JA', 'JP', '.jp', 'Japan'),
-(124, 'JE', 'JE', '.je', 'Jersey'),
-(125, 'JM', 'JM', '.jm', 'Jamaica'),
-(126, 'JN', 'SJ', '-', 'Jan Mayen'),
-(127, 'JO', 'JO', '.jo', 'Jordan'),
-(128, 'JQ', 'UM', '-', 'Johnston Atoll'),
-(129, 'JU', '-', '-', 'Juan de Nova Island'),
-(130, 'KE', 'KE', '.ke', 'Kenya'),
-(131, 'KG', 'KG', '.kg', 'Kyrgyzstan'),
-(132, 'KN', 'KP', '.kp', 'Korea, North'),
-(133, 'KQ', 'UM', '-', 'Kingman Reef'),
-(134, 'KR', 'KI', '.ki', 'Kiribati'),
-(135, 'KS', 'KR', '.kr', 'Korea, South'),
-(136, 'KT', 'CX', '.cx', 'Christmas Island'),
-(137, 'KU', 'KW', '.kw', 'Kuwait'),
-(138, 'KV', 'KV', '-', 'Kosovo'),
-(139, 'KZ', 'KZ', '.kz', 'Kazakhstan'),
-(140, 'LA', 'LA', '.la', 'Laos'),
-(141, 'LE', 'LB', '.lb', 'Lebanon'),
-(142, 'LG', 'LV', '.lv', 'Latvia'),
-(143, 'LH', 'LT', '.lt', 'Lithuania'),
-(144, 'LI', 'LR', '.lr', 'Liberia'),
-(145, 'LO', 'SK', '.sk', 'Slovakia'),
-(146, 'LQ', 'UM', '-', 'Palmyra Atoll'),
-(147, 'LS', 'LI', '.li', 'Liechtenstein'),
-(148, 'LT', 'LS', '.ls', 'Lesotho'),
-(149, 'LU', 'LU', '.lu', 'Luxembourg'),
-(150, 'LY', 'LY', '.ly', 'Libyan Arab'),
-(151, 'MA', 'MG', '.mg', 'Madagascar'),
-(152, 'MB', 'MQ', '.mq', 'Martinique'),
-(153, 'MC', 'MO', '.mo', 'Macau'),
-(154, 'MD', 'MD', '.md', 'Moldova, Republic of'),
-(155, 'MF', 'YT', '.yt', 'Mayotte'),
-(156, 'MG', 'MN', '.mn', 'Mongolia'),
-(157, 'MH', 'MS', '.ms', 'Montserrat'),
-(158, 'MI', 'MW', '.mw', 'Malawi'),
-(159, 'MJ', 'ME', '.me', 'Montenegro'),
-(160, 'MK', 'MK', '.mk', 'The Former Yugoslav Republic of Macedonia'),
-(161, 'ML', 'ML', '.ml', 'Mali'),
-(162, 'MN', 'MC', '.mc', 'Monaco'),
-(163, 'MO', 'MA', '.ma', 'Morocco'),
-(164, 'MP', 'MU', '.mu', 'Mauritius'),
-(165, 'MQ', 'UM', '-', 'Midway Islands'),
-(166, 'MR', 'MR', '.mr', 'Mauritania'),
-(167, 'MT', 'MT', '.mt', 'Malta'),
-(168, 'MU', 'OM', '.om', 'Oman'),
-(169, 'MV', 'MV', '.mv', 'Maldives'),
-(170, 'MX', 'MX', '.mx', 'Mexico'),
-(171, 'MY', 'MY', '.my', 'Malaysia'),
-(172, 'MZ', 'MZ', '.mz', 'Mozambique'),
-(173, 'NC', 'NC', '.nc', 'New Caledonia'),
-(174, 'NE', 'NU', '.nu', 'Niue'),
-(175, 'NF', 'NF', '.nf', 'Norfolk Island'),
-(176, 'NG', 'NE', '.ne', 'Niger'),
-(177, 'NH', 'VU', '.vu', 'Vanuatu'),
-(178, 'NI', 'NG', '.ng', 'Nigeria'),
-(179, 'NL', 'NL', '.nl', 'Netherlands'),
-(180, 'NM', '', '', 'No Man\'s Land'),
-(181, 'NO', 'NO', '.no', 'Norway'),
-(182, 'NP', 'NP', '.np', 'Nepal'),
-(183, 'NR', 'NR', '.nr', 'Nauru'),
-(184, 'NS', 'SR', '.sr', 'Suriname'),
-(185, 'NT', 'AN', '.an', 'Netherlands Antilles'),
-(186, 'NU', 'NI', '.ni', 'Nicaragua'),
-(187, 'NZ', 'NZ', '.nz', 'New Zealand'),
-(188, 'PA', 'PY', '.py', 'Paraguay'),
-(189, 'PC', 'PN', '.pn', 'Pitcairn Islands'),
-(190, 'PE', 'PE', '.pe', 'Peru'),
-(191, 'PF', '-', '-', 'Paracel Islands'),
-(192, 'PG', '-', '-', 'Spratly Islands'),
-(193, 'PK', 'PK', '.pk', 'Pakistan'),
-(194, 'PL', 'PL', '.pl', 'Poland'),
-(195, 'PM', 'PA', '.pa', 'Panama'),
-(196, 'PO', 'PT', '.pt', 'Portugal'),
-(197, 'PP', 'PG', '.pg', 'Papua New Guinea'),
-(198, 'PS', 'PW', '.pw', 'Palau'),
-(199, 'PU', 'GW', '.gw', 'Guinea-Bissau'),
-(200, 'QA', 'QA', '.qa', 'Qatar'),
-(201, 'RE', 'RE', '.re', 'Reunion'),
-(202, 'RI', 'RS', '.rs', 'Serbia'),
-(203, 'RM', 'MH', '.mh', 'Marshall Islands'),
-(204, 'RN', 'MF', '-', 'Saint Martin'),
-(205, 'RO', 'RO', '.ro', 'Romania'),
-(206, 'RP', 'PH', '.ph', 'Philippines'),
-(207, 'RQ', 'PR', '.pr', 'Puerto Rico'),
-(208, 'RS', 'RU', '.ru', 'Russia'),
-(209, 'RW', 'RW', '.rw', 'Rwanda'),
-(210, 'SA', 'SA', '.sa', 'Saudi Arabia'),
-(211, 'SB', 'PM', '.pm', 'Saint Pierre and Miquelon'),
-(212, 'SC', 'KN', '.kn', 'Saint Kitts and Nevis'),
-(213, 'SE', 'SC', '.sc', 'Seychelles'),
-(214, 'SF', 'ZA', '.za', 'South Africa'),
-(215, 'SG', 'SN', '.sn', 'Senegal'),
-(216, 'SH', 'SH', '.sh', 'Saint Helena'),
-(217, 'SI', 'SI', '.si', 'Slovenia'),
-(218, 'SL', 'SL', '.sl', 'Sierra Leone'),
-(219, 'SM', 'SM', '.sm', 'San Marino'),
-(220, 'SN', 'SG', '.sg', 'Singapore'),
-(221, 'SO', 'SO', '.so', 'Somalia'),
-(222, 'SP', 'ES', '.es', 'Spain'),
-(223, 'ST', 'LC', '.lc', 'Saint Lucia'),
-(224, 'SU', 'SD', '.sd', 'Sudan'),
-(225, 'SV', 'SJ', '.sj', 'Svalbard'),
-(226, 'SW', 'SE', '.se', 'Sweden'),
-(227, 'SX', 'GS', '.gs', 'South Georgia and the Islands'),
-(228, 'SY', 'SY', '.sy', 'Syrian Arab Republic'),
-(229, 'SZ', 'CH', '.ch', 'Switzerland'),
-(230, 'TD', 'TT', '.tt', 'Trinidad and Tobago'),
-(231, 'TE', '-', '-', 'Tromelin Island'),
-(232, 'TH', 'TH', '.th', 'Thailand'),
-(233, 'TI', 'TJ', '.tj', 'Tajikistan'),
-(234, 'TK', 'TC', '.tc', 'Turks and Caicos Islands'),
-(235, 'TL', 'TK', '.tk', 'Tokelau'),
-(236, 'TN', 'TO', '.to', 'Tonga'),
-(237, 'TO', 'TG', '.tg', 'Togo'),
-(238, 'TP', 'ST', '.st', 'Sao Tome and Principe'),
-(239, 'TS', 'TN', '.tn', 'Tunisia'),
-(240, 'TT', 'TL', '.tl', 'East Timor'),
-(241, 'TU', 'TR', '.tr', 'Turkey'),
-(242, 'TV', 'TV', '.tv', 'Tuvalu'),
-(243, 'TW', 'TW', '.tw', 'Taiwan'),
-(244, 'TX', 'TM', '.tm', 'Turkmenistan'),
-(245, 'TZ', 'TZ', '.tz', 'Tanzania, United Republic of'),
-(246, 'UG', 'UG', '.ug', 'Uganda'),
-(247, 'UK', 'GB', '.uk', 'United Kingdom'),
-(248, 'UP', 'UA', '.ua', 'Ukraine'),
-(249, 'US', 'US', '.us', 'United States'),
-(250, 'UV', 'BF', '.bf', 'Burkina Faso'),
-(251, 'UY', 'UY', '.uy', 'Uruguay'),
-(252, 'UZ', 'UZ', '.uz', 'Uzbekistan'),
-(253, 'VC', 'VC', '.vc', 'Saint Vincent and the Grenadines'),
-(254, 'VE', 'VE', '.ve', 'Venezuela'),
-(255, 'VI', 'VG', '.vg', 'British Virgin Islands'),
-(256, 'VM', 'VN', '.vn', 'Vietnam'),
-(257, 'VQ', 'VI', '.vi', 'Virgin Islands (US)'),
-(258, 'VT', 'VA', '.va', 'Holy See (Vatican City)'),
-(259, 'WA', 'NA', '.na', 'Namibia'),
-(260, 'WE', '-', '-', 'West Bank'),
-(261, 'WF', 'WF', '.wf', 'Wallis and Futuna'),
-(262, 'WI', 'EH', '.eh', 'Western Sahara'),
-(263, 'WQ', 'UM', '-', 'Wake Island'),
-(264, 'WS', 'WS', '.ws', 'Samoa'),
-(265, 'WZ', 'SZ', '.sz', 'Swaziland'),
-(266, 'YI', 'CS', '.yu', 'Serbia and Montenegro'),
-(267, 'YM', 'YE', '.ye', 'Yemen'),
-(268, 'ZA', 'ZM', '.zm', 'Zambia'),
-(269, 'ZI', 'ZW', '.zw', 'Zimbabwe');
+(13, 'AS', 'AU', '.au', 'Australia');
 
 -- --------------------------------------------------------
 
@@ -450,6 +186,14 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+INSERT INTO `failed_jobs` (`id`, `connection`, `queue`, `payload`, `exception`, `failed_at`) VALUES
+(1, 'database', 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderCustomer\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:22:\\\"App\\\\Mail\\\\OrderCustomer\\\":20:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:32:\\\"http:\\/\\/www.printingamazon.com.au\\\";s:12:\\\"delivery_img\\\";s:69:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017090301\\\";s:14:\\\"transaction_id\\\";s:8:\\\"4ma57q56\\\";s:7:\\\"country\\\";s:2:\\\"IN\\\";s:5:\\\"state\\\";s:16:\\\"V0VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:16:\\\"ODU2OTc0ODU5OQ==\\\";s:6:\\\"street\\\";s:52:\\\"c2V1amh3ZyBhaXVnYWh3Z2J1ZyBhd2l1aGdhd2dhd2d3YWd3YQ==\\\";s:8:\\\"subtotal\\\";i:191;s:8:\\\"discount\\\";i:0;s:7:\\\"payable\\\";i:191;s:5:\\\"items\\\";s:408:\\\"[{\\\"id\\\":44,\\\"cart_token\\\":\\\"beed3358be2a87c49cbe5283889447dba7a620db\\\",\\\"user_id\\\":2,\\\"product_id\\\":17,\\\"paperstock\\\":1,\\\"width\\\":90,\\\"height\\\":90,\\\"qty\\\":2000,\\\"price\\\":\\\"191.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"artwork\\\":\\\"artworks\\\\\\/gUyNwNHQR1QFjdOUuratx12eXvAmI96qQsxANn9L.png\\\",\\\"instructions\\\":\\\"nothing special\\\",\\\"preset_mapper\\\":27,\\\"created_at\\\":\\\"2017-09-03 18:38:32\\\",\\\"updated_at\\\":\\\"2017-09-03 18:38:41\\\"}]\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 'ErrorException: file_put_contents(/var/www/pa-laravel/storage/framework/views/5f8e726fe36b52a43512e51e2ce9538d085764fa.php): failed to open stream: Permission denied in /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:111\nStack trace:\n#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'file_put_conten...\', \'/var/www/pa-lar...\', 111, Array)\n#1 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(111): file_put_contents(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\', 0)\n#2 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(122): Illuminate\\Filesystem\\Filesystem->put(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\')\n#3 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile(\'/var/www/pa-lar...\')\n#4 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(137): Illuminate\\View\\Engines\\CompilerEngine->get(\'/var/www/pa-lar...\', Array)\n#5 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(120): Illuminate\\View\\View->getContents()\n#6 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(85): Illuminate\\View\\View->renderContents()\n#7 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(303): Illuminate\\View\\View->render()\n#8 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(276): Illuminate\\Mail\\Mailer->renderView(\'emails.order-cu...\', Array)\n#9 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(200): Illuminate\\Mail\\Mailer->addContent(Object(Illuminate\\Mail\\Message), \'emails.order-cu...\', NULL, NULL, Array)\n#10 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailable.php(124): Illuminate\\Mail\\Mailer->send(\'emails.order-cu...\', Array, Object(Closure))\n#11 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/SendQueuedMailable.php(52): Illuminate\\Mail\\Mailable->send(Object(Illuminate\\Mail\\Mailer))\n#12 [internal function]: Illuminate\\Mail\\SendQueuedMailable->handle(Object(Illuminate\\Mail\\Mailer))\n#13 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#14 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#15 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#16 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#17 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(94): Illuminate\\Container\\Container->call(Array)\n#18 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(114): Illuminate\\Bus\\Dispatcher->Illuminate\\Bus\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#19 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#20 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(98): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))\n#21 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): Illuminate\\Bus\\Dispatcher->dispatchNow(Object(Illuminate\\Mail\\SendQueuedMailable), false)\n#22 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(69): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#23 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(291): Illuminate\\Queue\\Jobs\\Job->fire()\n#24 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(258): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#25 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(110): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#26 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'order,default\', Object(Illuminate\\Queue\\WorkerOptions))\n#27 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'order,default\')\n#28 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->fire()\n#29 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#30 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#31 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#32 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#33 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Illuminate\\Container\\Container->call(Array)\n#34 /var/www/pa-laravel/vendor/symfony/console/Command/Command.php(262): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#35 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(167): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#36 /var/www/pa-laravel/vendor/symfony/console/Application.php(826): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#37 /var/www/pa-laravel/vendor/symfony/console/Application.php(190): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#38 /var/www/pa-laravel/vendor/symfony/console/Application.php(121): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#39 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(123): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#40 /var/www/pa-laravel/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#41 {main}', '2017-09-03 18:47:03'),
+(2, 'database', 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderAdmin\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\OrderAdmin\\\":21:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:32:\\\"http:\\/\\/www.printingamazon.com.au\\\";s:12:\\\"delivery_img\\\";s:69:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:55:\\\"http:\\/\\/www.printingamazon.com.au\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017090301\\\";s:14:\\\"transaction_id\\\";s:8:\\\"4ma57q56\\\";s:7:\\\"country\\\";s:2:\\\"IN\\\";s:5:\\\"state\\\";s:16:\\\"V0VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:16:\\\"ODU2OTc0ODU5OQ==\\\";s:6:\\\"street\\\";s:52:\\\"c2V1amh3ZyBhaXVnYWh3Z2J1ZyBhd2l1aGdhd2dhd2d3YWd3YQ==\\\";s:8:\\\"subtotal\\\";i:191;s:8:\\\"discount\\\";i:0;s:7:\\\"payable\\\";i:191;s:5:\\\"items\\\";s:408:\\\"[{\\\"id\\\":44,\\\"cart_token\\\":\\\"beed3358be2a87c49cbe5283889447dba7a620db\\\",\\\"user_id\\\":2,\\\"product_id\\\":17,\\\"paperstock\\\":1,\\\"width\\\":90,\\\"height\\\":90,\\\"qty\\\":2000,\\\"price\\\":\\\"191.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"artwork\\\":\\\"artworks\\\\\\/gUyNwNHQR1QFjdOUuratx12eXvAmI96qQsxANn9L.png\\\",\\\"instructions\\\":\\\"nothing special\\\",\\\"preset_mapper\\\":27,\\\"created_at\\\":\\\"2017-09-03 18:38:32\\\",\\\"updated_at\\\":\\\"2017-09-03 18:38:41\\\"}]\\\";}}s:13:\\\"personal_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"name\\\";s:20:\\\"U291cmF2IFJha3NoaXQ=\\\";s:5:\\\"email\\\";s:24:\\\"c3J2Lm54ckBnbWFpbC5jb20=\\\";s:5:\\\"phone\\\";s:16:\\\"NTY5ODc0ODU5Ng==\\\";s:7:\\\"company\\\";s:0:\\\"\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:24:\\\"developer.srv1@gmail.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 'ErrorException: file_put_contents(/var/www/pa-laravel/storage/framework/views/e803e68130bd2952a0173be0ccaeaef021111a33.php): failed to open stream: Permission denied in /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:111\nStack trace:\n#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'file_put_conten...\', \'/var/www/pa-lar...\', 111, Array)\n#1 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(111): file_put_contents(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\', 0)\n#2 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(122): Illuminate\\Filesystem\\Filesystem->put(\'/var/www/pa-lar...\', \'<!DOCTYPE html>...\')\n#3 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile(\'/var/www/pa-lar...\')\n#4 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(137): Illuminate\\View\\Engines\\CompilerEngine->get(\'/var/www/pa-lar...\', Array)\n#5 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(120): Illuminate\\View\\View->getContents()\n#6 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/View/View.php(85): Illuminate\\View\\View->renderContents()\n#7 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(303): Illuminate\\View\\View->render()\n#8 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(276): Illuminate\\Mail\\Mailer->renderView(\'emails.order-ad...\', Array)\n#9 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(200): Illuminate\\Mail\\Mailer->addContent(Object(Illuminate\\Mail\\Message), \'emails.order-ad...\', NULL, NULL, Array)\n#10 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/Mailable.php(124): Illuminate\\Mail\\Mailer->send(\'emails.order-ad...\', Array, Object(Closure))\n#11 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Mail/SendQueuedMailable.php(52): Illuminate\\Mail\\Mailable->send(Object(Illuminate\\Mail\\Mailer))\n#12 [internal function]: Illuminate\\Mail\\SendQueuedMailable->handle(Object(Illuminate\\Mail\\Mailer))\n#13 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#14 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#15 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#16 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#17 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(94): Illuminate\\Container\\Container->call(Array)\n#18 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(114): Illuminate\\Bus\\Dispatcher->Illuminate\\Bus\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#19 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Mail\\SendQueuedMailable))\n#20 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(98): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))\n#21 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): Illuminate\\Bus\\Dispatcher->dispatchNow(Object(Illuminate\\Mail\\SendQueuedMailable), false)\n#22 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(69): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#23 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(291): Illuminate\\Queue\\Jobs\\Job->fire()\n#24 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(258): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#25 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(110): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#26 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'order,default\', Object(Illuminate\\Queue\\WorkerOptions))\n#27 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'order,default\')\n#28 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->fire()\n#29 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#30 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#31 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#32 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Container/Container.php(531): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#33 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Illuminate\\Container\\Container->call(Array)\n#34 /var/www/pa-laravel/vendor/symfony/console/Command/Command.php(262): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#35 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php(167): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#36 /var/www/pa-laravel/vendor/symfony/console/Application.php(826): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#37 /var/www/pa-laravel/vendor/symfony/console/Application.php(190): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#38 /var/www/pa-laravel/vendor/symfony/console/Application.php(121): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#39 /var/www/pa-laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(123): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#40 /var/www/pa-laravel/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#41 {main}', '2017-09-03 18:47:05');
 
 -- --------------------------------------------------------
 
@@ -506,9 +250,8 @@ CREATE TABLE `lamination_options` (
 --
 
 INSERT INTO `lamination_options` (`id`, `option`, `sort`) VALUES
-(3, 'Lamination 1', 1),
-(4, 'Lamination 2', 2),
-(5, 'lamination 3', 3);
+(6, 'Glossy', 1),
+(7, 'Waterproof', 2);
 
 -- --------------------------------------------------------
 
@@ -536,9 +279,6 @@ INSERT INTO `map_prod_form` (`id`, `form_field_id`, `product_id`) VALUES
 (44, 1, 17),
 (45, 2, 17),
 (46, 3, 17),
-(50, 1, 19),
-(51, 2, 19),
-(52, 3, 19),
 (53, 1, 20),
 (54, 2, 20),
 (55, 3, 20),
@@ -546,8 +286,11 @@ INSERT INTO `map_prod_form` (`id`, `form_field_id`, `product_id`) VALUES
 (57, 2, 21),
 (58, 3, 21),
 (59, 1, 22),
-(60, 2, 22),
-(61, 3, 22);
+(61, 3, 22),
+(62, 1, 25),
+(63, 2, 25),
+(64, 3, 25),
+(65, 2, 22);
 
 -- --------------------------------------------------------
 
@@ -568,11 +311,7 @@ CREATE TABLE `map_prod_form_options` (
 
 INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sort`) VALUES
 (13, 38, 1, 1),
-(14, 38, 5, 4),
-(17, 39, 3, 1),
-(19, 39, 5, 3),
-(20, 39, 6, 4),
-(21, 39, 7, 5),
+(14, 38, 5, 3),
 (22, 40, 1, 7),
 (23, 40, 2, 3),
 (24, 40, 3, 4),
@@ -590,30 +329,15 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (38, 46, 3, 4),
 (39, 46, 4, 6),
 (40, 46, 5, 5),
-(42, 41, 5, 1),
-(44, 41, 7, 2),
+(42, 41, 5, 2),
+(44, 41, 7, 6),
 (45, 41, 4, 3),
-(47, 41, 3, 5),
-(48, 42, 8, 0),
-(49, 42, 9, 0),
-(50, 42, 10, 0),
-(51, 42, 11, 0),
-(52, 43, 1, 7),
+(47, 41, 3, 4),
+(52, 43, 1, 8),
 (53, 43, 2, 3),
 (54, 43, 3, 4),
-(55, 43, 4, 6),
+(55, 43, 4, 7),
 (56, 43, 5, 5),
-(57, 50, 1, 1),
-(58, 50, 5, 2),
-(59, 51, 8, 0),
-(60, 51, 9, 0),
-(61, 51, 10, 0),
-(62, 51, 11, 0),
-(63, 52, 1, 7),
-(64, 52, 2, 3),
-(65, 52, 3, 4),
-(66, 52, 4, 6),
-(67, 52, 5, 5),
 (68, 53, 7, 1),
 (69, 53, 3, 2),
 (70, 54, 8, 1),
@@ -638,18 +362,12 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (90, 58, 4, 6),
 (91, 58, 5, 5),
 (92, 59, 1, 1),
-(93, 59, 5, 2),
-(94, 59, 7, 3),
-(95, 59, 4, 4),
+(95, 59, 4, 2),
 (96, 61, 1, 7),
 (97, 61, 2, 3),
 (98, 61, 3, 4),
 (99, 61, 4, 6),
 (100, 61, 5, 5),
-(101, 60, 8, 1),
-(102, 60, 9, 2),
-(103, 60, 10, 3),
-(104, 60, 11, 4),
 (107, 54, 9, 2),
 (108, 61, 7, 1),
 (109, 61, 8, 2),
@@ -659,12 +377,81 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (113, 55, 8, 2),
 (114, 43, 7, 1),
 (115, 43, 8, 2),
-(116, 52, 7, 1),
-(117, 52, 8, 2),
 (118, 46, 7, 1),
 (119, 46, 8, 2),
 (120, 40, 7, 1),
-(121, 40, 8, 2);
+(121, 40, 8, 2),
+(122, 43, 9, 9),
+(123, 43, 10, 10),
+(124, 43, 11, 11),
+(125, 43, 12, 12),
+(126, 43, 13, 13),
+(127, 43, 14, 14),
+(128, 43, 15, 15),
+(129, 43, 16, 16),
+(130, 43, 17, 17),
+(131, 43, 18, 18),
+(132, 43, 19, 19),
+(136, 40, 9, 8),
+(137, 40, 10, 9),
+(138, 40, 11, 10),
+(139, 40, 12, 11),
+(140, 40, 13, 12),
+(141, 40, 14, 13),
+(142, 40, 15, 14),
+(143, 40, 16, 15),
+(144, 40, 17, 16),
+(145, 40, 18, 17),
+(146, 40, 19, 18),
+(147, 38, 7, 5),
+(148, 38, 3, 4),
+(149, 38, 4, 2),
+(150, 41, 1, 0),
+(151, 41, 8, 1),
+(152, 41, 9, 7),
+(153, 62, 1, 1),
+(154, 62, 5, 3),
+(155, 62, 8, 2),
+(156, 62, 9, 7),
+(157, 62, 7, 6),
+(158, 62, 3, 5),
+(159, 62, 4, 4),
+(160, 63, 8, 2),
+(161, 63, 9, 4),
+(162, 63, 10, 5),
+(163, 63, 11, 7),
+(164, 63, 12, 1),
+(165, 63, 14, 6),
+(166, 64, 7, 1),
+(167, 64, 8, 2),
+(168, 64, 2, 3),
+(169, 64, 3, 4),
+(170, 64, 5, 5),
+(171, 64, 4, 6),
+(172, 64, 1, 7),
+(173, 64, 9, 8),
+(174, 64, 10, 9),
+(175, 64, 11, 10),
+(176, 64, 12, 11),
+(177, 64, 13, 12),
+(178, 64, 14, 13),
+(179, 64, 15, 14),
+(180, 64, 16, 15),
+(181, 64, 17, 16),
+(182, 64, 18, 17),
+(183, 64, 19, 18),
+(184, 63, 15, 3),
+(185, 42, 8, 2),
+(186, 42, 9, 4),
+(188, 42, 12, 1),
+(189, 42, 13, 5),
+(190, 42, 15, 3),
+(191, 43, 20, 6),
+(192, 41, 10, 5),
+(193, 65, 8, 1),
+(194, 65, 9, 2),
+(195, 65, 10, 3),
+(196, 65, 11, 4);
 
 -- --------------------------------------------------------
 
@@ -745,9 +532,9 @@ CREATE TABLE `notificationsetting` (
 --
 
 INSERT INTO `notificationsetting` (`id`, `type`, `mail_ids`) VALUES
-(1, 'order', 'developer.srv1@gmail.com, srv.nxr@gmail.com'),
-(2, 'contact', 'srv.nxr@gmail.com'),
-(3, 'review', 'developer.srv1@gmail.com, srv.nxr@gmail.com');
+(1, 'order', 'julian@blendev.com, angellous99@gmail.com'),
+(2, 'contact', 'julian@blendev.com, angellous99@gmail.com'),
+(3, 'review', 'julian@blendev.com, angellous99@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -774,16 +561,14 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discount`, `price`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'PA2017083001', 'pccq8g1h', 1, '0.00', '7906.00', 1, '2017-08-30 13:10:22', '2017-08-30 13:10:22'),
 (2, 'PA2017083002', 'r1zkz7mq', 2, '170.00', '5481.00', 1, '2017-08-30 15:27:36', '2017-08-30 15:27:36'),
-(3, 'PA2017083003', '8rpwsqqm', NULL, '0.00', '236.00', 1, '2017-08-30 15:29:48', '2017-08-30 15:29:48'),
 (4, 'PA2017083101', 'jw1jz7vc', NULL, '261.00', '8442.00', 1, '2017-08-31 10:56:12', '2017-08-31 10:56:12'),
-(5, 'PA2017083102', 'f111m0hs', 1, '453.00', '14655.00', 1, '2017-08-31 15:56:28', '2017-08-31 15:56:28'),
-(6, 'PA2017083103', 'qd38txnk', 1, '0.00', '8467.00', 6, '2017-08-31 16:17:17', '2017-09-02 22:33:17'),
-(7, 'PA2017083104', 'mfes3cbb', 1, '180.00', '5811.00', 1, '2017-08-31 16:51:50', '2017-08-31 16:51:50'),
+(7, 'PA2017083104', 'mfes3cbb', 1, '180.00', '5811.00', 4, '2017-08-31 16:51:50', '2017-09-04 11:45:11'),
 (8, 'PA2017083105', '7s9bwzjd', 1, '1097.00', '17181.00', 5, '2017-08-31 17:00:53', '2017-09-02 22:33:09'),
 (9, 'PA2017083106', '3rnzp51j', 1, '500.00', '7838.00', 1, '2017-08-31 17:04:19', '2017-08-31 17:04:19'),
 (10, 'PA2017083107', 'hmfk8s25', NULL, '93.00', '3001.00', 6, '2017-08-31 17:48:45', '2017-09-01 18:03:27'),
 (11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 5, '2017-08-31 18:00:05', '2017-09-01 18:03:39'),
-(13, 'PA2017090301', '40cq85b0', 2, '0.00', '29.00', 1, '2017-09-02 20:10:34', '2017-09-02 20:10:34');
+(19, 'PA2017090303', '3exy7af3', NULL, '0.00', '1016.00', 4, '2017-09-03 19:10:13', '2017-09-05 00:54:39'),
+(21, 'PA2017090601', '1v5yv6jw', NULL, '0.00', '26.00', 5, '2017-09-06 01:39:04', '2017-09-06 01:45:59');
 
 -- --------------------------------------------------------
 
@@ -811,18 +596,16 @@ CREATE TABLE `order_billing` (
 --
 
 INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_address`, `country_fips`, `state`, `city`, `zipcode`, `street`, `company`) VALUES
-(1, 1, 'Sourav', 'srv.nxr@gmail.com', '813463113', '::1', 'IN', 'WB', 'Kolkata', '712222', 'Baidyabati', 'my company'),
-(2, 2, 'Sourav Rakshit', 'srv.nxr@gmail.com', '7278863258', '::1', 'IN', 'Abc', 'iojhio', '7122222', 'anywhere in world', NULL),
-(3, 3, 'Sammy Gurho', 'abc@example.com', '96587456', '::1', 'US', 'TX', 'Houston', 'TX1234', 'Texas', 'Printing Comopany'),
-(4, 4, 'Brock Lesnar', 'brock@wwe.com', '54896547', '::1', 'IN', 'WB', 'KOL', '712222', 'Mn', NULL),
-(5, 5, 'Sourav', 'developer.srv1@gmail.com', '8013463113', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', '59 (25/C/D) Kaibarta Para Lane, Baidyabati, dist.- Hooghly', NULL),
-(6, 6, 'Sourav', 'developer.srv1@gmail.com', '8965874466', '::1', 'UK', 'West Bengal', 'Kolkata', '71254789', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non', NULL),
-(7, 7, 'Sourav', 'developer.srv1@gmail.com', '5587654841', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
-(8, 8, 'Sourav', 'developer.srv1@gmail.com', '58965478796', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
-(9, 9, 'Sourav', 'developer.srv1@gmail.com', '8785459632', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
-(10, 10, 'Sourav Rakshit', 'reach@devsourav.com', '8013463113', '::1', 'IN', 'West Bengal', 'Kolkata', '712222', '59 (25/C/D) Kaibarta Para Lane, Baidyabati, dist.- Hooghly', NULL),
-(11, 11, 'Sourav Rakshit', 'srv.nxr@gmail.com', '5698745896', '::1', 'IN', 'West Bengal', 'KOlkata', '712222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 'C Company'),
-(13, 13, 'Sourav Rakshit', 'srv.nxr@gmail.com', '8596547896', '::1', 'BA', 'West Bengal', 'Kolkata', '58964778', 'consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL);
+(1, 1, 'Sourav', 'srv.nxr@gmail.com', '813463113', '::1', 'AS', 'WB', 'Kolkata', '712222', 'Baidyabati', 'my company'),
+(2, 2, 'Sourav Rakshit', 'srv.nxr@gmail.com', '7278863258', '::1', 'AS', 'Abc', 'iojhio', '7122222', 'anywhere in world', NULL),
+(4, 4, 'Brock Lesnar', 'brock@wwe.com', '54896547', '::1', 'AS', 'WB', 'KOL', '712222', 'Mn', NULL),
+(7, 7, 'Sourav', 'developer.srv1@gmail.com', '5587654841', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
+(8, 8, 'Sourav', 'developer.srv1@gmail.com', '58965478796', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
+(9, 9, 'Sourav', 'developer.srv1@gmail.com', '8785459632', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
+(10, 10, 'Sourav Rakshit', 'reach@devsourav.com', '8013463113', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', '59 (25/C/D) Kaibarta Para Lane, Baidyabati, dist.- Hooghly', NULL),
+(11, 11, 'Sourav Rakshit', 'srv.nxr@gmail.com', '5698745896', '::1', 'AS', 'West Bengal', 'KOlkata', '712222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 'C Company'),
+(16, 19, 'Brock Lesnar', 'atanu_das1985@yahoo.co.in', '8965854785', '223.223.129.189', 'AS', 'West Bengal', 'Kolkata', '702203', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse', NULL),
+(18, 21, 'Julian Dabbs', 'julian@blendev.com', '7472091732', '46.252.74.82', 'AS', 'NSW', 'Rouse Hill', '2115', '10 Dalton Cl', NULL);
 
 -- --------------------------------------------------------
 
@@ -854,12 +637,8 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (1, 1, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
 (2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, NULL),
 (3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '3', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper'),
-(4, 3, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem'),
 (5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
 (6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, 'artworks/Q6f8VWei6BqfC5QobFbgbzSlc2zyqqQcKbVQUeEC.jpeg', NULL),
-(7, 5, 22, 'Glossy & Matt paperboard (Artboard)', '50', '50', '4000', '12250.00', 'Animal Town 007', '3', 'Sourav', NULL, NULL),
-(8, 5, 2, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL),
-(9, 6, 19, 'Glossy & Matt paperboard (Artboard)', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
 (10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, NULL),
 (11, 7, 4, 'Kraft Paperboard', '12', '12', '200', '111.00', NULL, NULL, NULL, NULL, NULL),
 (12, 8, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
@@ -872,7 +651,8 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL),
 (20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, NULL),
 (21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL),
-(24, 13, 2, 'Kraft Paperboard', '50', '50', '10', '29.00', NULL, NULL, NULL, NULL, NULL);
+(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, NULL, NULL),
+(30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -912,11 +692,14 @@ CREATE TABLE `paperstock_options` (
 --
 
 INSERT INTO `paperstock_options` (`id`, `option`) VALUES
-(1, 'Glossy & Matt paperboard (Artboard)'),
-(5, 'Kraft Paperboard'),
-(7, 'Silver Matt paperboard'),
-(3, 'Transparent Paper'),
-(4, 'Waterproof paperboard');
+(1, 'Glossy Sticker'),
+(5, 'Kraft Sticker'),
+(8, 'Matte Sticker'),
+(9, 'PVC Sticker'),
+(7, 'Silver Vinyl Sticker (Matte)'),
+(10, 'Transparent Sticker (Full Colour + White)'),
+(3, 'Transparent Sticker (Full Colour)'),
+(4, 'Waterproof Sticker');
 
 -- --------------------------------------------------------
 
@@ -954,14 +737,7 @@ CREATE TABLE `preset_general` (
 --
 
 INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_per_mmsq`, `profit_percent`, `min_size`, `max_size`, `is_base`, `base_price`) VALUES
-(5, 13, 0, 47, NULL, NULL, 3, 45, 1, 69.00),
-(6, 13, 48, 90, 0.25, 0.50, 3, 45, 0, NULL),
-(7, 13, 91, 135, 0.24, 0.49, 3, 45, 0, NULL),
-(8, 13, 136, 450, 0.23, 0.48, 3, 45, 0, NULL),
-(9, 14, 0, 47, NULL, NULL, 3, 45, 1, 68.00),
-(10, 14, 48, 90, 0.25, 0.50, 4, 45, 0, NULL),
-(11, 14, 91, 135, 0.24, 0.49, 4, 45, 0, NULL),
-(12, 14, 136, 450, 0.20, 0.40, 40, 450, 0, NULL),
+(5, 13, 0, 4000, NULL, NULL, 10, 300, 1, 99.00),
 (13, 27, 0, 470, 0.25, 0.50, 30, 250, 1, 63.00),
 (14, 27, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (15, 27, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
@@ -975,31 +751,19 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (30, 31, 321, 500, 0.24, 0.49, 30, 250, 0, NULL),
 (31, 31, 501, 800, 0.24, 0.49, 30, 250, 0, NULL),
 (32, 31, 801, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(33, 42, 0, 410, 0.25, 0.50, 30, 250, 1, 93.00),
-(34, 42, 411, 600, 0.24, 0.49, 30, 250, 0, NULL),
-(35, 42, 601, 800, 0.24, 0.49, 30, 250, 0, NULL),
-(36, 42, 801, 1200, 0.24, 0.49, 30, 250, 0, NULL),
-(37, 42, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(44, 44, 0, 320, 0.25, 0.50, 30, 250, 1, 99.00),
-(45, 44, 321, 500, 0.24, 0.49, 30, 250, 0, NULL),
-(46, 44, 501, 800, 0.24, 0.49, 30, 250, 0, NULL),
-(47, 44, 801, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(48, 47, 0, 370, 0.25, 0.50, 30, 250, 1, 95.00),
-(49, 47, 371, 700, 0.24, 0.49, 30, 250, 0, NULL),
-(50, 47, 701, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(51, 47, 901, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(52, 45, 0, 370, 0.25, 0.50, 30, 250, 1, 91.00),
-(53, 45, 371, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(54, 45, 901, 1200, 0.24, 0.49, 30, 250, 0, NULL),
-(55, 45, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(56, 57, 0, 470, 0.25, 0.50, 30, 250, 1, 63.00),
-(57, 57, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(58, 57, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
-(59, 57, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(60, 58, 0, 470, 0.24, 0.49, 30, 250, 0, NULL),
-(62, 58, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(63, 58, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
-(64, 58, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
+(33, 42, 0, 5400, 0.00, 0.00, 40, 300, 1, 84.00),
+(34, 42, 5401, 7000, 0.29, 0.55, 40, 300, 0, NULL),
+(35, 42, 7001, 9000, 0.29, 0.54, 40, 300, 0, NULL),
+(36, 42, 9001, 12000, 0.28, 0.55, 40, 300, 0, NULL),
+(37, 42, 12001, 15000, 0.28, 0.54, 40, 300, 0, NULL),
+(44, 44, 0, 5400, 0.00, 0.00, 40, 300, 1, 99.99),
+(45, 44, 5401, 8000, 0.33, 0.55, 40, 300, 0, NULL),
+(46, 44, 8001, 10000, 0.33, 0.54, 40, 300, 0, NULL),
+(47, 44, 10001, 12000, 0.32, 0.55, 40, 300, 0, NULL),
+(48, 47, 0, 5400, 0.00, 0.00, 40, 300, 1, 99.00),
+(49, 47, 5401, 6000, 0.33, 0.55, 40, 300, 0, NULL),
+(50, 47, 6001, 8000, 0.33, 0.54, 40, 300, 0, NULL),
+(51, 47, 8001, 10000, 0.32, 0.55, 40, 300, 0, NULL),
 (65, 69, 0, 470, 0.25, 0.50, 30, 250, 1, 69.00),
 (66, 69, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (67, 69, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
@@ -1026,22 +790,78 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (88, 82, 251, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (89, 82, 901, 1200, 0.24, 0.49, 30, 250, 0, NULL),
 (90, 82, 1201, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(91, 92, 0, 470, 0.25, 0.50, 30, 250, 1, 99.00),
+(91, 92, 0, 470, NULL, NULL, 30, 250, 1, 99.00),
 (92, 92, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (93, 92, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
 (94, 92, 1351, 62500, 0.25, 0.49, 30, 250, 0, NULL),
-(96, 93, 0, 470, 0.25, 0.50, 30, 250, 1, 69.00),
-(97, 93, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(98, 93, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
-(99, 93, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
-(100, 94, 0, 470, 0.25, 0.50, 30, 250, 1, 63.00),
-(101, 94, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
-(102, 94, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
-(103, 94, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
 (104, 95, 0, 470, 0.25, 0.50, 30, 250, 1, 69.00),
 (105, 95, 471, 900, 0.24, 0.49, 30, 250, 0, NULL),
 (106, 95, 901, 1350, 0.24, 0.49, 30, 250, 0, NULL),
-(107, 95, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL);
+(107, 95, 1351, 62500, 0.24, 0.49, 30, 250, 0, NULL),
+(108, 42, 15001, 18000, 0.27, 0.55, 40, 300, 0, NULL),
+(109, 42, 18001, 20000, 0.27, 0.54, 40, 300, 0, NULL),
+(110, 42, 20001, 23000, 0.26, 0.55, 40, 300, 0, NULL),
+(111, 42, 23001, 26000, 0.26, 0.54, 40, 300, 0, NULL),
+(112, 42, 26001, 29000, 0.25, 0.55, 40, 300, 0, NULL),
+(113, 42, 29001, 90000, 0.25, 0.54, 40, 300, 0, NULL),
+(116, 47, 10001, 12000, 0.32, 0.54, 40, 300, 0, NULL),
+(117, 47, 12001, 15000, 0.31, 0.55, 40, 300, 0, NULL),
+(118, 47, 15001, 18000, 0.31, 0.54, 40, 300, 0, NULL),
+(119, 47, 18001, 20000, 0.30, 0.55, 40, 300, 0, NULL),
+(121, 47, 20001, 23000, 0.30, 0.54, 40, 300, 0, NULL),
+(122, 47, 23001, 26000, 0.29, 0.55, 40, 300, 0, NULL),
+(124, 47, 26001, 90000, 0.29, 0.54, 40, 300, 0, NULL),
+(125, 13, 4001, 6000, 0.41, 0.55, 10, 300, 0, NULL),
+(126, 13, 6001, 8000, 0.40, 0.55, 10, 300, 0, NULL),
+(127, 13, 8001, 10000, 0.39, 0.55, 10, 300, 0, NULL),
+(128, 13, 10001, 12000, 0.38, 0.54, 10, 300, 0, NULL),
+(129, 13, 12001, 15000, 0.37, 0.53, 10, 300, 0, NULL),
+(130, 13, 15001, 18000, 0.36, 0.52, 10, 300, 0, NULL),
+(131, 13, 18001, 20000, 0.35, 0.51, 10, 300, 0, NULL),
+(132, 13, 20001, 23000, 0.34, 0.50, 10, 300, 0, NULL),
+(133, 13, 23001, 25000, 0.33, 0.49, 10, 300, 0, NULL),
+(134, 13, 25000, 90000, 0.32, 0.48, 10, 300, 0, NULL),
+(135, 150, 0, 5400, 0.00, 0.00, 40, 300, 1, 65.00),
+(136, 150, 5401, 6000, 0.25, 0.47, 40, 300, 0, NULL),
+(137, 150, 6001, 8000, 0.24, 0.48, 40, 300, 0, NULL),
+(138, 150, 8001, 10000, 0.24, 0.47, 40, 300, 0, NULL),
+(139, 150, 10001, 12000, 0.23, 0.48, 40, 300, 0, NULL),
+(140, 150, 12001, 15000, 0.23, 0.47, 40, 300, 0, NULL),
+(141, 150, 15001, 18000, 0.22, 0.48, 40, 300, 0, NULL),
+(142, 150, 18001, 20000, 0.22, 0.47, 40, 300, 0, NULL),
+(143, 150, 20001, 23000, 0.21, 0.48, 40, 300, 0, NULL),
+(144, 150, 23001, 26000, 0.21, 0.47, 40, 300, 0, NULL),
+(145, 150, 26001, 90000, 0.20, 0.48, 40, 300, 0, NULL),
+(146, 153, 0, 5400, 0.00, 0.00, 40, 300, 1, 65.00),
+(148, 153, 8100, 8101, 0.00, 0.00, 40, 300, 1, 81.00),
+(150, 153, 10000, 10001, 0.00, 0.00, 40, 300, 1, 99.99),
+(151, 44, 12001, 15000, 0.32, 0.54, 40, 300, 0, NULL),
+(152, 44, 15001, 18000, 0.31, 0.55, 40, 300, 0, NULL),
+(153, 44, 18001, 20000, 0.31, 0.54, 40, 300, 0, NULL),
+(154, 44, 20001, 23000, 0.30, 0.55, 40, 300, 0, NULL),
+(155, 44, 23001, 26000, 0.30, 0.54, 40, 300, 0, NULL),
+(156, 44, 26001, 90000, 0.29, 0.55, 40, 300, 0, NULL),
+(157, 151, 0, 5400, 0.00, 0.00, 40, 300, 1, 65.00),
+(158, 151, 5401, 6000, 0.25, 0.47, 40, 300, 0, NULL),
+(159, 151, 6001, 8000, 0.24, 0.48, 40, 300, 0, NULL),
+(160, 151, 8001, 10000, 0.24, 0.47, 40, 300, 0, NULL),
+(161, 151, 10001, 12000, 0.23, 0.48, 40, 300, 0, NULL),
+(167, 151, 15001, 18000, 0.22, 0.48, 40, 300, 0, NULL),
+(169, 151, 18001, 20000, 0.22, 0.47, 40, 300, 0, NULL),
+(171, 151, 20001, 23000, 0.21, 0.48, 40, 300, 0, NULL),
+(172, 151, 23001, 26000, 0.21, 0.47, 40, 300, 0, NULL),
+(173, 151, 26001, 90000, 0.20, 0.48, 40, 300, 0, NULL),
+(177, 45, 0, 5400, 0.00, 0.00, 40, 300, 1, 87.00),
+(178, 45, 5401, 6000, 0.29, 0.55, 40, 300, 0, NULL),
+(179, 45, 6001, 8000, 0.29, 0.54, 40, 300, 0, NULL),
+(180, 45, 8001, 10000, 0.28, 0.55, 40, 300, 0, NULL),
+(181, 45, 10001, 12000, 0.28, 0.54, 40, 300, 0, NULL),
+(182, 45, 12001, 15000, 0.27, 0.55, 40, 300, 0, NULL),
+(184, 45, 15001, 18000, 0.27, 0.54, 40, 300, 0, NULL),
+(186, 45, 18001, 20000, 0.26, 0.55, 40, 300, 0, NULL),
+(187, 45, 20001, 23000, 0.26, 0.54, 40, 300, 0, NULL),
+(188, 45, 23001, 26000, 0.25, 0.55, 40, 300, 0, NULL),
+(189, 45, 26001, 90000, 0.25, 0.54, 40, 300, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1061,24 +881,58 @@ CREATE TABLE `preset_qty_rule_one` (
 --
 
 INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `disc_rate`) VALUES
-(4, 13, 100, 57.00),
-(5, 13, 200, 70.00),
-(6, 13, 300, 83.00),
-(7, 13, 400, 89.00),
+(4, 13, 100, 83.00),
+(5, 13, 200, 86.00),
+(6, 13, 300, 89.00),
+(7, 13, 400, 92.00),
 (8, 13, 500, 95.00),
-(9, 14, 100, 57.00),
-(10, 14, 200, 70.00),
-(11, 14, 300, 83.00),
-(12, 14, 400, 89.00),
-(13, 14, 500, 95.00),
 (15, 92, 10, 6.00),
 (16, 92, 50, 20.00),
 (17, 92, 100, 57.00),
-(18, 42, 100, 57.00),
-(19, 42, 200, 70.00),
-(20, 42, 300, 83.00),
-(21, 42, 400, 89.00),
-(22, 42, 500, 95.00);
+(32, 13, 10, 75.00),
+(33, 13, 50, 80.00),
+(35, 150, 10, 40.00),
+(36, 150, 50, 45.00),
+(37, 150, 100, 50.00),
+(38, 150, 200, 60.00),
+(39, 150, 300, 68.00),
+(40, 150, 400, 73.00),
+(41, 150, 500, 80.00),
+(42, 153, 10, 40.00),
+(43, 153, 50, 45.00),
+(44, 153, 100, 50.00),
+(45, 153, 200, 62.00),
+(46, 153, 300, 69.00),
+(47, 153, 400, 75.00),
+(48, 153, 500, 80.00),
+(49, 44, 10, 45.00),
+(50, 44, 50, 50.00),
+(51, 44, 100, 53.00),
+(52, 44, 200, 58.00),
+(53, 44, 300, 63.00),
+(54, 44, 400, 68.00),
+(55, 44, 500, 73.00),
+(56, 42, 10, 45.00),
+(57, 42, 50, 50.00),
+(58, 42, 100, 53.00),
+(59, 42, 200, 58.00),
+(60, 42, 300, 63.00),
+(63, 42, 400, 68.00),
+(64, 42, 500, 73.00),
+(65, 47, 10, 45.00),
+(66, 47, 50, 50.00),
+(67, 47, 100, 53.00),
+(68, 47, 200, 58.00),
+(69, 47, 300, 63.00),
+(70, 47, 400, 68.00),
+(71, 47, 500, 73.00),
+(72, 45, 10, 45.00),
+(73, 45, 50, 50.00),
+(74, 45, 100, 53.00),
+(75, 45, 200, 58.00),
+(76, 45, 300, 63.00),
+(77, 45, 400, 68.00),
+(78, 45, 500, 73.00);
 
 -- --------------------------------------------------------
 
@@ -1100,12 +954,24 @@ CREATE TABLE `preset_qty_rule_two` (
 --
 
 INSERT INTO `preset_qty_rule_two` (`id`, `map_prod_form_option`, `every_extra_qty`, `from`, `to`, `disc_rate`) VALUES
-(5, 13, 2000, 1000, 4000, 8.00),
-(6, 13, 1000, 5000, 20000, 1.00),
-(7, 13, 1000, 20000, NULL, 0.20),
-(8, 14, 2000, 1000, 4000, 8.00),
-(9, 14, 1000, 5000, 20000, 1.00),
-(10, 14, 1000, 20000, 50000, 0.20);
+(11, 42, 1000, 1000, 4000, 9.00),
+(12, 42, 1000, 5000, 20000, 1.00),
+(13, 47, 1000, 1000, 4000, 9.00),
+(14, 47, 1000, 5000, 20000, 1.00),
+(16, 13, 1000, 1000, 4000, 8.00),
+(17, 13, 1000, 5000, 20000, 1.00),
+(19, 150, 1000, 1000, 4000, 9.00),
+(20, 150, 1000, 5000, 20000, 1.00),
+(21, 153, 1000, 1000, 3000, 18.00),
+(22, 153, 1000, 4000, 8000, 13.00),
+(23, 153, 1000, 9000, 14000, 10.00),
+(24, 153, 1000, 14000, 20000, 4.00),
+(25, 44, 1000, 1000, 4000, 8.00),
+(26, 44, 1000, 5000, 20000, 1.00),
+(28, 151, 1000, 1000, 4000, 9.00),
+(30, 151, 1000, 5000, 20000, 1.00),
+(31, 45, 1000, 1000, 4000, 9.00),
+(32, 45, 1000, 5000, 20000, 2.00);
 
 -- --------------------------------------------------------
 
@@ -1134,15 +1000,15 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `product_name`, `product_slug`, `logo`, `description`, `sample_image`, `sort`, `created_at`, `updated_at`) VALUES
-(2, 'Square Stickers - Printing Amazon', 'some meta', 'Square Sticker_3.jpg', 1, 'Square Stickers', 'square-stickers', 'cs-3.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', '1242-gloss_stickers.jpg*Square Sticker_3.jpg*Square Sticker_4.jpg', 2, '2017-05-30 14:35:51', '2017-08-19 16:12:51'),
-(4, 'Free Shaping Business Card', NULL, NULL, 2, 'Free Shaping Cards', 'free-shaping-cards', 'f1.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Lettering Decal_1.jpg', 2, '2017-06-19 15:22:41', '2017-08-19 16:22:27'),
-(17, 'Rectangle Stickers - Printing Amazon', NULL, NULL, 1, 'Rectangle Stickers', 'rectangle-stickers', 'cs-4.png', 'Custom rectangle stickers make great business card stickers, product labels, envelope seals and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 3, '2017-08-15 14:00:51', '2017-08-15 14:19:28'),
-(19, 'Rectangle Postcards', NULL, NULL, 4, 'Rectangle Postcards', 'rectangle-postcards', 'f2.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Postcard_1.jpg', 1, '2017-08-15 16:23:21', '2017-08-15 16:23:21'),
-(20, 'Rounded Corner', NULL, NULL, 3, 'Rounded Corner', 'rounded-corner', 'cs-6.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 1, '2017-08-15 16:42:47', '2017-08-19 16:20:42'),
-(21, 'Circle Stickers', NULL, NULL, 1, 'Circle Stickers', 'circle-stickers', 'cs-2.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 4, '2017-08-15 16:57:52', '2017-08-19 16:13:40'),
-(22, 'Name stickers - Printing Amazon', NULL, NULL, 1, 'Name stickers', 'name-stickers', 'namesticker_icon.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of.', NULL, 5, '2017-08-16 13:48:57', '2017-08-26 17:17:23'),
-(23, 'Labels - Printing Amazon', NULL, NULL, 5, 'Labels', 'labels', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo', 'PVC-paper-custom-label-sticker-logo-printing-self-adhesive-shipping-labels-custom-sticker-label-stickers.jpg', 1, '2017-08-19 13:08:47', '2017-08-19 15:57:18'),
-(24, 'Graphic Designs - Printing Amazon', NULL, NULL, 5, 'Graphic Designs', 'graphic-designs', 'cs-4.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo', 'gshock-watch-sports-watch-stopwatch-158741.jpeg*hacker-internet-technology-computers-159195.jpeg', 2, '2017-08-19 13:24:07', '2017-08-19 13:24:07');
+(2, 'Square Stickers - Printing Amazon', 'some meta', 'Square Sticker_3.jpg', 1, 'Square & Rectangle Stickers', 'square-rectangle-stickers', 'Square.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', '1.jpg*2.jpg*3.jpg*4.jpg', 2, '2017-05-30 14:35:51', '2017-09-05 14:01:50'),
+(4, 'Die-Cutting Stickers', NULL, NULL, 1, 'Die Cutting Stickers', 'die-cutting-stickers', 'Diecut.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Die-cutting_9.jpg', 2, '2017-06-19 15:22:41', '2017-09-04 22:50:52'),
+(17, 'Rectangle Stickers - Printing Amazon', NULL, NULL, 1, 'Oval Stickers', 'oval-stickers', 'Oval.png', 'Custom Oval Stickers are a great way to represent your state, team or organisation. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 3, '2017-08-15 14:00:51', '2017-09-06 11:57:28'),
+(20, 'Rounded Corner', NULL, NULL, 1, 'Rounded Corner', 'rounded-corner', 'Round-Corner.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 1, '2017-08-15 16:42:47', '2017-09-06 11:55:37'),
+(21, 'Circle Stickers', NULL, NULL, 1, 'Circle Stickers', 'circle-stickers', 'Circle.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 4, '2017-08-15 16:57:52', '2017-09-06 11:55:10'),
+(22, 'Name stickers - Printing Amazon', NULL, NULL, 1, 'Name stickers', 'name-stickers', 'namesticker_icon.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of.', NULL, 5, '2017-08-16 13:48:57', '2017-09-13 10:25:19'),
+(23, 'Labels - Printing Amazon', NULL, NULL, 5, 'Labels', 'labels', 'cs-4.png', 'Printing Amazon provides custom Label printing services by using flexographic and digital printing techniques. Both of these printing methods produce high-quality labels, and each method offers different capabilities that allow us to create a larger variety of label styles. Simply leave your brief requirements and contact details, and our service consultant will contact you within 24 hours. We provide quality and durable labels. Ordering from us means your stickers will withstand exposure and they would always portray your brand whenever.', 'PVC-paper-custom-label-sticker-logo-printing-self-adhesive-shipping-labels-custom-sticker-label-stickers.jpg', 1, '2017-08-19 13:08:47', '2017-09-06 11:53:58'),
+(24, 'Graphic Designs - Printing Amazon', NULL, NULL, 5, 'Graphic Designs', 'graphic-designs', 'cs-4.png', 'Printing Amazon provides custom Graphic Design services for all business. Our professional graphic design team with more than 20 years of experience. We are well known because we provide quality graphic design for every demand by our clients and we get satisfactory feedbacks every time from our clients. Simply send us your requirements and contact details, and our service consultant will contact you within 24 hours to help you make your idea a reality.', 'gshock-watch-sports-watch-stopwatch-158741.jpeg*hacker-internet-technology-computers-159195.jpeg', 2, '2017-08-19 13:24:07', '2017-09-06 11:52:32'),
+(25, NULL, NULL, NULL, 6, 'Square & Rectangle (Preset Size)', 'square-rectangle-preset-size', 'Square.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', 'Square Sticker_2.jpg', 1, '2017-09-05 14:03:30', '2017-09-05 14:06:34');
 
 -- --------------------------------------------------------
 
@@ -1166,7 +1032,19 @@ INSERT INTO `qty_options` (`id`, `option`) VALUES
 (4, 500),
 (5, 300),
 (7, 10),
-(8, 50);
+(8, 50),
+(9, 2000),
+(10, 3000),
+(11, 4000),
+(12, 5000),
+(13, 6000),
+(14, 7000),
+(15, 8000),
+(16, 9000),
+(17, 10000),
+(18, 15000),
+(19, 20000),
+(20, 400);
 
 -- --------------------------------------------------------
 
@@ -1201,8 +1079,7 @@ INSERT INTO `reviews` (`id`, `product_id`, `user_id`, `title`, `description`, `r
 (75, 22, 2, 'Sed ut perspiciatis unde omnis iste natus error sit voluptat', 'quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione', '4.0', 1, '2017-08-17 20:07:07', '2017-08-17 20:07:42'),
 (76, 20, 2, 'nostrud exercitation ullamco laboris nisi aliquip', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non loqaugfa aytggu aghaewyese y4qaqalug', '5.0', 1, '2017-08-19 10:50:20', '2017-08-19 10:53:59'),
 (77, 23, 1, 'sunt in culpa qui officia deserunt mollit anim id est', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip', '5.0', 1, '2017-08-19 13:47:49', '2017-08-19 13:49:23'),
-(78, 24, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam edit', '3.5', 1, '2017-08-19 13:49:54', '2017-08-19 14:02:05'),
-(80, 19, 1, 'proident, sunt in culpa qui officia deserunt mollit anim', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non', '4.0', 0, '2017-08-31 16:15:08', '2017-08-31 16:15:08');
+(78, 24, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam edit', '5.0', 1, '2017-08-19 13:49:54', '2017-09-04 09:28:24');
 
 -- --------------------------------------------------------
 
@@ -1222,16 +1099,14 @@ CREATE TABLE `size_options` (
 --
 
 INSERT INTO `size_options` (`id`, `display_value`, `width`, `height`) VALUES
-(1, 'small (11cm x 20cm)', 11, 20),
-(2, 'Large A1 Paper (17 x 10)', 17, 10),
-(3, '5 x 5 mm', 5, 5),
-(5, '9 x 9 mm', 9, 9),
-(6, '12 x 12 mm', 12, 12),
-(7, '15 x 15 mm', 15, 15),
 (8, '50 x 50 mm', 50, 50),
 (9, '70 x 70 mm', 70, 70),
 (10, '90 x 90 mm', 90, 90),
-(11, '120 x 120 mm', 120, 120);
+(11, '120 x 120 mm', 120, 120),
+(12, '40 x 40 mm', 40, 40),
+(13, '90 x 60 mm', 90, 60),
+(14, '100 x 100 mm', 100, 100),
+(15, '60 x 60mm', 60, 60);
 
 -- --------------------------------------------------------
 
@@ -1277,8 +1152,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'c3PMMPMwdpB2GsistxSbMV9WeZSgTPBrGbWeJWVIhcfswHceMqAeKUcAYi27', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', '6o1VOiAPaIOifeUP9b8GM0ZET3GyXkPcKRbtvUTqmKCkWRozHJyCalon05gf', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
-(3, 'angellous99', 'angellous99@gmail.com', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wqupgczDAwlp3sCuzfFMet8fC6EBIHvHteCGXtnyTFeh5T2ioufdAs9O8s7i', '2017-08-22 11:25:02', '2017-08-22 11:25:13');
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '$2y$10$vTSYi53gm8fBEqEvZbD0l..Gm3Nioiv8A693txll7/3eR7qVy4hWq', 'vRai1sABq9lLVyXScKUTWB2plJvocxFjz4DQ0v9mWwWisOQR17zNrgbqpc7P', '2017-05-18 16:08:04', '2017-07-22 18:16:07'),
+(3, 'angellous99', 'angellous99@gmail.com', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'nlxlHBj2MMuWQBBPV4hYX7dy453lvbadF3TWkGht4yeaeedLeOtCAwLT2TXD', '2017-08-22 11:25:02', '2017-08-22 11:25:13'),
+(4, 'Atanu Das', 'technomind1985@gmail.com', NULL, '$2y$10$/6z6LNSCPYg.f6MfDlY6fORMAJy60FcRgNlor33qsZU7IAe2m93Wi', 'E8YULdUvh3X5dzZ8btsFMmSdCYqQF5vpETvFQhv40wuUXjNhZEDvwKLhnVI3', '2017-09-05 00:06:04', '2017-09-05 00:06:17');
 
 --
 -- Indexes for dumped tables
@@ -1483,12 +1359,12 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -1503,7 +1379,7 @@ ALTER TABLE `email_authentication`
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `form_field_types`
 --
@@ -1513,22 +1389,22 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `lamination_options`
 --
 ALTER TABLE `lamination_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -1543,17 +1419,17 @@ ALTER TABLE `notificationsetting`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `order_status`
 --
@@ -1563,32 +1439,32 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `paperstock_options`
 --
 ALTER TABLE `paperstock_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --
 ALTER TABLE `preset_qty_rule_two`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `qty_options`
 --
 ALTER TABLE `qty_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `reviews`
 --
@@ -1598,7 +1474,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `size_options`
 --
 ALTER TABLE `size_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `sticker_types`
 --
@@ -1608,7 +1484,7 @@ ALTER TABLE `sticker_types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
