@@ -167,6 +167,12 @@
                                     @else
                                     <span class="label label-danger">Not Provided</span>
                                     @endif
+
+                                    <br>
+                                    @if($item->instructions)
+                                        <strong>Instructions:</strong>
+                                        <p>&#8220;{{ $item->instructions }}&#8221;</p>
+                                    @endif
                                 </td>
                                 <td class="text-right">$ {{ $item->price }}</td>
                             </tr>
