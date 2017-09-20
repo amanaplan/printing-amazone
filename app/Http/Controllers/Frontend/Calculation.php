@@ -135,8 +135,8 @@ class Calculation extends Controller
                 abort(503, 'size options not selected by admin');
             }
 
-            $orderedSizeOptns = $map_qty_option->orderBy('sort', 'asc')->get();
-            $qtyValues = OptQty::find($orderedSizeOptns)->orderBy('option', 'asc')->get();
+            $orderedSizeOptns = $map_qty_option->orderBy('sort', 'asc')->select('option_id')->get();
+            $qtyValues = OptQty::whereIn('id', $orderedSizeOptns)->orderBy('option', 'asc')->get();
             $setOfPrices = [];
             foreach($qtyValues as $qtyOpt)
             {
