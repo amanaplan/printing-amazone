@@ -201,6 +201,9 @@ Route::prefix('admin')->group(function() {
 
 	Route::get('/customer/manage', 'Backend\AdminController@ManageCustomers')->name('manage.customers');
 
+	//the CMS pages
+	Route::get('/cms/add-page', 'Backend\AdminController@CMSAddPage');
+
 
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin
@@ -215,6 +218,7 @@ Route::prefix('admin')->group(function() {
 
 	//access elfinder file manager
 	Route::get('/manage-media', 'Backend\AdminController@MediaManager')->name('elfinder');
+	Route::get('/ckeditor-media', 'Backend\AdminController@CkeditorMediaManager')->name('elfinder-ckeditor');
 
 });
 

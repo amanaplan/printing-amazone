@@ -65,6 +65,14 @@
             </ul>
         </li>
 
+        <li {!! ($page == 'page_add' || $page == 'page_manage')? 'class="active"' : '' !!}>
+            <a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span class="nav-label"> CMS Pages </span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                <li><a {!! ($page == 'page_add')? 'class="current-menu"' : '' !!} href="{{ url('/admin/cms/add-page') }}">Add Page</a></li>
+                <li><a {!! ($page == 'page_manage')? 'class="current-menu"' : '' !!} href="{{ url('/admin/cms/list-pages') }}">Manage Pages </a></li>
+            </ul>
+        </li>
+
         <li>
             <a {!! ($page == 'notification')? 'class="current-menu"' : '' !!} href="{{ url('/admin/settings/notification') }}"><i class="fa fa-cog"></i> <span class="nav-label">Notification Settings </span></a>
         </li>

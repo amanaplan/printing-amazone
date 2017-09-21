@@ -68,6 +68,14 @@ class AdminController extends Controller
     }
 
     /**
+    *manage elfinder for ckeditor
+    */
+    public function CkeditorMediaManager()
+    {
+        return view('backend.elfinder-ckeditor', ['page' => '']);
+    }
+
+    /**
     *manage added general admins
     */
     public function ListUsers()
@@ -395,6 +403,18 @@ class AdminController extends Controller
         ];
 
         return view('backend.customers', $data);
+    }
+
+    /**
+    *add new cms page
+    */
+    public function CMSAddPage()
+    {
+        $data = [
+            'page'  => 'page_add',
+        ];
+
+        return view('backend.cms-add-page', $data);
     }
 
 }
