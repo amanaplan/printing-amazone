@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2017 at 01:18 PM
+-- Generation Time: Sep 21, 2017 at 02:35 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -506,7 +506,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (54, '2017_08_30_190320_create_order_status_table', 29),
 (55, '2017_08_30_190457_add_status_col_to_order_table', 29),
 (56, '2017_08_31_184512_create_settiongs_table', 30),
-(57, '2017_09_21_201505_add_min_max_dim_cols_to_product', 31);
+(57, '2017_09_21_201505_add_min_max_dim_cols_to_product', 31),
+(58, '2017_09_21_213110_create_cms_pages_table', 32);
 
 -- --------------------------------------------------------
 
@@ -668,6 +669,24 @@ INSERT INTO `order_status` (`id`, `status_text`) VALUES
 (4, 'Shipped'),
 (5, 'Completed'),
 (6, 'Cancelled');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_img` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `page_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contents` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1270,6 +1289,13 @@ ALTER TABLE `order_status`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pages_page_slug_unique` (`page_slug`);
+
+--
 -- Indexes for table `paperstock_options`
 --
 ALTER TABLE `paperstock_options`
@@ -1402,7 +1428,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `notificationsetting`
 --
@@ -1428,6 +1454,11 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `order_status`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
