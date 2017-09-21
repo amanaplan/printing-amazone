@@ -101,32 +101,6 @@
                             @endif
                         </div>
 
-                        <div class="form-group {{ $errors->has('min_dimenssion') ? ' has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Minimum Allowed Dimenssion (in mm)</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="min_dimenssion" class="form-control" value="{{ $preset->min_size }}">
-
-                                @if ($errors->has('min_dimenssion'))
-                                    <span class="help-block m-b-none">
-                                        <strong>{{ $errors->first('min_dimenssion') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group {{ $errors->has('max_dimenssion') ? ' has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Maximum Allowed Dimenssion (in mm)</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="max_dimenssion" class="form-control" value="{{ $preset->max_size }}">
-
-                                @if ($errors->has('max_dimenssion'))
-                                    <span class="help-block m-b-none">
-                                        <strong>{{ $errors->first('max_dimenssion') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group"><label class="col-sm-4 control-label">It is the fixed price group preset</label>

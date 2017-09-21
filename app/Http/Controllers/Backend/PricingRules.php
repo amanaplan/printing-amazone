@@ -142,8 +142,6 @@ class PricingRules extends Controller
             'to'                => 'required|integer|greater_than_field:from',
             'val_per_mm'        => 'nullable|required_unless:from,0|numeric',
             'profit'            => 'nullable|required_unless:from,0|numeric',
-            'min_dimenssion'    => 'required|integer',
-            'max_dimenssion'    => 'required|integer',
             'is_base'           => 'required|boolean',
             'fixed_price'       => 'nullable|required_unless:is_base,0|numeric',
         ],
@@ -174,8 +172,6 @@ class PricingRules extends Controller
             'to'                    => $request->input('to'),
             'val_per_mmsq'          => $request->input('val_per_mm'),
             'profit_percent'        => $request->input('profit'),
-            'min_size'              => $request->input('min_dimenssion'),
-            'max_size'              => $request->input('max_dimenssion'),
             'is_base'               => $request->input('is_base'),
             'base_price'            => $request->input('fixed_price'),
         ]);
@@ -240,8 +236,6 @@ class PricingRules extends Controller
             'to'                => 'required|integer|greater_than_field:from',
             'val_per_mm'        => 'nullable|required_unless:from,0|numeric',
             'profit'            => 'nullable|required_unless:from,0|numeric',
-            'min_dimenssion'    => 'required|integer',
-            'max_dimenssion'    => 'required|integer',
             'is_base'           => 'required|boolean',
             'fixed_price'       => 'nullable|required_unless:is_base,0|numeric|between:1,10000',
         ],
@@ -264,8 +258,6 @@ class PricingRules extends Controller
         $preset->to                 = $request->input('to');
         $preset->val_per_mmsq       = $request->input('val_per_mm');
         $preset->profit_percent     = $request->input('profit');
-        $preset->min_size           = $request->input('min_dimenssion');
-        $preset->max_size           = $request->input('max_dimenssion');
         $preset->is_base            = $request->input('is_base');
         $preset->base_price         = ($request->input('is_base') == 0) ? null : $request->input('fixed_price');
 

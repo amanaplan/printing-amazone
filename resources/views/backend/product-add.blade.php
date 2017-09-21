@@ -123,8 +123,34 @@
                             <label class="col-sm-2 control-label">Applicable form fields</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline"> <input type="checkbox" name="fields[]" value="1"> Paperstock </label> 
-                                <label class="checkbox-inline"><input type="checkbox" name="fields[]" value="2"> Size (cm<sup>2</sup>) </label> 
+                                <label class="checkbox-inline"><input type="checkbox" name="fields[]" value="2"> Size (mm<sup>2</sup>) </label> 
                                 <label class="checkbox-inline"><input type="checkbox" name="fields[]" value="3"> Quantity </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('min_size') ? ' has-error' : '' }}">
+                            <label class="col-sm-2 control-label">Minimum allowed size (mm)</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="min_size" class="form-control" value="{{ old('min_size') }}">
+
+                                @if ($errors->has('min_size'))
+                                    <span class="help-block m-b-none">
+                                        <strong>{{ $errors->first('min_size') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('max_size') ? ' has-error' : '' }}">
+                            <label class="col-sm-2 control-label">Maximum allowed size (mm)</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="max_size" class="form-control" value="{{ old('max_size') }}">
+
+                                @if ($errors->has('max_size'))
+                                    <span class="help-block m-b-none">
+                                        <strong>{{ $errors->first('max_size') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

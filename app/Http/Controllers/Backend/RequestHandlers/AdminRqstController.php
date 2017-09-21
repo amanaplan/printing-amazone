@@ -119,6 +119,8 @@ class AdminRqstController extends Controller
             'category_id'   => 'required|numeric',
             'product_name'  => 'required|min:5|unique:products,product_name',
             'description'   => 'required',
+            'min_size'      => 'required|numeric',
+            'max_size'      => 'required|numeric',
             'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/']
         ]);
 
@@ -135,6 +137,8 @@ class AdminRqstController extends Controller
         $product->logo              = $request->input('logo');
         $product->description       = $request->input('description');
         $product->sample_image      = $request->input('sample_img');
+        $product->min_size          = $request->input('min_size');
+        $product->max_size          = $request->input('max_size');
 
         //calculating the sort order of this product
         $curr_max_sort = \App\Product::where('category_id', $request->input('category_id'))->max('sort');
@@ -177,6 +181,8 @@ class AdminRqstController extends Controller
             'category_id'   => 'required|numeric',
             'product_name'  => ['required', 'min:5', Rule::unique('products','product_name')->ignore($id)],
             'description'   => 'required',
+            'min_size'      => 'required|numeric',
+            'max_size'      => 'required|numeric',
             'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/']
         ]);
 
@@ -193,6 +199,8 @@ class AdminRqstController extends Controller
         $product->logo              = $request->input('logo');
         $product->description       = $request->input('description');
         $product->sample_image      = $request->input('sample_img');
+        $product->min_size          = $request->input('min_size');
+        $product->max_size          = $request->input('max_size');
 
         $product->title             = $request->input('page_title');
         $product->meta_desc         = $request->input('meta_desc');

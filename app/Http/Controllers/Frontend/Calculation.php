@@ -75,9 +75,10 @@ class Calculation extends Controller
             }
 
             //check if its within the max min boundation
-            $generel_preset = PresetGeneral::where('map_prod_form_option', $map_paperstock_option->first()->id)->firstOrFail(); //just picking the first one as because all the max min limitations will be same for all rules
-            $min = $generel_preset->min_size;
-            $max = $generel_preset->max_size;
+            $theproduct = Product::find($product);
+            $min = $theproduct->min_size;
+            $max = $theproduct->max_size;
+            
 
             if($width < $min || $width > $max)
             {

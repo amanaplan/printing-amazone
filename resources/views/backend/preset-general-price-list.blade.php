@@ -57,8 +57,6 @@
                                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Value/mm<sup>2</sup></th>
 
                                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Profit %</th>
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Min. (mm)</th>
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5">Max. (mm)</th>
                                     <th scope="col">Base Preset Group</th>
                                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="6">Fixed Base Price</th>
                                     <th scope="col">Edit</th>
@@ -97,8 +95,6 @@
                                         <td>{{ $preset->from }} - {{ $preset->to }}</td>
                                         <td>{{ ($preset->val_per_mmsq)? '$ '.$preset->val_per_mmsq : 'NA' }}</td>
                                         <td>{{ ($preset->profit_percent)? $preset->profit_percent.' %' : 'NA' }}</td>
-                                        <td>{{ $preset->min_size }}</td>
-                                        <td>{{ $preset->max_size }}</td>
                                         <td>{!! ($preset->is_base)? '<i class="fa fa-check fa-lg text-success"></i>' : '<i class="fa fa-times-circle-o fa-lg"></i>' !!}</td>
                                         <td>{{ ($preset->is_base)? '$ '.$preset->base_price.' /1000 qty.' : 'NA' }}</td>
                                         <td><a href="{{ url('/admin/product/presets/general/edit/'.$preset->id.'/'.$product_id) }}" class="btn btn-default"><i class="fa fa-pencil"></i></a></td>
