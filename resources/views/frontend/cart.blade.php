@@ -134,7 +134,7 @@
 				</div><!-- row -->
 				<div class="row" style="margin-top:20px;">
 					<div class="col-sm-6">
-						<a href="{{ url('/sticker') }}" class="cnt-shopping">Continue Shopping</a>
+						<a href="{{ url('/') }}" class="cnt-shopping">Continue Shopping</a>
 					</div>
 					<div class="col-sm-6 btn-right">
 						<a href="#" class="clr-shopping">Clear Shopping Cart</a>

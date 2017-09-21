@@ -74,12 +74,7 @@
 
 				    <div class="form-group col-sm-6 col-xs-12 res-right" style="padding-left: 0;">
 						<label>Country</label>
-						<select name="country" class="form-control" data-validation="custom" data-validation-regexp="^[A-Z]{2}$">
-							<option>--Select an appropriate option--</option>
-							@foreach($countries as $country)
-							<option value="{{ $country->cc_fips }}">{{ $country->country_name }}</option>
-							@endforeach
-						</select>
+						<input type="text" value="Australia" class="form-control" readonly="readonly" />
 				    </div>
 
 				    <div class="form-group col-sm-6 col-xs-12 res" style="padding-right: 0;">
