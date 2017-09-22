@@ -15,6 +15,7 @@ use App\PresetQtyGrpOne;
 use App\PresetQtyGrpTwo;
 use App\OptLamination;
 use App\StickerType;
+use App\Page;
 
 use App\Http\HelperClass\Multipurpose;
 use Illuminate\Support\Facades\Redis;
@@ -876,12 +877,71 @@ class AdminRqstController extends Controller
     public function AddPage(Request $request)
     {
         $this->validate($request, [
-            'page_name'  =>  'required|alpha_num|min:3|unique:pages,page_name',
+            'page_name'  =>  'required|min:3|unique:pages,page_name',
         ]);
 
-        // \.\.\/images\/(.+)$
+        $slug = str_slug($request->input('page_name'));
+        $exist = Page::where('page_slug', $slug)->count();
+        if($exist > 0)
+        {
+            adminflash('warning', 'page url conflict, choose another page name');
+            return redirect('/admin/cms/list-pages');
+        }
+        
+        $page_conts = ($request->has('page_desc'))? preg_replace('/src="(.+\/images\/(.+(jpg|png|gif)))\"/', 'src="[BASE_URL]/$2"', $request->input('page_desc')) : null;
+
+        Page::create([
+            'title'     => $request->input('page_title'),
+            'meta_desc' => $request->input('meta_desc'),
+            'page_name' => $request->input('page_name'),
+            'page_slug' => $slug,
+            'contents'  => $page_conts,
+        ]);        
 
         adminflash('success', 'new page added successfully');
+        return redirect('/admin/cms/list-pages');
+    }
+
+    /**
+    *edit page form submit
+    */
+    public function EditPage(Request $request, $id)
+    {
+        $this->validate($request, [
+            'page_name'  =>  ['required', 'min:3', Rule::unique('pages','page_name')->ignore($id, 'id')],
+        ]);
+
+        $slug = str_slug($request->input('page_name'));
+        $exist = Page::where([['page_slug', $slug],['id', '!=', $id]])->count();
+        if($exist > 0)
+        {
+            adminflash('warning', 'page url conflict, choose another page name');
+            return redirect('/admin/cms/list-pages');
+        }
+        
+        $page_conts = ($request->has('page_desc'))? preg_replace('/src="(.+\/images\/(.+(jpg|png|gif)))\"/', 'src="[BASE_URL]/$2"', $request->input('page_desc')) : null;
+        
+        $page = Page::findOrFail($id);
+        $page->title     = $request->input('page_title');
+        $page->meta_desc = $request->input('meta_desc');
+        $page->page_name = $request->input('page_name');
+        $page->page_slug = $slug;
+        $page->contents  = $page_conts;       
+
+        $page->save();
+
+        adminflash('success', 'page updated successfully');
+        return redirect('/admin/cms/list-pages');
+    }
+
+    /**
+    *delete cms page
+    */
+    public function RemovePage($id)
+    {
+        Page::destroy($id);
+        
+        adminflash('success', 'page deleted successfully');
         return redirect('/admin/cms/list-pages');
     }
 

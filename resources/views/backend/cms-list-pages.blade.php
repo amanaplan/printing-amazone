@@ -59,6 +59,27 @@
                             </thead>
                             <tbody>
 
+                                <form id="delete-page" action="" method="post">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    
+                                </form>
+
+                                @foreach($pages as $page)
+
+                                    <tr>
+                                        <td>{{ $loop->count }}</td>
+                                        <td>{{ $page->page_name }}</td>
+                                        <td><a href="{{ url('/'.$page->page_slug) }}" target="_blank">{{url('/'.$page->page_slug)}}</a></td>
+                                        <td>{{ $page->updated_at }}</td>
+                                        <td><a href="{{ url('/admin/cms/edit-page/'.$page->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                                        <td>
+                                            <button type="button" onclick="deletePage({{ $page->id }});" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
                             </tbody>
                         </table>
 
@@ -77,56 +98,14 @@
 @push('scripts')
     
     <script>
-        /*function changeCatSort(id, order) {
-            //ajax
-            $.ajaxSetup({
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "{{ url('/admin/category/set-order') }}",
-                type: "PUT",
-                data: {id:id, sort:order},
-                success: function(result){
-                    Command: toastr["success"]("order updated successfully", "Successfully Done. .");
-                },
-                error: function(xhr,status,error){
-                    Command: toastr["error"](error, "some error occurred");
-                }
-            });
-
-            $.ajax();
-            //ajax
-        }
-
-        function remCategory(catId, elem)
+        function deletePage(page)
         {
-            let conf = confirm('sure to remove the category completely!\nall related products will be deleted too');
-
+            let conf = confirm('sure to delete this page!');
             if(conf)
             {
-                var xhttp = new XMLHttpRequest();
-                
-                xhttp.open("DELETE", "{{ url('/admin/category/delete') }}", true);
-                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-                let data = '_token={{ csrf_token() }}';
-                data += '&category='+catId;
-
-                xhttp.send(data);
-
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4) {
-                        if(this.status == 200)
-                        {
-                            Command: toastr["success"]("category removed successfully", "Successfully Done. .");
-                            $(elem).closest('tr').fadeOut();
-                        }
-                        else
-                        {
-                            Command: toastr["error"]("Upss! some error occurred", "Error. .");
-                        }
-                    }
-                };
+                $("form#delete-page").attr('action', `{{ url('/admin/cms/manage-page/delete/') }}/${page}`).submit();
             }
-        }*/
+        }
     </script>
 
 @endpush

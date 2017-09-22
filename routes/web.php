@@ -204,7 +204,10 @@ Route::prefix('admin')->group(function() {
 	//the CMS pages
 	Route::get('/cms/add-page', 'Backend\AdminController@CMSAddPage');
 	Route::post('/cms/pageadd', 'Backend\RequestHandlers\AdminRqstController@AddPage');
+	Route::get('/cms/edit-page/{id}', 'Backend\AdminController@EditPage');
+	Route::put('/cms/edit-submit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditPage');
 	Route::get('/cms/list-pages', 'Backend\AdminController@CMSPagesList');
+	Route::delete('/cms/manage-page/delete/{id}', 'Backend\RequestHandlers\AdminRqstController@RemovePage');
 
 
 	/*___________________________________________________

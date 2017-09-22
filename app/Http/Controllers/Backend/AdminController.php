@@ -18,6 +18,7 @@ use App\OptLamination;
 use App\StickerType;
 use App\User;
 use App\Order;
+use App\Page;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -424,9 +425,23 @@ class AdminController extends Controller
     {
         $data = [
             'page'  => 'page_manage',
+            'pages' => Page::orderBy('page_name', 'asc')->get()
         ];
 
         return view('backend.cms-list-pages', $data);
+    }
+
+    /**
+    *edit page
+    */
+    public function EditPage($id)
+    {
+        $data = [
+            'page'      => 'page_manage',
+            'cmspage'   => Page::findOrFail($id)
+        ];
+
+        return view('backend.cms-edit-page', $data);
     }
 
 }

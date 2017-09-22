@@ -2,7 +2,7 @@
 
 {{-- title of the page --}}
 @section('pagetitle')
-    add new page
+    edit page details
 @stop
 
 {{-- page specific css --}}
@@ -16,7 +16,7 @@
         <div class="col-sm-12">
             <div class="page-title">
                 <div class="row">
-                    <h4 class="pull-left">Add new CMS Page</h4>
+                    <h4 class="pull-left">Edit Page</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i></a></li>
                     </ol>
@@ -38,14 +38,15 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form action="{{ url('/admin/cms/pageadd') }}" method="post" class="form-horizontal">
+                    <form action="{{ url('/admin/cms/edit-submit/'.$cmspage->id) }}" method="post" class="form-horizontal">
 
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
 
                         <div class="form-group {{ $errors->has('page_name') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Page Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="page_name" class="form-control" value="{{ old('page_name') }}">
+                                <input type="text" name="page_name" class="form-control" value="{{ $cmspage->page_name }}">
 
                                 @if ($errors->has('page_name'))
                                     <span class="help-block m-b-none">
@@ -59,7 +60,7 @@
                         <div class="form-group {{ $errors->has('page_desc') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Page Contents</label>
                             <div class="col-sm-10">
-                                <textarea id="editor1" name="page_desc" class="form-control">{{ old('page_desc') }}</textarea>
+                                <textarea id="editor1" name="page_desc" class="form-control">{{ preg_replace("/\[BASE_URL\]/", asset('assets/images/'), $cmspage->contents) }}</textarea>
 
                                 @if ($errors->has('page_desc'))
                                     <span class="help-block m-b-none">
@@ -74,7 +75,7 @@
                         <div class="form-group {{ $errors->has('page_title') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Page Title</label>
                             <div class="col-sm-10">
-                                <textarea name="page_title" class="form-control">{{ old('page_title') }}</textarea>
+                                <textarea name="page_title" class="form-control">{{ $cmspage->title }}</textarea>
 
                                 @if ($errors->has('page_title'))
                                     <span class="help-block m-b-none">
@@ -88,7 +89,7 @@
                         <div class="form-group {{ $errors->has('meta_desc') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Meta Description</label>
                             <div class="col-sm-10">
-                                <textarea name="meta_desc" class="form-control">{{ old('meta_desc') }}</textarea>
+                                <textarea name="meta_desc" class="form-control">{{ $cmspage->meta_desc }}</textarea>
 
                                 @if ($errors->has('meta_desc'))
                                     <span class="help-block m-b-none">
@@ -103,7 +104,7 @@
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
                                 <a href="{{ url('/admin/cms/list-pages') }}" class="btn btn-white">Cancel</a>
-                                <button class="btn btn-primary" type="submit">Add Page</button>
+                                <button class="btn btn-primary" type="submit">Save Page</button>
                             </div>
                         </div>
                     </form>
