@@ -60,7 +60,7 @@
                         <div class="form-group {{ $errors->has('page_desc') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Page Contents</label>
                             <div class="col-sm-10">
-                                <textarea id="editor1" name="page_desc" class="form-control">{{ preg_replace("/\[BASE_URL\]/", asset('assets/images/'), $cmspage->contents) }}</textarea>
+                                <textarea id="editor1" name="page_desc" class="form-control">{{ $cmspage->contents }}</textarea>
 
                                 @if ($errors->has('page_desc'))
                                     <span class="help-block m-b-none">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2017 at 02:35 PM
+-- Generation Time: Sep 22, 2017 at 02:13 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -687,6 +687,15 @@ CREATE TABLE `pages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `title`, `meta_desc`, `og_img`, `page_name`, `page_slug`, `contents`, `created_at`, `updated_at`) VALUES
+(2, 'demo page title', 'desc', NULL, 'another page', 'another-page', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br />\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br />\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n\r\n<p>some lage contents here</p>\r\n\r\n<p><img alt=\"\" src=\"[BASE_URL]/products/Diecut.png\" style=\"float:left; height:100px; width:100px\" />some nice text in the right side too</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br />\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<br />\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2017-09-22 15:59:53', '2017-09-22 16:31:07'),
+(3, 'abc', NULL, NULL, 'Sample page', 'sample-page', '<p>some text</p>\r\n\r\n<p><img alt=\"\" src=\"[BASE_URL]/products/1242-gloss_stickers.jpg\" style=\"height:750px; width:1000px\" /></p>', '2017-09-22 16:36:52', '2017-09-22 16:41:58'),
+(4, NULL, NULL, NULL, 'final test', 'final-test', '<p>segheshseh</p>\r\n\r\n<p><img alt=\"\" src=\"[BASE_URL]/products/Decal%20Sticker_4.jpg\" style=\"height:1000px; width:1000px\" /></p>', '2017-09-22 16:42:45', '2017-09-22 16:42:45');
 
 -- --------------------------------------------------------
 
@@ -1378,7 +1387,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -1458,7 +1467,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --

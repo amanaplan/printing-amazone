@@ -233,5 +233,5 @@ Route::prefix('admin')->group(function() {
 | category page and product page dynamic URL
 |----------------------------------------------------
 */
-Route::get('/{slug}', 'Frontend\PagesCtrl@category');
+Route::get('/{slug}', 'Frontend\PagesCtrl@category'); //can be category or CMS page
 Route::get('/{categorySlug}/{prodSlug}', 'Frontend\PagesCtrl@product');

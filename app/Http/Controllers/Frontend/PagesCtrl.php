@@ -11,6 +11,7 @@ use App\MapProdFrmOpt;
 use App\Review;
 use App\OptLamination;
 use App\StickerType;
+use App\Page;
 
 use App\Http\HelperClass\Multipurpose;
 
@@ -38,6 +39,12 @@ class PagesCtrl extends Controller
     */
     public function category($slug)
     {
+        $the_category = Category::with('products')->where('category_slug', $slug)->count();
+        if($the_category == 0)
+        {
+            return $this->CmsPage($slug);
+        }
+
     	$category = Category::with('products')->where('category_slug', $slug)->firstOrFail();
 
         //if redis has the data
@@ -211,6 +218,16 @@ class PagesCtrl extends Controller
     public function about()
     {
         return view('frontend.about');
+    }
+
+    /**
+    *access CMS page by slug
+    */
+    public function CmsPage($slug)
+    {
+        $page = Page::where('page_slug', $slug)->firstOrFail();
+
+        return view('frontend.cms-page', ['page' => $page]);
     }
 
     /**
