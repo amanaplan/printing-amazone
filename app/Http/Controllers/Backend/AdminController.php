@@ -417,4 +417,16 @@ class AdminController extends Controller
         return view('backend.cms-add-page', $data);
     }
 
+    /**
+    *CMS pages list
+    */
+    public function CMSPagesList()
+    {
+        $data = [
+            'page'  => 'page_manage',
+        ];
+
+        return view('backend.cms-list-pages', $data);
+    }
+
 }

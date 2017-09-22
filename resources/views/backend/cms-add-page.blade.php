@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form action="" method="post" class="form-horizontal">
+                    <form action="{{ url('/admin/cms/pageadd') }}" method="post" class="form-horizontal">
 
                         {{ csrf_field() }}
 
@@ -95,22 +95,6 @@
                                         <strong>{{ $errors->first('meta_desc') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-
-                        <div class="form-group {{ $errors->has('og_image') ? ' has-error' : '' }}">
-                            <label class="col-sm-2 control-label">OG Image</label>
-                            <div class="col-sm-4">
-                                <input type="text" id="the_img_fld-1" class="form-control" name="og_image" placeholder="image from the pages folder" value="{{ old('og_image') }}">
-                            </div>
-                            <div class="col-sm-6">
-                                <button class="btn btn-sm btn-primary pull-left fileSelector" elem-id="1" type="button">select file</button>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="row text-center">
-                                    <img id="picture_prvw-1" width="150" src="" />
-                                </div>
                             </div>
                         </div>
                         

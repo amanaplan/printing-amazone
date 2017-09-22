@@ -73,7 +73,7 @@
                         var reParam = new RegExp('(?:[\?&]|&amp;)CKEditorFuncNum=([^&]+)', 'i') ;
                         var match = window.location.search.match(reParam) ;
                         return (match && match.length > 1) ? match[1] : '' ;
-                    })(), "{{ asset('assets/images/pages') }}/"+file.name);
+                    })(), file.url);
                     fm.destroy();
                     window.close();
                 }

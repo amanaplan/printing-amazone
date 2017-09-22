@@ -203,6 +203,8 @@ Route::prefix('admin')->group(function() {
 
 	//the CMS pages
 	Route::get('/cms/add-page', 'Backend\AdminController@CMSAddPage');
+	Route::post('/cms/pageadd', 'Backend\RequestHandlers\AdminRqstController@AddPage');
+	Route::get('/cms/list-pages', 'Backend\AdminController@CMSPagesList');
 
 
 	/*___________________________________________________

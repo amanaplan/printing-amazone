@@ -870,4 +870,19 @@ class AdminRqstController extends Controller
         return redirect('/admin/form/sticker-type');
     }
 
+    /**
+    *add new page form submit
+    */
+    public function AddPage(Request $request)
+    {
+        $this->validate($request, [
+            'page_name'  =>  'required|alpha_num|min:3|unique:pages,page_name',
+        ]);
+
+        // \.\.\/images\/(.+)$
+
+        adminflash('success', 'new page added successfully');
+        return redirect('/admin/cms/list-pages');
+    }
+
 }
