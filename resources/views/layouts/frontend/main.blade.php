@@ -124,9 +124,9 @@
 				</div><!-- footer-menu -->
 				<div class="social col-sm-4 col-lg-4">
 					<ul>
-						<li><a href="#" class="fb"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.facebook.com/withprintingamazon/" target="_blank" class="fb"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a href="https://www.instagram.com/wthprintingamazon/" target="_blank" class="tw"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 						<li><a href="#" class="tw"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="yt"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
 					</ul>
 				</div><!-- social -->
 				<div class="clearfix"></div>
