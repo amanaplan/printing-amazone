@@ -21,6 +21,20 @@
 }
 
 @media (max-width:767px){
+	.row{width: 100%; margin-left: 0;}
+	p.copyright{text-align: center;}
+	.social{margin-top: 15px; text-align: center;}
+	.navbar-toggle {
+		background: #eca400;
+		float: none;
+		margin:15px 0 0;
+	}
+	.navbar-toggle .icon-bar{
+		background: #fff;
+		width:26px;
+		height:3px;
+	}
+	.footer{text-align: center;;}
 	.responsive-slider .slides ul li .slide-body .container .wrapper{width:100%;}	
 	#cart{padding: 0;}
 	.cart-qty{width: 32px;}
@@ -44,6 +58,7 @@
 	.checkout-summary{margin-top: 20px;}
     /*background: url(../../images/responsive-bg.png) no-repeat scroll 0 0 / cover;*/
     /*z-index: 999;*/
+    .carousel-inner{overflow: visible;}
 
 .top-menu a i{color:#111;}
 .review-short .avatar{width: 15%; margin-bottom: 10px;}
@@ -60,8 +75,10 @@ header.inner .top-menu a i{color: #fff;}
 .one_color_blue_carousel_wrapper {
     position: relative;
     z-index: 9;
-    background: url(../../images/responsive-bg.png) no-repeat scroll 0px 0 / cover!important;
+    background: url(../../images/responsive-bg.png) no-repeat scroll 0px 0 / cover !important;
+    min-height: 350px;
 }
+.one_color_blue_carousel_fade .item.active img{width: 100%;}
 	.custom h2{text-align:center; display: block !important;}
 	.review{display:block; text-align:center; margin:10px 0;}
 	/*.one_color_blue_carousel_wrapper {
@@ -90,11 +107,11 @@ header.inner .top-menu a i{color: #fff;}
 		overflow: visible;
 	}
 	.carousel-inner{min-height:600px;}*/
-	.one_color_blue_carousel_wrapper {
+	/*.one_color_blue_carousel_wrapper {
     position: relative;
     z-index: 9;
     background: url(../../images/responsive-bg.jpg) no-repeat scroll -9px 0 / cover!important;
-}
+}*/
 
 
 	.logo img{margin:0;}
@@ -104,13 +121,13 @@ header.inner .top-menu a i{color: #fff;}
 		margin-top:11px;
 	}
 	.menu{text-align:center;}
-	.navbar-toggle {
+	/*.navbar-toggle {
 		background: #fff;
 		float: none;
 		margin:15px 0 0;
-	}
+	}*/
 	.navbar-toggle .icon-bar{
-		background:#000;
+		background: #fff;
 		width:26px;
 		height:3px;
 	}

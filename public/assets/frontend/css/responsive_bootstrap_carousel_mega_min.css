@@ -433,8 +433,8 @@
 	.one_color_blue_carousel_control_icons{line-height:50px;font-size:50px!important;font-weight:normal!important}
 	.one_color_blue_carousel_control_left{left:1%!important}
 	.one_color_blue_carousel_control_right{right:1%!important}
-	.one_color_blue_carousel_caption{left:0;right:0;z-index:1;width:100%;bottom:25.5%;text-shadow:none;text-transform:uppercase;font-family:'Open Sans',sans-serif}
-	.one_color_blue_carousel_caption_text{width:40%;right:-50%;padding:25px;text-align:right;position:relative}
+	.one_color_blue_carousel_caption{left:0;right:0;z-index:1;width:100%;bottom:22%;text-shadow:none;text-transform:uppercase;font-family:'Open Sans',sans-serif}
+	.one_color_blue_carousel_caption_text{width:41%;right:-50%;padding:25px 0;text-align:right;position:relative}
 	.one_color_blue_carousel_caption_text h1{font-size: 60px;
 	  /*background: #FF6600;*/
 	  padding: 0 3px 0 3px;
@@ -487,7 +487,7 @@
 		background: -moz-linear-gradient(top,  #319500,  #4cd900);
 		transition:all 0.4s;
 	}
-	.one_color_blue_carousel_caption>img{right:0; left:12.6%;top:2%;width:25%;position:absolute;-webkit-animation-delay:2.5s;animation-delay:2.5s}
+	.one_color_blue_carousel_caption>img{right:0; left:9%;top:2%;width:28%;position:absolute;-webkit-animation-delay:2.5s;animation-delay:2.5s}
 	@media only screen and (max-width:480px){
 		/*.one_color_blue_carousel_wrapper {
 		background-size: cover;
@@ -498,7 +498,7 @@
 		.one_color_blue_carousel_control_left,
 		.one_color_blue_carousel_control_right{border:0}
 		.one_color_blue_carousel_control_icons{font-size:18px!important}
-		.one_color_blue_carousel_caption{top:-110px; /*bottom:26px;*/ padding:0; position: relative;}
+		.one_color_blue_carousel_caption{top:85px; /*bottom:26px;*/ padding:0; /*position: relative;*/}
 		.one_color_blue_carousel_caption_text{left:0;width:100%;padding:2px;text-align:center; top:-10px;}
 		.one_color_blue_carousel_caption_text h1{font-size:25px;margin:0 0 10px 0}
 		.one_color_blue_carousel_caption_text p{font-size:11px;margin:0 0 10px 0}
@@ -523,7 +523,7 @@
 		.one_color_blue_carousel_caption_text h1{font-size:30px;}
 	}
 	@media(min-width:601px) and (max-width:666px){
-		.one_color_blue_carousel_caption{top:0px; padding:0;}
+		.one_color_blue_carousel_caption{top:50px; /*padding:0;*/}
 		.one_color_blue_carousel_caption_text{left:0;width:100%;text-align:center; padding:0;}
 		.one_color_blue_carousel_caption img{display:none}
 		.one_color_blue_carousel_control_right:focus{background:transparent!important; display:none;}
@@ -531,22 +531,22 @@
 		.one_color_blue_carousel_caption_text h1{font-size:30px;}
 	}
 	@media(min-width:667px) and (max-width:767px){
-		.one_color_blue_carousel_caption{top:0px; padding:0;}
+		/*.one_color_blue_carousel_caption{top:0px; padding:0;}*/
 		.one_color_blue_carousel_caption_text{left:0;width:100%;text-align:center; padding:0;}
 		.one_color_blue_carousel_caption img{display:none}
 		.one_color_blue_carousel_control_right:focus{background:transparent!important; display:none;}
-		.carousel-inner{max-height:220px;}
+		/*.carousel-inner{max-height:220px;}*/
 		.one_color_blue_carousel_caption_text h1{font-size:30px;}
 	}
 	@media(min-width:768px) and (max-width:991px){
-		.one_color_blue_carousel_caption{bottom:-1px;}
-		.one_color_blue_carousel_caption>img{top:20px; left:10%;}
+		.one_color_blue_carousel_caption{bottom:0px; top: 32%;}
+		.one_color_blue_carousel_caption>img{top:20px; left:4%;}
 		.one_color_blue_carousel_caption_text h1{font-size:32px;}
-		.one_color_blue_carousel_caption_text{width:62%; right:-35%; padding:20px;}
+		.one_color_blue_carousel_caption_text{width:60%; right:-35%; padding:20px 0;}
 		.one_color_blue_carousel_control_left, .one_color_blue_carousel_control_right{display:none;}
 	}
 	@media(min-width:992px) and (max-width:1250px){
-		.one_color_blue_carousel_caption{bottom:4%;}
+		.one_color_blue_carousel_caption{bottom:0; top: 30%;}
 		.one_color_blue_carousel_caption>img{top:20px; left:10%;}
 		/*.one_color_blue_carousel_caption_text h1{font-size:32px;}*/
 		.one_color_blue_carousel_caption_text{width:57%; right:-35%; padding:20px;}
@@ -586,3 +586,4 @@
 	@media (min-width: 1400px) and (max-width: 1450px) {
 		.one_color_blue_carousel_caption{bottom:20%;}	
 	}
+.feature{margin-bottom: 40px;}

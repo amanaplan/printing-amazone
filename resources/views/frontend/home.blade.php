@@ -32,6 +32,7 @@
 		
 	<!-- ========= Wrapper for slides  =========-->
 	<div class="carousel-inner" role="listbox">
+		<div class="container">
 
 		<!--========= First slide =========-->
 		<div class="item active">
@@ -45,6 +46,7 @@
 				</div>						
 			</div>
 		</div>
+	</div>
 
 	</div>
 
@@ -55,7 +57,7 @@
 		<div class="row">
 			<h2>Printing Amazon Features</h2>
 			<div class="feature-dtls">
-				<a href="{{ url('/sticker') }}"><div class="col-sm-4 col-lg-4 dtls-box">
+				<a href="{{ url('/custom-stickers') }}"><div class="col-sm-4 col-lg-4 dtls-box">
 					<img src="{{ asset( 'assets/images/f1.png' ) }}" />
 					<h2>Custom Stickers</h2>
 				</div></a>
