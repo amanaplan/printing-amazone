@@ -48,38 +48,21 @@
                 <div class="panel-body">
 
                     <div class="col-md-12">
-                        <table class="tablesaw" data-tablesaw-sortable data-tablesaw-sortable-switch>
+                        <table class="tablesaw" id="preset-table">
                             <thead>
-                                <tr>
-                                    <th scope="col">#No.</th>
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Paperstock</th>
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Dimension (mm<sup>2</sup> range)</th>
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Value/mm<sup>2</sup></th>
-
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Profit %</th>
-                                    <th scope="col">Base Preset Group</th>
-                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="6">Fixed Base Price</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Remove</th>
-                                </tr>
-                            </thead>
-
-                            <!-- <thead>
-
                                 <tr>
                                     <th>#No.</th>
                                     <th>Paperstock</th>
                                     <th>Dimension (mm<sup>2</sup> range)</th>
                                     <th>Value/mm<sup>2</sup></th>
                                     <th>Profit %</th>
-                                    <th>Min. (mm)</th>
-                                    <th>Max. (mm)</th>
                                     <th>Base Preset Group</th>
                                     <th>Fixed Base Price</th>
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
-                            </thead> -->
+                            </thead>
+
                             <tbody>
 
                                 @foreach($presets as $preset)
@@ -149,6 +132,12 @@
             }
         }
 
+    </script>
+
+    <script type="text/javascript" src="{{ asset('assets/backend/js/table-sort.js') }}"></script>
+    <script type="text/javascript">
+        var TSort_Data = new Array ('preset-table', 'i', 's', 'i');
+        tsRegister();
     </script>
 
 @endpush

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2017 at 02:13 PM
+-- Generation Time: Sep 23, 2017 at 11:44 AM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -95,7 +95,8 @@ INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `
 (1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
 (62, 'f69cac096d0363504e604cc1d5f862128d513531', 0, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-08 02:10:00', '2017-09-08 02:10:00'),
 (68, '1cf01403e1a2a9f5e9008a57c6e86c0c6e5d5b3a', 0, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-12 03:04:07', '2017-09-12 03:04:07'),
-(70, '96181f0cb4e52467977ff1d9e28dc263d4565439', 1, 25, 1, 50.00, 50.00, 3000, '131.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-13 09:57:45', '2017-09-13 09:57:45');
+(70, '96181f0cb4e52467977ff1d9e28dc263d4565439', 1, 25, 1, 50.00, 50.00, 3000, '131.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-13 09:57:45', '2017-09-13 09:57:45'),
+(72, '0b7a13377a70681e2a06d8439038e7e14cb56bf3', 2, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-23 12:36:39', '2017-09-23 12:36:39');
 
 -- --------------------------------------------------------
 
@@ -693,9 +694,8 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `meta_desc`, `og_img`, `page_name`, `page_slug`, `contents`, `created_at`, `updated_at`) VALUES
-(2, 'demo page title', 'desc', NULL, 'another page', 'another-page', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br />\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br />\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n\r\n<p>some lage contents here</p>\r\n\r\n<p><img alt=\"\" src=\"[BASE_URL]/products/Diecut.png\" style=\"float:left; height:100px; width:100px\" />some nice text in the right side too</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br />\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<br />\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2017-09-22 15:59:53', '2017-09-22 16:31:07'),
 (3, 'abc', NULL, NULL, 'Sample page', 'sample-page', '<p>some text</p>\r\n\r\n<p><img alt=\"\" src=\"[BASE_URL]/products/1242-gloss_stickers.jpg\" style=\"height:750px; width:1000px\" /></p>', '2017-09-22 16:36:52', '2017-09-22 16:41:58'),
-(4, NULL, NULL, NULL, 'final test', 'final-test', '<p>segheshseh</p>\r\n\r\n<p><img alt=\"\" src=\"[BASE_URL]/products/Decal%20Sticker_4.jpg\" style=\"height:1000px; width:1000px\" /></p>', '2017-09-22 16:42:45', '2017-09-22 16:42:45');
+(5, 'About Us - Printing Amazon', NULL, NULL, 'About Us', 'about-us', '<p>We exist to provide our clients with <strong>GREAT BENEFITS, BEST QUALITY</strong> print outcomes and deliver to them at the appropriate time. We create great design and believe it can work wonders for every business. That&rsquo;s why we make it simple to create beautiful, expertly crafted business stationery and promotional materials that&rsquo;ll help you start conversations, open doors and strengthen relationships.</p>\r\n\r\n<p><strong>Our innovations for your success.</strong></p>\r\n\r\n<p>Modern consumers expect to be able to create and order their personalized photo and print products not only via the web or a desktop application but also via tablets and smartphones. This creates the challenge of providing powerful solutions not only for multiple device types but also for different and even upcoming operating systems.</p>\r\n\r\n<p>We&rsquo;re dedicated to bringing you Custom stickers, business cards, postcards and print quality that helps you stand out. After all, helping your business look good on paper is what inspired us from the start!</p>\r\n\r\n<p><strong>At Printing Amazon, we know the value of your TIME!</strong></p>\r\n\r\n<p>TIME cannot be bought or get refunded. Giving our client bad experiences means that we wasted their most valuable and unreturnable resources, TIME! Printing Amazon always strives to step towards 0% defects and 200% pleasant experiences for all our clients.</p>\r\n\r\n<p><strong>Free shipping</strong></p>\r\n\r\n<p>Do you dislike surprise shipping fees during checkout? Printing Amazon offers free shipping on all Australia orders.</p>\r\n\r\n<p><strong>Print your ideas from anywhere, anytime!</strong></p>\r\n\r\n<p>You can have easy access to our fantastic web via your mobile and tablet and on your PC. Our page is surprisingly mobile friendly and always ready to print your ideas anytime.</p>\r\n\r\n<p><strong>Guaranteed Quality</strong></p>\r\n\r\n<p>If you have had bad experiences with printing something in the past, simply dump your bad memories into the trash bin. We always check your final printed outcome through our Quality Control team before the shipping process. If you get any bad experiences or changes you need with our outcome, simply take a photo with your mobile, upload the image and let us know why you are not happy. We respect all our clients&rsquo; valuable feedbacks and we will fix the problem REAL FAST.</p>\r\n\r\n<p><strong>Product &amp; Service development</strong></p>\r\n\r\n<p>Printing Amazon will continuously develop new products and services for all our clients. We keep research market trend and strive to seek any valuable new products and services that can help and amaze our clients.</p>', '2017-09-23 12:44:21', '2017-09-23 12:45:36');
 
 -- --------------------------------------------------------
 
@@ -1387,7 +1387,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -1467,7 +1467,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
