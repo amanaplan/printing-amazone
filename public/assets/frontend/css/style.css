@@ -335,7 +335,7 @@ p.fieldset span {
   appearance: none;
   width:100%;
   font-family: 'Raleway', sans-serif;
-  transition:all 0.4s;
+  /*transition:all 0.4s;*/
   border:1px none;
 }
 .cd-form button[type=submit]:hover, .cd-form button[type=submit]:focus {
