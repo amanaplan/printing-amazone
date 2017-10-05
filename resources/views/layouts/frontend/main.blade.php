@@ -118,15 +118,14 @@
 				<div class="footer-menu col-sm-8 col-lg-8">
 					<ul>
 						<li><a href="{{ url('/') }}">Home</a> /</li>
-						<li><a href="{{ url('/about') }}">About</a> /</li>
+						<li><a href="{{ url('/about-us') }}">About</a> /</li>
 						<li><a href="{{ url('/contact') }}">Contact</a></li>
 					</ul>
 				</div><!-- footer-menu -->
 				<div class="social col-sm-4 col-lg-4">
 					<ul>
-						<li><a href="https://www.facebook.com/withprintingamazon/" target="_blank" class="fb"><img src="{{ asset( 'assets/images/fb-icon.png' ) }}" /><!--<i class="fa fa-facebook" aria-hidden="true"></i>--></a></li>
-						<li><a href="https://www.instagram.com/wthprintingamazon/" target="_blank" class="tw"><img src="{{ asset( 'assets/images/insta-icon.png' ) }}" /><!--<i class="fa fa-instagram" aria-hidden="true"></i>--></a></li>
-						<li><a href="#" class="tw"><img src="{{ asset( 'assets/images/twitter-icon.png' ) }}" /><!--<i class="fa fa-twitter" aria-hidden="true"></i>--></a></li>
+						<li><a href="https://www.facebook.com/withprintingamazon/" rel="noreferrer noopener" target="_blank" class="fb"><img src="{{ asset( 'assets/images/fb-icon.png' ) }}" /><!--<i class="fa fa-facebook" aria-hidden="true"></i>--></a></li>
+						<li><a href="https://www.instagram.com/withprintingamazon/" rel="noreferrer noopener" target="_blank" class="tw"><img src="{{ asset( 'assets/images/insta-icon.png' ) }}" /><!--<i class="fa fa-instagram" aria-hidden="true"></i>--></a></li>
 					</ul>
 				</div><!-- social -->
 				<div class="clearfix"></div>

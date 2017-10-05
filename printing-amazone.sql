@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2017 at 11:44 AM
+-- Generation Time: Oct 05, 2017 at 05:36 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -95,7 +95,6 @@ INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `
 (1, 'c397da159a5a6f08cd71e36986795a6ed298d1ef', 0, 20, 3, 90.00, 90.00, 500, '4763.00', NULL, NULL, NULL, 'artworks/iMikZ3psK2FX2NcD9GccbGoowb74e3ALJy4LDi95.jpeg', NULL, 69, '2017-08-22 17:35:33', '2017-08-22 17:35:33'),
 (62, 'f69cac096d0363504e604cc1d5f862128d513531', 0, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-08 02:10:00', '2017-09-08 02:10:00'),
 (68, '1cf01403e1a2a9f5e9008a57c6e86c0c6e5d5b3a', 0, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-12 03:04:07', '2017-09-12 03:04:07'),
-(70, '96181f0cb4e52467977ff1d9e28dc263d4565439', 1, 25, 1, 50.00, 50.00, 3000, '131.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-13 09:57:45', '2017-09-13 09:57:45'),
 (72, '0b7a13377a70681e2a06d8439038e7e14cb56bf3', 2, 25, 1, 40.00, 40.00, 10, '26.00', NULL, NULL, NULL, NULL, NULL, 153, '2017-09-23 12:36:39', '2017-09-23 12:36:39');
 
 -- --------------------------------------------------------
@@ -313,10 +312,10 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (27, 44, 1, 1),
 (28, 44, 5, 2),
 (31, 44, 7, 7),
-(32, 45, 8, 1),
-(33, 45, 9, 2),
-(34, 45, 10, 3),
-(35, 45, 11, 4),
+(32, 45, 8, 2),
+(33, 45, 9, 3),
+(34, 45, 10, 4),
+(35, 45, 11, 5),
 (36, 46, 1, 7),
 (37, 46, 2, 3),
 (38, 46, 3, 4),
@@ -444,7 +443,15 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (193, 65, 8, 1),
 (194, 65, 9, 2),
 (195, 65, 10, 3),
-(196, 65, 11, 4);
+(196, 65, 11, 4),
+(197, 46, 9, 8),
+(198, 46, 10, 9),
+(199, 46, 11, 10),
+(200, 46, 12, 11),
+(201, 46, 17, 12),
+(202, 46, 18, 13),
+(203, 46, 19, 14),
+(204, 45, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -695,7 +702,7 @@ CREATE TABLE `pages` (
 
 INSERT INTO `pages` (`id`, `title`, `meta_desc`, `og_img`, `page_name`, `page_slug`, `contents`, `created_at`, `updated_at`) VALUES
 (3, 'abc', NULL, NULL, 'Sample page', 'sample-page', '<p>some text</p>\r\n\r\n<p><img alt=\"\" src=\"[BASE_URL]/products/1242-gloss_stickers.jpg\" style=\"height:750px; width:1000px\" /></p>', '2017-09-22 16:36:52', '2017-09-22 16:41:58'),
-(5, 'About Us - Printing Amazon', NULL, NULL, 'About Us', 'about-us', '<p>We exist to provide our clients with <strong>GREAT BENEFITS, BEST QUALITY</strong> print outcomes and deliver to them at the appropriate time. We create great design and believe it can work wonders for every business. That&rsquo;s why we make it simple to create beautiful, expertly crafted business stationery and promotional materials that&rsquo;ll help you start conversations, open doors and strengthen relationships.</p>\r\n\r\n<p><strong>Our innovations for your success.</strong></p>\r\n\r\n<p>Modern consumers expect to be able to create and order their personalized photo and print products not only via the web or a desktop application but also via tablets and smartphones. This creates the challenge of providing powerful solutions not only for multiple device types but also for different and even upcoming operating systems.</p>\r\n\r\n<p>We&rsquo;re dedicated to bringing you Custom stickers, business cards, postcards and print quality that helps you stand out. After all, helping your business look good on paper is what inspired us from the start!</p>\r\n\r\n<p><strong>At Printing Amazon, we know the value of your TIME!</strong></p>\r\n\r\n<p>TIME cannot be bought or get refunded. Giving our client bad experiences means that we wasted their most valuable and unreturnable resources, TIME! Printing Amazon always strives to step towards 0% defects and 200% pleasant experiences for all our clients.</p>\r\n\r\n<p><strong>Free shipping</strong></p>\r\n\r\n<p>Do you dislike surprise shipping fees during checkout? Printing Amazon offers free shipping on all Australia orders.</p>\r\n\r\n<p><strong>Print your ideas from anywhere, anytime!</strong></p>\r\n\r\n<p>You can have easy access to our fantastic web via your mobile and tablet and on your PC. Our page is surprisingly mobile friendly and always ready to print your ideas anytime.</p>\r\n\r\n<p><strong>Guaranteed Quality</strong></p>\r\n\r\n<p>If you have had bad experiences with printing something in the past, simply dump your bad memories into the trash bin. We always check your final printed outcome through our Quality Control team before the shipping process. If you get any bad experiences or changes you need with our outcome, simply take a photo with your mobile, upload the image and let us know why you are not happy. We respect all our clients&rsquo; valuable feedbacks and we will fix the problem REAL FAST.</p>\r\n\r\n<p><strong>Product &amp; Service development</strong></p>\r\n\r\n<p>Printing Amazon will continuously develop new products and services for all our clients. We keep research market trend and strive to seek any valuable new products and services that can help and amaze our clients.</p>', '2017-09-23 12:44:21', '2017-09-23 12:45:36');
+(5, 'About Us - Printing Amazon', NULL, NULL, 'About Us', 'about-us', '<p><img alt=\"\" class=\"img-responsive\" src=\"[BASE_URL]/pages/About-Us.jpg\" style=\"height:1412px; width:1200px\" /></p>', '2017-09-23 12:44:21', '2017-10-05 21:06:21');
 
 -- --------------------------------------------------------
 
@@ -757,9 +764,9 @@ CREATE TABLE `preset_general` (
 
 INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_per_mmsq`, `profit_percent`, `is_base`, `base_price`) VALUES
 (5, 13, 0, 4000, NULL, NULL, 1, '99.00'),
-(13, 27, 0, 470, 0.25, 0.50, 1, '63.00'),
-(14, 27, 471, 900, 0.24, 0.49, 0, NULL),
-(15, 27, 901, 1350, 0.24, 0.49, 0, NULL),
+(13, 27, 0, 2000, NULL, NULL, 1, '65.00'),
+(14, 27, 2001, 4000, 0.24, 0.49, 0, NULL),
+(15, 27, 4001, 90000, 0.24, 0.49, 0, NULL),
 (16, 27, 1351, 62500, 0.24, 0.49, 0, NULL),
 (17, 28, 0, 410, 0.25, 0.50, 1, '93.00'),
 (18, 28, 411, 600, 0.24, 0.49, 0, NULL),
@@ -990,7 +997,10 @@ INSERT INTO `preset_qty_rule_two` (`id`, `map_prod_form_option`, `every_extra_qt
 (28, 151, 1000, 1000, 4000, 9.00),
 (30, 151, 1000, 5000, 20000, 1.00),
 (31, 45, 1000, 1000, 4000, 9.00),
-(32, 45, 1000, 5000, 20000, 2.00);
+(32, 45, 1000, 5000, 20000, 2.00),
+(34, 27, 1000, 1000, 4000, 9.00),
+(35, 27, 1000, 4000, 10000, 2.00),
+(36, 27, 1000, 10000, 20000, 1.00);
 
 -- --------------------------------------------------------
 
@@ -1023,7 +1033,7 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `product_name`, `product_slug`, `logo`, `description`, `sample_image`, `min_size`, `max_size`, `sort`, `created_at`, `updated_at`) VALUES
 (2, 'Square Stickers - Printing Amazon', 'some meta', 'Square Sticker_3.jpg', 1, 'Square & Rectangle Stickers', 'square-rectangle-stickers', 'Square.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', '1.jpg*2.jpg*3.jpg*4.jpg', 0, 0, 2, '2017-05-30 14:35:51', '2017-09-05 14:01:50'),
 (4, 'Die-Cutting Stickers', NULL, NULL, 1, 'Die Cutting Stickers', 'die-cutting-stickers', 'Diecut.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Die-cutting_9.jpg', 0, 0, 2, '2017-06-19 15:22:41', '2017-09-04 22:50:52'),
-(17, 'Rectangle Stickers - Printing Amazon', NULL, NULL, 1, 'Oval Stickers', 'oval-stickers', 'Oval.png', 'Custom Oval Stickers are a great way to represent your state, team or organisation. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 0, 0, 3, '2017-08-15 14:00:51', '2017-09-06 11:57:28'),
+(17, 'Rectangle Stickers - Printing Amazon', NULL, NULL, 1, 'Oval Stickers', 'oval-stickers', 'Oval.png', 'Custom Oval Stickers are a great way to represent your state, team or organisation. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 30, 120, 3, '2017-08-15 14:00:51', '2017-10-05 19:59:38'),
 (20, 'Rounded Corner', NULL, NULL, 1, 'Rounded Corner', 'rounded-corner', 'Round-Corner.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 0, 0, 1, '2017-08-15 16:42:47', '2017-09-06 11:55:37'),
 (21, 'Circle Stickers', NULL, NULL, 1, 'Circle Stickers', 'circle-stickers', 'Circle.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 0, 0, 4, '2017-08-15 16:57:52', '2017-09-06 11:55:10'),
 (22, 'Name stickers - Printing Amazon', NULL, NULL, 1, 'Name stickers', 'name-stickers', 'namesticker_icon.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of.', NULL, 30, 300, 5, '2017-08-16 13:48:57', '2017-09-21 15:37:30'),
@@ -1387,7 +1397,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -1432,7 +1442,7 @@ ALTER TABLE `map_prod_form`
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -1487,7 +1497,7 @@ ALTER TABLE `preset_qty_rule_one`
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --
 ALTER TABLE `preset_qty_rule_two`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `products`
 --
