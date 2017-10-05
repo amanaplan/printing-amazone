@@ -87,7 +87,8 @@ class ProceedOrder extends Controller
         /*-----------------------------------------------------------------------------------------------
         | validating the input provided
         -----------------------------------------------------------------------------------------------*/
-        $product = Product::where('product_slug', $request->input('product'))->firstOrFail()->id;
+        $theProduct = Product::where('product_slug', $request->input('product'))->firstOrFail();
+        $product = $theProduct->id;
 
         //Validating whether the options are linked to the product or not
 
@@ -117,9 +118,8 @@ class ProceedOrder extends Controller
             $height = $request->input('size_h');
 
             //check if its within the max min boundation
-            $generel_preset = PresetGeneral::where('map_prod_form_option', $map_paperstock_option->first()->id)->firstOrFail(); //just picking the first one as because all the max min limitations will be same for all rules
-            $min = $generel_preset->min_size;
-            $max = $generel_preset->max_size;
+            $min = $theProduct->min_size;
+            $max = $theProduct->max_size;
 
             if($width < $min || $width > $max || $height < $min || $height > $max)
             {

@@ -97,6 +97,7 @@ class AutoCalculator{
 		if($presetTwo->count() > 0)
 		{
 			$thePresetTwo = $presetTwo->first();
+			$totalDisc = 0;
 
 			$excess = $this->qty - $thePresetTwo->from;
 			if($excess >= $thePresetTwo->every_extra_qty)
@@ -104,14 +105,14 @@ class AutoCalculator{
 				$j = floor($excess / $thePresetTwo->every_extra_qty);
 				for($d = 0; $d < $j; $d++)
 				{
-					$this->price = $this->price - ($this->price * ($thePresetTwo->disc_rate/100));
+					$totalDisc += $thePresetTwo->disc_rate;
 				}
 			}
 
 			//now add discount rates of all the previous predefined preset of qty rule 2
-			$this->price = $this->recursivePercents($thePresetTwo, $this->price);
+			$finalTotalDisc = $this->recursivePercents($thePresetTwo, $totalDisc);
 
-			return $this->price;
+			return $this->price - ($this->price * ($finalTotalDisc/100));
 		}
 		else
 		{
@@ -122,10 +123,10 @@ class AutoCalculator{
 	/**
 	*recusively adds % for the previous preset groups for qty rule group 2
 	*/
-	public function recursivePercents(PresetQtyGrpTwo $currGroup, $currPrice)
+	public function recursivePercents(PresetQtyGrpTwo $currGroup, $currTotalDisc)
 	{
 		$currFrom = $currGroup->from;
-		$arbitraryQty = $currFrom - 1100;  //an arbitrary qty that belongs to the previous preset group qty range
+		$arbitraryQty = $currFrom - 1;  //an arbitrary qty that belongs to the previous preset group qty range
 		$presetTwo = PresetQtyGrpTwo::where([['map_prod_form_option', $this->map_prod_form_option], ['from', '<=', $arbitraryQty], ['to', '>=', $arbitraryQty]]);
 
 		if($presetTwo->count() > 0)
@@ -134,20 +135,23 @@ class AutoCalculator{
 
 			$excess = $thePresetTwo->to - $thePresetTwo->from;
 			$j = floor($excess / $thePresetTwo->every_extra_qty);
+			$totalDisc = 0;
 			for($d = 0; $d < $j; $d++)
 			{
-				$currPrice = $currPrice - ($currPrice * ($thePresetTwo->disc_rate/100));
+				$totalDisc += $thePresetTwo->disc_rate;
 			}
 
-			$this->recursivePercents($thePresetTwo, $currPrice);
+			$currTotalDisc += $totalDisc;
 
+			//recursively checking previous avilability of presets
+			$currTotalDisc = $this->recursivePercents($thePresetTwo, $currTotalDisc);
 
-			return $currPrice;
+			return $currTotalDisc;
 		}
 		else
 		{
 			//there is no more qty rule group 2 previous preset
-			return $currPrice;
+			return $currTotalDisc;
 		}
 	}
 
