@@ -31,7 +31,16 @@ class PagesCtrl extends Controller
      */
     public function index()
     {
-        return view('frontend.home');
+        $data = [
+            'text1'     => Redis::command('HGET', ['banner', 'text1']),
+            'text2'     => Redis::command('HGET', ['banner', 'text2']),
+            'btn1'      => Redis::command('HGET', ['banner', 'btn1']),
+            'url1'      => Redis::command('HGET', ['banner', 'url1']),
+            'btn2'      => Redis::command('HGET', ['banner', 'btn2']),
+            'url2'      => Redis::command('HGET', ['banner', 'url2']),
+        ];
+
+        return view('frontend.home', $data);
     }
 
     /**

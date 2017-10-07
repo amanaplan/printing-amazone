@@ -40,9 +40,9 @@
 			<div class="carousel-caption one_color_blue_carousel_caption">
 				<img src="{{ asset( 'assets/images/banner-img1.png' ) }}" alt="slider 01" class="img-responsive" />
 				<div class="one_color_blue_carousel_caption_text">
-					<h1>Make your own<br> Custom <span>Stickers</span></h1>
-					<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit<br> amet, consectetur, adipisci velit</p>
-					<a href="{{ url('/contact') }}" class="pink">Contact Us</a><a href="{{ url('/preset-sized-stickers') }}" class="green">Shop Now</a>
+					<h1>{!! $text1 !!}</h1>
+					<p>{!! $text2 !!}</p>
+					<a href="{{ $url1 }}" class="pink">{{ $btn1 }}</a><a href="{{ $url2 }}" class="green">{{ $btn2 }}</a>
 				</div>						
 			</div>
 		</div>
