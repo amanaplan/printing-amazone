@@ -945,4 +945,28 @@ class AdminRqstController extends Controller
         return redirect('/admin/cms/list-pages');
     }
 
+    /**
+    *home page banner contents form post
+    */
+    public function CMSManageHomeBanner(Request $request)
+    {
+        $this->validate($request, [
+            'text_line_1'  =>  'required|min:5',
+            'button1_text'  =>  'required',
+            'button2_text'  =>  'required',
+            'button1_url'  =>  'required|url',
+            'button2_url'  =>  'required|url',
+        ]);
+
+        Redis::command('HSET', ['banner', 'text1', $request->input('text_line_1')]);
+        Redis::command('HSET', ['banner', 'text2', $request->input('text_line_2')]);
+        Redis::command('HSET', ['banner', 'btn1', $request->input('button1_text')]);
+        Redis::command('HSET', ['banner', 'url1', $request->input('button1_url')]);
+        Redis::command('HSET', ['banner', 'btn2', $request->input('button2_text')]);
+        Redis::command('HSET', ['banner', 'url2', $request->input('button2_url')]);
+
+        adminflash('success', 'changes saved successfully');
+        return redirect()->back();
+    }
+
 }

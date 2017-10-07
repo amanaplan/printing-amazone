@@ -23,6 +23,7 @@ use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class AdminController extends Controller
 {
@@ -442,6 +443,24 @@ class AdminController extends Controller
         ];
 
         return view('backend.cms-edit-page', $data);
+    }
+
+    /**
+    *manage home page contents
+    */
+    public function CMSManageHomeBanner()
+    {
+        $data = [
+            'page'      => 'banner',
+            'text1'     => Redis::command('HGET', ['banner', 'text1']),
+            'text2'     => Redis::command('HGET', ['banner', 'text2']),
+            'btn1'      => Redis::command('HGET', ['banner', 'btn1']),
+            'url1'      => Redis::command('HGET', ['banner', 'url1']),
+            'btn2'      => Redis::command('HGET', ['banner', 'btn2']),
+            'url2'      => Redis::command('HGET', ['banner', 'url2']),
+        ];
+
+        return view('backend.cms-home-banner', $data);
     }
 
 }

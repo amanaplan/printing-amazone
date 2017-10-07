@@ -207,6 +207,8 @@ Route::prefix('admin')->group(function() {
 	Route::put('/cms/edit-submit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditPage');
 	Route::get('/cms/list-pages', 'Backend\AdminController@CMSPagesList');
 	Route::delete('/cms/manage-page/delete/{id}', 'Backend\RequestHandlers\AdminRqstController@RemovePage');
+	Route::get('/cms/manage-home', 'Backend\AdminController@CMSManageHomeBanner');
+	Route::post('/cms/home/banner', 'Backend\RequestHandlers\AdminRqstController@CMSManageHomeBanner');
 
 
 	/*___________________________________________________
