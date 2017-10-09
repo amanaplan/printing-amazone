@@ -118,7 +118,7 @@ class AdminRqstController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_id'   => 'required|numeric',
-            'product_name'  => 'required|min:5|unique:products,product_name',
+            'product_name'  => 'required|min:3|unique:products,product_name',
             'description'   => 'required',
             'min_size'      => 'required|numeric',
             'max_size'      => 'required|numeric',
@@ -180,7 +180,7 @@ class AdminRqstController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_id'   => 'required|numeric',
-            'product_name'  => ['required', 'min:5', Rule::unique('products','product_name')->ignore($id)],
+            'product_name'  => ['required', 'min:3', Rule::unique('products','product_name')->ignore($id)],
             'description'   => 'required',
             'min_size'      => 'required|numeric',
             'max_size'      => 'required|numeric',

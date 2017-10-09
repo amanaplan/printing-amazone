@@ -143,7 +143,7 @@
 											<li>&nbsp;</li>
 
 											<li>
-												<strong>**for quantiry more than 20,000 please <a href="{{ url('/contact') }}">contact</a></strong>
+												<strong>** for any other quantity, please <a href="{{ url('/contact') }}">contact</a></strong>
 											</li>
 										</ul>
 										
