@@ -395,17 +395,7 @@
                             <tbody><tr>
                                 <td align="center">
                                     <table class="tel" align="center" border="0" cellpadding="0" cellspacing="0">
-                                        <tbody><tr>
-                                            <td>
-                                                <img  style="display: block;" src="{{ asset( 'assets/images/email-img/icon-tel.png' ) }}" alt="icon 2" width="17">
-                                            </td>
-                                            <td>&nbsp;&nbsp;</td>
-                                            <td style="color: #fefefe; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
-                                                <singleline>
-                                                    Contact : +1 (222) 333-4444
-                                                </singleline>
-                                            </td>
-                                        </tr>
+                                        <tbody>
                                         </tbody></table>
                                 </td>
                             </tr>
@@ -498,64 +488,12 @@
 </tr>
 <!-- end main section -->
 
-<tr><td height="20"></td></tr>
-
-
-<!-- prefooter -->
-
-<tr>
-    <td>
-        <table class="container-middle" align="center" border="0" cellpadding="0" cellspacing="0" width="560">
-            <tbody><tr>
-                <td>
-
-
-                    <table class="nav" align="center" border="0" cellpadding="0" cellspacing="0">
-                        <tbody><tr><td height="10"></td></tr>
-                        <tr>
-                            <td  style="font-size: 13px; font-family: Helvetica, Arial, sans-serif;" align="center">
-                                <table align="center" border="0" cellpadding="0" cellspacing="0">
-                                    <tbody><tr>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-google.png' ) }}" alt="google plus" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-youtube.png' ) }}" alt="youtube" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img style="display: block;" src="{{ asset( 'assets/images/email-img/social-facebook.png' ) }}" alt="facebook" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-twitter.png' ) }}" alt="twitter" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="{{ asset( 'assets/images/email-img/social-linkedin.png' ) }}" alt="linkedin" width="16"></a>
-                                        </td>
-                                    </tr>
-                                    </tbody></table>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            </tbody></table>
-    </td>
-</tr>
-<!-- end prefooter  -->
-
-<tr><td height="20"></td></tr>
-
 <tr><td height="30"></td></tr>
 
 <tr>
     <td  style="color: #939393; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" class="prefooter-subheader" align="center">
 
-        <span style="color: #ed8f01">Adress :</span> 3423 Dream Land &nbsp;&nbsp;&nbsp;   <span style="color: #ed8f01">Phone :</span> 123233243    &nbsp;&nbsp;&nbsp;<span style="color: #ed8f01">Email :</span> info@printingamazon.com.au
+        <span style="color: #ed8f01">Facebook :</span> <a href="https://www.facebook.com/withprintingamazon/" rel="noreferrer noopener" target="_blank">fb/withprintingamazon</a> &nbsp;&nbsp;&nbsp;  <span style="color: #ed8f01">Email :</span> info@printingamazon.com.au
 
 
     </td>

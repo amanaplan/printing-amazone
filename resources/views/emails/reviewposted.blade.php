@@ -401,9 +401,7 @@
                                             </td>
                                             <td>&nbsp;&nbsp;</td>
                                             <td style="color: #fefefe; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
-                                                <singleline>
-                                                    Contact : +1 (222) 333-4444
-                                                </singleline>
+
                                             </td>
                                         </tr>
                                         </tbody></table>
@@ -500,15 +498,6 @@
 <tr><td height="20"></td></tr>
 
 <tr><td height="30"></td></tr>
-
-<tr>
-    <td  style="color: #939393; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" class="prefooter-subheader" align="center">
-
-        <span style="color: #ed8f01">Adress :</span> 3423 Dream Land &nbsp;&nbsp;&nbsp;   <span style="color: #ed8f01">Phone :</span> 123233243    &nbsp;&nbsp;&nbsp;<span style="color: #ed8f01">Email :</span> info@printingamazon.com.au
-
-
-    </td>
-</tr>
 
 <tr><td height="30"></td></tr>
 </tbody></table>
