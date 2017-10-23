@@ -77,7 +77,7 @@
             <a href="#"><i class="fa fa-home" aria-hidden="true"></i> <span class="nav-label"> Manage Home Page </span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
                 <li><a {!! ($page == 'banner')? 'class="current-menu"' : '' !!} href="{{ url('/admin/cms/manage-home') }}"> Banner Contents</a></li>
-                <li><a {!! ($page == 'product_links')? 'class="current-menu"' : '' !!} href="#">Manage Features </a></li>
+                <li><a {!! ($page == 'product_links')? 'class="current-menu"' : '' !!} href="{{ url('/admin/cms/product-links') }}">Manage Features </a></li>
             </ul>
         </li>
 

@@ -209,6 +209,8 @@ Route::prefix('admin')->group(function() {
 	Route::delete('/cms/manage-page/delete/{id}', 'Backend\RequestHandlers\AdminRqstController@RemovePage');
 	Route::get('/cms/manage-home', 'Backend\AdminController@CMSManageHomeBanner');
 	Route::post('/cms/home/banner', 'Backend\RequestHandlers\AdminRqstController@CMSManageHomeBanner');
+	Route::get('/cms/product-links', 'Backend\AdminController@CMSManageProdLinks');
+	Route::post('/cms/product-links/save', 'Backend\RequestHandlers\AdminRqstController@CMSSaveProdLinks');
 
 
 	/*___________________________________________________

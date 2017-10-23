@@ -463,4 +463,18 @@ class AdminController extends Controller
         return view('backend.cms-home-banner', $data);
     }
 
+    /**
+    *manage product links of home page
+    */
+    public function CMSManageProdLinks()
+    {
+        $data = [
+            'page'          => 'product_links',
+            'products'      => Product::select(['id', 'product_name'])->orderBy('product_name', 'asc')->get(),
+            'curr_prods'    => Redis::exists('prod_links') ? json_decode(Redis::get('prod_links')) : null,
+        ];
+
+        return view('backend.cms-prod-links-page', $data);
+    }
+
 }

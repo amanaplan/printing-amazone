@@ -969,4 +969,38 @@ class AdminRqstController extends Controller
         return redirect()->back();
     }
 
+    /**
+    *save home page features product links
+    */
+    public function CMSSaveProdLinks(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'prod.*' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            adminflash('warning', 'validation error occurred, select products');
+            return redirect()->back();
+        }
+
+        
+        $featured_arr = [];
+        foreach($request->input('prod') as $prod)
+        {
+            $theProduct = Product::find($prod);
+
+            $featured_arr[] = [
+                'id'    => $prod,
+                'url'   => ($theProduct->category->category_slug === 'uncategorized')? $theProduct->product_slug : $theProduct->category->category_slug .'/'. $theProduct->product_slug, 
+                'name'  => $theProduct->product_name, 
+                'logo'  => $theProduct->logo,
+            ];
+        }
+
+        Redis::set('prod_links', json_encode($featured_arr));
+
+        adminflash('success', 'changes saved successfully');
+        return redirect()->back();
+    }
+
 }

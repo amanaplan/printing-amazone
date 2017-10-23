@@ -57,31 +57,23 @@
 		<div class="row">
 			<h2>Printing Amazon Features</h2>
 			<div class="feature-dtls">
-				<a href="{{ url('/custom-stickers') }}"><div class="col-sm-4 col-lg-4 dtls-box">
-					<img src="{{ asset( 'assets/images/f1.png' ) }}" />
-					<h2>Custom Stickers</h2>
-				</div></a>
-				<a href="{{ url('/business-card') }}"><div class="col-sm-4 col-lg-4 dtls-box">
-					<img src="{{ asset( 'assets/images/f2.png' ) }}" />
-					<h2>Business Cards</h2>
-				</div></a>
-				<a href="{{ url('/postcards') }}"><div class="col-sm-4 col-lg-4 dtls-box">
-					<img src="{{ asset( 'assets/images/f3.png' ) }}" />
-					<h2>Postcards</h2>
-				</div></a>
-				<div class="clearfix"></div>
-				<a href="{{ url('/brochuresflyers') }}"><div class="col-sm-4 col-lg-4 dtls-box">
-					<img src="{{ asset( 'assets/images/f4.png' ) }}" />
-					<h2>Decal Stickers</h2>
-				</div></a>
-				<a href="{{ url('/labels') }}"><div class="col-sm-4 col-lg-4 dtls-box">
-					<img src="{{ asset( 'assets/images/f5.png' ) }}" />
-					<h2>Label</h2>
-				</div></a>
-				<a href="{{ url('/graphic-designs') }}"><div class="col-sm-4 col-lg-4 dtls-box">
-					<img src="{{ asset( 'assets/images/f6.png' ) }}" />
-					<h2>Graphic Design</h2>
-				</div></a>
+
+				@if($prods)
+					@foreach($prods->chunk(3) as $chunk)
+						@foreach ($chunk as $prod)
+								<a href="{{ url('/') .'/'. $prod->url }}">
+								<div class="col-sm-4 col-lg-4 dtls-box">
+									<img src="{{ asset( 'assets/images/products/'.$prod->logo ) }}" />
+									<h2>{{ $prod->name }}</h2>
+								</div>
+							</a>
+						@endforeach
+						
+						<div class="clearfix"></div>
+
+					@endforeach
+				@endif
+
 				<div class="clearfix"></div>
 			</div><!-- feature-dtls -->
 		</div><!-- row -->

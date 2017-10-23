@@ -31,6 +31,9 @@ class PagesCtrl extends Controller
      */
     public function index()
     {
+        //features products
+        $products = Redis::exists('prod_links') ? collect(json_decode(Redis::get('prod_links'))) : null;
+
         $data = [
             'text1'     => Redis::command('HGET', ['banner', 'text1']),
             'text2'     => Redis::command('HGET', ['banner', 'text2']),
@@ -38,6 +41,7 @@ class PagesCtrl extends Controller
             'url1'      => Redis::command('HGET', ['banner', 'url1']),
             'btn2'      => Redis::command('HGET', ['banner', 'btn2']),
             'url2'      => Redis::command('HGET', ['banner', 'url2']),
+            'prods'     => $products,
         ];
 
         return view('frontend.home', $data);
