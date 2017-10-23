@@ -1,3 +1,3 @@
-const APP_URL = 'http://localhost/srv/printing-amazone/public/';
+const APP_URL = 'http://printingamazon.dev/';
 
 export default APP_URL;

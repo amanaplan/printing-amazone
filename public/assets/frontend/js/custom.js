@@ -1,4 +1,4 @@
-const SERVER_ADDR = 'http://localhost/srv/printing-amazone/public/';
+const SERVER_ADDR = 'http://printingamazon.dev/';
 
 /** google oauth2.0 **/
 
