@@ -379,7 +379,7 @@ module.exports = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var APP_URL = 'http://localhost/srv/printing-amazone/public/';
+var APP_URL = 'http://printingamazon.dev/';
 
 /* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
