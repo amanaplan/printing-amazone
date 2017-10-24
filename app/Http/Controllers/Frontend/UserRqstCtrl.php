@@ -115,7 +115,9 @@ class UserRqstCtrl extends Controller
     {
         $validator = Validator::make($request->all(), [
             'full-name'     => 'required|min:5',
-            'profile_pic'   => 'nullable|mimes:jpeg,png,jpg,gif'
+            'profile_pic'   => 'nullable|mimes:jpeg,png,jpg,gif',
+            'mobile'        => ['required', 'regex:/^(\+{1})?\d+$/', 'min:6', 'max:20'],
+            'birthday'      => ['required', 'regex:/^\d{4}\-\d{2}\-\d{2}$/'],
         ]);
 
 
@@ -125,7 +127,15 @@ class UserRqstCtrl extends Controller
 
         //otherwise update profile info
         $user = \App\User::findorFail(Auth::id());
-        $user->name = $request->input('full-name');
+        $user->name         = $request->input('full-name');
+        $user->mobile       = $request->input('mobile');
+        $user->birthday     = $request->input('birthday');
+        $user->state        = $request->input('state');
+        $user->suburb       = $request->input('suburb');
+        $user->post_code    = $request->input('post_code');
+        $user->street       = $request->input('street');
+        $user->company      = $request->input('company');
+
 
 
         //profile picture upload attempt

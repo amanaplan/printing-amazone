@@ -44,7 +44,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label" for="input-order-id">Search Customer</label>
-                                    <input type="text" name="customer" value="{{ (Request::has('customer'))? Request::input('customer') : '' }}" placeholder="customer name or email" id="input-order-id" class="form-control">
+                                    <input type="text" name="customer" value="{{ (Request::has('customer'))? Request::input('customer') : '' }}" placeholder="customer name or email or mobile" id="input-order-id" class="form-control">
                                 </div>
                                 @if(Request::has('customer'))
                                 <a href="{{ route('manage.customers') }}" class="btn btn-primary"><i class="fa fa-times"></i> Clear search</a>
@@ -63,9 +63,9 @@
                             
                             <td class="text-center">                    Photo
                             </td>
-                            <td class="text-right">                    Full Name
+                            <td class="text-right">                     Name &amp; Birthday
                             </td>
-                            <td class="text-center">                    Email ID
+                            <td class="text-center">                    Contact Details
                             </td>
                             <td class="text-right">                    Total Purchase
                             </td>
@@ -83,9 +83,26 @@
                             <td class="text-center">
                                 <img width="80" src="{{ getTheCustomerPic($customer->id) }}">
                             </td>
-                            <td class="text-right">{{ $customer->name }}</td>
+                            <td class="text-left">
+                                <ul class="list-group">
+                                    <li class="list-group-item">{{ $customer->name }}</li>  
+                                    @if($customer->birthday)
+                                    <li class="list-group-item"><i class="fa fa-birthday-cake" aria-hidden="true"></i> 
+                                        @php
+                                            $dt = Carbon\Carbon::parse($customer->birthday);
+                                        @endphp
+                                        {{ $dt->formatLocalized('%A %d %B %Y') }}
+                                    </li>
+                                    @endif
+                                </ul> 
+                            </td>
                             <td class="text-center">
-                                <i class="fa fa-envelope"></i> {{ $customer->email }}
+                                <ul class="list-group">
+                                    <li class="list-group-item"><i class="fa fa-envelope"></i> {{ $customer->email }}</li>
+                                    <li class="list-group-item"><i class="fa fa-phone"></i> {{ ($customer->mobile)?? 'NA' }}</li>
+                                </ul>
+                                
+                                
                             </td>
                             <td class="text-right">$ {{ number_format(\App\Order::where([['user_id', $customer->id],['status', 5]])->sum('price')) }}</td>
                             <td class="text-right">{{ \App\Order::where('user_id', $customer->id)->count() }}</td>

@@ -50,25 +50,25 @@
 
 					<div class="form-group">
 						<label>Full Name</label>
-						@if(Auth::guard('web')->check())
+						@customerloggedin
 						<input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" readonly="readonly" />
 						@else
 						<input type="text" class="form-control" data-validation="length" data-validation-length="min5" name="name" placeholder="Enter Full Name" />
-						@endif
+						@endcustomerloggedin
 				    </div>
 
 				    <div class="form-group col-sm-6 col-xs-12 res-right" style="padding-left: 0;">
 						<label>Email ID</label>
-						@if(Auth::guard('web')->check())
+						@customerloggedin
 						<input type="text" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly="readonly" />
 						@else
 						<input type="email" name="email" data-validation="email" class="form-control" />
-						@endif
+						@endcustomerloggedin
 				    </div>
 
 				    <div class="form-group col-sm-6 col-xs-12 res" style="padding-right: 0;">
 						<label>Phone</label>
-						<input name="phone" data-validation="custom" data-validation-regexp="^(\+{1})?\d+$" type="text" class="form-control" />
+						<input name="phone" data-validation="custom" @customerloggedin value="{{ Auth::user()->mobile }}" @endcustomerloggedin data-validation-regexp="^(\+{1})?\d+$" type="text" class="form-control" />
 				    </div>
 				    <div class="clearfix"></div>
 
@@ -79,29 +79,29 @@
 
 				    <div class="form-group col-sm-6 col-xs-12 res" style="padding-right: 0;">
 						<label>State</label>
-						<input name="state" data-validation="required" type="text" class="form-control" />
+						<input name="state" data-validation="required" type="text" class="form-control" @customerloggedin value="{{ Auth::user()->state }}" @endcustomerloggedin />
 				    </div>
 				    <div class="clearfix"></div>
 
 				    <div class="form-group col-sm-6 col-xs-12 res-right" style="padding-left: 0;">
 						<label>Suburb</label>
-						<input name="city" data-validation="required" type="text" class="form-control" />
+						<input name="city" data-validation="required" type="text" class="form-control" @customerloggedin value="{{ Auth::user()->suburb }}" @endcustomerloggedin />
 				    </div>
 
 				    <div class="form-group col-sm-6 col-xs-12 res" style="padding-right: 0;">
 						<label>Post Code</label>
-						<input name="zipcode" data-validation="required" type="text" class="form-control" />
+						<input name="zipcode" data-validation="required" type="text" class="form-control" @customerloggedin value="{{ Auth::user()->post_code }}" @endcustomerloggedin />
 				    </div>
 				    <div class="clearfix"></div>
 
 				    <div class="form-group">
 						<label>Street Address</label>
-						<textarea name="street" data-validation="required" class="form-control"></textarea>
+						<textarea name="street" data-validation="required" class="form-control">@customerloggedin {{ Auth::user()->street }} @endcustomerloggedin</textarea>
 				    </div>
 
 				    <div class="form-group">
 						<label>Company (optional)</label>
-						<input type="text" name="company" class="form-control" />
+						<input type="text" name="company" class="form-control" @customerloggedin value="{{ Auth::user()->company }}" @endcustomerloggedin />
 				    </div>
 
 				    <!-- <input type="hidden" name="payment_method_nonce" id="#nonce" /> -->

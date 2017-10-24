@@ -19,6 +19,7 @@ use App\Order;
 use App\OrderBilling;
 use App\OrderItem;
 use App\OptPaperstock;
+use App\User;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
@@ -103,6 +104,22 @@ class Checkout extends Controller
             'street' => $request->input('street'),
             'company'   => $request->input('company'),
         ];
+
+        /**
+        *update user's shipping details in their profile with the current checkout form input
+        */
+        if(Auth::guard('web')->check())
+        {
+            $user = Auth::user();
+            $user->mobile = $request->input('phone');
+            $user->state = $request->input('state');
+            $user->suburb = $request->input('city');
+            $user->post_code = $request->input('zipcode');
+            $user->street = $request->input('street');
+            $user->company = $request->input('company');
+            $user->save();
+        }
+        
 
         Session::put('order', collect($collect));
     }

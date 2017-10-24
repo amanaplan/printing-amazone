@@ -86,7 +86,7 @@
 										<ul class="dropdown-menu" style="display: none;">
 											<li><a href="{{ route('user.dashboard') }}">My Dashboard</a></li>
 											<li><a href="{{ url('/user/profile') }}">Profile</a></li>
-											<li><a href="#">Orders</a></li>
+											<li><a href="{{ url('/user/my-orders') }}">Orders</a></li>
 										</ul>
 									</li>
 									<li><a class="cd-signup" href="#" onclick="LogoffUser();"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>

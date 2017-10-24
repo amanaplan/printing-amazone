@@ -12,6 +12,7 @@
 @push( 'styles' )
 
   @include('layouts.frontend.userpanel-styles')
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/plugin/datepicker/bootstrap-datepicker3.min.css') }}">
 
 @endpush
 
@@ -71,6 +72,106 @@
        </div>
     </div>
 
+    <div class="form-group {{ $errors->has('mobile') ? ' has-error' : '' }}">
+      <label class="control-label col-sm-2">Mobile No.:</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="mobile" value="{{ Auth::user()->mobile }}" placeholder="your mobile phone no." type="text">
+
+        @if ($errors->has('mobile'))
+            <span class="help-block m-b-none">
+                <strong>{{ $errors->first('mobile') }}</strong>
+            </span>
+        @endif
+
+       </div>
+    </div>
+
+    <div class="form-group {{ $errors->has('birthday') ? ' has-error' : '' }}">
+      <label class="control-label col-sm-2">Birthday:</label>
+      <div class="col-sm-10 date" data-provide="datepicker" data-date-end-date="0d" data-date-format="yyyy-mm-dd">
+        <input class="form-control" name="birthday" value="{{ Auth::user()->birthday }}" placeholder="yyyy-mm-dd" type="text">
+        <div class="input-group-addon" style="display: none;">
+        </div>
+
+        @if ($errors->has('birthday'))
+            <span class="help-block m-b-none">
+                <strong>{{ $errors->first('birthday') }}</strong>
+            </span>
+        @endif
+
+       </div>
+    </div>
+
+    <div class="form-group {{ $errors->has('state') ? ' has-error' : '' }}">
+      <label class="control-label col-sm-2">State:</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="state" value="{{ Auth::user()->state }}" type="text">
+
+        @if ($errors->has('state'))
+            <span class="help-block m-b-none">
+                <strong>{{ $errors->first('state') }}</strong>
+            </span>
+        @endif
+
+       </div>
+    </div>
+
+    <div class="form-group {{ $errors->has('suburb') ? ' has-error' : '' }}">
+      <label class="control-label col-sm-2">Suburb:</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="suburb" value="{{ Auth::user()->suburb }}" type="text">
+
+        @if ($errors->has('suburb'))
+            <span class="help-block m-b-none">
+                <strong>{{ $errors->first('suburb') }}</strong>
+            </span>
+        @endif
+
+       </div>
+    </div>
+
+    <div class="form-group {{ $errors->has('post_code') ? ' has-error' : '' }}">
+      <label class="control-label col-sm-2">Post Code:</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="post_code" value="{{ Auth::user()->post_code }}" type="text">
+
+        @if ($errors->has('post_code'))
+            <span class="help-block m-b-none">
+                <strong>{{ $errors->first('post_code') }}</strong>
+            </span>
+        @endif
+
+       </div>
+    </div>
+
+    <div class="form-group {{ $errors->has('street') ? ' has-error' : '' }}">
+      <label class="control-label col-sm-2">Street Address:</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" name="street">{{ Auth::user()->street }}</textarea>
+
+        @if ($errors->has('street'))
+            <span class="help-block m-b-none">
+                <strong>{{ $errors->first('street') }}</strong>
+            </span>
+        @endif
+
+       </div>
+    </div>
+
+    <div class="form-group {{ $errors->has('company') ? ' has-error' : '' }}">
+      <label class="control-label col-sm-2">Company:</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="company" value="{{ Auth::user()->company }}" type="text">
+
+        @if ($errors->has('company'))
+            <span class="help-block m-b-none">
+                <strong>{{ $errors->first('company') }}</strong>
+            </span>
+        @endif
+
+       </div>
+    </div>
+
     <div class="form-group"> 
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-info">Save Changes</button>
@@ -93,5 +194,11 @@
 
 {{-- page specific scripts --}}
 @push( 'scripts' )
+
+  <script type="text/javascript" src="{{ asset('assets/frontend/plugin/datepicker/bootstrap-datepicker.min.js') }}"></script>
+
+  <script type="text/javascript">
+    $('.datepicker').datepicker();
+  </script>
 
 @endpush

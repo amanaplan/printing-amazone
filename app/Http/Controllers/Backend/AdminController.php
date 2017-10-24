@@ -388,7 +388,7 @@ class AdminController extends Controller
         if($request->has('customer'))
         {
             $term = $request->input('customer');
-            $customers = User::where('name', 'like', '%'.$term.'%')->orWhere('email', 'like', '%'.$term.'%')->withCount(['reviews' => function($query){
+            $customers = User::where('name', 'like', '%'.$term.'%')->orWhere('email', 'like', '%'.$term.'%')->orWhere('mobile', 'like', '%'.$term.'%')->withCount(['reviews' => function($query){
                 return $query->where('publish', 1);
             }])->latest()->paginate(10);
         }

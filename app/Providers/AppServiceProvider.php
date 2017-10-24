@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Blade;
+
+use Auth;
 
 use App\Cart;
 use App\Order;
@@ -24,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::if('customerloggedin', function(){
+            return Auth::guard('web')->check();
+        });
+
         Schema::defaultStringLength(191);
 
         //custom validation
