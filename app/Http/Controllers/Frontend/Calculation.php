@@ -76,6 +76,8 @@ class Calculation extends Controller
 
             //check if its within the max min boundation
             $theproduct = Product::find($product);
+            abort_unless($theproduct->allow_custom_size, 422); //check if custom size option applicable
+
             $min = $theproduct->min_size;
             $max = $theproduct->max_size;
             

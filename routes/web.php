@@ -34,7 +34,7 @@ Route::post('/product/calculate-price', 'Frontend\Calculation@GenPrice');
 Route::get('/labels', 'Frontend\DirectProduct');
 Route::get('/graphic-designs', 'Frontend\DirectProduct');
 Route::get('/product/name-sticker/get-preview', 'Frontend\AjaxCtrl@ShowPreview');
-Route::get('/contact', 'Frontend\PagesCtrl@contact');
+Route::view('/contact', 'frontend.contact');
 Route::post('/place-order/proceed', 'Frontend\ProceedOrder@Index');
 Route::get('/upload-artwork', 'Frontend\ProceedOrder@UploadArtwork')->name('upload.artwork');
 Route::post('/upload-artwork/process-upload', 'Frontend\ProceedOrder@UploadFile');

@@ -154,6 +154,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Allow custom size selection option</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline"> 
+                                    <input type="checkbox" name="custom_size" value="1"> Enable </label> 
+                                    
+                                    @if ($errors->has('custom_size'))
+                                        <span class="help-block m-b-none">
+                                            <strong>{{ $errors->first('custom_size') }}</strong>
+                                        </span>
+                                    @endif
+                            </div>
+                        </div>
+
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group {{ $errors->has('page_title') ? ' has-error' : '' }}">

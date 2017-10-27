@@ -22,4 +22,8 @@ class Product extends Model
     {
 		return $this->belongsTo('App\Category');
     }
+
+    protected $casts = [
+        'allow_custom_size' => 'boolean',
+    ];
 }
