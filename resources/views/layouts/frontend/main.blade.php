@@ -119,6 +119,7 @@
 					<ul>
 						<li><a href="{{ url('/') }}">Home</a> /</li>
 						<li><a href="{{ url('/about-us') }}">About</a> /</li>
+						<li><a href="{{ url('/faq') }}">Faq</a> /</li>
 						<li><a href="{{ url('/contact') }}">Contact</a></li>
 					</ul>
 				</div><!-- footer-menu -->
