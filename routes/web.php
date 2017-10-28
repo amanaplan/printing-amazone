@@ -28,13 +28,14 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
+Route::view('/template', 'frontend.template');
+Route::view('/contact', 'frontend.contact');
 Route::post('/product/give-review', 'Frontend\UserReviewPost');
 Route::post('/product/load-reviews', 'Frontend\AjaxCtrl@LoadReviews');
 Route::post('/product/calculate-price', 'Frontend\Calculation@GenPrice');
 Route::get('/labels', 'Frontend\DirectProduct');
 Route::get('/graphic-designs', 'Frontend\DirectProduct');
 Route::get('/product/name-sticker/get-preview', 'Frontend\AjaxCtrl@ShowPreview');
-Route::view('/contact', 'frontend.contact');
 Route::post('/place-order/proceed', 'Frontend\ProceedOrder@Index');
 Route::get('/upload-artwork', 'Frontend\ProceedOrder@UploadArtwork')->name('upload.artwork');
 Route::post('/upload-artwork/process-upload', 'Frontend\ProceedOrder@UploadFile');

@@ -629,3 +629,9 @@ border-radius: 4px;
 /**** user menu dropdown *****/
 ul.dropdown-menu{ background:#171717; text-align:left;left: 10px;}ul.dropdown-menu li{ display:block; text-align:left; border-bottom:1px solid;}ul.dropdown-menu li:last-child {    border-bottom: 1px none;}ul.dropdown-menu li a{color:#fff;font-size: 12px;font-weight: 300;padding: 6px 14px; transition:all 0.4s;}ul.dropdown-menu li a:hover{background:none; color:#999;}ul.dropdown-menu::after{    border-color: transparent transparent #171717;    border-image: none;    border-style: solid;    border-width: 6px 6px 5px;    content: "";    left: 22px;    position: absolute;    top: -11px;}
 >>>>>>> feature/signup-login
+
+.nav-pills .nav-link.active {
+    color: #fff;
+    cursor: default;
+    background-color: #0275d8;
+}

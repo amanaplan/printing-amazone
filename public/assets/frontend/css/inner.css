@@ -1078,3 +1078,55 @@ button#place-order {
 }
 form#contact-form div.row{margin-bottom: 10px;}
 form#contact-form .has-error{border: 1px solid #ff1818;}
+
+.nav-pills .nav-link.active {
+    color: #fff;
+    cursor: default;
+    background-color: #0275d8;
+    font-size: 14px;
+}
+.nav-pills .nav-link.active:hover{background:#0275d8; }
+.nav-pills .nav-link{
+    background: #eee; 
+    color: #000;
+    font-weight: 800;
+    font-size: 14px;
+    padding:14px 18px;
+    margin-right: 6px;
+    transition: all 0.4s;
+}
+.nav-pills .nav-link:hover{background: #fba51c; color: #fff;}
+.template-list{margin: 40px 0;}
+.template-box a{text-align: center; display: block; color: #000; font-weight: 700; font-size: 15px; text-decoration: none;}
+.template-box a:hover{color: #0275d8;}
+.template-box a img {
+    display: block;
+    margin: 0 auto 20px;
+}
+.template-box {
+    margin-bottom: 30px;
+}
+.modal-body button.continue {
+    width: 62%;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 auto 20px;
+}
+h4.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+.modal-body table{background: #f7f7f7;}
+.modal-body table td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.modal-body table td:last-child {
+    border-right: 1px none;
+}
+.modal-dialog {
+    width: 480px;
+}
+.close{font-size: 30px; line-height: 0.8;}
