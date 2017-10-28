@@ -39,16 +39,13 @@
 					
 					<ul class="nav nav-pills">
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#">Custom Stickers</a>
+					    <a class="nav-link active" href="#">Stickers</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#">Custom Magnets</a>
+					    <a class="nav-link" href="#">Magnets</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#">Custom Buttons</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="#">CustomPackaging</a>
+					    <a class="nav-link" href="#">Badges</a>
 					  </li>
 					</ul>
 					<div class="template-list">
