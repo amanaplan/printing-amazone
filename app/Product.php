@@ -23,6 +23,11 @@ class Product extends Model
 		return $this->belongsTo('App\Category');
     }
 
+    public function variations()
+    {
+        return $this->hasMany('App\TemplateProdVar', 'product_id');
+    }
+
     protected $casts = [
         'allow_custom_size' => 'boolean',
     ];

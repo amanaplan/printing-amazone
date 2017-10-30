@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2017 at 01:20 PM
+-- Generation Time: Oct 30, 2017 at 02:12 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -640,10 +640,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (58, '2017_09_21_213110_create_cms_pages_table', 32),
 (59, '2017_10_24_205620_add_additioal_profile_info_col_to_users_table', 33),
 (60, '2017_10_27_213858_add_customsizebox_toggle_col_to_products_table', 34),
-(61, '2017_10_28_193358_create_template_category_table', 35),
-(62, '2017_10_28_193712_create_template_prod_table', 36),
-(63, '2017_10_28_194049_create_template_prod_variation_table', 37),
-(65, '2017_10_28_194335_add_pic_col_to_template_prod_table', 38);
+(66, '2017_10_28_194049_create_template_prod_variation_table', 35);
 
 -- --------------------------------------------------------
 
@@ -2000,52 +1997,6 @@ INSERT INTO `sticker_types` (`id`, `name`, `image`, `sort`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `template_category`
---
-
-CREATE TABLE `template_category` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `category_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sort` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `template_category`
---
-
-INSERT INTO `template_category` (`id`, `category_name`, `category_slug`, `sort`) VALUES
-(1, 'hTF8yOb9', 'htf8yob9', 0),
-(2, 'UAHngDfR', 'uahngdfr', 0),
-(3, '6sUU2BC6', '6suu2bc6', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `template_products`
---
-
-CREATE TABLE `template_products` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `product_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sort` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `template_products`
---
-
-INSERT INTO `template_products` (`id`, `category_id`, `product_name`, `product_slug`, `image`, `sort`) VALUES
-(1, 3, 'BP5bnNPK', 'bp5bnnpk', NULL, 0),
-(2, 1, 'OW4Ue2nW', 'ow4ue2nw', NULL, 0),
-(3, 3, '0yHinsxk', '0yhinsxk', NULL, 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `template_product_variations`
 --
 
@@ -2056,6 +2007,17 @@ CREATE TABLE `template_product_variations` (
   `template_file` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sort` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `template_product_variations`
+--
+
+INSERT INTO `template_product_variations` (`id`, `product_id`, `variation`, `template_file`, `sort`) VALUES
+(1, 24, '80 x 80', 'templates/qfhV8WjsPy2VG5jpmLC3Cp5oAMiEbxTOQH9lqQnd.jpeg', 0),
+(2, 2, '80 x 80 mm', 'templates/Untitled.393633590png', 2),
+(3, 23, '100 x 100 mm', 'templates/M7hJXIXHl34FArb2wjdBkcpPHTsCq9itGEAzTdp8.jpeg', 0),
+(4, 31, '20 x  20', 'templates/popup(1)-1401491792.zip', 0),
+(5, 2, '10 x 20 mm', 'templates/new-form-1716529005.zip', 1);
 
 -- --------------------------------------------------------
 
@@ -2282,20 +2244,6 @@ ALTER TABLE `sticker_types`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `template_category`
---
-ALTER TABLE `template_category`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `template_category_category_slug_unique` (`category_slug`);
-
---
--- Indexes for table `template_products`
---
-ALTER TABLE `template_products`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `template_products_product_slug_unique` (`product_slug`);
-
---
 -- Indexes for table `template_product_variations`
 --
 ALTER TABLE `template_product_variations`
@@ -2371,7 +2319,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `notificationsetting`
 --
@@ -2448,20 +2396,10 @@ ALTER TABLE `size_options`
 ALTER TABLE `sticker_types`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `template_category`
---
-ALTER TABLE `template_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `template_products`
---
-ALTER TABLE `template_products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
 -- AUTO_INCREMENT for table `template_product_variations`
 --
 ALTER TABLE `template_product_variations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --

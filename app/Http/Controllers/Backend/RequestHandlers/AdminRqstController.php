@@ -16,9 +16,11 @@ use App\PresetQtyGrpTwo;
 use App\OptLamination;
 use App\StickerType;
 use App\Page;
+use App\TemplateProdVar;
 
 use App\Http\HelperClass\Multipurpose;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -1005,6 +1007,63 @@ class AdminRqstController extends Controller
 
         adminflash('success', 'changes saved successfully');
         return redirect()->back();
+    }
+
+    /**
+    *add downloadable template
+    */
+    public function AddTemplate(Request $request)
+    {
+        $request->validate([
+            'product_id'    => 'required|integer|exists:products,id',
+            'variation_name'    => 'required|min:5',
+            'template'      => 'required|file',
+        ]);
+
+        $template = Storage::disk('public')->putFile('templates', $request->file('template'));
+
+        TemplateProdVar::create([
+            'product_id'    =>  $request->input('product_id'),
+            'variation'     =>  $request->input('variation_name'),
+            'template_file' =>  $template,
+        ]);
+
+        adminflash('success', 'template uploaded successfully');
+        return redirect('/admin/template/manage');
+    }
+
+    /**
+    *edit template request
+    */
+    public function EditTemplate(Request $request, $id)
+    {
+        $request->validate([
+            'variation_name'    => 'required|min:5',
+            'template'          => 'nullable|file',
+        ]);
+
+        $variation = TemplateProdVar::findOrFail($id);
+        $variation->variation = $request->input('variation_name');
+
+        if($request->hasFile('template'))
+        {
+            $template = Storage::disk('public')->putFile('templates', $request->file('template'));
+
+            if($request->file('template')->isValid())
+            {
+                Storage::disk('public')->delete($variation->template_file); //delete the previous template file & replace with new
+                $variation->template_file = $template;
+            }
+        }
+
+        if($variation->save())
+        {
+            adminflash('success', 'template updated successfully');
+            return redirect('/admin/template/manage');
+        }
+
+        adminflash('danger', 'some error occurred, try again');
+        return redirect('/admin/template/manage');
     }
 
 }

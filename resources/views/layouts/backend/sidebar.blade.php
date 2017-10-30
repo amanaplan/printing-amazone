@@ -73,12 +73,11 @@
             </ul>
         </li>
 
-        <li {!! ($page == 'template' || $page == 'template_prod' || $page == 'template_variations')? 'class="active"' : '' !!}>
+        <li {!! ($page == 'template' || $page == 'template_add')? 'class="active"' : '' !!}>
             <a href="#"><i class="fa fa-download" aria-hidden="true"></i> <span class="nav-label">Downloadable Templates </span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
-                <li><a {!! ($page == 'template')? 'class="current-menu"' : '' !!} href="#">Template Category</a></li>
-                <li><a {!! ($page == 'template_prod')? 'class="current-menu"' : '' !!} href="#">Products </a></li>
-                <li><a {!! ($page == 'template_variations')? 'class="current-menu"' : '' !!} href="#">Product Sizes</a></li>
+                <li><a {!! ($page == 'template')? 'class="current-menu"' : '' !!} href="{{ url('/admin/template/manage') }}">Manage Templates</a></li>
+                <li><a {!! ($page == 'template_add')? 'class="current-menu"' : '' !!} href="{{ url('/admin/template/add') }}">Add Template </a></li>
             </ul>
         </li>
 

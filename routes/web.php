@@ -201,6 +201,13 @@ Route::prefix('admin')->group(function() {
 
 	Route::get('/customer/manage', 'Backend\AdminController@ManageCustomers')->name('manage.customers');
 
+	Route::get('/template/manage', 'Backend\AdminController@ManageTemplates');
+	Route::get('/template/add', 'Backend\AdminController@AddTemplates');
+	Route::get('/template/get-categories', 'Backend\AdminController@GetProductsByCategory');
+	Route::post('/request/template/add', 'Backend\RequestHandlers\AdminRqstController@AddTemplate');
+	Route::get('/template/edit/{id}', 'Backend\AdminController@EditTemplate');
+	Route::put('/request/template/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditTemplate');
+
 	//the CMS pages
 	Route::get('/cms/add-page', 'Backend\AdminController@CMSAddPage');
 	Route::post('/cms/pageadd', 'Backend\RequestHandlers\AdminRqstController@AddPage');

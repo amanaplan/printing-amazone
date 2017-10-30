@@ -13,6 +13,6 @@ class TemplateProdVar extends Model
 
     public function ofproduct()
     {
-    	return $this->belongsTo('App\TemplateProducts');
+    	return $this->belongsTo('App\Product', 'product_id');
     }
 }

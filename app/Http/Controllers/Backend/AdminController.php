@@ -19,6 +19,7 @@ use App\StickerType;
 use App\User;
 use App\Order;
 use App\Page;
+use App\TemplateProdVar;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -475,6 +476,67 @@ class AdminController extends Controller
         ];
 
         return view('backend.cms-prod-links-page', $data);
+    }
+
+    /**
+    *manage added templates
+    */
+    public function ManageTemplates()
+    {
+        $templates = Product::has('variations')
+                            ->withCount('variations')
+                            ->with(['variations' => function($query){
+                                                $query->orderBy('sort', 'asc');
+                                            }, 
+                                    'category:id,category_slug'])
+                            ->orderBy('product_name', 'asc')->get();
+
+        $data = [
+            'page'          => 'template',
+            'products'      => $templates
+        ];
+
+        return view('backend.template-list', $data);
+    }
+
+    /**
+    *manage added templates
+    */
+    public function AddTemplates()
+    {
+        $data = [
+            'page'          => 'template_add',
+            'categories'    => Category::orderBy('created_at', 'desc')->get()
+        ];
+
+        return view('backend.template-add', $data);
+    }
+
+    /**
+    *edit template page
+    */
+    public function EditTemplate($id)
+    {
+        $data = [
+            'page'          => 'template',
+            'template'      => TemplateProdVar::findOrFail($id)
+        ];
+
+        return view('backend.template-edit', $data);
+    }
+
+    /**
+    *category wise product fetch
+    */
+    public function GetProductsByCategory(Request $request)
+    {
+        $request->validate([
+            'category' => 'required|integer|exists:category,id'
+        ]);
+
+        $products = Category::find($request->input('category'))->products()->select('products.id','product_name')->get();
+
+        return $products;
     }
 
 }
