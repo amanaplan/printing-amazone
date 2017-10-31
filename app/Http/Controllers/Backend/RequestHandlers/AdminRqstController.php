@@ -1066,4 +1066,37 @@ class AdminRqstController extends Controller
         return redirect('/admin/template/manage');
     }
 
+    /**
+    *sort template order request
+    */
+    public function SortTemplate(Request $request)
+    {
+        $request->validate([
+            'id'    =>  'required|integer|exists:template_product_variations,id',
+            'sort'  =>  'required|integer',
+        ]);
+
+        TemplateProdVar::findOrFail($request->input('id'))->update(['sort' => $request->input('sort')]);
+
+        return response('success', 200);
+    }
+
+    /**
+    *remove template
+    */
+    public function DeleteTemplate(Request $request)
+    {
+        $request->validate([
+            'templateid' => 'required|integer|exists:template_product_variations,id'
+        ]);
+
+        $template_file = TemplateProdVar::findOrFail($request->input('templateid'))->template_file;
+
+        Storage::disk('public')->delete($template_file);
+        TemplateProdVar::destroy($request->input('templateid'));
+
+        adminflash('success', 'template deleted');
+        return redirect()->back();
+    }
+
 }

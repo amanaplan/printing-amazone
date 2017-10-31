@@ -539,4 +539,19 @@ class AdminController extends Controller
         return $products;
     }
 
+    /**
+    *sort template appearance
+    */
+    public function SortTemplate($id)
+    {
+        $templates = TemplateProdVar::where('product_id', $id)->get();
+
+        $data = [
+            'page'          => 'template',
+            'templates'      => $templates
+        ];
+
+        return view('backend.template-sort', $data);
+    }
+
 }

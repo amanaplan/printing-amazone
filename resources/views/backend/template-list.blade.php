@@ -80,19 +80,27 @@
                                             <li style="padding-top: 5px;">{{ $variation->variation }} 
                                                 <a href="{{ asset('storage/'.$variation->template_file) }}" download="{{ $product->product_name.'-'.$variation->variation }}" class="label label-success">download <i class="fa fa-download" aria-hidden="true"></i></a>
                                                 <a href="{{ url('/admin/template/edit', $variation->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" class="btn btn-default btn-sm"><i class="fa fa-trash"></i></a>
+                                                <a href="#" onclick="deleteTemplate({{ $variation->id }});" class="btn btn-default btn-sm"><i class="fa fa-trash"></i></a>
                                             </li>
                                             
                                         @endforeach
                                         </ul>
                                     </td>
 
-                                    <td><a href="#" class="btn btn-info"><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a></td>                                </tr>
+                                    <td><a href="{{ url('/admin/template/sort', $product->id) }}" class="btn btn-info"><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a></td>                                </tr>
 
                             @endforeach
 
                             </tbody>
                         </table>
+
+                        {{-- template delete form --}}
+                        <form action="{{ url('/admin/request/template/remove') }}" method="POST" id="template-delete">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <input type="hidden" name="templateid" value="0" />
+                        </form>
+                        
 
                     </div>
 
@@ -109,24 +117,14 @@
 @push('scripts')
     
     <script>
-        /*function changeCatSort(id, order) {
-            //ajax
-            $.ajaxSetup({
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: "{{ url('/admin/category/set-order') }}",
-                type: "PUT",
-                data: {id:id, sort:order},
-                success: function(result){
-                    Command: toastr["success"]("order updated successfully", "Successfully Done. .");
-                },
-                error: function(xhr,status,error){
-                    Command: toastr["error"](error, "some error occurred");
-                }
-            });
-
-            $.ajax();
-            //ajax
-        }*/
+        function deleteTemplate(id) {
+            let conf = confirm('sure to delete this template!');
+            if(conf == true)
+            {
+                $("input[name='templateid']").val(id);
+                $("form#template-delete").submit();
+            }
+        }
     </script>
 
 @endpush

@@ -207,6 +207,9 @@ Route::prefix('admin')->group(function() {
 	Route::post('/request/template/add', 'Backend\RequestHandlers\AdminRqstController@AddTemplate');
 	Route::get('/template/edit/{id}', 'Backend\AdminController@EditTemplate');
 	Route::put('/request/template/edit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditTemplate');
+	Route::get('/template/sort/{id}', 'Backend\AdminController@SortTemplate');
+	Route::put('/request/template/set-order', 'Backend\RequestHandlers\AdminRqstController@SortTemplate');
+	Route::delete('/request/template/remove', 'Backend\RequestHandlers\AdminRqstController@DeleteTemplate');
 
 	//the CMS pages
 	Route::get('/cms/add-page', 'Backend\AdminController@CMSAddPage');
