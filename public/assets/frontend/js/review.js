@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 178);
+/******/ 	return __webpack_require__(__webpack_require__.s = 179);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -889,7 +889,7 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ 165:
+/***/ 166:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11237,14 +11237,14 @@ module.exports = function dispatchRequest(config) {
 
 /***/ }),
 
-/***/ 170:
+/***/ 171:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(171)(
+var Component = __webpack_require__(172)(
   /* script */
-  __webpack_require__(89),
+  __webpack_require__(92),
   /* template */
-  __webpack_require__(172),
+  __webpack_require__(173),
   /* scopeId */
   null,
   /* cssModules */
@@ -11272,7 +11272,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 171:
+/***/ 172:
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -11330,7 +11330,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 172:
+/***/ 173:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11397,7 +11397,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 173:
+/***/ 174:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21493,7 +21493,7 @@ module.exports = Vue$3;
 
 /***/ }),
 
-/***/ 178:
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(73);
@@ -22367,11 +22367,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__star_rating__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formClass__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(174);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__boot_js__ = __webpack_require__(10);
 
@@ -22484,52 +22484,6 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 
 /***/ }),
 
-/***/ 89:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'reviewitem',
-  props: ['photo', 'heading', 'customer', 'review', 'rating'],
-  data: function data() {
-    return {};
-  },
-
-  methods: {
-    editReview: function editReview() {
-      return this.$emit('editreview');
-    }
-  }
-});
-
-/***/ }),
-
 /***/ 90:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22634,7 +22588,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     if (true) {
         // jshint ignore:line
         // AMD. Register as an anonymous module.
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(165)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(166)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); // jshint ignore:line
@@ -23286,6 +23240,52 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             $input.removeClass('rating-loading').addClass('rating-loading').rating();
         }
     });
+});
+
+/***/ }),
+
+/***/ 92:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'reviewitem',
+  props: ['photo', 'heading', 'customer', 'review', 'rating'],
+  data: function data() {
+    return {};
+  },
+
+  methods: {
+    editReview: function editReview() {
+      return this.$emit('editreview');
+    }
+  }
 });
 
 /***/ })

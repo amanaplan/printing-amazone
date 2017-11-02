@@ -37,68 +37,7 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 content">
 					
-					<ul class="nav nav-pills">
-					  <li class="nav-item">
-					    <a class="nav-link active" href="#">Stickers</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="#">Magnets</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="#">Badges</a>
-					  </li>
-					</ul>
-					<div class="template-list">
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#" data-toggle="modal" data-target="#myModal">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Square stickers
-							</a>
-						</div>
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Rectangle stickers
-							</a>
-						</div>
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Circle stickers
-							</a>
-						</div>
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Oval stickers
-							</a>
-						</div>
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#" data-toggle="modal" data-target="#myModal">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Bumper stickers
-							</a>
-						</div>
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Die Cut stickers
-							</a>
-						</div>
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Rounded Corner stickers
-							</a>
-						</div>
-						<div class="col-sm-3 col-xs-12 template-box">
-							<a href="#">
-								<img src="{{ asset('assets/images/products/Round-Corner.png') }}">
-								Transfer stickers
-							</a>
-						</div>
-						<div class="clearfix"></div>
-					</div>
+					<div id="react-zone"></div>
 
 				</div>
 			</div><!-- row -->
@@ -159,9 +98,12 @@
 
 @stop
 
+@include ('layouts.frontend.phpvartojs')
+
 
 {{-- page specific scripts --}}
 @push( 'scripts' )
 	
+	<script type="text/javascript" src="{{ asset('assets/frontend/js/template.js') }}"></script>
 
 @endpush

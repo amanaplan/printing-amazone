@@ -1094,6 +1094,7 @@ form#contact-form .has-error{border: 1px solid #ff1818;}
     padding:14px 18px;
     margin-right: 6px;
     transition: all 0.4s;
+    cursor: pointer;
 }
 .nav-pills .nav-link:hover{background: #fba51c; color: #fff;}
 .template-list{margin: 40px 0;}
@@ -1106,27 +1107,3 @@ form#contact-form .has-error{border: 1px solid #ff1818;}
 .template-box {
     margin-bottom: 30px;
 }
-.modal-body button.continue {
-    width: 62%;
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0 auto 20px;
-}
-h4.modal-title {
-    font-size: 20px;
-    font-weight: 600;
-}
-.modal-body table{background: #f7f7f7;}
-.modal-body table td {
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-}
-.modal-body table td:last-child {
-    border-right: 1px none;
-}
-.modal-dialog {
-    width: 480px;
-}
-.close{font-size: 30px; line-height: 0.8;}

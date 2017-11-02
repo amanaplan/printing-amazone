@@ -28,7 +28,8 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
-Route::view('/template', 'frontend.template');
+Route::get('/templates', 'Frontend\PagesCtrl@ShowTemplates');
+Route::post('/templates/get-products', 'Frontend\PagesCtrl@GetTemplateProducts');
 Route::view('/contact', 'frontend.contact');
 Route::post('/product/give-review', 'Frontend\UserReviewPost');
 Route::post('/product/load-reviews', 'Frontend\AjaxCtrl@LoadReviews');

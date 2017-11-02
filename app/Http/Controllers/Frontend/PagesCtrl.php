@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
+use JavaScript;
 
 class PagesCtrl extends Controller
 {
@@ -238,6 +239,45 @@ class PagesCtrl extends Controller
         }
         
         abort(404);
+    }
+
+    /**
+    *tmplate download page
+    */
+    public function ShowTemplates()
+    {
+        $categories = Product::has('variations')->with(['category' => function($query){
+            $query->select(['id','category_name','category_slug'])->orderBy('sort', 'asc');
+        }])->select(['products.category_id'])->distinct()->get();
+
+        foreach($categories as $item)
+        {
+            if($item->category->category_slug != 'uncategorized')
+            {
+                $currSelected = $item->category->id;
+                break;
+            }
+        }
+
+        JavaScript::put([
+            'categories'    =>  $categories,
+            'currpill'      =>  $currSelected,
+            'initialproducts'   =>  Category::find($currSelected)->products()->has('variations')->select(['id', 'product_name', 'logo'])->get()
+        ]);
+
+        return view('frontend.template');
+    }
+
+    /**
+    *get template products by category
+    */
+    public function GetTemplateProducts(Request $request)
+    {
+        $request->validate([
+            'category_id'   =>  'required|integer|exists:category,id'
+        ]);
+
+        return Category::find($request->category_id)->products()->has('variations')->select(['id', 'product_name', 'logo'])->get();
     }
 
 }
