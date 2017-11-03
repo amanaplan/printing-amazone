@@ -6,7 +6,7 @@
 
 	@component('component.seo-data')
 		@slot('title')
-			Custom Stickers Template - Printing Amazon
+			Download Stickers Template - Printing Amazon
 		@endslot
 
 		@slot('meta_desc')
