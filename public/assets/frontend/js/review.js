@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 179);
+/******/ 	return __webpack_require__(__webpack_require__.s = 210);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -376,30 +376,104 @@ module.exports = {
 /***/ }),
 
 /***/ 1:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var g;
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
 
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(27);
 
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
+var PROTECTION_PREFIX = /^\)\]\}',?\n/;
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
 }
 
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(3);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(3);
+  }
+  return adapter;
+}
 
-module.exports = g;
+var defaults = {
+  adapter: getDefaultAdapter(),
 
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      data = data.replace(PROTECTION_PREFIX, '');
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 
@@ -410,6 +484,730 @@ module.exports = g;
 var APP_URL = 'http://printingamazon.dev/';
 
 /* harmony default export */ __webpack_exports__["a"] = (APP_URL);
+
+/***/ }),
+
+/***/ 100:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*!
+ * bootstrap-star-rating v4.0.2
+ * http://plugins.krajee.com/star-rating
+ *
+ * Author: Kartik Visweswaran
+ * Copyright: 2013 - 2017, Kartik Visweswaran, Krajee.com
+ *
+ * Licensed under the BSD 3-Clause
+ * https://github.com/kartik-v/bootstrap-star-rating/blob/master/LICENSE.md
+ */
+(function (factory) {
+    "use strict";
+    //noinspection JSUnresolvedVariable
+
+    if (true) {
+        // jshint ignore:line
+        // AMD. Register as an anonymous module.
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(190)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); // jshint ignore:line
+    } else {
+        // noinspection JSUnresolvedVariable
+        if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+            // jshint ignore:line
+            // Node/CommonJS
+            // noinspection JSUnresolvedVariable
+            module.exports = factory(require('jquery')); // jshint ignore:line
+        } else {
+            // Browser globals
+            factory(window.jQuery);
+        }
+    }
+})(function ($) {
+    "use strict";
+
+    $.fn.ratingLocales = {};
+    $.fn.ratingThemes = {};
+
+    var $h, Rating;
+
+    // global helper methods and constants
+    $h = {
+        NAMESPACE: '.rating',
+        DEFAULT_MIN: 0,
+        DEFAULT_MAX: 5,
+        DEFAULT_STEP: 0.5,
+        isEmpty: function isEmpty(value, trim) {
+            return value === null || value === undefined || value.length === 0 || trim && $.trim(value) === '';
+        },
+        getCss: function getCss(condition, css) {
+            return condition ? ' ' + css : '';
+        },
+        addCss: function addCss($el, css) {
+            $el.removeClass(css).addClass(css);
+        },
+        getDecimalPlaces: function getDecimalPlaces(num) {
+            var m = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+            return !m ? 0 : Math.max(0, (m[1] ? m[1].length : 0) - (m[2] ? +m[2] : 0));
+        },
+        applyPrecision: function applyPrecision(val, precision) {
+            return parseFloat(val.toFixed(precision));
+        },
+        handler: function handler($el, event, callback, skipOff, skipNS) {
+            var ev = skipNS ? event : event.split(' ').join($h.NAMESPACE + ' ') + $h.NAMESPACE;
+            if (!skipOff) {
+                $el.off(ev);
+            }
+            $el.on(ev, callback);
+        }
+    };
+
+    // rating constructor
+    Rating = function Rating(element, options) {
+        var self = this;
+        self.$element = $(element);
+        self._init(options);
+    };
+    Rating.prototype = {
+        constructor: Rating,
+        _parseAttr: function _parseAttr(vattr, options) {
+            var self = this,
+                $el = self.$element,
+                elType = $el.attr('type'),
+                finalVal,
+                val,
+                chk,
+                out;
+            if (elType === 'range' || elType === 'number') {
+                val = options[vattr] || $el.data(vattr) || $el.attr(vattr);
+                switch (vattr) {
+                    case 'min':
+                        chk = $h.DEFAULT_MIN;
+                        break;
+                    case 'max':
+                        chk = $h.DEFAULT_MAX;
+                        break;
+                    default:
+                        chk = $h.DEFAULT_STEP;
+                }
+                finalVal = $h.isEmpty(val) ? chk : val;
+                out = parseFloat(finalVal);
+            } else {
+                out = parseFloat(options[vattr]);
+            }
+            return isNaN(out) ? chk : out;
+        },
+        _parseValue: function _parseValue(val) {
+            var self = this,
+                v = parseFloat(val);
+            if (isNaN(v)) {
+                v = self.clearValue;
+            }
+            return self.zeroAsNull && (v === 0 || v === '0') ? null : v;
+        },
+        _setDefault: function _setDefault(key, val) {
+            var self = this;
+            if ($h.isEmpty(self[key])) {
+                self[key] = val;
+            }
+        },
+        _initSlider: function _initSlider(options) {
+            var self = this,
+                v = self.$element.val();
+            self.initialValue = $h.isEmpty(v) ? 0 : v;
+            self._setDefault('min', self._parseAttr('min', options));
+            self._setDefault('max', self._parseAttr('max', options));
+            self._setDefault('step', self._parseAttr('step', options));
+            if (isNaN(self.min) || $h.isEmpty(self.min)) {
+                self.min = $h.DEFAULT_MIN;
+            }
+            if (isNaN(self.max) || $h.isEmpty(self.max)) {
+                self.max = $h.DEFAULT_MAX;
+            }
+            if (isNaN(self.step) || $h.isEmpty(self.step) || self.step === 0) {
+                self.step = $h.DEFAULT_STEP;
+            }
+            self.diff = self.max - self.min;
+        },
+        _initHighlight: function _initHighlight(v) {
+            var self = this,
+                w,
+                cap = self._getCaption();
+            if (!v) {
+                v = self.$element.val();
+            }
+            w = self.getWidthFromValue(v) + '%';
+            self.$filledStars.width(w);
+            self.cache = { caption: cap, width: w, val: v };
+        },
+        _getContainerCss: function _getContainerCss() {
+            var self = this;
+            return 'rating-container' + $h.getCss(self.theme, 'theme-' + self.theme) + $h.getCss(self.rtl, 'rating-rtl') + $h.getCss(self.size, 'rating-' + self.size) + $h.getCss(self.animate, 'rating-animate') + $h.getCss(self.disabled || self.readonly, 'rating-disabled') + $h.getCss(self.containerClass, self.containerClass);
+        },
+        _checkDisabled: function _checkDisabled() {
+            var self = this,
+                $el = self.$element,
+                opts = self.options;
+            self.disabled = opts.disabled === undefined ? $el.attr('disabled') || false : opts.disabled;
+            self.readonly = opts.readonly === undefined ? $el.attr('readonly') || false : opts.readonly;
+            self.inactive = self.disabled || self.readonly;
+            $el.attr({ disabled: self.disabled, readonly: self.readonly });
+        },
+        _addContent: function _addContent(type, content) {
+            var self = this,
+                $container = self.$container,
+                isClear = type === 'clear';
+            if (self.rtl) {
+                return isClear ? $container.append(content) : $container.prepend(content);
+            } else {
+                return isClear ? $container.prepend(content) : $container.append(content);
+            }
+        },
+        _generateRating: function _generateRating() {
+            var self = this,
+                $el = self.$element,
+                $rating,
+                $container,
+                w;
+            $container = self.$container = $(document.createElement("div")).insertBefore($el);
+            $h.addCss($container, self._getContainerCss());
+            self.$rating = $rating = $(document.createElement("div")).attr('class', 'rating-stars').appendTo($container).append(self._getStars('empty')).append(self._getStars('filled'));
+            self.$emptyStars = $rating.find('.empty-stars');
+            self.$filledStars = $rating.find('.filled-stars');
+            self._renderCaption();
+            self._renderClear();
+            self._initHighlight();
+            $container.append($el);
+            if (self.rtl) {
+                w = Math.max(self.$emptyStars.outerWidth(), self.$filledStars.outerWidth());
+                self.$emptyStars.width(w);
+            }
+            $el.appendTo($rating);
+        },
+        _getCaption: function _getCaption() {
+            var self = this;
+            return self.$caption && self.$caption.length ? self.$caption.html() : self.defaultCaption;
+        },
+        _setCaption: function _setCaption(content) {
+            var self = this;
+            if (self.$caption && self.$caption.length) {
+                self.$caption.html(content);
+            }
+        },
+        _renderCaption: function _renderCaption() {
+            var self = this,
+                val = self.$element.val(),
+                html,
+                $cap = self.captionElement ? $(self.captionElement) : '';
+            if (!self.showCaption) {
+                return;
+            }
+            html = self.fetchCaption(val);
+            if ($cap && $cap.length) {
+                $h.addCss($cap, 'caption');
+                $cap.html(html);
+                self.$caption = $cap;
+                return;
+            }
+            self._addContent('caption', '<div class="caption">' + html + '</div>');
+            self.$caption = self.$container.find(".caption");
+        },
+        _renderClear: function _renderClear() {
+            var self = this,
+                css,
+                $clr = self.clearElement ? $(self.clearElement) : '';
+            if (!self.showClear) {
+                return;
+            }
+            css = self._getClearClass();
+            if ($clr.length) {
+                $h.addCss($clr, css);
+                $clr.attr({ "title": self.clearButtonTitle }).html(self.clearButton);
+                self.$clear = $clr;
+                return;
+            }
+            self._addContent('clear', '<div class="' + css + '" title="' + self.clearButtonTitle + '">' + self.clearButton + '</div>');
+            self.$clear = self.$container.find('.' + self.clearButtonBaseClass);
+        },
+        _getClearClass: function _getClearClass() {
+            var self = this;
+            return self.clearButtonBaseClass + ' ' + (self.inactive ? '' : self.clearButtonActiveClass);
+        },
+        _toggleHover: function _toggleHover(out) {
+            var self = this,
+                w,
+                width,
+                caption;
+            if (!out) {
+                return;
+            }
+            if (self.hoverChangeStars) {
+                w = self.getWidthFromValue(self.clearValue);
+                width = out.val <= self.clearValue ? w + '%' : out.width;
+                self.$filledStars.css('width', width);
+            }
+            if (self.hoverChangeCaption) {
+                caption = out.val <= self.clearValue ? self.fetchCaption(self.clearValue) : out.caption;
+                if (caption) {
+                    self._setCaption(caption + '');
+                }
+            }
+        },
+        _init: function _init(options) {
+            var self = this,
+                $el = self.$element.addClass('rating-input'),
+                v;
+            self.options = options;
+            $.each(options, function (key, value) {
+                self[key] = value;
+            });
+            if (self.rtl || $el.attr('dir') === 'rtl') {
+                self.rtl = true;
+                $el.attr('dir', 'rtl');
+            }
+            self.starClicked = false;
+            self.clearClicked = false;
+            self._initSlider(options);
+            self._checkDisabled();
+            if (self.displayOnly) {
+                self.inactive = true;
+                self.showClear = false;
+                self.showCaption = false;
+            }
+            self._generateRating();
+            self._initEvents();
+            self._listen();
+            v = self._parseValue($el.val());
+            $el.val(v);
+            return $el.removeClass('rating-loading');
+        },
+        _initEvents: function _initEvents() {
+            var self = this;
+            self.events = {
+                _getTouchPosition: function _getTouchPosition(e) {
+                    var pageX = $h.isEmpty(e.pageX) ? e.originalEvent.touches[0].pageX : e.pageX;
+                    return pageX - self.$rating.offset().left;
+                },
+                _listenClick: function _listenClick(e, callback) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    if (e.handled !== true) {
+                        callback(e);
+                        e.handled = true;
+                    } else {
+                        return false;
+                    }
+                },
+                _noMouseAction: function _noMouseAction(e) {
+                    return !self.hoverEnabled || self.inactive || e && e.isDefaultPrevented();
+                },
+                initTouch: function initTouch(e) {
+                    //noinspection JSUnresolvedVariable
+                    var ev,
+                        touches,
+                        pos,
+                        out,
+                        caption,
+                        w,
+                        width,
+                        params,
+                        clrVal = self.clearValue || 0,
+                        isTouchCapable = 'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch;
+                    if (!isTouchCapable || self.inactive) {
+                        return;
+                    }
+                    ev = e.originalEvent;
+                    //noinspection JSUnresolvedVariable
+                    touches = !$h.isEmpty(ev.touches) ? ev.touches : ev.changedTouches;
+                    pos = self.events._getTouchPosition(touches[0]);
+                    if (e.type === "touchend") {
+                        self._setStars(pos);
+                        params = [self.$element.val(), self._getCaption()];
+                        self.$element.trigger('change').trigger('rating.change', params);
+                        self.starClicked = true;
+                    } else {
+                        out = self.calculate(pos);
+                        caption = out.val <= clrVal ? self.fetchCaption(clrVal) : out.caption;
+                        w = self.getWidthFromValue(clrVal);
+                        width = out.val <= clrVal ? w + '%' : out.width;
+                        self._setCaption(caption);
+                        self.$filledStars.css('width', width);
+                    }
+                },
+                starClick: function starClick(e) {
+                    var pos, params;
+                    self.events._listenClick(e, function (ev) {
+                        if (self.inactive) {
+                            return false;
+                        }
+                        pos = self.events._getTouchPosition(ev);
+                        self._setStars(pos);
+                        params = [self.$element.val(), self._getCaption()];
+                        self.$element.trigger('change').trigger('rating.change', params);
+                        self.starClicked = true;
+                    });
+                },
+                clearClick: function clearClick(e) {
+                    self.events._listenClick(e, function () {
+                        if (!self.inactive) {
+                            self.clear();
+                            self.clearClicked = true;
+                        }
+                    });
+                },
+                starMouseMove: function starMouseMove(e) {
+                    var pos, out;
+                    if (self.events._noMouseAction(e)) {
+                        return;
+                    }
+                    self.starClicked = false;
+                    pos = self.events._getTouchPosition(e);
+                    out = self.calculate(pos);
+                    self._toggleHover(out);
+                    self.$element.trigger('rating.hover', [out.val, out.caption, 'stars']);
+                },
+                starMouseLeave: function starMouseLeave(e) {
+                    var out;
+                    if (self.events._noMouseAction(e) || self.starClicked) {
+                        return;
+                    }
+                    out = self.cache;
+                    self._toggleHover(out);
+                    self.$element.trigger('rating.hoverleave', ['stars']);
+                },
+                clearMouseMove: function clearMouseMove(e) {
+                    var caption, val, width, out;
+                    if (self.events._noMouseAction(e) || !self.hoverOnClear) {
+                        return;
+                    }
+                    self.clearClicked = false;
+                    caption = '<span class="' + self.clearCaptionClass + '">' + self.clearCaption + '</span>';
+                    val = self.clearValue;
+                    width = self.getWidthFromValue(val) || 0;
+                    out = { caption: caption, width: width, val: val };
+                    self._toggleHover(out);
+                    self.$element.trigger('rating.hover', [val, caption, 'clear']);
+                },
+                clearMouseLeave: function clearMouseLeave(e) {
+                    var out;
+                    if (self.events._noMouseAction(e) || self.clearClicked || !self.hoverOnClear) {
+                        return;
+                    }
+                    out = self.cache;
+                    self._toggleHover(out);
+                    self.$element.trigger('rating.hoverleave', ['clear']);
+                },
+                resetForm: function resetForm(e) {
+                    if (e && e.isDefaultPrevented()) {
+                        return;
+                    }
+                    if (!self.inactive) {
+                        self.reset();
+                    }
+                }
+            };
+        },
+        _listen: function _listen() {
+            var self = this,
+                $el = self.$element,
+                $form = $el.closest('form'),
+                $rating = self.$rating,
+                $clear = self.$clear,
+                events = self.events;
+            $h.handler($rating, 'touchstart touchmove touchend', $.proxy(events.initTouch, self));
+            $h.handler($rating, 'click touchstart', $.proxy(events.starClick, self));
+            $h.handler($rating, 'mousemove', $.proxy(events.starMouseMove, self));
+            $h.handler($rating, 'mouseleave', $.proxy(events.starMouseLeave, self));
+            if (self.showClear && $clear.length) {
+                $h.handler($clear, 'click touchstart', $.proxy(events.clearClick, self));
+                $h.handler($clear, 'mousemove', $.proxy(events.clearMouseMove, self));
+                $h.handler($clear, 'mouseleave', $.proxy(events.clearMouseLeave, self));
+            }
+            if ($form.length) {
+                $h.handler($form, 'reset', $.proxy(events.resetForm, self), true);
+            }
+            return $el;
+        },
+        _getStars: function _getStars(type) {
+            var self = this,
+                stars = '<span class="' + type + '-stars">',
+                i;
+            for (i = 1; i <= self.stars; i++) {
+                stars += '<span class="star">' + self[type + 'Star'] + '</span>';
+            }
+            return stars + '</span>';
+        },
+        _setStars: function _setStars(pos) {
+            var self = this,
+                out = arguments.length ? self.calculate(pos) : self.calculate(),
+                $el = self.$element,
+                v = self._parseValue(out.val);
+            $el.val(v);
+            self.$filledStars.css('width', out.width);
+            self._setCaption(out.caption);
+            self.cache = out;
+            return $el;
+        },
+        showStars: function showStars(val) {
+            var self = this,
+                v = self._parseValue(val);
+            self.$element.val(v);
+            return self._setStars();
+        },
+        calculate: function calculate(pos) {
+            var self = this,
+                defaultVal = $h.isEmpty(self.$element.val()) ? 0 : self.$element.val(),
+                val = arguments.length ? self.getValueFromPosition(pos) : defaultVal,
+                caption = self.fetchCaption(val),
+                width = self.getWidthFromValue(val);
+            width += '%';
+            return { caption: caption, width: width, val: val };
+        },
+        getValueFromPosition: function getValueFromPosition(pos) {
+            var self = this,
+                precision = $h.getDecimalPlaces(self.step),
+                val,
+                factor,
+                maxWidth = self.$rating.width();
+            factor = self.diff * pos / (maxWidth * self.step);
+            factor = self.rtl ? Math.floor(factor) : Math.ceil(factor);
+            val = $h.applyPrecision(parseFloat(self.min + factor * self.step), precision);
+            val = Math.max(Math.min(val, self.max), self.min);
+            return self.rtl ? self.max - val : val;
+        },
+        getWidthFromValue: function getWidthFromValue(val) {
+            var self = this,
+                min = self.min,
+                max = self.max,
+                factor,
+                $r = self.$emptyStars,
+                w;
+            if (!val || val <= min || min === max) {
+                return 0;
+            }
+            w = $r.outerWidth();
+            factor = w ? $r.width() / w : 1;
+            if (val >= max) {
+                return 100;
+            }
+            return (val - min) * factor * 100 / (max - min);
+        },
+        fetchCaption: function fetchCaption(rating) {
+            var self = this,
+                val = parseFloat(rating) || self.clearValue,
+                css,
+                cap,
+                capVal,
+                cssVal,
+                caption,
+                vCap = self.starCaptions,
+                vCss = self.starCaptionClasses;
+            if (val && val !== self.clearValue) {
+                val = $h.applyPrecision(val, $h.getDecimalPlaces(self.step));
+            }
+            cssVal = typeof vCss === "function" ? vCss(val) : vCss[val];
+            capVal = typeof vCap === "function" ? vCap(val) : vCap[val];
+            cap = $h.isEmpty(capVal) ? self.defaultCaption.replace(/\{rating}/g, val) : capVal;
+            css = $h.isEmpty(cssVal) ? self.clearCaptionClass : cssVal;
+            caption = val === self.clearValue ? self.clearCaption : cap;
+            return '<span class="' + css + '">' + caption + '</span>';
+        },
+        destroy: function destroy() {
+            var self = this,
+                $el = self.$element;
+            if (!$h.isEmpty(self.$container)) {
+                self.$container.before($el).remove();
+            }
+            $.removeData($el.get(0));
+            return $el.off('rating').removeClass('rating rating-input');
+        },
+        create: function create(options) {
+            var self = this,
+                opts = options || self.options || {};
+            return self.destroy().rating(opts);
+        },
+        clear: function clear() {
+            var self = this,
+                title = '<span class="' + self.clearCaptionClass + '">' + self.clearCaption + '</span>';
+            if (!self.inactive) {
+                self._setCaption(title);
+            }
+            return self.showStars(self.clearValue).trigger('change').trigger('rating.clear');
+        },
+        reset: function reset() {
+            var self = this;
+            return self.showStars(self.initialValue).trigger('rating.reset');
+        },
+        update: function update(val) {
+            var self = this;
+            return arguments.length ? self.showStars(val) : self.$element;
+        },
+        refresh: function refresh(options) {
+            var self = this,
+                $el = self.$element;
+            if (!options) {
+                return $el;
+            }
+            return self.destroy().rating($.extend(true, self.options, options)).trigger('rating.refresh');
+        }
+    };
+
+    $.fn.rating = function (option) {
+        var args = Array.apply(null, arguments),
+            retvals = [];
+        args.shift();
+        this.each(function () {
+            var self = $(this),
+                data = self.data('rating'),
+                options = (typeof option === 'undefined' ? 'undefined' : _typeof(option)) === 'object' && option,
+                theme = options.theme || self.data('theme'),
+                lang = options.language || self.data('language') || 'en',
+                thm = {},
+                loc = {},
+                opts;
+            if (!data) {
+                if (theme) {
+                    thm = $.fn.ratingThemes[theme] || {};
+                }
+                if (lang !== 'en' && !$h.isEmpty($.fn.ratingLocales[lang])) {
+                    loc = $.fn.ratingLocales[lang];
+                }
+                opts = $.extend(true, {}, $.fn.rating.defaults, thm, $.fn.ratingLocales.en, loc, options, self.data());
+                data = new Rating(this, opts);
+                self.data('rating', data);
+            }
+
+            if (typeof option === 'string') {
+                retvals.push(data[option].apply(data, args));
+            }
+        });
+        switch (retvals.length) {
+            case 0:
+                return this;
+            case 1:
+                return retvals[0] === undefined ? this : retvals[0];
+            default:
+                return retvals;
+        }
+    };
+
+    $.fn.rating.defaults = {
+        theme: '',
+        language: 'en',
+        stars: 5,
+        filledStar: '<i class="glyphicon glyphicon-star"></i>',
+        emptyStar: '<i class="glyphicon glyphicon-star-empty"></i>',
+        containerClass: '',
+        size: 'md',
+        animate: true,
+        displayOnly: false,
+        rtl: false,
+        showClear: true,
+        showCaption: true,
+        starCaptionClasses: {
+            0.5: 'label label-danger',
+            1: 'label label-danger',
+            1.5: 'label label-warning',
+            2: 'label label-warning',
+            2.5: 'label label-info',
+            3: 'label label-info',
+            3.5: 'label label-primary',
+            4: 'label label-primary',
+            4.5: 'label label-success',
+            5: 'label label-success'
+        },
+        clearButton: '<i class="glyphicon glyphicon-minus-sign"></i>',
+        clearButtonBaseClass: 'clear-rating',
+        clearButtonActiveClass: 'clear-rating-active',
+        clearCaptionClass: 'label label-default',
+        clearValue: null,
+        captionElement: null,
+        clearElement: null,
+        hoverEnabled: true,
+        hoverChangeCaption: true,
+        hoverChangeStars: true,
+        hoverOnClear: true,
+        zeroAsNull: true
+    };
+
+    $.fn.ratingLocales.en = {
+        defaultCaption: '{rating} Stars',
+        starCaptions: {
+            0.5: 'Half Star',
+            1: 'One Star',
+            1.5: 'One & Half Star',
+            2: 'Two Stars',
+            2.5: 'Two & Half Stars',
+            3: 'Three Stars',
+            3.5: 'Three & Half Stars',
+            4: 'Four Stars',
+            4.5: 'Four & Half Stars',
+            5: 'Five Stars'
+        },
+        clearButtonTitle: 'Clear',
+        clearCaption: 'Not Rated'
+    };
+
+    $.fn.rating.Constructor = Rating;
+
+    /**
+     * Convert automatically inputs with class 'rating' into Krajee's star rating control.
+     */
+    $(document).ready(function () {
+        var $input = $('input.rating');
+        if ($input.length) {
+            $input.removeClass('rating-loading').addClass('rating-loading').rating();
+        }
+    });
+});
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'reviewitem',
+  props: ['photo', 'heading', 'customer', 'review', 'rating'],
+  data: function data() {
+    return {};
+  },
+
+  methods: {
+    editReview: function editReview() {
+      return this.$emit('editreview');
+    }
+  }
+});
 
 /***/ }),
 
@@ -620,7 +1418,7 @@ module.exports = __webpack_require__(13);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(7);
 var Axios = __webpack_require__(15);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(1);
 
 /**
  * Create an instance of Axios
@@ -742,7 +1540,7 @@ module.exports = CancelToken;
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(1);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(16);
 var dispatchRequest = __webpack_require__(17);
@@ -889,7 +1687,154 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ 166:
+/***/ 17:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var transformData = __webpack_require__(20);
+var isCancel = __webpack_require__(5);
+var defaults = __webpack_require__(1);
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData(
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers || {}
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData(
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData(
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+
+/***/ 18:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ @ @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+  error.response = response;
+  return error;
+};
+
+
+/***/ }),
+
+/***/ 19:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var createError = __webpack_require__(6);
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  // Note: status is not exposed by XDomainRequest
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response
+    ));
+  }
+};
+
+
+/***/ }),
+
+/***/ 190:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11150,101 +12095,70 @@ return jQuery;
 
 /***/ }),
 
-/***/ 17:
+/***/ 2:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(20);
-var isCancel = __webpack_require__(5);
-var defaults = __webpack_require__(2);
 
 /**
- * Throws a `Cancel` if cancellation has been requested.
- */
-function throwIfCancellationRequested(config) {
-  if (config.cancelToken) {
-    config.cancelToken.throwIfRequested();
-  }
-}
-
-/**
- * Dispatch a request to the server using the configured adapter.
+ * Transform the data for a request or a response
  *
- * @param {object} config The config that is to be used for the request
- * @returns {Promise} The Promise to be fulfilled
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
  */
-module.exports = function dispatchRequest(config) {
-  throwIfCancellationRequested(config);
-
-  // Ensure headers exist
-  config.headers = config.headers || {};
-
-  // Transform request data
-  config.data = transformData(
-    config.data,
-    config.headers,
-    config.transformRequest
-  );
-
-  // Flatten headers
-  config.headers = utils.merge(
-    config.headers.common || {},
-    config.headers[config.method] || {},
-    config.headers || {}
-  );
-
-  utils.forEach(
-    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
-    function cleanHeaderConfig(method) {
-      delete config.headers[method];
-    }
-  );
-
-  var adapter = config.adapter || defaults.adapter;
-
-  return adapter(config).then(function onAdapterResolution(response) {
-    throwIfCancellationRequested(config);
-
-    // Transform response data
-    response.data = transformData(
-      response.data,
-      response.headers,
-      config.transformResponse
-    );
-
-    return response;
-  }, function onAdapterRejection(reason) {
-    if (!isCancel(reason)) {
-      throwIfCancellationRequested(config);
-
-      // Transform response data
-      if (reason && reason.response) {
-        reason.response.data = transformData(
-          reason.response.data,
-          reason.response.headers,
-          config.transformResponse
-        );
-      }
-    }
-
-    return Promise.reject(reason);
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
   });
+
+  return data;
 };
 
 
 /***/ }),
 
-/***/ 171:
+/***/ 202:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(172)(
+var Component = __webpack_require__(203)(
   /* script */
-  __webpack_require__(92),
+  __webpack_require__(101),
   /* template */
-  __webpack_require__(173),
+  __webpack_require__(204),
   /* scopeId */
   null,
   /* cssModules */
@@ -11272,7 +12186,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 172:
+/***/ 203:
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -11330,7 +12244,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 173:
+/***/ 204:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11397,7 +12311,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 174:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21489,205 +22403,7 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-
-/***/ 179:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(73);
-
-
-/***/ }),
-
-/***/ 18:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Update an Error with the specified config, error code, and response.
- *
- * @param {Error} error The error to update.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- @ @param {Object} [response] The response.
- * @returns {Error} The error.
- */
-module.exports = function enhanceError(error, config, code, response) {
-  error.config = config;
-  if (code) {
-    error.code = code;
-  }
-  error.response = response;
-  return error;
-};
-
-
-/***/ }),
-
-/***/ 19:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var createError = __webpack_require__(6);
-
-/**
- * Resolve or reject a Promise based on response status.
- *
- * @param {Function} resolve A function that resolves the promise.
- * @param {Function} reject A function that rejects the promise.
- * @param {object} response The response.
- */
-module.exports = function settle(resolve, reject, response) {
-  var validateStatus = response.config.validateStatus;
-  // Note: status is not exposed by XDomainRequest
-  if (!response.status || !validateStatus || validateStatus(response.status)) {
-    resolve(response);
-  } else {
-    reject(createError(
-      'Request failed with status code ' + response.status,
-      response.config,
-      null,
-      response
-    ));
-  }
-};
-
-
-/***/ }),
-
-/***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(27);
-
-var PROTECTION_PREFIX = /^\)\]\}',?\n/;
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(3);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(3);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      data = data.replace(PROTECTION_PREFIX, '');
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-/**
- * Transform the data for a request or a response
- *
- * @param {Object|String} data The data to be transformed
- * @param {Array} headers The headers for the request or response
- * @param {Array|Function} fns A single function or Array of functions
- * @returns {*} The resulting transformed data
- */
-module.exports = function transformData(data, headers, fns) {
-  /*eslint no-param-reassign:0*/
-  utils.forEach(fns, function transform(fn) {
-    data = fn(data, headers);
-  });
-
-  return data;
-};
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 
@@ -21731,6 +22447,14 @@ function btoa(input) {
 }
 
 module.exports = btoa;
+
+
+/***/ }),
+
+/***/ 210:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(82);
 
 
 /***/ }),
@@ -22359,19 +23083,19 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 73:
+/***/ 82:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__star_rating__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formClass__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formClass__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__boot_js__ = __webpack_require__(10);
 
@@ -22484,7 +23208,7 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 
 /***/ }),
 
-/***/ 90:
+/***/ 99:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22563,730 +23287,6 @@ var ReviewForm = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (ReviewForm);
-
-/***/ }),
-
-/***/ 91:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*!
- * bootstrap-star-rating v4.0.2
- * http://plugins.krajee.com/star-rating
- *
- * Author: Kartik Visweswaran
- * Copyright: 2013 - 2017, Kartik Visweswaran, Krajee.com
- *
- * Licensed under the BSD 3-Clause
- * https://github.com/kartik-v/bootstrap-star-rating/blob/master/LICENSE.md
- */
-(function (factory) {
-    "use strict";
-    //noinspection JSUnresolvedVariable
-
-    if (true) {
-        // jshint ignore:line
-        // AMD. Register as an anonymous module.
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(166)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); // jshint ignore:line
-    } else {
-        // noinspection JSUnresolvedVariable
-        if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
-            // jshint ignore:line
-            // Node/CommonJS
-            // noinspection JSUnresolvedVariable
-            module.exports = factory(require('jquery')); // jshint ignore:line
-        } else {
-            // Browser globals
-            factory(window.jQuery);
-        }
-    }
-})(function ($) {
-    "use strict";
-
-    $.fn.ratingLocales = {};
-    $.fn.ratingThemes = {};
-
-    var $h, Rating;
-
-    // global helper methods and constants
-    $h = {
-        NAMESPACE: '.rating',
-        DEFAULT_MIN: 0,
-        DEFAULT_MAX: 5,
-        DEFAULT_STEP: 0.5,
-        isEmpty: function isEmpty(value, trim) {
-            return value === null || value === undefined || value.length === 0 || trim && $.trim(value) === '';
-        },
-        getCss: function getCss(condition, css) {
-            return condition ? ' ' + css : '';
-        },
-        addCss: function addCss($el, css) {
-            $el.removeClass(css).addClass(css);
-        },
-        getDecimalPlaces: function getDecimalPlaces(num) {
-            var m = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-            return !m ? 0 : Math.max(0, (m[1] ? m[1].length : 0) - (m[2] ? +m[2] : 0));
-        },
-        applyPrecision: function applyPrecision(val, precision) {
-            return parseFloat(val.toFixed(precision));
-        },
-        handler: function handler($el, event, callback, skipOff, skipNS) {
-            var ev = skipNS ? event : event.split(' ').join($h.NAMESPACE + ' ') + $h.NAMESPACE;
-            if (!skipOff) {
-                $el.off(ev);
-            }
-            $el.on(ev, callback);
-        }
-    };
-
-    // rating constructor
-    Rating = function Rating(element, options) {
-        var self = this;
-        self.$element = $(element);
-        self._init(options);
-    };
-    Rating.prototype = {
-        constructor: Rating,
-        _parseAttr: function _parseAttr(vattr, options) {
-            var self = this,
-                $el = self.$element,
-                elType = $el.attr('type'),
-                finalVal,
-                val,
-                chk,
-                out;
-            if (elType === 'range' || elType === 'number') {
-                val = options[vattr] || $el.data(vattr) || $el.attr(vattr);
-                switch (vattr) {
-                    case 'min':
-                        chk = $h.DEFAULT_MIN;
-                        break;
-                    case 'max':
-                        chk = $h.DEFAULT_MAX;
-                        break;
-                    default:
-                        chk = $h.DEFAULT_STEP;
-                }
-                finalVal = $h.isEmpty(val) ? chk : val;
-                out = parseFloat(finalVal);
-            } else {
-                out = parseFloat(options[vattr]);
-            }
-            return isNaN(out) ? chk : out;
-        },
-        _parseValue: function _parseValue(val) {
-            var self = this,
-                v = parseFloat(val);
-            if (isNaN(v)) {
-                v = self.clearValue;
-            }
-            return self.zeroAsNull && (v === 0 || v === '0') ? null : v;
-        },
-        _setDefault: function _setDefault(key, val) {
-            var self = this;
-            if ($h.isEmpty(self[key])) {
-                self[key] = val;
-            }
-        },
-        _initSlider: function _initSlider(options) {
-            var self = this,
-                v = self.$element.val();
-            self.initialValue = $h.isEmpty(v) ? 0 : v;
-            self._setDefault('min', self._parseAttr('min', options));
-            self._setDefault('max', self._parseAttr('max', options));
-            self._setDefault('step', self._parseAttr('step', options));
-            if (isNaN(self.min) || $h.isEmpty(self.min)) {
-                self.min = $h.DEFAULT_MIN;
-            }
-            if (isNaN(self.max) || $h.isEmpty(self.max)) {
-                self.max = $h.DEFAULT_MAX;
-            }
-            if (isNaN(self.step) || $h.isEmpty(self.step) || self.step === 0) {
-                self.step = $h.DEFAULT_STEP;
-            }
-            self.diff = self.max - self.min;
-        },
-        _initHighlight: function _initHighlight(v) {
-            var self = this,
-                w,
-                cap = self._getCaption();
-            if (!v) {
-                v = self.$element.val();
-            }
-            w = self.getWidthFromValue(v) + '%';
-            self.$filledStars.width(w);
-            self.cache = { caption: cap, width: w, val: v };
-        },
-        _getContainerCss: function _getContainerCss() {
-            var self = this;
-            return 'rating-container' + $h.getCss(self.theme, 'theme-' + self.theme) + $h.getCss(self.rtl, 'rating-rtl') + $h.getCss(self.size, 'rating-' + self.size) + $h.getCss(self.animate, 'rating-animate') + $h.getCss(self.disabled || self.readonly, 'rating-disabled') + $h.getCss(self.containerClass, self.containerClass);
-        },
-        _checkDisabled: function _checkDisabled() {
-            var self = this,
-                $el = self.$element,
-                opts = self.options;
-            self.disabled = opts.disabled === undefined ? $el.attr('disabled') || false : opts.disabled;
-            self.readonly = opts.readonly === undefined ? $el.attr('readonly') || false : opts.readonly;
-            self.inactive = self.disabled || self.readonly;
-            $el.attr({ disabled: self.disabled, readonly: self.readonly });
-        },
-        _addContent: function _addContent(type, content) {
-            var self = this,
-                $container = self.$container,
-                isClear = type === 'clear';
-            if (self.rtl) {
-                return isClear ? $container.append(content) : $container.prepend(content);
-            } else {
-                return isClear ? $container.prepend(content) : $container.append(content);
-            }
-        },
-        _generateRating: function _generateRating() {
-            var self = this,
-                $el = self.$element,
-                $rating,
-                $container,
-                w;
-            $container = self.$container = $(document.createElement("div")).insertBefore($el);
-            $h.addCss($container, self._getContainerCss());
-            self.$rating = $rating = $(document.createElement("div")).attr('class', 'rating-stars').appendTo($container).append(self._getStars('empty')).append(self._getStars('filled'));
-            self.$emptyStars = $rating.find('.empty-stars');
-            self.$filledStars = $rating.find('.filled-stars');
-            self._renderCaption();
-            self._renderClear();
-            self._initHighlight();
-            $container.append($el);
-            if (self.rtl) {
-                w = Math.max(self.$emptyStars.outerWidth(), self.$filledStars.outerWidth());
-                self.$emptyStars.width(w);
-            }
-            $el.appendTo($rating);
-        },
-        _getCaption: function _getCaption() {
-            var self = this;
-            return self.$caption && self.$caption.length ? self.$caption.html() : self.defaultCaption;
-        },
-        _setCaption: function _setCaption(content) {
-            var self = this;
-            if (self.$caption && self.$caption.length) {
-                self.$caption.html(content);
-            }
-        },
-        _renderCaption: function _renderCaption() {
-            var self = this,
-                val = self.$element.val(),
-                html,
-                $cap = self.captionElement ? $(self.captionElement) : '';
-            if (!self.showCaption) {
-                return;
-            }
-            html = self.fetchCaption(val);
-            if ($cap && $cap.length) {
-                $h.addCss($cap, 'caption');
-                $cap.html(html);
-                self.$caption = $cap;
-                return;
-            }
-            self._addContent('caption', '<div class="caption">' + html + '</div>');
-            self.$caption = self.$container.find(".caption");
-        },
-        _renderClear: function _renderClear() {
-            var self = this,
-                css,
-                $clr = self.clearElement ? $(self.clearElement) : '';
-            if (!self.showClear) {
-                return;
-            }
-            css = self._getClearClass();
-            if ($clr.length) {
-                $h.addCss($clr, css);
-                $clr.attr({ "title": self.clearButtonTitle }).html(self.clearButton);
-                self.$clear = $clr;
-                return;
-            }
-            self._addContent('clear', '<div class="' + css + '" title="' + self.clearButtonTitle + '">' + self.clearButton + '</div>');
-            self.$clear = self.$container.find('.' + self.clearButtonBaseClass);
-        },
-        _getClearClass: function _getClearClass() {
-            var self = this;
-            return self.clearButtonBaseClass + ' ' + (self.inactive ? '' : self.clearButtonActiveClass);
-        },
-        _toggleHover: function _toggleHover(out) {
-            var self = this,
-                w,
-                width,
-                caption;
-            if (!out) {
-                return;
-            }
-            if (self.hoverChangeStars) {
-                w = self.getWidthFromValue(self.clearValue);
-                width = out.val <= self.clearValue ? w + '%' : out.width;
-                self.$filledStars.css('width', width);
-            }
-            if (self.hoverChangeCaption) {
-                caption = out.val <= self.clearValue ? self.fetchCaption(self.clearValue) : out.caption;
-                if (caption) {
-                    self._setCaption(caption + '');
-                }
-            }
-        },
-        _init: function _init(options) {
-            var self = this,
-                $el = self.$element.addClass('rating-input'),
-                v;
-            self.options = options;
-            $.each(options, function (key, value) {
-                self[key] = value;
-            });
-            if (self.rtl || $el.attr('dir') === 'rtl') {
-                self.rtl = true;
-                $el.attr('dir', 'rtl');
-            }
-            self.starClicked = false;
-            self.clearClicked = false;
-            self._initSlider(options);
-            self._checkDisabled();
-            if (self.displayOnly) {
-                self.inactive = true;
-                self.showClear = false;
-                self.showCaption = false;
-            }
-            self._generateRating();
-            self._initEvents();
-            self._listen();
-            v = self._parseValue($el.val());
-            $el.val(v);
-            return $el.removeClass('rating-loading');
-        },
-        _initEvents: function _initEvents() {
-            var self = this;
-            self.events = {
-                _getTouchPosition: function _getTouchPosition(e) {
-                    var pageX = $h.isEmpty(e.pageX) ? e.originalEvent.touches[0].pageX : e.pageX;
-                    return pageX - self.$rating.offset().left;
-                },
-                _listenClick: function _listenClick(e, callback) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    if (e.handled !== true) {
-                        callback(e);
-                        e.handled = true;
-                    } else {
-                        return false;
-                    }
-                },
-                _noMouseAction: function _noMouseAction(e) {
-                    return !self.hoverEnabled || self.inactive || e && e.isDefaultPrevented();
-                },
-                initTouch: function initTouch(e) {
-                    //noinspection JSUnresolvedVariable
-                    var ev,
-                        touches,
-                        pos,
-                        out,
-                        caption,
-                        w,
-                        width,
-                        params,
-                        clrVal = self.clearValue || 0,
-                        isTouchCapable = 'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch;
-                    if (!isTouchCapable || self.inactive) {
-                        return;
-                    }
-                    ev = e.originalEvent;
-                    //noinspection JSUnresolvedVariable
-                    touches = !$h.isEmpty(ev.touches) ? ev.touches : ev.changedTouches;
-                    pos = self.events._getTouchPosition(touches[0]);
-                    if (e.type === "touchend") {
-                        self._setStars(pos);
-                        params = [self.$element.val(), self._getCaption()];
-                        self.$element.trigger('change').trigger('rating.change', params);
-                        self.starClicked = true;
-                    } else {
-                        out = self.calculate(pos);
-                        caption = out.val <= clrVal ? self.fetchCaption(clrVal) : out.caption;
-                        w = self.getWidthFromValue(clrVal);
-                        width = out.val <= clrVal ? w + '%' : out.width;
-                        self._setCaption(caption);
-                        self.$filledStars.css('width', width);
-                    }
-                },
-                starClick: function starClick(e) {
-                    var pos, params;
-                    self.events._listenClick(e, function (ev) {
-                        if (self.inactive) {
-                            return false;
-                        }
-                        pos = self.events._getTouchPosition(ev);
-                        self._setStars(pos);
-                        params = [self.$element.val(), self._getCaption()];
-                        self.$element.trigger('change').trigger('rating.change', params);
-                        self.starClicked = true;
-                    });
-                },
-                clearClick: function clearClick(e) {
-                    self.events._listenClick(e, function () {
-                        if (!self.inactive) {
-                            self.clear();
-                            self.clearClicked = true;
-                        }
-                    });
-                },
-                starMouseMove: function starMouseMove(e) {
-                    var pos, out;
-                    if (self.events._noMouseAction(e)) {
-                        return;
-                    }
-                    self.starClicked = false;
-                    pos = self.events._getTouchPosition(e);
-                    out = self.calculate(pos);
-                    self._toggleHover(out);
-                    self.$element.trigger('rating.hover', [out.val, out.caption, 'stars']);
-                },
-                starMouseLeave: function starMouseLeave(e) {
-                    var out;
-                    if (self.events._noMouseAction(e) || self.starClicked) {
-                        return;
-                    }
-                    out = self.cache;
-                    self._toggleHover(out);
-                    self.$element.trigger('rating.hoverleave', ['stars']);
-                },
-                clearMouseMove: function clearMouseMove(e) {
-                    var caption, val, width, out;
-                    if (self.events._noMouseAction(e) || !self.hoverOnClear) {
-                        return;
-                    }
-                    self.clearClicked = false;
-                    caption = '<span class="' + self.clearCaptionClass + '">' + self.clearCaption + '</span>';
-                    val = self.clearValue;
-                    width = self.getWidthFromValue(val) || 0;
-                    out = { caption: caption, width: width, val: val };
-                    self._toggleHover(out);
-                    self.$element.trigger('rating.hover', [val, caption, 'clear']);
-                },
-                clearMouseLeave: function clearMouseLeave(e) {
-                    var out;
-                    if (self.events._noMouseAction(e) || self.clearClicked || !self.hoverOnClear) {
-                        return;
-                    }
-                    out = self.cache;
-                    self._toggleHover(out);
-                    self.$element.trigger('rating.hoverleave', ['clear']);
-                },
-                resetForm: function resetForm(e) {
-                    if (e && e.isDefaultPrevented()) {
-                        return;
-                    }
-                    if (!self.inactive) {
-                        self.reset();
-                    }
-                }
-            };
-        },
-        _listen: function _listen() {
-            var self = this,
-                $el = self.$element,
-                $form = $el.closest('form'),
-                $rating = self.$rating,
-                $clear = self.$clear,
-                events = self.events;
-            $h.handler($rating, 'touchstart touchmove touchend', $.proxy(events.initTouch, self));
-            $h.handler($rating, 'click touchstart', $.proxy(events.starClick, self));
-            $h.handler($rating, 'mousemove', $.proxy(events.starMouseMove, self));
-            $h.handler($rating, 'mouseleave', $.proxy(events.starMouseLeave, self));
-            if (self.showClear && $clear.length) {
-                $h.handler($clear, 'click touchstart', $.proxy(events.clearClick, self));
-                $h.handler($clear, 'mousemove', $.proxy(events.clearMouseMove, self));
-                $h.handler($clear, 'mouseleave', $.proxy(events.clearMouseLeave, self));
-            }
-            if ($form.length) {
-                $h.handler($form, 'reset', $.proxy(events.resetForm, self), true);
-            }
-            return $el;
-        },
-        _getStars: function _getStars(type) {
-            var self = this,
-                stars = '<span class="' + type + '-stars">',
-                i;
-            for (i = 1; i <= self.stars; i++) {
-                stars += '<span class="star">' + self[type + 'Star'] + '</span>';
-            }
-            return stars + '</span>';
-        },
-        _setStars: function _setStars(pos) {
-            var self = this,
-                out = arguments.length ? self.calculate(pos) : self.calculate(),
-                $el = self.$element,
-                v = self._parseValue(out.val);
-            $el.val(v);
-            self.$filledStars.css('width', out.width);
-            self._setCaption(out.caption);
-            self.cache = out;
-            return $el;
-        },
-        showStars: function showStars(val) {
-            var self = this,
-                v = self._parseValue(val);
-            self.$element.val(v);
-            return self._setStars();
-        },
-        calculate: function calculate(pos) {
-            var self = this,
-                defaultVal = $h.isEmpty(self.$element.val()) ? 0 : self.$element.val(),
-                val = arguments.length ? self.getValueFromPosition(pos) : defaultVal,
-                caption = self.fetchCaption(val),
-                width = self.getWidthFromValue(val);
-            width += '%';
-            return { caption: caption, width: width, val: val };
-        },
-        getValueFromPosition: function getValueFromPosition(pos) {
-            var self = this,
-                precision = $h.getDecimalPlaces(self.step),
-                val,
-                factor,
-                maxWidth = self.$rating.width();
-            factor = self.diff * pos / (maxWidth * self.step);
-            factor = self.rtl ? Math.floor(factor) : Math.ceil(factor);
-            val = $h.applyPrecision(parseFloat(self.min + factor * self.step), precision);
-            val = Math.max(Math.min(val, self.max), self.min);
-            return self.rtl ? self.max - val : val;
-        },
-        getWidthFromValue: function getWidthFromValue(val) {
-            var self = this,
-                min = self.min,
-                max = self.max,
-                factor,
-                $r = self.$emptyStars,
-                w;
-            if (!val || val <= min || min === max) {
-                return 0;
-            }
-            w = $r.outerWidth();
-            factor = w ? $r.width() / w : 1;
-            if (val >= max) {
-                return 100;
-            }
-            return (val - min) * factor * 100 / (max - min);
-        },
-        fetchCaption: function fetchCaption(rating) {
-            var self = this,
-                val = parseFloat(rating) || self.clearValue,
-                css,
-                cap,
-                capVal,
-                cssVal,
-                caption,
-                vCap = self.starCaptions,
-                vCss = self.starCaptionClasses;
-            if (val && val !== self.clearValue) {
-                val = $h.applyPrecision(val, $h.getDecimalPlaces(self.step));
-            }
-            cssVal = typeof vCss === "function" ? vCss(val) : vCss[val];
-            capVal = typeof vCap === "function" ? vCap(val) : vCap[val];
-            cap = $h.isEmpty(capVal) ? self.defaultCaption.replace(/\{rating}/g, val) : capVal;
-            css = $h.isEmpty(cssVal) ? self.clearCaptionClass : cssVal;
-            caption = val === self.clearValue ? self.clearCaption : cap;
-            return '<span class="' + css + '">' + caption + '</span>';
-        },
-        destroy: function destroy() {
-            var self = this,
-                $el = self.$element;
-            if (!$h.isEmpty(self.$container)) {
-                self.$container.before($el).remove();
-            }
-            $.removeData($el.get(0));
-            return $el.off('rating').removeClass('rating rating-input');
-        },
-        create: function create(options) {
-            var self = this,
-                opts = options || self.options || {};
-            return self.destroy().rating(opts);
-        },
-        clear: function clear() {
-            var self = this,
-                title = '<span class="' + self.clearCaptionClass + '">' + self.clearCaption + '</span>';
-            if (!self.inactive) {
-                self._setCaption(title);
-            }
-            return self.showStars(self.clearValue).trigger('change').trigger('rating.clear');
-        },
-        reset: function reset() {
-            var self = this;
-            return self.showStars(self.initialValue).trigger('rating.reset');
-        },
-        update: function update(val) {
-            var self = this;
-            return arguments.length ? self.showStars(val) : self.$element;
-        },
-        refresh: function refresh(options) {
-            var self = this,
-                $el = self.$element;
-            if (!options) {
-                return $el;
-            }
-            return self.destroy().rating($.extend(true, self.options, options)).trigger('rating.refresh');
-        }
-    };
-
-    $.fn.rating = function (option) {
-        var args = Array.apply(null, arguments),
-            retvals = [];
-        args.shift();
-        this.each(function () {
-            var self = $(this),
-                data = self.data('rating'),
-                options = (typeof option === 'undefined' ? 'undefined' : _typeof(option)) === 'object' && option,
-                theme = options.theme || self.data('theme'),
-                lang = options.language || self.data('language') || 'en',
-                thm = {},
-                loc = {},
-                opts;
-            if (!data) {
-                if (theme) {
-                    thm = $.fn.ratingThemes[theme] || {};
-                }
-                if (lang !== 'en' && !$h.isEmpty($.fn.ratingLocales[lang])) {
-                    loc = $.fn.ratingLocales[lang];
-                }
-                opts = $.extend(true, {}, $.fn.rating.defaults, thm, $.fn.ratingLocales.en, loc, options, self.data());
-                data = new Rating(this, opts);
-                self.data('rating', data);
-            }
-
-            if (typeof option === 'string') {
-                retvals.push(data[option].apply(data, args));
-            }
-        });
-        switch (retvals.length) {
-            case 0:
-                return this;
-            case 1:
-                return retvals[0] === undefined ? this : retvals[0];
-            default:
-                return retvals;
-        }
-    };
-
-    $.fn.rating.defaults = {
-        theme: '',
-        language: 'en',
-        stars: 5,
-        filledStar: '<i class="glyphicon glyphicon-star"></i>',
-        emptyStar: '<i class="glyphicon glyphicon-star-empty"></i>',
-        containerClass: '',
-        size: 'md',
-        animate: true,
-        displayOnly: false,
-        rtl: false,
-        showClear: true,
-        showCaption: true,
-        starCaptionClasses: {
-            0.5: 'label label-danger',
-            1: 'label label-danger',
-            1.5: 'label label-warning',
-            2: 'label label-warning',
-            2.5: 'label label-info',
-            3: 'label label-info',
-            3.5: 'label label-primary',
-            4: 'label label-primary',
-            4.5: 'label label-success',
-            5: 'label label-success'
-        },
-        clearButton: '<i class="glyphicon glyphicon-minus-sign"></i>',
-        clearButtonBaseClass: 'clear-rating',
-        clearButtonActiveClass: 'clear-rating-active',
-        clearCaptionClass: 'label label-default',
-        clearValue: null,
-        captionElement: null,
-        clearElement: null,
-        hoverEnabled: true,
-        hoverChangeCaption: true,
-        hoverChangeStars: true,
-        hoverOnClear: true,
-        zeroAsNull: true
-    };
-
-    $.fn.ratingLocales.en = {
-        defaultCaption: '{rating} Stars',
-        starCaptions: {
-            0.5: 'Half Star',
-            1: 'One Star',
-            1.5: 'One & Half Star',
-            2: 'Two Stars',
-            2.5: 'Two & Half Stars',
-            3: 'Three Stars',
-            3.5: 'Three & Half Stars',
-            4: 'Four Stars',
-            4.5: 'Four & Half Stars',
-            5: 'Five Stars'
-        },
-        clearButtonTitle: 'Clear',
-        clearCaption: 'Not Rated'
-    };
-
-    $.fn.rating.Constructor = Rating;
-
-    /**
-     * Convert automatically inputs with class 'rating' into Krajee's star rating control.
-     */
-    $(document).ready(function () {
-        var $input = $('input.rating');
-        if ($input.length) {
-            $input.removeClass('rating-loading').addClass('rating-loading').rating();
-        }
-    });
-});
-
-/***/ }),
-
-/***/ 92:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'reviewitem',
-  props: ['photo', 'heading', 'customer', 'review', 'rating'],
-  data: function data() {
-    return {};
-  },
-
-  methods: {
-    editReview: function editReview() {
-      return this.$emit('editreview');
-    }
-  }
-});
 
 /***/ })
 

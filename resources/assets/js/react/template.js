@@ -152,6 +152,18 @@ class ShowPillAndProducts extends React.Component {
 		//console.log(prodId);
 		//make ajax call with prod id and show in the modal body + head
 
+		const reactThis = this;
+		axios.post(`${APP_URL}templates/get-template-byproduct`, {
+			product_id: prodId
+		})
+		.then(function (response) {
+			//reactThis.setState({currProds: response.data});
+			console.log(response.data);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+
 		this.setState((prevState, props) => ({
 		  	showPopup: true
 		}));

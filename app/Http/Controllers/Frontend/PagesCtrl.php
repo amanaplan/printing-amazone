@@ -12,6 +12,7 @@ use App\Review;
 use App\OptLamination;
 use App\StickerType;
 use App\Page;
+use App\TemplateProdVar;
 
 use App\Http\HelperClass\Multipurpose;
 
@@ -278,6 +279,18 @@ class PagesCtrl extends Controller
         ]);
 
         return Category::find($request->category_id)->products()->has('variations')->select(['id', 'product_name', 'logo'])->get();
+    }
+
+    /**
+    *fetch templates by product id
+    */
+    public function GetTemplateByProduct(Request $request)
+    {
+        $request->validate([
+            'product_id'    =>  'required|integer|exists:products,id'
+        ]);
+
+        return TemplateProdVar::where('product_id', $request->product_id)->orderBy('sort', 'asc')->get();
     }
 
 }
