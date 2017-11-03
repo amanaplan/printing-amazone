@@ -290,7 +290,10 @@ class PagesCtrl extends Controller
             'product_id'    =>  'required|integer|exists:products,id'
         ]);
 
-        return TemplateProdVar::where('product_id', $request->product_id)->orderBy('sort', 'asc')->get();
+        return response()->json([
+            'templates' =>  TemplateProdVar::where('product_id', $request->product_id)->orderBy('sort', 'asc')->select(['id', 'variation', 'template_file'])->get(),
+            'productname' => Product::find($request->product_id)->product_name
+        ]);
     }
 
 }

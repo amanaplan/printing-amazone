@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2017 at 02:12 PM
+-- Generation Time: Nov 03, 2017 at 12:56 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -2013,11 +2013,15 @@ CREATE TABLE `template_product_variations` (
 --
 
 INSERT INTO `template_product_variations` (`id`, `product_id`, `variation`, `template_file`, `sort`) VALUES
-(1, 24, '80 x 80', 'templates/qfhV8WjsPy2VG5jpmLC3Cp5oAMiEbxTOQH9lqQnd.jpeg', 0),
-(2, 2, '80 x 80 mm', 'templates/Untitled.393633590png', 2),
-(3, 23, '100 x 100 mm', 'templates/M7hJXIXHl34FArb2wjdBkcpPHTsCq9itGEAzTdp8.jpeg', 0),
-(4, 31, '20 x  20', 'templates/popup(1)-1401491792.zip', 0),
-(5, 2, '10 x 20 mm', 'templates/new-form-1716529005.zip', 1);
+(2, 2, '80 x 80 mm', 'templates/Untitled.393633590png', 1),
+(4, 31, '20 x  20', 'templates/A1VLFMBg0Z0WPb3iygDUXoOuuDj2ivMaM4RuFxjJ.jpeg', 0),
+(5, 2, '10 x 20 mm', 'templates/Z7i3qrlXeKCCj9GoBrW6but9dVy0VzwCJsSrbavM.jpeg', 2),
+(8, 17, '50 x 50 mm', 'templates/JTQMSvapNPpELNveXVc8dRO2RSotXKBZpxheI5Il.jpeg', 0),
+(9, 27, '50 X 50 mm', 'templates/fogoOn9FzW5tjkjUgnGYddmrHpesbW8yiEhwtxLy.gif', 0),
+(10, 28, '80 x 80 mm', 'templates/xfAN0QFkIwsinpZ0L51VMEsqgxBuUqoEqdZQzSqr.jpeg', 1),
+(11, 28, '100 x 100 mm', 'templates/kXHcIgLhruUDxMm8Pcg7W1NsFDNSuniYtqGW9sIN.jpeg', 2),
+(12, 29, '20 x 20 mm', 'templates/GqiurG7IM9qNeaVwgBe8qQQz2vXF82NgQR9dTXij.jpeg', 0),
+(15, 2, '50 x 50 mm', 'templates/PlrIvYjLgSMq63D5LDHwzrj9kwSVG5SMaLdyonl1.jpeg', 3);
 
 -- --------------------------------------------------------
 
@@ -2399,7 +2403,7 @@ ALTER TABLE `sticker_types`
 -- AUTO_INCREMENT for table `template_product_variations`
 --
 ALTER TABLE `template_product_variations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `users`
 --

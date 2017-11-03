@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 210);
+/******/ 	return __webpack_require__(__webpack_require__.s = 213);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -487,7 +487,89 @@ var APP_URL = 'http://printingamazon.dev/';
 
 /***/ }),
 
-/***/ 100:
+/***/ 101:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ReviewForm = function () {
+	function ReviewForm() {
+		_classCallCheck(this, ReviewForm);
+
+		this.errors = {};
+	}
+
+	_createClass(ReviewForm, [{
+		key: 'getError',
+		value: function getError(field) {
+			return this.errors[field];
+		}
+	}, {
+		key: 'hasError',
+		value: function hasError(field) {
+			return this.errors.hasOwnProperty(field);
+		}
+	}, {
+		key: 'chkError',
+		value: function chkError(arrOfObj) {
+			var _this = this;
+
+			arrOfObj.forEach(function (pair) {
+				switch (pair.field) {
+					case 'heading':
+						if (pair.fieldVal.length < 8) {
+							_this.errors = {};
+							_this.errors[pair.field] = 'review heading is too small';
+						} else if (pair.fieldVal.length > 60) {
+							_this.errors = {};
+							_this.errors[pair.field] = 'you have exceeded maximum character';
+						} else {
+							delete _this.errors[pair.field];
+						}
+
+						break;
+
+					case 'review':
+						if (pair.fieldVal.length < 10) {
+							_this.errors = {};
+							_this.errors[pair.field] = 'review message is too small';
+						} else {
+							delete _this.errors[pair.field];
+						}
+						break;
+
+					default:
+						if (pair.fieldVal <= 0 || pair.fieldVal > 5) {
+							_this.errors = {};
+							_this.errors[pair.field] = 'please provide your rating';
+						} else {
+							delete _this.errors[pair.field];
+						}
+
+				}
+			});
+
+			//reurn true / false if any error or not
+			if (Object.keys(this.errors).length > 0) {
+				return false;
+			} else {
+				this.errors = {};
+				return true;
+			}
+		}
+	}]);
+
+	return ReviewForm;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (ReviewForm);
+
+/***/ }),
+
+/***/ 102:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -509,7 +591,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     if (true) {
         // jshint ignore:line
         // AMD. Register as an anonymous module.
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(190)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(192)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); // jshint ignore:line
@@ -1165,7 +1247,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 101:
+/***/ 103:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1834,7 +1916,7 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 190:
+/***/ 192:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -12151,14 +12233,14 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-/***/ 202:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(203)(
+var Component = __webpack_require__(206)(
   /* script */
-  __webpack_require__(101),
+  __webpack_require__(103),
   /* template */
-  __webpack_require__(204),
+  __webpack_require__(207),
   /* scopeId */
   null,
   /* cssModules */
@@ -12186,7 +12268,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 203:
+/***/ 206:
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -12244,7 +12326,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 204:
+/***/ 207:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12311,7 +12393,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 205:
+/***/ 208:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22451,10 +22533,10 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 210:
+/***/ 213:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(82);
+module.exports = __webpack_require__(84);
 
 
 /***/ }),
@@ -23083,19 +23165,19 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 82:
+/***/ 84:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__star_rating__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formClass__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formClass__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__boot_js__ = __webpack_require__(10);
 
@@ -23205,88 +23287,6 @@ new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
 		}
 	}
 });
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ReviewForm = function () {
-	function ReviewForm() {
-		_classCallCheck(this, ReviewForm);
-
-		this.errors = {};
-	}
-
-	_createClass(ReviewForm, [{
-		key: 'getError',
-		value: function getError(field) {
-			return this.errors[field];
-		}
-	}, {
-		key: 'hasError',
-		value: function hasError(field) {
-			return this.errors.hasOwnProperty(field);
-		}
-	}, {
-		key: 'chkError',
-		value: function chkError(arrOfObj) {
-			var _this = this;
-
-			arrOfObj.forEach(function (pair) {
-				switch (pair.field) {
-					case 'heading':
-						if (pair.fieldVal.length < 8) {
-							_this.errors = {};
-							_this.errors[pair.field] = 'review heading is too small';
-						} else if (pair.fieldVal.length > 60) {
-							_this.errors = {};
-							_this.errors[pair.field] = 'you have exceeded maximum character';
-						} else {
-							delete _this.errors[pair.field];
-						}
-
-						break;
-
-					case 'review':
-						if (pair.fieldVal.length < 10) {
-							_this.errors = {};
-							_this.errors[pair.field] = 'review message is too small';
-						} else {
-							delete _this.errors[pair.field];
-						}
-						break;
-
-					default:
-						if (pair.fieldVal <= 0 || pair.fieldVal > 5) {
-							_this.errors = {};
-							_this.errors[pair.field] = 'please provide your rating';
-						} else {
-							delete _this.errors[pair.field];
-						}
-
-				}
-			});
-
-			//reurn true / false if any error or not
-			if (Object.keys(this.errors).length > 0) {
-				return false;
-			} else {
-				this.errors = {};
-				return true;
-			}
-		}
-	}]);
-
-	return ReviewForm;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (ReviewForm);
 
 /***/ })
 

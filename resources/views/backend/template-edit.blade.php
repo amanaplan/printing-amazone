@@ -85,7 +85,7 @@
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
                                 <a href="{{ url('/admin/template/manage') }}" class="btn btn-white">Cancel</a>
-                                <button class="btn btn-primary" type="submit">Add Item</button>
+                                <button class="btn btn-primary" type="submit">Save Changes</button>
                             </div>
                         </div>
                     </form>

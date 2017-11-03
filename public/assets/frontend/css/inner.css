@@ -1107,3 +1107,4 @@ form#contact-form .has-error{border: 1px solid #ff1818;}
 .template-box {
     margin-bottom: 30px;
 }
+.template-list a{cursor: pointer;}
