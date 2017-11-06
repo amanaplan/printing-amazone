@@ -69,7 +69,10 @@
 .review-sec h2{text-align: center;}
 header.inner .menu {
     position: absolute;
-    width: 100%;
+    width: 70%;
+    margin:0 auto;
+    left: 0;
+    right: 0;
 }
 header.inner .menu .navbar-collapse{background: #fff; padding: 0;margin-top: 6px;}
 header.inner .top-menu a i{color: #fff;}
