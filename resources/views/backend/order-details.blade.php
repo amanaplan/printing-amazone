@@ -123,6 +123,7 @@
                                 <td class="text-left">Size</td>
                                 <td class="text-right">Quantity</td>
                                 <td class="text-right">Artwork</td>
+                                <td class="text-right">Approval State</td>
                                 <td class="text-right">Price</td>
                             </tr>
                         </thead>
@@ -174,20 +175,29 @@
                                         <p>&#8220;{{ $item->instructions }}&#8221;</p>
                                     @endif
                                 </td>
+                                <td class="text-right">
+                                    <a href="{{ route('order.artwork.approval', ['order_id' => $order->id, 'order_item_id' => $item->id]) }}" class="btn btn-default btn-sm">Manage</a>
+                                    <br>
+                                    @if($order->mockup_approved)
+                                        <span class="label label-success">approved</span>
+                                    @else
+                                        <span class="label label-danger">not approved yet</span>
+                                    @endif
+                                </td>
                                 <td class="text-right">$ {{ $item->price }}</td>
                             </tr>
                             @endforeach
 
                             <tr>
-                                <td colspan="4" class="text-right">Sub-Total:</td>
+                                <td colspan="5" class="text-right">Sub-Total:</td>
                                 <td class="text-right">$ {{ $order->price + $order->discount }}.00</td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="text-right">Multiple Order Discount:</td>
+                                <td colspan="5" class="text-right">Multiple Order Discount:</td>
                                 <td class="text-right">$ {{ $order->discount }}</td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="text-right">Total:</td>
+                                <td colspan="5" class="text-right">Total:</td>
                                 <td class="text-right">$ {{ $order->price }}</td>
                             </tr>
                         </tbody>

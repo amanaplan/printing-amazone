@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 
 use App\Order;
 use App\OrderStatus;
+use App\OrderItem;
+use App\OrderArtworkApproval;
+use Validator;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -157,6 +160,69 @@ class OrderCtrl extends Controller
         ];
 
         return view('backend.order-details', $data);
+    }
+
+    /**
+    *upload creted mock up based on user's provided artwork
+    *and check if any further request changes
+    */
+    public function OrderArtworkApproval(Request $request, $order_id, $order_item_id)
+    {
+        $orderItem = OrderItem::findOrFail($order_item_id);
+
+        $data = [
+            'page'      => 'order_pending',
+            'back_url'  => route('order.details', $order_id),
+            'order_item'    => $orderItem,
+            'order_id'  => $order_id,
+            'item_id' => $order_item_id
+        ];
+
+        return view('backend.order-artwork-status', $data);
+    }
+
+    /**
+    *admin change the default artwork provided by user
+    */
+    public function OrderModDefArtwork(Request $request, $order_id, $order_item_id)
+    {
+        $orderItem = OrderItem::findOrFail($order_item_id);
+        abort_if($orderItem->order_id != $order_id, 401);
+
+         $validator = Validator::make($request->all(), [
+            'artwork'   => 'required|image'
+        ]);
+
+        if ($validator->fails()) {
+
+            adminflash('warning', 'error, make sure uploaded file is a image');
+            return redirect()->back();
+        }
+
+        //upload current image
+        $artwork = Storage::disk('public')->putFile('artworks', $request->file('artwork'));
+
+        //if file upload successful
+        if ($request->file('artwork')->isValid())
+        {
+            //delete the current image if any
+            if($orderItem->artwork)
+            {
+                Storage::disk('public')->delete($orderItem->artwork);
+            }
+
+            //store new file path in db
+            $orderItem->artwork = $artwork;
+            $orderItem->save();
+
+            adminflash('success', 'artwork updated successfully');
+        }
+        else
+        {
+            adminflash('danger', 'file upload error, try again');
+        }
+        
+        return redirect()->back();
     }
 
     /**

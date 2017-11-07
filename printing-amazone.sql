@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2017 at 06:52 AM
+-- Generation Time: Nov 07, 2017 at 06:33 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -622,7 +622,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (58, '2017_09_21_213110_create_cms_pages_table', 32),
 (59, '2017_10_24_205620_add_additioal_profile_info_col_to_users_table', 33),
 (60, '2017_10_27_213858_add_customsizebox_toggle_col_to_products_table', 34),
-(66, '2017_10_28_194049_create_template_prod_variation_table', 35);
+(66, '2017_10_28_194049_create_template_prod_variation_table', 35),
+(67, '2017_11_08_010518_add_mockup_approved_col_to_order_items_table', 36),
+(68, '2017_11_08_011036_create_mockup_approval_table', 37);
 
 -- --------------------------------------------------------
 
@@ -678,8 +680,23 @@ INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discoun
 (11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 5, '2017-08-31 18:00:05', '2017-09-01 18:03:39'),
 (19, 'PA2017090303', '3exy7af3', NULL, '0.00', '1016.00', 4, '2017-09-03 19:10:13', '2017-09-05 00:54:39'),
 (21, 'PA2017090601', '1v5yv6jw', NULL, '0.00', '26.00', 5, '2017-09-06 01:39:04', '2017-09-06 01:45:59'),
-(22, 'PA2017092301', '9kwczzce', 2, '2.00', '69.00', 1, '2017-09-23 21:32:36', '2017-09-23 21:32:36'),
 (28, 'PA2017102401', 'hz0bg4y2', 2, '0.00', '160.00', 4, '2017-10-24 17:30:47', '2017-10-24 17:33:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_artwork_approval`
+--
+
+CREATE TABLE `order_artwork_approval` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_item_id` int(11) NOT NULL,
+  `mockup` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `review_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `approved` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -717,7 +734,6 @@ INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_add
 (11, 11, 'Sourav Rakshit', 'srv.nxr@gmail.com', '5698745896', '::1', 'AS', 'West Bengal', 'KOlkata', '712222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 'C Company'),
 (16, 19, 'Brock Lesnar', 'atanu_das1985@yahoo.co.in', '8965854785', '223.223.129.189', 'AS', 'West Bengal', 'Kolkata', '702203', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse', NULL),
 (18, 21, 'Julian Dabbs', 'julian@blendev.com', '7472091732', '46.252.74.82', 'AS', 'NSW', 'Rouse Hill', '2115', '10 Dalton Cl', NULL),
-(19, 22, 'Sourav Rakshit', 'srv.nxr@gmail.com', '7278818541', '223.223.136.212', 'AS', 'West Bengal', 'Kolkata', '712203', 'proident, sunt in culpa qui officia deserunt', NULL),
 (25, 28, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '127.0.0.1', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL);
 
 -- --------------------------------------------------------
@@ -739,36 +755,35 @@ CREATE TABLE `order_items` (
   `laminating` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sticker_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `artwork` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instructions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `instructions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mockup_approved` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `order_items`
 --
 
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`) VALUES
-(1, 1, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
-(2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, NULL),
-(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '6', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper'),
-(5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
-(6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, 'artworks/Q6f8VWei6BqfC5QobFbgbzSlc2zyqqQcKbVQUeEC.jpeg', NULL),
-(10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, NULL),
-(11, 7, 4, 'Kraft Paperboard', '12', '12', '200', '111.00', NULL, NULL, NULL, NULL, NULL),
-(12, 8, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL),
-(13, 8, 21, 'Transparent Paper', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL),
-(14, 8, 17, 'Silver Matt paperboard', '90', '90', '200', '1905.00', NULL, NULL, NULL, NULL, NULL),
-(15, 9, 21, 'Glossy & Matt paperboard (Artboard)', '50', '50', '300', '882.00', NULL, NULL, NULL, NULL, NULL),
-(16, 9, 2, 'Kraft Paperboard', '70', '70', '200', '4034.00', NULL, NULL, NULL, NULL, NULL),
-(17, 9, 17, 'Silver Matt paperboard', '48.5', '200', '300', '3422.00', NULL, NULL, NULL, NULL, NULL),
-(18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, NULL),
-(19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL),
-(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, NULL),
-(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL),
-(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, NULL, NULL),
-(30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, NULL),
-(31, 22, 25, 'Glossy Sticker', '40', '40', '100', '33.00', NULL, NULL, NULL, NULL, NULL),
-(32, 22, 20, 'Transparent Sticker (Full Colour)', '90', '90', '400', '38.00', NULL, NULL, NULL, 'artworks/erdZEIXN5EF0Po0R4FtLJ6qkeFKgyySuYzkIwgpi.svg', NULL),
-(39, 28, 2, 'Glossy Sticker', '40', '60', '3000', '160.00', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `mockup_approved`) VALUES
+(1, 1, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL, 0),
+(2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, NULL, 0),
+(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '6', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper', 0),
+(5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL, 0),
+(6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, 'artworks/Q6f8VWei6BqfC5QobFbgbzSlc2zyqqQcKbVQUeEC.jpeg', NULL, 0),
+(10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, NULL, 0),
+(11, 7, 4, 'Kraft Paperboard', '12', '12', '200', '111.00', NULL, NULL, NULL, NULL, NULL, 0),
+(12, 8, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL, 0),
+(13, 8, 21, 'Transparent Paper', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL, 0),
+(14, 8, 17, 'Silver Matt paperboard', '90', '90', '200', '1905.00', NULL, NULL, NULL, NULL, NULL, 0),
+(15, 9, 21, 'Glossy & Matt paperboard (Artboard)', '50', '50', '300', '882.00', NULL, NULL, NULL, NULL, NULL, 0),
+(16, 9, 2, 'Kraft Paperboard', '70', '70', '200', '4034.00', NULL, NULL, NULL, NULL, NULL, 0),
+(17, 9, 17, 'Silver Matt paperboard', '48.5', '200', '300', '3422.00', NULL, NULL, NULL, NULL, NULL, 0),
+(18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, NULL, 0),
+(19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL, 0),
+(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, NULL, 0),
+(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL, 0),
+(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, NULL, NULL, 0),
+(30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, NULL, 0),
+(39, 28, 2, 'Glossy Sticker', '40', '60', '3000', '160.00', NULL, NULL, NULL, 'artworks/3UD5G2JndA7dfLYwTO7Zi7BCdge1fbEnoCTPjndr.png', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2141,6 +2156,12 @@ ALTER TABLE `orders`
   ADD UNIQUE KEY `orders_order_token_unique` (`order_token`);
 
 --
+-- Indexes for table `order_artwork_approval`
+--
+ALTER TABLE `order_artwork_approval`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `order_billing`
 --
 ALTER TABLE `order_billing`
@@ -2305,7 +2326,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `notificationsetting`
 --
@@ -2316,6 +2337,11 @@ ALTER TABLE `notificationsetting`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT for table `order_artwork_approval`
+--
+ALTER TABLE `order_artwork_approval`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
