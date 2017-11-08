@@ -28,6 +28,9 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
+
+Route::view('/artwork', 'frontend.artwork-approve'); //temporary
+
 Route::get('/templates', 'Frontend\PagesCtrl@ShowTemplates');
 Route::post('/templates/get-products', 'Frontend\PagesCtrl@GetTemplateProducts');
 Route::post('/templates/get-template-byproduct', 'Frontend\PagesCtrl@GetTemplateByProduct');
