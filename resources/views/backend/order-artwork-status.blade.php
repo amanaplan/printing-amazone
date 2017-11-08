@@ -101,10 +101,11 @@
                 </div>
                 <div class="panel-body">
                     
-                    <form>
+                    <form action="{{ route('order.upload.digitalproof', ['order_id' => $order_id, 'order_item_id' => $item_id]) }}" enctype="multipart/form-data" method="POST">
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label for="mockup">Upload Mockup: </label>
-                            <input id="mockup" type="file" class="form-control" />
+                            <input type="file" required="required" name="mockup" class="form-control" accept=".jpeg,.png,.bmp,.gif,.svg" />
                         </div>
 
                         <button type="submit" class="btn btn-success">Save Changes</button>
@@ -145,7 +146,7 @@
                             <form action="{{ route('order.mod.default.artwork', ['order_id' => $order_id, 'order_item_id' => $item_id]) }}" enctype="multipart/form-data" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <input type="file" name="artwork" class="form-control" accept=".jpeg,.png,.bmp,.gif,.svg" />
+                                    <input type="file" required="required" name="artwork" class="form-control" accept=".jpeg,.png,.bmp,.gif,.svg" />
                                 </div>
 
                                 <button type="submit" class="btn btn-info">Update Default Artwork</button>
