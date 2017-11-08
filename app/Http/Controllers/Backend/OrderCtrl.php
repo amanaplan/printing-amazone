@@ -175,7 +175,9 @@ class OrderCtrl extends Controller
             'back_url'  => route('order.details', $order_id),
             'order_item'    => $orderItem,
             'order_id'  => $order_id,
-            'item_id' => $order_item_id
+            'item_id' => $order_item_id,
+            'customer'  => Order::find($order_id)->user ? Order::find($order_id)->user->name : 'Customer',
+            'timeline'  => $orderItem->artworks->count() > 0? $orderItem->artworks()->oldest()->get() : null
         ];
 
         return view('backend.order-artwork-status', $data);
@@ -216,6 +218,46 @@ class OrderCtrl extends Controller
             $orderItem->save();
 
             adminflash('success', 'artwork updated successfully');
+        }
+        else
+        {
+            adminflash('danger', 'file upload error, try again');
+        }
+        
+        return redirect()->back();
+    }
+
+    /**
+    *admin uploads new generated digital proof of the user 
+    *provided artwork
+    */
+    public function OrderUploadMockup(Request $request, $order_id, $order_item_id)
+    {
+        $orderItem = OrderItem::findOrFail($order_item_id);
+        abort_if($orderItem->order_id != $order_id, 401);
+
+         $validator = Validator::make($request->all(), [
+            'mockup'   => 'required|image'
+        ]);
+
+        if ($validator->fails()) {
+
+            adminflash('warning', 'error, make sure uploaded file is a image');
+            return redirect()->back();
+        }
+
+        //upload mockup
+        $mockup = Storage::disk('public')->putFile('mockups', $request->file('mockup'));
+
+        //if file upload successful
+        if ($request->file('mockup')->isValid())
+        {
+            OrderArtworkApproval::create([
+                'order_item_id' =>  $order_item_id,
+                'mockup'        =>  $mockup,
+            ]);            
+
+            adminflash('success', 'mockup updated, user will be notified shortly');
         }
         else
         {

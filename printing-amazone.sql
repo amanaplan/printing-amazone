@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2017 at 06:33 PM
+-- Generation Time: Nov 08, 2017 at 12:25 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -698,6 +698,15 @@ CREATE TABLE `order_artwork_approval` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `order_artwork_approval`
+--
+
+INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `mockup`, `review_text`, `approved`, `created_at`, `updated_at`) VALUES
+(1, 39, 'mockups/hp0sAsI8jv3ZcUv4KtJZERYmEfxPZmfpjrO0RLy4.svg', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 0, '2017-11-08 15:34:52', '2017-11-08 15:40:32'),
+(2, 39, 'mockups/0ws8m9MEdO6Vi3pMTw2OWYJCBIsroRgM82wgOPRL.png', NULL, 1, '2017-11-08 15:42:03', '2017-11-08 15:42:03'),
+(3, 28, 'mockups/RwYjyeeby8wRVzB68iZoL1gEbibWmsnxxdKk0xZe.jpeg', 'I like it, please make it little more glossy and make the footer B&W', 0, '2017-11-08 16:48:39', '2017-11-08 16:52:39');
+
 -- --------------------------------------------------------
 
 --
@@ -781,7 +790,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL, 0),
 (20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, NULL, 0),
 (21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL, 0),
-(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, NULL, NULL, 0),
+(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, 'artworks/BfndhULHhkQHLDPjluSztZj9uvlgEq9JNhcK4nl5.jpeg', NULL, 0),
 (30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, NULL, 0),
 (39, 28, 2, 'Glossy Sticker', '40', '60', '3000', '160.00', NULL, NULL, NULL, 'artworks/3UD5G2JndA7dfLYwTO7Zi7BCdge1fbEnoCTPjndr.png', NULL, 0);
 
@@ -2341,7 +2350,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --

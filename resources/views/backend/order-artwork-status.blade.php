@@ -34,58 +34,92 @@
                     Mockups &amp; User's Reviews
                     <div class="pull-right">
                         <div class="btn-group">
-                            <a href="{{ $back_url }}" class="btn btn-info btn-rounded btn-xs">< Back</a>
+                            <a href="{{ $back_url }}" class="btn btn-info btn-rounded btn-xs">< Back to order details</a>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="timeline-item">
-                        <div class="row">
-                            <div class="col-sm-3 date left">
-                                <i class="fa fa-th-large"></i>
-                                6:00 am
-                                <br>
-                                <small class="text-navy">2 hour ago</small>
-                            </div>
-                            <div class="col-sm-9 content no-top-border ">
-                                <p class="m-b-xs"><strong>Mockup Uploaded</strong> <a href="{{ asset('assets/images/no-image.jpg') }}" target="_blank"><span class="label label-default">view large <i class="fa fa-external-link" aria-hidden="true"></i></span></a></p>
-                                <p>
-                                    <img src="{{ asset('assets/images/no-image.jpg') }}" width="300" class="img-responsive">
-                                </p>
 
+                    @if($timeline)
+
+                        @foreach($timeline as $item)
+
+                            @php
+                                $added = Carbon\Carbon::parse($item->created_at);
+                                $moded = Carbon\Carbon::parse($item->updated_at);
+
+                            @endphp
+
+                            <div class="timeline-item">
+                                <div class="row">
+                                    <div class="col-sm-3 date left">
+                                        <i class="fa fa-th-large"></i>
+                                        {{ $added->format('jS M y, h:i: A') }}
+                                        <br>
+                                        <small class="text-navy">{{ $added->diffForHumans() }}</small>
+                                    </div>
+                                    <div class="col-sm-9 content no-top-border ">
+                                        <p class="m-b-xs"><strong>Mockup Uploaded</strong> 
+                                        <a href="{{ asset('storage/'.$item->mockup) }}" target="_blank"><span class="label label-default">view large <i class="fa fa-external-link" aria-hidden="true"></i></span></a></p>
+                                        <p>
+                                            <img src="{{ asset('storage/'.$item->mockup) }}" width="300" class="img-responsive">
+                                        </p>
+
+                                    </div>
+                                </div>
                             </div>
+
+                            @if($item->review_text)
+                                <div class="timeline-item">
+                                    <div class="row">
+                                        <div class="col-sm-3 date left">
+                                            <i class="fa fa-th-large"></i>
+                                            {{ $moded->format('jS M y, h:i: A') }}
+                                            <br>
+                                            <small class="text-navy">{{ $moded->diffForHumans() }}</small>
+                                        </div>
+                                        <div class="col-sm-9 content no-top-border ">
+                                            <p class="m-b-xs text-info">
+                                                <i class="fa fa-user" aria-hidden="true"></i> 
+                                                <strong>{{ $customer }}</strong>
+                                            </p>
+
+                                            <p>{{ $item->review_text }}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if($item->approved)
+                                <div class="timeline-item">
+                                    <div class="row">
+                                        <div class="col-sm-3 date left">
+                                            <i class="fa fa-th-large"></i>
+                                            {{ $moded->format('jS M y, h:i: A') }}
+                                            <br>
+                                            <small class="text-navy">{{ $moded->diffForHumans() }}</small>
+                                        </div>
+                                        <div class="col-sm-9 content no-top-border ">
+                                            <h5 class="well text-success bg-info" style="background: #7bff93;"><strong>MOCK-UP APPROVED <i class="fa fa-check-circle fa-lg" aria-hidden="true"></i></strong></h5>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                        @endforeach
+
+
+                    @else
+
+                        <div class="jumbotron">
+                            <h3>No data yet. . .</h3>
+                            <p>Upload mockup to notify user that digital proof is ready</p>
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="row">
-                            <div class="col-sm-3 date left">
-                                <i class="fa fa-th-large"></i>
-                                6:00 am
-                                <br>
-                                <small class="text-navy">2 hour ago</small>
-                            </div>
-                            <div class="col-sm-9 content no-top-border ">
-                                <p class="m-b-xs text-info"><i class="fa fa-user" aria-hidden="true"></i> <strong>Sourav Rakshit</strong></p>
 
-                                <p>Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products.</p>
+                    @endif
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="row">
-                            <div class="col-sm-3 date left">
-                                <i class="fa fa-th-large"></i>
-                                6:00 am
-                                <br>
-                                <small class="text-navy">2 hour ago</small>
-                            </div>
-                            <div class="col-sm-9 content no-top-border ">
-                                <p class="m-b-xs text-success bg-info"><strong>MOCK-UP APPROVED <i class="fa fa-check-square" aria-hidden="true"></i></strong></p>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -105,7 +139,7 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="mockup">Upload Mockup: </label>
-                            <input type="file" required="required" name="mockup" class="form-control" accept=".jpeg,.png,.bmp,.gif,.svg" />
+                            <input type="file" required="required" name="mockup" class="form-control" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg" />
                         </div>
 
                         <button type="submit" class="btn btn-success">Save Changes</button>
@@ -146,7 +180,7 @@
                             <form action="{{ route('order.mod.default.artwork', ['order_id' => $order_id, 'order_item_id' => $item_id]) }}" enctype="multipart/form-data" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <input type="file" required="required" name="artwork" class="form-control" accept=".jpeg,.png,.bmp,.gif,.svg" />
+                                    <input type="file" required="required" name="artwork" class="form-control" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg" />
                                 </div>
 
                                 <button type="submit" class="btn btn-info">Update Default Artwork</button>
