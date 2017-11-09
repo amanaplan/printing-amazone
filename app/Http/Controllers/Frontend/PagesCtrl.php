@@ -60,7 +60,9 @@ class PagesCtrl extends Controller
             return $this->CmsPage($slug);
         }
 
-    	$category = Category::with('products')->where('category_slug', $slug)->firstOrFail();
+    	$category = Category::with(['products' => function($query){
+            $query->orderBy('sort', 'asc');
+        }])->where('category_slug', $slug)->firstOrFail();
 
         //if redis has the data
         if(Redis::command('exists',['category:id:'.$category->id.':rate']))

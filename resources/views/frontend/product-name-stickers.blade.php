@@ -120,12 +120,15 @@
 												<li><input id="{{ $val }}" class="size-opt" type="radio" name="size" value="{{ $key }}" {{ ($loop->index === 0)? 'checked' : '' }}> <label for="{{ $val }}">{{ $val }}</label></li>
 											@endforeach
 											
+											{{-- allow custom size box only if applicable --}}
+											@if($product->allow_custom_size)
 											<li><input id="custom" type="radio" name="size" value="custom"> <label for="custom">Custom Size</label>
 												<div class="custom-input" style="display: none;">
 													<input type="text" placeholder="Width" name="size_w"> x <input type="text" placeholder="height" name="size_h"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button>
 													<span id="size-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
 												</div>
 											</li>
+											@endif
 										</ul>
 										
 									</div>
