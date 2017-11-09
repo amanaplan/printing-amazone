@@ -1,0 +1,50 @@
+.art-card {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(90, 97, 105, 0.1) 0px 0.46875rem 2.1875rem, rgba(90, 97, 105, 0.1) 0px 0.9375rem 1.40625rem, rgba(90, 97, 105, 0.12) 0px 0.25rem 0.53125rem, rgba(90, 97, 105, 0.1) 0px 0.125rem 0.1875rem;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 0.625rem;
+    word-wrap: break-word;
+    border: 1px solid rgba(0,0,0,.125);
+    background-clip: border-box;
+    padding: 33px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.uploaded-artwork{
+    margin-top: 80px;
+}
+.uploaded-artwork h4{
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.cart-dtls{
+	margin-bottom: 10px;
+}
+.order-spec{
+	margin-top: 49px;
+}
+.order-spec p{
+	padding-bottom: 10px;
+}
+div.mockup{
+	width: 55%;
+    margin: 0px auto;
+}
+
+#mockup-ready{
+	text-align: center;
+	font-size: 2em;
+}
+#mockup-ready::after {
+    content: "";
+    width: 30px;
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+    bottom: 89%;
+    background: rgb(23, 198, 113);
+}
