@@ -74,7 +74,7 @@
 
 					<div class="row">
 						<div class="page-header">
-							<h1 id="timeline">Timeline</h1>
+							<h1 id="timeline">Conversations</h1>
 						</div>
 						<ul class="timeline">
 							<li class="timeline-inverted">
@@ -120,12 +120,27 @@
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="adjustment-form">
+					<div class="adjustment-form">
+
+						<!-- <div class="row">
 							<input class="btn btn-success btn-pill d-flex ml-auto mr-auto" type="submit" value="Approve Mockup">
-							<a href="">or, Make an Adjustment</a>
+							<a href="#">or, Make an Adjustment</a>
+						</div> -->
+
+						<div class="row">
+							<div class="col-sm-12 com-md-12">
+								<div class="form-group">
+									<textarea class="form-control review-msg" rows="10" placeholder="Enter your message..." name="message"></textarea>
+								</div>
+								<div class="btns pull-left">
+									<button type="submit" class="btn btn-info btn-pill d-flex ml-auto mr-auto" type="submit">Send Your Message</button>
+									<button type="button" class="btn btn-warning btn-pill d-flex ml-auto mr-auto" type="submit">Cancel &amp; Approve Mockup</button>
+								</div>
+							</div>
 						</div>
+
 					</div>
+
 				</div>
 				
 			</div>
