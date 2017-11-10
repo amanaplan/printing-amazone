@@ -11,6 +11,8 @@ use App\OrderItem;
 use App\OrderArtworkApproval;
 use Validator;
 
+use App\Events\MockupReady;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -256,6 +258,16 @@ class OrderCtrl extends Controller
                 'order_item_id' =>  $order_item_id,
                 'mockup'        =>  $mockup,
             ]);            
+
+            //notify the user that mockup is ready
+            $order_data = Order::find($order_id);
+            $order_billing = $order_data->billing;
+            $billing_name = $order_billing->name;
+            $billing_email = $order_billing->email;
+
+            $secure_url = '';
+
+            event(new MockupReady($billing_name, $billing_email, $mockup, $order_data->order_token, $secure_url));
 
             adminflash('success', 'mockup updated, user will be notified shortly');
         }
