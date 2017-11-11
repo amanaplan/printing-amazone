@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2017 at 04:18 PM
+-- Generation Time: Nov 11, 2017 at 04:41 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.6
 
@@ -1997,10 +1997,14 @@ CREATE TABLE `sticker_types` (
 --
 
 INSERT INTO `sticker_types` (`id`, `name`, `image`, `sort`) VALUES
-(4, 'Animal Town Value Pack', 'N-Stickers Animal-Town.jpg', 1),
-(5, 'Smile Colour Pack', 'N-Stickers Smile-Colour-Pack.jpg', 2),
-(6, 'Fresh Fruits Pack', 'N-Stickers Fresh-Fruits.jpg', 3),
-(7, 'Flower Garden', 'N-Stickers Flower-Garden.jpg', 4);
+(4, 'Animal Town Value Pack', 'N-Stickers Animal-Town.jpg', 5),
+(5, 'Smile Colour Pack', 'N-Stickers Smile-Colour-Pack.jpg', 6),
+(6, 'Fresh Fruits Pack', 'N-Stickers Fresh-Fruits.jpg', 7),
+(7, 'Flower Garden', 'N-Stickers Flower-Garden.jpg', 8),
+(8, 'Photo Sticker 1', 'Photo 0001-(0094).jpg', 1),
+(9, 'Photo Sticker 2', 'Photo 0002-(0116).jpg', 2),
+(10, 'Photo Sticker 3', 'Photo 0003-(0141).jpg', 3),
+(11, 'Photo Sticker 4', 'Photo 0004-(0099).jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -2417,7 +2421,7 @@ ALTER TABLE `size_options`
 -- AUTO_INCREMENT for table `sticker_types`
 --
 ALTER TABLE `sticker_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `template_product_variations`
 --
