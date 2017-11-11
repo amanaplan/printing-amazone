@@ -7,5 +7,6 @@
   "/assets/frontend/js/uploadArtwork.js": "/assets/frontend/js/uploadArtwork.js",
   "/assets/frontend/js/cart.js": "/assets/frontend/js/cart.js",
   "/assets/frontend/js/payment.js": "/assets/frontend/js/payment.js",
-  "/assets/frontend/js/template.js": "/assets/frontend/js/template.js"
+  "/assets/frontend/js/template.js": "/assets/frontend/js/template.js",
+  "/assets/frontend/js/mockup-review.js": "/assets/frontend/js/mockup-review.js"
 }

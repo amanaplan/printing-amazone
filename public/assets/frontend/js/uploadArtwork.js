@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 215);
+/******/ 	return __webpack_require__(__webpack_require__.s = 218);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -477,13 +477,125 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 10:
+/***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var APP_URL = 'http://printingamazon.dev/';
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(8);
 
-/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
+
+
+
+(function () {
+    var output = document.getElementById('output');
+    document.getElementById('upload').onchange = function () {
+
+        //preview of the file
+        readURL(this);
+
+        var fileField = document.getElementById('upload');
+
+        //disable the field
+        fileField.setAttribute('disabled', 'disabled');
+        //hide img remove btn
+        $("button#rem-artwork").hide();
+
+        var data = new FormData();
+        data.append('file', fileField.files[0]);
+
+        var config = {
+            headers: { 'Content-Type': 'multipart/form-data' },
+            onUploadProgress: function onUploadProgress(progressEvent) {
+                var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
+                if (percentCompleted > 0) {
+                    document.getElementById("op-progress").style.display = 'block';
+                    output.setAttribute('aria-valuenow', percentCompleted);
+                    output.style.width = percentCompleted + '%';
+                    output.innerHTML = percentCompleted + '%';
+                }
+            }
+        };
+
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/process-upload', data, config).then(function (res) {
+            resetAnimation();
+
+            //the remove button
+            $("button#rem-artwork").show();
+
+            //proceed button active
+            $("div.proceed-to-cart").html('<div class="field"><button type="submit" class="btn btn-success">Proceed <i class="fa fa-cart-plus"></i> <i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div>');
+
+            //skip button off
+            $("p#skip-step").html('');
+
+            swal("", "Artwork uploaded successfully", "success");
+        }).catch(function (err) {
+            resetAnimation();
+
+            //proceed button off
+            $(".proceed-to-cart").html('');
+
+            //skip button on
+            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
+
+            swal("Error!", err.message, "error");
+        });
+    };
+})();
+
+function resetAnimation() {
+    //active the file field
+    var fileField = document.getElementById('upload');
+    fileField.removeAttribute('disabled');
+
+    document.getElementById("op-progress").style.display = 'none';
+    output.setAttribute('aria-valuenow', '00');
+    output.style.width = '0%';
+    output.innerHTML = '0%';
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#artwork-prvw').show();
+
+            $('#prvw-img').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function getFileExtension(filename) {
+    return filename.split('.').pop();
+}
+
+$(document).ready(function () {
+    $("button#rem-artwork").click(function () {
+
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/remove-current', {
+            removecurrent: 1
+        }).then(function (res) {
+
+            $("img#prvw-img").attr('src', '');
+            $("div#artwork-prvw").hide();
+
+            //proceed button off
+            $(".proceed-to-cart").html('');
+
+            //skip button on
+            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
+        }).catch(function (err) {
+
+            swal("Error!", 'Something went wrong', "error");
+        });
+    });
+});
 
 /***/ }),
 
@@ -1182,10 +1294,10 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 215:
+/***/ 218:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(86);
+module.exports = __webpack_require__(106);
 
 
 /***/ }),
@@ -1814,125 +1926,13 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 86:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(10);
+var APP_URL = 'http://printingamazon.dev/';
 
-
-
-
-(function () {
-    var output = document.getElementById('output');
-    document.getElementById('upload').onchange = function () {
-
-        //preview of the file
-        readURL(this);
-
-        var fileField = document.getElementById('upload');
-
-        //disable the field
-        fileField.setAttribute('disabled', 'disabled');
-        //hide img remove btn
-        $("button#rem-artwork").hide();
-
-        var data = new FormData();
-        data.append('file', fileField.files[0]);
-
-        var config = {
-            headers: { 'Content-Type': 'multipart/form-data' },
-            onUploadProgress: function onUploadProgress(progressEvent) {
-                var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
-                if (percentCompleted > 0) {
-                    document.getElementById("op-progress").style.display = 'block';
-                    output.setAttribute('aria-valuenow', percentCompleted);
-                    output.style.width = percentCompleted + '%';
-                    output.innerHTML = percentCompleted + '%';
-                }
-            }
-        };
-
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/process-upload', data, config).then(function (res) {
-            resetAnimation();
-
-            //the remove button
-            $("button#rem-artwork").show();
-
-            //proceed button active
-            $("div.proceed-to-cart").html('<div class="field"><button type="submit" class="btn btn-success">Proceed <i class="fa fa-cart-plus"></i> <i class="fa fa-angle-double-right" aria-hidden="true"></i></button></div>');
-
-            //skip button off
-            $("p#skip-step").html('');
-
-            swal("", "Artwork uploaded successfully", "success");
-        }).catch(function (err) {
-            resetAnimation();
-
-            //proceed button off
-            $(".proceed-to-cart").html('');
-
-            //skip button on
-            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
-
-            swal("Error!", err.message, "error");
-        });
-    };
-})();
-
-function resetAnimation() {
-    //active the file field
-    var fileField = document.getElementById('upload');
-    fileField.removeAttribute('disabled');
-
-    document.getElementById("op-progress").style.display = 'none';
-    output.setAttribute('aria-valuenow', '00');
-    output.style.width = '0%';
-    output.innerHTML = '0%';
-}
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#artwork-prvw').show();
-
-            $('#prvw-img').attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function getFileExtension(filename) {
-    return filename.split('.').pop();
-}
-
-$(document).ready(function () {
-    $("button#rem-artwork").click(function () {
-
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'upload-artwork/remove-current', {
-            removecurrent: 1
-        }).then(function (res) {
-
-            $("img#prvw-img").attr('src', '');
-            $("div#artwork-prvw").hide();
-
-            //proceed button off
-            $(".proceed-to-cart").html('');
-
-            //skip button on
-            $("p#skip-step").html('or, <button type="submit" class="skip-upload-button">skip this step &amp; email artwork later.</button>');
-        }).catch(function (err) {
-
-            swal("Error!", 'Something went wrong', "error");
-        });
-    });
-});
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
 /***/ })
 

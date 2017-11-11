@@ -152,4 +152,12 @@ class UserPagesCtrl extends Controller
         return view('frontend.user-order-details', $data);
     }
 
+    /**
+    *review mockup page for signed up customers
+    */
+    public function ReviewMockup($order_token, $order_item_id)
+    {
+        return \Facades\App\Http\Controllers\Frontend\PagesCtrl::ReviewMockup($order_token, $order_item_id, false);
+    }
+
 }

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 212);
+/******/ 	return __webpack_require__(__webpack_require__.s = 215);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -477,13 +477,286 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 10:
+/***/ 103:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var APP_URL = 'http://printingamazon.dev/';
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(8);
 
-/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
+
+
+$(document).ready(function () {
+	$("span.remove-item").on('click', function () {
+
+		startOverlay();
+		fillPricing(true, {});
+
+		var item = $(this).attr('data-cart-item');
+		var elem = $(this);
+
+		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/remove-product', {
+			params: { item: item }
+		}).then(function (response) {
+			if (response.data.count == 0) {
+				$("div#cart").html('\n\t\t    \t\t<div class="feature">\n\t\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'sticker">product</a> in your cart.</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t    \t');
+
+				$("span#cartcount").remove();
+			} else {
+				$("span#cartcount").html(response.data.count);
+
+				fillPricing(false, { total: response.data.total, discount: response.data.discount, payable: response.data.payable });
+
+				elem.closest('tr').fadeOut();
+			}
+
+			closeOverlay();
+		}).catch(function (error) {
+			closeOverlay();
+			fillPricing(false, { total: '__', discount: '__', payable: '__' });
+
+			swal("Error!", error.message, "error");
+		});
+	});
+
+	$(".clr-shopping").click(function (e) {
+		e.preventDefault();
+		startOverlay();
+
+		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/empty-cart', {}).then(function (response) {
+			$("div#cart").html('\n\t    \t\t<div class="feature">\n\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'sticker">product</a> in your cart.</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t    \t');
+
+			$("span#cartcount").remove();
+
+			closeOverlay();
+		}).catch(function (error) {
+			closeOverlay();
+			swal("Error!", error.message, "error");
+		});
+	});
+
+	$("button.add-qty").click(function () {
+		var qtyBox = $(this).closest('tr').find('input:text');
+		var cartItemId = qtyBox.attr('data-cart-id');
+		var currQty = parseInt($.trim(qtyBox.val()));
+
+		var nextQty = 0;
+
+		switch (currQty) {
+			case 10:
+				nextQty = 50;
+				break;
+			case 50:
+				nextQty = 100;
+				break;
+			case 100:
+				nextQty = 200;
+				break;
+			case 200:
+				nextQty = 300;
+				break;
+			case 300:
+				nextQty = 400;
+				break;
+			case 400:
+				nextQty = 500;
+				break;
+			case 500:
+				nextQty = 1000;
+				break;
+			case 20000:
+				nextQty = 20000;
+				break;
+			default:
+				nextQty = 1000;
+		}
+
+		if (currQty >= 1000 && currQty < 20000 && currQty % 1000 == 0) {
+			nextQty = currQty + 1000;
+		}
+
+		qtyBox.val(nextQty);
+
+		//change price
+		updateProductPrice(cartItemId, qtyBox);
+	});
+
+	$("button.remove-qty").click(function () {
+		var qtyBox = $(this).closest('tr').find('input:text');
+		var cartItemId = qtyBox.attr('data-cart-id');
+		var currQty = parseInt($.trim(qtyBox.val()));
+
+		var nextQty = 0;
+
+		switch (currQty) {
+			case 10:
+				nextQty = 10;
+				break;
+			case 50:
+				nextQty = 10;
+				break;
+			case 100:
+				nextQty = 50;
+				break;
+			case 200:
+				nextQty = 100;
+				break;
+			case 300:
+				nextQty = 200;
+				break;
+			case 400:
+				nextQty = 300;
+				break;
+			case 500:
+				nextQty = 400;
+				break;
+			case 1000:
+				nextQty = 500;
+				break;
+			default:
+				nextQty = 1000;
+		}
+
+		if (currQty > 1000 && currQty <= 20000 && currQty % 1000 == 0) {
+			nextQty = currQty - 1000;
+		}
+
+		qtyBox.val(nextQty);
+
+		//change price
+		updateProductPrice(cartItemId, qtyBox);
+	});
+
+	$("input.cart-qty").change(function () {
+		var cartItemId = $(this).attr('data-cart-id');
+		var qtyBox = $(this);
+		updateProductPrice(cartItemId, qtyBox);
+	});
+});
+
+function startOverlay() {
+	$("div#loading-overlay").show();
+}
+
+function closeOverlay() {
+	$("div#loading-overlay").hide();
+}
+
+function updateProductPrice(cartId, qtyBox) {
+	//qty validation + tooltip error message 
+	var allowedQty = [10, 50, 100, 200, 300, 400, 500];
+	var currQty = parseInt(qtyBox.val());
+
+	if (qtyBox.val().toString().indexOf('.') != -1) {
+		showErrorMsg(qtyBox, 'must be of type integer');
+		return false;
+	}
+
+	if (currQty < 1000) {
+		if (allowedQty.indexOf(currQty) != -1) {
+			showErrorMsg(qtyBox);
+		} else {
+			showErrorMsg(qtyBox, 'quantity not available');
+			return false;
+		}
+	} else if (currQty >= 1000 && currQty <= 20000) {
+		if (currQty % 1000 == 0) {
+			showErrorMsg(qtyBox);
+		} else {
+			showErrorMsg(qtyBox, 'only multipe of 1k after 1k');
+			return false;
+		}
+	} else if (currQty > 20000) {
+		showErrorMsg(qtyBox, 'for more than 20,000 contact us');
+		return false;
+	} else {
+		showErrorMsg(qtyBox, 'not a valid quantity');
+		return false;
+	}
+
+	var priceFld = qtyBox.closest('tr').find('span.current-price');
+	qtyBox.val(currQty);
+
+	disableUpdateBtns(qtyBox, true);
+
+	priceFld.html('<i class="fa fa-refresh fa-spin fa-lg"></i>');
+	fillPricing(true, {});
+
+	__WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/update-quantity', {
+		cartid: cartId,
+		qty: currQty
+	}).then(function (response) {
+
+		if (response.data.error == 1) {
+			swal("Error!", response.data.msg, "error");
+		}
+
+		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + response.data.price);
+		fillPricing(false, { total: response.data.total, discount: response.data.discount, payable: response.data.payable });
+
+		disableUpdateBtns(qtyBox, false);
+	}).catch(function (error) {
+		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i>__');
+		fillPricing(false, { total: '__', discount: '__', payable: '__' });
+
+		disableUpdateBtns(qtyBox, false);
+		swal("Error!", "Oops some server error occurred", "error");
+	});
+}
+
+function fillPricing(animate, prices) {
+	var payable = $("#tot-price");
+	var discount = $("#cart-discount");
+	var total = $("#cart-subtotal");
+
+	if (animate) {
+		var animation = '<i class="fa fa-refresh fa-spin fa-lg"></i>';
+		total.html(animation);
+		discount.html(animation);
+		payable.html(animation);
+	} else {
+		total.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.total);
+		discount.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.discount);
+		payable.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.payable);
+	}
+}
+
+function showErrorMsg(qtyBox) {
+	var msg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+	var errorTooltip = qtyBox.closest('tr').find('div.errtooltip');
+	var errorMsgBox = qtyBox.closest('tr').find('div.errtooltip span.text');
+
+	if (msg == '') {
+		errorTooltip.hide();
+		errorMsgBox.html('');
+	} else {
+		errorTooltip.show();
+		errorMsgBox.html(msg + ' <span class="instructions" title="we accept order quantity 10, 50, 100, multiple of 100 upto 500, 1000 then multiple of 1000 upto 20,000"> <i class="fa fa-info-circle"></i></span>');
+
+		$('.instructions').tooltipster({
+			theme: 'tooltipster-punk',
+			side: 'bottom',
+			maxWidth: 400
+		});
+	}
+}
+
+function disableUpdateBtns(qtyBox) {
+	var block = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+	var rmvBtn = qtyBox.closest('tr').find('button.remove-qty');
+	var addBtn = qtyBox.closest('tr').find('button.add-qty');
+	if (block) {
+		rmvBtn.prop('disabled', true);
+		addBtn.prop('disabled', true);
+	} else {
+		rmvBtn.prop('disabled', false);
+		addBtn.prop('disabled', false);
+	}
+}
 
 /***/ }),
 
@@ -1182,10 +1455,10 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 212:
+/***/ 215:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(83);
+module.exports = __webpack_require__(103);
 
 
 /***/ }),
@@ -1814,286 +2087,13 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 83:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(10);
+var APP_URL = 'http://printingamazon.dev/';
 
-
-
-$(document).ready(function () {
-	$("span.remove-item").on('click', function () {
-
-		startOverlay();
-		fillPricing(true, {});
-
-		var item = $(this).attr('data-cart-item');
-		var elem = $(this);
-
-		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/remove-product', {
-			params: { item: item }
-		}).then(function (response) {
-			if (response.data.count == 0) {
-				$("div#cart").html('\n\t\t    \t\t<div class="feature">\n\t\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'sticker">product</a> in your cart.</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t    \t');
-
-				$("span#cartcount").remove();
-			} else {
-				$("span#cartcount").html(response.data.count);
-
-				fillPricing(false, { total: response.data.total, discount: response.data.discount, payable: response.data.payable });
-
-				elem.closest('tr').fadeOut();
-			}
-
-			closeOverlay();
-		}).catch(function (error) {
-			closeOverlay();
-			fillPricing(false, { total: '__', discount: '__', payable: '__' });
-
-			swal("Error!", error.message, "error");
-		});
-	});
-
-	$(".clr-shopping").click(function (e) {
-		e.preventDefault();
-		startOverlay();
-
-		__WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/empty-cart', {}).then(function (response) {
-			$("div#cart").html('\n\t    \t\t<div class="feature">\n\t\t\t\t\t<div class="container">\n\t\t\t\t\t\t<div class="row" style="height: 400px">\n\t\t\t\t\t\t\t<h2>Your cart is empty</h2>\n\t\t\t\t\t\t\t<p class="subtitle">You may want to add some <a href="' + __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'sticker">product</a> in your cart.</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t    \t');
-
-			$("span#cartcount").remove();
-
-			closeOverlay();
-		}).catch(function (error) {
-			closeOverlay();
-			swal("Error!", error.message, "error");
-		});
-	});
-
-	$("button.add-qty").click(function () {
-		var qtyBox = $(this).closest('tr').find('input:text');
-		var cartItemId = qtyBox.attr('data-cart-id');
-		var currQty = parseInt($.trim(qtyBox.val()));
-
-		var nextQty = 0;
-
-		switch (currQty) {
-			case 10:
-				nextQty = 50;
-				break;
-			case 50:
-				nextQty = 100;
-				break;
-			case 100:
-				nextQty = 200;
-				break;
-			case 200:
-				nextQty = 300;
-				break;
-			case 300:
-				nextQty = 400;
-				break;
-			case 400:
-				nextQty = 500;
-				break;
-			case 500:
-				nextQty = 1000;
-				break;
-			case 20000:
-				nextQty = 20000;
-				break;
-			default:
-				nextQty = 1000;
-		}
-
-		if (currQty >= 1000 && currQty < 20000 && currQty % 1000 == 0) {
-			nextQty = currQty + 1000;
-		}
-
-		qtyBox.val(nextQty);
-
-		//change price
-		updateProductPrice(cartItemId, qtyBox);
-	});
-
-	$("button.remove-qty").click(function () {
-		var qtyBox = $(this).closest('tr').find('input:text');
-		var cartItemId = qtyBox.attr('data-cart-id');
-		var currQty = parseInt($.trim(qtyBox.val()));
-
-		var nextQty = 0;
-
-		switch (currQty) {
-			case 10:
-				nextQty = 10;
-				break;
-			case 50:
-				nextQty = 10;
-				break;
-			case 100:
-				nextQty = 50;
-				break;
-			case 200:
-				nextQty = 100;
-				break;
-			case 300:
-				nextQty = 200;
-				break;
-			case 400:
-				nextQty = 300;
-				break;
-			case 500:
-				nextQty = 400;
-				break;
-			case 1000:
-				nextQty = 500;
-				break;
-			default:
-				nextQty = 1000;
-		}
-
-		if (currQty > 1000 && currQty <= 20000 && currQty % 1000 == 0) {
-			nextQty = currQty - 1000;
-		}
-
-		qtyBox.val(nextQty);
-
-		//change price
-		updateProductPrice(cartItemId, qtyBox);
-	});
-
-	$("input.cart-qty").change(function () {
-		var cartItemId = $(this).attr('data-cart-id');
-		var qtyBox = $(this);
-		updateProductPrice(cartItemId, qtyBox);
-	});
-});
-
-function startOverlay() {
-	$("div#loading-overlay").show();
-}
-
-function closeOverlay() {
-	$("div#loading-overlay").hide();
-}
-
-function updateProductPrice(cartId, qtyBox) {
-	//qty validation + tooltip error message 
-	var allowedQty = [10, 50, 100, 200, 300, 400, 500];
-	var currQty = parseInt(qtyBox.val());
-
-	if (qtyBox.val().toString().indexOf('.') != -1) {
-		showErrorMsg(qtyBox, 'must be of type integer');
-		return false;
-	}
-
-	if (currQty < 1000) {
-		if (allowedQty.indexOf(currQty) != -1) {
-			showErrorMsg(qtyBox);
-		} else {
-			showErrorMsg(qtyBox, 'quantity not available');
-			return false;
-		}
-	} else if (currQty >= 1000 && currQty <= 20000) {
-		if (currQty % 1000 == 0) {
-			showErrorMsg(qtyBox);
-		} else {
-			showErrorMsg(qtyBox, 'only multipe of 1k after 1k');
-			return false;
-		}
-	} else if (currQty > 20000) {
-		showErrorMsg(qtyBox, 'for more than 20,000 contact us');
-		return false;
-	} else {
-		showErrorMsg(qtyBox, 'not a valid quantity');
-		return false;
-	}
-
-	var priceFld = qtyBox.closest('tr').find('span.current-price');
-	qtyBox.val(currQty);
-
-	disableUpdateBtns(qtyBox, true);
-
-	priceFld.html('<i class="fa fa-refresh fa-spin fa-lg"></i>');
-	fillPricing(true, {});
-
-	__WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + 'cart/update-quantity', {
-		cartid: cartId,
-		qty: currQty
-	}).then(function (response) {
-
-		if (response.data.error == 1) {
-			swal("Error!", response.data.msg, "error");
-		}
-
-		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + response.data.price);
-		fillPricing(false, { total: response.data.total, discount: response.data.discount, payable: response.data.payable });
-
-		disableUpdateBtns(qtyBox, false);
-	}).catch(function (error) {
-		priceFld.html('<i class="fa fa-usd" aria-hidden="true"></i>__');
-		fillPricing(false, { total: '__', discount: '__', payable: '__' });
-
-		disableUpdateBtns(qtyBox, false);
-		swal("Error!", "Oops some server error occurred", "error");
-	});
-}
-
-function fillPricing(animate, prices) {
-	var payable = $("#tot-price");
-	var discount = $("#cart-discount");
-	var total = $("#cart-subtotal");
-
-	if (animate) {
-		var animation = '<i class="fa fa-refresh fa-spin fa-lg"></i>';
-		total.html(animation);
-		discount.html(animation);
-		payable.html(animation);
-	} else {
-		total.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.total);
-		discount.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.discount);
-		payable.html('<i class="fa fa-usd" aria-hidden="true"></i> ' + prices.payable);
-	}
-}
-
-function showErrorMsg(qtyBox) {
-	var msg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-	var errorTooltip = qtyBox.closest('tr').find('div.errtooltip');
-	var errorMsgBox = qtyBox.closest('tr').find('div.errtooltip span.text');
-
-	if (msg == '') {
-		errorTooltip.hide();
-		errorMsgBox.html('');
-	} else {
-		errorTooltip.show();
-		errorMsgBox.html(msg + ' <span class="instructions" title="we accept order quantity 10, 50, 100, multiple of 100 upto 500, 1000 then multiple of 1000 upto 20,000"> <i class="fa fa-info-circle"></i></span>');
-
-		$('.instructions').tooltipster({
-			theme: 'tooltipster-punk',
-			side: 'bottom',
-			maxWidth: 400
-		});
-	}
-}
-
-function disableUpdateBtns(qtyBox) {
-	var block = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
-	var rmvBtn = qtyBox.closest('tr').find('button.remove-qty');
-	var addBtn = qtyBox.closest('tr').find('button.add-qty');
-	if (block) {
-		rmvBtn.prop('disabled', true);
-		addBtn.prop('disabled', true);
-	} else {
-		rmvBtn.prop('disabled', false);
-		addBtn.prop('disabled', false);
-	}
-}
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
 /***/ })
 

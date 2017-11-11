@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 214);
+/******/ 	return __webpack_require__(__webpack_require__.s = 217);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -477,17 +477,330 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 10:
+/***/ 105:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var APP_URL = 'http://printingamazon.dev/';
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__star_rating__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formClass__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__boot_js__ = __webpack_require__(8);
 
-/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
+
+
+
+
+
+
+
+new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
+	el: '#app',
+	components: { reviewitem: __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default.a },
+	data: {
+		heading: $("input[name='heading']").val(),
+		review: $("textarea[name='review']").val(),
+		rating: $('.rating').val(),
+		photo: document.querySelector("#photo").value,
+		givenReview: false,
+		disableForm: false,
+		showform: true,
+		errMsg: '',
+		offset: 2,
+		showLoadBtn: true,
+		LoadBtnText: 'Load more reviews',
+		lockLoadBtn: false,
+		customer: document.querySelector("#customerName").value,
+		formobj: new __WEBPACK_IMPORTED_MODULE_1__formClass__["a" /* default */]()
+	},
+	methods: {
+		postReview: function postReview() {
+			this.rating = $('.rating').val();
+			this.review = this.review.trim();
+			this.heading = this.heading.trim();
+
+			var state = this.formobj.chkError([{ field: 'rating', fieldVal: this.rating }, { field: 'review', fieldVal: this.review }, { field: 'heading', fieldVal: this.heading }]);
+			if (state == true) {
+				this.disableForm = true;
+				this.showform = false;
+				this.givenReview = true;
+				this.errMsg = '<div class="postingloader"></div>'; //resetting review submit server msg
+
+				//ajax here
+				var vueThis = this;
+				__WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_5__boot_js__["a" /* default */] + 'product/give-review', {
+					heading: this.heading,
+					review: this.review,
+					star: this.rating,
+					product: document.querySelector("#product").value
+				}).then(function (response) {
+					vueThis.errMsg = '\n\t\t\t\t\t<div class="alert alert-success alert-dismissable text-success">\n\t\t\t\t\t<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> \n\t\t\t\t\t\t<strong><i class="fa fa-check-circle" aria-hidden="true"></i> Your review submitted,</strong> \n\t\t\t\t\t\tit will be published after admin approval</em>\n\t\t\t\t\t</div>';
+				}).catch(function (error) {
+					vueThis.errMsg = '\n\t\t\t\t\t<div class="alert alert-danger alert-dismissable text-danger">\n\t\t\t\t\t<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> \n\t\t\t\t\t\t<strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Oops something went wrong!</strong> \n\t\t\t\t\t\treview can\'t be posted now <em>please try later</em>\n\t\t\t\t\t</div>';
+					//console.log('oops something went wrong, please try later');
+				});
+			}
+		},
+		loadReviews: function loadReviews($event) {
+			var vueThis = this;
+
+			$event.preventDefault();
+			vueThis.lockLoadBtn = true;
+			vueThis.LoadBtnText = '<i class="fa fa-spinner fa-pulse fa-fw"></i> Loading reviews. . .';
+			__WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_5__boot_js__["a" /* default */] + 'product/load-reviews', {
+				offset: this.offset,
+				product: document.querySelector("#product").value
+			}).then(function (response) {
+				vueThis.offset = response.data.offset;
+				$("#published-reviews").append(response.data.reviews);
+				vueThis.LoadBtnText = 'Load more review';
+				vueThis.lockLoadBtn = false;
+				if (response.data.removeloadBtn == 1) {
+					vueThis.showLoadBtn = false;
+				}
+				//console.log(response.data.offset);
+			}).catch(function (error) {
+				console.log('oops something went wrong, please try later');
+			});
+		},
+		genRatedStar: function genRatedStar(rating) {
+			var starMap = '';
+
+			if (!isNaN(rating) && rating.toString().indexOf('.') != -1) {
+				var floor = Math.floor(parseInt(rating));
+				for (var i = 0; i < floor; i++) {
+					starMap += '<i class="fa fa-star"></i> ';
+				}
+				starMap += '<i class="fa fa-star-half-o"></i> ';
+
+				if (floor < 5 && floor != 4) {
+					for (var _i = 0; _i < parseInt(5 - (floor + 1)); _i++) {
+						starMap += '<i class="fa fa-star-o"></i> ';
+					}
+				}
+			} else {
+				for (var _i2 = 0; _i2 < parseInt(rating); _i2++) {
+					starMap += '<i class="fa fa-star"></i> ';
+				}
+				if (rating < 5) {
+					for (var _i3 = 0; _i3 < parseInt(5 - rating); _i3++) {
+						starMap += '<i class="fa fa-star-o"></i> ';
+					}
+				}
+			}
+
+			return starMap;
+		}
+	}
+});
 
 /***/ }),
 
-/***/ 102:
+/***/ 11:
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+
+/***/ 12:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(13);
+
+/***/ }),
+
+/***/ 123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -569,7 +882,7 @@ var ReviewForm = function () {
 
 /***/ }),
 
-/***/ 103:
+/***/ 124:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -591,7 +904,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     if (true) {
         // jshint ignore:line
         // AMD. Register as an anonymous module.
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(194)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(203)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); // jshint ignore:line
@@ -1247,7 +1560,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 105:
+/***/ 128:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1290,204 +1603,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   }
 });
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-
-/***/ 12:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(13);
 
 /***/ }),
 
@@ -1916,7 +2031,63 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 194:
+/***/ 2:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+
+/***/ 203:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -12177,70 +12348,14 @@ return jQuery;
 
 /***/ }),
 
-/***/ 2:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 20:
+/***/ 209:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-/**
- * Transform the data for a request or a response
- *
- * @param {Object|String} data The data to be transformed
- * @param {Array} headers The headers for the request or response
- * @param {Array|Function} fns A single function or Array of functions
- * @returns {*} The resulting transformed data
- */
-module.exports = function transformData(data, headers, fns) {
-  /*eslint no-param-reassign:0*/
-  utils.forEach(fns, function transform(fn) {
-    data = fn(data, headers);
-  });
-
-  return data;
-};
-
-
-/***/ }),
-
-/***/ 206:
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(207)(
+var Component = __webpack_require__(210)(
   /* script */
-  __webpack_require__(105),
+  __webpack_require__(128),
   /* template */
-  __webpack_require__(208),
+  __webpack_require__(211),
   /* scopeId */
   null,
   /* cssModules */
@@ -12268,7 +12383,51 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 207:
+/***/ 21:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
+
+var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+
+function E() {
+  this.message = 'String contains an invalid character';
+}
+E.prototype = new Error;
+E.prototype.code = 5;
+E.prototype.name = 'InvalidCharacterError';
+
+function btoa(input) {
+  var str = String(input);
+  var output = '';
+  for (
+    // initialize result and counter
+    var block, charCode, idx = 0, map = chars;
+    // if the next str index does not exist:
+    //   change the mapping table to "="
+    //   check if d has no fractional digits
+    str.charAt(idx | 0) || (map = '=', idx % 1);
+    // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
+    output += map.charAt(63 & block >> 8 - idx % 1 * 8)
+  ) {
+    charCode = str.charCodeAt(idx += 3 / 4);
+    if (charCode > 0xFF) {
+      throw new E();
+    }
+    block = block << 8 | charCode;
+  }
+  return output;
+}
+
+module.exports = btoa;
+
+
+/***/ }),
+
+/***/ 210:
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -12326,7 +12485,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 208:
+/***/ 211:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12393,7 +12552,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 209:
+/***/ 212:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22489,54 +22648,10 @@ module.exports = Vue$3;
 
 /***/ }),
 
-/***/ 21:
+/***/ 217:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-// btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
-
-var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-
-function E() {
-  this.message = 'String contains an invalid character';
-}
-E.prototype = new Error;
-E.prototype.code = 5;
-E.prototype.name = 'InvalidCharacterError';
-
-function btoa(input) {
-  var str = String(input);
-  var output = '';
-  for (
-    // initialize result and counter
-    var block, charCode, idx = 0, map = chars;
-    // if the next str index does not exist:
-    //   change the mapping table to "="
-    //   check if d has no fractional digits
-    str.charAt(idx | 0) || (map = '=', idx % 1);
-    // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
-    output += map.charAt(63 & block >> 8 - idx % 1 * 8)
-  ) {
-    charCode = str.charCodeAt(idx += 3 / 4);
-    if (charCode > 0xFF) {
-      throw new E();
-    }
-    block = block << 8 | charCode;
-  }
-  return output;
-}
-
-module.exports = btoa;
-
-
-/***/ }),
-
-/***/ 214:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(85);
+module.exports = __webpack_require__(105);
 
 
 /***/ }),
@@ -23165,128 +23280,13 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 85:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__star_rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__star_rating__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formClass__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__boot_js__ = __webpack_require__(10);
+var APP_URL = 'http://printingamazon.dev/';
 
-
-
-
-
-
-
-
-new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
-	el: '#app',
-	components: { reviewitem: __WEBPACK_IMPORTED_MODULE_4__components_reviewitem_vue___default.a },
-	data: {
-		heading: $("input[name='heading']").val(),
-		review: $("textarea[name='review']").val(),
-		rating: $('.rating').val(),
-		photo: document.querySelector("#photo").value,
-		givenReview: false,
-		disableForm: false,
-		showform: true,
-		errMsg: '',
-		offset: 2,
-		showLoadBtn: true,
-		LoadBtnText: 'Load more reviews',
-		lockLoadBtn: false,
-		customer: document.querySelector("#customerName").value,
-		formobj: new __WEBPACK_IMPORTED_MODULE_1__formClass__["a" /* default */]()
-	},
-	methods: {
-		postReview: function postReview() {
-			this.rating = $('.rating').val();
-			this.review = this.review.trim();
-			this.heading = this.heading.trim();
-
-			var state = this.formobj.chkError([{ field: 'rating', fieldVal: this.rating }, { field: 'review', fieldVal: this.review }, { field: 'heading', fieldVal: this.heading }]);
-			if (state == true) {
-				this.disableForm = true;
-				this.showform = false;
-				this.givenReview = true;
-				this.errMsg = '<div class="postingloader"></div>'; //resetting review submit server msg
-
-				//ajax here
-				var vueThis = this;
-				__WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_5__boot_js__["a" /* default */] + 'product/give-review', {
-					heading: this.heading,
-					review: this.review,
-					star: this.rating,
-					product: document.querySelector("#product").value
-				}).then(function (response) {
-					vueThis.errMsg = '\n\t\t\t\t\t<div class="alert alert-success alert-dismissable text-success">\n\t\t\t\t\t<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> \n\t\t\t\t\t\t<strong><i class="fa fa-check-circle" aria-hidden="true"></i> Your review submitted,</strong> \n\t\t\t\t\t\tit will be published after admin approval</em>\n\t\t\t\t\t</div>';
-				}).catch(function (error) {
-					vueThis.errMsg = '\n\t\t\t\t\t<div class="alert alert-danger alert-dismissable text-danger">\n\t\t\t\t\t<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> \n\t\t\t\t\t\t<strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Oops something went wrong!</strong> \n\t\t\t\t\t\treview can\'t be posted now <em>please try later</em>\n\t\t\t\t\t</div>';
-					//console.log('oops something went wrong, please try later');
-				});
-			}
-		},
-		loadReviews: function loadReviews($event) {
-			var vueThis = this;
-
-			$event.preventDefault();
-			vueThis.lockLoadBtn = true;
-			vueThis.LoadBtnText = '<i class="fa fa-spinner fa-pulse fa-fw"></i> Loading reviews. . .';
-			__WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_5__boot_js__["a" /* default */] + 'product/load-reviews', {
-				offset: this.offset,
-				product: document.querySelector("#product").value
-			}).then(function (response) {
-				vueThis.offset = response.data.offset;
-				$("#published-reviews").append(response.data.reviews);
-				vueThis.LoadBtnText = 'Load more review';
-				vueThis.lockLoadBtn = false;
-				if (response.data.removeloadBtn == 1) {
-					vueThis.showLoadBtn = false;
-				}
-				//console.log(response.data.offset);
-			}).catch(function (error) {
-				console.log('oops something went wrong, please try later');
-			});
-		},
-		genRatedStar: function genRatedStar(rating) {
-			var starMap = '';
-
-			if (!isNaN(rating) && rating.toString().indexOf('.') != -1) {
-				var floor = Math.floor(parseInt(rating));
-				for (var i = 0; i < floor; i++) {
-					starMap += '<i class="fa fa-star"></i> ';
-				}
-				starMap += '<i class="fa fa-star-half-o"></i> ';
-
-				if (floor < 5 && floor != 4) {
-					for (var _i = 0; _i < parseInt(5 - (floor + 1)); _i++) {
-						starMap += '<i class="fa fa-star-o"></i> ';
-					}
-				}
-			} else {
-				for (var _i2 = 0; _i2 < parseInt(rating); _i2++) {
-					starMap += '<i class="fa fa-star"></i> ';
-				}
-				if (rating < 5) {
-					for (var _i3 = 0; _i3 < parseInt(5 - rating); _i3++) {
-						starMap += '<i class="fa fa-star-o"></i> ';
-					}
-				}
-			}
-
-			return starMap;
-		}
-	}
-});
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
 /***/ })
 

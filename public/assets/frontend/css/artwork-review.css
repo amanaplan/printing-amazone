@@ -55,9 +55,11 @@ h3#mockup-ready{
 div.adjustment-form{
     text-align: center;
 }
+div.adjustment-form a{
+  text-decoration: none;
+}
 .btn.btn-pill {
-    border-radius: 24px;
-    height: 56px;
+    height: 40px;
 }
 textarea.review-msg{
   padding: .664rem 1rem;

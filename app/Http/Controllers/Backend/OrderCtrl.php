@@ -265,7 +265,14 @@ class OrderCtrl extends Controller
             $billing_name = $order_billing->name;
             $billing_email = $order_billing->email;
 
-            $secure_url = '';
+            $secure_url = $order_data->user ? 
+                        route('user.review.mockup', [
+                            'order_token' => $order_data->order_token, 'order_item_id' => $order_item_id
+                        ])
+                        :
+                        route('nonuser.review.mockup', [
+                            'enc_order_id' => encrypt($order_data->order_token), 'enc_order_item_id' => encrypt($order_item_id)
+                        ]);
 
             event(new MockupReady($billing_name, $billing_email, $mockup, $order_data->order_token, $secure_url));
 
@@ -338,6 +345,62 @@ class OrderCtrl extends Controller
 
         adminflash('success', 'order deleted successfully');
         return redirect()->back();
+    }
+
+    /**
+    *user request mockup adjustment
+    */
+    public function RequestAdjustment(Request $request)
+    {
+        $request->validate([
+            'message'       =>  'required|min:5',
+            'order_token'   =>  'required|exists:orders,order_token',
+            'order_item'    =>  'required|integer|exists:order_items,id'
+        ]);
+
+        $order_id = Order::ByToken($request->order_token)->first()->id;
+        if(OrderItem::find($request->order_item)->order_id != $order_id)
+        {
+            abort(401, 'unauthorized');
+        }
+
+        $the_mockup = OrderArtworkApproval::where('order_item_id', $request->order_item)->latest()->first();
+        $the_mockup->review_text = $request->message;
+        $the_mockup->save();
+
+        //send notification to the admins
+
+        return response(200);
+    }
+
+    /**
+    *user request mockup approve
+    */
+    public function RequestApprove(Request $request)
+    {
+        $request->validate([
+            'approve'       =>  'required|integer',
+            'order_token'   =>  'required|exists:orders,order_token',
+            'order_item'    =>  'required|integer|exists:order_items,id'
+        ]);
+
+        $order_id = Order::ByToken($request->order_token)->first()->id;
+        if(OrderItem::find($request->order_item)->order_id != $order_id)
+        {
+            abort(401, 'unauthorized');
+        }
+
+        $the_mockup = OrderArtworkApproval::where('order_item_id', $request->order_item)->latest()->first();
+        $the_mockup->approved = 1;
+        $the_mockup->save();
+
+        $order_item = OrderItem::find($request->order_item);
+        $order_item->mockup_approved = 1;
+        $order_item->save();
+
+        //send notification to the admins
+
+        return response(200);
     }
 
 }

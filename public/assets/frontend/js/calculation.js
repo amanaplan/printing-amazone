@@ -63,90 +63,18 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 211);
+/******/ 	return __webpack_require__(__webpack_require__.s = 214);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 10:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var APP_URL = 'http://printingamazon.dev/';
-
-/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
-
-/***/ }),
-
-/***/ 211:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(82);
-
-
-/***/ }),
-
-/***/ 45:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = createSnackbar;
-function createSnackbar(message, actionText, action) {
-  // Any snackbar that is already shown
-  var previous = null;
-
-  if (previous) {
-    previous.dismiss();
-  }
-  var snackbar = document.createElement('div');
-  snackbar.className = 'paper-snackbar';
-  snackbar.dismiss = function () {
-    this.style.opacity = 0;
-  };
-  var text = document.createTextNode(message);
-  snackbar.appendChild(text);
-  if (actionText) {
-    if (!action) {
-      action = snackbar.dismiss.bind(snackbar);
-    }
-    var actionButton = document.createElement('button');
-    actionButton.className = 'action';
-    actionButton.innerHTML = actionText;
-    actionButton.addEventListener('click', action);
-    snackbar.appendChild(actionButton);
-  }
-  setTimeout(function () {
-    if (previous === this) {
-      previous.dismiss();
-    }
-  }.bind(snackbar), 5000);
-
-  snackbar.addEventListener('transitionend', function (event, elapsed) {
-    if (event.propertyName === 'opacity' && this.style.opacity == 0) {
-      this.parentElement.removeChild(this);
-      if (previous === this) {
-        previous = null;
-      }
-    }
-  }.bind(snackbar));
-
-  previous = snackbar;
-  document.body.appendChild(snackbar);
-  // In order for the animations to trigger, I have to force the original style to be computed, and then change it.
-  getComputedStyle(snackbar).bottom;
-  snackbar.style.bottom = '0px';
-  snackbar.style.opacity = 1;
-}
-
-/***/ }),
-
-/***/ 82:
+/***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__snackbar_main__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__snackbar_main__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(8);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -470,6 +398,78 @@ function gatherInput() {
 			checkPrice(product, paperstock, size, 0, customSize, 0);
 		}
 }
+
+/***/ }),
+
+/***/ 214:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(102);
+
+
+/***/ }),
+
+/***/ 54:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = createSnackbar;
+function createSnackbar(message, actionText, action) {
+  // Any snackbar that is already shown
+  var previous = null;
+
+  if (previous) {
+    previous.dismiss();
+  }
+  var snackbar = document.createElement('div');
+  snackbar.className = 'paper-snackbar';
+  snackbar.dismiss = function () {
+    this.style.opacity = 0;
+  };
+  var text = document.createTextNode(message);
+  snackbar.appendChild(text);
+  if (actionText) {
+    if (!action) {
+      action = snackbar.dismiss.bind(snackbar);
+    }
+    var actionButton = document.createElement('button');
+    actionButton.className = 'action';
+    actionButton.innerHTML = actionText;
+    actionButton.addEventListener('click', action);
+    snackbar.appendChild(actionButton);
+  }
+  setTimeout(function () {
+    if (previous === this) {
+      previous.dismiss();
+    }
+  }.bind(snackbar), 5000);
+
+  snackbar.addEventListener('transitionend', function (event, elapsed) {
+    if (event.propertyName === 'opacity' && this.style.opacity == 0) {
+      this.parentElement.removeChild(this);
+      if (previous === this) {
+        previous = null;
+      }
+    }
+  }.bind(snackbar));
+
+  previous = snackbar;
+  document.body.appendChild(snackbar);
+  // In order for the animations to trigger, I have to force the original style to be computed, and then change it.
+  getComputedStyle(snackbar).bottom;
+  snackbar.style.bottom = '0px';
+  snackbar.style.opacity = 1;
+}
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var APP_URL = 'http://printingamazon.dev/';
+
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
 /***/ })
 

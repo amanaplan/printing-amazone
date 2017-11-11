@@ -34,6 +34,7 @@
 								<tr>
 									<td colspan="1"><strong>Product</strong></td>
 									<td colspan="1"><strong>Details</strong></td>
+									<td colspan="1"><strong>Mockup</strong></td>
 									<td colspan="1"><strong>Size</strong></td>
 									<td colspan="1"><strong>Qty.</strong></td>
 									<td colspan="2" align="right"><strong>Price</strong></td>
@@ -45,7 +46,8 @@
 									<tr>
 										<td class="product-name">
 											<a href="{{ url('/'.$item->product->category->category_slug.'/'.$item->product->product_slug) }}" target="_blank">
-												<img width="80" src="{{ asset('assets/images/products/'.$item->product->logo) }}" style="margin-right: 10px; float: left; border: 1px solid #ddd;"><h5>{{ $item->product->product_name }}</h5>
+												<img width="80" src="{{ asset('assets/images/products/'.$item->product->logo) }}" style="margin-right: 10px; float: left; border: 1px solid #ddd;">
+												<h5>{{ $item->product->product_name }}</h5>
 											</a>
 											<br>
 										</td>
@@ -63,7 +65,18 @@
 											@if($item->sticker_name)
 											<p><strong>Printing Name:</strong> {{ $item->sticker_name }}</p>
 											@endif
-										</td>								
+										</td>	
+										<td>
+											<p>
+												@if($item->mockup_approved || $order->orderStatus->status_text == "Completed")
+													<a class="btn btn-info" href="#">View Mockup</a>
+												@elseif($order->orderStatus->status_text == "Cancelled")
+													NA
+												@else
+													<a class="btn btn-warning" href="{{ route('user.review.mockup', ['order_token' => $order->order_token, 'order_item_id' => $item->id]) }}">Review Mockup</a>
+												@endif
+											</p>
+										</td>							
 										<td class="price">
 											<h5>{{ $item->width }} x {{ $item->height }} mm<sup>2</sup></h5>
 										</td>
@@ -75,22 +88,22 @@
 								@endforeach
 
 								<tr>
-								    <td rowspan="3" colspan="2"><div class="address">
+								    <td rowspan="3" colspan="3"><div class="address">
 										    <h2>Shipping Address :</h2>
 											<p>{{ $order->billing->city }}, {{ $order->billing->country->country_name }}, {{ $order->billing->state }} - {{ $order->billing->zipcode }}</p><br>
 											<p>{{ $order->billing->street }}</p>
 										</div>
 									</td>
-									<td colspan="1"><div class="total"><span style="font-weight: 700;">Subtotal :</span></div></td>
-									<td colspan="2"><div class="total"><h5><i class="fa fa-usd" aria-hidden="true"></i> {{ number_format($order->price + $order->discount) }}</h5></div></td>
+									<td colspan="2"><div class="total"><span style="font-weight: 700;">Subtotal :</span></div></td>
+									<td colspan="3"><div class="total"><h5><i class="fa fa-usd" aria-hidden="true"></i> {{ number_format($order->price + $order->discount) }}</h5></div></td>
 								</tr>
 								<tr>
-									<td colspan="1"><div class="total"><span style="font-weight: 700;">Discount :</span></div></td>
-									<td colspan="2"><div class="total"><h5><i class="fa fa-usd" aria-hidden="true"></i> {{ $order->discount }}</h5></div></td>
+									<td colspan="2"><div class="total"><span style="font-weight: 700;">Discount :</span></div></td>
+									<td colspan="3"><div class="total"><h5><i class="fa fa-usd" aria-hidden="true"></i> {{ $order->discount }}</h5></div></td>
 								</tr>
 								<tr>
-									<td colspan="1"><div class="total"><span style="font-weight: 700;">Total :</span></div></td>
-									<td colspan="2"><div class="total"><h5><i class="fa fa-usd" aria-hidden="true"></i> {{ $order->price }}</h5></div></td>
+									<td colspan="2"><div class="total"><span style="font-weight: 700;">Total :</span></div></td>
+									<td colspan="3"><div class="total"><h5><i class="fa fa-usd" aria-hidden="true"></i> {{ $order->price }}</h5></div></td>
 								</tr>
 							</tbody>
 						</table>

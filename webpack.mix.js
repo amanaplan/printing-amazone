@@ -17,4 +17,5 @@ mix.js('resources/assets/js/frontend/reviewPost.js', 'public/assets/frontend/js/
 	.js('resources/assets/js/frontend/uploadArtwork.js', 'public/assets/frontend/js/uploadArtwork.js')
 	.js('resources/assets/js/frontend/cart.js', 'public/assets/frontend/js/cart.js')
 	.js('resources/assets/js/frontend/braintree/main.js', 'public/assets/frontend/js/payment.js')
-	.react('resources/assets/js/react/template/template.js', 'public/assets/frontend/js/template.js');
+	.react('resources/assets/js/react/template/template.js', 'public/assets/frontend/js/template.js')
+	.react('resources/assets/js/react/mockup-review/mockup-review.js', 'public/assets/frontend/js/mockup-review.js');

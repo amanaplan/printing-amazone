@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 use JavaScript;
 
+use Illuminate\Contracts\Encryption\DecryptException;
+
 class PagesCtrl extends Controller
 {
 
@@ -296,6 +298,85 @@ class PagesCtrl extends Controller
             'templates' =>  TemplateProdVar::where('product_id', $request->product_id)->orderBy('sort', 'asc')->select(['id', 'variation', 'template_file'])->get(),
             'productname' => Product::find($request->product_id)->product_name
         ]);
+    }
+
+    /**
+    *review mockup view page for non customers
+    */
+    public function ReviewMockup($enc_order_id, $enc_order_item_id, $encrypted = true)
+    {
+        if($encrypted)
+        {
+            try {
+                $order_token = decrypt($enc_order_id);
+                $order_item_id = decrypt($enc_order_item_id);
+
+            } catch (DecryptException $e) {
+                abort(404, 'invalid tokens');
+            }
+        }
+        else
+        {
+            $order_token = $enc_order_id;
+            $order_item_id = $enc_order_item_id;
+        }
+
+
+        $order = \App\Order::ByToken($order_token)->firstOrFail();
+        $order_item = \App\OrderItem::findOrFail($order_item_id);
+        abort_if($order_item->order_id != $order->id, 401);
+
+        //don't show the page if order completed/ order cancelled/ mockup approved
+        if($order->orderStatus->status_text == "Completed" || $order->orderStatus->status_text == "Cancelled" || $order_item->mockup_approved == true)
+        {
+            abort(404);
+            return false;
+        }
+
+        //checking whether mockup is ready
+        if($order_item->artworks()->count() > 0) //if ever admin uploaded any mockup
+        {
+            if($order_item->artworks()->latest()->first()->review_text) //user requested change and the corresponding mockup not yet ready
+            {
+                $mockup_ready = false;
+            }
+            else
+            {
+                $mockup_ready = true;
+            }
+        }
+        else //no single data in order_artwork_approval table
+        {
+            $mockup_ready = false;
+        }
+
+        //data for react
+        JavaScript::put([
+            '_hitURI'   => route('order.artwork.adjustment.request'),
+            '_hitURIapprove'    => route('order.artwork.approve.request'),
+            '_orderID_' => $order->order_token,
+            '_orderedPROD'  => $order_item_id
+        ]);
+
+        $data = [
+            'order_token'   =>  $order->order_token,
+            'order_date'    =>  $order->created_at,
+            'product'       =>  [
+                                    'name'  =>  $order_item->product->product_name,
+                                    'url'   =>  url('/'.$order_item->product->category->category_slug.'/'.$order_item->product->product_slug),
+                                    'logo'  =>  $order_item->product->logo
+                                ],
+            'paperstock'    =>  $order_item->paperstock,
+            'dimension'     =>  $order_item->width.' x '.$order_item->height,
+            'user_artwork'  =>  $order_item->artwork ? asset('storage/'.$order_item->artwork) : asset('assets/images/no-image.jpg'),
+            'user_desc'     =>  $order_item->instructions,
+            'mockup_ready'  =>  $mockup_ready,
+            'mockups'       =>  $order_item->artworks()->oldest()->get(),
+            'latest_mockup' =>  optional($order_item->artworks()->latest()->first())->mockup
+            
+        ];
+
+        return view('frontend.order-review-mockup', $data);
     }
 
 }

@@ -6,7 +6,7 @@
 
 	@component('component.seo-data')
 		@slot('title')
-			Approve Mock-Up - Printing Amazon
+			Review Mock-Up - Printing Amazon
 		@endslot
 
 		@slot('meta_desc')
@@ -41,7 +41,7 @@
 						<div class="col-sm-12">
 							<p>
 								<strong>Order ID:</strong>
-								<span class="pull-right text-info">123456789</span>
+								<span class="pull-right text-info">{{ $order_token }}</span>
 							</p>
 						</div>
 					</div>
@@ -49,57 +49,79 @@
 					<div class="row cart-dtls">
 						<div class="col-sm-12 col-md-6">
 							<div class="pull-left">
-								<a href="#">
-									<img class="img-rounded img-responsive pull-right" src="http://printingamazon.dev/assets/images/products/Square-Stickers.png">
+								<a href="{{ $product['url'] }}" target="_blank">
+									<img class="img-rounded img-responsive pull-right" src="{{ asset('assets/images/products/'. $product['logo']) }}">
 									<br/>
-									<p>Square/Rectangle</p>
+									<p>{{ $product['name'] }}</p>
 								</a>
 							</div>
 						</div>
 
 						<div class="col-sm-12 col-md-6">
 							<div class="pull-right text-left order-spec">
-								<p>50 x 50 mm</p>
-								<p>Glossy Paper</p>
+								<p>{{ $dimension }} mm<sup>2</sup></p>
+								<p>{{ $paperstock }}</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="uploaded-artwork">
 						<h4>Artwork Uploaded by You:</h4>
-						<img class="artwork-img img-responsive" onclick="showLargeImage(this);" src="{{ asset('storage/artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg') }}" />
+						<img class="artwork-img img-responsive" onclick="showLargeImage(this);" src="{{ $user_artwork }}" />
 					</div>
 
 					<div class="clearfix"></div>
 
 					<div class="row">
 						<div class="page-header">
-							<h1 id="timeline">Conversations</h1>
+							<h1 id="timeline">Conversation History</h1>
 						</div>
 						<ul class="timeline">
+
+							@if($user_desc)
 							<li class="timeline-inverted">
 								<div class="timeline-badge info"><i class="fa fa-commenting-o" aria-hidden="true"></i></div>
 								<div class="timeline-panel">
 									<div class="timeline-heading">
-									  	<h4 class="timeline-title">Wed, 10th Nov 17</h4>
+									  	<h4 class="timeline-title">{{ $order_date }}</h4>
 									</div>
 									<div class="timeline-body">
-									  	<p>I want it little more colorful and glossy, & remove the border make it runded corner</p>
+									  	<p>{{ $user_desc }}</p>
 									</div>
 								</div>
 							</li>
+							@endif
 
-							<li class="timeline-inverted">
-								<div class="timeline-badge success"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-									  	<h4 class="timeline-title">Sat, 11th Nov 17</h4>
+							@foreach($mockups as $mockup)
+
+								<li class="timeline-inverted">
+									<div class="timeline-badge success"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+										  	<h4 class="timeline-title">{{ Carbon\Carbon::parse($mockup->created_at)->toFormattedDateString() }}</h4>
+										</div>
+										<div class="timeline-body">
+										  	<img src="{{ asset('storage/'. $mockup->mockup) }}" onclick="showLargeImage(this);" class="artwork-img thumbnail img-responsive">
+										</div>
 									</div>
-									<div class="timeline-body">
-									  	<img src="{{ asset('storage/Small-17.jpg') }}" onclick="showLargeImage(this);" class="artwork-img thumbnail img-responsive">
-									</div>
-								</div>
-							</li>
+								</li>
+
+								@if($mockup->review_text)
+									<li class="timeline-inverted">
+										<div class="timeline-badge info"><i class="fa fa-commenting-o" aria-hidden="true"></i></div>
+										<div class="timeline-panel">
+											<div class="timeline-heading">
+											  	<h4 class="timeline-title">{{ Carbon\Carbon::parse($mockup->updated_at)->toFormattedDateString() }}</h4>
+											</div>
+											<div class="timeline-body">
+											  	<p>{{ $mockup->review_text }}</p>
+											</div>
+										</div>
+									</li>
+								@endif
+
+							@endforeach
+							
 						</ul>
 					</div>
 
@@ -112,35 +134,32 @@
 
 					<h3 id="mockup-ready">GENERATED MOCKUP</h3>
 
-					<div class="row">
-						<div class="mockup">
-							<p class="text-center">
-								<img class="artwork-img img-responsive" onclick="showLargeImage(this);" src="{{ asset('storage/temp.jpg') }}" />
-							</p>
+					@if(! $mockup_ready)
+						<div class="jumbotron">
+							<h3 style="font-size: 31px;">Your mockup is not ready yet, we are working on it</h3>
+							<br/>
+							<h4>We'll notify you via email once it is ready</h4>
 						</div>
-					</div>
 
-					<div class="adjustment-form">
-
-						<!-- <div class="row">
-							<input class="btn btn-success btn-pill d-flex ml-auto mr-auto" type="submit" value="Approve Mockup">
-							<a href="#">or, Make an Adjustment</a>
-						</div> -->
-
+						<a class="btn btn-info" href="{{ url('/contact') }}">Feel free to contact us</a>
+					@else
 						<div class="row">
-							<div class="col-sm-12 com-md-12">
-								<div class="form-group">
-									<textarea class="form-control review-msg" rows="10" placeholder="Enter your message..." name="message"></textarea>
-								</div>
-								<div class="btns pull-left">
-									<button type="submit" class="btn btn-info btn-pill d-flex ml-auto mr-auto" type="submit">Send Your Message</button>
-									<button type="button" class="btn btn-warning btn-pill d-flex ml-auto mr-auto" type="submit">Cancel &amp; Approve Mockup</button>
-								</div>
+							<div class="mockup">
+								<p class="text-center">
+									<img class="artwork-img img-responsive" onclick="showLargeImage(this);" src="{{ asset('storage/'. $latest_mockup) }}" />
+								</p>
 							</div>
 						</div>
 
-					</div>
 
+						<div class="adjustment-form">
+
+							<div id="react-zone"></div>
+
+						</div>
+					@endif
+
+					
 				</div>
 				
 			</div>
@@ -159,9 +178,10 @@
 
 @stop
 
-
 {{-- page specific scripts --}}
 @push( 'scripts' )
+
+@include( 'layouts.frontend.phpvartojs' )
 	
 <script>
 	function showLargeImage(img)
@@ -184,5 +204,6 @@
 	}
 </script>
 
+<script type="text/javascript" src="{{ asset( 'assets/frontend/js/mockup-review.js' ) }}"></script>
 
 @endpush

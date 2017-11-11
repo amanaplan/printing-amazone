@@ -28,9 +28,6 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 |------------------------------------------------------------------------------------------------------
 */
 Route::get('/', 'Frontend\PagesCtrl@index');
-
-Route::view('/artwork', 'frontend.artwork-approve'); //temporary
-
 Route::get('/templates', 'Frontend\PagesCtrl@ShowTemplates');
 Route::post('/templates/get-products', 'Frontend\PagesCtrl@GetTemplateProducts');
 Route::post('/templates/get-template-byproduct', 'Frontend\PagesCtrl@GetTemplateByProduct');
@@ -57,6 +54,7 @@ Route::post('/checkout/process-payment', 'Frontend\Checkout@PaymentProcess');
 Route::get('/order-confirm', 'Frontend\PagesCtrl@OrderConfirm')->name('order.confirm');
 Route::post('/request/label-graphics', 'Frontend\CustomRequest@CustomProds')->name('product.request');
 Route::post('/request/contact', 'Frontend\CustomRequest@Contact')->name('contact.request');
+Route::get('/review-mockup/{enc_order_id}/{enc_order_item_id}', 'Frontend\PagesCtrl@ReviewMockup')->name('nonuser.review.mockup');
 
 
 //users not allowed to access these routes if they are logged in
@@ -94,6 +92,7 @@ Route::prefix('user')->middleware('userloggedin')->group(function() {
 	Route::post('/request/review-add', 'Frontend\UserRqstCtrl@AddReviewRq');
 	Route::get('/my-orders', 'Frontend\UserPagesCtrl@ListOrders');
 	Route::get('/my-order/{token}', 'Frontend\UserPagesCtrl@OrderDetails');
+	Route::get('/my-order/review-mockup/{order_token}/{order_item_id}', 'Frontend\UserPagesCtrl@ReviewMockup')->name('user.review.mockup');
 
 });
 
@@ -200,6 +199,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/order-details/{order_id}/{order_item_id}', 'Backend\OrderCtrl@OrderArtworkApproval')->name('order.artwork.approval');
 	Route::post('/order/artwork/modify/{order_id}/{order_item_id}', 'Backend\OrderCtrl@OrderModDefArtwork')->name('order.mod.default.artwork');
 	Route::post('/order/upload-mockup/{order_id}/{order_item_id}', 'Backend\OrderCtrl@OrderUploadMockup')->name('order.upload.digitalproof');
+	Route::post('/order/artwork/request-adjustment', 'Backend\OrderCtrl@RequestAdjustment')->name('order.artwork.adjustment.request');
+	Route::post('/order/artwork/request-approve', 'Backend\OrderCtrl@RequestApprove')->name('order.artwork.approve.request');
 	Route::post('/order/manage/download-artwork', 'Backend\OrderCtrl@DownloadArtwork')->name('download.artwork');
 	Route::put('/order/update-status', 'Backend\OrderCtrl@UpdateStatus');
 	Route::delete('/order/manage/delete', 'Backend\OrderCtrl@DeleteOrder')->name('order.delete');

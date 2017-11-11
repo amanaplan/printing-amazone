@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 213);
+/******/ 	return __webpack_require__(__webpack_require__.s = 216);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -477,13 +477,47 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 10:
+/***/ 104:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var APP_URL = 'http://printingamazon.dev/';
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__boot_js__ = __webpack_require__(8);
 
-/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
+
+
+
+
+$("select[name='type']").change(function () {
+	/*animation started*/
+	startAnimation();
+
+	var stickerType = $(this).val();
+	__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'product/name-sticker/get-preview?artwork=' + stickerType).then(function (response) {
+		$("img#sticker-preview").attr("src", __WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'assets/images/products/' + response.data);
+		$("img#sticker-preview").on('load', function () {
+			stopAnimation();
+		});
+	}).catch(function (error) {
+
+		stopAnimation();
+
+		__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__["a" /* default */])('Invalid Sticker Type! try after some time', 'Dismiss');
+	});
+});
+
+function startAnimation() {
+	$("#sticker-preview").css('opacity', 0.3);
+	$(".middle").css('opacity', 1);
+}
+
+function stopAnimation() {
+	$("#sticker-preview").css('opacity', 1);
+	$(".middle").css('opacity', 0);
+}
 
 /***/ }),
 
@@ -1182,10 +1216,10 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 213:
+/***/ 216:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(84);
+module.exports = __webpack_require__(104);
 
 
 /***/ }),
@@ -1757,7 +1791,20 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 45:
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+
+/***/ 54:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1811,19 +1858,6 @@ function createSnackbar(message, actionText, action) {
 
 /***/ }),
 
-/***/ 5:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-
 /***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1868,47 +1902,13 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 84:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__boot_js__ = __webpack_require__(10);
+var APP_URL = 'http://printingamazon.dev/';
 
-
-
-
-
-$("select[name='type']").change(function () {
-	/*animation started*/
-	startAnimation();
-
-	var stickerType = $(this).val();
-	__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'product/name-sticker/get-preview?artwork=' + stickerType).then(function (response) {
-		$("img#sticker-preview").attr("src", __WEBPACK_IMPORTED_MODULE_2__boot_js__["a" /* default */] + 'assets/images/products/' + response.data);
-		$("img#sticker-preview").on('load', function () {
-			stopAnimation();
-		});
-	}).catch(function (error) {
-
-		stopAnimation();
-
-		__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__["a" /* default */])('Invalid Sticker Type! try after some time', 'Dismiss');
-	});
-});
-
-function startAnimation() {
-	$("#sticker-preview").css('opacity', 0.3);
-	$(".middle").css('opacity', 1);
-}
-
-function stopAnimation() {
-	$("#sticker-preview").css('opacity', 1);
-	$(".middle").css('opacity', 0);
-}
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
 /***/ })
 
