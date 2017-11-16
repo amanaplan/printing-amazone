@@ -30,5 +30,6 @@ class Product extends Model
 
     protected $casts = [
         'allow_custom_size' => 'boolean',
+        'is_circle'         => 'boolean'
     ];
 }

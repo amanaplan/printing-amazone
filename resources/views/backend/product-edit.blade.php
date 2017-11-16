@@ -157,6 +157,20 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Is this a circle product</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline"> 
+                                    <input type="checkbox" name="is_circle" value="1" {{ ($product->is_circle)? 'checked="checked"' : '' }}> Yes </label> 
+                                    
+                                    @if ($errors->has('is_circle'))
+                                        <span class="help-block m-b-none">
+                                            <strong>{{ $errors->first('is_circle') }}</strong>
+                                        </span>
+                                    @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-sm-2 control-label">Allow custom size selection option</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline"> 

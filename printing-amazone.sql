@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2017 at 04:41 PM
+-- Generation Time: Nov 16, 2017 at 01:03 PM
 -- Server version: 10.2.6-MariaDB
--- PHP Version: 7.1.6
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -624,7 +624,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (60, '2017_10_27_213858_add_customsizebox_toggle_col_to_products_table', 34),
 (66, '2017_10_28_194049_create_template_prod_variation_table', 35),
 (67, '2017_11_08_010518_add_mockup_approved_col_to_order_items_table', 36),
-(68, '2017_11_08_011036_create_mockup_approval_table', 37);
+(68, '2017_11_08_011036_create_mockup_approval_table', 37),
+(69, '2017_11_16_195418_add_is_circle_col_to_products_table', 38);
 
 -- --------------------------------------------------------
 
@@ -1830,6 +1831,7 @@ CREATE TABLE `products` (
   `min_size` int(11) NOT NULL DEFAULT 0,
   `max_size` int(11) NOT NULL DEFAULT 0,
   `allow_custom_size` tinyint(4) NOT NULL DEFAULT 1,
+  `is_circle` tinyint(4) NOT NULL DEFAULT 0,
   `sort` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1839,20 +1841,20 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `product_name`, `product_slug`, `logo`, `description`, `sample_image`, `min_size`, `max_size`, `allow_custom_size`, `sort`, `created_at`, `updated_at`) VALUES
-(2, 'Square/Rectangle', 'some meta', 'Square Sticker_3.jpg', 6, 'Square/Rectangle', 'squarerectangle', 'Square-Stickers.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', 'Square Sticker_2.jpg', 40, 300, 1, 2, '2017-05-30 14:35:51', '2017-10-27 17:29:12'),
-(4, 'Custom Shape', NULL, NULL, 6, 'Custom Shape', 'custom-shape', 'Custom-Shape-Stickers.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Die-cutting_9.jpg', 10, 300, 1, 2, '2017-06-19 15:22:41', '2017-09-28 16:56:54'),
-(17, 'Ovals', NULL, NULL, 6, 'Ovals', 'ovals', 'Oval-Stickers.png', 'Custom Oval Stickers are a great way to represent your state, team or organisation. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 10, 300, 1, 3, '2017-08-15 14:00:51', '2017-09-28 16:56:45'),
-(20, 'Rounded Corner', NULL, NULL, 6, 'Rounded Corner', 'rounded-corner', 'Round-Corner-Stickers.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 10, 300, 1, 1, '2017-08-15 16:42:47', '2017-09-28 16:56:35'),
-(21, 'Circle Stickers', NULL, NULL, 6, 'Circle', 'circle', 'Circle-Stickers.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 10, 300, 1, 4, '2017-08-15 16:57:52', '2017-09-28 16:56:25'),
-(22, 'Name stickers - Printing Amazon', NULL, NULL, 6, 'Name stickers', 'name-stickers', 'Name-Stickers.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of. \r\n(***We may have to abbreviate your child\'s name due to limited sticker spaces.)', NULL, 30, 300, 1, 5, '2017-08-16 13:48:57', '2017-09-29 11:38:01'),
-(23, 'Labels - Printing Amazon', NULL, NULL, 5, 'Labels', 'labels', 'Labels.png', 'Printing Amazon provides custom Label printing services by using flexographic and digital printing techniques. Both of these printing methods produce high-quality labels, and each method offers different capabilities that allow us to create a larger variety of label styles. Simply leave your brief requirements and contact details, and our service consultant will contact you within 24 hours. We provide quality and durable labels. Ordering from us means your stickers will withstand exposure and they would always portray your brand whenever.', 'PVC-paper-custom-label-sticker-logo-printing-self-adhesive-shipping-labels-custom-sticker-label-stickers.jpg', 0, 0, 1, 1, '2017-08-19 13:08:47', '2017-09-28 16:55:57'),
-(24, 'Graphic Designs - Printing Amazon', NULL, NULL, 5, 'Graphic Designs', 'graphic-designs', 'Grahpic-Design.png', 'Printing Amazon provides custom Graphic Design services for all business. Our professional graphic design team with more than 20 years of experience. We are well known because we provide quality graphic design for every demand by our clients and we get satisfactory feedbacks every time from our clients. Simply send us your requirements and contact details, and our service consultant will contact you within 24 hours to help you make your idea a reality.', 'gshock-watch-sports-watch-stopwatch-158741.jpeg*hacker-internet-technology-computers-159195.jpeg', 0, 0, 1, 2, '2017-08-19 13:24:07', '2017-09-28 16:56:06'),
-(27, 'Circle Badge with Pin', NULL, NULL, 1, 'Circle with Pin', 'circle-with-pin', 'Circle-Pin-Badge.png', 'Small custom round buttons feature full color printing and a durable steel pin-back.', 'Pin Button 1.jpg*Pin Button 3.jpg*Pin Button 4.jpg', 0, 0, 1, 1, '2017-09-28 15:34:59', '2017-10-06 14:38:59'),
-(28, 'Square Badge with Pin', NULL, NULL, 1, 'Square Pin', 'square-pin', 'Square-Pin.png', 'Small custom square buttons feature full color printing and a durable steel pin-back.', 'Square Pin Button 1.jpg*Square Pin Button 2.jpg*Square Pin Button 3.jpg*Square Pin Button 4.jpg', 0, 0, 1, 2, '2017-09-28 16:39:35', '2017-10-06 14:37:57'),
-(29, 'Heart Pin', NULL, NULL, 1, 'Heart Pin', 'heart-pin', 'Heart-Pin.png', 'Custom heart buttons feature full color printing and a durable steel pin-back.', 'Heart Pint Button 1.jpg*Heart Pint Button 2.jpg', 0, 0, 1, 3, '2017-09-28 22:48:42', '2017-10-06 14:37:38'),
-(31, 'Round Corner Magnets', NULL, NULL, 2, 'Round Corner', 'round-corner', 'Round-Corner-Magnets.png', 'Varies of round corner magnets with your personal designs. Create personalized magnets to use on cars, refrigerators and more.', NULL, 0, 0, 1, 1, '2017-09-29 12:21:20', '2017-10-06 14:09:42'),
-(33, 'Circle Magnets', NULL, NULL, 2, 'Circle Magnets', 'circle-magnets', 'Circle Magnets.png', 'Varies sizes of circle magnets with your personal designs. Create personalized magnets to use on cars, refrigerators and more.', 'Magnet Button 1.jpg*Magnet Button 2.jpg', 0, 0, 1, 2, '2017-09-29 13:24:48', '2017-10-06 14:15:47');
+INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `product_name`, `product_slug`, `logo`, `description`, `sample_image`, `min_size`, `max_size`, `allow_custom_size`, `is_circle`, `sort`, `created_at`, `updated_at`) VALUES
+(2, 'Square/Rectangle', 'some meta', 'Square Sticker_3.jpg', 6, 'Square/Rectangle', 'squarerectangle', 'Square-Stickers.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', 'Square Sticker_2.jpg', 40, 300, 1, 0, 2, '2017-05-30 14:35:51', '2017-10-27 17:29:12'),
+(4, 'Custom Shape', NULL, NULL, 6, 'Custom Shape', 'custom-shape', 'Custom-Shape-Stickers.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Die-cutting_9.jpg', 10, 300, 1, 0, 2, '2017-06-19 15:22:41', '2017-09-28 16:56:54'),
+(17, 'Ovals', NULL, NULL, 6, 'Ovals', 'ovals', 'Oval-Stickers.png', 'Custom Oval Stickers are a great way to represent your state, team or organisation. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 10, 300, 1, 0, 3, '2017-08-15 14:00:51', '2017-09-28 16:56:45'),
+(20, 'Rounded Corner', NULL, NULL, 6, 'Rounded Corner', 'rounded-corner', 'Round-Corner-Stickers.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 10, 300, 1, 0, 1, '2017-08-15 16:42:47', '2017-09-28 16:56:35'),
+(21, 'Circle Stickers', NULL, NULL, 6, 'Circle', 'circle', 'Circle-Stickers.png', 'Easy to hand out, Printing Amazon’s Circle Stickers are a great way to promote your brand or label your products. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect.', 'Round Sticker_1.png', 10, 300, 1, 1, 4, '2017-08-15 16:57:52', '2017-11-16 17:33:12'),
+(22, 'Name stickers - Printing Amazon', NULL, NULL, 6, 'Name stickers', 'name-stickers', 'Name-Stickers.png', 'If you are getting headaches with your kids because they lose their belongings at school, try our Name stickers. We provide various forms of pre-designed artworks and you only simply need to let us know the detail that you would like to apply onto the sticker and you would a name sticker you would be proud of. \r\n(***We may have to abbreviate your child\'s name due to limited sticker spaces.)', NULL, 30, 300, 1, 0, 5, '2017-08-16 13:48:57', '2017-09-29 11:38:01'),
+(23, 'Labels - Printing Amazon', NULL, NULL, 5, 'Labels', 'labels', 'Labels.png', 'Printing Amazon provides custom Label printing services by using flexographic and digital printing techniques. Both of these printing methods produce high-quality labels, and each method offers different capabilities that allow us to create a larger variety of label styles. Simply leave your brief requirements and contact details, and our service consultant will contact you within 24 hours. We provide quality and durable labels. Ordering from us means your stickers will withstand exposure and they would always portray your brand whenever.', 'PVC-paper-custom-label-sticker-logo-printing-self-adhesive-shipping-labels-custom-sticker-label-stickers.jpg', 0, 0, 1, 0, 1, '2017-08-19 13:08:47', '2017-09-28 16:55:57'),
+(24, 'Graphic Designs - Printing Amazon', NULL, NULL, 5, 'Graphic Designs', 'graphic-designs', 'Grahpic-Design.png', 'Printing Amazon provides custom Graphic Design services for all business. Our professional graphic design team with more than 20 years of experience. We are well known because we provide quality graphic design for every demand by our clients and we get satisfactory feedbacks every time from our clients. Simply send us your requirements and contact details, and our service consultant will contact you within 24 hours to help you make your idea a reality.', 'gshock-watch-sports-watch-stopwatch-158741.jpeg*hacker-internet-technology-computers-159195.jpeg', 0, 0, 1, 0, 2, '2017-08-19 13:24:07', '2017-09-28 16:56:06'),
+(27, 'Circle Badge with Pin', NULL, NULL, 1, 'Circle with Pin', 'circle-with-pin', 'Circle-Pin-Badge.png', 'Small custom round buttons feature full color printing and a durable steel pin-back.', 'Pin Button 1.jpg*Pin Button 3.jpg*Pin Button 4.jpg', 32, 75, 1, 1, 1, '2017-09-28 15:34:59', '2017-11-16 17:32:30'),
+(28, 'Square Badge with Pin', NULL, NULL, 1, 'Square Pin', 'square-pin', 'Square-Pin.png', 'Small custom square buttons feature full color printing and a durable steel pin-back.', 'Square Pin Button 1.jpg*Square Pin Button 2.jpg*Square Pin Button 3.jpg*Square Pin Button 4.jpg', 0, 0, 1, 0, 2, '2017-09-28 16:39:35', '2017-10-06 14:37:57'),
+(29, 'Heart Pin', NULL, NULL, 1, 'Heart Pin', 'heart-pin', 'Heart-Pin.png', 'Custom heart buttons feature full color printing and a durable steel pin-back.', 'Heart Pint Button 1.jpg*Heart Pint Button 2.jpg', 0, 0, 1, 0, 3, '2017-09-28 22:48:42', '2017-10-06 14:37:38'),
+(31, 'Round Corner Magnets', NULL, NULL, 2, 'Round Corner', 'round-corner', 'Round-Corner-Magnets.png', 'Varies of round corner magnets with your personal designs. Create personalized magnets to use on cars, refrigerators and more.', NULL, 0, 0, 1, 0, 1, '2017-09-29 12:21:20', '2017-10-06 14:09:42'),
+(33, 'Circle Magnets', NULL, NULL, 2, 'Circle Magnets', 'circle-magnets', 'Circle Magnets.png', 'Varies sizes of circle magnets with your personal designs. Create personalized magnets to use on cars, refrigerators and more.', 'Magnet Button 1.jpg*Magnet Button 2.jpg', 40, 100, 1, 1, 2, '2017-09-29 13:24:48', '2017-11-16 17:31:34');
 
 -- --------------------------------------------------------
 
@@ -2287,151 +2289,181 @@ ALTER TABLE `users`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `country`
 --
 ALTER TABLE `country`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=270;
+
 --
 -- AUTO_INCREMENT for table `email_authentication`
 --
 ALTER TABLE `email_authentication`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `form_field_types`
 --
 ALTER TABLE `form_field_types`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+
 --
 -- AUTO_INCREMENT for table `lamination_options`
 --
 ALTER TABLE `lamination_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+
 --
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=397;
+
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
 --
 -- AUTO_INCREMENT for table `notificationsetting`
 --
 ALTER TABLE `notificationsetting`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
 --
 -- AUTO_INCREMENT for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
 --
 -- AUTO_INCREMENT for table `order_status`
 --
 ALTER TABLE `order_status`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `paperstock_options`
 --
 ALTER TABLE `paperstock_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=624;
+
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=365;
+
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
 --
 ALTER TABLE `preset_qty_rule_two`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
 --
 -- AUTO_INCREMENT for table `qty_options`
 --
 ALTER TABLE `qty_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
 --
 -- AUTO_INCREMENT for table `size_options`
 --
 ALTER TABLE `size_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
 --
 -- AUTO_INCREMENT for table `sticker_types`
 --
 ALTER TABLE `sticker_types`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `template_product_variations`
 --
 ALTER TABLE `template_product_variations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

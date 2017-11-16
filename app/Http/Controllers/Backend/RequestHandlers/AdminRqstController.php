@@ -125,6 +125,7 @@ class AdminRqstController extends Controller
             'min_size'      => 'required|numeric',
             'max_size'      => 'required|numeric',
             'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/'],
+            'is_circle'     => 'nullable|boolean',
             'custom_size'   => 'nullable|boolean'
         ]);
 
@@ -144,6 +145,7 @@ class AdminRqstController extends Controller
         $product->min_size          = $request->input('min_size');
         $product->max_size          = $request->input('max_size');
         $product->allow_custom_size = ($request->filled('custom_size'))? 1 : 0;
+        $product->is_circle         = ($request->filled('is_circle'))? 1 : 0;
 
         //calculating the sort order of this product
         $curr_max_sort = \App\Product::where('category_id', $request->input('category_id'))->max('sort');
@@ -189,6 +191,7 @@ class AdminRqstController extends Controller
             'min_size'      => 'required|numeric',
             'max_size'      => 'required|numeric',
             'logo'          => ['required', 'regex:/\.(jpg|png|gif|jpeg)$/'],
+            'is_circle'     => 'nullable|boolean',
             'custom_size'   => 'nullable|boolean'
         ]);
 
@@ -208,6 +211,7 @@ class AdminRqstController extends Controller
         $product->min_size          = $request->input('min_size');
         $product->max_size          = $request->input('max_size');
         $product->allow_custom_size = ($request->filled('custom_size'))? 1 : 0;
+        $product->is_circle         = ($request->filled('is_circle'))? 1 : 0;
 
         $product->title             = $request->input('page_title');
         $product->meta_desc         = $request->input('meta_desc');
