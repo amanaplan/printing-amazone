@@ -214,6 +214,7 @@ function gatherInput(){
 	let product = $("input#prodName").val();
 	let paperstock = $("select[name='paperstock']").val();
 	let size = $("input[name='size']:checked").val();
+	let circle_type = $("input#circle_type").val();
 	//let quantity = $("input[name='qty']:checked").val();
 	let customSize = 0;
 	//let customQty = 0;
@@ -221,10 +222,19 @@ function gatherInput(){
 	{
 		let calform = new calForm();
 
-		let widthBox = $("input[name='size_w']");
-		let heightBox = $("input[name='size_h']");
-		let width = $.trim(widthBox.val());
-		let height = $.trim(heightBox.val());
+		if(circle_type == 1)
+		{
+			var widthBox = $("input[name='size_w']");
+			var width = $.trim(widthBox.val());
+			var height = width;
+		}
+		else
+		{
+			var widthBox = $("input[name='size_w']");
+			var heightBox = $("input[name='size_h']");
+			var width = $.trim(widthBox.val());
+			var height = $.trim(heightBox.val());
+		}
 
 		//validation
 		if(isNaN(width) || width == ""){

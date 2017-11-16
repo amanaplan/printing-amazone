@@ -303,16 +303,23 @@ function gatherInput() {
 	var product = $("input#prodName").val();
 	var paperstock = $("select[name='paperstock']").val();
 	var size = $("input[name='size']:checked").val();
+	var circle_type = $("input#circle_type").val();
 	//let quantity = $("input[name='qty']:checked").val();
 	var customSize = 0;
 	//let customQty = 0;
 	if (size == 'custom') {
 		var calform = new calForm();
 
-		var widthBox = $("input[name='size_w']");
-		var heightBox = $("input[name='size_h']");
-		var width = $.trim(widthBox.val());
-		var height = $.trim(heightBox.val());
+		if (circle_type == 1) {
+			var widthBox = $("input[name='size_w']");
+			var width = $.trim(widthBox.val());
+			var height = width;
+		} else {
+			var widthBox = $("input[name='size_w']");
+			var heightBox = $("input[name='size_h']");
+			var width = $.trim(widthBox.val());
+			var height = $.trim(heightBox.val());
+		}
 
 		//validation
 		if (isNaN(width) || width == "") {

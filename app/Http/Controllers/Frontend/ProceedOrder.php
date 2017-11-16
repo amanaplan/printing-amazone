@@ -38,15 +38,18 @@ class ProceedOrder extends Controller
         $validator = Validator::make($request->all(), [
             'product'       => 'required|alpha_dash',
             'paperstock'    => 'required|integer',
+            'circle_type'   => 'required|boolean',
             'size'          => 'required',
             'qty'           => 'nullable|integer',
             'size_w'		=> 'nullable|required_if:size,custom|numeric',
-            'size_h'		=> 'nullable|required_if:size,custom|numeric',
         ]);
+
+        $validator->sometimes('size_h', 'required|numeric', function ($input) {
+            return $input->size == 'custom' && $input->circle_type == 0;
+        });
 
         if ($validator->fails()) {
         	$request->session()->flash('formError', 'Oops! something went wrong, please try again');
-
             return redirect()->back();
         }
 
@@ -114,16 +117,24 @@ class ProceedOrder extends Controller
         //---------------size option
         if($request->input('size') == 'custom')
         {
-            $width = $request->input('size_w');
-            $height = $request->input('size_h');
-
+            if($theProduct->is_circle)
+            {
+                $width = $request->input('size_w');
+                $height = $width;
+            }
+            else
+            {
+                $width = $request->input('size_w');
+                $height = $request->input('size_h');
+            }
+            
             //check if its within the max min boundation
             $min = $theProduct->min_size;
             $max = $theProduct->max_size;
 
             if($width < $min || $width > $max || $height < $min || $height > $max)
             {
-                $request->session()->flash('formError', 'Max. size (height x width) limit crossed');
+                $request->session()->flash('formError', 'Max. or Min. size (height x width) limit crossed');
                 return redirect()->back();
             }
         }

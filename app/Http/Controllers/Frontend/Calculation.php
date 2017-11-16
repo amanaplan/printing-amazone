@@ -84,6 +84,11 @@ class Calculation extends Controller
 
             if($width < $min || $width > $max)
             {
+                if($theproduct->is_circle)
+                {
+                    return response()->json(['error' => 1, 'for' => 'w', 'msg' => 'diameter must be within '.$min.' to '.$max]);
+                }
+
                 return response()->json(['error' => 1, 'for' => 'w', 'msg' => 'width must be within '.$min.' to '.$max]);
             }
             else if($height < $min || $height > $max)

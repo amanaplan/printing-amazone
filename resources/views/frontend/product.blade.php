@@ -101,11 +101,13 @@
 					@if($has_fields)
 
 						<div class="col-sm-4 col-lg-4 custom-size">
+
 							<form action="{{ url('/place-order/proceed') }}" method="post">
 
 								{{ csrf_field() }}
 
-								<input type="hidden" name="product" id="prodName" value="{{ $product->product_slug }}">
+								<input type="hidden" name="product" id="prodName" value="{{ $product->product_slug }}" />
+								<input type="hidden" name="circle_type" id="circle_type" value="{{ $product->is_circle ? 1 : 0 }}" />
 
 								@if(array_key_exists(1,$fields))
 								<div class="paperstock">
@@ -131,7 +133,13 @@
 										@if($product->allow_custom_size)
 										<li><input id="custom" type="radio" name="size" value="custom"> <label for="custom">Custom Size</label>
 											<div class="custom-input" style="display: none;">
-												<input type="text" placeholder="Width" name="size_w"> x <input type="text" placeholder="height" name="size_h"> <button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button>
+												@if($product->is_circle)
+												<input type="text" placeholder="Diameter" name="size_w">
+												@else
+												<input type="text" placeholder="Width" name="size_w"> x <input type="text" placeholder="height" name="size_h">
+												@endif
+
+												<button class="btn btn-sm btn-warning check-price" type="button"><i class="fa fa-check"></i></button>
 												<span id="size-err" class="text-danger" style="width: 100%;display: none;">some validation error</span>
 											</div>
 										</li>
