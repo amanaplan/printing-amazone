@@ -434,6 +434,26 @@ class AdminController extends Controller
     }
 
     /**
+     * manage footer page links
+    */
+    public function CMSPagesFooterLinks()
+    {
+        $page_links = '';
+        $saved = json_decode(Redis::get('footer-links'));
+         foreach($saved as $link)
+         {
+            $page_links .= $link->name. ' <'. $link->link . '>,'.PHP_EOL;
+         }
+
+        $data = [
+            'page' => 'footer_links',
+            'links' => $page_links
+        ];
+
+        return view('backend.cms-footer-links', $data);
+    }
+
+    /**
     *edit page
     */
     public function EditPage($id)

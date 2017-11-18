@@ -117,11 +117,12 @@
 			<div class="row">
 				<div class="footer-menu col-sm-8 col-lg-8">
 					<ul>
-						<li><a href="{{ url('/') }}">Home</a> /</li>
-						<li><a href="{{ url('/about-us') }}">About</a> /</li>
-						<li><a href="{{ url('/templates') }}">Templates</a> /</li>
-						<li><a href="{{ url('/faq') }}">Faq</a> /</li>
-						<li><a href="{{ url('/contact') }}">Contact</a></li>
+						@foreach ($links as $link)
+							<li>
+								<a href="{{ $link->link }}">{{ $link->name }}</a> 
+								{{ ($loop->last)? '' : '/' }}
+							</li>
+						@endforeach
 					</ul>
 				</div><!-- footer-menu -->
 				<div class="social col-sm-4 col-lg-4">

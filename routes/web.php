@@ -226,6 +226,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/cms/edit-page/{id}', 'Backend\AdminController@EditPage');
 	Route::put('/cms/edit-submit/{id}', 'Backend\RequestHandlers\AdminRqstController@EditPage');
 	Route::get('/cms/list-pages', 'Backend\AdminController@CMSPagesList');
+	Route::get('/cms/footer-links', 'Backend\AdminController@CMSPagesFooterLinks');
+	Route::post('/cms/set-footer-links', 'Backend\RequestHandlers\AdminRqstController@CMSSetFooterLinks');
 	Route::delete('/cms/manage-page/delete/{id}', 'Backend\RequestHandlers\AdminRqstController@RemovePage');
 	Route::get('/cms/manage-home', 'Backend\AdminController@CMSManageHomeBanner');
 	Route::post('/cms/home/banner', 'Backend\RequestHandlers\AdminRqstController@CMSManageHomeBanner');

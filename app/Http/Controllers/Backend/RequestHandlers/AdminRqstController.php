@@ -1103,4 +1103,30 @@ class AdminRqstController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * set footer links
+     */
+    public function CMSSetFooterLinks(Request $request)
+    {
+        $res = $request->validate([
+            'links' =>  'required'
+        ]);
+
+        $links_arr = explode(',', $res['links']);
+        $store = [];
+
+        foreach($links_arr as $row)
+        {
+            if(preg_match('/^(.+)\s?\<(.+)\>$/', trim($row), $match))
+            {
+                $store[] = ['name' => $match[1], 'link' => $match[2]];
+            }
+        }
+
+        Redis::set('footer-links', json_encode($store));
+
+        adminflash('success', 'footer links updated');
+        return redirect()->back();
+    }
+
 }
