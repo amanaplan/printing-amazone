@@ -9,6 +9,8 @@ use App\User;
 use App\Review;
 use App\Product;
 use App\Order;
+use App\OrderItem;
+use App\OrderArtworkApproval;
 
 use Auth;
 
@@ -157,7 +159,36 @@ class UserPagesCtrl extends Controller
     */
     public function ReviewMockup($order_token, $order_item_id)
     {
+        //make sure the order belongs to the loggedd in user
+        $ordered_user = Order::ByToken($order_token)->first()->user->id;
+        abort_if($ordered_user !== Auth::user()->id, 401);
+
         return \Facades\App\Http\Controllers\Frontend\PagesCtrl::ReviewMockup($order_token, $order_item_id, false);
+    }
+
+    /**
+     * final approved mockup page for users
+     * visible if order status not cancelled & mockup approved
+     */
+    public function FinalMockup($order_token, $order_item_id)
+    {
+        $order = Order::ByToken($order_token)->firstOrFail();
+        $order_item = OrderItem::findOrFail($order_item_id);
+
+        abort_if($order_item->order_id != $order->id, 401);
+        abort_if($order->orderStatus->status_text == "Cancelled", 401);
+        abort_unless($order_item->mockup_approved, 401);
+
+        $the_mockup = $order_item->artworks()->where('approved', 1)->first();
+
+        $data = [
+            'page'          => 'orders',
+            'order_token'   => $order_token,
+            'approved_on'   => $the_mockup->updated_at,
+            'mockup'        => $the_mockup->mockup
+        ];
+
+        return view('frontend.user-final-mockup', $data);
     }
 
 }

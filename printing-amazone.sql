@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2017 at 09:56 AM
+-- Generation Time: Nov 18, 2017 at 02:00 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -678,7 +678,7 @@ INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discoun
 (8, 'PA2017083105', '7s9bwzjd', 1, '1097.00', '17181.00', 5, '2017-08-31 17:00:53', '2017-09-02 22:33:09'),
 (9, 'PA2017083106', '3rnzp51j', 1, '500.00', '7838.00', 1, '2017-08-31 17:04:19', '2017-08-31 17:04:19'),
 (10, 'PA2017083107', 'hmfk8s25', NULL, '93.00', '3001.00', 6, '2017-08-31 17:48:45', '2017-09-01 18:03:27'),
-(11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 5, '2017-08-31 18:00:05', '2017-09-01 18:03:39'),
+(11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 3, '2017-08-31 18:00:05', '2017-11-18 15:52:58'),
 (19, 'PA2017090303', '3exy7af3', NULL, '0.00', '1016.00', 3, '2017-09-03 19:10:13', '2017-11-11 14:58:04'),
 (21, 'PA2017090601', '1v5yv6jw', NULL, '0.00', '26.00', 5, '2017-09-06 01:39:04', '2017-09-06 01:45:59'),
 (28, 'PA2017102401', 'hz0bg4y2', 2, '0.00', '160.00', 4, '2017-10-24 17:30:47', '2017-10-24 17:33:13');
@@ -705,10 +705,11 @@ CREATE TABLE `order_artwork_approval` (
 
 INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `mockup`, `review_text`, `approved`, `created_at`, `updated_at`) VALUES
 (1, 39, 'mockups/hp0sAsI8jv3ZcUv4KtJZERYmEfxPZmfpjrO0RLy4.svg', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 0, '2017-11-08 15:34:52', '2017-11-08 15:40:32'),
-(2, 39, 'mockups/0ws8m9MEdO6Vi3pMTw2OWYJCBIsroRgM82wgOPRL.png', NULL, 1, '2017-11-08 15:42:03', '2017-11-08 15:42:03'),
+(2, 39, 'mockups/0ws8m9MEdO6Vi3pMTw2OWYJCBIsroRgM82wgOPRL.png', NULL, 0, '2017-11-08 15:42:03', '2017-11-18 18:28:59'),
 (3, 28, 'mockups/RwYjyeeby8wRVzB68iZoL1gEbibWmsnxxdKk0xZe.jpeg', 'I like it, please make it little more glossy and make the footer B&W', 0, '2017-11-08 16:48:39', '2017-11-08 16:52:39'),
 (5, 28, 'mockups/vfoOrHHSWmyts2YHHDWnZjumzgLJvwRdZhEz9Unj.jpeg', NULL, 0, '2017-11-11 14:04:23', '2017-11-11 14:04:23'),
-(6, 11, 'mockups/6AdqRLMQgp70e7DtELJKpg7KZ3ZZlVomkgPaKPY4.jpeg', NULL, 0, '2017-11-11 17:17:17', '2017-11-11 20:38:34');
+(6, 11, 'mockups/6AdqRLMQgp70e7DtELJKpg7KZ3ZZlVomkgPaKPY4.jpeg', NULL, 0, '2017-11-11 17:17:17', '2017-11-11 20:38:34'),
+(7, 20, 'mockups/VYAj0gvakOqnEU8jRjQbzNlltXnhMnb7ZHwvAYl6.jpeg', NULL, 0, '2017-11-18 15:55:10', '2017-11-18 15:59:37');
 
 -- --------------------------------------------------------
 
@@ -791,7 +792,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (17, 9, 17, 'Silver Matt paperboard', '48.5', '200', '300', '3422.00', NULL, NULL, NULL, NULL, NULL, 0),
 (18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, NULL, 0),
 (19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL, 0),
-(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, NULL, 0),
+(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, 'artworks/xLCKk5sQs2ikpWHbQ0vzkdDeP0UdcnmsCmEzfIFD.jpeg', NULL, 1),
 (21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL, 0),
 (28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, 'artworks/BfndhULHhkQHLDPjluSztZj9uvlgEq9JNhcK4nl5.jpeg', 'lorem instructions', 0),
 (30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, NULL, 0),
@@ -2066,8 +2067,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `mobile`, `birthday`, `state`, `suburb`, `post_code`, `street`, `company`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 'ppDOv2Sp4pfVN4by3Mf7MLAxIxsUZYCaPM6mRqfYOJdc09fLtNbnFxfL76Sy', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '9569857458', '1994-03-02', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL, '$2y$10$vx4NtBOPpcq0hLSwhMRfv.sy9Ury0BRbUWNDiiQhucPAghjVS1Fqa', 'rpCncsOW4Wm1WhL38bjEnjf39S3lqigpIiuJEZIPJfVTnbNa4ple2xwDvnHM', '2017-05-18 16:08:04', '2017-10-24 17:35:14'),
+(1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 't4NYqUCvdmoHAf4PIY93uvcCoTqGwYI5ZRv8pKXFa4wRBivpDF8ETjqBaVXx', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '9569857458', '1994-03-02', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL, '$2y$10$vx4NtBOPpcq0hLSwhMRfv.sy9Ury0BRbUWNDiiQhucPAghjVS1Fqa', 'o1aT6C0jBMzQZzDW0Ys9u9djXWJTk904dObgEBx1N1YJ7Eudys0rULx7vTTY', '2017-05-18 16:08:04', '2017-10-24 17:35:14'),
 (3, 'angellous99', 'angellous99@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wkFA5aR1jsK3jrsO9bb9biIJUZmTKGw7TtKPCLPRKm9CfiZRCK0ARnM6oZec', '2017-08-22 11:25:02', '2017-08-22 11:25:13'),
 (4, 'Atanu Das', 'technomind1985@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$/6z6LNSCPYg.f6MfDlY6fORMAJy60FcRgNlor33qsZU7IAe2m93Wi', 'E8YULdUvh3X5dzZ8btsFMmSdCYqQF5vpETvFQhv40wuUXjNhZEDvwKLhnVI3', '2017-09-05 00:06:04', '2017-09-05 00:06:17');
 
@@ -2330,7 +2331,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2372,7 +2373,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_billing`

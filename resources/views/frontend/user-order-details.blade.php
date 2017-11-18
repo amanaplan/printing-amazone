@@ -68,9 +68,11 @@
 										</td>	
 										<td>
 											<p>
-												@if($item->mockup_approved || $order->orderStatus->status_text == "Completed")
-													<a class="btn btn-info" href="#">View Mockup</a>
+												@if($item->mockup_approved)
+													<a class="btn btn-info" href="{{ route('user.final.mockup', ['order_token' => $order->order_token, 'order_item_id' => $item->id]) }}">View Mockup</a>
 												@elseif($order->orderStatus->status_text == "Cancelled")
+													NA
+												@elseif(! $item->mockup_approved && $order->orderStatus->status_text == "Completed")
 													NA
 												@else
 													<a class="btn btn-warning" href="{{ route('user.review.mockup', ['order_token' => $order->order_token, 'order_item_id' => $item->id]) }}">Review Mockup</a>
