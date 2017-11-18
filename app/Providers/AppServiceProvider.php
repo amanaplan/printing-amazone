@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Redis;
 
 use Auth;
 
@@ -70,6 +71,12 @@ class AppServiceProvider extends ServiceProvider
             $sidebar_conts['pending_review'] = Review::unpublished()->count();
             $sidebar_conts['pending_orders'] = Order::ofType('pending')->count();
             View::share($sidebar_conts);
+        });
+
+        //footer links
+        View::composer('layouts.frontend.main', function () {
+            $links = json_decode(Redis::get('footer-links'));
+            View::share(['links' => $links]);
         });
     }
 
