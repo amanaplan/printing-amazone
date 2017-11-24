@@ -1008,7 +1008,7 @@ span.current-price {
 h5#cart-subtotal, h5#cart-discount, h5.price{font-family: arial;}
 .checkout-summary h4{display: inline-block;}
 .checkout-summary {
-    background: #eee;
+    background-image: linear-gradient( 135deg, #FAD7A1 10%, #E96D71 100%);
     padding: 30px;
     border-radius: 4px;
 }

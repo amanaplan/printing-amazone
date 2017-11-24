@@ -151,7 +151,7 @@
 								</td>
 							</tr>
 
-							<tr class="happy-text">
+							<tr class="text-success">
 								<td>Discount For Multiple Designs</td>
 								<td class="text-right"><h5 id="cart-discount"><i class="fa fa-usd" aria-hidden="true"></i> {{ session('discount') }}</h5></td>
 							</tr>
