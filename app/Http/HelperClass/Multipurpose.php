@@ -11,6 +11,8 @@ use App\NotificationSetting;
 
 use Illuminate\Support\Facades\Redis;
 
+use Illuminate\Support\Carbon;
+
 class Multipurpose {
 
 	public function __construct()
@@ -216,5 +218,43 @@ class Multipurpose {
                 return false;
             }
         }
+    }
+
+    /**
+     * calculate the delivery & printing dates
+     */
+    public function CalendarDates()
+    {
+        $printing = 4;
+        $delivery = 5;
+
+        $business_dates = [];
+
+        for ($i = 0, $j = 0; $i <= 20; $i++)  //arbitarily picked as 20 days will be checkked & mapped for calendar dates
+        {
+            $currDate = ($i == 0) ? Carbon::tomorrow() : $currDate->addDay(); //for 1st iteration tomorrow otherwise add 1 day after tomorrow for each iteration
+            
+            if ($currDate->dayOfWeek === Carbon::SATURDAY || $currDate->dayOfWeek === Carbon::SUNDAY) 
+            {
+                continue;
+            } 
+            else if ($j < ($printing + $delivery) )
+            {
+                $j++;
+                $business_dates[] = $currDate->format('jS M');
+            } 
+            else
+            {
+                break;
+            }
+
+        }
+
+        // return $business_dates;
+
+        return [
+            'print' => $business_dates[0] . ' to ' . $business_dates[$printing-1], 
+            'delivery' => $business_dates[$printing] . ' to ' . $business_dates[$printing + $delivery - 1]
+        ];
     }
 }

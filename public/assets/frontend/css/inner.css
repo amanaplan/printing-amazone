@@ -1108,3 +1108,53 @@ form#contact-form .has-error{border: 1px solid #ff1818;}
     margin-bottom: 30px;
 }
 .template-list a{cursor: pointer;}
+.calendar-grade-1 {
+    background-color: #FA8A00;
+    color: #fff;
+}
+
+.calendar-grade-2 {
+    background-color: #357ebd;
+}
+
+.calendar-grade-3 {
+    background-color: #00C0E5;
+    color: #fff;
+}
+
+.calendar-grade-4 {
+    background-color: #4ab96c;
+    color: #fff;
+}
+.calendar-purple {
+    background-color: purple;
+}
+
+.calendar_details_item {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 15px;
+    border-bottom: 1px solid #CCCCCC;
+}
+.calendar_details_row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+div.bullet{    
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin: 2px 10px;
+}
+div.calendar_details_item p{
+    font-size: 16px;
+    font-weight: 400;
+    color: #808081;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

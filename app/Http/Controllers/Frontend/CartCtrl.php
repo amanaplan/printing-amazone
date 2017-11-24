@@ -13,6 +13,8 @@ use Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Carbon;
+
 class CartCtrl extends Controller
 {
     /**
@@ -33,14 +35,21 @@ class CartCtrl extends Controller
                 // subtotal & multiple prod discount
                 $pricing = $this->GenPricing();
                 $pricing = json_decode($pricing);
-    			
+
+                $calendar_dates = \Facades\App\Http\HelperClass\Multipurpose::CalendarDates();
+
     			$data = [
     				'cart_empty'	      => false,
     				'cart_data'		      => $cart_data,
                     'subtotal'            => $pricing->subtotal,
                     'discount_amount'     => $pricing->discount_amount,
-                    'payable'             => $pricing->payable
-    			];
+                    'payable'             => $pricing->payable,
+                    'delivery_dates'      => [
+                        'order_date'    => Carbon::now()->format('l jS \\of M'),
+                        'print'         => $calendar_dates['print'],
+                        'delivery'      => $calendar_dates['delivery']
+                    ]
+                ];
 
     			return view('frontend.cart', $data);
     		}

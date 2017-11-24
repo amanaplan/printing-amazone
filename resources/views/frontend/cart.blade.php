@@ -29,6 +29,9 @@
 	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/tooltipster/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css' ) }}" media="all" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.css' ) }}" />
 
+	{{-- calendar --}}
+	<link rel="stylesheet" href="{{ asset( 'assets/frontend/plugin/calendar/zabuto_calendar.min.css' ) }}" />
+
 @endpush
 
 {{-- main page contents --}}
@@ -166,6 +169,38 @@
 					</table>
 					<a href="{{ url('/checkout') }}" class="cnt-shopping process">Proceed to checkout</a>
 				</div>
+
+				<br><br>
+
+				{{-- calendar --}}
+				<h4 class="cart-head text-center">Estimated Date for Order Completion</h4>
+				<div id="delivery-calendar"></div>
+
+				<div class="turnaround_calendar_details">
+					<div class="calendar_details_row">
+						<div class="calendar_details_item">
+							<div class="bullet calendar-grade-2"></div>
+							<p>Order Date： <br> <span class="text-primary">{{ $delivery_dates['order_date'] }}</span></p>
+						</div>
+						<div class="calendar_details_item">
+							<div class="bullet calendar-grade-3"></div>
+							<p>Estimated Date for Printing Completion： <br> <span class="text-primary">{{ $delivery_dates['print'] }}  </span></p>
+						</div>
+					</div>
+					<div class="calendar_details_row">
+						<div class="calendar_details_item">
+							<div class="bullet calendar-grade-4"></div>
+							<p>Delivery Date： <br> <span class="text-primary">{{ $delivery_dates['delivery'] }}  </span></p>
+						</div>
+						<div class="calendar_details_item">
+							<div class="bullet calendar-grade-1"></div>
+							<p>Non-Business Day / Maintenance</p>
+						</div>
+					</div>
+					<div class="turnaround_calendar_details_note">
+						<p class="text-danger">**Printing and delivery estimates are based from final mockup approval</p>
+					</div>
+				</div>
 			</div>
 
 			<div class="clearfix"></div>
@@ -217,4 +252,24 @@
 			elem.src="{{ asset('assets/images/sample-file.png') }}";
 		}
 	</script>
+
+	{{-- for calendar --}}
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/calendar/zabuto_calendar.min.js' ) }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#delivery-calendar").zabuto_calendar({
+				show_previous: false,
+				show_next: 1,
+				today: true,
+				nav_icon: {
+					prev: '<i class="fa fa-chevron-circle-left"></i>',
+					next: '<i class="fa fa-chevron-circle-right"></i>'
+				},
+				ajax: {
+					url: "{{ route('order.calendar.time') }}"
+				}
+			});
+		});
+	</script>
+
 @endpush

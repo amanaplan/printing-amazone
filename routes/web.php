@@ -57,6 +57,8 @@ Route::post('/request/contact', 'Frontend\CustomRequest@Contact')->name('contact
 Route::get('/review-mockup/{enc_order_id}/{enc_order_item_id}', 'Frontend\PagesCtrl@ReviewMockup')->name('nonuser.review.mockup');
 Route::post('/order/artwork/request-adjustment', 'Frontend\FrontendReqstCtrl@RequestAdjustment')->name('order.artwork.adjustment.request');
 Route::post('/order/artwork/request-approve', 'Frontend\FrontendReqstCtrl@RequestApprove')->name('order.artwork.approve.request');
+Route::get('/order/calendar-time', 'Frontend\FrontendReqstCtrl@CalendarTime')->name('order.calendar.time');
+
 
 
 //users not allowed to access these routes if they are logged in

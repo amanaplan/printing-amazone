@@ -18,6 +18,7 @@ use App\OrderArtworkApproval;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyAdminMockupReview;
 use Facades\App\Http\HelperClass\Multipurpose;
+use Illuminate\Support\Carbon;
 
 
 class FrontendReqstCtrl extends Controller
@@ -119,5 +120,53 @@ class FrontendReqstCtrl extends Controller
 		Mail::to($mail_ids)->send(new NotifyAdminMockupReview(true, null, $request->order_token, $order_id, $request->order_item));
 
 		return response(200);
+	}
+	
+	/**
+	 * calculate calendar times
+	 */
+	public function CalendarTime(Request $request)
+	{
+		//time to be taken
+		$printing = 4;
+		$delivery = 5;
+
+		$dates = [];
+
+		for ($i = 0, $j=1; $i <= 20; $i++)  //arbitarily picked as 20 days will be checkked & mapped for calendar dates
+		{
+			$currDate = ($i == 0)? Carbon::tomorrow() : $currDate->addDay(); //for 1st iteration tomorrow otherwise add 1 day after tomorrow for each iteration
+
+			$dates[$i] = [
+				'date' => $currDate->toDateString(),
+			];
+
+			//determine day colors
+			if ($currDate->dayOfWeek === Carbon::SATURDAY || $currDate->dayOfWeek === Carbon::SUNDAY) 
+			{
+				$dates[$i]['classname'] = 'calendar-grade-1';
+				$dates[$i]['title'] = 'Non-Business Day';
+			}
+			else if($j <= $printing)
+			{
+				$j++;
+				$dates[$i]['classname'] = 'calendar-grade-3';
+				$dates[$i]['title'] = 'After Mock-up Approval, Printing Under Process';
+			}
+			else if($j > $printing && $j < ($printing + $delivery) )
+			{
+				$j++;
+				$dates[$i]['classname'] = 'calendar-grade-4';
+				$dates[$i]['title'] = 'Expected Delivery Date';
+			}
+			else
+			{
+				$dates[$i]['classname'] = 'calendar-grade-4';
+				$dates[$i]['title'] = 'Expected Maximum Delivery Date';
+				break;
+			}
+		}
+
+		return response()->json($dates);
 	}
 }
