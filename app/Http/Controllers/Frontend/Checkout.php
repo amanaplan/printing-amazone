@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use Facades\App\Http\HelperClass\Multipurpose;
 
+use Illuminate\Support\Carbon;
+
 class Checkout extends Controller
 {
     /**
@@ -49,9 +51,16 @@ class Checkout extends Controller
                 Session::put('payable', $pricing->payable);
                 Session::put('discount', $pricing->discount_amount);
 
+                $calendar_dates = Multipurpose::CalendarDates();
+
                 $data = [
                     'countries'     => Country::orderBy('country_name', 'asc')->get(),
                     'cart_items'    => $cart_data,
+                    'delivery_dates' => [
+                        'order_date'    => Carbon::now()->format('l jS \\of M'),
+                        'print'         => $calendar_dates['print'],
+                        'delivery'      => $calendar_dates['delivery']
+                    ]
                 ];
 
     			return view('frontend.checkout', $data);
