@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2017 at 11:36 AM
+-- Generation Time: Nov 25, 2017 at 01:34 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -573,7 +573,13 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (394, 58, 17, 17),
 (395, 58, 18, 18),
 (396, 58, 19, 19),
-(397, 78, 45, 1);
+(397, 78, 45, 1),
+(398, 59, 7, 4),
+(399, 59, 3, 3),
+(400, 61, 22, 2),
+(401, 61, 23, 3),
+(402, 61, 24, 4),
+(403, 61, 25, 5);
 
 -- --------------------------------------------------------
 
@@ -863,7 +869,8 @@ CREATE TABLE `pages` (
 
 INSERT INTO `pages` (`id`, `title`, `meta_desc`, `og_img`, `page_name`, `page_slug`, `contents`, `created_at`, `updated_at`) VALUES
 (5, 'About Us - Printing Amazon', NULL, NULL, 'About Us', 'about-us', '<p><img alt=\"about us\" class=\"img-responsive\" src=\"[BASE_URL]/pages/About-Us.jpg\" style=\"height:auto; width:100%\" /></p>', '2017-09-23 12:44:21', '2017-11-18 19:50:53'),
-(6, 'FAQ - Printing Amazon', NULL, NULL, 'FAQ', 'faq', '<p><strong>FAQ</strong></p>\r\n\r\n<p>Below you will find answers to some of the most common questions asked by our customers. If you do not see your question answered below, feel free to let us know your questions via <a href=\"mailto:info@printingamazon.com.au\">info@printingamazon.com.au</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Proof</strong></p>\r\n\r\n<p>Free proofs are sent for all orders within 24 hours of purchase (Business Days only). They are sent to the email address that is associated with payment for the order. You must reply in confirmation of the proof to begin the printing process. We will not print a design unless you&#39;re satisfied with the proof.</p>\r\n\r\n<p>Please keep a look out in your SPAM and JUNK folders, as our proof emails may sometimes be flagged and hidden by your email provider causing delays in production time.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Do your stickers come on rolls or pre-separated?</strong></p>\r\n\r\n<p>All of our custom stickers come pre-separated unless you place your order with Label. Please contact us if you would like to receive your stickers in roll format. Roll format stickers MOQ and price may differ from the price list shown at our homepage.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- &nbsp;Full colour printing</strong></p>\r\n\r\n<p>All our Printing Amazon products are printed with top of the line full colour printers. Whether your design is pure black and white, or full CMYK color, we can print it for the same low price. No extra charges per color printed, anything goes!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Color guidelines</strong></p>\r\n\r\n<p>We convert Pantone colors to their CMYK equivalent values for printing. If you need to match pantone colors we recommend converting them to CMYK using pantone&#39;s suggested formulas. These can be found at the pantone color finder website. We do not recommend using the conversions built in to Adobe software. If you&rsquo;d like to specify your own CMYK values, please include that in your artwork instructions when ordering.</p>\r\n\r\n<p>Any designs submitted in RGB will be converted to CMYK before printing. The CMYK color gamut cannot achieve some of the bright color values that RGB displayed on screen is capable of. Please be cautious of submitting neon / vibrant designs in RGB as they may become dull or darker when printed as CMYK.</p>\r\n\r\n<p><strong><em class=\"text-danger\">**Disclaimer - Actual colours may vary slightly because individual computer monitors/mobile devices have different capabilities from one another to display colour. If you have any questions about colour, please email us before you order and we will be happy to help you out.</em></strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Why are some RGB colours difficult to match?</strong></p>\r\n\r\n<p>RGB is additive and made up of light, where the more colors you combine the brighter and closer it gets to white. The less colors you combine the closer it gets to black. This explains why it&rsquo;s possible to get bright, neon colors in RGB. Your TV, computer and phone screens work this way.</p>\r\n\r\n<p>CMYK on the other hand is subtractive and made up of ink. The more colors you combine the darker and closer it gets to black, and incoming light cannot reflect as much off of the substrate.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- What is your minimum font size?</strong></p>\r\n\r\n<p>It depends on the font style, font color and background color. Generally, at least a 6 pt. font is required.</p>\r\n\r\n<p>We do not guarantee small fonts will print legibly. There are too many font styles and color combinations for us to know for certain if an especially small font will be legible when printed. &nbsp;Additionally, the legibility of small fonts if often subject to the opinion of the viewer.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Can I request a change after I approve my proof?</strong></p>\r\n\r\n<p>No, changes cannot be made after proof approval. Review your proof carefully before approving it. Once it&#39;s approved we automatically add your order to our production queue and aim to ship it as fast as possible.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- How do I order stickers without a white border?</strong></p>\r\n\r\n<p>If you leave instructions for us to print &quot;full bleed&quot; when uploading artwork then we will prepare an online proof without the border if possible. Additionally, you can always request changes to a proof and ask for the white border to be added or removed.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Are templates available?</strong></p>\r\n\r\n<p>Yes, we offer sample templates in <font color=\"red\">PDF, EPS and PSD formats.</font></p>\r\n\r\n<p>Using our templates is completely optional. To ensure that your stickers look how you desire, we prepare free proofs with every order that show how we intend to make your stickers. You can request changes to your proofs and we will make them for free until you&#39;re happy.</p>\r\n\r\n<p>You can also upload your artwork without a template. Although we can make custom stickers in any size to fit your product, we are unable to create templates specific to your product.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Can I split a quantity with multiple designs and/or finishes?</strong></p>\r\n\r\n<p>You must order one design and finish per quantity. We cannot split quantities into multiple designs or finishes.Please know that combining multiple finishes in one order may slow production time slightly.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Do you offer custom shaped die cutting?</strong></p>\r\n\r\n<p>Tired of your standard square, rectangle, circle or oval shaped sticker? Look no further! Printing Amazon offers custom shaped die cutting for a great price! Unlike our competition who will charge an arm and a leg for custom shaped. We use a different printing and die cutting method that allows our equipment to automatically die cut your custom sticker job for a low cost. View our quote page to get an accurate price quote and feel free to contact us if you cannot find any information that you are looking after.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Accepted file formats</strong></p>\r\n\r\n<p>We currently only accept the following file formats: .AI, .EPS, .PDF, .TIF, .PSD &amp; .JPEG (minimum of 300 dpi).</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Sending artwork</strong></p>\r\n\r\n<p>The first step of our order process allows you to automatically upload your file to us, before you pay for you order. You may use this form to send us your art file from your &quot;My Account&quot; email address, or you can email the files to info@printingamazon.com.au from your &quot;My Account&quot; email address.</p>\r\n\r\n<p>Files over 50mb should be sent as a link via FTP, WeTransfer or some other type of large file sharing service.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Free shipping</strong></p>\r\n\r\n<p>We provide free delivery services to entire Australia regions. Require delivery time may vary depends on final destinations in Australia. Sydney Metro, Melbourne, Brisbane approximately takes 5 business days from the shipment.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Payment methods</strong></p>\r\n\r\n<p>Currently we only accept Paypal and credit card payment via either VISA or Master.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Production Time</strong></p>\r\n\r\n<p>Standard production time is 4 business (not include shipping schedule) days after proof approval on most of orders. Your proof will be delivered within 24 hours and your quick response will help speed up the process. A production time estimate will be provided with your invoice.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- When will I receive my products?</strong></p>\r\n\r\n<p>For your convenience, we do provide an estimated delivery time for every order that is based on the time it takes to process and ship your product to its designated address. Please note that sometimes order processing may take longer than expected depending on the local customs clearing time.</p>\r\n\r\n<p>Please keep in mind that the we estimate the delivery time from the date of artwork approval by you.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Can I cancel my order?</strong></p>\r\n\r\n<p>You can cancel your order at any time BEFORE we print your design. HOWEVER please note that this could be within moments after approving your proof. If you have decided to cancel your order before approving the proof this gives you more time to let us know. Please do not place an order with us until you are sure you want what you&#39;re ordering.</p>\r\n\r\n<p>After we have printed your design, a refund is no longer an option.</p>', '2017-10-27 13:53:12', '2017-10-27 14:01:37');
+(6, 'FAQ - Printing Amazon', NULL, NULL, 'FAQ', 'faq', '<p><strong>FAQ</strong></p>\r\n\r\n<p>Below you will find answers to some of the most common questions asked by our customers. If you do not see your question answered below, feel free to let us know your questions via <a href=\"mailto:info@printingamazon.com.au\">info@printingamazon.com.au</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Proof</strong></p>\r\n\r\n<p>Free proofs are sent for all orders within 24 hours of purchase (Business Days only). They are sent to the email address that is associated with payment for the order. You must reply in confirmation of the proof to begin the printing process. We will not print a design unless you&#39;re satisfied with the proof.</p>\r\n\r\n<p>Please keep a look out in your SPAM and JUNK folders, as our proof emails may sometimes be flagged and hidden by your email provider causing delays in production time.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Do your stickers come on rolls or pre-separated?</strong></p>\r\n\r\n<p>All of our custom stickers come pre-separated unless you place your order with Label. Please contact us if you would like to receive your stickers in roll format. Roll format stickers MOQ and price may differ from the price list shown at our homepage.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- &nbsp;Full colour printing</strong></p>\r\n\r\n<p>All our Printing Amazon products are printed with top of the line full colour printers. Whether your design is pure black and white, or full CMYK color, we can print it for the same low price. No extra charges per color printed, anything goes!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Color guidelines</strong></p>\r\n\r\n<p>We convert Pantone colors to their CMYK equivalent values for printing. If you need to match pantone colors we recommend converting them to CMYK using pantone&#39;s suggested formulas. These can be found at the pantone color finder website. We do not recommend using the conversions built in to Adobe software. If you&rsquo;d like to specify your own CMYK values, please include that in your artwork instructions when ordering.</p>\r\n\r\n<p>Any designs submitted in RGB will be converted to CMYK before printing. The CMYK color gamut cannot achieve some of the bright color values that RGB displayed on screen is capable of. Please be cautious of submitting neon / vibrant designs in RGB as they may become dull or darker when printed as CMYK.</p>\r\n\r\n<p><strong><em class=\"text-danger\">**Disclaimer - Actual colours may vary slightly because individual computer monitors/mobile devices have different capabilities from one another to display colour. If you have any questions about colour, please email us before you order and we will be happy to help you out.</em></strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Why are some RGB colours difficult to match?</strong></p>\r\n\r\n<p>RGB is additive and made up of light, where the more colors you combine the brighter and closer it gets to white. The less colors you combine the closer it gets to black. This explains why it&rsquo;s possible to get bright, neon colors in RGB. Your TV, computer and phone screens work this way.</p>\r\n\r\n<p>CMYK on the other hand is subtractive and made up of ink. The more colors you combine the darker and closer it gets to black, and incoming light cannot reflect as much off of the substrate.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- What is your minimum font size?</strong></p>\r\n\r\n<p>It depends on the font style, font color and background color. Generally, at least a 6 pt. font is required.</p>\r\n\r\n<p>We do not guarantee small fonts will print legibly. There are too many font styles and color combinations for us to know for certain if an especially small font will be legible when printed. &nbsp;Additionally, the legibility of small fonts if often subject to the opinion of the viewer.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Can I request a change after I approve my proof?</strong></p>\r\n\r\n<p>No, changes cannot be made after proof approval. Review your proof carefully before approving it. Once it&#39;s approved we automatically add your order to our production queue and aim to ship it as fast as possible.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- How do I order stickers without a white border?</strong></p>\r\n\r\n<p>If you leave instructions for us to print &quot;full bleed&quot; when uploading artwork then we will prepare an online proof without the border if possible. Additionally, you can always request changes to a proof and ask for the white border to be added or removed.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Are templates available?</strong></p>\r\n\r\n<p>Yes, we offer sample templates in <font color=\"red\">PDF, EPS and PSD formats.</font></p>\r\n\r\n<p>Using our templates is completely optional. To ensure that your stickers look how you desire, we prepare free proofs with every order that show how we intend to make your stickers. You can request changes to your proofs and we will make them for free until you&#39;re happy.</p>\r\n\r\n<p>You can also upload your artwork without a template. Although we can make custom stickers in any size to fit your product, we are unable to create templates specific to your product.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Can I split a quantity with multiple designs and/or finishes?</strong></p>\r\n\r\n<p>You must order one design and finish per quantity. We cannot split quantities into multiple designs or finishes.Please know that combining multiple finishes in one order may slow production time slightly.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Do you offer custom shaped die cutting?</strong></p>\r\n\r\n<p>Tired of your standard square, rectangle, circle or oval shaped sticker? Look no further! Printing Amazon offers custom shaped die cutting for a great price! Unlike our competition who will charge an arm and a leg for custom shaped. We use a different printing and die cutting method that allows our equipment to automatically die cut your custom sticker job for a low cost. View our quote page to get an accurate price quote and feel free to contact us if you cannot find any information that you are looking after.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Accepted file formats</strong></p>\r\n\r\n<p>We currently only accept the following file formats: .AI, .EPS, .PDF, .TIF, .PSD &amp; .JPEG (minimum of 300 dpi).</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Sending artwork</strong></p>\r\n\r\n<p>The first step of our order process allows you to automatically upload your file to us, before you pay for you order. You may use this form to send us your art file from your &quot;My Account&quot; email address, or you can email the files to info@printingamazon.com.au from your &quot;My Account&quot; email address.</p>\r\n\r\n<p>Files over 50mb should be sent as a link via FTP, WeTransfer or some other type of large file sharing service.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Free shipping</strong></p>\r\n\r\n<p>We provide free delivery services to entire Australia regions. Require delivery time may vary depends on final destinations in Australia. Sydney Metro, Melbourne, Brisbane approximately takes 5 business days from the shipment.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Payment methods</strong></p>\r\n\r\n<p>Currently we only accept Paypal and credit card payment via either VISA or Master.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Production Time</strong></p>\r\n\r\n<p>Standard production time is 4 business (not include shipping schedule) days after proof approval on most of orders. Your proof will be delivered within 24 hours and your quick response will help speed up the process. A production time estimate will be provided with your invoice.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- When will I receive my products?</strong></p>\r\n\r\n<p>For your convenience, we do provide an estimated delivery time for every order that is based on the time it takes to process and ship your product to its designated address. Please note that sometimes order processing may take longer than expected depending on the local customs clearing time.</p>\r\n\r\n<p>Please keep in mind that the we estimate the delivery time from the date of artwork approval by you.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>- Can I cancel my order?</strong></p>\r\n\r\n<p>You can cancel your order at any time BEFORE we print your design. HOWEVER please note that this could be within moments after approving your proof. If you have decided to cancel your order before approving the proof this gives you more time to let us know. Please do not place an order with us until you are sure you want what you&#39;re ordering.</p>\r\n\r\n<p>After we have printed your design, a refund is no longer an option.</p>', '2017-10-27 13:53:12', '2017-10-27 14:01:37'),
+(7, NULL, NULL, NULL, 'Our Paperstock', 'our-paperstock', '<p><strong>Glossy Stickers</strong></p>\r\n\r\n<p>Our Glossy Paper can create a shiny look, that reflects light, and you get vibrant rich colors, which makes the color in your images pop on the stickers. We can say that the shine works well on print file with heavy color coverage, photographs and big graphics. It is a great eye catcher!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Matte Stickers</strong></p>\r\n\r\n<p>Our Matte Paper can give calm looks that less shininess. Colors gets more darken onto the paper and this will create vague atmosphere that brings another way of attractiveness.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Waterproof Stickers</strong></p>\r\n\r\n<p>The characteristic of Waterproof paper can bring out the color more clear and bright. It is the great way to express many different bright colors together with Waterproof feature! It&rsquo;s best for indoor use, especially on fridges, plastic, wine bottles, but not so strictly limited to just for waterproof function. If you want to create more brighter and luxurious look, you should try Printing Amazon&rsquo;s Waterproof Stickers!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Transparent Stickers</strong></p>\r\n\r\n<p>You can choose either&nbsp;&ldquo;CMYK&quot; or &quot;CMYK&nbsp;+ White Color&rdquo; onto any of the Printing Amazon&rsquo;s Transparent Sticker. You can see instant price to add white color before proceed any further printing process. Then, just simply upload the file.</p>\r\n\r\n<p>Printing Amazon&rsquo;s Transparent Sticker is great to use indoor signage, product package and anything that come up with your creativeness.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Kraft Stickers</strong></p>\r\n\r\n<p>Natural, tactile brown stickers with excellent writability! Printing Amazon&rsquo;s Kraft Sticker will create organic and eco-friendly look and feel with your design works.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>PVC Stickers</strong></p>\r\n\r\n<p>Thick and durable stickers that is suitable to use at both indoor and outdoor. All Printing Amazon&rsquo;s PVC Sticker is printed by UV printing process and this will give more clearer, visible, and durable printing outcomes for you.</p>', '2017-11-25 17:05:25', '2017-11-25 17:05:25');
 
 -- --------------------------------------------------------
 
@@ -988,7 +995,7 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (187, 45, 20001, 23000, 0.29, 0.54, 0, NULL),
 (188, 45, 23001, 26000, 0.28, 0.55, 0, NULL),
 (189, 45, 26001, 90000, 0.28, 0.54, 0, NULL),
-(190, 92, 0, 90000, 0.00, 0.00, 1, '1000.00'),
+(190, 92, 0, 90000, 0.00, 0.00, 1, '700.00'),
 (191, 150, 3501, 5400, 0.00, 0.00, 1, '70.00'),
 (192, 151, 3501, 5400, 0.00, 0.00, 1, '70.00'),
 (193, 151, 12001, 15000, 0.25, 0.45, 0, NULL),
@@ -1394,7 +1401,10 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (620, 373, 40001, 52900, 0.51, 0.52, 0, NULL),
 (621, 373, 52901, 62500, 0.51, 0.51, 0, NULL),
 (622, 373, 62501, 78400, 0.50, 0.51, 0, NULL),
-(623, 373, 78401, 90000, 0.50, 0.50, 0, NULL);
+(623, 373, 78401, 90000, 0.50, 0.50, 0, NULL),
+(624, 398, 0, 90000, NULL, NULL, 1, '700.00'),
+(625, 399, 0, 90000, NULL, NULL, 1, '700.00'),
+(626, 95, 0, 90000, NULL, NULL, 1, '700.00');
 
 -- --------------------------------------------------------
 
@@ -1456,7 +1466,7 @@ INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `d
 (76, 45, 300, 71.00),
 (77, 45, 400, 78.00),
 (78, 45, 500, 80.00),
-(79, 92, 1, 3.00),
+(79, 92, 1, 1.00),
 (92, 151, 10, 48.00),
 (93, 151, 50, 52.00),
 (94, 151, 100, 55.00),
@@ -1725,7 +1735,26 @@ INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `d
 (361, 82, 200, 86.00),
 (362, 82, 300, 89.00),
 (363, 82, 400, 92.00),
-(364, 82, 500, 95.00);
+(364, 82, 500, 95.00),
+(365, 92, 2, 1.90),
+(366, 92, 3, 2.70),
+(367, 92, 4, 3.50),
+(368, 92, 5, 4.00),
+(369, 398, 1, 1.00),
+(370, 398, 2, 1.90),
+(371, 398, 3, 2.70),
+(374, 398, 4, 3.50),
+(375, 398, 5, 4.00),
+(376, 399, 1, 1.00),
+(377, 399, 2, 1.90),
+(378, 399, 3, 2.70),
+(379, 399, 4, 3.50),
+(380, 399, 5, 4.00),
+(381, 95, 1, 1.00),
+(382, 95, 2, 1.90),
+(383, 95, 3, 2.70),
+(384, 95, 4, 3.50),
+(385, 95, 5, 4.00);
 
 -- --------------------------------------------------------
 
@@ -2020,14 +2049,15 @@ CREATE TABLE `sticker_types` (
 --
 
 INSERT INTO `sticker_types` (`id`, `name`, `image`, `sort`) VALUES
-(4, 'Animal Town Value Pack', 'N-Stickers Animal-Town.jpg', 5),
+(4, 'Animal Town Value Pack', 'N-Stickers Animal-Town.jpg', 6),
 (5, 'Smile Colour Pack', 'N-Stickers Smile-Colour-Pack.jpg', 6),
-(6, 'Fresh Fruits Pack', 'N-Stickers Fresh-Fruits.jpg', 7),
-(7, 'Flower Garden', 'N-Stickers Flower-Garden.jpg', 8),
-(8, 'Photo Sticker 1', 'Photo 0001-(0094).jpg', 1),
-(9, 'Photo Sticker 2', 'Photo 0002-(0116).jpg', 2),
-(10, 'Photo Sticker 3', 'Photo 0003-(0141).jpg', 3),
-(11, 'Photo Sticker 4', 'Photo 0004-(0099).jpg', 4);
+(6, 'Fresh Fruits Pack', 'N-Stickers Fresh-Fruits.jpg', 8),
+(7, 'Flower Garden', 'N-Stickers Flower-Garden.jpg', 9),
+(8, 'Photo Sticker 1', 'Photo 0001-(0094).jpg', 2),
+(9, 'Photo Sticker 2', 'Photo 0002-(0116).jpg', 3),
+(10, 'Photo Sticker 3', 'Photo 0003-(0141).jpg', 4),
+(11, 'Photo Sticker 4', 'Photo 0004-(0099).jpg', 5),
+(12, 'Name Sticker 001 (S)', 'Animal Town 821.png', 1);
 
 -- --------------------------------------------------------
 
@@ -2089,8 +2119,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `mobile`, `birthday`, `state`, `suburb`, `post_code`, `street`, `company`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 't4NYqUCvdmoHAf4PIY93uvcCoTqGwYI5ZRv8pKXFa4wRBivpDF8ETjqBaVXx', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
 (2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '9569857458', '1994-03-02', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL, '$2y$10$vx4NtBOPpcq0hLSwhMRfv.sy9Ury0BRbUWNDiiQhucPAghjVS1Fqa', 'o1aT6C0jBMzQZzDW0Ys9u9djXWJTk904dObgEBx1N1YJ7Eudys0rULx7vTTY', '2017-05-18 16:08:04', '2017-10-24 17:35:14'),
-(3, 'angellous99', 'angellous99@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wkFA5aR1jsK3jrsO9bb9biIJUZmTKGw7TtKPCLPRKm9CfiZRCK0ARnM6oZec', '2017-08-22 11:25:02', '2017-08-22 11:25:13'),
-(4, 'Atanu Das', 'technomind1985@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$/6z6LNSCPYg.f6MfDlY6fORMAJy60FcRgNlor33qsZU7IAe2m93Wi', 'E8YULdUvh3X5dzZ8btsFMmSdCYqQF5vpETvFQhv40wuUXjNhZEDvwKLhnVI3', '2017-09-05 00:06:04', '2017-09-05 00:06:17');
+(3, 'Peter', 'angellous99@gmail.com', NULL, '0416433429', '2017-11-25', 'NSW', 'Bualkham Hills', '2153', '44-46 Jenner Street', NULL, '$2y$10$0M3u8GJw6P5jedMqgf6hYe2gLJVExZCSAWdnhTd1ZDkX2D8VamP9i', 'wkFA5aR1jsK3jrsO9bb9biIJUZmTKGw7TtKPCLPRKm9CfiZRCK0ARnM6oZec', '2017-08-22 11:25:02', '2017-11-25 22:27:05'),
+(4, 'Atanu Das', 'technomind1985@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$/6z6LNSCPYg.f6MfDlY6fORMAJy60FcRgNlor33qsZU7IAe2m93Wi', 'E8YULdUvh3X5dzZ8btsFMmSdCYqQF5vpETvFQhv40wuUXjNhZEDvwKLhnVI3', '2017-09-05 00:06:04', '2017-09-05 00:06:17'),
+(5, 'HANS CDS', 'creative@hanscds.com', NULL, '0416433429', '1983-09-02', 'NSW', 'Seven Hills', '2147', '12 Prince William', 'HANS CDS Australia Pty Ltd', '$2y$10$ozoQFshpkPXF4nC9XdC0uuQEx.U9SzsKDisTzVWWsz9kJ9MRB7KYO', NULL, '2017-11-20 13:42:59', '2017-11-20 13:44:08');
 
 --
 -- Indexes for dumped tables
@@ -2381,7 +2412,7 @@ ALTER TABLE `map_prod_form`
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=398;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=404;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -2429,7 +2460,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `paperstock_options`
@@ -2441,13 +2472,13 @@ ALTER TABLE `paperstock_options`
 -- AUTO_INCREMENT for table `preset_general`
 --
 ALTER TABLE `preset_general`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=624;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=627;
 
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=365;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=386;
 
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_two`
@@ -2483,7 +2514,7 @@ ALTER TABLE `size_options`
 -- AUTO_INCREMENT for table `sticker_types`
 --
 ALTER TABLE `sticker_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `template_product_variations`
@@ -2495,7 +2526,7 @@ ALTER TABLE `template_product_variations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
