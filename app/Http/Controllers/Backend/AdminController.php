@@ -574,4 +574,20 @@ class AdminController extends Controller
         return view('backend.template-sort', $data);
     }
 
+    /**
+     * manage calendar day settings
+     */
+    public function ManageCalendar()
+    {
+        $settings = \App\Calendar::first();
+
+        $data = [
+            'page' => 'calendar',
+            'printing'  => $settings->printing,
+            'delivery'  => $settings->delivery,
+        ];
+
+        return view('backend.calendar-manage', $data);
+    }
+
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2017 at 03:27 PM
+-- Generation Time: Nov 25, 2017 at 11:36 AM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -64,6 +64,25 @@ CREATE TABLE `admin_password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `calendar`
+--
+
+CREATE TABLE `calendar` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `printing` int(11) NOT NULL,
+  `delivery` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `calendar`
+--
+
+INSERT INTO `calendar` (`id`, `printing`, `delivery`) VALUES
+(1, 10, 12);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cart`
 --
 
@@ -86,6 +105,13 @@ CREATE TABLE `cart` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
+(18, '84e6215b936db9c788d731e80b0f606fa35fba4a', 2, 20, 1, 50.00, 50.00, 500, '62.00', NULL, NULL, NULL, NULL, NULL, 260, '2017-11-24 20:24:31', '2017-11-24 20:24:31');
 
 -- --------------------------------------------------------
 
@@ -617,7 +643,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (66, '2017_10_28_194049_create_template_prod_variation_table', 35),
 (67, '2017_11_08_010518_add_mockup_approved_col_to_order_items_table', 36),
 (68, '2017_11_08_011036_create_mockup_approval_table', 37),
-(69, '2017_11_16_195418_add_is_circle_col_to_products_table', 38);
+(69, '2017_11_16_195418_add_is_circle_col_to_products_table', 38),
+(70, '2017_11_25_205434_create_calendar_settings_table', 39);
 
 -- --------------------------------------------------------
 
@@ -701,7 +728,7 @@ INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `mockup`, `review_t
 (3, 28, 'mockups/RwYjyeeby8wRVzB68iZoL1gEbibWmsnxxdKk0xZe.jpeg', 'I like it, please make it little more glossy and make the footer B&W', 0, '2017-11-08 16:48:39', '2017-11-08 16:52:39'),
 (5, 28, 'mockups/vfoOrHHSWmyts2YHHDWnZjumzgLJvwRdZhEz9Unj.jpeg', NULL, 0, '2017-11-11 14:04:23', '2017-11-11 14:04:23'),
 (6, 11, 'mockups/6AdqRLMQgp70e7DtELJKpg7KZ3ZZlVomkgPaKPY4.jpeg', NULL, 0, '2017-11-11 17:17:17', '2017-11-11 20:38:34'),
-(7, 20, 'mockups/VYAj0gvakOqnEU8jRjQbzNlltXnhMnb7ZHwvAYl6.jpeg', NULL, 0, '2017-11-18 15:55:10', '2017-11-18 15:59:37');
+(7, 20, 'mockups/VYAj0gvakOqnEU8jRjQbzNlltXnhMnb7ZHwvAYl6.jpeg', NULL, 1, '2017-11-18 15:55:10', '2017-11-18 15:59:37');
 
 -- --------------------------------------------------------
 
@@ -2083,6 +2110,12 @@ ALTER TABLE `admin_password_resets`
   ADD KEY `admin_password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `calendar`
+--
+ALTER TABLE `calendar`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
@@ -2285,10 +2318,16 @@ ALTER TABLE `admins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `calendar`
+--
+ALTER TABLE `calendar`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -2324,7 +2363,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2348,7 +2387,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `notificationsetting`
@@ -2360,7 +2399,7 @@ ALTER TABLE `notificationsetting`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval`
@@ -2372,7 +2411,7 @@ ALTER TABLE `order_artwork_approval`
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `order_items`

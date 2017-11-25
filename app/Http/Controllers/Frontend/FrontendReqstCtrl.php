@@ -128,12 +128,14 @@ class FrontendReqstCtrl extends Controller
 	public function CalendarTime(Request $request)
 	{
 		//time to be taken
-		$printing = 4;
-		$delivery = 5;
+		$settings = \App\Calendar::first();
+
+		$printing = $settings->printing;
+		$delivery = $settings->delivery;
 
 		$dates = [];
 
-		for ($i = 0, $j=1; $i <= 20; $i++)  //arbitarily picked as 20 days will be checkked & mapped for calendar dates
+		for ($i = 0, $j=1; $i <= 30; $i++)  //arbitarily picked as 30 days will be checkked & mapped for calendar dates
 		{
 			$currDate = ($i == 0)? Carbon::tomorrow() : $currDate->addDay(); //for 1st iteration tomorrow otherwise add 1 day after tomorrow for each iteration
 

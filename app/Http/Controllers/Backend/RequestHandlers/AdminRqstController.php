@@ -1129,4 +1129,20 @@ class AdminRqstController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * store calendar days settings
+     */
+    public function SaveCalendarSettings(Request $request)
+    {
+        $settings = $request->validate([
+            'printing'  =>  'required|integer',
+            'delivery'  =>  'required|integer',
+        ]);
+
+        \App\Calendar::first()->update($settings);
+
+        adminflash('success', 'calendar settings updated');
+        return redirect()->back();
+    }
+
 }

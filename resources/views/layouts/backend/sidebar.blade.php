@@ -57,11 +57,12 @@
             </ul>
         </li>
 
-        <li {!! ($page == 'order_complete' || $page == 'order_pending')? 'class="active"' : '' !!}>
+        <li {!! ($page == 'order_complete' || $page == 'order_pending' || $page == 'calendar')? 'class="active"' : '' !!}>
             <a href="#"><i class="icon-basket"></i> <span class="nav-label">Orders </span> @if($pending_orders > 0) <span class="label label-success label-rouded pull-right p3-bg note-icon">{{ $pending_orders }}</span> @endif </a>
             <ul class="nav nav-second-level collapse">
                 <li><a {!! ($page == 'order_complete')? 'class="current-menu"' : '' !!} href="{{ url('/admin/order/manage/completed') }}">Completed Orders</a></li>
                 <li><a {!! ($page == 'order_pending')? 'class="current-menu"' : '' !!} href="{{ url('/admin/order/manage/pending') }}">Pending Orders @if($pending_orders > 0) <span class="label label-success label-rouded pull-right p3-bg note-icon">{{ $pending_orders }}</span> @endif </a></li>
+                <li><a {!! ($page == 'calendar')? 'class="current-menu"' : '' !!} href="{{ url('/admin/manage/calendar') }}">Calendar Days Setting </a></li>
             </ul>
         </li>
 

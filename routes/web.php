@@ -237,6 +237,10 @@ Route::prefix('admin')->group(function() {
 	Route::get('/cms/product-links', 'Backend\AdminController@CMSManageProdLinks');
 	Route::post('/cms/product-links/save', 'Backend\RequestHandlers\AdminRqstController@CMSSaveProdLinks');
 
+	//calendar manage
+	Route::get('/manage/calendar', 'Backend\AdminController@ManageCalendar');
+	Route::post('/manage/calendar/save', 'Backend\RequestHandlers\AdminRqstController@SaveCalendarSettings');
+
 
 	/*___________________________________________________
 	| Super admin can add new, delete or inactive admin
