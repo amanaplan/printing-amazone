@@ -20,6 +20,8 @@ use App\OptSize;
 use App\PresetGeneral;
 use App\Cart;
 
+use JavaScript;
+
 use Illuminate\Support\Facades\Session;
 
 class ProceedOrder extends Controller
@@ -216,22 +218,27 @@ class ProceedOrder extends Controller
 		if(! Session::has('curr_product_payload'))
 		{
 			return redirect('/');
-		}
+        }
 
         $collection = Session::get('curr_product_payload');
         $product = Product::find($collection->get('product'));
-        $data = [
-            'product_name'      =>  $product->product_name,
-            'product_img'       =>  $product->logo,
-            'width'             =>  $collection->get('width'),
-            'height'            =>  $collection->get('height'),
-            'qty'               =>  $collection->get('qty'),
-            'sticker_type'      =>  $collection->has('sticker_type')? $collection->get('sticker_type') : null,
-            'laminating'        =>  $collection->has('laminating')? $collection->get('laminating') : null,
-            'sticker_name'      =>  $collection->has('sticker_name')? $collection->get('sticker_name') : null,
-        ];
 
-		return view('frontend.upload-artwork', $data);
+        JavaScript::put([
+            'any_artwork'   => $collection->has('artwork') ? true : false,
+            'artworks'      => $collection->has('artwork') ? $collection->get('artwork') : false,
+            '_submitURL'    => route('addto.cart'),
+            'csrf'          => csrf_token(),
+            'product_name' => $product->product_name,
+            'product_img'   => $product->logo,
+            'width'         => $collection->get('width'),
+            'height'        => $collection->get('height'),
+            'qty'           => $collection->get('qty'),
+            'sticker_type'  => $collection->has('sticker_type') ? $collection->get('sticker_type') : false,
+            'laminating'    => $collection->has('laminating') ? $collection->get('laminating') : false,
+            'sticker_name'  => $collection->has('sticker_name') ? $collection->get('sticker_name') : false,
+        ]);
+
+		return view('frontend.upload-artwork');
 	}
 
     /**
@@ -246,14 +253,6 @@ class ProceedOrder extends Controller
         //current payload collection
         $collection = $request->session()->get('curr_product_payload');
 
-        //remove if any previous uploaded file exist
-        if($collection->has('artwork'))
-        {
-            Storage::disk('public')->delete($collection->get('artwork'));
-            $collection->forget('artwork');
-        }
-
-
         //upload attempt curr file
         $file = $request->file('file');
         $url = Storage::disk('public')->putFile('artworks', $file);
@@ -264,9 +263,18 @@ class ProceedOrder extends Controller
         }
 
         //add artwork to payload collection
-        $collection->put('artwork', $url);
+        //if any previous uploaded file exist
+        if ($collection->has('artwork')) {
+            $curr_artworks = $collection->get('artwork');
+            array_push($curr_artworks, $url);
 
-        return response('uploaded, 200');
+            $collection->put('artwork', $curr_artworks);
+        }
+        else{
+            $collection->put('artwork', [$url]);
+        }
+        
+        return response()->json(['file' => $url]);
     }
 
     /**
@@ -295,7 +303,7 @@ class ProceedOrder extends Controller
 
 
         /*---------------------------------------------------------------------------------------------
-        |   check if cart token already exist otherwise create one
+        |  start check if cart token already exist otherwise create one
         -----------------------------------------------------------------------------------------------*/
         
         if($request->session()->has('cart_token'))
@@ -310,7 +318,7 @@ class ProceedOrder extends Controller
         
 
         /*---------------------------------------------------------------------------------------------
-        |   check if cart token already exist otherwise create one
+        |  end check if cart token already exist otherwise create one
         -----------------------------------------------------------------------------------------------*/
 
         //current payload collection

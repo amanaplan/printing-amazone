@@ -1158,3 +1158,21 @@ div.calendar_details_item p{
     padding: 0;
     overflow: hidden;
 }
+div.row .preview{
+    padding-bottom: 30px;
+    position: relative;
+}
+div.preview span.remove-uploaded-artwork{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #ff4221;
+    cursor: pointer;
+    display: none;
+}
+div.preview:hover{
+    cursor: pointer;
+}
+div.preview:hover span.remove-uploaded-artwork{
+    display: block;
+}

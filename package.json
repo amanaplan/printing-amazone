@@ -13,17 +13,17 @@
     "axios": "^0.17.1",
     "babel-preset-react": "^6.24.1",
     "bootstrap-sass": "^3.3.7",
-    "cross-env": "^3.2.3",
+    "cross-env": "^5.1.1",
     "jquery": "^3.2.1",
-    "laravel-mix": "^1.6.1",
+    "laravel-mix": "^1.6.2",
     "lodash": "^4.17.4",
     "nprogress": "^0.2.0",
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "vue": "^2.4.1"
   },
   "dependencies": {
-    "braintree-web-drop-in": "^1.7.0",
+    "braintree-web-drop-in": "^1.9.2",
     "connect": "^3.6.3",
     "express": "^4.15.4"
   }
