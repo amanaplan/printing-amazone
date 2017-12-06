@@ -60,53 +60,33 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 118);
+/******/ 	return __webpack_require__(__webpack_require__.s = 121);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 10:
+/***/ 121:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var APP_URL = 'http://printingamazon.dev/';
-
-exports.default = APP_URL;
-
-/***/ }),
-
-/***/ 118:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(119);
+module.exports = __webpack_require__(122);
 
 
 /***/ }),
 
-/***/ 119:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 122:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__snackbar_main__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__boot_js__ = __webpack_require__(9);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _main = __webpack_require__(74);
-
-var _main2 = _interopRequireDefault(_main);
-
-var _boot = __webpack_require__(10);
-
-var _boot2 = _interopRequireDefault(_boot);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
 
 $(document).ready(function () {
 
@@ -276,7 +256,7 @@ function checkPrice(product, paperstock, size) {
 
 	$.ajaxSetup({
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-		url: _boot2.default + "product/calculate-price",
+		url: __WEBPACK_IMPORTED_MODULE_1__boot_js__["a" /* default */] + "product/calculate-price",
 		type: "POST",
 		dataType: 'json',
 		data: { product: product, paperstock: paperstock, customsize: customSize, size: size, qty: quantityVal, customqty: customQty },
@@ -310,7 +290,7 @@ function checkPrice(product, paperstock, size) {
 			}
 		},
 		error: function error(xhr, status, _error) {
-			(0, _main2.default)('Some server error occurred! please refresh and try again.', 'Dismiss');
+			Object(__WEBPACK_IMPORTED_MODULE_0__snackbar_main__["a" /* default */])('Some server error occurred! please refresh and try again.', 'Dismiss');
 
 			erasePriceOverview('all');
 		}
@@ -434,15 +414,10 @@ function gatherInput() {
 /***/ }),
 
 /***/ 74:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = createSnackbar;
+/* harmony export (immutable) */ __webpack_exports__["a"] = createSnackbar;
 function createSnackbar(message, actionText, action) {
   // Any snackbar that is already shown
   var previous = null;
@@ -489,6 +464,16 @@ function createSnackbar(message, actionText, action) {
   snackbar.style.bottom = '0px';
   snackbar.style.opacity = 1;
 }
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var APP_URL = 'http://printingamazon.dev/';
+
+/* harmony default export */ __webpack_exports__["a"] = (APP_URL);
 
 /***/ })
 

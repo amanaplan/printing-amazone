@@ -63,24 +63,85 @@ function readURL(input) {
     }
 }
 
+/**
+ * button component for upload more artworks
+ */
+class MoreArtworkBtn extends Component{
+    constructor(props) {
+        super(props);
+        this.handleMoreArtworksClick = this.handleMoreArtworksClick.bind(this);
+    }
+
+    handleMoreArtworksClick(){
+        this.props.onMoreArtworksClick();
+    }
+
+    render(){
+        const renderable = this.props.show?
+            <button type="button" onClick={this.handleMoreArtworksClick} className="btn btn-info"><i className="fa fa-picture-o" aria-hidden="true"></i> Want to Upload More Artworks !</button>
+            :
+            null;
+
+        return renderable;
+    }
+    
+}
+
+/**
+ * file type input field
+ */
+class UploadField extends Component{
+    constructor(props) {
+        super(props);
+        this.state = { show: true};
+        this.handleImageUpload = this.handleImageUpload.bind(this);
+    }
+
+    handleImageUpload(){
+        this.props.onImageUploadAttempt();
+    }
+
+    render(){
+        const renderable = this.props.show?
+                        <div>
+                            <input type="file" className="filestyle" ref={this.props.fieldref} disabled={this.props.disableFld} onChange={this.handleImageUpload} id="upload" tabIndex="-1" data-buttonname="btn-info" placeholder="No file Chosen" style={{ position: 'absolute', clip: 'rect(0px 0px 0px 0px)' }} />
+                            <div className="bootstrap-filestyle input-group">
+                                <input type="text" className="form-control" disabled={true} />
+                                <span className="group-span-filestyle input-group-btn" tabIndex="0">
+                                    <label htmlFor="upload" className="btn btn-primary "><span className="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span className="buttonText"> Choose file</span></label>
+                                </span>
+                            </div>
+                            <span>max upload size 50MB</span>
+                        </div>
+                        :
+                        null;
+
+        return renderable;
+    }
+}
+
 class FormFields extends Component{
     constructor(props){
         super(props);
-        this.state = { proceedBtn: window.any_artwork, instruction: '', showProgress:false, progressData:0 };
+        this.state = { proceedBtn: window.any_artwork, instruction: '', showProgress: false, progressData: 0, showUploadField: !window.any_artwork, disableUploadFld: false };
         this.handleInstChange = this.handleInstChange.bind(this);
         this.handleImageUpload = this.handleImageUpload.bind(this);
+        this.handleMoreArtworksUpload = this.handleMoreArtworksUpload.bind(this);
     }
 
     handleInstChange(e){
         this.setState({ instruction: e.target.value });
     }
 
+    handleMoreArtworksUpload(){
+        this.setState({ showUploadField: true, disableUploadFld: false });
+    }
+
     handleImageUpload(){
-        //console.log(this.uploadFld.value);
-        //readURL(this.uploadFld);
         const reactThis = this;
 
-        this.uploadFld.setAttribute('disabled', 'disabled');
+        this.setState({ disableUploadFld: true});
+        //this.uploadFld.setAttribute('disabled', 'disabled');
 
         let data = new FormData();
         data.append('file', this.uploadFld.files[0]);
@@ -97,15 +158,13 @@ class FormFields extends Component{
 
         axios.post(`${APP_URL}upload-artwork/process-upload`, data, config)
         .then(function (res) {
-            reactThis.setState({ showProgress: false, progressData: 0, proceedBtn: true });
+            reactThis.setState({ showProgress: false, progressData: 0, proceedBtn: true, disableUploadFld: true, showUploadField: false });
             reactThis.props.onFileUploadSuccess(res.data.file);
-            //console.log(res.data.file);
 
             swal("", "Artwork uploaded successfully", "success");
         })
         .catch(function (err) {
-            reactThis.setState({ showProgress: false, progressData: 0 });
-            reactThis.uploadFld.removeAttribute('disabled');
+            reactThis.setState({ showProgress: false, progressData: 0, disableUploadFld: false, showUploadField:true });
 
             swal("Error!", err.message, "error");
         });
@@ -121,15 +180,10 @@ class FormFields extends Component{
                     <input type="hidden" name="_token" value={window.csrf} />
 
                     <div className="file-upload">
-                        <input type="file" className="filestyle" ref={el => this.uploadFld = el} onChange={this.handleImageUpload} id="upload" tabIndex="-1" data-buttonname="btn-info" placeholder="No file Chosen" style={{position: 'absolute', clip: 'rect(0px 0px 0px 0px)'}} />
-                        <div className="bootstrap-filestyle input-group">
-                            <input type="text" className="form-control" disabled={true} /> 
-                            <span className="group-span-filestyle input-group-btn" tabIndex="0">
-                                <label htmlFor="upload" className="btn btn-primary "><span className="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span className="buttonText"> Choose file</span></label>
-                            </span>
-                        </div>
-                        <span>max upload size 50MB</span>
+                        <MoreArtworkBtn show={!this.state.showUploadField} onMoreArtworksClick={this.handleMoreArtworksUpload} />
 
+                        <UploadField show={this.state.showUploadField} fieldref={el => this.uploadFld = el} disableFld={this.state.disableUploadFld} onImageUploadAttempt={this.handleImageUpload}/>
+                        
                         <UploadProgress showProgress={this.state.showProgress} progressData={this.state.progressData} />
 
                         <br />
