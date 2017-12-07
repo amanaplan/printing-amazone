@@ -21,7 +21,7 @@ $(document).ready(function(){
 						<div class="container">
 							<div class="row" style="height: 400px">
 								<h2>Your cart is empty</h2>
-								<p class="subtitle">You may want to add some <a href="${APP_URL}sticker">product</a> in your cart.</p>
+								<p class="subtitle">You may want to add some <a href="${APP_URL}">product</a> in your cart.</p>
 							</div>
 						</div>
 					</div>
@@ -61,7 +61,7 @@ $(document).ready(function(){
 					<div class="container">
 						<div class="row" style="height: 400px">
 							<h2>Your cart is empty</h2>
-							<p class="subtitle">You may want to add some <a href="${APP_URL}sticker">product</a> in your cart.</p>
+							<p class="subtitle">You may want to add some <a href="${APP_URL}">product</a> in your cart.</p>
 						</div>
 					</div>
 				</div>

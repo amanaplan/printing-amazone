@@ -1176,3 +1176,7 @@ div.preview:hover{
 div.preview:hover span.remove-uploaded-artwork{
     display: block;
 }
+
+div#added-artworks-preview{
+    width: 259px;
+}

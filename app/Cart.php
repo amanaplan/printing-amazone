@@ -14,6 +14,11 @@ class Cart extends Model
         return $this->belongsTo('App\Product');
     }
 
+    public function artworks()
+    {
+        return $this->hasMany('App\CartArtworks', 'cart_id', 'id');
+    }
+
     public function paperstockopt()
     {
         return $this->belongsTo('App\OptPaperstock', 'paperstock');

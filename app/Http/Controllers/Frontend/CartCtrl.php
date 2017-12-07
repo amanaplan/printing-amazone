@@ -30,7 +30,7 @@ class CartCtrl extends Controller
 
     		if($avlbl_in_cart->count() > 0)
     		{
-    			$cart_data =  $avlbl_in_cart->oldest()->with('product.category', 'paperstockopt')->get();
+    			$cart_data =  $avlbl_in_cart->oldest()->with('product.category', 'paperstockopt', 'artworks:id,cart_id,artwork')->get();
 
                 // subtotal & multiple prod discount
                 $pricing = $this->GenPricing();
@@ -110,11 +110,17 @@ class CartCtrl extends Controller
         $cart_item = Cart::where([['cart_token', $cart_token], ['id', $request->input('item')]]);
         if($cart_item->count() == 1)
         {
-        	if($cart_item->first()->artwork)
-        	{
-        		Storage::disk('public')->delete($cart_item->first()->artwork);
-        	}
-        	
+            //remove the artwork(s)
+            if($cart_item->first()->artworks()->count() > 0)
+            {
+                foreach($cart_item->first()->artworks as $artworkitem){
+                    Storage::disk('public')->delete($artworkitem->artwork);
+                }
+
+                $cart_item->first()->artworks()->delete();
+            }
+            
+            //remove the cart item itself
         	$cart_item->delete();
 
             $pricing = $this->GenPricing();
@@ -142,10 +148,14 @@ class CartCtrl extends Controller
 
     	foreach($cart_items->get() as $item)
     	{
-    		if($item->artwork)
-    		{
-    			Storage::disk('public')->delete($item->artwork);
-    		}
+            //remove the artwork(s)
+            if ($item->artworks()->count() > 0) {
+                foreach ($item->artworks as $artworkitem) {
+                    Storage::disk('public')->delete($artworkitem->artwork);
+                }
+
+                $item->artworks()->delete();
+            }
     	}
 
     	$cart_items->delete();

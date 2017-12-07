@@ -354,12 +354,23 @@ class ProceedOrder extends Controller
             'sticker_type'  =>  $collection->get('sticker_type'),
             'laminating'    =>  $collection->get('laminating'),
             'sticker_name'  =>  $collection->get('sticker_name'),
-            'artwork'       =>  $collection->get('artwork'),
             'instructions'  =>  $request->input('instructions'),
             'preset_mapper' =>  $collection->get('mapper'),
         ]);
 
         $cart->price = $collection->get('price');
+
+        //for inserting artwork(s) to related model
+        if ($collection->has('artwork')) {
+            $artworks = $collection->get('artwork'); //contains array of artwork(s)
+            $to_save = [];
+            foreach ($artworks as $art) {
+                $to_save[] = ['artwork' => $art];
+            }
+
+            $cart->artworks()->createMany($to_save);
+        }
+
         $cart->save();
 
         //flush the curr product payload

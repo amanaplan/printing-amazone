@@ -75,17 +75,23 @@
 											<h5>{{ $item->product->product_name }}</h5>
 										</a>
 
-										@if($item->artwork)
-										<div class="pinned-artwork" data-tooltip-content="#prod-artwork-{{$item->id}}">
-											<img src="{{ asset('storage/'.$item->artwork) }}" onerror="showFileImg(this);" alt="Artwork" width="96" height="96">
-											Artwork <i class="fa fa-paperclip"></i>
-										</div>
+										
+										@if($item->artworks->count() > 0)
+											<div id="added-artworks-preview">
+											@foreach($item->artworks as $row)
+												<div class="pinned-artwork" data-tooltip-content="#prod-artwork-{{$row->id}}">
+													<img src="{{ asset('storage/'.$row->artwork) }}" onerror="showFileImg(this);" alt="Artwork" width="96" height="96">
+													Artwork <i class="fa fa-paperclip"></i>
+												</div>
 
-										<div class="tooltip_templates" style="display: none;">
-										    <span id="prod-artwork-{{$item->id}}">
-										        <img width="200" src="{{ asset('storage/'.$item->artwork) }}" onerror="showFileImg(this);" alt="Artwork" />
-										    </span>
-										</div>
+												<div class="tooltip_templates" style="display: none;">
+													<span id="prod-artwork-{{$row->id}}">
+														<img width="200" src="{{ asset('storage/'.$row->artwork) }}" onerror="showFileImg(this);" alt="Artwork" />
+													</span>
+												</div>
+											@endforeach
+											</div>
+
 										@endif
 
 									</td>
@@ -214,7 +220,7 @@
 <div class="container">
 	<div class="row" style="height: 400px">
 		<h2>Your cart is empty</h2>
-		<p class="subtitle">You may want to add some <a href="{{ url('/sticker') }}">product</a> in your cart.</p>
+		<p class="subtitle">You may want to add some <a href="{{ url('/') }}">product</a> in your cart.</p>
 	</div><!-- row -->
 </div><!-- container -->
 </div>
