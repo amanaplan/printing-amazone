@@ -251,10 +251,20 @@ class Checkout extends Controller
             $order_item->sticker_type = $item->sticker_type;
             $order_item->laminating = $item->laminating;
             $order_item->sticker_name = $item->sticker_name;
-            $order_item->artwork = $item->artwork;
+            //$order_item->artwork = $item->artwork;
             $order_item->instructions = $item->instructions;
 
             $order_item->save();
+
+            //for inserting artwork(s) to related model
+            if ($item->artworks()->count() > 0) {
+                $to_save = [];
+                foreach ($item->artworks as $art) {
+                    $to_save[] = ['artwork' => $art->artwork];
+                }
+
+                $order_item->orderartworks()->createMany($to_save);
+            }
         }
 
         //retaining data before they flush

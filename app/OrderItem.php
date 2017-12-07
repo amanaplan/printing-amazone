@@ -29,6 +29,11 @@ class OrderItem extends Model
         return $this->hasMany('App\OrderArtworkApproval', 'order_item_id');
     }
 
+    public function orderartworks()
+    {
+        return $this->hasMany('App\OrderArtwork', 'order_item_id');
+    }
+
     public function order()
     {
         return $this->belongsTo('App\Order');

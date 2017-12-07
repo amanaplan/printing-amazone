@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2017 at 01:23 PM
+-- Generation Time: Dec 07, 2017 at 01:58 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -116,8 +116,7 @@ INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `
 (22, 'dce37b8fe8c66760c6cb79e5807da1e00784a55d', 0, 4, 1, 70.00, 70.00, 10, '92.00', NULL, NULL, NULL, NULL, 13, '2017-11-27 23:20:20', '2017-11-27 23:20:20'),
 (23, '7b05467a154d33b357b8d4421bc3c2865c0263e8', 0, 17, 1, 125.00, 75.00, 10, '129.00', NULL, NULL, NULL, NULL, 27, '2017-11-28 23:08:17', '2017-11-28 23:08:17'),
 (34, '044d87f0646a844b16ff211dbb901f1c592d5a26', 0, 21, 1, 55.00, 55.00, 50, '66.00', NULL, NULL, NULL, NULL, 79, '2017-12-01 14:21:40', '2017-12-01 14:21:40'),
-(41, '2ab093abb48216ed19215648fbe962228b447fea', 0, 2, 1, 40.00, 60.00, 10, '31.00', NULL, NULL, NULL, NULL, 150, '2017-12-03 23:06:27', '2017-12-03 23:06:27'),
-(68, '80ff32e80fbbc1463f71f217883374a560fd6984', 2, 2, 1, 60.00, 60.00, 20000, '686.00', NULL, NULL, NULL, NULL, 150, '2017-12-07 17:50:04', '2017-12-07 17:50:04');
+(41, '2ab093abb48216ed19215648fbe962228b447fea', 0, 2, 1, 40.00, 60.00, 10, '31.00', NULL, NULL, NULL, NULL, 150, '2017-12-03 23:06:27', '2017-12-03 23:06:27');
 
 -- --------------------------------------------------------
 
@@ -136,7 +135,9 @@ CREATE TABLE `cart_artworks` (
 --
 
 INSERT INTO `cart_artworks` (`id`, `cart_id`, `artwork`) VALUES
-(13, 68, 'artworks/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg');
+(13, 68, 'artworks/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg'),
+(14, 69, 'artworks/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg'),
+(15, 69, 'artworks/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg');
 
 -- --------------------------------------------------------
 
@@ -266,6 +267,14 @@ CREATE TABLE `jobs` (
   `available_at` int(10) UNSIGNED NOT NULL,
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
+(136, 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderCustomer\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:22:\\\"App\\\\Mail\\\\OrderCustomer\\\":21:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:25:\\\"http:\\/\\/printingamazon.dev\\\";s:12:\\\"delivery_img\\\";s:62:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017120701\\\";s:14:\\\"transaction_id\\\";s:8:\\\"3b9nh1mx\\\";s:7:\\\"country\\\";s:2:\\\"AS\\\";s:5:\\\"state\\\";s:16:\\\"V2VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:8:\\\"NzEyMjAz\\\";s:6:\\\"street\\\";s:60:\\\"NTkoMjUvQy9EKSBLLkIgUGFyYSBMYW5lLCBCYWlkeWFiYXRpLCBIb29naGx5\\\";s:8:\\\"subtotal\\\";i:1078;s:8:\\\"discount\\\";i:32;s:7:\\\"payable\\\";i:1046;s:5:\\\"items\\\";s:954:\\\"[{\\\"id\\\":68,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":2,\\\"paperstock\\\":1,\\\"width\\\":60,\\\"height\\\":60,\\\"qty\\\":20000,\\\"price\\\":\\\"686.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":150,\\\"created_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"updated_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"artworks\\\":[{\\\"id\\\":13,\\\"cart_id\\\":68,\\\"artwork\\\":\\\"artworks\\\\\\/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg\\\"}]},{\\\"id\\\":69,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":4,\\\"paperstock\\\":1,\\\"width\\\":50,\\\"height\\\":50,\\\"qty\\\":5000,\\\"price\\\":\\\"392.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":13,\\\"created_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"updated_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"artworks\\\":[{\\\"id\\\":14,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg\\\"},{\\\"id\\\":15,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg\\\"}]}]\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 0, NULL, 1512651272, 1512651272),
+(137, 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderAdmin\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\OrderAdmin\\\":22:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:25:\\\"http:\\/\\/printingamazon.dev\\\";s:12:\\\"delivery_img\\\";s:62:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017120701\\\";s:14:\\\"transaction_id\\\";s:8:\\\"3b9nh1mx\\\";s:7:\\\"country\\\";s:2:\\\"AS\\\";s:5:\\\"state\\\";s:16:\\\"V2VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:8:\\\"NzEyMjAz\\\";s:6:\\\"street\\\";s:60:\\\"NTkoMjUvQy9EKSBLLkIgUGFyYSBMYW5lLCBCYWlkeWFiYXRpLCBIb29naGx5\\\";s:8:\\\"subtotal\\\";i:1078;s:8:\\\"discount\\\";i:32;s:7:\\\"payable\\\";i:1046;s:5:\\\"items\\\";s:954:\\\"[{\\\"id\\\":68,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":2,\\\"paperstock\\\":1,\\\"width\\\":60,\\\"height\\\":60,\\\"qty\\\":20000,\\\"price\\\":\\\"686.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":150,\\\"created_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"updated_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"artworks\\\":[{\\\"id\\\":13,\\\"cart_id\\\":68,\\\"artwork\\\":\\\"artworks\\\\\\/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg\\\"}]},{\\\"id\\\":69,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":4,\\\"paperstock\\\":1,\\\"width\\\":50,\\\"height\\\":50,\\\"qty\\\":5000,\\\"price\\\":\\\"392.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":13,\\\"created_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"updated_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"artworks\\\":[{\\\"id\\\":14,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg\\\"},{\\\"id\\\":15,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg\\\"}]}]\\\";}}s:13:\\\"personal_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"name\\\";s:20:\\\"U291cmF2IFJha3NoaXQ=\\\";s:5:\\\"email\\\";s:24:\\\"c3J2Lm54ckBnbWFpbC5jb20=\\\";s:5:\\\"phone\\\";s:16:\\\"OTU2OTg1NzQ1OA==\\\";s:7:\\\"company\\\";s:0:\\\"\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"julian@blendev.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:26:\\\"info@printingamazon.com.au\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 0, NULL, 1512651272, 1512651272);
 
 -- --------------------------------------------------------
 
@@ -679,7 +688,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (70, '2017_11_25_205434_create_calendar_settings_table', 39),
 (71, '2017_12_07_215017_create_cart_artworks_table', 40),
 (72, '2017_12_07_215645_change_artwork_col_cart_table', 40),
-(73, '2017_12_07_222019_remove_artwork_col_cart_table', 41);
+(73, '2017_12_07_222019_remove_artwork_col_cart_table', 41),
+(74, '2017_12_07_233248_create_order_artworks_table', 42),
+(75, '2017_12_07_233535_remove_artwork_col_from_order_items_table', 42);
 
 -- --------------------------------------------------------
 
@@ -741,7 +752,29 @@ INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discoun
 (36, 'PA2017120101', 'g25c9v36', 2, '0.00', '62.00', 1, '2017-12-01 16:31:42', '2017-12-01 16:31:42'),
 (37, 'PA2017120201', 'nygq23p8', 2, '3.00', '86.00', 1, '2017-12-02 21:53:03', '2017-12-02 21:53:03'),
 (40, 'PA2017120501', '6hyjgsam', 3, '0.00', '31.00', 5, '2017-12-05 11:22:26', '2017-12-05 12:08:52'),
-(41, 'PA2017120502', '4dqs7tfc', NULL, '0.00', '31.00', 1, '2017-12-05 14:58:30', '2017-12-05 14:58:30');
+(41, 'PA2017120502', '4dqs7tfc', NULL, '0.00', '31.00', 1, '2017-12-05 14:58:30', '2017-12-05 14:58:30'),
+(42, 'PA2017120701', '3b9nh1mx', 2, '32.00', '1046.00', 1, '2017-12-07 18:24:31', '2017-12-07 18:24:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_artworks`
+--
+
+CREATE TABLE `order_artworks` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_item_id` int(11) NOT NULL,
+  `artwork` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_artworks`
+--
+
+INSERT INTO `order_artworks` (`id`, `order_item_id`, `artwork`) VALUES
+(1, 57, 'artworks/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg'),
+(2, 58, 'artworks/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg'),
+(3, 58, 'artworks/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg');
 
 -- --------------------------------------------------------
 
@@ -822,7 +855,8 @@ INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_add
 (33, 36, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '103.42.172.162', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL),
 (34, 37, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '202.142.104.12', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL),
 (37, 40, 'Peter', 'angellous99@gmail.com', '0416433429', '60.242.149.4', 'AS', 'NSW', 'Bualkham Hills', '2153', '44-46 Jenner Street', NULL),
-(38, 41, 'Peter', 'angellous99@gmail.com', '+61416433429', '60.242.149.4', 'AS', 'New South Wales', 'Seven Hills', '2147', '12\nPrince William', NULL);
+(38, 41, 'Peter', 'angellous99@gmail.com', '+61416433429', '60.242.149.4', 'AS', 'New South Wales', 'Seven Hills', '2147', '12\nPrince William', NULL),
+(39, 42, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '127.0.0.1', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL);
 
 -- --------------------------------------------------------
 
@@ -842,7 +876,6 @@ CREATE TABLE `order_items` (
   `sticker_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `laminating` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sticker_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `artwork` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `instructions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mockup_approved` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -851,35 +884,37 @@ CREATE TABLE `order_items` (
 -- Dumping data for table `order_items`
 --
 
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `artwork`, `instructions`, `mockup_approved`) VALUES
-(2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, NULL, 0),
-(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '6', 'Sourav', 'artworks/IlzYrzwDzivlphZ4W2oqDJMPqIYxETOfnN2b1tTK.jpeg', 'I want it to be in oily paper', 0),
-(5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL, 0),
-(6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, 'artworks/Q6f8VWei6BqfC5QobFbgbzSlc2zyqqQcKbVQUeEC.jpeg', NULL, 0),
-(10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, NULL, 0),
-(11, 7, 4, 'Kraft Paperboard', '12', '12', '200', '111.00', NULL, NULL, NULL, 'artworks/6MEnusBEg8aAfAxJ5GYMUZ6LAEsXNVQJsj9YFqJG.png', 'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 0),
-(12, 8, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, NULL, 0),
-(13, 8, 21, 'Transparent Paper', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, NULL, 0),
-(14, 8, 17, 'Silver Matt paperboard', '90', '90', '200', '1905.00', NULL, NULL, NULL, NULL, NULL, 0),
-(15, 9, 21, 'Glossy & Matt paperboard (Artboard)', '50', '50', '300', '882.00', NULL, NULL, NULL, NULL, NULL, 0),
-(16, 9, 2, 'Kraft Paperboard', '70', '70', '200', '4034.00', NULL, NULL, NULL, NULL, NULL, 0),
-(17, 9, 17, 'Silver Matt paperboard', '48.5', '200', '300', '3422.00', NULL, NULL, NULL, NULL, NULL, 0),
-(18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, NULL, 0),
-(19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, NULL, 0),
-(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, 'artworks/xLCKk5sQs2ikpWHbQ0vzkdDeP0UdcnmsCmEzfIFD.jpeg', NULL, 1),
-(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, NULL, 0),
-(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, 'artworks/BfndhULHhkQHLDPjluSztZj9uvlgEq9JNhcK4nl5.jpeg', 'lorem instructions', 0),
-(30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, NULL, 0),
-(39, 28, 2, 'Glossy Sticker', '40', '60', '3000', '160.00', NULL, NULL, NULL, 'artworks/3UD5G2JndA7dfLYwTO7Zi7BCdge1fbEnoCTPjndr.png', NULL, 0),
-(41, 31, 4, 'Glossy Sticker', '50', '50', '10', '76.00', NULL, NULL, NULL, NULL, NULL, 0),
-(44, 34, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, NULL, 1),
-(45, 35, 21, 'Glossy Sticker', '70', '70', '1000', '83.00', NULL, NULL, NULL, NULL, NULL, 0),
-(46, 35, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, NULL, 0),
-(47, 36, 20, 'Glossy Sticker', '50', '50', '500', '62.00', NULL, NULL, NULL, NULL, NULL, 0),
-(48, 37, 2, 'Glossy Sticker', '60', '60', '100', '39.00', NULL, NULL, NULL, NULL, NULL, 0),
-(49, 37, 2, 'Kraft Sticker', '60', '60', '200', '50.00', NULL, NULL, NULL, NULL, NULL, 0),
-(55, 40, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, 'artworks/FzI9a2wGpZmvORTjQZEQHrzxGeDUo6fRUnp3S9yM.jpeg', 'Please print the left design onto sticker', 1),
-(56, 41, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `instructions`, `mockup_approved`) VALUES
+(2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, 0),
+(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '6', 'Sourav', 'I want it to be in oily paper', 0),
+(5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, 0),
+(6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 0),
+(10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, 0),
+(11, 7, 4, 'Kraft Paperboard', '12', '12', '200', '111.00', NULL, NULL, NULL, 'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 0),
+(12, 8, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, 0),
+(13, 8, 21, 'Transparent Paper', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, 0),
+(14, 8, 17, 'Silver Matt paperboard', '90', '90', '200', '1905.00', NULL, NULL, NULL, NULL, 0),
+(15, 9, 21, 'Glossy & Matt paperboard (Artboard)', '50', '50', '300', '882.00', NULL, NULL, NULL, NULL, 0),
+(16, 9, 2, 'Kraft Paperboard', '70', '70', '200', '4034.00', NULL, NULL, NULL, NULL, 0),
+(17, 9, 17, 'Silver Matt paperboard', '48.5', '200', '300', '3422.00', NULL, NULL, NULL, NULL, 0),
+(18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 0),
+(19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, 0),
+(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, 1),
+(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, 0),
+(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, 'lorem instructions', 0),
+(30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, 0),
+(39, 28, 2, 'Glossy Sticker', '40', '60', '3000', '160.00', NULL, NULL, NULL, NULL, 0),
+(41, 31, 4, 'Glossy Sticker', '50', '50', '10', '76.00', NULL, NULL, NULL, NULL, 0),
+(44, 34, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 1),
+(45, 35, 21, 'Glossy Sticker', '70', '70', '1000', '83.00', NULL, NULL, NULL, NULL, 0),
+(46, 35, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 0),
+(47, 36, 20, 'Glossy Sticker', '50', '50', '500', '62.00', NULL, NULL, NULL, NULL, 0),
+(48, 37, 2, 'Glossy Sticker', '60', '60', '100', '39.00', NULL, NULL, NULL, NULL, 0),
+(49, 37, 2, 'Kraft Sticker', '60', '60', '200', '50.00', NULL, NULL, NULL, NULL, 0),
+(55, 40, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, 'Please print the left design onto sticker', 1),
+(56, 41, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 1),
+(57, 42, 2, 'Glossy Sticker', '60', '60', '20000', '686.00', NULL, NULL, NULL, NULL, 0),
+(58, 42, 4, 'Glossy Sticker', '50', '50', '5000', '392.00', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2310,6 +2345,12 @@ ALTER TABLE `orders`
   ADD UNIQUE KEY `orders_order_token_unique` (`order_token`);
 
 --
+-- Indexes for table `order_artworks`
+--
+ALTER TABLE `order_artworks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
@@ -2437,13 +2478,13 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `cart_artworks`
 --
 ALTER TABLE `cart_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -2479,7 +2520,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2503,7 +2544,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `notificationsetting`
@@ -2515,7 +2556,13 @@ ALTER TABLE `notificationsetting`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `order_artworks`
+--
+ALTER TABLE `order_artworks`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval`
@@ -2527,13 +2574,13 @@ ALTER TABLE `order_artwork_approval`
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `order_status`
