@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2017 at 01:58 PM
+-- Generation Time: Dec 07, 2017 at 03:27 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -1997,7 +1997,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `product_name`, `product_slug`, `logo`, `description`, `sample_image`, `min_size`, `max_size`, `allow_custom_size`, `is_circle`, `sort`, `created_at`, `updated_at`) VALUES
-(2, 'Square/Rectangle', 'some meta', 'Square Sticker_3.jpg', 6, 'Square/Rectangle', 'squarerectangle', 'Square-Stickers.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', 'Square Sticker_2.jpg', 40, 300, 1, 0, 2, '2017-05-30 14:35:51', '2017-10-27 17:29:12'),
+(2, 'Square/Rectangle', 'some meta', 'Square Sticker_3.jpg', 6, 'Square/Rectangle', 'square-rectangle', 'Square-Stickers.png', 'Our custom square stickers are great for logos, product labels, artwork reproductions and more. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your business.', 'Square Sticker_2.jpg', 40, 300, 1, 0, 2, '2017-05-30 14:35:51', '2017-10-27 17:29:12'),
 (4, 'Custom Shape', NULL, NULL, 6, 'Custom Shape', 'custom-shape', 'Custom-Shape-Stickers.png', 'Printing Amazon’s Premium Business Cards will set you apart from the crowd with our carefully selected materials and high definition printing technology. Our proof approval process let you work directly with us to ensure the size, corners, and look are perfect. From every day to extra special. With a variety of stocks and specialty finishes, designing your unique custom business cards is easier than you think.', 'Die-cutting_9.jpg', 10, 300, 1, 0, 2, '2017-06-19 15:22:41', '2017-09-28 16:56:54'),
 (17, 'Ovals', NULL, NULL, 6, 'Ovals', 'ovals', 'Oval-Stickers.png', 'Custom Oval Stickers are a great way to represent your state, team or organisation. Our proof approval process lets you work directly with us to ensure the size, borders, and look are perfect for your needs.', 'Rectangle Sticker_1.jpg', 10, 300, 1, 0, 3, '2017-08-15 14:00:51', '2017-09-28 16:56:45'),
 (20, 'Rounded Corner', NULL, NULL, 6, 'Rounded Corner', 'rounded-corner', 'Round-Corner-Stickers.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Die-cutting_7.jpg', 10, 300, 1, 0, 1, '2017-08-15 16:42:47', '2017-09-28 16:56:35'),

@@ -180,6 +180,8 @@ return [
 
         //braintree service provider
         App\Providers\BraintreeServiceProvider::class,
+        //zipper provider
+        Chumper\Zipper\ZipperServiceProvider::class,
 
     ],
 

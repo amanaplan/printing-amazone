@@ -159,11 +159,11 @@
                                 <td class="text-left">{{ $item->width }} x {{ $item->height }} mm<sup>2</sup></td>
                                 <td class="text-right">{{ $item->qty }}</td>
                                 <td class="text-right">
-                                    @if($item->artwork)
+                                    @if($item->orderartworks()->count() > 0)
                                     <form action="{{ route('download.artwork') }}" method="post" target="_blank">
                                         {{csrf_field()}}
-                                        <input type="hidden" name="artwork" value="{{ $item->artwork }}" />
-                                        <button type="submit" class="btn btn-success btn-sm">Download {{ formatSizeUnits(Storage::disk('public')->size($item->artwork)) }}</button>
+                                        <input type="hidden" name="order_item" value="{{ $item->id }}" />
+                                        <button type="submit" class="btn btn-success btn-sm">Download</button>
                                     </form>
                                     @else
                                     <span class="label label-danger">Not Provided</span>

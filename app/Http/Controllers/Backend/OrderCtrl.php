@@ -292,10 +292,26 @@ class OrderCtrl extends Controller
     public function DownloadArtwork(Request $request)
     {
         $this->validate($request,[
-            'artwork'   => 'required'
+            'order_item'   => 'required|integer|exists:order_items,id'
         ]);
 
-        return response()->download('storage/'.$request->input('artwork'));
+        $zipper = new \Chumper\Zipper\Zipper;
+
+        $order_item = \App\OrderItem::find($request->input('order_item'));
+
+        $artworks = [];
+        foreach($order_item->orderartworks as $file){
+            $artworks[] = 'storage/'. $file->artwork;
+        }
+
+        $zip_file_path = 'storage/artworks/' . $order_item->order->order_token . ' - ' . $order_item->product->product_slug . '.zip';
+
+        $zipper->zip($zip_file_path)
+                ->folder('artworks')
+                ->add($artworks)
+                ->close();
+
+        return response()->download($zip_file_path)->deleteFileAfterSend(true);
     }
 
 
