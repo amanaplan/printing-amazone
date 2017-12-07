@@ -10,6 +10,7 @@ class UploadArtwork extends Component{
         super(props);
         this.state = { anyartworkUploaded: window.any_artwork, currUploadedArtworks: window.artworks };
         this.handleFileUpSuccess = this.handleFileUpSuccess.bind(this);
+        this.handleArtworkRemove = this.handleArtworkRemove.bind(this);
     }
 
     handleFileUpSuccess(filepath){
@@ -26,13 +27,20 @@ class UploadArtwork extends Component{
         this.setState({ anyartworkUploaded: true, currUploadedArtworks: currfiles });
     }
 
+    handleArtworkRemove(data){
+        this.setState({ anyartworkUploaded: data.any_artwork, currUploadedArtworks: data.artworks });
+    }
+
     render() {
         return(
             <div>
                 <SideBar>
-                    <UploadedArtworks exist={this.state.anyartworkUploaded} uploaded={this.state.currUploadedArtworks} />
+                    <UploadedArtworks exist={this.state.anyartworkUploaded} 
+                                    uploaded={this.state.currUploadedArtworks}
+                                    onArtworkRemove={this.handleArtworkRemove} />
                 </SideBar>
-                <FormFields onFileUploadSuccess={this.handleFileUpSuccess} />
+
+                <FormFields allartworksremoved={!this.state.anyartworkUploaded} onFileUploadSuccess={this.handleFileUpSuccess} />
             </div>
         );
     }

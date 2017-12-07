@@ -149,6 +149,11 @@ class FrontendReqstCtrl extends Controller
 				$dates[$i]['classname'] = 'calendar-grade-1';
 				$dates[$i]['title'] = 'Non-Business Day';
 			}
+			/*else if($currDate->day == 12) //to be done if manual non-business day access required
+			{
+				$dates[$i]['classname'] = 'calendar-grade-1';
+				$dates[$i]['title'] = 'Non-Business Day';
+			}*/
 			else if($j <= $printing)
 			{
 				$j++;

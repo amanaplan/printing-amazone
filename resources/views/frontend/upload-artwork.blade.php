@@ -54,7 +54,6 @@
 	{{-- sweet alert --}}
 	<script type="text/javascript" src="{{ asset( 'assets/frontend/plugin/sweetalert/sweetalert.min.js' ) }}"></script>
 
-	<!-- <script type="text/javascript" src="{{ asset('assets/frontend/js/uploadArtwork.js') }}"></script> -->
 	<script type="text/javascript" src="{{ asset('assets/frontend/js/artwork-main.js') }}"></script>
 
 @endpush

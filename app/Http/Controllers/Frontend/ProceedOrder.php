@@ -282,14 +282,33 @@ class ProceedOrder extends Controller
     */
     public function RemoveArtwork(Request $request)
     {
+        $request->validate([
+            'artwork_index' => 'required|integer'
+        ]);
+
         //current payload collection
         $collection = $request->session()->get('curr_product_payload');
 
         if($collection->has('artwork'))
         {
-            Storage::disk('public')->delete($collection->get('artwork'));
-            $collection->forget('artwork');
+            $artworks_arr = $collection->get('artwork');
+
+            $the_artwork_to_remove = $artworks_arr[$request->input('artwork_index')];
+            Storage::disk('public')->delete( $the_artwork_to_remove );
+
+            unset( $artworks_arr[$request->input('artwork_index')] );
+            $collection->put('artwork', array_values($artworks_arr));
+
+            if(count($artworks_arr) == 0)
+            {
+                $collection->forget('artwork');
+                return response()->json(['any_artwork' => false, 'artworks' => false]);
+            }
+
+            return response()->json(['any_artwork' => true, 'artworks' => array_values($artworks_arr)]);
         }
+
+        return response('nothing to remove', 401);
     }
 
     /**

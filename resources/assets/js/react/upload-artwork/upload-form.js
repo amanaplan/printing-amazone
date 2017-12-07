@@ -78,7 +78,7 @@ class MoreArtworkBtn extends Component{
 
     render(){
         const renderable = this.props.show?
-            <button type="button" onClick={this.handleMoreArtworksClick} className="btn btn-info"><i className="fa fa-picture-o" aria-hidden="true"></i> Want to Upload More Artworks !</button>
+            <button type="button" onClick={this.handleMoreArtworksClick} className="btn btn-warning"><i className="fa fa-plus" aria-hidden="true"></i> You Can Upload More Artworks Here. . .</button>
             :
             null;
 
@@ -123,10 +123,24 @@ class UploadField extends Component{
 class FormFields extends Component{
     constructor(props){
         super(props);
-        this.state = { proceedBtn: window.any_artwork, instruction: '', showProgress: false, progressData: 0, showUploadField: !window.any_artwork, disableUploadFld: false };
+        this.state = { 
+            proceedBtn: window.any_artwork, 
+            instruction: '', 
+            showProgress: false, 
+            progressData: 0, 
+            showUploadField: !window.any_artwork, 
+            disableUploadFld: false 
+        };
+
         this.handleInstChange = this.handleInstChange.bind(this);
         this.handleImageUpload = this.handleImageUpload.bind(this);
         this.handleMoreArtworksUpload = this.handleMoreArtworksUpload.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        if (nextProps.allartworksremoved === true){
+            this.setState({ proceedBtn: false, disableUploadFld: false, showUploadField: true });
+        }
     }
 
     handleInstChange(e){
