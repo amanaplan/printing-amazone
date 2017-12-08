@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2017 at 04:04 PM
+-- Generation Time: Dec 08, 2017 at 06:04 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -105,19 +105,6 @@ CREATE TABLE `cart` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `cart_token`, `user_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `instructions`, `preset_mapper`, `created_at`, `updated_at`) VALUES
-(19, '8f452c021a3c9e2b2e7b1292c2cf8afb858f64c0', 0, 4, 1, 65.00, 100.00, 1000, '172.00', NULL, NULL, NULL, 'please place this image into oval shape with thr size I applied', 13, '2017-11-27 16:08:04', '2017-11-27 16:08:04'),
-(20, '39d66d92aa1a7454c8bd86b25f7cd784464fef19', 0, 4, 1, 50.00, 50.00, 10, '76.00', NULL, NULL, NULL, NULL, 13, '2017-11-27 21:24:27', '2017-11-27 21:24:27'),
-(21, '407066ebef04fdaea35b9e78777a232925860180', 0, 20, 1, 50.00, 50.00, 5000, '231.00', NULL, NULL, NULL, NULL, 260, '2017-11-27 23:09:21', '2017-11-27 23:10:01'),
-(22, 'dce37b8fe8c66760c6cb79e5807da1e00784a55d', 0, 4, 1, 70.00, 70.00, 10, '92.00', NULL, NULL, NULL, NULL, 13, '2017-11-27 23:20:20', '2017-11-27 23:20:20'),
-(23, '7b05467a154d33b357b8d4421bc3c2865c0263e8', 0, 17, 1, 125.00, 75.00, 10, '129.00', NULL, NULL, NULL, NULL, 27, '2017-11-28 23:08:17', '2017-11-28 23:08:17'),
-(34, '044d87f0646a844b16ff211dbb901f1c592d5a26', 0, 21, 1, 55.00, 55.00, 50, '66.00', NULL, NULL, NULL, NULL, 79, '2017-12-01 14:21:40', '2017-12-01 14:21:40'),
-(41, '2ab093abb48216ed19215648fbe962228b447fea', 0, 2, 1, 40.00, 60.00, 10, '31.00', NULL, NULL, NULL, NULL, 150, '2017-12-03 23:06:27', '2017-12-03 23:06:27');
-
 -- --------------------------------------------------------
 
 --
@@ -129,15 +116,6 @@ CREATE TABLE `cart_artworks` (
   `cart_id` int(11) NOT NULL,
   `artwork` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cart_artworks`
---
-
-INSERT INTO `cart_artworks` (`id`, `cart_id`, `artwork`) VALUES
-(13, 68, 'artworks/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg'),
-(14, 69, 'artworks/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg'),
-(15, 69, 'artworks/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg');
 
 -- --------------------------------------------------------
 
@@ -725,30 +703,6 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discount`, `price`, `status`, `created_at`, `updated_at`) VALUES
-(2, 'PA2017083002', 'r1zkz7mq', 2, '170.00', '5481.00', 1, '2017-08-30 15:27:36', '2017-08-30 15:27:36'),
-(4, 'PA2017083101', 'jw1jz7vc', NULL, '261.00', '8442.00', 1, '2017-08-31 10:56:12', '2017-08-31 10:56:12'),
-(7, 'PA2017083104', 'mfes3cbb', 1, '180.00', '5811.00', 4, '2017-08-31 16:51:50', '2017-09-04 11:45:11'),
-(8, 'PA2017083105', '7s9bwzjd', 1, '1097.00', '17181.00', 5, '2017-08-31 17:00:53', '2017-09-02 22:33:09'),
-(9, 'PA2017083106', '3rnzp51j', 1, '500.00', '7838.00', 1, '2017-08-31 17:04:19', '2017-08-31 17:04:19'),
-(10, 'PA2017083107', 'hmfk8s25', NULL, '93.00', '3001.00', 6, '2017-08-31 17:48:45', '2017-09-01 18:03:27'),
-(11, 'PA2017083108', 'rrrzh90v', 2, '140.00', '4529.00', 3, '2017-08-31 18:00:05', '2017-11-18 15:52:58'),
-(19, 'PA2017090303', '3exy7af3', NULL, '0.00', '1016.00', 3, '2017-09-03 19:10:13', '2017-11-11 14:58:04'),
-(21, 'PA2017090601', '1v5yv6jw', NULL, '0.00', '26.00', 5, '2017-09-06 01:39:04', '2017-09-06 01:45:59'),
-(28, 'PA2017102401', 'hz0bg4y2', 2, '0.00', '160.00', 4, '2017-10-24 17:30:47', '2017-10-24 17:33:13'),
-(31, 'PA2017112901', 'rkw4314w', NULL, '0.00', '76.00', 1, '2017-11-29 22:47:28', '2017-11-29 22:47:28'),
-(34, 'PA2017112902', 'bb63q7ym', 6, '0.00', '31.00', 4, '2017-11-29 23:17:13', '2017-12-01 12:26:56'),
-(35, 'PA2017113001', '8zxt85br', 3, '3.00', '111.00', 5, '2017-11-30 22:56:37', '2017-11-30 22:58:54'),
-(36, 'PA2017120101', 'g25c9v36', 2, '0.00', '62.00', 1, '2017-12-01 16:31:42', '2017-12-01 16:31:42'),
-(37, 'PA2017120201', 'nygq23p8', 2, '3.00', '86.00', 1, '2017-12-02 21:53:03', '2017-12-02 21:53:03'),
-(40, 'PA2017120501', '6hyjgsam', 3, '0.00', '31.00', 5, '2017-12-05 11:22:26', '2017-12-05 12:08:52'),
-(41, 'PA2017120502', '4dqs7tfc', NULL, '0.00', '31.00', 1, '2017-12-05 14:58:30', '2017-12-05 14:58:30'),
-(43, 'PA2017120901', '39jj9dyb', NULL, '35.00', '1117.00', 1, '2017-12-08 20:22:53', '2017-12-08 20:22:53');
-
 -- --------------------------------------------------------
 
 --
@@ -760,15 +714,6 @@ CREATE TABLE `order_artworks` (
   `order_item_id` int(11) NOT NULL,
   `artwork` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `order_artworks`
---
-
-INSERT INTO `order_artworks` (`id`, `order_item_id`, `artwork`) VALUES
-(8, 59, 'artworks/2N4h6DhIdjQqzoMErAGHiqaJr3z4CNQlwMLcK1EW.jpeg'),
-(9, 59, 'artworks/yos631r04MgdVdkrZ1Cbx8Kxiem8FEU8Phxkl9nX.jpeg'),
-(10, 60, 'artworks/iTpLWIlh4siD7cWoRApuhtm1Uy14oGIqMmManJ88.jpeg');
 
 -- --------------------------------------------------------
 
@@ -784,27 +729,6 @@ CREATE TABLE `order_artwork_approval` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `order_artwork_approval`
---
-
-INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `review_text`, `approved`, `created_at`, `updated_at`) VALUES
-(1, 39, 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 0, '2017-11-08 15:34:52', '2017-11-08 15:40:32'),
-(2, 39, NULL, 0, '2017-11-08 15:42:03', '2017-11-18 18:28:59'),
-(3, 28, 'I like it, please make it little more glossy and make the footer B&W', 0, '2017-11-08 16:48:39', '2017-11-08 16:52:39'),
-(5, 28, NULL, 0, '2017-11-11 14:04:23', '2017-11-11 14:04:23'),
-(6, 11, NULL, 0, '2017-11-11 17:17:17', '2017-11-11 20:38:34'),
-(7, 20, NULL, 1, '2017-11-18 15:55:10', '2017-11-18 15:59:37'),
-(8, 42, 'Please make the picture little bit more bigger and clearer. Thank you.', 0, '2017-11-29 22:51:28', '2017-11-29 22:52:22'),
-(9, 42, NULL, 1, '2017-11-29 22:52:42', '2017-11-29 22:53:16'),
-(10, 21, NULL, 0, '2017-11-29 22:54:32', '2017-11-29 22:54:32'),
-(11, 43, NULL, 1, '2017-11-29 23:10:43', '2017-11-29 23:11:24'),
-(12, 44, NULL, 1, '2017-11-29 23:17:54', '2017-11-29 23:18:42'),
-(13, 45, NULL, 0, '2017-11-30 22:57:27', '2017-11-30 22:57:27'),
-(14, 46, NULL, 0, '2017-11-30 22:57:37', '2017-11-30 22:57:37'),
-(15, 55, NULL, 1, '2017-12-05 11:25:32', '2017-12-05 12:07:06'),
-(16, 56, NULL, 1, '2017-12-05 14:59:04', '2017-12-05 14:59:30');
 
 -- --------------------------------------------------------
 
@@ -839,30 +763,6 @@ CREATE TABLE `order_billing` (
   `company` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `order_billing`
---
-
-INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_address`, `country_fips`, `state`, `city`, `zipcode`, `street`, `company`) VALUES
-(2, 2, 'Sourav Rakshit', 'srv.nxr@gmail.com', '7278863258', '::1', 'AS', 'Abc', 'iojhio', '7122222', 'anywhere in world', NULL),
-(4, 4, 'Brock Lesnar', 'brock@wwe.com', '54896547', '::1', 'AS', 'WB', 'KOL', '712222', 'Mn', NULL),
-(7, 7, 'Sourav', 'developer.srv1@gmail.com', '5587654841', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
-(8, 8, 'Sourav', 'developer.srv1@gmail.com', '58965478796', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
-(9, 9, 'Sourav', 'developer.srv1@gmail.com', '8785459632', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL),
-(10, 10, 'Sourav Rakshit', 'reach@devsourav.com', '8013463113', '::1', 'AS', 'West Bengal', 'Kolkata', '712222', '59 (25/C/D) Kaibarta Para Lane, Baidyabati, dist.- Hooghly', NULL),
-(11, 11, 'Sourav Rakshit', 'srv.nxr@gmail.com', '5698745896', '::1', 'AS', 'West Bengal', 'KOlkata', '712222', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod', 'C Company'),
-(16, 19, 'Brock Lesnar', 'atanu_das1985@yahoo.co.in', '8965854785', '223.223.129.189', 'AS', 'West Bengal', 'Kolkata', '702203', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse', NULL),
-(18, 21, 'Julian Dabbs', 'julian@blendev.com', '7472091732', '46.252.74.82', 'AS', 'NSW', 'Rouse Hill', '2115', '10 Dalton Cl', NULL),
-(25, 28, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '127.0.0.1', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL),
-(28, 31, 'Julian Dabbs', 'julian@blendev.com', '0400509514', '46.252.74.82', 'AS', 'NSW', 'Rouse Hill', '2155', '10 Dalton Close', 'Blendev'),
-(31, 34, 'angellous', 'angellous@naver.com', '0416433429', '110.174.46.244', 'AS', 'NSW', 'Seven Hills', '2147', '12 Prince William Drive', NULL),
-(32, 35, 'Peter', 'angellous99@gmail.com', '0416433429', '110.174.46.244', 'AS', 'NSW', 'Bualkham Hills', '2153', '44-46 Jenner Street', NULL),
-(33, 36, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '103.42.172.162', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL),
-(34, 37, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '202.142.104.12', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL),
-(37, 40, 'Peter', 'angellous99@gmail.com', '0416433429', '60.242.149.4', 'AS', 'NSW', 'Bualkham Hills', '2153', '44-46 Jenner Street', NULL),
-(38, 41, 'Peter', 'angellous99@gmail.com', '+61416433429', '60.242.149.4', 'AS', 'New South Wales', 'Seven Hills', '2147', '12\nPrince William', NULL),
-(40, 43, 'Demo User', 'demo@demo.com', '12345678', '127.0.0.1', 'AS', 'JSgfe seugy', 'esog9hgs', '45857745', 'segihag saihegg, se8gseh NDIUBe', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -884,42 +784,6 @@ CREATE TABLE `order_items` (
   `instructions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mockup_approved` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`, `height`, `qty`, `price`, `sticker_type`, `laminating`, `sticker_name`, `instructions`, `mockup_approved`) VALUES
-(2, 2, 2, 'Kraft Paperboard', '50', '50', '500', '2793.00', NULL, NULL, NULL, NULL, 0),
-(3, 2, 22, 'Silver Matt paperboard', '90', '90', '300', '2858.00', 'Ben 10 Ulimate Alien', '6', 'Sourav', 'I want it to be in oily paper', 0),
-(5, 4, 21, 'Waterproof paperboard', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, 0),
-(6, 4, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 0),
-(10, 7, 2, 'Kraft Paperboard', '50', '50', '2000', '5880.00', NULL, NULL, NULL, NULL, 0),
-(11, 7, 4, 'Kraft Paperboard', '12', '12', '200', '111.00', NULL, NULL, NULL, 'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 0),
-(12, 8, 2, 'Kraft Paperboard', '90', '90', '300', '7906.00', NULL, NULL, NULL, NULL, 0),
-(13, 8, 21, 'Transparent Paper', '120', '120', '500', '8467.00', NULL, NULL, NULL, NULL, 0),
-(14, 8, 17, 'Silver Matt paperboard', '90', '90', '200', '1905.00', NULL, NULL, NULL, NULL, 0),
-(15, 9, 21, 'Glossy & Matt paperboard (Artboard)', '50', '50', '300', '882.00', NULL, NULL, NULL, NULL, 0),
-(16, 9, 2, 'Kraft Paperboard', '70', '70', '200', '4034.00', NULL, NULL, NULL, NULL, 0),
-(17, 9, 17, 'Silver Matt paperboard', '48.5', '200', '300', '3422.00', NULL, NULL, NULL, NULL, 0),
-(18, 10, 4, 'Glossy & Matt paperboard (Artboard)', '15', '15', '500', '236.00', NULL, NULL, NULL, NULL, 0),
-(19, 10, 21, 'Waterproof paperboard', '90', '90', '300', '2858.00', NULL, NULL, NULL, NULL, 0),
-(20, 11, 17, 'Kraft Paperboard', '70', '70', '300', '1729.00', NULL, NULL, NULL, NULL, 1),
-(21, 11, 2, 'Waterproof paperboard', '50', '50', '1000', '2940.00', NULL, NULL, NULL, NULL, 0),
-(28, 19, 2, 'Kraft Paperboard', '120', '120', '6000', '1016.00', NULL, NULL, NULL, 'lorem instructions', 0),
-(30, 21, 25, 'Glossy Sticker', '40', '40', '10', '26.00', NULL, NULL, NULL, NULL, 0),
-(39, 28, 2, 'Glossy Sticker', '40', '60', '3000', '160.00', NULL, NULL, NULL, NULL, 0),
-(41, 31, 4, 'Glossy Sticker', '50', '50', '10', '76.00', NULL, NULL, NULL, NULL, 0),
-(44, 34, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 1),
-(45, 35, 21, 'Glossy Sticker', '70', '70', '1000', '83.00', NULL, NULL, NULL, NULL, 0),
-(46, 35, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 0),
-(47, 36, 20, 'Glossy Sticker', '50', '50', '500', '62.00', NULL, NULL, NULL, NULL, 0),
-(48, 37, 2, 'Glossy Sticker', '60', '60', '100', '39.00', NULL, NULL, NULL, NULL, 0),
-(49, 37, 2, 'Kraft Sticker', '60', '60', '200', '50.00', NULL, NULL, NULL, NULL, 0),
-(55, 40, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, 'Please print the left design onto sticker', 1),
-(56, 41, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 1),
-(59, 43, 31, 'Glossy Sticker', '40', '60', '3000', '392.00', NULL, NULL, NULL, NULL, 0),
-(60, 43, 4, 'Glossy Sticker', '90', '90', '5000', '760.00', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2489,13 +2353,13 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cart_artworks`
 --
 ALTER TABLE `cart_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -2531,7 +2395,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2567,37 +2431,37 @@ ALTER TABLE `notificationsetting`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `order_artworks`
 --
 ALTER TABLE `order_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval_artworks`
 --
 ALTER TABLE `order_artwork_approval_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `order_status`
