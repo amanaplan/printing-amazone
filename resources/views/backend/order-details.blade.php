@@ -178,7 +178,7 @@
                                 <td class="text-right">
                                     <a href="{{ route('order.artwork.approval', ['order_id' => $order->id, 'order_item_id' => $item->id]) }}" class="btn btn-default btn-sm">Manage</a>
                                     <br>
-                                    @if($order->mockup_approved)
+                                    @if($item->mockup_approved)
                                         <span class="label label-success">approved</span>
                                     @else
                                         <span class="label label-danger">not approved yet</span>
