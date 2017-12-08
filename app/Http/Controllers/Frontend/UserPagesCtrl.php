@@ -185,7 +185,7 @@ class UserPagesCtrl extends Controller
             'page'          => 'orders',
             'order_token'   => $order_token,
             'approved_on'   => $the_mockup->updated_at,
-            'mockup'        => $the_mockup->mockup
+            'mockups'        => $the_mockup->mockups
         ];
 
         return view('frontend.user-final-mockup', $data);

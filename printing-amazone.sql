@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2017 at 02:20 PM
+-- Generation Time: Dec 08, 2017 at 02:59 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -267,6 +267,15 @@ CREATE TABLE `jobs` (
   `available_at` int(10) UNSIGNED NOT NULL,
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
+(4, 'default', '{\"displayName\":\"App\\\\Mail\\\\NotifyAdminMockupReview\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:32:\\\"App\\\\Mail\\\\NotifyAdminMockupReview\\\":22:{s:11:\\\"is_approved\\\";b:0;s:8:\\\"user_msg\\\";s:46:\\\"can I get those dummy text out of the mockups!\\\";s:11:\\\"order_token\\\";s:12:\\\"PA2017120701\\\";s:8:\\\"order_id\\\";i:42;s:7:\\\"item_id\\\";s:2:\\\"58\\\";s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"julian@blendev.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:26:\\\"info@printingamazon.com.au\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}', 0, NULL, 1512740969, 1512740969),
+(5, 'default', '{\"displayName\":\"App\\\\Listeners\\\\ApproveMockupNotify\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Events\\\\CallQueuedListener\",\"command\":\"O:36:\\\"Illuminate\\\\Events\\\\CallQueuedListener\\\":7:{s:5:\\\"class\\\";s:33:\\\"App\\\\Listeners\\\\ApproveMockupNotify\\\";s:6:\\\"method\\\";s:6:\\\"handle\\\";s:4:\\\"data\\\";a:1:{i:0;O:22:\\\"App\\\\Events\\\\MockupReady\\\":5:{s:12:\\\"billing_name\\\";s:14:\\\"Sourav Rakshit\\\";s:13:\\\"billing_email\\\";s:17:\\\"srv.nxr@gmail.com\\\";s:10:\\\"secure_url\\\";s:69:\\\"http:\\/\\/printingamazon.dev\\/user\\/my-order\\/review-mockup\\/PA2017120701\\/58\\\";s:11:\\\"order_token\\\";s:12:\\\"PA2017120701\\\";s:6:\\\"socket\\\";N;}}s:5:\\\"tries\\\";N;s:9:\\\"timeoutAt\\\";N;s:7:\\\"timeout\\\";N;s:6:\\\"\\u0000*\\u0000job\\\";N;}\"}}', 0, NULL, 1512740993, 1512740993),
+(6, 'default', '{\"displayName\":\"App\\\\Mail\\\\NotifyAdminMockupReview\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:32:\\\"App\\\\Mail\\\\NotifyAdminMockupReview\\\":22:{s:11:\\\"is_approved\\\";b:1;s:8:\\\"user_msg\\\";N;s:11:\\\"order_token\\\";s:12:\\\"PA2017120701\\\";s:8:\\\"order_id\\\";i:42;s:7:\\\"item_id\\\";s:2:\\\"58\\\";s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"julian@blendev.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:26:\\\"info@printingamazon.com.au\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}', 0, NULL, 1512741012, 1512741012);
 
 -- --------------------------------------------------------
 
@@ -805,7 +814,7 @@ INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `review_text`, `app
 (14, 46, NULL, 0, '2017-11-30 22:57:37', '2017-11-30 22:57:37'),
 (15, 55, NULL, 1, '2017-12-05 11:25:32', '2017-12-05 12:07:06'),
 (16, 56, NULL, 1, '2017-12-05 14:59:04', '2017-12-05 14:59:30'),
-(21, 58, NULL, 0, '2017-12-08 18:48:06', '2017-12-08 18:48:06');
+(21, 58, NULL, 1, '2017-12-08 18:48:06', '2017-12-08 19:19:29');
 
 -- --------------------------------------------------------
 
@@ -929,7 +938,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (55, 40, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, 'Please print the left design onto sticker', 1),
 (56, 41, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 1),
 (57, 42, 2, 'Glossy Sticker', '60', '60', '20000', '686.00', NULL, NULL, NULL, NULL, 0),
-(58, 42, 4, 'Glossy Sticker', '50', '50', '5000', '392.00', NULL, NULL, NULL, NULL, 0);
+(58, 42, 4, 'Glossy Sticker', '50', '50', '5000', '392.00', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2541,7 +2550,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2589,13 +2598,13 @@ ALTER TABLE `order_artworks`
 -- AUTO_INCREMENT for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval_artworks`
 --
 ALTER TABLE `order_artwork_approval_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_billing`

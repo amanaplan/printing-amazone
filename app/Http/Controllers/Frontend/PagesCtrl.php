@@ -368,11 +368,11 @@ class PagesCtrl extends Controller
                                 ],
             'paperstock'    =>  $order_item->paperstock,
             'dimension'     =>  $order_item->width.' x '.$order_item->height,
-            'user_artwork'  =>  $order_item->artwork ? asset('storage/'.$order_item->artwork) : asset('assets/images/no-image.jpg'),
+            'user_artworks'  =>  $order_item->orderartworks,
             'user_desc'     =>  $order_item->instructions,
             'mockup_ready'  =>  $mockup_ready,
             'mockups'       =>  $order_item->artworks()->oldest()->get(),
-            'latest_mockup' =>  optional($order_item->artworks()->latest()->first())->mockup
+            'latest_mockups' =>  optional($order_item->artworks()->latest()->first())->mockups
             
         ];
 

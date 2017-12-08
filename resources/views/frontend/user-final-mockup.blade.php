@@ -35,10 +35,13 @@
                     <div class="clearfix"></div>
                     
 					<div class="table-responsive">
-						<div class="clearfix">
-                        <img src="{{ asset('storage/'.$mockup) }}" class="img-responsive" />
+						<div class="clearfix"></div>
+						@foreach($mockups as $mockupitem)
+							<div class="col-md-4 col-sm-12">
+								<img src="{{ asset('storage/'.$mockupitem->mockup) }}" width="200" class="img-responsive img-thumbnail" />
+							</div>
+						@endforeach
 					</div>
-				</div>
 					
 			</div>
 			<div class="clearfix"></div>

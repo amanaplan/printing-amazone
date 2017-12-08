@@ -67,7 +67,13 @@
 
 					<div class="uploaded-artwork">
 						<h4>Artwork Uploaded by You:</h4>
-						<img class="artwork-img img-responsive" onclick="showLargeImage(this);" src="{{ $user_artwork }}" />
+						@if($user_artworks->count() > 0)
+							@foreach($user_artworks as $userart)
+								<img class="artwork-img img-responsive img-thumbnail" width="100" onclick="showLargeImage(this);" src="{{ asset('storage/'.$userart->artwork) }}" />
+							@endforeach
+						@else
+							<img class="artwork-img img-responsive" onclick="showLargeImage(this);" src="{{ asset('assets/images/no-image.jpg') }}" />
+						@endif
 					</div>
 
 					<div class="clearfix"></div>
@@ -101,7 +107,11 @@
 										  	<h4 class="timeline-title">{{ Carbon\Carbon::parse($mockup->created_at)->toFormattedDateString() }}</h4>
 										</div>
 										<div class="timeline-body">
-										  	<img src="{{ asset('storage/'. $mockup->mockup) }}" onclick="showLargeImage(this);" class="artwork-img thumbnail img-responsive">
+											@foreach($mockup->mockups as $mockupitem)
+											<div class="col-md-6">
+												<img src="{{ asset('storage/'. $mockupitem->mockup) }}" width="80" onclick="showLargeImage(this);" class="artwork-img thumbnail img-responsive">
+											</div>
+											@endforeach
 										</div>
 									</div>
 								</li>
@@ -146,7 +156,9 @@
 						<div class="row">
 							<div class="mockup">
 								<p class="text-center">
-									<img class="artwork-img img-responsive" onclick="showLargeImage(this);" src="{{ asset('storage/'. $latest_mockup) }}" />
+									@foreach($latest_mockups as $latest)
+										<img class="artwork-img img-thumbnail img-responsive" onclick="showLargeImage(this);" src="{{ asset('storage/'. $latest->mockup) }}" />
+									@endforeach
 								</p>
 							</div>
 						</div>
