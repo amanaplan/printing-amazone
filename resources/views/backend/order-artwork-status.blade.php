@@ -156,13 +156,19 @@
             <div class="panel panel-card recent-activites">
                 <!-- Start .panel -->
                 <div class="panel-heading">
-                    Artwork Provided By Customer
+                    Artwork(s) Provided By Customer
                 </div>
                 <div class="panel-body">
 
-                    @if($order_item->artwork)
-                        <img class="img-responsive" src="{{ asset('storage/'.$order_item->artwork) }}">
-                        <a href="{{ asset('storage/'.$order_item->artwork) }}" target="_blank" class="btn btn-default btn-sm">view large image</a>
+                    @if($order_item->orderartworks->count() > 0)
+                        @foreach($order_item->orderartworks as $art)
+                        <div style="position:relative;text-align: center;padding-bottom: 20px;">
+                            <img class="img-responsive img-thumbnail" width="200" src="{{ asset('storage/'.$art->artwork) }}" onerror="showFileImg(this);">
+                            <span style="position:absolute; top:0; roght:0;" onclick="removeDefaultArtwork({{$art->id}}, this);" data-toggle="tooltip" title="remove the artwork">
+                                <a href="javascript:void();" class="text-danger"><i class="fa fa-times-circle fa-lg fa-2x"></i></a>
+                            </span>
+                        </div>
+                        @endforeach
                     @else
                         <img class="img-responsive" src="{{ asset('assets/images/no-image.jpg') }}">
                     @endif
@@ -171,19 +177,19 @@
 
                 <div class="panel panel-info">
                         <div class="panel-heading bg-info">
-                            To update the user provided artwork change it in here
+                            To update the user provided artwork(s) change it in here
                             <br>
-                            <small class="text-danger text-lowercase">**this will replace any previous artwork provided by user</small>
+                            <small class="text-danger text-lowercase">**remove / add artwork(s) on behalf of customer</small>
                         </div>
                         <div class="panel-body">
                             
                             <form action="{{ route('order.mod.default.artwork', ['order_id' => $order_id, 'order_item_id' => $item_id]) }}" enctype="multipart/form-data" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <input type="file" required="required" name="artwork" class="form-control" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg" />
+                                    <input type="file" required="required" name="artwork[]" multiple="multiple" class="form-control" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg" />
                                 </div>
 
-                                <button type="submit" class="btn btn-info">Update Default Artwork</button>
+                                <button type="submit" class="btn btn-info">Update Default Artwork(s)</button>
                             </form>
 
                         </div>
@@ -198,4 +204,31 @@
 @stop
 {{-- page specific js --}}
 @push('scripts')
+
+    <script type="text/javascript">
+        function showFileImg(elem){
+            $(elem).attr('src', "{{asset('assets/images/sample-file.png')}}");
+        }
+
+        function removeDefaultArtwork(artwork_id, elem){
+            const conf = confirm('sure to remove this artwork permanently!');
+            if(conf === true){
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: "{{ route('order.remove.default.artwork') }}",
+                    type: "DELETE",
+                    data: {artwork_id:artwork_id},
+                    success: function(result){
+                        $(elem).closest('div').remove();
+                        Command: toastr["success"]("Action Performed Successfully", "Successfully Done. .");
+                    },
+                    error: function(xhr,status,error){
+                        Command: toastr["error"](error, "Error Occurred. .");
+                    }
+                });
+                $.ajax();
+            }
+        }
+    </script>
+
 @endpush

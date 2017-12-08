@@ -203,6 +203,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/order-details/{id}', 'Backend\OrderCtrl@OrderDetails')->name('order.details');
 	Route::get('/order-details/{order_id}/{order_item_id}', 'Backend\OrderCtrl@OrderArtworkApproval')->name('order.artwork.approval');
 	Route::post('/order/artwork/modify/{order_id}/{order_item_id}', 'Backend\OrderCtrl@OrderModDefArtwork')->name('order.mod.default.artwork');
+	Route::delete('/order/artwork/remove-default', 'Backend\OrderCtrl@OrderRemoveDefArtworks')->name('order.remove.default.artwork');
 	Route::post('/order/upload-mockup/{order_id}/{order_item_id}', 'Backend\OrderCtrl@OrderUploadMockup')->name('order.upload.digitalproof');
 	Route::post('/order/manage/download-artwork', 'Backend\OrderCtrl@DownloadArtwork')->name('download.artwork');
 	Route::put('/order/update-status', 'Backend\OrderCtrl@UpdateStatus');

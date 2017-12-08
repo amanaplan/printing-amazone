@@ -193,40 +193,48 @@ class OrderCtrl extends Controller
         $orderItem = OrderItem::findOrFail($order_item_id);
         abort_if($orderItem->order_id != $order_id, 401);
 
-         $validator = Validator::make($request->all(), [
-            'artwork'   => 'required|image'
-        ]);
+        //validation rule for multiple image upload
+        $rules = [];
+        $photos = count($request->input('artwork'));
+        foreach (range(0, $photos) as $index) {
+            $rules['artwork.' . $index] = 'required|image';
+        }
+
+         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-
-            adminflash('warning', 'error, make sure uploaded file is a image');
+            adminflash('warning', 'error, make sure uploaded file(s) are image');
             return redirect()->back();
         }
 
-        //upload current image
-        $artwork = Storage::disk('public')->putFile('artworks', $request->file('artwork'));
+        //upload & save current uploaded images
+        $store_in_db = [];
 
-        //if file upload successful
-        if ($request->file('artwork')->isValid())
+        foreach ($request->file('artwork') as $photo) 
         {
-            //delete the current image if any
-            if($orderItem->artwork)
-            {
-                Storage::disk('public')->delete($orderItem->artwork);
-            }
-
-            //store new file path in db
-            $orderItem->artwork = $artwork;
-            $orderItem->save();
-
-            adminflash('success', 'artwork updated successfully');
+            $artwork = Storage::disk('public')->putFile('artworks', $photo);
+            $store_in_db[] = ['artwork' => $artwork];
         }
-        else
-        {
-            adminflash('danger', 'file upload error, try again');
-        }
-        
+
+        //store new files path in db
+        $orderItem->orderartworks()->createMany($store_in_db);
+
+        adminflash('success', 'artwork updated successfully');
         return redirect()->back();
+    }
+
+    /**
+     * order remove default user provided artworks
+     */
+    public function OrderRemoveDefArtworks(Request $request)
+    {
+        $request->validate([
+            'artwork_id' => 'required|exists:order_artworks,id'
+        ]);
+
+        $order_artwork = \App\OrderArtwork::findOrFail($request->artwork_id);
+        Storage::disk('public')->delete($order_artwork->artwork);
+        $order_artwork->delete();
     }
 
     /**

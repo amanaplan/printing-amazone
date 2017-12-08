@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2017 at 03:27 PM
+-- Generation Time: Dec 08, 2017 at 09:47 AM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -773,8 +773,8 @@ CREATE TABLE `order_artworks` (
 
 INSERT INTO `order_artworks` (`id`, `order_item_id`, `artwork`) VALUES
 (1, 57, 'artworks/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg'),
-(2, 58, 'artworks/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg'),
-(3, 58, 'artworks/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg');
+(6, 58, 'artworks/I1ZvTKXPckSpg8s5mgayYxnCHNxCIdkkLPyyJpTh.jpeg'),
+(7, 58, 'artworks/vzYaUOPLE9xEAbwWxAwqheNpxCYuWVCdWIqZkLck.jpeg');
 
 -- --------------------------------------------------------
 
@@ -2478,7 +2478,7 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `cart_artworks`
@@ -2562,7 +2562,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_artworks`
 --
 ALTER TABLE `order_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval`
