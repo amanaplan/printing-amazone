@@ -59,11 +59,15 @@
                                         <small class="text-navy">{{ $added->diffForHumans() }}</small>
                                     </div>
                                     <div class="col-sm-9 content no-top-border ">
-                                        <p class="m-b-xs"><strong>Mockup Uploaded</strong> 
-                                        <a href="{{ asset('storage/'.$item->mockup) }}" target="_blank"><span class="label label-default">view large <i class="fa fa-external-link" aria-hidden="true"></i></span></a></p>
-                                        <p>
-                                            <img src="{{ asset('storage/'.$item->mockup) }}" width="300" class="img-responsive">
-                                        </p>
+                                        <p class="m-b-xs"><strong>Mockup Uploaded</strong> </p>
+
+                                        @foreach($item->mockups as $mockupitem)
+                                            <div class="col-md-6" style="width: 165px;">
+                                                <a href="{{ asset('storage/'.$mockupitem->mockup) }}" target="_blank">
+                                                    <img src="{{ asset('storage/'.$mockupitem->mockup) }}" width="150" class="img-responsive img-thumbnail">
+                                                </a>
+                                            </div>
+                                        @endforeach
 
                                     </div>
                                 </div>
@@ -139,7 +143,7 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="mockup">Upload Mockup: </label>
-                            <input type="file" required="required" name="mockup" class="form-control" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg" />
+                            <input type="file" required="required" name="mockup[]" multiple="multiple" class="form-control" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg" />
                         </div>
 
                         <button type="submit" class="btn btn-success">Save Changes</button>

@@ -12,7 +12,6 @@ class MockupReadyMail extends Mailable
     use Queueable, SerializesModels;
 
     public $name;
-    public $mockup;
     public $url;
     public $order_token;
 
@@ -21,10 +20,9 @@ class MockupReadyMail extends Mailable
      *
      * @return void
      */
-    public function __construct($name, $mockup, $order_token, $url)
+    public function __construct($name, $order_token, $url)
     {
         $this->name = $name;
-        $this->mockup = $mockup;
         $this->order_token = $order_token;
         $this->url = $url;
     }

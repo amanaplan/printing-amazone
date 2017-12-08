@@ -246,50 +246,51 @@ class OrderCtrl extends Controller
         $orderItem = OrderItem::findOrFail($order_item_id);
         abort_if($orderItem->order_id != $order_id, 401);
 
-         $validator = Validator::make($request->all(), [
-            'mockup'   => 'required|image'
-        ]);
+        //validation rule for multiple image upload
+        $rules = [];
+        $photos = count($request->input('mockup'));
+        foreach (range(0, $photos) as $index) {
+            $rules['mockup.' . $index] = 'required|image';
+        }
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-
             adminflash('warning', 'error, make sure uploaded file is a image');
             return redirect()->back();
         }
 
-        //upload mockup
-        $mockup = Storage::disk('public')->putFile('mockups', $request->file('mockup'));
+        //upload & save current uploaded images
+        $store_in_db = [];
 
-        //if file upload successful
-        if ($request->file('mockup')->isValid())
-        {
-            OrderArtworkApproval::create([
-                'order_item_id' =>  $order_item_id,
-                'mockup'        =>  $mockup,
-            ]);            
-
-            //notify the user that mockup is ready
-            $order_data = Order::find($order_id);
-            $order_billing = $order_data->billing;
-            $billing_name = $order_billing->name;
-            $billing_email = $order_billing->email;
-
-            $secure_url = $order_data->user ? 
-                        route('user.review.mockup', [
-                            'order_token' => $order_data->order_token, 'order_item_id' => $order_item_id
-                        ])
-                        :
-                        route('nonuser.review.mockup', [
-                            'enc_order_id' => encrypt($order_data->order_token), 'enc_order_item_id' => encrypt($order_item_id)
-                        ]);
-
-            event(new MockupReady($billing_name, $billing_email, $mockup, $order_data->order_token, $secure_url));
-
-            adminflash('success', 'mockup updated, user will be notified shortly');
+        foreach ($request->file('mockup') as $photo) {
+            $artwork = Storage::disk('public')->putFile('mockups', $photo);
+            $store_in_db[] = ['mockup' => $artwork];
         }
-        else
-        {
-            adminflash('danger', 'file upload error, try again');
-        }
+
+        $mockup_approval = OrderArtworkApproval::create(['order_item_id' =>  $order_item_id]);  
+        
+        //store new files path in db
+        $mockup_approval->mockups()->createMany($store_in_db);
+
+        //notify the user that mockup is ready
+        $order_data = Order::find($order_id);
+        $order_billing = $order_data->billing;
+        $billing_name = $order_billing->name;
+        $billing_email = $order_billing->email;
+
+        $secure_url = $order_data->user ? 
+                    route('user.review.mockup', [
+                        'order_token' => $order_data->order_token, 'order_item_id' => $order_item_id
+                    ])
+                    :
+                    route('nonuser.review.mockup', [
+                        'enc_order_id' => encrypt($order_data->order_token), 'enc_order_item_id' => encrypt($order_item_id)
+                    ]);
+
+        event(new MockupReady($billing_name, $billing_email, $order_data->order_token, $secure_url));
+
+        adminflash('success', 'mockup updated, user will be notified shortly');
         
         return redirect()->back();
     }

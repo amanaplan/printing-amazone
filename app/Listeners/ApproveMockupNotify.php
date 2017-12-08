@@ -39,7 +39,7 @@ class ApproveMockupNotify implements ShouldQueue
     public function handle(MockupReady $event)
     {
         //Log::info($event->user_email);
-        Mail::to($event->billing_email)->send(new MockupReadyMail($event->billing_name, $event->mockup, $event->order_token, $event->secure_url));
+        Mail::to($event->billing_email)->send(new MockupReadyMail($event->billing_name, $event->order_token, $event->secure_url));
 
     }
 

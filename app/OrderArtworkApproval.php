@@ -12,4 +12,9 @@ class OrderArtworkApproval extends Model
     protected $casts = [
         'approved'   => 'boolean',
     ];
+
+    public function mockups()
+    {
+        return $this->hasMany('App\OrderMockupApprovalArtworks', 'artwork_approval_id');
+    }
 }

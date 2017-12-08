@@ -451,13 +451,6 @@
 
 						<tr><td height="20"></td></tr>
                             <tr>
-                                <td>
-                                    <p class="text-center" style="text-align: center;">
-                                        <img width="300" src="{{ $mockup }}">
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td style="padding:30 0 17px;">
                                     <table cellspacing="0" cellpadding="0">
                                         <tbody>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2017 at 09:47 AM
+-- Generation Time: Dec 08, 2017 at 02:20 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -267,14 +267,6 @@ CREATE TABLE `jobs` (
   `available_at` int(10) UNSIGNED NOT NULL,
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `jobs`
---
-
-INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
-(136, 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderCustomer\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:22:\\\"App\\\\Mail\\\\OrderCustomer\\\":21:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:25:\\\"http:\\/\\/printingamazon.dev\\\";s:12:\\\"delivery_img\\\";s:62:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017120701\\\";s:14:\\\"transaction_id\\\";s:8:\\\"3b9nh1mx\\\";s:7:\\\"country\\\";s:2:\\\"AS\\\";s:5:\\\"state\\\";s:16:\\\"V2VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:8:\\\"NzEyMjAz\\\";s:6:\\\"street\\\";s:60:\\\"NTkoMjUvQy9EKSBLLkIgUGFyYSBMYW5lLCBCYWlkeWFiYXRpLCBIb29naGx5\\\";s:8:\\\"subtotal\\\";i:1078;s:8:\\\"discount\\\";i:32;s:7:\\\"payable\\\";i:1046;s:5:\\\"items\\\";s:954:\\\"[{\\\"id\\\":68,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":2,\\\"paperstock\\\":1,\\\"width\\\":60,\\\"height\\\":60,\\\"qty\\\":20000,\\\"price\\\":\\\"686.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":150,\\\"created_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"updated_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"artworks\\\":[{\\\"id\\\":13,\\\"cart_id\\\":68,\\\"artwork\\\":\\\"artworks\\\\\\/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg\\\"}]},{\\\"id\\\":69,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":4,\\\"paperstock\\\":1,\\\"width\\\":50,\\\"height\\\":50,\\\"qty\\\":5000,\\\"price\\\":\\\"392.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":13,\\\"created_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"updated_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"artworks\\\":[{\\\"id\\\":14,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg\\\"},{\\\"id\\\":15,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg\\\"}]}]\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:17:\\\"srv.nxr@gmail.com\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 0, NULL, 1512651272, 1512651272),
-(137, 'order', '{\"displayName\":\"App\\\\Mail\\\\OrderAdmin\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":20,\"timeout\":120,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\OrderAdmin\\\":22:{s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;s:12:\\\"common_conts\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"logo\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/logo.png\\\";s:7:\\\"website\\\";s:25:\\\"http:\\/\\/printingamazon.dev\\\";s:12:\\\"delivery_img\\\";s:62:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/email-img\\/delivery.png\\\";s:13:\\\"prod_logo_dir\\\";s:48:\\\"http:\\/\\/printingamazon.dev\\/assets\\/images\\/products\\\";}}s:10:\\\"order_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:11:{s:8:\\\"order_id\\\";s:12:\\\"PA2017120701\\\";s:14:\\\"transaction_id\\\";s:8:\\\"3b9nh1mx\\\";s:7:\\\"country\\\";s:2:\\\"AS\\\";s:5:\\\"state\\\";s:16:\\\"V2VzdCBCZW5nYWw=\\\";s:4:\\\"city\\\";s:12:\\\"S29sa2F0YQ==\\\";s:7:\\\"zipcode\\\";s:8:\\\"NzEyMjAz\\\";s:6:\\\"street\\\";s:60:\\\"NTkoMjUvQy9EKSBLLkIgUGFyYSBMYW5lLCBCYWlkeWFiYXRpLCBIb29naGx5\\\";s:8:\\\"subtotal\\\";i:1078;s:8:\\\"discount\\\";i:32;s:7:\\\"payable\\\";i:1046;s:5:\\\"items\\\";s:954:\\\"[{\\\"id\\\":68,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":2,\\\"paperstock\\\":1,\\\"width\\\":60,\\\"height\\\":60,\\\"qty\\\":20000,\\\"price\\\":\\\"686.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":150,\\\"created_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"updated_at\\\":\\\"2017-12-07 23:20:04\\\",\\\"artworks\\\":[{\\\"id\\\":13,\\\"cart_id\\\":68,\\\"artwork\\\":\\\"artworks\\\\\\/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg\\\"}]},{\\\"id\\\":69,\\\"cart_token\\\":\\\"80ff32e80fbbc1463f71f217883374a560fd6984\\\",\\\"user_id\\\":2,\\\"product_id\\\":4,\\\"paperstock\\\":1,\\\"width\\\":50,\\\"height\\\":50,\\\"qty\\\":5000,\\\"price\\\":\\\"392.00\\\",\\\"sticker_type\\\":null,\\\"laminating\\\":null,\\\"sticker_name\\\":null,\\\"instructions\\\":null,\\\"preset_mapper\\\":13,\\\"created_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"updated_at\\\":\\\"2017-12-07 23:53:47\\\",\\\"artworks\\\":[{\\\"id\\\":14,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/dDf5raqTCjmlJu73Bc9AdCzSqpA7xSKkZtli19se.jpeg\\\"},{\\\"id\\\":15,\\\"cart_id\\\":69,\\\"artwork\\\":\\\"artworks\\\\\\/EZzd4DyPJKNJ6HQPpFkEwHBdMW8JBy5HG20Kg2de.jpeg\\\"}]}]\\\";}}s:13:\\\"personal_info\\\";O:29:\\\"Illuminate\\\\Support\\\\Collection\\\":1:{s:8:\\\"\\u0000*\\u0000items\\\";a:4:{s:4:\\\"name\\\";s:20:\\\"U291cmF2IFJha3NoaXQ=\\\";s:5:\\\"email\\\";s:24:\\\"c3J2Lm54ckBnbWFpbC5jb20=\\\";s:5:\\\"phone\\\";s:16:\\\"OTU2OTg1NzQ1OA==\\\";s:7:\\\"company\\\";s:0:\\\"\\\";}}s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"julian@blendev.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:26:\\\"info@printingamazon.com.au\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";s:5:\\\"order\\\";s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";i:20;s:7:\\\"timeout\\\";i:120;}\"}}', 0, NULL, 1512651272, 1512651272);
 
 -- --------------------------------------------------------
 
@@ -690,7 +682,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (72, '2017_12_07_215645_change_artwork_col_cart_table', 40),
 (73, '2017_12_07_222019_remove_artwork_col_cart_table', 41),
 (74, '2017_12_07_233248_create_order_artworks_table', 42),
-(75, '2017_12_07_233535_remove_artwork_col_from_order_items_table', 42);
+(75, '2017_12_07_233535_remove_artwork_col_from_order_items_table', 42),
+(76, '2017_12_08_200121_create_artwork_approval_artworks_table', 43),
+(77, '2017_12_08_200315_delete_mockup_col_artwork_approval_table', 43);
 
 -- --------------------------------------------------------
 
@@ -785,7 +779,6 @@ INSERT INTO `order_artworks` (`id`, `order_item_id`, `artwork`) VALUES
 CREATE TABLE `order_artwork_approval` (
   `id` int(10) UNSIGNED NOT NULL,
   `order_item_id` int(11) NOT NULL,
-  `mockup` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `review_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `approved` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -796,22 +789,44 @@ CREATE TABLE `order_artwork_approval` (
 -- Dumping data for table `order_artwork_approval`
 --
 
-INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `mockup`, `review_text`, `approved`, `created_at`, `updated_at`) VALUES
-(1, 39, 'mockups/hp0sAsI8jv3ZcUv4KtJZERYmEfxPZmfpjrO0RLy4.svg', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 0, '2017-11-08 15:34:52', '2017-11-08 15:40:32'),
-(2, 39, 'mockups/0ws8m9MEdO6Vi3pMTw2OWYJCBIsroRgM82wgOPRL.png', NULL, 0, '2017-11-08 15:42:03', '2017-11-18 18:28:59'),
-(3, 28, 'mockups/RwYjyeeby8wRVzB68iZoL1gEbibWmsnxxdKk0xZe.jpeg', 'I like it, please make it little more glossy and make the footer B&W', 0, '2017-11-08 16:48:39', '2017-11-08 16:52:39'),
-(5, 28, 'mockups/vfoOrHHSWmyts2YHHDWnZjumzgLJvwRdZhEz9Unj.jpeg', NULL, 0, '2017-11-11 14:04:23', '2017-11-11 14:04:23'),
-(6, 11, 'mockups/6AdqRLMQgp70e7DtELJKpg7KZ3ZZlVomkgPaKPY4.jpeg', NULL, 0, '2017-11-11 17:17:17', '2017-11-11 20:38:34'),
-(7, 20, 'mockups/VYAj0gvakOqnEU8jRjQbzNlltXnhMnb7ZHwvAYl6.jpeg', NULL, 1, '2017-11-18 15:55:10', '2017-11-18 15:59:37'),
-(8, 42, 'mockups/n4MYXcmBHUvQKGKpRqviRgz8cAPggv7cecLub7Di.png', 'Please make the picture little bit more bigger and clearer. Thank you.', 0, '2017-11-29 22:51:28', '2017-11-29 22:52:22'),
-(9, 42, 'mockups/t6VvAXWCtXl0C24r1nvem0N3TNai8gjUpYrGZD0w.png', NULL, 1, '2017-11-29 22:52:42', '2017-11-29 22:53:16'),
-(10, 21, 'mockups/wujgEhEjNS3ZcbUJ2iefv2gX5JtZFk7Wmbwh8NaC.bmp', NULL, 0, '2017-11-29 22:54:32', '2017-11-29 22:54:32'),
-(11, 43, 'mockups/bdVPlJvMvnX3zUol3ge1Hp6EcgPVjTIH2MBmwPSc.png', NULL, 1, '2017-11-29 23:10:43', '2017-11-29 23:11:24'),
-(12, 44, 'mockups/AMWdN5SwaFSq1iHiJQdAXe0TTusy0QNbHA6b6tZO.png', NULL, 1, '2017-11-29 23:17:54', '2017-11-29 23:18:42'),
-(13, 45, 'mockups/hucu5KFjtcrrzBK3QurZXuPeqrsQkymXgZNGhJF4.png', NULL, 0, '2017-11-30 22:57:27', '2017-11-30 22:57:27'),
-(14, 46, 'mockups/ZcYE9HkY5bgTCM3F5dDyhynQk0RhiYDs0uOD2YAs.png', NULL, 0, '2017-11-30 22:57:37', '2017-11-30 22:57:37'),
-(15, 55, 'mockups/M5feWPKCXeL5flue3hadfqnfNwYO9KqdTvA8fqN2.jpeg', NULL, 1, '2017-12-05 11:25:32', '2017-12-05 12:07:06'),
-(16, 56, 'mockups/gh89r2bNfzZQNEoqfQIgH8oAH7SvPxemTNEdguxf.jpeg', NULL, 1, '2017-12-05 14:59:04', '2017-12-05 14:59:30');
+INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `review_text`, `approved`, `created_at`, `updated_at`) VALUES
+(1, 39, 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 0, '2017-11-08 15:34:52', '2017-11-08 15:40:32'),
+(2, 39, NULL, 0, '2017-11-08 15:42:03', '2017-11-18 18:28:59'),
+(3, 28, 'I like it, please make it little more glossy and make the footer B&W', 0, '2017-11-08 16:48:39', '2017-11-08 16:52:39'),
+(5, 28, NULL, 0, '2017-11-11 14:04:23', '2017-11-11 14:04:23'),
+(6, 11, NULL, 0, '2017-11-11 17:17:17', '2017-11-11 20:38:34'),
+(7, 20, NULL, 1, '2017-11-18 15:55:10', '2017-11-18 15:59:37'),
+(8, 42, 'Please make the picture little bit more bigger and clearer. Thank you.', 0, '2017-11-29 22:51:28', '2017-11-29 22:52:22'),
+(9, 42, NULL, 1, '2017-11-29 22:52:42', '2017-11-29 22:53:16'),
+(10, 21, NULL, 0, '2017-11-29 22:54:32', '2017-11-29 22:54:32'),
+(11, 43, NULL, 1, '2017-11-29 23:10:43', '2017-11-29 23:11:24'),
+(12, 44, NULL, 1, '2017-11-29 23:17:54', '2017-11-29 23:18:42'),
+(13, 45, NULL, 0, '2017-11-30 22:57:27', '2017-11-30 22:57:27'),
+(14, 46, NULL, 0, '2017-11-30 22:57:37', '2017-11-30 22:57:37'),
+(15, 55, NULL, 1, '2017-12-05 11:25:32', '2017-12-05 12:07:06'),
+(16, 56, NULL, 1, '2017-12-05 14:59:04', '2017-12-05 14:59:30'),
+(21, 58, NULL, 0, '2017-12-08 18:48:06', '2017-12-08 18:48:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_artwork_approval_artworks`
+--
+
+CREATE TABLE `order_artwork_approval_artworks` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `artwork_approval_id` int(11) NOT NULL,
+  `mockup` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_artwork_approval_artworks`
+--
+
+INSERT INTO `order_artwork_approval_artworks` (`id`, `artwork_approval_id`, `mockup`) VALUES
+(4, 21, 'mockups/43T1CdxQ5twQMOtQLL0l6JK73u4iqD422ZARQWmu.jpeg'),
+(5, 21, 'mockups/heKbeRcF644Iypf5zGj3YcpUH45gMaDTqKBYqgXd.jpeg'),
+(6, 21, 'mockups/f7CsMNTzXzz7T1XOTet9K6XAD2A1fsfLmfib71En.jpeg');
 
 -- --------------------------------------------------------
 
@@ -2357,6 +2372,12 @@ ALTER TABLE `order_artwork_approval`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order_artwork_approval_artworks`
+--
+ALTER TABLE `order_artwork_approval_artworks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `order_billing`
 --
 ALTER TABLE `order_billing`
@@ -2520,7 +2541,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2544,7 +2565,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `notificationsetting`
@@ -2568,7 +2589,13 @@ ALTER TABLE `order_artworks`
 -- AUTO_INCREMENT for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `order_artwork_approval_artworks`
+--
+ALTER TABLE `order_artwork_approval_artworks`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_billing`
