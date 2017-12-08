@@ -265,6 +265,9 @@ class Checkout extends Controller
 
                 $order_item->orderartworks()->createMany($to_save);
             }
+
+            //removing data from cart artworks table
+            $item->artworks()->delete();
         }
 
         //retaining data before they flush

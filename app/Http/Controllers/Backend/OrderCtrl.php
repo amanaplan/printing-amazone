@@ -357,9 +357,30 @@ class OrderCtrl extends Controller
         $items = $order->orderItems;
         foreach($items as $item)
         {
-            if($item->artwork)
+            //remove any user provided artwork
+            if($item->orderartworks->count() > 0)
             {
-                Storage::disk('public')->delete($item->artwork);
+                foreach($item->orderartworks as $user_artwork){
+                    Storage::disk('public')->delete($user_artwork->artwork);
+
+                    $user_artwork->delete();
+                }
+            }
+
+            //remove any admin uploaded mockup
+            if($item->artworks->count() > 0)
+            {
+                foreach($item->artworks as $mockup_approval_item){
+                    if ($mockup_approval_item->mockups->count() > 0) {
+                        foreach ($mockup_approval_item->mockups as $mockup_item) {
+                            Storage::disk('public')->delete($mockup_item->mockup);
+
+                            $mockup_item->delete();
+                        }
+
+                        $mockup_approval_item->delete();
+                    }
+                }
             }
         }
 

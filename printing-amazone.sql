@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2017 at 02:59 PM
+-- Generation Time: Dec 08, 2017 at 04:04 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -267,15 +267,6 @@ CREATE TABLE `jobs` (
   `available_at` int(10) UNSIGNED NOT NULL,
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `jobs`
---
-
-INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
-(4, 'default', '{\"displayName\":\"App\\\\Mail\\\\NotifyAdminMockupReview\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:32:\\\"App\\\\Mail\\\\NotifyAdminMockupReview\\\":22:{s:11:\\\"is_approved\\\";b:0;s:8:\\\"user_msg\\\";s:46:\\\"can I get those dummy text out of the mockups!\\\";s:11:\\\"order_token\\\";s:12:\\\"PA2017120701\\\";s:8:\\\"order_id\\\";i:42;s:7:\\\"item_id\\\";s:2:\\\"58\\\";s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"julian@blendev.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:26:\\\"info@printingamazon.com.au\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}', 0, NULL, 1512740969, 1512740969),
-(5, 'default', '{\"displayName\":\"App\\\\Listeners\\\\ApproveMockupNotify\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Events\\\\CallQueuedListener\",\"command\":\"O:36:\\\"Illuminate\\\\Events\\\\CallQueuedListener\\\":7:{s:5:\\\"class\\\";s:33:\\\"App\\\\Listeners\\\\ApproveMockupNotify\\\";s:6:\\\"method\\\";s:6:\\\"handle\\\";s:4:\\\"data\\\";a:1:{i:0;O:22:\\\"App\\\\Events\\\\MockupReady\\\":5:{s:12:\\\"billing_name\\\";s:14:\\\"Sourav Rakshit\\\";s:13:\\\"billing_email\\\";s:17:\\\"srv.nxr@gmail.com\\\";s:10:\\\"secure_url\\\";s:69:\\\"http:\\/\\/printingamazon.dev\\/user\\/my-order\\/review-mockup\\/PA2017120701\\/58\\\";s:11:\\\"order_token\\\";s:12:\\\"PA2017120701\\\";s:6:\\\"socket\\\";N;}}s:5:\\\"tries\\\";N;s:9:\\\"timeoutAt\\\";N;s:7:\\\"timeout\\\";N;s:6:\\\"\\u0000*\\u0000job\\\";N;}\"}}', 0, NULL, 1512740993, 1512740993),
-(6, 'default', '{\"displayName\":\"App\\\\Mail\\\\NotifyAdminMockupReview\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"timeout\":null,\"timeoutAt\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":3:{s:8:\\\"mailable\\\";O:32:\\\"App\\\\Mail\\\\NotifyAdminMockupReview\\\":22:{s:11:\\\"is_approved\\\";b:1;s:8:\\\"user_msg\\\";N;s:11:\\\"order_token\\\";s:12:\\\"PA2017120701\\\";s:8:\\\"order_id\\\";i:42;s:7:\\\"item_id\\\";s:2:\\\"58\\\";s:4:\\\"from\\\";a:0:{}s:2:\\\"to\\\";a:2:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"julian@blendev.com\\\";}i:1;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:26:\\\"info@printingamazon.com.au\\\";}}s:2:\\\"cc\\\";a:0:{}s:3:\\\"bcc\\\";a:0:{}s:7:\\\"replyTo\\\";a:0:{}s:7:\\\"subject\\\";N;s:11:\\\"\\u0000*\\u0000markdown\\\";N;s:4:\\\"view\\\";N;s:8:\\\"textView\\\";N;s:8:\\\"viewData\\\";a:0:{}s:11:\\\"attachments\\\";a:0:{}s:14:\\\"rawAttachments\\\";a:0:{}s:9:\\\"callbacks\\\";a:0:{}s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:5:\\\"delay\\\";N;s:7:\\\"chained\\\";a:0:{}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;}\"}}', 0, NULL, 1512741012, 1512741012);
 
 -- --------------------------------------------------------
 
@@ -756,7 +747,7 @@ INSERT INTO `orders` (`id`, `order_token`, `transaction_id`, `user_id`, `discoun
 (37, 'PA2017120201', 'nygq23p8', 2, '3.00', '86.00', 1, '2017-12-02 21:53:03', '2017-12-02 21:53:03'),
 (40, 'PA2017120501', '6hyjgsam', 3, '0.00', '31.00', 5, '2017-12-05 11:22:26', '2017-12-05 12:08:52'),
 (41, 'PA2017120502', '4dqs7tfc', NULL, '0.00', '31.00', 1, '2017-12-05 14:58:30', '2017-12-05 14:58:30'),
-(42, 'PA2017120701', '3b9nh1mx', 2, '32.00', '1046.00', 1, '2017-12-07 18:24:31', '2017-12-07 18:24:31');
+(43, 'PA2017120901', '39jj9dyb', NULL, '35.00', '1117.00', 1, '2017-12-08 20:22:53', '2017-12-08 20:22:53');
 
 -- --------------------------------------------------------
 
@@ -775,9 +766,9 @@ CREATE TABLE `order_artworks` (
 --
 
 INSERT INTO `order_artworks` (`id`, `order_item_id`, `artwork`) VALUES
-(1, 57, 'artworks/NcGX5buKkRUNTQEMJNFXUZJ3oY4i2WjBQadxzdb1.jpeg'),
-(6, 58, 'artworks/I1ZvTKXPckSpg8s5mgayYxnCHNxCIdkkLPyyJpTh.jpeg'),
-(7, 58, 'artworks/vzYaUOPLE9xEAbwWxAwqheNpxCYuWVCdWIqZkLck.jpeg');
+(8, 59, 'artworks/2N4h6DhIdjQqzoMErAGHiqaJr3z4CNQlwMLcK1EW.jpeg'),
+(9, 59, 'artworks/yos631r04MgdVdkrZ1Cbx8Kxiem8FEU8Phxkl9nX.jpeg'),
+(10, 60, 'artworks/iTpLWIlh4siD7cWoRApuhtm1Uy14oGIqMmManJ88.jpeg');
 
 -- --------------------------------------------------------
 
@@ -813,8 +804,7 @@ INSERT INTO `order_artwork_approval` (`id`, `order_item_id`, `review_text`, `app
 (13, 45, NULL, 0, '2017-11-30 22:57:27', '2017-11-30 22:57:27'),
 (14, 46, NULL, 0, '2017-11-30 22:57:37', '2017-11-30 22:57:37'),
 (15, 55, NULL, 1, '2017-12-05 11:25:32', '2017-12-05 12:07:06'),
-(16, 56, NULL, 1, '2017-12-05 14:59:04', '2017-12-05 14:59:30'),
-(21, 58, NULL, 1, '2017-12-08 18:48:06', '2017-12-08 19:19:29');
+(16, 56, NULL, 1, '2017-12-05 14:59:04', '2017-12-05 14:59:30');
 
 -- --------------------------------------------------------
 
@@ -827,15 +817,6 @@ CREATE TABLE `order_artwork_approval_artworks` (
   `artwork_approval_id` int(11) NOT NULL,
   `mockup` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `order_artwork_approval_artworks`
---
-
-INSERT INTO `order_artwork_approval_artworks` (`id`, `artwork_approval_id`, `mockup`) VALUES
-(4, 21, 'mockups/43T1CdxQ5twQMOtQLL0l6JK73u4iqD422ZARQWmu.jpeg'),
-(5, 21, 'mockups/heKbeRcF644Iypf5zGj3YcpUH45gMaDTqKBYqgXd.jpeg'),
-(6, 21, 'mockups/f7CsMNTzXzz7T1XOTet9K6XAD2A1fsfLmfib71En.jpeg');
 
 -- --------------------------------------------------------
 
@@ -880,7 +861,7 @@ INSERT INTO `order_billing` (`id`, `order_id`, `name`, `email`, `phone`, `ip_add
 (34, 37, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '202.142.104.12', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL),
 (37, 40, 'Peter', 'angellous99@gmail.com', '0416433429', '60.242.149.4', 'AS', 'NSW', 'Bualkham Hills', '2153', '44-46 Jenner Street', NULL),
 (38, 41, 'Peter', 'angellous99@gmail.com', '+61416433429', '60.242.149.4', 'AS', 'New South Wales', 'Seven Hills', '2147', '12\nPrince William', NULL),
-(39, 42, 'Sourav Rakshit', 'srv.nxr@gmail.com', '9569857458', '127.0.0.1', 'AS', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL);
+(40, 43, 'Demo User', 'demo@demo.com', '12345678', '127.0.0.1', 'AS', 'JSgfe seugy', 'esog9hgs', '45857745', 'segihag saihegg, se8gseh NDIUBe', NULL);
 
 -- --------------------------------------------------------
 
@@ -937,8 +918,8 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `paperstock`, `width`
 (49, 37, 2, 'Kraft Sticker', '60', '60', '200', '50.00', NULL, NULL, NULL, NULL, 0),
 (55, 40, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, 'Please print the left design onto sticker', 1),
 (56, 41, 2, 'Glossy Sticker', '40', '60', '10', '31.00', NULL, NULL, NULL, NULL, 1),
-(57, 42, 2, 'Glossy Sticker', '60', '60', '20000', '686.00', NULL, NULL, NULL, NULL, 0),
-(58, 42, 4, 'Glossy Sticker', '50', '50', '5000', '392.00', NULL, NULL, NULL, NULL, 1);
+(59, 43, 31, 'Glossy Sticker', '40', '60', '3000', '392.00', NULL, NULL, NULL, NULL, 0),
+(60, 43, 4, 'Glossy Sticker', '90', '90', '5000', '760.00', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2249,7 +2230,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `mobile`, `birthday`, `state`, `suburb`, `post_code`, `street`, `company`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 't4NYqUCvdmoHAf4PIY93uvcCoTqGwYI5ZRv8pKXFa4wRBivpDF8ETjqBaVXx', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '9569857458', '1994-03-02', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL, '$2y$10$vx4NtBOPpcq0hLSwhMRfv.sy9Ury0BRbUWNDiiQhucPAghjVS1Fqa', '9g9ovVTNdc4ntFC5cj1kfzcc5kQDkkNOKUAhD7dMeRXjvlVW46ipi0O9y9Eu', '2017-05-18 16:08:04', '2017-10-24 17:35:14'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '9569857458', '1994-03-02', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL, '$2y$10$vx4NtBOPpcq0hLSwhMRfv.sy9Ury0BRbUWNDiiQhucPAghjVS1Fqa', 'fKTbBWXzOCuoQ6pdHwR301jWW6mSfRmk4sJWlp2eq7e46WN9fzOt5VgJIIbt', '2017-05-18 16:08:04', '2017-10-24 17:35:14'),
 (3, 'Peter', 'angellous99@gmail.com', NULL, '0416433429', '2017-11-25', 'NSW', 'Bualkham Hills', '2153', '44-46 Jenner Street', NULL, '$2y$10$GEQoq6R9Jtm8slV5/5JDuubipwtbd.tpxALeW0uIuubdR9.YLk87i', '3JQaW33Q9tFprfkyu81cnFLs6NmkxoOR4mkwagMu7AjCXYNQMHKTbaBL8TyM', '2017-08-22 11:25:02', '2017-11-30 22:56:12'),
 (4, 'Atanu Das', 'technomind1985@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$/6z6LNSCPYg.f6MfDlY6fORMAJy60FcRgNlor33qsZU7IAe2m93Wi', 'E8YULdUvh3X5dzZ8btsFMmSdCYqQF5vpETvFQhv40wuUXjNhZEDvwKLhnVI3', '2017-09-05 00:06:04', '2017-09-05 00:06:17'),
 (5, 'HANS CDS', 'creative@hanscds.com', NULL, '0416433429', '1983-09-02', 'NSW', 'Seven Hills', '2147', '12 Prince William', 'HANS CDS Australia Pty Ltd', '$2y$10$ozoQFshpkPXF4nC9XdC0uuQEx.U9SzsKDisTzVWWsz9kJ9MRB7KYO', NULL, '2017-11-20 13:42:59', '2017-11-20 13:44:08'),
@@ -2508,13 +2489,13 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `cart_artworks`
 --
 ALTER TABLE `cart_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -2550,7 +2531,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2586,37 +2567,37 @@ ALTER TABLE `notificationsetting`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `order_artworks`
 --
 ALTER TABLE `order_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval`
 --
 ALTER TABLE `order_artwork_approval`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval_artworks`
 --
 ALTER TABLE `order_artwork_approval_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `order_status`
