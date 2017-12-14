@@ -119,7 +119,7 @@
 									</td>
 
 									<td>
-										<div class="form-group">
+										<!-- <div class="form-group">
 											<button type="button" class="btn btn-default remove-qty"><i class="fa fa-minus" aria-hidden="true"></i></button>
 
 											<input class="cart-qty" type="text" data-cart-id="{{ $item->id }}" value="{{ $item->qty }}">
@@ -129,7 +129,25 @@
 											</div>
 
 											<button type="button" class="btn btn-default add-qty"><i class="fa fa-plus" aria-hidden="true"></i></button>
-										</div>
+										</div> -->
+
+										@php
+											$map_field_qty_id = \App\MapFrmProd::where([['product_id', $item->product->id], ['form_field_id', 3]])->firstOrFail()->id;
+											$map_qty_option = \App\MapProdFrmOpt::where('mapping_field_id', $map_field_qty_id)->select('option_id')->get();
+
+											$options = [];
+											foreach($map_qty_option as $row){
+												$options[] = \App\OptQty::findOrFail($row->option_id)->option;
+											}
+
+											sort($options);
+										@endphp
+
+										<select class="form-control" style="width:100px;">
+											@foreach($options as $row)
+												<option value="{{ $row }}" {{ ($item->qty == $row)? 'selected' : '' }}>{{ $row }}</option>
+											@endforeach
+										</select>
 									</td>
 									
 									<td class="price multiplied-price"><h5> <span class="current-price"><i class="fa fa-usd" aria-hidden="true"></i> {{ number_format($item->price) }}</span></h5></td>
