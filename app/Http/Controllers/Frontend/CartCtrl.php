@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\AutoCalculator;
 
 use App\Cart;
+use App\MapFrmProd;
+use App\MapProdFrmOpt;
+
 use Auth;
 use Validator;
 
@@ -202,11 +205,25 @@ class CartCtrl extends Controller
     {
         $this->validate($request, [
             'cartid'    => 'required|integer',
-            'qty'       => 'required|integer|valid_qty',
+            'qty'       => 'required|integer',
         ]);
 
         $cart_token = Session::get('cart_token');
         $cartitem = Cart::where([['cart_token', $cart_token],['id', $request->input('cartid')]])->firstOrFail();
+
+        //check whether the quantity is applicable for the product
+        $map_field_qty_id = MapFrmProd::where([['product_id', $cartitem->product_id], ['form_field_id', 3]])->firstOrFail()->id;
+        $map_qty_option = MapProdFrmOpt::where('mapping_field_id', $map_field_qty_id)->select('option_id')->get();
+        $applicable_qtys = [];
+        foreach($map_qty_option as $option){
+            $applicable_qtys[] = \App\OptQty::findOrFail($option->option_id)->option;
+        }
+        
+        if(!in_array($request->input('qty'), $applicable_qtys))
+        {
+            return response()->json(['error' => 1, 'msg' => "quantity not available", 'price' => '__', 'total' => '__', 'discount' => '__', 'payable' => '__']);
+        }
+        //qty applicable check
 
         $calculator = new AutoCalculator(($cartitem->width * $cartitem->height), $request->input('qty'), $cartitem->preset_mapper);
         $price = $calculator->CalculatedPrice();

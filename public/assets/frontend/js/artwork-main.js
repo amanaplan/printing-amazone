@@ -1796,8 +1796,28 @@ var SideBar = function (_Component) {
                                 ' ',
                                 window.product_name
                             ),
-                            window.sticker_type ? '<p><strong>Sticker Type :</strong> ' + window.sticker_type + '</p>' : '',
-                            window.sticker_name ? '<p><strong>Sticker Type :</strong> ' + window.sticker_name + '</p>' : '',
+                            window.sticker_type ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'strong',
+                                    null,
+                                    'Sticker Type :'
+                                ),
+                                ' ',
+                                window.sticker_type
+                            ) : '',
+                            window.sticker_name ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'strong',
+                                    null,
+                                    'Sticker Name :'
+                                ),
+                                ' ',
+                                window.sticker_name
+                            ) : '',
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'p',
                                 null,

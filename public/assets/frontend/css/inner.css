@@ -976,7 +976,7 @@ p.subtitle {    text-align: center;    margin: 16px 0 0;    font-size: 18px;    
     color: #fff;
     background: #ff4242;
     border-radius: 4px;
-    /*top: -12px;*/
+    top: 180px;
     min-width: 30px;
     padding: 5px 10px;
     position: absolute;

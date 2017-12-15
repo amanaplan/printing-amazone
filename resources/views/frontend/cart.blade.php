@@ -103,7 +103,7 @@
 										@endif
 
 										@if($item->laminating) 
-										<h5>Laminating : <span>{{ $item->laminating }}</span> </h5> 
+										<h5>Laminating : <span>{{ \App\OptLamination::find($item->laminating)->option }}</span> </h5> 
 										@endif
 
 										@if($item->sticker_name) 
@@ -119,17 +119,6 @@
 									</td>
 
 									<td>
-										<!-- <div class="form-group">
-											<button type="button" class="btn btn-default remove-qty"><i class="fa fa-minus" aria-hidden="true"></i></button>
-
-											<input class="cart-qty" type="text" data-cart-id="{{ $item->id }}" value="{{ $item->qty }}">
-											<div class="errtooltip" style="display: none;">
-												<span class="arrow"></span>
-												<span class="text">This field is required</span>
-											</div>
-
-											<button type="button" class="btn btn-default add-qty"><i class="fa fa-plus" aria-hidden="true"></i></button>
-										</div> -->
 
 										@php
 											$map_field_qty_id = \App\MapFrmProd::where([['product_id', $item->product->id], ['form_field_id', 3]])->firstOrFail()->id;
@@ -143,11 +132,16 @@
 											sort($options);
 										@endphp
 
-										<select class="form-control" style="width:100px;">
+										<select class="form-control cart-qty" data-cart-id="{{ $item->id }}" style="width:100px;">
 											@foreach($options as $row)
 												<option value="{{ $row }}" {{ ($item->qty == $row)? 'selected' : '' }}>{{ $row }}</option>
 											@endforeach
 										</select>
+
+										<div class="errtooltip" style="display: none;">
+											<span class="arrow"></span>
+											<span class="text">This field is required</span>
+										</div>
 									</td>
 									
 									<td class="price multiplied-price"><h5> <span class="current-price"><i class="fa fa-usd" aria-hidden="true"></i> {{ number_format($item->price) }}</span></h5></td>

@@ -40,9 +40,9 @@ class ProceedOrder extends Controller
         $validator = Validator::make($request->all(), [
             'product'       => 'required|alpha_dash',
             'paperstock'    => 'required|integer',
-            'circle_type'   => 'required|boolean',
+            'circle_type'   => 'nullable|boolean',
             'size'          => 'required',
-            'qty'           => 'nullable|integer',
+            'qty'           => 'required|integer',
             'size_w'		=> 'nullable|required_if:size,custom|numeric',
         ]);
 

@@ -15,8 +15,8 @@ class SideBar extends Component{
                             <img className="img-responsive" src={`${APP_URL}assets/images/products/${window.product_img}`} />
                         </div>
                         <div className="stk-dtls"><h3> {window.product_name}</h3>
-                            {window.sticker_type ? `<p><strong>Sticker Type :</strong> ${window.sticker_type}</p>` : ''}
-                            {window.sticker_name ? `<p><strong>Sticker Type :</strong> ${window.sticker_name}</p>` : ''}
+                            {window.sticker_type ? <p><strong>Sticker Type :</strong> {window.sticker_type}</p> : ''}
+                            {window.sticker_name ? <p><strong>Sticker Name :</strong> {window.sticker_name}</p> : ''}
                             <p><strong>Size :</strong> { window.width } x { window.height } mm</p>
                             <p><strong>Qty. :</strong> { window.qty }</p>
                         </div>
