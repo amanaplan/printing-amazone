@@ -73,6 +73,7 @@
                                     <th>#No.</th>
                                     <th>Lamination Option</th>
                                     <th>Sort order</th>
+                                    <th>Applicable Product</th>
                                     <th>Remove</th>
                                 </tr>
                             </thead>
@@ -83,6 +84,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $option->option }}</td>
                                         <td><input type="number" value="{{ $option->sort }}" onchange="sortLamination({{ $option->id }}, this.value);"></td>
+                                        <td><a href="{{ url('/admin/form/lamination/set-product', $option->id) }}" class="btn btn-default">Set</a></td>
                                         <td>
                                             <form action="{{ url('/admin/form/remove/lamination') }}" method="post">
                                                 {{ csrf_field() }}

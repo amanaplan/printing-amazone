@@ -357,6 +357,26 @@ class AdminController extends Controller
     }
 
     /**
+     * link lamination option with product
+     */
+    public function LaminationLinkProducts(OptLamination $option_id)
+    {
+        $linked_products = [];
+        $linked = $option_id->linkedproducts()->select('product_id')->get();
+        foreach($linked as $item){
+            $linked_products[] = $item->product_id;
+        }
+
+        $data = [
+            'page' => 'lamination',
+            'option' => $option_id->id,
+            'linked' => $linked_products,
+            'products' => Product::whereIn('product_slug', ['name-stickers', 'photo-stickers'])->select(['id', 'product_name'])->get()
+        ];
+        return view('backend.lamination-link-poduct', $data);
+    }
+
+    /**
     *name sticker types list pages
     */
     public function VisitStickerTypes()
@@ -378,6 +398,26 @@ class AdminController extends Controller
             'option'  => StickerType::findOrFail($id)
         ];
         return view('backend.options-edit-sticker-type', $data);
+    }
+
+    /**
+     * link sticker type options with products
+     */
+    public function StickerTypeLinkProducts(StickerType $option)
+    {
+        $linked_products = [];
+        $linked = $option->linkedproducts()->select('product_id')->get();
+        foreach ($linked as $item) {
+            $linked_products[] = $item->product_id;
+        }
+
+        $data = [
+            'page' => 'sticker_type',
+            'option' => $option->id,
+            'linked' => $linked_products,
+            'products' => Product::whereIn('product_slug', ['name-stickers', 'photo-stickers'])->select(['id', 'product_name'])->get()
+        ];
+        return view('backend.sticker-type-link-poduct', $data);
     }
 
     /**

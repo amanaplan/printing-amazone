@@ -38,7 +38,7 @@
             </ul>
         </li>
 
-        <li {!! ($page == 'paperstock' || $page == 'size' || $page == 'qty')? 'class="active"' : '' !!}>
+        <li {!! ($page == 'paperstock' || $page == 'size' || $page == 'qty' || $page == 'sticker_type' || $page == 'lamination')? 'class="active"' : '' !!}>
             <a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">Form Field Options </span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
                 <li><a {!! ($page == 'paperstock')? 'class="current-menu"' : '' !!} href="{{ url('/admin/form/paperstock') }}">Paperstock options</a></li>

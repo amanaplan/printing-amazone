@@ -817,6 +817,47 @@ class AdminRqstController extends Controller
     }
 
     /**
+     * link product with lamination option
+     */
+    public function LaminationLinkProducts(Request $request, OptLamination $option)
+    {
+        $validator = validator::make($request->all(), [
+            'product.*' => 'nullable|integer|exists:products,id'
+        ]);
+        
+        if($validator->fails())
+        {
+            adminflash('warning', 'validation error');
+            return redirect()->back();
+        }
+
+        $option->linkedproducts()->sync($request->input('product'));
+
+        adminflash('success', 'linked with product(s) successfully');
+        return redirect()->back();
+    }
+
+    /**
+     * link product with sticker type option
+     */
+    public function StickerTypeLinkProducts(Request $request, StickerType $option)
+    {
+        $validator = validator::make($request->all(), [
+            'product.*' => 'nullable|integer|exists:products,id'
+        ]);
+
+        if ($validator->fails()) {
+            adminflash('warning', 'validation error');
+            return redirect()->back();
+        }
+
+        $option->linkedproducts()->sync($request->input('product'));
+
+        adminflash('success', 'linked with product(s) successfully');
+        return redirect()->back();
+    }
+
+    /**
     *add new name sticker type
     */
     public function StickerTypesInsert(Request $request)

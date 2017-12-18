@@ -96,6 +96,7 @@
                                     <th>Image</th>
                                     <th>Sticker Type</th>
                                     <th>Sort order</th>
+                                    <th>Applicable products</th>
                                     <th>Edit</th>
                                     <th>Remove</th>
                                 </tr>
@@ -108,6 +109,7 @@
                                         <td style="width: 15%;"><img style="width: 100%;" src="{{ asset('assets/images/products/'.$option->image) }}" /></td>
                                         <td><strong>{{ $option->name }}</strong></td>
                                         <td><input type="number" value="{{ $option->sort }}" onchange="sortStickerType({{ $option->id }}, this.value);"></td>
+                                        <td><a href="{{ url('/admin/form/sticker-type/set-product', $option->id) }}" class="btn btn-default">Set</a></td>
                                         <td><a href="{{ url('/admin/form/edit/sticker-type/'.$option->id) }}" class="btn btn-info"><i class="fa fa-pencil"></i></a></td>
                                         <td>
                                             <form action="{{ url('/admin/form/remove/sticker_type') }}" method="post">

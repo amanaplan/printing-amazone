@@ -168,6 +168,8 @@ Route::prefix('admin')->group(function() {
 	Route::post('/form/insert/lamination', 'Backend\RequestHandlers\AdminRqstController@LaminationInsert');
 	Route::delete('/form/remove/lamination', 'Backend\RequestHandlers\AdminRqstController@LaminationRemove');
 	Route::put('/form/sort/lamination', 'Backend\RequestHandlers\AdminRqstController@SortLamination');
+	Route::get('/form/lamination/set-product/{option_id}', 'Backend\AdminController@LaminationLinkProducts');
+	Route::post('/form/lamination/link-product/{option}', 'Backend\RequestHandlers\AdminRqstController@LaminationLinkProducts');
 
 	Route::get('/form/sticker-type', 'Backend\AdminController@VisitStickerTypes');
 	Route::post('/form/insert/sticker-type', 'Backend\RequestHandlers\AdminRqstController@StickerTypesInsert');
@@ -175,6 +177,9 @@ Route::prefix('admin')->group(function() {
 	Route::put('/form/sort/sticker-type', 'Backend\RequestHandlers\AdminRqstController@SortStickerTypes');
 	Route::get('/form/edit/sticker-type/{id}', 'Backend\AdminController@EditStickerType');
 	Route::put('/form/update/sticker-type/{id}', 'Backend\RequestHandlers\AdminRqstController@EditRqStickerType');
+	Route::get('/form/sticker-type/set-product/{option}', 'Backend\AdminController@StickerTypeLinkProducts');
+	Route::post('/form/sticker-type/link-product/{option}', 'Backend\RequestHandlers\AdminRqstController@StickerTypeLinkProducts');
+
 
 	//manage pricing presets
 	Route::get('/product/presets/{prod_id}', 'Backend\PricingRules@RuleOptions');
