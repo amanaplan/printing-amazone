@@ -109,10 +109,12 @@
 											@endforeach
 										</select>
 									</div>
+									@if($product->product_slug == 'name-stickers')
 									<div class="field">
 										<label style="padding-bottom: 10px;">Printing Name</label>
 										<input type="text" name="sticker_name" value="{{ old('sticker_name') }}" placeholder="Enter Printing Name">
 									</div>
+									@endif
 									<div class="field">
 										<label>Select a Size</label>
 										<ul>

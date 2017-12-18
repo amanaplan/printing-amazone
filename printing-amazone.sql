@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2017 at 10:14 AM
+-- Generation Time: Dec 18, 2017 at 02:16 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -269,6 +269,53 @@ INSERT INTO `lamination_options` (`id`, `option`, `sort`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `map_product_lamination`
+--
+
+CREATE TABLE `map_product_lamination` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `lamination_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `map_product_lamination`
+--
+
+INSERT INTO `map_product_lamination` (`id`, `product_id`, `lamination_id`) VALUES
+(4, 22, 6),
+(5, 35, 6),
+(7, 35, 8),
+(8, 22, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `map_product_sticker_type`
+--
+
+CREATE TABLE `map_product_sticker_type` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `sticker_type_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `map_product_sticker_type`
+--
+
+INSERT INTO `map_product_sticker_type` (`id`, `product_id`, `sticker_type_id`) VALUES
+(3, 22, 12),
+(5, 22, 4),
+(6, 35, 5),
+(7, 35, 8),
+(8, 35, 9),
+(9, 35, 10),
+(10, 35, 11);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `map_prod_form`
 --
 
@@ -315,7 +362,10 @@ INSERT INTO `map_prod_form` (`id`, `form_field_id`, `product_id`) VALUES
 (81, 3, 31),
 (85, 1, 33),
 (86, 2, 33),
-(87, 3, 33);
+(87, 3, 33),
+(91, 1, 35),
+(92, 2, 35),
+(93, 3, 35);
 
 -- --------------------------------------------------------
 
@@ -584,7 +634,15 @@ INSERT INTO `map_prod_form_options` (`id`, `mapping_field_id`, `option_id`, `sor
 (400, 61, 22, 2),
 (401, 61, 23, 3),
 (402, 61, 24, 4),
-(403, 61, 25, 5);
+(403, 61, 25, 5),
+(406, 92, 45, 1),
+(407, 93, 21, 1),
+(408, 93, 22, 2),
+(409, 93, 23, 3),
+(410, 93, 24, 4),
+(411, 93, 25, 5),
+(412, 91, 1, 1),
+(413, 91, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -662,7 +720,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (74, '2017_12_07_233248_create_order_artworks_table', 42),
 (75, '2017_12_07_233535_remove_artwork_col_from_order_items_table', 42),
 (76, '2017_12_08_200121_create_artwork_approval_artworks_table', 43),
-(77, '2017_12_08_200315_delete_mockup_col_artwork_approval_table', 43);
+(77, '2017_12_08_200315_delete_mockup_col_artwork_approval_table', 43),
+(78, '2017_12_18_205029_create_map_product_sticker_type_pivot_table', 44),
+(79, '2017_12_18_205215_create_map_product_lamination_pivot_table', 44);
 
 -- --------------------------------------------------------
 
@@ -1878,7 +1938,8 @@ INSERT INTO `products` (`id`, `title`, `meta_desc`, `og_img`, `category_id`, `pr
 (28, 'Square Badge with Pin', NULL, NULL, 1, 'Square Pin', 'square-pin', 'Square-Pin.png', 'Small custom square buttons feature full color printing and a durable steel pin-back.', 'Square Pin Button 1.jpg*Square Pin Button 2.jpg*Square Pin Button 3.jpg*Square Pin Button 4.jpg', 0, 0, 1, 0, 2, '2017-09-28 16:39:35', '2017-10-06 14:37:57'),
 (29, 'Heart Pin', NULL, NULL, 1, 'Heart Pin', 'heart-pin', 'Heart-Pin.png', 'Custom heart buttons feature full color printing and a durable steel pin-back.', 'Heart Pint Button 1.jpg*Heart Pint Button 2.jpg', 0, 0, 1, 0, 3, '2017-09-28 22:48:42', '2017-10-06 14:37:38'),
 (31, 'Round Corner Magnets', NULL, NULL, 2, 'Round Corner', 'round-corner', 'Round-Corner-Magnets.png', 'Varies of round corner magnets with your personal designs. Create personalized magnets to use on cars, refrigerators and more.', NULL, 0, 0, 1, 0, 1, '2017-09-29 12:21:20', '2017-10-06 14:09:42'),
-(33, 'Circle Magnets', NULL, NULL, 2, 'Circle Magnets', 'circle-magnets', 'Circle Magnets.png', 'Varies sizes of circle magnets with your personal designs. Create personalized magnets to use on cars, refrigerators and more.', 'Magnet Button 1.jpg*Magnet Button 2.jpg', 40, 100, 1, 1, 2, '2017-09-29 13:24:48', '2017-11-16 17:31:34');
+(33, 'Circle Magnets', NULL, NULL, 2, 'Circle Magnets', 'circle-magnets', 'Circle Magnets.png', 'Varies sizes of circle magnets with your personal designs. Create personalized magnets to use on cars, refrigerators and more.', 'Magnet Button 1.jpg*Magnet Button 2.jpg', 40, 100, 1, 1, 2, '2017-09-29 13:24:48', '2017-11-16 17:31:34'),
+(35, 'Photo stickers - printingamazon', NULL, 'Name-Stickers.png', 6, 'Photo Stickers', 'photo-stickers', 'Name-Stickers.png', 'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, 50, 100, 0, 0, 6, '2017-12-18 15:53:10', '2017-12-18 15:53:40');
 
 -- --------------------------------------------------------
 
@@ -2183,6 +2244,18 @@ ALTER TABLE `lamination_options`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `map_product_lamination`
+--
+ALTER TABLE `map_product_lamination`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `map_product_sticker_type`
+--
+ALTER TABLE `map_product_sticker_type`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
@@ -2404,22 +2477,34 @@ ALTER TABLE `lamination_options`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `map_product_lamination`
+--
+ALTER TABLE `map_product_lamination`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `map_product_sticker_type`
+--
+ALTER TABLE `map_product_sticker_type`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `map_prod_form`
 --
 ALTER TABLE `map_prod_form`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `map_prod_form_options`
 --
 ALTER TABLE `map_prod_form_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=406;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=414;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `notificationsetting`
@@ -2503,7 +2588,7 @@ ALTER TABLE `preset_qty_rule_two`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `qty_options`

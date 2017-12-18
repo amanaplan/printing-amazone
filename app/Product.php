@@ -28,6 +28,16 @@ class Product extends Model
         return $this->hasMany('App\TemplateProdVar', 'product_id');
     }
 
+    public function stickertypes()
+    {
+      return $this->belongsToMany('App\StickerType', 'map_product_sticker_type', 'product_id', 'sticker_type_id');
+    }
+
+    public function laminations()
+    {
+      return $this->belongsToMany('App\OptLamination', 'map_product_lamination', 'product_id', 'lamination_id');
+    }
+
     protected $casts = [
         'allow_custom_size' => 'boolean',
         'is_circle'         => 'boolean'

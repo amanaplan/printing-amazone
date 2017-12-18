@@ -210,11 +210,18 @@ class PagesCtrl extends Controller
             'loadmore'      => $showmore
         ];
 
-        //redirect to controller action of it is name sticker
+        //if it is name sticker
         if($prodSlug == 'name-stickers'){
-            $data['laminations'] = OptLamination::orderBy('sort', 'asc')->get();
-            $data['sticker_types'] = StickerType::orderBy('sort', 'asc')->get();
+            $data['laminations'] = $product->laminations()->orderBy('sort', 'asc')->get();
+            $data['sticker_types'] = $product->stickertypes()->orderBy('sort', 'asc')->get();
             
+            return view('frontend.product-name-stickers', $data);
+        }
+        //if it is photo sticker
+        else if ($prodSlug == 'photo-stickers') {
+            $data['laminations'] = $product->laminations()->orderBy('sort', 'asc')->get();
+            $data['sticker_types'] = $product->stickertypes()->orderBy('sort', 'asc')->get();
+
             return view('frontend.product-name-stickers', $data);
         }
         else{
