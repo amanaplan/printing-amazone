@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2017 at 02:16 PM
+-- Generation Time: Dec 19, 2017 at 02:11 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -722,7 +722,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (76, '2017_12_08_200121_create_artwork_approval_artworks_table', 43),
 (77, '2017_12_08_200315_delete_mockup_col_artwork_approval_table', 43),
 (78, '2017_12_18_205029_create_map_product_sticker_type_pivot_table', 44),
-(79, '2017_12_18_205215_create_map_product_lamination_pivot_table', 44);
+(79, '2017_12_18_205215_create_map_product_lamination_pivot_table', 44),
+(80, '2017_12_19_223727_create_preset_name_photo_sticker_pricing', 45);
 
 -- --------------------------------------------------------
 
@@ -1426,6 +1427,32 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (624, 398, 0, 90000, NULL, NULL, 1, '700.00'),
 (625, 399, 0, 90000, NULL, NULL, 1, '700.00'),
 (626, 95, 0, 90000, NULL, NULL, 1, '700.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preset_name_photo_sticker`
+--
+
+CREATE TABLE `preset_name_photo_sticker` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `sticker_type` int(11) NOT NULL,
+  `quantity_id` int(11) NOT NULL,
+  `price` double(15,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `preset_name_photo_sticker`
+--
+
+INSERT INTO `preset_name_photo_sticker` (`id`, `product_id`, `sticker_type`, `quantity_id`, `price`, `created_at`, `updated_at`) VALUES
+(4, 35, 8, 23, 35.00, '2017-12-19 18:03:15', '2017-12-19 18:40:59'),
+(5, 22, 12, 21, 15.00, '2017-12-19 18:03:41', '2017-12-19 18:39:41'),
+(6, 22, 12, 22, 20.00, '2017-12-19 18:03:47', '2017-12-19 18:03:47'),
+(7, 22, 4, 21, 20.00, '2017-12-19 18:03:54', '2017-12-19 18:03:54');
 
 -- --------------------------------------------------------
 
@@ -2350,6 +2377,12 @@ ALTER TABLE `preset_general`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `preset_name_photo_sticker`
+--
+ALTER TABLE `preset_name_photo_sticker`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `preset_qty_rule_one`
 --
 ALTER TABLE `preset_qty_rule_one`
@@ -2504,7 +2537,7 @@ ALTER TABLE `map_prod_form_options`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `notificationsetting`
@@ -2571,6 +2604,12 @@ ALTER TABLE `paperstock_options`
 --
 ALTER TABLE `preset_general`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=629;
+
+--
+-- AUTO_INCREMENT for table `preset_name_photo_sticker`
+--
+ALTER TABLE `preset_name_photo_sticker`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`

@@ -203,6 +203,13 @@ Route::prefix('admin')->group(function() {
 	Route::get('/product/presets/qty-rule-sec/edit/{preset_id}/{product_id}', 'Backend\PricingRules@EditPageQtyRuleTwoPreset');
 	Route::put('/product/presets/qty-rule-sec/edit-rq/{preset_id}/{product_id}', 'Backend\PricingRules@EditQtyRuleTwoPreset');
 
+	//preset for name sticker & photo sticker
+	Route::get('/product/name-photo-sticker/preset/{product}', 'Backend\PricingRules@NamePhotoStickerRules');
+	Route::post('/product/presets/name-photo-sticker/{product}', 'Backend\PricingRules@StoreNamePhotoStickerRules');
+	Route::get('/product/name-photo-sticker/preset/edit/{preset}', 'Backend\PricingRules@EditNamePhotoStickerRules');
+	Route::put('/product/preset/name-photo-sticker/edit/{preset}', 'Backend\PricingRules@UpdateNamePhotoStickerRules');
+	Route::delete('/product/presets/remove/name-photo-sticker', 'Backend\PricingRules@RemoveNamePhotoStickerRules');
+
 	//order related
 	Route::get('/order/manage/{status}', 'Backend\OrderCtrl@Visit')->where('status', '(completed|pending)');
 	Route::get('/order-details/{id}', 'Backend\OrderCtrl@OrderDetails')->name('order.details');

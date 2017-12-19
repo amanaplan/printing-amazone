@@ -13,6 +13,7 @@ use App\MapProdFrmOpt;
 use App\PresetGeneral;
 use App\PresetQtyGrpOne;
 use App\PresetQtyGrpTwo;
+use App\PresetNamePhotoSticker;
 
 use Validator;
 
@@ -75,6 +76,101 @@ class PricingRules extends Controller
         ];
 
         return view('backend.preset-rules', $data);
+    }
+
+    /**
+     * Show the preset options page for name sticker & photo sticker
+     */
+    public function NamePhotoStickerRules(Product $product)
+    {
+        $map_field_qty_id = MapFrmProd::where([['product_id', $product->id], ['form_field_id', 3]])->firstOrFail()->id;
+        $map_qty_option = MapProdFrmOpt::where('mapping_field_id', $map_field_qty_id)->select('option_id')->get();
+
+        $data = [  
+            'page'          => 'product_manage',
+            'product_name'  => $product->product_name,
+            'id'            => $product->id,
+            'sticker_types' => $product->stickertypes()->orderBy('sort', 'asc')->get(),
+            'qty_options'   => $map_qty_option,
+            'presets'       => PresetNamePhotoSticker::where('product_id', $product->id)->orderBy('sticker_type', 'asc')->with(['stickertype', 'quantity'])->get(),
+        ];
+
+        return view('backend.preset-name-photo-stickers', $data);
+    }
+
+    /**
+     * store preset pricing for name sticker & photo sticker
+     */
+    public function StoreNamePhotoStickerRules(Request $request, $product)
+    {
+        $request->validate([
+            'sticker_type'  => 'required|integer|exists:sticker_types,id',
+            'quantity_id'   => 'required|integer|exists:qty_options,id',
+            'price'         => 'required|numeric',
+        ]);
+
+        //check for duplicate entry
+        $preset = PresetNamePhotoSticker::where([['product_id', $product], ['sticker_type', $request->input('sticker_type')], ['quantity_id', $request->input('quantity_id')]]);
+        if($preset->exists()){
+            adminflash('warning', 'duplicate entry found, try again');
+            return redirect()->back();
+        }
+
+        PresetNamePhotoSticker::create([
+            'product_id' => $product,
+            'sticker_type' => $request->input('sticker_type'),
+            'quantity_id' => $request->input('quantity_id'),
+            'price' => $request->input('price')
+        ]);
+
+        adminflash('success', 'preset added successfully');
+        return redirect()->back();
+    }
+
+    /**
+     * edit page photo & name sticker preset
+     */
+    public function EditNamePhotoStickerRules(PresetNamePhotoSticker $preset)
+    {
+        $data = [
+            'page' => 'product_manage',
+            'product_name' => Product::find($preset->product_id)->product_name,
+            'id' => $preset->id,
+            'preset' => $preset,
+        ];
+
+        return view('backend.preset-edit-name-photo-stickers', $data);
+    }
+
+    /**
+     * update preset price
+     */
+    public function UpdateNamePhotoStickerRules(Request $request, PresetNamePhotoSticker $preset)
+    {
+        $request->validate([
+            'price' => 'required|numeric'
+        ]);
+
+        $preset->price = $request->input('price');
+        $preset->save();
+
+        adminflash('success', 'preset price updated successfully');
+        return redirect('/admin/product/name-photo-sticker/preset/'. $preset->product_id);
+    }
+
+    /**
+     * remove name & photo sticker preset
+     */
+    public function RemoveNamePhotoStickerRules(Request $request)
+    {
+        $request->validate([
+            'preset_id' => 'required|integer|exists:preset_name_photo_sticker,id'
+        ]);
+
+        PresetNamePhotoSticker::destroy($request->input('preset_id'));
+
+        adminflash('success', 'preset deleted successfully');
+        return redirect()->back();
     }
 
     /**

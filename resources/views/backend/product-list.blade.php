@@ -93,7 +93,9 @@
                                     </td>
                                     <td>{{ $product->review()->count() }}</td>
                                     <td>
-                                        @if($product->formfields()->count() > 0)
+                                        @if($product->product_slug == 'name-stickers' || $product->product_slug == 'photo-stickers')
+                                            <a href="{{ url('/admin/product/name-photo-sticker/preset', $product->id) }}" class="btn btn-default"><i class="fa fa-wrench" aria-hidden="true"></i></a>
+                                        @elseif($product->formfields()->count() > 0)
                                              @php
                                                 $fieldTypes = [];
                                             @endphp
