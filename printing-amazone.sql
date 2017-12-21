@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2017 at 01:57 PM
+-- Generation Time: Dec 21, 2017 at 05:01 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -305,13 +305,11 @@ CREATE TABLE `map_product_sticker_type` (
 --
 
 INSERT INTO `map_product_sticker_type` (`id`, `product_id`, `sticker_type_id`) VALUES
-(3, 22, 12),
-(5, 22, 4),
-(6, 35, 5),
-(7, 35, 8),
-(8, 35, 9),
-(9, 35, 10),
-(10, 35, 11);
+(1, 22, 1),
+(2, 22, 2),
+(3, 22, 3),
+(4, 35, 18),
+(5, 35, 19);
 
 -- --------------------------------------------------------
 
@@ -1448,21 +1446,26 @@ CREATE TABLE `preset_name_photo_sticker` (
 --
 
 INSERT INTO `preset_name_photo_sticker` (`id`, `product_id`, `sticker_type`, `quantity_id`, `price`, `created_at`, `updated_at`) VALUES
-(4, 35, 8, 23, 35.00, '2017-12-19 18:03:15', '2017-12-19 18:40:59'),
-(5, 22, 12, 21, 15.00, '2017-12-19 18:03:41', '2017-12-19 18:39:41'),
-(6, 22, 12, 22, 20.00, '2017-12-19 18:03:47', '2017-12-19 18:03:47'),
-(7, 22, 4, 21, 20.00, '2017-12-19 18:03:54', '2017-12-19 18:03:54'),
-(8, 22, 12, 23, 30.00, '2017-12-21 15:27:11', '2017-12-21 15:27:11'),
-(9, 22, 12, 24, 40.00, '2017-12-21 15:27:18', '2017-12-21 15:27:18'),
-(10, 22, 12, 25, 50.00, '2017-12-21 15:27:24', '2017-12-21 15:27:24'),
-(11, 22, 4, 22, 30.00, '2017-12-21 15:34:05', '2017-12-21 15:34:05'),
-(12, 22, 4, 23, 40.00, '2017-12-21 15:34:11', '2017-12-21 15:34:11'),
-(13, 22, 4, 24, 50.00, '2017-12-21 15:34:19', '2017-12-21 15:34:19'),
-(14, 22, 4, 25, 60.00, '2017-12-21 15:34:26', '2017-12-21 15:34:26'),
-(15, 35, 8, 21, 10.00, '2017-12-21 15:51:51', '2017-12-21 15:51:51'),
-(16, 35, 8, 22, 20.00, '2017-12-21 15:51:56', '2017-12-21 15:51:56'),
-(17, 35, 8, 24, 40.00, '2017-12-21 15:52:05', '2017-12-21 15:52:32'),
-(18, 35, 8, 25, 50.00, '2017-12-21 15:52:17', '2017-12-21 15:52:23');
+(1, 35, 18, 21, 10.00, '2017-12-21 20:57:47', '2017-12-21 20:57:47'),
+(2, 35, 18, 22, 20.00, '2017-12-21 20:57:59', '2017-12-21 20:57:59'),
+(3, 35, 18, 23, 30.00, '2017-12-21 20:58:04', '2017-12-21 20:58:04'),
+(4, 35, 18, 24, 40.00, '2017-12-21 20:58:11', '2017-12-21 20:58:11'),
+(5, 35, 18, 25, 50.00, '2017-12-21 20:58:16', '2017-12-21 20:58:16'),
+(6, 35, 19, 21, 10.00, '2017-12-21 20:58:25', '2017-12-21 20:58:25'),
+(7, 35, 19, 22, 20.00, '2017-12-21 20:58:29', '2017-12-21 20:58:29'),
+(8, 35, 19, 23, 30.00, '2017-12-21 20:58:35', '2017-12-21 20:58:35'),
+(9, 35, 19, 24, 40.00, '2017-12-21 20:58:46', '2017-12-21 20:58:46'),
+(10, 35, 19, 25, 50.00, '2017-12-21 20:58:52', '2017-12-21 20:58:52'),
+(11, 22, 1, 21, 10.00, '2017-12-21 20:59:16', '2017-12-21 20:59:16'),
+(12, 22, 1, 22, 20.00, '2017-12-21 20:59:23', '2017-12-21 20:59:23'),
+(13, 22, 1, 23, 30.00, '2017-12-21 20:59:28', '2017-12-21 20:59:28'),
+(14, 22, 1, 24, 40.00, '2017-12-21 20:59:37', '2017-12-21 20:59:37'),
+(15, 22, 1, 25, 50.00, '2017-12-21 20:59:43', '2017-12-21 20:59:43'),
+(16, 22, 2, 21, 10.00, '2017-12-21 20:59:49', '2017-12-21 20:59:49'),
+(17, 22, 2, 22, 20.00, '2017-12-21 20:59:55', '2017-12-21 20:59:55'),
+(18, 22, 2, 23, 30.00, '2017-12-21 21:00:00', '2017-12-21 21:00:00'),
+(19, 22, 2, 24, 40.00, '2017-12-21 21:00:07', '2017-12-21 21:00:07'),
+(20, 22, 2, 25, 50.00, '2017-12-21 21:00:12', '2017-12-21 21:00:12');
 
 -- --------------------------------------------------------
 
@@ -2027,7 +2030,8 @@ CREATE TABLE `reviews` (
 
 INSERT INTO `reviews` (`id`, `product_id`, `user_id`, `title`, `description`, `rating`, `publish`, `created_at`, `updated_at`) VALUES
 (81, 2, 3, 'Perfect Size, Outstanding Quality! Great service', 'I\'ve placed an order and received stickers after 6 days! Of course size was perfect, printing quality is perfect and service  was outstanding! It only took me 3-4 mins to complete order and next time I can complete order within 2 mins! Great thanks to Printing Amazon!', '5.0', 1, '2017-10-04 08:40:02', '2017-10-04 08:40:11'),
-(83, 21, 6, 'Out Standing Stickers', 'Great work', '5.0', 1, '2017-11-29 23:24:00', '2017-11-29 23:24:11');
+(83, 21, 6, 'Out Standing Stickers', 'Great work', '5.0', 1, '2017-11-29 23:24:00', '2017-11-29 23:24:11'),
+(84, 2, 5, 'Outstanding Work Printing Amazon!!', 'I\'ve ordered this sticker with amazing price and in my hand by SUPER FAST delivery. Customer service was PERFECT and this site is very customer friendly from any devices : PC, Tablet and Mobile! Easy to use and VERY VERY VERY User Friendly! Strongly Recommend it to everyone!', '5.0', 1, '2017-12-11 22:46:23', '2017-12-21 21:30:50');
 
 -- --------------------------------------------------------
 
@@ -2103,15 +2107,26 @@ CREATE TABLE `sticker_types` (
 --
 
 INSERT INTO `sticker_types` (`id`, `name`, `image`, `sort`) VALUES
-(4, 'Animal Town Value Pack', 'N-Stickers Animal-Town.jpg', 6),
-(5, 'Smile Colour Pack', 'N-Stickers Smile-Colour-Pack.jpg', 6),
-(6, 'Fresh Fruits Pack', 'N-Stickers Fresh-Fruits.jpg', 8),
-(7, 'Flower Garden', 'N-Stickers Flower-Garden.jpg', 9),
-(8, 'Photo Sticker 1', 'Photo 0001-(0094).jpg', 2),
-(9, 'Photo Sticker 2', 'Photo 0002-(0116).jpg', 3),
-(10, 'Photo Sticker 3', 'Photo 0003-(0141).jpg', 4),
-(11, 'Photo Sticker 4', 'Photo 0004-(0099).jpg', 5),
-(12, 'Name Sticker 001 (S)', 'Animal Town 821.png', 1);
+(1, '001 - Small Size', '001- 821.jpg', 0),
+(2, '002 - Medium Size', '002 - 789.jpg', 0),
+(3, '003 - Medium Size', '003 - 834.jpg', 0),
+(4, '004 - Medium Size', '004 - 835.jpg', 0),
+(5, '005 - Medium Size', '005 - 743.jpg', 0),
+(6, '006 - Medium Size', '006 - 762.jpg', 0),
+(7, '007 - Small Size', '007 - 700.jpg', 0),
+(8, '008 - Small Size', '008 - 793.jpg', 0),
+(9, '009 - Small Size', '009 - 111.jpg', 0),
+(10, '010 - Large Size', '010 - 114.jpg', 0),
+(11, '011 - Small Size', '011 - 205.jpg', 0),
+(12, '011 - Small Size', '011 - 205.jpg', 0),
+(13, '012 - Large Size', '012 - 783.jpg', 0),
+(14, '013 - Small Size', '013 - 823.jpg', 0),
+(15, '014 - Small Size', '014 - 824.jpg', 0),
+(16, '015 - Medium Size', '015 - 028.jpg', 0),
+(17, '016 - Medium Size', '016 - 029.jpg', 0),
+(18, 'Photo 001', '001 - 094.jpg', 0),
+(19, 'Photo 002', '002 - 116.jpg', 0),
+(20, 'Photo 003', '003 - 141.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -2120,7 +2135,7 @@ INSERT INTO `sticker_types` (`id`, `name`, `image`, `sort`) VALUES
 --
 
 CREATE TABLE `template_product_variations` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) NOT NULL,
   `product_id` int(11) NOT NULL,
   `variation` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `template_file` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2132,15 +2147,30 @@ CREATE TABLE `template_product_variations` (
 --
 
 INSERT INTO `template_product_variations` (`id`, `product_id`, `variation`, `template_file`, `sort`) VALUES
-(2, 2, '80 x 80 mm', 'templates/Untitled.393633590png', 1),
-(4, 31, '20 x  20', 'templates/A1VLFMBg0Z0WPb3iygDUXoOuuDj2ivMaM4RuFxjJ.jpeg', 0),
-(5, 2, '10 x 20 mm', 'templates/Z7i3qrlXeKCCj9GoBrW6but9dVy0VzwCJsSrbavM.jpeg', 2),
-(8, 17, '50 x 50 mm', 'templates/JTQMSvapNPpELNveXVc8dRO2RSotXKBZpxheI5Il.jpeg', 0),
-(9, 27, '50 X 50 mm', 'templates/fogoOn9FzW5tjkjUgnGYddmrHpesbW8yiEhwtxLy.gif', 0),
-(10, 28, '80 x 80 mm', 'templates/xfAN0QFkIwsinpZ0L51VMEsqgxBuUqoEqdZQzSqr.jpeg', 1),
-(11, 28, '100 x 100 mm', 'templates/kXHcIgLhruUDxMm8Pcg7W1NsFDNSuniYtqGW9sIN.jpeg', 2),
-(12, 29, '20 x 20 mm', 'templates/GqiurG7IM9qNeaVwgBe8qQQz2vXF82NgQR9dTXij.jpeg', 0),
-(15, 2, '50 x 50 mm', 'templates/PlrIvYjLgSMq63D5LDHwzrj9kwSVG5SMaLdyonl1.jpeg', 3);
+(1, 21, '10x10mm', 'templates/Qet8V4m9l3ivVMbap80zw0ORI6jLiZzKUcTZsozN.pdf', 0),
+(2, 21, '15x15mm', 'templates/CncC5yL7u6dq6B28iPQOzX5evjQTaozpoeVZujOG.pdf', 0),
+(3, 21, '45x45mm', 'templates/vEGIuyxCG0u8UhnompA2231fOboTXcOmUBqSvfHn.pdf', 0),
+(4, 21, '50x50mm', 'templates/S5TUAp6376ryKcuQrBz9m0kXbh9wUGRq13UEgR1H.pdf', 0),
+(5, 21, '55x55mm', 'templates/J8IQcPVYQRWI0YGXyHAASElHnEYJdN94OKf7z3bT.pdf', 0),
+(6, 21, '60x60mm', 'templates/8KJiQlIBs1b746WDN5JTjQHN5aTLZrTDBJ6RSwnL.pdf', 0),
+(7, 21, '65x65mm', 'templates/y37ZwbaGHdY8HKGUn0Lej0pEocwVZhbQyx0fsMFB.pdf', 0),
+(8, 21, '70x70mm', 'templates/OmbCj1lNE0aIliG0qjvA1P4qCvdhs1kCnvVIaf7i.pdf', 0),
+(9, 21, '80x80mm', 'templates/NNKUBPogvChoCZmFSrRl9OKRgoCYkk9jLNwjW4ms.pdf', 0),
+(10, 17, '40x30mm', 'templates/YHjpzG9l7n5W3Aa0N0W4HWZyKZKl64sDrLshyVXl.pdf', 0),
+(11, 17, '60x40mm', 'templates/VwKRzinkDOZry8VRCIDQTe3SWROc9ivHShrAbOLf.pdf', 0),
+(12, 17, '70x50mm', 'templates/q30ChaCr2B3zZCgVtoGROCSbu1ck43Orszq9E1Pp.pdf', 0),
+(13, 17, '100x55mm', 'templates/CudfkKgcDb4hKXstt7FdoetJN5qALijnFbmjFVYW.pdf', 0),
+(14, 17, '125x50mm', 'templates/s8leYXTtzdqTvUKgexPlPBW6lEHxUNG5rW1hU2z2.pdf', 0),
+(15, 17, '125x75mm', 'templates/3CIkFMDS9cSvuONqveM6sT4cppIrovVN6IK0pIob.pdf', 0),
+(16, 20, '50x50mm', 'templates/qC8Fpt7kov110JP51NbJGMcUnAgYxZGvUj4QaH1m.pdf', 0),
+(17, 20, '60x60mm', 'templates/8yugAWuDVOXcuiUCK4NO4hcpixo11TMdj4e0DtXI.pdf', 0),
+(18, 20, '70x70mm', 'templates/XiyWUr3qmldGSEAV4gXh8UVKcepjEq0wwEoZND99.pdf', 0),
+(19, 20, '90x90mm', 'templates/srC4ifWGRNP2Toijo9YN7G8U5IXLQ8waJOPOZpNB.pdf', 0),
+(20, 20, '100x100mm', 'templates/SF6ATiW9KwIpa2onLMcjEcnguuCqry3wHk8GcQ1u.pdf', 0),
+(21, 2, '40x60mm', 'templates/2u3WHn92aYn0KYDhZeYuroOKSQ7HLnGEL6as6IIm.pdf', 0),
+(22, 2, '50x50mm', 'templates/UljI9dJUOGhrMzzlNwtFFv29uZbNvVCJP83kytRU.pdf', 0),
+(23, 2, '60x60mm', 'templates/0a7ewksjnwHRUWgNANTFOn0hTXTvOAAhk3YU9s7F.pdf', 0),
+(24, 2, '90x60mm', 'templates/XHsONsR3rF8RSOXXJqituyx9JAsdU0tybsaA7XcA.pdf', 0);
 
 -- --------------------------------------------------------
 
@@ -2172,7 +2202,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `mobile`, `birthday`, `state`, `suburb`, `post_code`, `street`, `company`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Sourav', 'developer.srv1@gmail.com', 'avatar21500453464.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$1ehSKhL5I7eGaFs0f8VKMObmsFC10rBHXXdNpZG.cC9TUhtNsrd46', 't4NYqUCvdmoHAf4PIY93uvcCoTqGwYI5ZRv8pKXFa4wRBivpDF8ETjqBaVXx', '2017-05-03 05:53:37', '2017-07-19 13:07:44'),
-(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '9569857458', '1994-03-02', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL, '$2y$10$vx4NtBOPpcq0hLSwhMRfv.sy9Ury0BRbUWNDiiQhucPAghjVS1Fqa', 'k1YeZGLZmn4bItNXdW0nGTyaeWAdiIBCYWvqCN7v3SdGB554eg2YyWBsDgO9', '2017-05-18 16:08:04', '2017-10-24 17:35:14'),
+(2, 'Sourav Rakshit', 'srv.nxr@gmail.com', 'depositphotos_56695985-stock-illustration-male-avatar.jpg', '9569857458', '1994-03-02', 'West Bengal', 'Kolkata', '712203', '59(25/C/D) K.B Para Lane, Baidyabati, Hooghly', NULL, '$2y$10$vx4NtBOPpcq0hLSwhMRfv.sy9Ury0BRbUWNDiiQhucPAghjVS1Fqa', 'K0D2mSpg1KrdRfbAKHZzk87zHrKi871BTdGhY0CLZRKVYU69yf6dUHGADudz', '2017-05-18 16:08:04', '2017-10-24 17:35:14'),
 (3, 'Peter', 'angellous99@gmail.com', NULL, '0416433429', '2017-11-25', 'NSW', 'Bualkham Hills', '2153', '44-46 Jenner Street', NULL, '$2y$10$GEQoq6R9Jtm8slV5/5JDuubipwtbd.tpxALeW0uIuubdR9.YLk87i', '3JQaW33Q9tFprfkyu81cnFLs6NmkxoOR4mkwagMu7AjCXYNQMHKTbaBL8TyM', '2017-08-22 11:25:02', '2017-11-30 22:56:12'),
 (4, 'Atanu Das', 'technomind1985@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$/6z6LNSCPYg.f6MfDlY6fORMAJy60FcRgNlor33qsZU7IAe2m93Wi', 'E8YULdUvh3X5dzZ8btsFMmSdCYqQF5vpETvFQhv40wuUXjNhZEDvwKLhnVI3', '2017-09-05 00:06:04', '2017-09-05 00:06:17'),
 (5, 'HANS CDS', 'creative@hanscds.com', NULL, '0416433429', '1983-09-02', 'NSW', 'Seven Hills', '2147', '12 Prince William', 'HANS CDS Australia Pty Ltd', '$2y$10$ozoQFshpkPXF4nC9XdC0uuQEx.U9SzsKDisTzVWWsz9kJ9MRB7KYO', NULL, '2017-11-20 13:42:59', '2017-11-20 13:44:08'),
@@ -2449,7 +2479,7 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `cart_artworks`
@@ -2509,7 +2539,7 @@ ALTER TABLE `map_product_lamination`
 -- AUTO_INCREMENT for table `map_product_sticker_type`
 --
 ALTER TABLE `map_product_sticker_type`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `map_prod_form`
@@ -2599,7 +2629,7 @@ ALTER TABLE `preset_general`
 -- AUTO_INCREMENT for table `preset_name_photo_sticker`
 --
 ALTER TABLE `preset_name_photo_sticker`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`
@@ -2629,7 +2659,7 @@ ALTER TABLE `qty_options`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `size_options`
@@ -2641,13 +2671,13 @@ ALTER TABLE `size_options`
 -- AUTO_INCREMENT for table `sticker_types`
 --
 ALTER TABLE `sticker_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `template_product_variations`
 --
 ALTER TABLE `template_product_variations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
