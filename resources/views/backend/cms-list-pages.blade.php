@@ -68,7 +68,7 @@
                                 @foreach($pages as $page)
 
                                     <tr>
-                                        <td>{{ $loop->count }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $page->page_name }}</td>
                                         <td><a href="{{ url('/'.$page->page_slug) }}" target="_blank">{{url('/'.$page->page_slug)}}</a></td>
                                         <td>{{ $page->updated_at }}</td>
