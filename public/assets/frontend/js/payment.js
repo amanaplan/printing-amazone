@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 129);
+/******/ 	return __webpack_require__(__webpack_require__.s = 131);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2029,9 +2029,9 @@ module.exports = Promise;
 "use strict";
 
 
-var deferred = __webpack_require__(147);
-var once = __webpack_require__(148);
-var promiseOrCallback = __webpack_require__(149);
+var deferred = __webpack_require__(149);
+var once = __webpack_require__(150);
+var promiseOrCallback = __webpack_require__(151);
 
 function wrapPromise(fn) {
   return function () {
@@ -3132,8 +3132,8 @@ module.exports = {
 
 
 var BraintreeError = __webpack_require__(3);
-var Client = __webpack_require__(133);
-var getConfiguration = __webpack_require__(146).getConfiguration;
+var Client = __webpack_require__(135);
+var getConfiguration = __webpack_require__(148).getConfiguration;
 var VERSION = "3.26.0";
 var Promise = __webpack_require__(33);
 var wrapPromise = __webpack_require__(34);
@@ -3213,10 +3213,10 @@ module.exports = {
 
 var ajaxIsAvaliable;
 var once = __webpack_require__(75);
-var JSONPDriver = __webpack_require__(134);
-var AJAXDriver = __webpack_require__(135);
-var getUserAgent = __webpack_require__(141);
-var isHTTP = __webpack_require__(142);
+var JSONPDriver = __webpack_require__(136);
+var AJAXDriver = __webpack_require__(137);
+var getUserAgent = __webpack_require__(143);
+var isHTTP = __webpack_require__(144);
 
 function isAjaxAvailable() {
   if (ajaxIsAvaliable == null) {
@@ -3411,7 +3411,7 @@ module.exports = convertToBraintreeError;
 
 
 var createAuthorizationData = __webpack_require__(91);
-var jsonClone = __webpack_require__(144);
+var jsonClone = __webpack_require__(146);
 var constants = __webpack_require__(48);
 
 function addMetadata(configuration, data) {
@@ -3449,7 +3449,7 @@ module.exports = addMetadata;
 "use strict";
 
 
-var atob = __webpack_require__(143).atob;
+var atob = __webpack_require__(145).atob;
 
 var apiUrls = {
   production: 'https://api.braintreegateway.com:443',
@@ -3876,9 +3876,9 @@ module.exports = function (client) {
 "use strict";
 
 
-var setAttributes = __webpack_require__(160);
-var defaultAttributes = __webpack_require__(161);
-var assign = __webpack_require__(162);
+var setAttributes = __webpack_require__(162);
+var defaultAttributes = __webpack_require__(163);
+var assign = __webpack_require__(164);
 
 module.exports = function createFrame(options) {
   var iframe = document.createElement('iframe');
@@ -3906,9 +3906,9 @@ module.exports = function createFrame(options) {
 "use strict";
 
 
-var bus = __webpack_require__(163);
-var events = __webpack_require__(164);
-var checkOrigin = __webpack_require__(165).checkOrigin;
+var bus = __webpack_require__(165);
+var events = __webpack_require__(166);
+var checkOrigin = __webpack_require__(167).checkOrigin;
 var BraintreeError = __webpack_require__(3);
 
 function BraintreeBus(options) {
@@ -4093,7 +4093,7 @@ module.exports = function (instance, methodNames) {
 "use strict";
 
 
-var browserDetection = __webpack_require__(180);
+var browserDetection = __webpack_require__(182);
 
 function isHidden(element) {
   if (!element) { // no parentNode, so nothing containing the element is hidden
@@ -4137,7 +4137,7 @@ module.exports = {
 
 var assign = __webpack_require__(46).assign;
 var BaseView = __webpack_require__(42);
-var btPaypal = __webpack_require__(182);
+var btPaypal = __webpack_require__(184);
 var DropinError = __webpack_require__(38);
 
 var ASYNC_DEPENDENCY_TIMEOUT = 30000;
@@ -4343,7 +4343,7 @@ module.exports = {
 
 
 var BaseView = __webpack_require__(42);
-var PaymentMethodView = __webpack_require__(189);
+var PaymentMethodView = __webpack_require__(191);
 var DropinError = __webpack_require__(38);
 var classlist = __webpack_require__(50);
 var errors = __webpack_require__(13).errors;
@@ -4645,14 +4645,16 @@ module.exports = {
 /* 126 */,
 /* 127 */,
 /* 128 */,
-/* 129 */
+/* 129 */,
+/* 130 */,
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(130);
+module.exports = __webpack_require__(132);
 
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4670,7 +4672,7 @@ __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_1__
 
 	var client_token = response.data.token;
 
-	var dropin = __webpack_require__(131);
+	var dropin = __webpack_require__(133);
 	var form = document.querySelector('#checkout-form');
 
 	dropin.create({
@@ -4755,7 +4757,7 @@ function disableOrderPlaceBtn() {
 }
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4864,9 +4866,9 @@ function disableOrderPlaceBtn() {
  * </form>
  */
 
-var Dropin = __webpack_require__(132);
+var Dropin = __webpack_require__(134);
 var client = __webpack_require__(85);
-var createFromScriptTag = __webpack_require__(221);
+var createFromScriptTag = __webpack_require__(223);
 var constants = __webpack_require__(13);
 var analytics = __webpack_require__(47);
 var DropinError = __webpack_require__(38);
@@ -5262,7 +5264,7 @@ module.exports = {
 
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5272,18 +5274,18 @@ var assign = __webpack_require__(46).assign;
 var analytics = __webpack_require__(47);
 var constants = __webpack_require__(13);
 var DropinError = __webpack_require__(38);
-var DropinModel = __webpack_require__(150);
+var DropinModel = __webpack_require__(152);
 var EventEmitter = __webpack_require__(95);
 var isGuestCheckout = __webpack_require__(96);
 
-var MainView = __webpack_require__(152);
+var MainView = __webpack_require__(154);
 var paymentMethodsViewID = __webpack_require__(106).ID;
 var paymentOptionsViewID = __webpack_require__(107).ID;
 var paymentOptionIDs = constants.paymentOptionIDs;
-var translations = __webpack_require__(191);
+var translations = __webpack_require__(193);
 var uuid = __webpack_require__(108);
 var Promise = __webpack_require__(43);
-var ThreeDSecure = __webpack_require__(215);
+var ThreeDSecure = __webpack_require__(217);
 var wrapPrototype = __webpack_require__(34).wrapPrototype;
 
 var mainHTML = "<div class=\"braintree-dropin\">\n  <div data-braintree-id=\"methods-label\" class=\"braintree-heading\">&nbsp;</div>\n  <div data-braintree-id=\"choose-a-way-to-pay\" class=\"braintree-heading\">{{chooseAWayToPay}}</div>\n  <div class=\"braintree-placeholder\">&nbsp;</div>\n\n  <div data-braintree-id=\"upper-container\" class=\"braintree-upper-container\">\n    <div data-braintree-id=\"loading-container\" class=\"braintree-loader__container\">\n      <div data-braintree-id=\"loading-indicator\" class=\"braintree-loader__indicator\">\n        <svg width=\"14\" height=\"16\" class=\"braintree-loader__lock\">\n          <use xlink:href=\"#iconLockLoader\"></use>\n        </svg>\n      </div>\n    </div>\n\n    <div data-braintree-id=\"methods\" class=\"braintree-methods braintree-methods-initial\">\n      <div data-braintree-id=\"methods-container\"></div>\n    </div>\n\n    <div data-braintree-id=\"options\" class=\"braintree-test-class braintree-options braintree-options-initial\">\n      <div data-braintree-id=\"payment-options-container\" class=\"braintree-options-list\"></div>\n    </div>\n\n    <div data-braintree-id=\"sheet-container\" class=\"braintree-sheet__container\">\n      <div data-braintree-id=\"paypal\" class=\"braintree-paypal braintree-sheet\">\n        <div data-braintree-id=\"paypal-sheet-header\" class=\"braintree-sheet__header\">\n          <div class=\"braintree-sheet__header-label\">\n            <div class=\"braintree-sheet__logo--header\">\n              <svg width=\"40\" height=\"24\">\n                <use xlink:href=\"#logoPayPal\"></use>\n              </svg>\n            </div>\n            <div class=\"braintree-sheet__label\">{{PayPal}}</div>\n          </div>\n        </div>\n        <div class=\"braintree-sheet__content braintree-sheet__content--button\">\n          <div data-braintree-id=\"paypal-button\" class=\"braintree-sheet__button--paypal\"></div>\n        </div>\n      </div>\n      <div data-braintree-id=\"paypalCredit\" class=\"braintree-paypalCredit braintree-sheet\">\n        <div data-braintree-id=\"paypal-credit-sheet-header\" class=\"braintree-sheet__header\">\n          <div class=\"braintree-sheet__header-label\">\n            <div class=\"braintree-sheet__logo--header\">\n              <svg width=\"40\" height=\"24\">\n                <use xlink:href=\"#logoPayPalCredit\"></use>\n              </svg>\n            </div>\n            <div class=\"braintree-sheet__label\">{{PayPal Credit}}</div>\n          </div>\n        </div>\n        <div class=\"braintree-sheet__content braintree-sheet__content--button\">\n          <div data-braintree-id=\"paypal-credit-button\" class=\"braintree-sheet__button--paypal\"></div>\n        </div>\n      </div>\n      <div data-braintree-id=\"applePay\" class=\"braintree-applePay braintree-sheet\">\n        <div data-braintree-id=\"apple-pay-sheet-header\" class=\"braintree-sheet__header\">\n          <div class=\"braintree-sheet__header-label\">\n            <div class=\"braintree-sheet__logo--header\">\n              <svg height=\"24\" width=\"40\">\n              <use xlink:href=\"#logoApplePay\"></use>\n              </svg>\n            </div>\n            <div class=\"braintree-sheet__label\">{{Apple Pay}}</div>\n          </div>\n        </div>\n        <div class=\"braintree-sheet__content braintree-sheet__content--button\">\n          <div data-braintree-id=\"apple-pay-button\" class=\"braintree-sheet__button--apple-pay apple-pay-button\"></div>\n        </div>\n      </div>\n      <div data-braintree-id=\"card\" class=\"braintree-card braintree-form braintree-sheet\">\n        <div data-braintree-id=\"card-sheet-header\" class=\"braintree-sheet__header\">\n          <div class=\"braintree-sheet__header-label\">\n            <div class=\"braintree-sheet__logo--header\">\n              <svg width=\"40\" height=\"24\" class=\"braintree-icon--bordered\">\n                <use xlink:href=\"#iconCardFront\"></use>\n              </svg>\n            </div>\n            <div class=\"braintree-sheet__text\">{{payWithCard}}</div>\n          </div>\n          <div data-braintree-id=\"card-view-icons\" class=\"braintree-sheet__icons\"></div>\n        </div>\n        <div class=\"braintree-sheet__content braintree-sheet__content--form\">\n          <div data-braintree-id=\"cardholder-name-field-group\" class=\"braintree-form__field-group\">\n            <div class=\"braintree-form__label\">{{cardholderNameLabel}}</div>\n            <div class=\"braintree-form__field\">\n              <div class=\"braintree-form-cardholder-name braintree-form__hosted-field\">\n                <input id=\"braintree__card-view-input__cardholder-name\" type=\"text\" placeholder=\"{{cardholderNamePlaceholder}}\"/>\n              </div>\n              <div class=\"braintree-form__icon-container\">\n                <div class=\"braintree-form__icon braintree-form__field-error-icon\">\n                  <svg width=\"24\" height=\"24\">\n                    <use xlink:href=\"#iconError\"></use>\n                  </svg>\n                </div>\n              </div>\n            </div>\n            <div data-braintree-id=\"cardholder-name-field-error\" class=\"braintree-form__field-error\"></div>\n          </div>\n          <div data-braintree-id=\"number-field-group\" class=\"braintree-form__field-group\">\n            <div class=\"braintree-form__label\">{{cardNumberLabel}}</div>\n            <div class=\"braintree-form__field\">\n              <label>\n                <div class=\"braintree-form-number braintree-form__hosted-field\"></div>\n              </label>\n              <div class=\"braintree-form__icon-container\">\n                <div data-braintree-id=\"card-number-icon\" class=\"braintree-form__icon braintree-form__field-secondary-icon\">\n                  <svg width=\"40\" height=\"24\" class=\"braintree-icon--bordered\">\n                  <use data-braintree-id=\"card-number-icon-svg\" xlink:href=\"#iconCardFront\"></use>\n                  </svg>\n                </div>\n                <div class=\"braintree-form__icon braintree-form__field-error-icon\">\n                  <svg width=\"24\" height=\"24\">\n                    <use xlink:href=\"#iconError\"></use>\n                  </svg>\n                </div>\n              </div>\n            </div>\n            <div data-braintree-id=\"number-field-error\" class=\"braintree-form__field-error\"></div>\n          </div>\n\n          <div class=\"braintree-form__flexible-fields\">\n            <div data-braintree-id=\"expiration-date-field-group\" class=\"braintree-form__field-group\">\n              <div class=\"braintree-form__label\">{{expirationDateLabel}}\n                <span class=\"braintree-form__descriptor\">{{expirationDateLabelSubheading}}</span>\n              </div>\n              <div class=\"braintree-form__field\">\n                <label>\n                  <div class=\"braintree-form__hosted-field braintree-form-expiration\"></div>\n                </label>\n                <div class=\"braintree-form__icon-container\">\n                  <div class=\"braintree-form__icon braintree-form__field-error-icon\">\n                    <svg width=\"24\" height=\"24\">\n                      <use xlink:href=\"#iconError\"></use>\n                    </svg>\n                  </div>\n                </div>\n              </div>\n\n              <div data-braintree-id=\"expiration-date-field-error\" class=\"braintree-form__field-error\"></div>\n            </div>\n\n            <div data-braintree-id=\"cvv-field-group\" class=\"braintree-form__field-group\">\n              <div class=\"braintree-form__label\">{{cvvLabel}}\n                <span data-braintree-id=\"cvv-label-descriptor\" class=\"braintree-form__descriptor\">{{cvvThreeDigitLabelSubheading}}</span>\n              </div>\n              <div class=\"braintree-form__field\">\n                <label>\n                  <div class=\"braintree-form__hosted-field braintree-form-cvv\"></div>\n                </label>\n                <div class=\"braintree-form__icon-container\">\n                  <div data-braintree-id=\"cvv-icon\" class=\"braintree-form__icon braintree-form__field-secondary-icon\">\n                    <svg width=\"40\" height=\"24\" class=\"braintree-icon--bordered\">\n                    <use data-braintree-id=\"cvv-icon-svg\" xlink:href=\"#iconCVVBack\"></use>\n                    </svg>\n                  </div>\n                  <div class=\"braintree-form__icon braintree-form__field-error-icon\">\n                    <svg width=\"24\" height=\"24\">\n                      <use xlink:href=\"#iconError\"></use>\n                    </svg>\n                  </div>\n                </div>\n              </div>\n              <div data-braintree-id=\"cvv-field-error\" class=\"braintree-form__field-error\"></div>\n            </div>\n\n            <div data-braintree-id=\"postal-code-field-group\" class=\"braintree-form__field-group\">\n              <div class=\"braintree-form__label\">{{postalCodeLabel}}</div>\n              <div class=\"braintree-form__field\">\n                <label>\n                  <div class=\"braintree-form__hosted-field braintree-form-postal-code\"></div>\n                </label>\n                <div class=\"braintree-form__icon-container\">\n                  <div class=\"braintree-form__icon braintree-form__field-error-icon\">\n                    <svg width=\"24\" height=\"24\">\n                      <use xlink:href=\"#iconError\"></use>\n                    </svg>\n                  </div>\n                </div>\n              </div>\n              <div data-braintree-id=\"postal-code-field-error\" class=\"braintree-form__field-error\"></div>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div data-braintree-id=\"sheet-error\" class=\"braintree-sheet__error\">\n        <div class=\"braintree-form__icon braintree-sheet__error-icon\">\n          <svg width=\"24\" height=\"24\">\n            <use xlink:href=\"#iconError\"></use>\n          </svg>\n        </div>\n        <div data-braintree-id=\"sheet-error-text\" class=\"braintree-sheet__error-text\"></div>\n      </div>\n    </div>\n  </div>\n\n  <div data-braintree-id=\"lower-container\" class=\"braintree-test-class braintree-options braintree-hidden\">\n    <div data-braintree-id=\"other-ways-to-pay\" class=\"braintree-heading\">{{otherWaysToPay}}</div>\n  </div>\n\n  <div data-braintree-id=\"toggle\" class=\"braintree-toggle braintree-hidden\" tabindex=\"0\">\n    <span>{{chooseAnotherWayToPay}}</span>\n  </div>\n</div>\n";
@@ -6056,7 +6058,7 @@ module.exports = wrapPrototype(Dropin);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6071,7 +6073,7 @@ var Promise = __webpack_require__(33);
 var once = __webpack_require__(75);
 var deferred = __webpack_require__(93);
 var assign = __webpack_require__(76).assign;
-var constants = __webpack_require__(145);
+var constants = __webpack_require__(147);
 var errors = __webpack_require__(94);
 var sharedErrors = __webpack_require__(49);
 var VERSION = __webpack_require__(48).VERSION;
@@ -6385,7 +6387,7 @@ module.exports = Client;
 
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6501,17 +6503,17 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 135 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
 var querystring = __webpack_require__(87);
-var browserDetection = __webpack_require__(136);
+var browserDetection = __webpack_require__(138);
 var assign = __webpack_require__(76).assign;
-var prepBody = __webpack_require__(139);
-var parseBody = __webpack_require__(140);
+var prepBody = __webpack_require__(141);
+var parseBody = __webpack_require__(142);
 var isXHRAvailable = global.XMLHttpRequest && 'withCredentials' in new global.XMLHttpRequest();
 
 var MAX_TCP_RETRYCOUNT = 1;
@@ -6609,13 +6611,13 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 136 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var isIe = __webpack_require__(137);
+var isIe = __webpack_require__(139);
 
 module.exports = {
   isIe: isIe
@@ -6623,13 +6625,13 @@ module.exports = {
 
 
 /***/ }),
-/* 137 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var isIE11 = __webpack_require__(138);
+var isIE11 = __webpack_require__(140);
 
 module.exports = function isIE(ua) {
   ua = ua || global.navigator.userAgent;
@@ -6639,7 +6641,7 @@ module.exports = function isIE(ua) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 138 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6652,7 +6654,7 @@ module.exports = function isIe11(ua) {
 
 
 /***/ }),
-/* 139 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6672,7 +6674,7 @@ module.exports = function (method, body) {
 
 
 /***/ }),
-/* 140 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6688,7 +6690,7 @@ module.exports = function (body) {
 
 
 /***/ }),
-/* 141 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6701,7 +6703,7 @@ module.exports = function getUserAgent() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 142 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6714,7 +6716,7 @@ module.exports = function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 143 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6759,7 +6761,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 144 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6771,7 +6773,7 @@ module.exports = function (value) {
 
 
 /***/ }),
-/* 145 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6783,7 +6785,7 @@ module.exports = {
 
 
 /***/ }),
-/* 146 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6871,7 +6873,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 147 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6892,7 +6894,7 @@ module.exports = deferred;
 
 
 /***/ }),
-/* 148 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6913,7 +6915,7 @@ module.exports = once;
 
 
 /***/ }),
-/* 149 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6937,7 +6939,7 @@ module.exports = promiseOrCallback;
 
 
 /***/ }),
-/* 150 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6949,7 +6951,7 @@ var constants = __webpack_require__(13);
 var paymentMethodTypes = constants.paymentMethodTypes;
 var paymentOptionIDs = constants.paymentOptionIDs;
 var isGuestCheckout = __webpack_require__(96);
-var isHTTPS = __webpack_require__(151);
+var isHTTPS = __webpack_require__(153);
 
 function DropinModel(options) {
   this.componentID = options.componentID;
@@ -7171,7 +7173,7 @@ module.exports = DropinModel;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 151 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7188,7 +7190,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 152 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7198,12 +7200,12 @@ var analytics = __webpack_require__(47);
 var analyticsKinds = __webpack_require__(13).analyticsKinds;
 var BaseView = __webpack_require__(42);
 var classlist = __webpack_require__(50);
-var sheetViews = __webpack_require__(153);
+var sheetViews = __webpack_require__(155);
 var PaymentMethodsView = __webpack_require__(106);
 var PaymentOptionsView = __webpack_require__(107);
 var addSelectionEventHandler = __webpack_require__(81);
 var Promise = __webpack_require__(43);
-var supportsFlexbox = __webpack_require__(190);
+var supportsFlexbox = __webpack_require__(192);
 var transitionHelper = __webpack_require__(102);
 
 var CHANGE_ACTIVE_PAYMENT_METHOD_TIMEOUT = __webpack_require__(13).CHANGE_ACTIVE_PAYMENT_METHOD_TIMEOUT;
@@ -7497,7 +7499,7 @@ module.exports = MainView;
 
 
 /***/ }),
-/* 153 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7507,16 +7509,16 @@ var paymentOptionIDs = __webpack_require__(13).paymentOptionIDs;
 
 var result = {};
 
-result[paymentOptionIDs.card] = __webpack_require__(154);
-result[paymentOptionIDs.paypal] = __webpack_require__(181);
-result[paymentOptionIDs.paypalCredit] = __webpack_require__(185);
-result[paymentOptionIDs.applePay] = __webpack_require__(186);
+result[paymentOptionIDs.card] = __webpack_require__(156);
+result[paymentOptionIDs.paypal] = __webpack_require__(183);
+result[paymentOptionIDs.paypalCredit] = __webpack_require__(187);
+result[paymentOptionIDs.applePay] = __webpack_require__(188);
 
 module.exports = result;
 
 
 /***/ }),
-/* 154 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7528,7 +7530,7 @@ var BaseView = __webpack_require__(42);
 var classlist = __webpack_require__(50);
 var constants = __webpack_require__(13);
 var DropinError = __webpack_require__(38);
-var hostedFields = __webpack_require__(155);
+var hostedFields = __webpack_require__(157);
 var transitionHelper = __webpack_require__(102);
 var Promise = __webpack_require__(43);
 
@@ -8140,16 +8142,16 @@ module.exports = CardView;
 
 
 /***/ }),
-/* 155 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /** @module braintree-web/hosted-fields */
 
-var HostedFields = __webpack_require__(156);
+var HostedFields = __webpack_require__(158);
 var basicComponentVerification = __webpack_require__(68);
-var supportsInputFormatting = __webpack_require__(174);
+var supportsInputFormatting = __webpack_require__(176);
 var wrapPromise = __webpack_require__(34);
 var Promise = __webpack_require__(33);
 var VERSION = "3.26.0";
@@ -8373,34 +8375,34 @@ module.exports = {
 
 
 /***/ }),
-/* 156 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var Destructor = __webpack_require__(157);
-var classlist = __webpack_require__(159);
+var Destructor = __webpack_require__(159);
+var classlist = __webpack_require__(161);
 var iFramer = __webpack_require__(97);
 var Bus = __webpack_require__(98);
 var BraintreeError = __webpack_require__(3);
-var composeUrl = __webpack_require__(166);
+var composeUrl = __webpack_require__(168);
 var constants = __webpack_require__(77);
 var errors = __webpack_require__(78);
 var INTEGRATION_TIMEOUT_MS = __webpack_require__(48).INTEGRATION_TIMEOUT_MS;
 var uuid = __webpack_require__(67);
-var findParentTags = __webpack_require__(167);
-var browserDetection = __webpack_require__(168);
+var findParentTags = __webpack_require__(169);
+var browserDetection = __webpack_require__(170);
 var events = constants.events;
-var EventEmitter = __webpack_require__(170);
-var injectFrame = __webpack_require__(171);
+var EventEmitter = __webpack_require__(172);
+var injectFrame = __webpack_require__(173);
 var analytics = __webpack_require__(44);
 var whitelistedFields = constants.whitelistedFields;
 var methods = __webpack_require__(100);
 var convertMethodsToError = __webpack_require__(101);
 var sharedErrors = __webpack_require__(49);
-var getCardTypes = __webpack_require__(172);
-var attributeValidationError = __webpack_require__(173);
+var getCardTypes = __webpack_require__(174);
+var attributeValidationError = __webpack_require__(175);
 var Promise = __webpack_require__(33);
 var wrapPromise = __webpack_require__(34);
 
@@ -9439,13 +9441,13 @@ module.exports = wrapPromise.wrapPrototype(HostedFields);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 157 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var batchExecuteFunctions = __webpack_require__(158);
+var batchExecuteFunctions = __webpack_require__(160);
 
 function Destructor() {
   this._teardownRegistry = [];
@@ -9482,7 +9484,7 @@ module.exports = Destructor;
 
 
 /***/ }),
-/* 158 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9533,7 +9535,7 @@ module.exports = function (functions, cb) {
 
 
 /***/ }),
-/* 159 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9577,7 +9579,7 @@ module.exports = {
 
 
 /***/ }),
-/* 160 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9601,7 +9603,7 @@ module.exports = function setAttributes(element, attributes) {
 
 
 /***/ }),
-/* 161 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9616,7 +9618,7 @@ module.exports = {
 
 
 /***/ }),
-/* 162 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9638,7 +9640,7 @@ module.exports = function assign(target) {
 
 
 /***/ }),
-/* 163 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9920,7 +9922,7 @@ module.exports = function assign(target) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 164 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9934,7 +9936,7 @@ module.exports = enumerate([
 
 
 /***/ }),
-/* 165 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9971,7 +9973,7 @@ module.exports = {
 
 
 /***/ }),
-/* 166 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9990,7 +9992,7 @@ module.exports = function composeUrl(assetsUrl, componentId, isDebug) {
 
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10015,7 +10017,7 @@ module.exports = findParentTags;
 
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10024,12 +10026,12 @@ module.exports = findParentTags;
 module.exports = {
   isIe9: __webpack_require__(79),
   isIos: __webpack_require__(80),
-  isIosWebview: __webpack_require__(169)
+  isIosWebview: __webpack_require__(171)
 };
 
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10056,7 +10058,7 @@ module.exports = function isIosWebview(ua) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10091,7 +10093,7 @@ module.exports = EventEmitter;
 
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10113,7 +10115,7 @@ module.exports = function injectFrame(frame, container) {
 
 
 /***/ }),
-/* 172 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10307,7 +10309,7 @@ module.exports = creditCardType;
 
 
 /***/ }),
-/* 173 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10351,13 +10353,13 @@ module.exports = attributeValidationError;
 
 
 /***/ }),
-/* 174 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var device = __webpack_require__(175);
+var device = __webpack_require__(177);
 
 module.exports = function () {
   // Digits get dropped in samsung browser
@@ -10366,7 +10368,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 175 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10374,8 +10376,8 @@ module.exports = function () {
 
 var UA = global.navigator && global.navigator.userAgent;
 
-var isAndroid = __webpack_require__(176);
-var isChrome = __webpack_require__(177);
+var isAndroid = __webpack_require__(178);
+var isChrome = __webpack_require__(179);
 var isIos = __webpack_require__(80);
 var isIE9 = __webpack_require__(79);
 
@@ -10415,7 +10417,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 176 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10429,14 +10431,14 @@ module.exports = function isAndroid(ua) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 177 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var isEdge = __webpack_require__(178);
-var isSamsung = __webpack_require__(179);
+var isEdge = __webpack_require__(180);
+var isSamsung = __webpack_require__(181);
 
 module.exports = function isChrome(ua) {
   ua = ua || navigator.userAgent;
@@ -10445,7 +10447,7 @@ module.exports = function isChrome(ua) {
 
 
 /***/ }),
-/* 178 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10458,7 +10460,7 @@ module.exports = function isEdge(ua) {
 
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10472,7 +10474,7 @@ module.exports = function isSamsungBrowser(ua) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 180 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10486,7 +10488,7 @@ module.exports = {
 
 
 /***/ }),
-/* 181 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10507,7 +10509,7 @@ module.exports = PayPalView;
 
 
 /***/ }),
-/* 182 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10523,7 +10525,7 @@ var basicComponentVerification = __webpack_require__(68);
 var errors = __webpack_require__(104);
 var Promise = __webpack_require__(33);
 var wrapPromise = __webpack_require__(34);
-var PayPalCheckout = __webpack_require__(183);
+var PayPalCheckout = __webpack_require__(185);
 var VERSION = "3.26.0";
 
 /**
@@ -10624,7 +10626,7 @@ module.exports = {
 
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10636,7 +10638,7 @@ var wrapPromise = __webpack_require__(34);
 var BraintreeError = __webpack_require__(3);
 var convertToBraintreeError = __webpack_require__(89);
 var errors = __webpack_require__(104);
-var constants = __webpack_require__(184);
+var constants = __webpack_require__(186);
 
 /**
  * PayPal Checkout tokenized payload. Returned in {@link PayPalCheckout#tokenizePayment}'s callback as the second argument, `data`.
@@ -10971,7 +10973,7 @@ module.exports = wrapPromise.wrapPrototype(PayPalCheckout);
 
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10987,7 +10989,7 @@ module.exports = {
 
 
 /***/ }),
-/* 185 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11010,7 +11012,7 @@ module.exports = PayPalCreditView;
 
 
 /***/ }),
-/* 186 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11018,7 +11020,7 @@ module.exports = PayPalCreditView;
 
 var assign = __webpack_require__(46).assign;
 var BaseView = __webpack_require__(42);
-var btApplePay = __webpack_require__(187);
+var btApplePay = __webpack_require__(189);
 var DropinError = __webpack_require__(38);
 var paymentOptionIDs = __webpack_require__(13).paymentOptionIDs;
 
@@ -11109,7 +11111,7 @@ module.exports = ApplePayView;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11121,7 +11123,7 @@ module.exports = ApplePayView;
  */
 
 var BraintreeError = __webpack_require__(3);
-var ApplePay = __webpack_require__(188);
+var ApplePay = __webpack_require__(190);
 var analytics = __webpack_require__(44);
 var basicComponentVerification = __webpack_require__(68);
 var errors = __webpack_require__(105);
@@ -11163,7 +11165,7 @@ module.exports = {
 
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11460,7 +11462,7 @@ module.exports = wrapPromise.wrapPrototype(ApplePay);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11537,7 +11539,7 @@ module.exports = PaymentMethodView;
 
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11563,7 +11565,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11571,35 +11573,35 @@ module.exports = function () {
 
 
 module.exports = {
-  da: __webpack_require__(192),
-  de: __webpack_require__(193),
-  en: __webpack_require__(194),
-  en_AU: __webpack_require__(195),
-  en_GB: __webpack_require__(196),
-  es: __webpack_require__(197),
-  fr_CA: __webpack_require__(198),
-  fr: __webpack_require__(199),
-  id: __webpack_require__(200),
-  it: __webpack_require__(201),
-  ja: __webpack_require__(202),
-  ko: __webpack_require__(203),
-  nl: __webpack_require__(204),
-  no: __webpack_require__(205),
-  pl: __webpack_require__(206),
-  pt_BR: __webpack_require__(207),
-  pt: __webpack_require__(208),
-  ru: __webpack_require__(209),
-  sv: __webpack_require__(210),
-  th: __webpack_require__(211),
-  zh: __webpack_require__(212),
-  zh_HK: __webpack_require__(213),
-  zh_TW: __webpack_require__(214)
+  da: __webpack_require__(194),
+  de: __webpack_require__(195),
+  en: __webpack_require__(196),
+  en_AU: __webpack_require__(197),
+  en_GB: __webpack_require__(198),
+  es: __webpack_require__(199),
+  fr_CA: __webpack_require__(200),
+  fr: __webpack_require__(201),
+  id: __webpack_require__(202),
+  it: __webpack_require__(203),
+  ja: __webpack_require__(204),
+  ko: __webpack_require__(205),
+  nl: __webpack_require__(206),
+  no: __webpack_require__(207),
+  pl: __webpack_require__(208),
+  pt_BR: __webpack_require__(209),
+  pt: __webpack_require__(210),
+  ru: __webpack_require__(211),
+  sv: __webpack_require__(212),
+  th: __webpack_require__(213),
+  zh: __webpack_require__(214),
+  zh_HK: __webpack_require__(215),
+  zh_TW: __webpack_require__(216)
 };
 /* eslint-enable camelcase */
 
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11660,7 +11662,7 @@ module.exports = {
 
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11721,7 +11723,7 @@ module.exports = {
 
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11785,7 +11787,7 @@ module.exports = {
 
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11846,7 +11848,7 @@ module.exports = {
 
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11907,7 +11909,7 @@ module.exports = {
 
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11968,7 +11970,7 @@ module.exports = {
 
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12029,7 +12031,7 @@ module.exports = {
 
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12090,7 +12092,7 @@ module.exports = {
 
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12151,7 +12153,7 @@ module.exports = {
 
 
 /***/ }),
-/* 201 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12212,7 +12214,7 @@ module.exports = {
 
 
 /***/ }),
-/* 202 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12273,7 +12275,7 @@ module.exports = {
 
 
 /***/ }),
-/* 203 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12334,7 +12336,7 @@ module.exports = {
 
 
 /***/ }),
-/* 204 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12395,7 +12397,7 @@ module.exports = {
 
 
 /***/ }),
-/* 205 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12456,7 +12458,7 @@ module.exports = {
 
 
 /***/ }),
-/* 206 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12517,7 +12519,7 @@ module.exports = {
 
 
 /***/ }),
-/* 207 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12578,7 +12580,7 @@ module.exports = {
 
 
 /***/ }),
-/* 208 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12639,7 +12641,7 @@ module.exports = {
 
 
 /***/ }),
-/* 209 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12700,7 +12702,7 @@ module.exports = {
 
 
 /***/ }),
-/* 210 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12761,7 +12763,7 @@ module.exports = {
 
 
 /***/ }),
-/* 211 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12822,7 +12824,7 @@ module.exports = {
 
 
 /***/ }),
-/* 212 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12883,7 +12885,7 @@ module.exports = {
 
 
 /***/ }),
-/* 213 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12944,7 +12946,7 @@ module.exports = {
 
 
 /***/ }),
-/* 214 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13005,7 +13007,7 @@ module.exports = {
 
 
 /***/ }),
-/* 215 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13013,7 +13015,7 @@ module.exports = {
 
 
 var classlist = __webpack_require__(50);
-var threeDSecure = __webpack_require__(216);
+var threeDSecure = __webpack_require__(218);
 var Promise = __webpack_require__(43);
 
 function ThreeDSecure(client, merchantConfiguration, cardVerificationString) {
@@ -13151,15 +13153,15 @@ module.exports = ThreeDSecure;
 
 
 /***/ }),
-/* 216 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /** @module braintree-web/three-d-secure */
 
-var ThreeDSecure = __webpack_require__(217);
-var isHTTPS = __webpack_require__(220).isHTTPS;
+var ThreeDSecure = __webpack_require__(219);
+var isHTTPS = __webpack_require__(222).isHTTPS;
 var basicComponentVerification = __webpack_require__(68);
 var BraintreeError = __webpack_require__(3);
 var analytics = __webpack_require__(44);
@@ -13219,7 +13221,7 @@ module.exports = {
 
 
 /***/ }),
-/* 217 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13230,13 +13232,13 @@ var analytics = __webpack_require__(44);
 var assign = __webpack_require__(76).assign;
 var methods = __webpack_require__(100);
 var convertMethodsToError = __webpack_require__(101);
-var constants = __webpack_require__(218);
+var constants = __webpack_require__(220);
 var useMin = __webpack_require__(99);
 var Bus = __webpack_require__(98);
 var uuid = __webpack_require__(67);
 var deferred = __webpack_require__(93);
 var errors = __webpack_require__(109);
-var events = __webpack_require__(219);
+var events = __webpack_require__(221);
 var VERSION = "3.26.0";
 var iFramer = __webpack_require__(97);
 var Promise = __webpack_require__(33);
@@ -13570,7 +13572,7 @@ module.exports = wrapPromise.wrapPrototype(ThreeDSecure);
 
 
 /***/ }),
-/* 218 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13582,7 +13584,7 @@ module.exports = {
 
 
 /***/ }),
-/* 219 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13596,7 +13598,7 @@ module.exports = enumerate([
 
 
 /***/ }),
-/* 220 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13615,17 +13617,17 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 221 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var analytics = __webpack_require__(47);
-var find = __webpack_require__(222);
+var find = __webpack_require__(224);
 var uuid = __webpack_require__(108);
 var DropinError = __webpack_require__(38);
-var kebabCaseToCamelCase = __webpack_require__(223);
+var kebabCaseToCamelCase = __webpack_require__(225);
 var WHITELISTED_DATA_ATTRIBUTES = [
   'locale',
   'payment-option-priority',
@@ -13750,7 +13752,7 @@ module.exports = createFromScriptTag;
 
 
 /***/ }),
-/* 222 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13772,7 +13774,7 @@ module.exports = {
 
 
 /***/ }),
-/* 223 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
