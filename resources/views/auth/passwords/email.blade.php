@@ -29,7 +29,7 @@
 
 <div class="dashboard-area">
     <div class="container">
-        <div class="row dasboard">
+        <div class="row">
             
             <div class="col-md-12 col-sm-12">
                 <div id="passwordreset" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">

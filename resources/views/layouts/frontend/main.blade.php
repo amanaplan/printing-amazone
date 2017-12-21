@@ -207,7 +207,7 @@
 
 					<p class="fieldset">
 						<input type="checkbox" id="accept-terms" checked="checked" disabled="disabled">
-						<label for="accept-terms">I agree to the <a href="#">Terms</a></label>
+						<label for="accept-terms">I agree to the <a href="{{ url('/terms-condition') }}">Terms</a></label>
 					</p>
 
 					<p class="fieldset">

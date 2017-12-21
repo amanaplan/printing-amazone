@@ -115,7 +115,7 @@
 				    <br>
 				    <div class="form-group">
 						<input type="checkbox" checked="checked" disabled="disabled" />
-						<span>I agree with the <a href="#">Terms &amp; Conditions</a></span>
+						<span>I agree with the <a href="{{ url('/terms-condition') }}" target="_blank">Terms &amp; Conditions</a></span>
 				    </div>
 				    <div class="form-group">
 						<input type="checkbox" checked="checked" disabled="disabled" />
