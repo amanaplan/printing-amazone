@@ -19,6 +19,8 @@ use App\OptQty;
 use App\OptSize;
 use App\PresetGeneral;
 use App\Cart;
+use App\StickerType;
+use App\PresetNamePhotoSticker;
 
 use JavaScript;
 
@@ -39,6 +41,7 @@ class ProceedOrder extends Controller
 	{
         $validator = Validator::make($request->all(), [
             'product'       => 'required|alpha_dash',
+            'type'          => 'nullable|integer|exists:sticker_types,id',
             'paperstock'    => 'required|integer',
             'circle_type'   => 'nullable|boolean',
             'size'          => 'required',
@@ -56,13 +59,15 @@ class ProceedOrder extends Controller
         }
 
         /*-----------------------------------------------------------------------------------------------
-        | detect if it is name sticker & validate upon the provided form data
+        | detect if it is name sticker / photo sticker & validate upon the provided form data
         -----------------------------------------------------------------------------------------------*/
-        if($request->input('product') == 'name-stickers')
+
+        $product_slug = $request->input('product');
+
+        if($product_slug == 'name-stickers' || $product_slug == 'photo-stickers')
         {
             $sticker_type = $request->input('type');
             $laminating = $request->input('laminating');
-            $sticker_name = $request->input('sticker_name');
 
             if($sticker_type == null)
             {
@@ -74,17 +79,23 @@ class ProceedOrder extends Controller
                 $request->session()->flash('formError', 'Please select a laminating option');
                 return redirect()->back();
             }
-            else if($sticker_name == null)
-            {
+
+            $name_sticker_data = [
+                'sticker_type'  => StickerType::find($sticker_type)->name,
+                'laminating'    => $laminating,
+            ];
+        }
+
+        if($product_slug == 'name-stickers')
+        {
+            $sticker_name = $request->input('sticker_name');
+
+            if ($sticker_name == null) {
                 $request->session()->flash('formError', 'Please enter printing name');
                 return redirect()->back();
             }
 
-            $name_sticker_data = [
-                'sticker_type'  => $sticker_type,
-                'laminating'    => $laminating,
-                'sticker_name'  => $sticker_name
-            ];
+            $name_sticker_data['sticker_name'] = $sticker_name;
         }
 
 
@@ -109,10 +120,20 @@ class ProceedOrder extends Controller
         else
         {
             //checking the paperstock has predefined presets or not
-            if(PresetGeneral::where('map_prod_form_option', $map_paperstock_option->first()->id)->count() == 0)
+            if ($product_slug == 'name-stickers' || $product_slug == 'photo-stickers')
             {
-            	$request->session()->flash('formError', 'Oops! price not available for this paperstock');
-        		return redirect()->back();
+                $price_avlbl = PresetNamePhotoSticker::where([['product_id', $product], ['sticker_type', $request->input('type')], ['quantity_id', $request->input('qty')]])->exists();
+                if(!$price_avlbl){
+                    $request->session()->flash('formError', 'Oops! price not available for this sticker type');
+                    return redirect()->back();
+                }
+            }
+            else
+            {
+                if (PresetGeneral::where('map_prod_form_option', $map_paperstock_option->first()->id)->count() == 0) {
+                    $request->session()->flash('formError', 'Oops! price not available for this paperstock');
+                    return redirect()->back();
+                }
             }
         }
 
@@ -179,9 +200,17 @@ class ProceedOrder extends Controller
         /*-----------------------------------------------------------------------------------------------
         | calculate the pricing & set data to the session
         -----------------------------------------------------------------------------------------------*/
+        if($product_slug == 'name-stickers' || $product_slug == 'photo-stickers')
+        {
+            $price = PresetNamePhotoSticker::where([['product_id', $product], ['sticker_type', $request->input('type')], ['quantity_id', $qty_option_id]])->firstOrFail()->price;
+        }
+        else
+        {
+            $calculator = new AutoCalculator(($width * $height), $qty, $map_paperstock_option->first()->id);
+            $price = $calculator->CalculatedPrice();
+        }
 
-        $calculator = new AutoCalculator(($width * $height), $qty, $map_paperstock_option->first()->id);
-        $price = $calculator->CalculatedPrice();
+
         if($price == false)
         {
             $request->session()->flash('formError', 'Oops! price not available, try again later');
@@ -199,7 +228,7 @@ class ProceedOrder extends Controller
         ];
 
         //if name sticker then add the additional parameters
-        $storeInSession = ($request->input('product') == 'name-stickers')? array_merge($common_data, $name_sticker_data) : $common_data;
+        $storeInSession = ($product_slug == 'name-stickers' || $product_slug == 'photo-stickers')? array_merge($common_data, $name_sticker_data) : $common_data;
 
         $request->session()->put('curr_product_payload', collect($storeInSession));
 

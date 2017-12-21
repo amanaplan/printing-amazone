@@ -9,6 +9,7 @@ use App\OptPaperstock;
 use App\OptQty;
 use App\OptSize;
 use App\PresetGeneral;
+use App\PresetNamePhotoSticker;
 
 use App\Http\Controllers\Frontend\AutoCalculator; //custom class calculates the pricing based on the preset
 
@@ -165,6 +166,46 @@ class Calculation extends Controller
 
             return response()->json(['quantityPrice' => $customQtyPrice, 'setOfPrices' => $setOfPrices]);
         }
+    }
+
+    /**
+     *generate price based on selected options for name sticker & photo sticker
+     */
+    public function GenNamePhotoPrice(Request $request)
+    {
+        $this->validate($request, [
+            'product' => 'required|alpha_dash|exists:products,product_slug',
+            'type' => 'required|integer|exists:sticker_types,id',
+        ]);
+
+        //get the product
+        $product = Product::where('product_slug', $request->input('product'))->firstOrFail()->id;
+
+        /*----------------------------------------------------------------------
+        |   Validating whether the options are linked to the product or not
+        ------------------------------------------------------------------------*/
+
+        $linked = DB::table('map_product_sticker_type')->where([['product_id', $product], ['sticker_type_id', $request->input('type')]])->exists();
+        abort_if(! $linked, 403);
+
+        //calculate price for the listed quantities
+        $map_field_qty_id = MapFrmProd::where([['product_id', $product], ['form_field_id', 3]])->firstOrFail()->id;
+        $map_qty_option = MapProdFrmOpt::where('mapping_field_id', $map_field_qty_id)->select('option_id');
+        if ($map_qty_option->count() == 0) {
+            abort(503, 'size options not selected by admin');
+        }
+
+        $orderedSizeOptns = $map_qty_option->orderBy('sort', 'asc')->select('option_id')->get();
+        $qtyValues = OptQty::whereIn('id', $orderedSizeOptns)->orderBy('option', 'asc')->get();
+        $setOfPrices = [];
+
+        foreach ($qtyValues as $qtyOpt) {
+            $preset = PresetNamePhotoSticker::where([['product_id', $product], ['sticker_type', $request->input('type')], ['quantity_id', $qtyOpt->id]])->firstOrFail();
+
+            $setOfPrices[] = $preset->price;
+        }
+
+        return response()->json(['setOfPrices' => $setOfPrices]);
     }
 
     /**

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2017 at 02:11 PM
+-- Generation Time: Dec 21, 2017 at 12:21 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -1452,7 +1452,18 @@ INSERT INTO `preset_name_photo_sticker` (`id`, `product_id`, `sticker_type`, `qu
 (4, 35, 8, 23, 35.00, '2017-12-19 18:03:15', '2017-12-19 18:40:59'),
 (5, 22, 12, 21, 15.00, '2017-12-19 18:03:41', '2017-12-19 18:39:41'),
 (6, 22, 12, 22, 20.00, '2017-12-19 18:03:47', '2017-12-19 18:03:47'),
-(7, 22, 4, 21, 20.00, '2017-12-19 18:03:54', '2017-12-19 18:03:54');
+(7, 22, 4, 21, 20.00, '2017-12-19 18:03:54', '2017-12-19 18:03:54'),
+(8, 22, 12, 23, 30.00, '2017-12-21 15:27:11', '2017-12-21 15:27:11'),
+(9, 22, 12, 24, 40.00, '2017-12-21 15:27:18', '2017-12-21 15:27:18'),
+(10, 22, 12, 25, 50.00, '2017-12-21 15:27:24', '2017-12-21 15:27:24'),
+(11, 22, 4, 22, 30.00, '2017-12-21 15:34:05', '2017-12-21 15:34:05'),
+(12, 22, 4, 23, 40.00, '2017-12-21 15:34:11', '2017-12-21 15:34:11'),
+(13, 22, 4, 24, 50.00, '2017-12-21 15:34:19', '2017-12-21 15:34:19'),
+(14, 22, 4, 25, 60.00, '2017-12-21 15:34:26', '2017-12-21 15:34:26'),
+(15, 35, 8, 21, 10.00, '2017-12-21 15:51:51', '2017-12-21 15:51:51'),
+(16, 35, 8, 22, 20.00, '2017-12-21 15:51:56', '2017-12-21 15:51:56'),
+(17, 35, 8, 24, 40.00, '2017-12-21 15:52:05', '2017-12-21 15:52:32'),
+(18, 35, 8, 25, 50.00, '2017-12-21 15:52:17', '2017-12-21 15:52:23');
 
 -- --------------------------------------------------------
 
@@ -2459,13 +2470,13 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `cart_artworks`
 --
 ALTER TABLE `cart_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -2609,7 +2620,7 @@ ALTER TABLE `preset_general`
 -- AUTO_INCREMENT for table `preset_name_photo_sticker`
 --
 ALTER TABLE `preset_name_photo_sticker`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `preset_qty_rule_one`

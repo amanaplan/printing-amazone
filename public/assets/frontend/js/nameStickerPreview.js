@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 123);
+/******/ 	return __webpack_require__(__webpack_require__.s = 125);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -574,20 +574,20 @@ module.exports = __webpack_require__(15);
 
 /***/ }),
 
-/***/ 123:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(124);
+module.exports = __webpack_require__(126);
 
 
 /***/ }),
 
-/***/ 124:
+/***/ 126:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__calculation_snackbar_main__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__boot_js__ = __webpack_require__(9);
@@ -1648,6 +1648,60 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
+/***/ 45:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = createSnackbar;
+function createSnackbar(message, actionText, action) {
+  // Any snackbar that is already shown
+  var previous = null;
+
+  if (previous) {
+    previous.dismiss();
+  }
+  var snackbar = document.createElement('div');
+  snackbar.className = 'paper-snackbar';
+  snackbar.dismiss = function () {
+    this.style.opacity = 0;
+  };
+  var text = document.createTextNode(message);
+  snackbar.appendChild(text);
+  if (actionText) {
+    if (!action) {
+      action = snackbar.dismiss.bind(snackbar);
+    }
+    var actionButton = document.createElement('button');
+    actionButton.className = 'action';
+    actionButton.innerHTML = actionText;
+    actionButton.addEventListener('click', action);
+    snackbar.appendChild(actionButton);
+  }
+  setTimeout(function () {
+    if (previous === this) {
+      previous.dismiss();
+    }
+  }.bind(snackbar), 5000);
+
+  snackbar.addEventListener('transitionend', function (event, elapsed) {
+    if (event.propertyName === 'opacity' && this.style.opacity == 0) {
+      this.parentElement.removeChild(this);
+      if (previous === this) {
+        previous = null;
+      }
+    }
+  }.bind(snackbar));
+
+  previous = snackbar;
+  document.body.appendChild(snackbar);
+  // In order for the animations to trigger, I have to force the original style to be computed, and then change it.
+  getComputedStyle(snackbar).bottom;
+  snackbar.style.bottom = '0px';
+  snackbar.style.opacity = 1;
+}
+
+/***/ }),
+
 /***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1872,60 +1926,6 @@ module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-
-/***/ }),
-
-/***/ 74:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = createSnackbar;
-function createSnackbar(message, actionText, action) {
-  // Any snackbar that is already shown
-  var previous = null;
-
-  if (previous) {
-    previous.dismiss();
-  }
-  var snackbar = document.createElement('div');
-  snackbar.className = 'paper-snackbar';
-  snackbar.dismiss = function () {
-    this.style.opacity = 0;
-  };
-  var text = document.createTextNode(message);
-  snackbar.appendChild(text);
-  if (actionText) {
-    if (!action) {
-      action = snackbar.dismiss.bind(snackbar);
-    }
-    var actionButton = document.createElement('button');
-    actionButton.className = 'action';
-    actionButton.innerHTML = actionText;
-    actionButton.addEventListener('click', action);
-    snackbar.appendChild(actionButton);
-  }
-  setTimeout(function () {
-    if (previous === this) {
-      previous.dismiss();
-    }
-  }.bind(snackbar), 5000);
-
-  snackbar.addEventListener('transitionend', function (event, elapsed) {
-    if (event.propertyName === 'opacity' && this.style.opacity == 0) {
-      this.parentElement.removeChild(this);
-      if (previous === this) {
-        previous = null;
-      }
-    }
-  }.bind(snackbar));
-
-  previous = snackbar;
-  document.body.appendChild(snackbar);
-  // In order for the animations to trigger, I have to force the original style to be computed, and then change it.
-  getComputedStyle(snackbar).bottom;
-  snackbar.style.bottom = '0px';
-  snackbar.style.opacity = 1;
-}
 
 /***/ }),
 

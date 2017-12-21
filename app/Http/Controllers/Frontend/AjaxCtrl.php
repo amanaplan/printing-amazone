@@ -275,12 +275,12 @@ class AjaxCtrl extends Controller
     public function ShowPreview(Request $request)
     {
         $this->validate($request, [
-            'artwork' => 'required',
+            'artwork' => 'required|integer|exists:sticker_types,id',
         ]);
 
-        $optName = $request->input('artwork');
+        $option = $request->input('artwork');
 
-        $artwork = StickerType::where('name', $optName)->firstOrFail()->image;
+        $artwork = StickerType::findOrFail($option)->image;
 
         return $artwork;
     }

@@ -84,7 +84,7 @@
 										<select name="type">
 											@foreach($sticker_types as $row)
 
-											<option value="{{ $row->name }}">{{ $row->name }}</option>
+											<option value="{{ $row->id }}">{{ $row->name }}</option>
 
 											@endforeach
 										</select>
@@ -367,7 +367,7 @@
 	@endif
 
 	{{-- calculation form --}}
-	<script type="text/javascript" src="{{ asset( 'assets/frontend/js/calculation.js' ) }}"></script>
+	<script type="text/javascript" src="{{ asset( 'assets/frontend/js/calculation-sp-sticker.js' ) }}"></script>
 
 	{{-- review --}}
 	<script type="text/javascript" src="{{ asset( mix('assets/frontend/js/review.js') ) }}"></script>

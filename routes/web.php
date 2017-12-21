@@ -35,6 +35,7 @@ Route::view('/contact', 'frontend.contact');
 Route::post('/product/give-review', 'Frontend\UserReviewPost');
 Route::post('/product/load-reviews', 'Frontend\AjaxCtrl@LoadReviews');
 Route::post('/product/calculate-price', 'Frontend\Calculation@GenPrice');
+Route::post('/product/calculate-name-photo-price', 'Frontend\Calculation@GenNamePhotoPrice');
 Route::get('/labels', 'Frontend\DirectProduct');
 Route::get('/graphic-designs', 'Frontend\DirectProduct');
 Route::get('/product/name-sticker/get-preview', 'Frontend\AjaxCtrl@ShowPreview');
