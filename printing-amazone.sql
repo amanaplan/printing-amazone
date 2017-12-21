@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2017 at 12:21 PM
+-- Generation Time: Dec 21, 2017 at 01:19 PM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.1.11
 
@@ -1018,7 +1018,6 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (187, 45, 20001, 23000, 0.29, 0.54, 0, NULL),
 (188, 45, 23001, 26000, 0.28, 0.55, 0, NULL),
 (189, 45, 26001, 90000, 0.28, 0.54, 0, NULL),
-(190, 92, 0, 90000, 0.00, 0.00, 1, '700.00'),
 (191, 150, 3501, 5400, 0.00, 0.00, 1, '70.00'),
 (192, 151, 3501, 5400, 0.00, 0.00, 1, '70.00'),
 (193, 151, 12001, 15000, 0.25, 0.45, 0, NULL),
@@ -1423,10 +1422,7 @@ INSERT INTO `preset_general` (`id`, `map_prod_form_option`, `from`, `to`, `val_p
 (620, 373, 40001, 52900, 0.51, 0.52, 0, NULL),
 (621, 373, 52901, 62500, 0.51, 0.51, 0, NULL),
 (622, 373, 62501, 78400, 0.50, 0.51, 0, NULL),
-(623, 373, 78401, 90000, 0.50, 0.50, 0, NULL),
-(624, 398, 0, 90000, NULL, NULL, 1, '700.00'),
-(625, 399, 0, 90000, NULL, NULL, 1, '700.00'),
-(626, 95, 0, 90000, NULL, NULL, 1, '700.00');
+(623, 373, 78401, 90000, 0.50, 0.50, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1525,7 +1521,6 @@ INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `d
 (76, 45, 300, 71.00),
 (77, 45, 400, 78.00),
 (78, 45, 500, 80.00),
-(79, 92, 1, 1.00),
 (92, 151, 10, 48.00),
 (93, 151, 50, 52.00),
 (94, 151, 100, 55.00),
@@ -1794,26 +1789,7 @@ INSERT INTO `preset_qty_rule_one` (`id`, `map_prod_form_option`, `order_qty`, `d
 (361, 82, 200, 86.00),
 (362, 82, 300, 89.00),
 (363, 82, 400, 92.00),
-(364, 82, 500, 95.00),
-(365, 92, 2, 1.90),
-(366, 92, 3, 2.70),
-(367, 92, 4, 3.50),
-(368, 92, 5, 4.00),
-(369, 398, 1, 1.00),
-(370, 398, 2, 1.90),
-(371, 398, 3, 2.70),
-(374, 398, 4, 3.50),
-(375, 398, 5, 4.00),
-(376, 399, 1, 1.00),
-(377, 399, 2, 1.90),
-(378, 399, 3, 2.70),
-(379, 399, 4, 3.50),
-(380, 399, 5, 4.00),
-(381, 95, 1, 1.00),
-(382, 95, 2, 1.90),
-(383, 95, 3, 2.70),
-(384, 95, 4, 3.50),
-(385, 95, 5, 4.00);
+(364, 82, 500, 95.00);
 
 -- --------------------------------------------------------
 
@@ -2470,13 +2446,13 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `cart_artworks`
 --
 ALTER TABLE `cart_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -2512,7 +2488,7 @@ ALTER TABLE `form_field_types`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `lamination_options`
@@ -2560,13 +2536,13 @@ ALTER TABLE `notificationsetting`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `order_artworks`
 --
 ALTER TABLE `order_artworks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `order_artwork_approval`
@@ -2584,13 +2560,13 @@ ALTER TABLE `order_artwork_approval_artworks`
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `order_status`

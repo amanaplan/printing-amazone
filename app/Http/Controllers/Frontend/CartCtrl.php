@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Carbon;
+use App\Product;
+use App\PresetNamePhotoSticker;
+use App\StickerType;
+use App\OptQty;
 
 class CartCtrl extends Controller
 {
@@ -225,8 +229,22 @@ class CartCtrl extends Controller
         }
         //qty applicable check
 
-        $calculator = new AutoCalculator(($cartitem->width * $cartitem->height), $request->input('qty'), $cartitem->preset_mapper);
-        $price = $calculator->CalculatedPrice();
+        //price calculate
+        $product_slug = Product::find($cartitem->product_id)->product_slug;
+
+        if ($product_slug == 'name-stickers' || $product_slug == 'photo-stickers') 
+        {
+            $price = PresetNamePhotoSticker::where([
+                ['product_id', $cartitem->product_id], 
+                ['sticker_type', StickerType::where('name', $cartitem->sticker_type)->first()->id], 
+                ['quantity_id', OptQty::where('option', $request->input('qty'))->first()->id]
+            ])->firstOrFail()->price;
+        }
+        else 
+        {
+            $calculator = new AutoCalculator(($cartitem->width * $cartitem->height), $request->input('qty'), $cartitem->preset_mapper);
+            $price = $calculator->CalculatedPrice();
+        }
 
         if($price == false)
         {
