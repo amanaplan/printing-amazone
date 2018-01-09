@@ -27,7 +27,7 @@ p.copyright{text-align:left; font-size:13px; color:#010101; font-family: 'Ralewa
 
 /************ inner page ******************/
 
-.custom{background:#fff;padding:0px 0 50px;}
+.custom{background:#fff;padding:0px 0 50px;min-height: 468px;}
 .custom h2{text-align:left; font-size:40px; color:#292929; font-weight:700;font-family: 'Raleway', sans-serif; text-shadow:none; display:inline-block !important;}
 .review{display:inline-block; margin-left:20px;}
 .review ul{display:inline-block;}
